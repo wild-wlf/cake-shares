@@ -1,7 +1,8 @@
 import React from "react";
+import TopBar from "./common/TopBar";
 
 const index = () => {
-  return <div>index</div>;
+  return <TopBar />;
 };
 
 export default index;

@@ -3,35 +3,35 @@
 :root {
   /* variables */
   --gray: #999;
-  --gray-2: #E4E4E7;
+  --gray-2: #e4e4e7;
   --gray-3: #f8f8f9;
   --gray-4: #f1f1f1;
-  --border-color: #E1E4E8;
+  --border-color: #e1e4e8;
   --light-gray: #b0b7c3;
   --hit-gray: #98a6ad;
   --white: #fff;
   --black: #000;
   --dark: #313131;
-  --light-blue: #DFEDF2;
+  --light-blue: #dfedf2;
   --sky-blue: #04b4ff;
-  --purple: #36469A;
-  --purple-dark: #685CB6;
-  --primary: #36469A;
+  --purple: #36469a;
+  --purple-dark: #685cb6;
+  --primary: #36469a;
   --light-primary: #d4f7eb;
   --secondary: #6180f2;
   --light: #eff2f8;
   --light-secondary: #f6f8fa;
   --success: #53b13e;
-  --danger-dark: #B10000;
-  --danger-light: #F44336;
+  --danger-dark: #b10000;
+  --danger-light: #f44336;
   --info: var(--secondary);
   --warning: #f9c055;
   --yellow: #fecf31;
-  --green: #47c07a;
+  --green: #408f8c;
   --dark-green: #009563;
   --pink: #f7f1ff;
-  --blue: #3DCDFF;
-  
+  --blue: #3dcdff;
+
   --primary-text-color: #24383f;
   --secondary-text-color: #160f46;
   --table-border: #cdcdcd;
@@ -40,9 +40,9 @@
 
   --primary-gradient: linear-gradient(178.19deg, #feeffe 20%, #34dba1 100%);
 
-  --base-font-sans-serif: "Outfit", "Arial", "Helvetica Neue", "Helvetica",
-    sans-serif;
-  --plus-jakarta-font: 'Plus Jakarta Sans', 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif;
+  --base-font-sans-serif: "Outfit", sans-serif;
+  --plus-jakarta-font: "Plus Jakarta Sans", "Arial", "Helvetica Neue",
+    "Helvetica", sans-serif;
   --base-font-serif: "Times New Roman", "Times", "Baskerville", "GeorFgia",
     serif;
 

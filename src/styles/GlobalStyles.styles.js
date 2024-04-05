@@ -26,7 +26,7 @@ export const Styling = css`
     color: var(--base-text-color);
     background: var(--base-background-color);
     font: var(--font-size-base) / var(--line-height-base)
-      var(--base-font-family);
+      var(--base-font-sans-serif);
     font-weight: 400;
     position: relative;
     min-width: var(--base-min-width);
