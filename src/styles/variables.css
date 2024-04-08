@@ -83,7 +83,7 @@
   --h2-font-size: 1.5625rem; /* 30px */
   --h3-font-size: 1.25rem; /* 20px */
   --h4-font-size: 1.125rem; /* 18px */
-  --h5-font-size: 1.0625rem; /* 17px */
+  --h5-font-size: 16px; /* 17px */
   --h6-font-size: 0.9375rem; /* 15px */
 
   --headings-font-family: var(--base-font-family);

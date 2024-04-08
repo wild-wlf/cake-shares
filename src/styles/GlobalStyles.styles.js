@@ -32,7 +32,9 @@ export const Styling = css`
     min-width: var(--base-min-width);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 auto;
     &.nav-active {
       @media (max-width: 575px) {
         overflow: hidden;

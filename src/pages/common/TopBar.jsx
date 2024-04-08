@@ -4,6 +4,7 @@ import { StyledTopBar } from "./TopBar.styles";
 import logo from "../_assets/logo.svg";
 import Image from "next/image";
 import bell from "../_assets/bell.svg";
+import bellWhite from "../_assets/bell-white.svg";
 import Button from "@/components/atoms/Button";
 import register from "../_assets/register.svg";
 import store from "../_assets/store.svg";
@@ -29,13 +30,14 @@ const TopBar = () => {
       </div>
       <div className="actions" style={{ display: "Flex", gap: "10px" }}>
         <div className="notification">
-          <Image src={bell} alt="bell" />
+          <Image src={bell} alt="bell" className="bell" />
+          <Image src={bellWhite} alt="bell" className="bell-white" />
           <div className="notificationWrapper">
             <Notifications />
           </div>
         </div>
         <div className="buttonWrapper">
-          <Button rounded sm btntype="new">
+          <Button rounded sm btntype="new" className="button">
             <Image src={register} />
             Register
           </Button>
@@ -48,7 +50,7 @@ const TopBar = () => {
           setSidenav(false);
         }}
       >
-      <SideNav />
+        <SideNav />
       </div>
     </StyledTopBar>
   );

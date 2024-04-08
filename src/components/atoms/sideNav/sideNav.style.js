@@ -5,10 +5,11 @@ export const Sidenav = styled.div`
   position: absolute;
   left: 0;
   background-color: white;
-  height: 100%;
   width: 260px;
   padding-top: 39px;
   padding-left: 20px;
+  height: 1000%;
+  border-top-right-radius: 40px;
 
   .nav-content {
     display: flex;
@@ -64,8 +65,8 @@ export const Sidenav = styled.div`
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 70px; 
-    height: 1px; 
-    background-color: var(--green); 
+    width: 70px;
+    height: 1px;
+    background-color: var(--green);
   }
 `;

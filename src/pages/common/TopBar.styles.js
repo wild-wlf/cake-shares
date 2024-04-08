@@ -59,6 +59,9 @@ export const StyledTopBar = styled.header`
     font-weight: 400;
     line-height: 17px;
     cursor: pointer;
+    .bell-white {
+      display: none;
+    }
     &:hover {
       .notificationWrapper {
         visibility: visible;
@@ -92,6 +95,9 @@ export const StyledTopBar = styled.header`
   }
 
   @media (max-width: 768px) {
+    padding: 30px 30px;
+    background: var(--black);
+
     .closedNav {
       display: block;
       border: 1px solid black;
@@ -103,5 +109,19 @@ export const StyledTopBar = styled.header`
     .textField {
       display: none;
     }
+    .button {
+      background-color: var(--white);
+    }
+    .notification {
+      .bell-white {
+        display: block;
+      }
+    }
+    .bell {
+      display: none;
+    }
+  }
+  @media (max-width: 576px) {
+    padding: 30px 20px;
   }
 `;

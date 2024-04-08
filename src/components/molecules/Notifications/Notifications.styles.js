@@ -22,6 +22,7 @@ export const NotificationsHolder = styled.div`
     align-items: center;
     justify-content: space-between;
     margin-bottom: 14px;
+    border: 0;
     .content {
       display: flex;
       gap: 10px;
