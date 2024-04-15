@@ -4,6 +4,7 @@ export const CardWrapper = styled.div`
   width: 221px;
   height: 272px;
   border-radius: 24px;
+  cursor: pointer;
   background-color: rgba(241, 241, 241, 1);
   box-shadow: 1px 8px 17px 0 rgba(0, 0, 0, 0.1),
     4px 31px 31px 0 rgba(0, 0, 0, 0.09), 10px 70px 42px 0 rgba(0, 0, 0, 0.05),

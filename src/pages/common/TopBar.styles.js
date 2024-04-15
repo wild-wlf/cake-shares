@@ -2,11 +2,8 @@
 import styled from "styled-components";
 
 export const StyledTopBar = styled.header`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 30px 50px;
+  position: relative;
+  padding: 30px 50px 0px 50px;
   font-family: var(--base-font-sans-serif);
   background: var(--white);
   display: flex;
@@ -84,7 +81,7 @@ export const StyledTopBar = styled.header`
 
   .sideNav {
     position: absolute;
-    left: -260px;
+    left: -500px;
     transition: all 0.3s ease-in-out;
     height: 100%;
   }

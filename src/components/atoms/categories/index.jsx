@@ -3,6 +3,7 @@ import { Wrapper } from "./categories.style";
 import Slider from "react-slick";
 import Card from "../card";
 import arrowRight from "../../../pages/_assets/arrow-right.svg";
+import Link from "next/link";
 
 const index = () => {
   var settings = {
@@ -58,22 +59,34 @@ const index = () => {
       <div className="slider">
         <Slider {...settings}>
           <div>
-            <Card />
+            <Link href="/productDetails/1">
+              <Card />
+            </Link>
           </div>
           <div>
-            <Card />
+            <Link href={{ pathname: "/productDetails/2" }}>
+              <Card />
+            </Link>
           </div>
           <div>
-            <Card />
+            <Link href={{ pathname: "/productDetails/3" }}>
+              <Card />
+            </Link>
           </div>
           <div>
-            <Card />
+            <Link href={{ pathname: "/productDetails/4" }}>
+              <Card />
+            </Link>
           </div>
           <div>
-            <Card />
+            <Link href={{ pathname: "/productDetails/5" }}>
+              <Card />
+            </Link>
           </div>
           <div>
-            <Card />
+            <Link href={{ pathname: "/productDetails/6" }}>
+              <Card />
+            </Link>
           </div>
         </Slider>
       </div>

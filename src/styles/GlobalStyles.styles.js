@@ -101,7 +101,6 @@ export const Styling = css`
   }
   a {
     text-decoration: none;
-    color: var(--blue);
   }
 
   input[type="search"]::-webkit-search-decoration,

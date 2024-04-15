@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  margin-top: 100px;
   padding: 0px 50px;
 
   .title {

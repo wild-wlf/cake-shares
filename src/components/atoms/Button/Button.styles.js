@@ -34,12 +34,18 @@ export const StyledButton = styled.button`
     if (btntype === "primary") {
       return "var(--white)";
     }
+    if (btntype === "green") {
+      return "var(--white)";
+    }
     if (btntype === "new") {
       return "rgba(64,143,140,1)";
     }
+    if (btntype === "blue") {
+      return "rgba(78, 97, 153, 1)";
+    }
 
     if (btntype === "white") {
-      return "var(--primary)";
+      return "#313131";
     }
     if (btntype === "gray") {
       return "var(--primary)";
@@ -57,8 +63,14 @@ export const StyledButton = styled.button`
     if (btntype === "primary") {
       return "var(--primary)";
     }
+    if (btntype === "green") {
+      return "rgba(64, 143, 140, 1)";
+    }
     if (btntype === "new") {
       return "rgba(64,143,140,0.1)";
+    }
+    if (btntype === "blue") {
+      return "rgba(78, 97, 153, 0.1)";
     }
 
     if (btntype === "white") {
@@ -83,6 +95,11 @@ export const StyledButton = styled.button`
       return "var(--light-blue)";
     }
     return "var(--primary)";
+  }};
+  border: ${({ btntype }) => {
+    if (btntype === "white") {
+      return "1px solid #cdcdcd";
+    }
   }};
 
   transition: 0.3s all ease-in-out;
