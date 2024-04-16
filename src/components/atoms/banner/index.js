@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { BannerWrapper } from "./banner.style";
-import banner from "../../../pages/_assets/slider.png";
-import banner2 from "../../../pages/_assets/slider-2.png";
+import banner from "../../../_assets/slider.png";
+import banner2 from "../../../_assets/slider-2.png";
 import Slider from "react-slick";
 
 const index = () => {

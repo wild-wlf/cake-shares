@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Notifications from "../../components/molecules/Notifications";
 import { StyledTopBar } from "./TopBar.styles";
-import logo from "../_assets/logo.svg";
+import logo from "../../_assets/logo.svg";
 import Image from "next/image";
-import bell from "../_assets/bell.svg";
-import bellWhite from "../_assets/bell-white.svg";
+import bell from "../../_assets/bell.svg";
+import bellWhite from "../../_assets/bell-white.svg";
 import Button from "@/components/atoms/Button";
-import register from "../_assets/register.svg";
-import store from "../_assets/store.svg";
-import closedNav from "../_assets/closed-nav.svg";
+import register from "../../_assets/register.svg";
+import store from "../../_assets/store.svg";
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import SideNav from "../../components/atoms/sideNav/index.js";
 
 const TopBar = () => {
@@ -18,7 +18,7 @@ const TopBar = () => {
     <StyledTopBar>
       <div className="logoWrapper">
         <div className="closedNav" onClick={() => setSidenav(true)}>
-          <Image src={closedNav} />
+          <HiOutlineMenuAlt1 />
         </div>
         <div className="logo">
           <Image src={logo} alt="logo" />

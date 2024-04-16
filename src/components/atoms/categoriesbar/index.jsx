@@ -2,7 +2,7 @@ import React from "react";
 import { Wrapper } from "./categoriesbar.style";
 import Button from "@/components/atoms/Button";
 import Slider from "react-slick";
-import all from "../../../pages/_assets/all.svg";
+import all from "../../../_assets/all.svg";
 import Image from "next/image";
 import { FaFire } from "react-icons/fa";
 import { FaHouseChimney } from "react-icons/fa6";

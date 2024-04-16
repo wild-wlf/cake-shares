@@ -2,7 +2,7 @@ import React from "react";
 import { Wrapper } from "./categories.style";
 import Slider from "react-slick";
 import Card from "../card";
-import arrowRight from "../../../pages/_assets/arrow-right.svg";
+import arrowRight from "../../../_assets/arrow-right.svg";
 import Link from "next/link";
 
 const index = () => {
@@ -10,7 +10,7 @@ const index = () => {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 5.2,
     slidesToScroll: 1,
     responsive: [
       {
@@ -90,6 +90,7 @@ const index = () => {
           </div>
         </Slider>
       </div>
+      
     </Wrapper>
   );
 };

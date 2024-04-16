@@ -24,7 +24,7 @@ export const Styling = css`
 
   body {
     color: var(--base-text-color);
-    background: var(--base-background-color);
+    background: rgba(254, 254, 254, 1);
     font: var(--font-size-base) / var(--line-height-base)
       var(--base-font-sans-serif);
     font-weight: 400;

@@ -93,12 +93,12 @@ export const StyledTopBar = styled.header`
 
   @media (max-width: 768px) {
     padding: 30px 30px;
-    background: var(--black);
+    /* background: var(--black); */
 
     .closedNav {
       display: block;
-      border: 1px solid black;
       cursor: pointer;
+      font-size: 24px;
     }
     .logo {
       display: none;
@@ -106,7 +106,7 @@ export const StyledTopBar = styled.header`
     .textField {
       display: none;
     }
-    .button {
+    /* .button {
       background-color: var(--white);
     }
     .notification {
@@ -116,7 +116,7 @@ export const StyledTopBar = styled.header`
     }
     .bell {
       display: none;
-    }
+    } */
   }
   @media (max-width: 576px) {
     padding: 30px 20px;

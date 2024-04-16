@@ -7,13 +7,17 @@ export const CardWrapper = styled.div`
   cursor: pointer;
   background-color: rgba(241, 241, 241, 1);
   box-shadow: 1px 8px 17px 0 rgba(0, 0, 0, 0.1),
-    4px 31px 31px 0 rgba(0, 0, 0, 0.09), 10px 70px 42px 0 rgba(0, 0, 0, 0.05),
-    17px 124px 50px 0 rgba(0, 0, 0, 0.01), 27px 194px 55px 0 rgba(0, 0, 0, 0);
+    4px 31px 31px 0 rgba(0, 0, 0, 0.09);
   .image-div {
     padding: 10px 10px 0px;
     height: 204px;
     border-radius: 20px 20px 0px 0px;
     position: relative;
+    img {
+      object-fit: cover;
+      height: 100%;
+      border-radius: 20px 20px 0px 0px;
+    }
   }
   .tagWrapper {
     position: absolute;
@@ -40,7 +44,7 @@ export const CardWrapper = styled.div`
     height: 49px;
     border-radius: 0px 0px 20px 20px;
     padding: 10px;
-    margin: 10px;
+    margin: 0px 10px 0px 10px;
     gap: 10px;
     font-weight: 400;
     font-size: 10px;
@@ -89,7 +93,7 @@ export const CardWrapper = styled.div`
       height: 33.96px;
       border-radius: 0px 0px 14px 14px;
       padding: 6.93px;
-      margin: 6.79px;
+      margin: 0px 6.79px;
       font-weight: 400;
       font-size: 6.93px;
       background-color: var(--white);

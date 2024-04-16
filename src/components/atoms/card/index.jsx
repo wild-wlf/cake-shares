@@ -1,8 +1,8 @@
 import React from "react";
 import { CardWrapper } from "./card.style";
 import Image from "next/image";
-import Property from "../../../pages/_assets/property.png";
-import Heart from "../../../pages/_assets/heart.svg";
+import Property from "../../../_assets/property.png";
+import Heart from "../../../_assets/heart.svg";
 import ProgressBar from "@ramonak/react-progress-bar";
 
 const index = () => {
