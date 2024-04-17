@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 
 export const StyledButton = styled.button`
-  min-width: 200px;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -47,6 +46,9 @@ export const StyledButton = styled.button`
     if (btntype === "white") {
       return "#313131";
     }
+    if (btntype === "dropdown") {
+      return "#313131";
+    }
     if (btntype === "gray") {
       return "var(--primary)";
     }
@@ -62,6 +64,9 @@ export const StyledButton = styled.button`
   background: ${({ btntype }) => {
     if (btntype === "primary") {
       return "var(--primary)";
+    }
+    if (btntype === "dropdown") {
+      return "var(--white)";
     }
     if (btntype === "green") {
       return "rgba(64, 143, 140, 1)";
@@ -99,6 +104,9 @@ export const StyledButton = styled.button`
   border: ${({ btntype }) => {
     if (btntype === "white") {
       return "1px solid #cdcdcd";
+    }
+    if (btntype === "dropdown") {
+      return "1px solid rgba(241, 241, 241, 1)";
     }
   }};
 

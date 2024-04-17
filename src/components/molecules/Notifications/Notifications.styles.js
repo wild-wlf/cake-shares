@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const NotificationsHolder = styled.div`
   width: 100%;
-  border-radius: 20px;
   background: var(--white);
   padding: 25px;
+  border-radius: 0px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   .holder {
-    padding: 14px 0;
+    padding: 10px 0;
     border-bottom: 1px solid var(--gray-150);
     &:nth-child(1) {
       padding-top: 0;
@@ -17,12 +17,15 @@ export const NotificationsHolder = styled.div`
       padding-bottom: 0;
     }
   }
-  .notification {
+  .notifications {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 14px;
     border: 0;
+    border-top: 1px solid rgba(240, 242, 243, 1);
+    border-bottom: 1px solid rgba(240, 242, 243, 1);
+    padding: 14px 0px;
     .content {
       display: flex;
       gap: 10px;
@@ -60,6 +63,9 @@ export const NotificationsHolder = styled.div`
     font-size: 14px;
     line-height: 18px;
     color: var(--matte-black);
+  }
+  @media only screen and (min-width: 420px) {
+    border-radius: 20px;
   }
 `;
 export const ImageHolder = styled.div`

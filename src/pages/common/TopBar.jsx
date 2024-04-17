@@ -13,6 +13,7 @@ import SideNav from "../../components/atoms/sideNav/index.js";
 
 const TopBar = () => {
   const [sideNav, setSidenav] = useState(false);
+  const [notifications, setNotifications] = useState(false);
 
   return (
     <StyledTopBar>
@@ -29,10 +30,24 @@ const TopBar = () => {
         </div>
       </div>
       <div className="actions" style={{ display: "Flex", gap: "10px" }}>
-        <div className="notification">
+        <div
+          className="notification"
+          onClick={() => {
+            setNotifications(!notifications);
+          }}
+          onMouseLeave={() => {
+            setNotifications(false);
+          }}
+        >
           <Image src={bell} alt="bell" className="bell" />
           <Image src={bellWhite} alt="bell" className="bell-white" />
-          <div className="notificationWrapper">
+          <div
+            className={
+              notifications
+                ? "notificationWrapper-visible"
+                : "notificationWrapper"
+            }
+          >
             <Notifications />
           </div>
         </div>

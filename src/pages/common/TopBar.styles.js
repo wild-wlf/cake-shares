@@ -59,19 +59,23 @@ export const StyledTopBar = styled.header`
     .bell-white {
       display: none;
     }
-    &:hover {
-      .notificationWrapper {
-        visibility: visible;
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
+  }
+  .notificationWrapper-visible {
+    visibility: visible;
+    transform: translateY(0);
+    opacity: 1;
+    max-width: 432px;
+    position: absolute;
+    top: 30px;
+    right: 0px;
+    transform: translateY(50px);
+    transition: 0.4s;
   }
   .notificationWrapper {
     max-width: 432px;
     position: absolute;
-    top: 0;
-    right: 30px;
+    top: 20px;
+    right: 0px;
     padding-top: 64px;
     visibility: hidden;
     transform: translateY(50px);

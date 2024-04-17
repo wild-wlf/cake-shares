@@ -43,7 +43,7 @@ const Notifications = () => {
     <NotificationsHolder>
       {notificationData.map((item, index) => (
         <div key={index} className="holder">
-          <div className="notification">
+          <div className="notifications">
             <div className="content">
               <ImageHolder background={item.background}>
                 <Image src={item.image} alt="notification" />
