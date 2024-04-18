@@ -58,7 +58,7 @@ export const StyledButton = styled.button`
     if (btntype === "info") {
       return "var(--blue)";
     }
-    return "var(--white)";
+    return "rgba(49, 49, 49, 1)";
   }};
 
   background: ${({ btntype }) => {
@@ -99,7 +99,7 @@ export const StyledButton = styled.button`
     if (btntype === "info") {
       return "var(--light-blue)";
     }
-    return "var(--primary)";
+    return "var(--white)";
   }};
   border: ${({ btntype }) => {
     if (btntype === "white") {
@@ -123,7 +123,7 @@ export const StyledButton = styled.button`
   ${({ sm }) =>
     sm &&
     css`
-      min-width: 107px;
+      min-width: 97px;
       font-size: 14px;
       line-height: 18px;
       font-weight: 400;

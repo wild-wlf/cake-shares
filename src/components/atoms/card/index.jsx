@@ -5,12 +5,12 @@ import Property from "../../../_assets/property.png";
 import Heart from "../../../_assets/heart.svg";
 import ProgressBar from "@ramonak/react-progress-bar";
 
-const index = () => {
+const index = ({ Cardimage }) => {
   return (
     <CardWrapper>
       <div className="card">
         <div className="image-div">
-          <Image src={Property} alt="card-image" />
+          <Image src={Cardimage} alt="card-image" />
           <div className="tagWrapper">
             <div className="tag">Properties</div>
             <div className="icon-div">

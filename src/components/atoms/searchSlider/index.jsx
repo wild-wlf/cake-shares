@@ -1,5 +1,5 @@
 import React from "react";
-import { Wrapper } from "./categories.style";
+import { Wrapper } from "./searchSlider.style";
 import Slider from "react-slick";
 import Card from "../card";
 import arrowRight from "../../../_assets/arrow-right.svg";
@@ -37,11 +37,16 @@ const index = () => {
   ];
   var settings = {
     dots: false,
+    arrows: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 5.2,
+    slidesToShow: 5.5,
     slidesToScroll: 1,
     responsive: [
+      {
+        breakpoint: 1300,
+        settings: { slidesToShow: 4.8 },
+      },
       {
         breakpoint: 1200,
         settings: { slidesToShow: 4.5 },
@@ -68,7 +73,7 @@ const index = () => {
       },
       {
         breakpoint: 600,
-        settings: { slidesToShow: 3 },
+        settings: { slidesToShow: 2.9 },
       },
       {
         breakpoint: 510,
@@ -76,15 +81,13 @@ const index = () => {
       },
       {
         breakpoint: 430,
-        settings: { slidesToShow: 2 },
+        settings: { slidesToShow: 2.1 },
       },
     ],
   };
+
   return (
     <Wrapper image={arrowRight}>
-      <div className="title">
-        <span>Popular Investments</span>
-      </div>
       <div className="slider">
         <Slider {...settings}>
           {images.map((data, index) => (

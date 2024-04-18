@@ -95,6 +95,11 @@ export const StyledTopBar = styled.header`
     transition: linear 0.3s;
   }
 
+  .buttonWrapper {
+    display: flex;
+    gap: 10px;
+  }
+
   @media (max-width: 768px) {
     padding: 30px 30px;
     /* background: var(--black); */

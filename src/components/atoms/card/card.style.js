@@ -29,7 +29,7 @@ export const CardWrapper = styled.div`
     gap: 95px;
   }
   .tag {
-    font-size: 10px;
+    font-size: 11px;
     width: 75px;
     height: 25px;
     background-color: rgba(255, 255, 255, 1);
@@ -71,7 +71,7 @@ export const CardWrapper = styled.div`
     .tag {
       width: 52.42px;
       height: 17.32px;
-      font-size: 7px;
+      font-size: 8px;
     }
     .tagWrapper {
       top: 12px;
@@ -90,12 +90,11 @@ export const CardWrapper = styled.div`
     }
     .decription {
       width: 139px;
-      height: 33.96px;
+      height: 40px;
       border-radius: 0px 0px 14px 14px;
       padding: 6.93px;
       margin: 0px 6.79px;
       font-weight: 400;
-      font-size: 6.93px;
       background-color: var(--white);
       display: flex;
       flex-direction: column;

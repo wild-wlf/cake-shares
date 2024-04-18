@@ -3,24 +3,74 @@ import { Sort, Wrapper } from "./advanceSearch.style";
 import Button from "../Button";
 import { IoMdArrowDropdown } from "react-icons/io";
 import Field from "../Field";
+import Link from "next/link";
 
 const index = () => {
-  const [radioBox, setRadioBox] = useState(false);
-  const [selectedRadio, setSelectedRadio] = useState(null);
+  const [investmentBox, setInvestmentBox] = useState(false);
+  const [countryBox, setCountryBox] = useState(false);
+  const [kycBox, setKycBox] = useState(false);
+  const [selected, setSelected] = useState({
+    investment: "Select Type",
+    country: "Select Country",
+    kyc: "Select Level",
+  });
   const [searchQuery, setSearchQuery] = useState({
     searchText: "",
+    popular: false,
+    private: false,
   });
 
   const handleRadioChecked = (e) => {
     const { name } = e.target;
 
-    setSelectedRadio(name);
+    setSelected((prev) => ({
+      ...prev,
+      investment: name,
+    }));
     setSearchQuery((prev) => ({
       ...prev,
-      sort: name,
+      investmentType: name,
     }));
-    setRadioBox(false);
+    setInvestmentBox(false);
   };
+  const handleCountryChecked = (e) => {
+    const { name } = e.target;
+
+    setSelected((prev) => ({
+      ...prev,
+      country: name,
+    }));
+    setSearchQuery((prev) => ({
+      ...prev,
+      country: name,
+    }));
+    setCountryBox(false);
+  };
+  const handleKycChecked = (e) => {
+    const { name } = e.target;
+    setSelected((prev) => ({
+      ...prev,
+      kyc: name,
+    }));
+    setSearchQuery((prev) => ({
+      ...prev,
+      kyc: name,
+    }));
+    setKycBox(false);
+  };
+  const handlePopularChecked = () => {
+    setSearchQuery((prev) => ({
+      ...prev,
+      popular: !prev.popular,
+    }));
+  };
+  const handlePrivateChecked = () => {
+    setSearchQuery((prev) => ({
+      ...prev,
+      private: !prev.private,
+    }));
+  };
+  console.log(searchQuery);
   return (
     <Wrapper>
       <div className="searchby">
@@ -31,38 +81,38 @@ const index = () => {
       <div className="investmenttype">
         <div className="dropdown-div">
           <span>Investment Type</span>
-          <Sort className={radioBox && "active"}>
+          <Sort className={investmentBox && "active"}>
             <Button
               type="dropdown"
               rounded
               sm
               width="500"
-              onClick={() => setRadioBox(!radioBox)}
+              onClick={() => setInvestmentBox(!investmentBox)}
               className="dropdown"
             >
-              Select type
+              {selected.investment}
               <IoMdArrowDropdown size={20} />
             </Button>
             <div className="sort-list">
-              {radioBox && (
+              {investmentBox && (
                 <div className="list">
                   <Field
                     type="radio"
-                    label="All"
-                    name="group"
+                    label="Properties"
+                    name="Properties"
                     radioBorder="var(--gray-2)"
                     labelReverse
                     onChange={handleRadioChecked}
-                    value={selectedRadio === "group"}
+                    value={selected.investment === "Properties"}
                   />
                   <Field
                     type="radio"
-                    label="Super User"
-                    name="group1"
+                    label="Vehicles"
+                    name="Vehicles"
                     radioBorder="var(--gray-2)"
                     labelReverse
                     onChange={handleRadioChecked}
-                    value={selectedRadio === "group1"}
+                    value={selected.investment === "Vehicles"}
                   />
                 </div>
               )}
@@ -71,38 +121,38 @@ const index = () => {
         </div>
         <div className="dropdown-div">
           <span>Country</span>
-          <Sort className={radioBox && "active"}>
+          <Sort className={countryBox && "active"}>
             <Button
               type="dropdown"
               rounded
               sm
               width="500"
-              onClick={() => setRadioBox(!radioBox)}
+              onClick={() => setCountryBox(!countryBox)}
               className="dropdown"
             >
-              Select Country
+              {selected.country}
               <IoMdArrowDropdown size={20} />
             </Button>
             <div className="sort-list">
-              {radioBox && (
+              {countryBox && (
                 <div className="list">
                   <Field
                     type="radio"
                     label="United States"
-                    name="group"
+                    name="United States"
                     radioBorder="var(--gray-2)"
                     labelReverse
-                    onChange={handleRadioChecked}
-                    value={selectedRadio === "group"}
+                    onChange={handleCountryChecked}
+                    value={selected.country === "United States"}
                   />
                   <Field
                     type="radio"
                     label="United Kingdom"
-                    name="group1"
+                    name="United Kingdom"
                     radioBorder="var(--gray-2)"
                     labelReverse
-                    onChange={handleRadioChecked}
-                    value={selectedRadio === "group1"}
+                    onChange={handleCountryChecked}
+                    value={selected.country === "United Kingdom"}
                   />
                 </div>
               )}
@@ -111,38 +161,38 @@ const index = () => {
         </div>
         <div className="dropdown-div">
           <span>KYC Level</span>
-          <Sort className={radioBox && "active"}>
+          <Sort className={kycBox && "active"}>
             <Button
               type="dropdown"
               rounded
               sm
               width="500"
-              onClick={() => setRadioBox(!radioBox)}
+              onClick={() => setKycBox(!kycBox)}
               className="dropdown"
             >
-              Select Level
+              {selected.kyc}
               <IoMdArrowDropdown size={20} />
             </Button>
             <div className="sort-list">
-              {radioBox && (
+              {kycBox && (
                 <div className="list">
                   <Field
                     type="radio"
                     label="Level 1"
-                    name="group"
+                    name="Level 1"
                     radioBorder="var(--gray-2)"
                     labelReverse
-                    onChange={handleRadioChecked}
-                    value={selectedRadio === "group"}
+                    onChange={handleKycChecked}
+                    value={selected.kyc === "Level 1"}
                   />
                   <Field
                     type="radio"
                     label="Level 2"
-                    name="group1"
+                    name="Level 2"
                     radioBorder="var(--gray-2)"
                     labelReverse
-                    onChange={handleRadioChecked}
-                    value={selectedRadio === "group1"}
+                    onChange={handleKycChecked}
+                    value={selected.kyc === "Level 2"}
                   />
                 </div>
               )}
@@ -174,27 +224,25 @@ const index = () => {
         <Field
           type="checkbox"
           label="Popular (likes)"
-          name="group1"
           labelColor="rgba(49, 49, 49, 1)"
           radioBorder="var(--gray-2)"
-          onChange={handleRadioChecked}
-          value={selectedRadio === "group1"}
+          onChange={handlePopularChecked}
         />
         <Field
           type="checkbox"
           label="Corporate or Private"
           labelColor="rgba(49, 49, 49, 1)"
-          name="group1"
           radioBorder="var(--gray-2)"
-          onChange={handleRadioChecked}
-          value={selectedRadio === "group2"}
+          onChange={handlePrivateChecked}
         />
       </div>
 
       <div className="btnwrapper">
-        <Button rounded md btntype="green" width="170">
-          Search
-        </Button>
+        <Link href={{ pathname: "/advanceSearch" }}>
+          <Button rounded md btntype="green" width="170">
+            Search
+          </Button>
+        </Link>
       </div>
     </Wrapper>
   );

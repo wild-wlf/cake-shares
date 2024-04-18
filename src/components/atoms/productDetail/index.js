@@ -8,7 +8,6 @@ import Image from "next/image";
 import property from "../../../_assets/property.png";
 import property2 from "../../../_assets/property2.png";
 import property3 from "../../../_assets/property3.png";
-import ModalContainer from "../ModalContainer";
 import CenterModal from "../Modal/CenterModal";
 import AdvanceSearch from "../advanceSearch";
 
