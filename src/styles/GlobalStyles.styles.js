@@ -24,15 +24,17 @@ export const Styling = css`
 
   body {
     color: var(--base-text-color);
-    background: var(--base-background-color);
+    background: rgba(254, 254, 254, 1);
     font: var(--font-size-base) / var(--line-height-base)
-      var(--base-font-family);
+      var(--base-font-sans-serif);
     font-weight: 400;
     position: relative;
     min-width: var(--base-min-width);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 auto;
     &.nav-active {
       @media (max-width: 575px) {
         overflow: hidden;
@@ -99,7 +101,6 @@ export const Styling = css`
   }
   a {
     text-decoration: none;
-    color: var(--blue);
   }
 
   input[type="search"]::-webkit-search-decoration,
@@ -171,7 +172,7 @@ export const Styling = css`
   /* This will work on Firefox */
   * {
     scrollbar-width: thin;
-    scrollbar-color: var(--primary) #eceaf9;
+    scrollbar-color: #408f8c;
   }
 
   /* Targtes on Chrome, Edge, and Safari */
@@ -182,11 +183,11 @@ export const Styling = css`
 
   *::-webkit-scrollbar-track {
     border-radius: 30px;
-    background: #eceaf9;
+    background: #408f8c;
   }
 
   *::-webkit-scrollbar-thumb {
-    background: var(--primary);
+    background: #408f8c;
     box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.03);
     border-radius: 30px;
   }
