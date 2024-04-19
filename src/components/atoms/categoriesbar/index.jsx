@@ -15,7 +15,7 @@ import { CiSearch } from "react-icons/ci";
 import CenterModal from "../Modal/CenterModal";
 import AdvanceSearch from "../advanceSearch";
 
-const index = () => {
+const CategoriesBar = () => {
   const [modal, setModal] = useState(false);
   var settings = {
     dots: false,
@@ -117,7 +117,7 @@ const index = () => {
             </Slider>
           </div>
           <div className="search" onClick={() => setModal(true)}>
-            <input type="text" placeholder="Search" readOnly/>
+            <input type="text" placeholder="Search" readOnly />
             <CiSearch className="searchicon" />
           </div>
         </div>
@@ -126,4 +126,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default CategoriesBar;

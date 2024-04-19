@@ -6,7 +6,7 @@ import Button from "../Button";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaMinus } from "react-icons/fa6";
 
-const index = () => {
+const SearchFilters = () => {
   const [investmentBox, setInvestmentBox] = useState(false);
   const [countryBox, setCountryBox] = useState(false);
   const [kycBox, setKycBox] = useState(false);
@@ -221,4 +221,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default SearchFilters;

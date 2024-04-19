@@ -9,7 +9,7 @@ import { IoIosListBox } from "react-icons/io";
 import { Sort } from "../advanceSearch/advanceSearch.style";
 import Field from "../Field";
 
-const index = () => {
+const SearchHeader = () => {
   const router = useRouter();
   const [sortBox, setSortBox] = useState(false);
   const [selected, setSelected] = useState(null);
@@ -107,4 +107,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default SearchHeader;

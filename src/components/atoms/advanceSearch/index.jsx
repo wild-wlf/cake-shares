@@ -5,7 +5,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import Field from "../Field";
 import Link from "next/link";
 
-const index = () => {
+const AdvanceSearch = () => {
   const [investmentBox, setInvestmentBox] = useState(false);
   const [countryBox, setCountryBox] = useState(false);
   const [kycBox, setKycBox] = useState(false);
@@ -239,12 +239,7 @@ const index = () => {
 
       <div className="btnwrapper">
         <Link href={{ pathname: "/advanceSearch" }}>
-          <Button
-            rounded
-            md
-            btntype="green"
-            width="170"
-          >
+          <Button rounded md btntype="green" width="170">
             Search
           </Button>
         </Link>
@@ -253,4 +248,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default AdvanceSearch;

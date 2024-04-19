@@ -1,5 +1,4 @@
 import React, { forwardRef, useState } from "react";
-
 import { Error, InputHolder } from "./Field.styles";
 import Label from "@/components/molecules/Label";
 import FakeInput from "../../molecules/FakeInput";
@@ -159,12 +158,13 @@ const Field = forwardRef(
                   </InputIcon> */}
                 </>
               ) : type === "datepicker" ? (
-                <DatePicker
-                  {...inputProps}
-                  prefix={prefix}
-                  $invalid={invalid || error}
-                />
-              ) : type === "chooseFile" ? (
+                // <DatePicker
+                //   {...inputProps}
+                //   prefix={prefix}
+                //   $invalid={invalid || error}
+                <></>
+              ) : // />
+              type === "chooseFile" ? (
                 // <ChooseFile {...inputProps} />
                 <></>
               ) : (
@@ -182,13 +182,14 @@ const Field = forwardRef(
                   /> */}
                   {/* input right icon */}
                   {suffix && (
-                    <InputIcon
-                      suffix={suffix}
-                      disabled={disabled}
-                      invalid={invalid || error}
-                    >
-                      {suffix}
-                    </InputIcon>
+                    // <InputIcon
+                    //   suffix={suffix}
+                    //   disabled={disabled}
+                    //   invalid={invalid || error}
+                    // >
+                    //   {suffix}
+                    // </InputIcon>
+                    <></>
                   )}
                   {button && (
                     <div
@@ -219,5 +220,7 @@ const Field = forwardRef(
 );
 
 Field.defaultProps = defaultProps;
+
+Field.displayName = "Field";
 
 export default Field;
