@@ -5,7 +5,7 @@ import Buyer from "../../../_assets/buyer.svg";
 import Seller from "../../../_assets/seller.svg";
 import Button from "../Button";
 
-const index = ({ handleRegisterModal }) => {
+const RegisterModal = ({ handleRegisterModal }) => {
   // const [register, setRegister] = useState("register");
 
   // const handleRadioChecked = (e) => {
@@ -87,4 +87,4 @@ const index = ({ handleRegisterModal }) => {
   );
 };
 
-export default index;
+export default RegisterModal;

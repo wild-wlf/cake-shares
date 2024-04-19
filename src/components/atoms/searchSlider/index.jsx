@@ -91,7 +91,7 @@ const index = () => {
       <div className="slider">
         <Slider {...settings}>
           {images.map((data, index) => (
-            <Link href={`/productDetails/${data.id}`}>
+            <Link href={`/productDetails/${data.id}`} key={index}>
               <Card Cardimage={data.image} />
             </Link>
           ))}

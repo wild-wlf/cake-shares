@@ -12,7 +12,7 @@ import CenterModal from "../Modal/CenterModal";
 import AdvanceSearch from "../advanceSearch";
 import { useRouter } from "next/router";
 
-const index = () => {
+const ProductDetail = () => {
   const router = useRouter();
   const [modal, setModal] = useState(false);
   return (
@@ -135,4 +135,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default ProductDetail;
