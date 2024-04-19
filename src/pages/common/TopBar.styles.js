@@ -128,6 +128,6 @@ export const StyledTopBar = styled.header`
     } */
   }
   @media (max-width: 576px) {
-    padding: 30px 20px;
+    padding: 30px 20px 20px 20px;
   }
 `;

@@ -10,21 +10,37 @@ import register from "../../_assets/register.svg";
 import store from "../../_assets/store.svg";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import SideNav from "../../components/atoms/sideNav/index.js";
-import AdvanceSearch from "../../components/atoms/advanceSearch";
+import RegisterModal from "../../components/atoms/registerModal";
 import CenterModal from "@/components/atoms/Modal/CenterModal";
+import AdvanceSearch from "../../components/atoms/advanceSearch";
 
 const TopBar = () => {
   const [sideNav, setSidenav] = useState(false);
   const [notifications, setNotifications] = useState(false);
-
   const [registermodal, setRegisterModal] = useState(false);
+  const [registermodal2, setRegisterModal2] = useState(false);
+
+  const handleRegisterModal = () => {
+    setRegisterModal(false);
+    setRegisterModal2(true);
+  };
+
   return (
     <>
       <CenterModal
         open={registermodal}
         setOpen={setRegisterModal}
-        title={"Advance Search"}
-        width="670"
+        title={"Register an Account!"}
+        width="646"
+      >
+        <RegisterModal handleRegisterModal={handleRegisterModal} />
+      </CenterModal>
+
+      <CenterModal
+        open={registermodal2}
+        setOpen={setRegisterModal2}
+        title={"Register as a Buyer"}
+        width="646"
       >
         <AdvanceSearch />
       </CenterModal>

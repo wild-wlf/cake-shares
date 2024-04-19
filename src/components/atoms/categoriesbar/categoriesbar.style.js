@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
     position: relative;
 
     input {
+      cursor: pointer;
       width: 100%;
       color: rgba(64, 143, 140, 1);
       background-color: rgba(64, 143, 140, 0.1);

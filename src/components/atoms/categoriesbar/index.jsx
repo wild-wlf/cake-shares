@@ -117,7 +117,7 @@ const index = () => {
             </Slider>
           </div>
           <div className="search" onClick={() => setModal(true)}>
-            <input type="text" placeholder="Search" />
+            <input type="text" placeholder="Search" readOnly/>
             <CiSearch className="searchicon" />
           </div>
         </div>

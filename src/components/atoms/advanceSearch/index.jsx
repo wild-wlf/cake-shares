@@ -239,7 +239,12 @@ const index = () => {
 
       <div className="btnwrapper">
         <Link href={{ pathname: "/advanceSearch" }}>
-          <Button rounded md btntype="green" width="170">
+          <Button
+            rounded
+            md
+            btntype="green"
+            width="170"
+          >
             Search
           </Button>
         </Link>

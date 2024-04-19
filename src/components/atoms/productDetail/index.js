@@ -10,8 +10,10 @@ import property2 from "../../../_assets/property2.png";
 import property3 from "../../../_assets/property3.png";
 import CenterModal from "../Modal/CenterModal";
 import AdvanceSearch from "../advanceSearch";
+import { useRouter } from "next/router";
 
 const index = () => {
+  const router = useRouter();
   const [modal, setModal] = useState(false);
   return (
     <>
@@ -25,12 +27,18 @@ const index = () => {
       </CenterModal>
       <Wrapper>
         <div className="btnwrapper">
-          <Link href="/">
-            <Button rounded sm btntype="blue" className="button">
-              <IoIosArrowBack />
-              Go Back
-            </Button>
-          </Link>
+          <Button
+            rounded
+            sm
+            btntype="blue"
+            className="button"
+            onClick={() => {
+              router.back();
+            }}
+          >
+            <IoIosArrowBack />
+            Go Back
+          </Button>
           <Button
             rounded
             sm
