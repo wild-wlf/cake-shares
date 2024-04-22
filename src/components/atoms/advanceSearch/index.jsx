@@ -4,6 +4,7 @@ import Button from "../Button";
 import { IoMdArrowDropdown } from "react-icons/io";
 import Field from "../Field";
 import Link from "next/link";
+import RangeSlider from "../rangeSlider";
 
 const AdvanceSearch = () => {
   const [investmentBox, setInvestmentBox] = useState(false);
@@ -70,6 +71,7 @@ const AdvanceSearch = () => {
       private: !prev.private,
     }));
   };
+
   console.log(searchQuery);
   return (
     <Wrapper>
@@ -199,6 +201,11 @@ const AdvanceSearch = () => {
             </div>
           </Sort>
         </div>
+      </div>
+
+      <div className="rangeSlider">
+        <span className="heading">Investment Volume</span>
+        <RangeSlider />
       </div>
 
       <div className="minvalues">

@@ -1,28 +1,33 @@
 import React, { useState } from "react";
-import Notifications from "../../components/molecules/Notifications";
+import Notifications from "../components/molecules/Notifications";
 import { StyledTopBar } from "./TopBar.styles";
-import logo from "../../_assets/logo.svg";
+import logo from "../_assets/logo.svg";
 import Image from "next/image";
-import bell from "../../_assets/bell.svg";
-import bellWhite from "../../_assets/bell-white.svg";
+import bell from "../_assets/bell.svg";
+import bellWhite from "../_assets/bell-white.svg";
 import Button from "@/components/atoms/Button";
-import register from "../../_assets/register.svg";
-import store from "../../_assets/store.svg";
+import register from "../_assets/register.svg";
+import store from "../_assets/store.svg";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
-import SideNav from "../../components/atoms/sideNav/index.js";
-import RegisterModal from "../../components/atoms/registerModal";
+import SideNav from "../components/atoms/sideNav/index.js";
+import RegisterModal from "../components/atoms/registerModal";
 import CenterModal from "@/components/atoms/Modal/CenterModal";
-import AdvanceSearch from "../../components/atoms/advanceSearch";
+import AdvanceSearch from "../components/atoms/advanceSearch";
+import InheritenceAddedModal from "@/components/atoms/inheritanceaddedmodal";
+import GreenTick from "../_assets/Green-Tick.svg";
 
 const TopBar = () => {
   const [sideNav, setSidenav] = useState(false);
   const [notifications, setNotifications] = useState(false);
   const [registermodal, setRegisterModal] = useState(false);
-  const [registermodal2, setRegisterModal2] = useState(false);
+  const [buyermodal, setBuyerModal] = useState(false);
 
   const handleRegisterModal = () => {
     setRegisterModal(false);
-    setRegisterModal2(true);
+    setBuyerModal(true);
+  };
+  const handleSellerModal = () => {
+    console.log("running");
   };
 
   return (
@@ -33,16 +38,30 @@ const TopBar = () => {
         title={"Register an Account!"}
         width="646"
       >
-        <RegisterModal handleRegisterModal={handleRegisterModal} />
+        <RegisterModal
+          handleRegisterModal={handleRegisterModal}
+          handleSellerModal={handleSellerModal}
+        />
       </CenterModal>
 
-      <CenterModal
-        open={registermodal2}
-        setOpen={setRegisterModal2}
+      {/* <CenterModal
+        open={buyermodal}
+        setOpen={setBuyerModal}
         title={"Register as a Buyer"}
         width="646"
       >
         <AdvanceSearch />
+      </CenterModal> */}
+
+      <CenterModal
+        open={buyermodal}
+        setOpen={setBuyerModal}
+        title={
+          <Image src={GreenTick} className="greentickpic" alt="greentickpic" />
+        }
+        width="543"
+      >
+        <InheritenceAddedModal />
       </CenterModal>
       <StyledTopBar>
         <div className="logoWrapper">
@@ -53,7 +72,7 @@ const TopBar = () => {
             <Image src={logo} alt="logo" />
           </div>
           <div className="textField">
-            <Image src={store} />
+            <Image src={store} alt="store" />
             <span>Marketplace</span>
           </div>
         </div>
@@ -63,9 +82,9 @@ const TopBar = () => {
             onClick={() => {
               setNotifications(!notifications);
             }}
-            onMouseLeave={() => {
-              setNotifications(false);
-            }}
+            // onMouseLeave={() => {
+            //   setNotifications(false);
+            // }}
           >
             <Image src={bell} alt="bell" className="bell" />
             <Image src={bellWhite} alt="bell" className="bell-white" />
@@ -87,7 +106,7 @@ const TopBar = () => {
               className="button"
               onClick={() => setRegisterModal(true)}
             >
-              <Image src={register} />
+              <Image src={register} alt="register" />
               Register
             </Button>
             <Button rounded sm btntype="blue" className="button">

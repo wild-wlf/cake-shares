@@ -8,8 +8,9 @@ import { IoIosRemoveCircle } from "react-icons/io";
 import { IoIosListBox } from "react-icons/io";
 import { Sort } from "../advanceSearch/advanceSearch.style";
 import Field from "../Field";
+import { BsFillGridFill } from "react-icons/bs";
 
-const SearchHeader = () => {
+const SearchHeader = ({ handleViewController, listview }) => {
   const router = useRouter();
   const [sortBox, setSortBox] = useState(false);
   const [selected, setSelected] = useState(null);
@@ -49,10 +50,27 @@ const SearchHeader = () => {
         </div>
         <div className="sorting">
           {" "}
-          <Button rounded sm className="button">
-            List View
-            <IoIosListBox size={18} />
-          </Button>
+          {listview ? (
+            <Button
+              rounded
+              sm
+              className="button"
+              onClick={handleViewController}
+            >
+              List View
+              <IoIosListBox size={18} />
+            </Button>
+          ) : (
+            <Button
+              rounded
+              sm
+              className="button"
+              onClick={handleViewController}
+            >
+              Grid View
+              <BsFillGridFill size={18} />
+            </Button>
+          )}
           <Sort className={sortBox && "active"}>
             <Button
               rounded

@@ -100,6 +100,7 @@ export const Styling = css`
     border-style: none;
   }
   a {
+    color: #313131;
     text-decoration: none;
   }
 
@@ -132,7 +133,7 @@ export const Styling = css`
   h4,
   h5,
   h6 {
-    margin: 0 0 1.25rem;
+    margin: 0;
   }
 
   p {
