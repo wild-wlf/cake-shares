@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   span {
     font-size: var(--font-size-sm);
-    font-weight: 400;
+    font-weight: 500;
   }
   input {
     width: 100%;
@@ -50,6 +50,13 @@ export const Wrapper = styled.div`
     display: flex;
     gap: 16px;
     padding-top: 26px;
+  }
+
+  .rangeSlider {
+    .heading {
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
   }
 
   @media only screen and (max-width: 576px) {

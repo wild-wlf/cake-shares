@@ -68,6 +68,7 @@ export const Head = styled.div`
     justify-content: center;
     cursor: pointer;
   }
+
   @media only screen and (max-width: 768px) {
     strong {
       font-size: 26px;
@@ -76,6 +77,10 @@ export const Head = styled.div`
   @media only screen and (max-width: 576px) {
     strong {
       font-size: 20px;
+    }
+    .notaccesspic {
+      width: 35px;
+      height: 35px;
     }
   }
 `;

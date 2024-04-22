@@ -5,7 +5,7 @@ import Buyer from "../../../_assets/buyer.svg";
 import Seller from "../../../_assets/seller.svg";
 import Button from "../Button";
 
-const RegisterModal = ({ handleRegisterModal }) => {
+const RegisterModal = ({ handleRegisterModal, handleSellerModal }) => {
   // const [register, setRegister] = useState("register");
 
   // const handleRadioChecked = (e) => {
@@ -17,6 +17,14 @@ const RegisterModal = ({ handleRegisterModal }) => {
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
+  };
+
+  const handleModal = () => {
+    if (selectedOption === "bank") {
+      handleRegisterModal();
+    } else {
+      handleSellerModal();
+    }
   };
   return (
     <>
@@ -72,14 +80,7 @@ const RegisterModal = ({ handleRegisterModal }) => {
           </Option>
         </OptionsWrapper>
 
-        <Button
-          rounded
-          s
-          md
-          btntype="green"
-          width="170"
-          onClick={handleRegisterModal}
-        >
+        <Button rounded s md btntype="green" width="170" onClick={handleModal}>
           Continue
         </Button>
       </Container>

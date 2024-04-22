@@ -5,7 +5,7 @@ import banner from "../../../_assets/slider.png";
 import banner2 from "../../../_assets/slider-2.png";
 import Slider from "react-slick";
 
-const index = () => {
+const Banner = () => {
   var settings = {
     dots: false,
     arrows: false,
@@ -20,16 +20,16 @@ const index = () => {
     <BannerWrapper image={banner}>
       <Slider {...settings}>
         <div>
-          <Image src={banner} className="banner" />
-          <Image src={banner2} className="banner2" />
+          <Image src={banner} className="banner" alt="banner" />
+          <Image src={banner2} className="banner2" alt="banner" />
         </div>
         <div>
-          <Image src={banner} className="banner" />
-          <Image src={banner2} className="banner2" />
+          <Image src={banner} className="banner" alt="banner" />
+          <Image src={banner2} className="banner2" alt="banner" />
         </div>
       </Slider>
     </BannerWrapper>
   );
 };
 
-export default index;
+export default Banner;
