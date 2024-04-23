@@ -60,6 +60,7 @@ export const Centered = css`
 `;
 
 export const StyledFormGroup = styled.div`
+  width: 100%;
   margin-bottom: ${({ $invalid, noMargin }) =>
     $invalid || noMargin ? "0px" : "1.625rem"};
   /* position: relative; */
