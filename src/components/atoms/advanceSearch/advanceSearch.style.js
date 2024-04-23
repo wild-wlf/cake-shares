@@ -59,6 +59,21 @@ export const Wrapper = styled.div`
     }
   }
 
+  .volume-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    .inputWrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 152px;
+      input {
+        text-align: center;
+      }
+    }
+  }
+
   @media only screen and (max-width: 576px) {
     .investmenttype {
       padding: 16px 0px;

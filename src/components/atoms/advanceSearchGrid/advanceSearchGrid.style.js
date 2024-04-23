@@ -108,6 +108,9 @@ export const Wrapper = styled.div`
     flex-direction: column;
     gap: 16px;
     padding: 0px 26px 0px 21px;
+    .button {
+      width: 100%;
+    }
   }
   @media only screen and (max-width: 1200px) {
     .values-div {
@@ -128,15 +131,27 @@ export const Wrapper = styled.div`
     padding: 0px 30px 0px 30px;
     .btnWrapper {
       flex-direction: row;
+      .button {
+        width: auto;
+      }
     }
     .CardWrapper {
       padding-top: 11px;
+    }
+    .values-div {
+      max-width: 400px;
     }
   }
   @media only screen and (max-width: 576px) {
     padding: 0px 20px 0px 20px;
     .values-div {
       padding: 0px;
+      span {
+        font-size: 14px;
+      }
+      h3 {
+        font-size: 18px;
+      }
     }
     .btnWrapper {
       padding: 0px;

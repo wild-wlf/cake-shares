@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Error = styled.span`
   display: block;
@@ -19,6 +19,6 @@ export const InputHolder = styled.div`
     position: relative;
   }
   @media (max-width: 575px) {
-    position: ${({ $searchField }) => !$searchField && "relative"};
+    position: ${({ $searchField }) => !$searchField && 'relative'};
   }
 `;

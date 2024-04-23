@@ -24,7 +24,7 @@ const ProductDetail = () => {
       <CenterModal
         open={modal}
         setOpen={setModal}
-        title={<Image src={NotAccessPic} />}
+        title={<Image src={NotAccessPic} alt="notaccess"/>}
         width="543"
       >
         <NotAccessModal handleCloseModal={handleCloseModal} />

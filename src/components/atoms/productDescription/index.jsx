@@ -19,7 +19,7 @@ const ProductDescription = () => {
       <CenterModal
         open={modal}
         setOpen={setModal}
-        title={<Image src={NotAccessPic} className="notaccesspic" />}
+        title={<Image src={NotAccessPic} className="notaccesspic" alt="notaccess"/>}
         width="543"
       >
         <NotAccessModal handleCloseModal={handleCloseModal} />
@@ -40,7 +40,7 @@ const ProductDescription = () => {
           </div>
           <div className="seller">
             <div className="profilepic">
-              <Image src={Profilepic} />
+              <Image src={Profilepic} alt="profilepic"/>
             </div>
             <div className="profiledesc">
               <h3>Logan Paulson</h3>

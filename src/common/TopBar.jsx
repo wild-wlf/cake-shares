@@ -15,6 +15,7 @@ import CenterModal from "@/components/atoms/Modal/CenterModal";
 import AdvanceSearch from "../components/atoms/advanceSearch";
 import InheritenceAddedModal from "@/components/atoms/inheritanceaddedmodal";
 import GreenTick from "../_assets/Green-Tick.svg";
+import RegisterAsBuyer from "@/components/atoms/registerAsBuyer";
 
 const TopBar = () => {
   const [sideNav, setSidenav] = useState(false);
@@ -56,12 +57,10 @@ const TopBar = () => {
       <CenterModal
         open={buyermodal}
         setOpen={setBuyerModal}
-        title={
-          <Image src={GreenTick} className="greentickpic" alt="greentickpic" />
-        }
+        title="Register As a Buyer"
         width="543"
       >
-        <InheritenceAddedModal />
+        <RegisterAsBuyer />
       </CenterModal>
       <StyledTopBar>
         <div className="logoWrapper">

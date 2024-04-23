@@ -8,6 +8,7 @@ import Property3 from "../../../_assets/property3.png";
 import Image from "next/image";
 import { RiFilePaperFill } from "react-icons/ri";
 import Button from "../Button";
+import Link from "next/link";
 
 const AdvanceSearchGrid = () => {
   const images = [
@@ -16,8 +17,8 @@ const AdvanceSearchGrid = () => {
       id: "1",
     },
     {
-      id: "2",
       image: Property3,
+      id: "2",
     },
     {
       image: Property,
@@ -107,10 +108,12 @@ const AdvanceSearchGrid = () => {
               <RiFilePaperFill />
               Initiate Investment
             </Button>
-            <Button rounded sm btntype="white-blue" className="button">
-              <RiFilePaperFill />
-              View Details
-            </Button>
+            <Link href={`/products/${data.id}`}>
+              <Button rounded sm btntype="white-blue" className="button">
+                <RiFilePaperFill />
+                View Details
+              </Button>
+            </Link>
           </div>
         </div>
       ))}
