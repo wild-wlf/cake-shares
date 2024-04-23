@@ -1,7 +1,6 @@
 import React from "react";
 import { CardWrapper } from "./card.style";
 import Image from "next/image";
-import Property from "../../../_assets/property.png";
 import Heart from "../../../_assets/heart.svg";
 import ProgressBar from "@ramonak/react-progress-bar";
 

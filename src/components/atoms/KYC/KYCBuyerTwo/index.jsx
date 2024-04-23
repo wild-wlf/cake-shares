@@ -7,9 +7,16 @@ import {
 } from "../KYCBuyer/KycBuyer.styles";
 import UploadFile from "@/components/molecules/UploadFile";
 import Button from "../../Button";
+import { useForm } from "@/components/molecules/Form";
+import Form from "@/components/molecules/Form/Form";
+import Select from "../../Select";
+import Field from "../../Field";
 
 const KycBuyerLevelTwo = () => {
+  const [form] = useForm();
+
   const [step, setStep] = useState(1);
+  const optionData = [{ label: "Buyer Level Two", value: "Buyer Level Two" }];
   return (
     <StyledKycBuyer>
       <div className="twoCol">
@@ -24,7 +31,57 @@ const KycBuyerLevelTwo = () => {
           </StepWrapper>
         </StepWrapperContainar>
       </div>
-      {step == 1 && <></>}
+      {step == 1 && (
+        <Form form={form}>
+          <Form.Item
+            type="text"
+            label="Email Address"
+            name="email"
+            // placeholder="Your Email or Username"
+            rules={[
+              { required: true },
+              {
+                pattern: /^.{0,256}$/,
+                message: "Maximum Character Length is 256",
+              },
+            ]}
+          >
+            <Select options={optionData} />
+          </Form.Item>
+          <div className="combineFields">
+            <Form.Item
+              type="text"
+              label="Email Address"
+              name="email"
+              placeholder="Your Email or Username"
+              rules={[
+                { required: true },
+                {
+                  pattern: /^.{0,256}$/,
+                  message: "Maximum Character Length is 256",
+                },
+              ]}
+            >
+              <Field options={optionData} />
+            </Form.Item>
+            <Form.Item
+              type="text"
+              label="Email Address"
+              name="email"
+              placeholder="Your Email or Username"
+              rules={[
+                { required: true },
+                {
+                  pattern: /^.{0,256}$/,
+                  message: "Maximum Character Length is 256",
+                },
+              ]}
+            >
+              <Field options={optionData} />
+            </Form.Item>
+          </div>
+        </Form>
+      )}
       {step == 2 && (
         <>
           <label htmlFor="" className="fakelabel">

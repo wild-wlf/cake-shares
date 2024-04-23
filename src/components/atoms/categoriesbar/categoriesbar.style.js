@@ -8,8 +8,18 @@ export const Wrapper = styled.div`
     justify-content: space-between;
     gap: 46px;
   }
+  .slick-track {
+    display: flex;
+    gap: 16px;
+  }
   .slider {
     width: 995px;
+  }
+  .button {
+    width: 100%;
+  }
+  .lg {
+    width: 140px;
   }
   .search {
     width: 300px;

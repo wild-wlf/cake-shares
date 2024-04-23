@@ -1,10 +1,17 @@
 import React, { forwardRef, useState } from "react";
-import { Error, InputHolder } from "./Field.styles";
-import Label from "@/components/molecules/Label";
+
+// eslint-disable-next-line no-unused-vars
+import styled from "styled-components";
+
+import Label from "../../molecules/Label";
+import Input from "../../molecules/Input";
+import InputIcon from "../../molecules/InputIcon";
+import FakeLabel from "../../molecules/FakeLabel";
 import FakeInput from "../../molecules/FakeInput";
-import { StyledFormGroup } from "@/styles/helpers.styles";
-import Input from "@/components/molecules/Input";
-import FakeLabel from "@/components/molecules/FakeLabel";
+import { StyledFormGroup } from "../../../styles/helpers.styles";
+import ChooseFile from "../../molecules/ChooseFile";
+import { Error, InputHolder } from "./Field.styles";
+import DatePicker from "../DatePicker";
 
 const defaultProps = {
   type: "text",
@@ -78,7 +85,7 @@ const Field = forwardRef(
             />
             <FakeInput $radioBorder={radioBorder} $labelReverse={labelReverse}>
               {type === "checkbox" && (
-                <i class="icon-check material-icons-outlined">✓</i>
+                <i className="icon-check material-icons-outlined">check</i>
               )}
             </FakeInput>
             <FakeLabel
@@ -113,26 +120,34 @@ const Field = forwardRef(
             <InputHolder $searchField={searchField}>
               {/* input left icon */}
               {prefix && (
-                // <InputIcon
-                //   disabled={disabled}
-                //   // as={type === 'search' && 'button'}
-                //   // type={type === 'search' ? 'button' : undefined}
-                //   prefix={prefix}
-                //   invalid={invalid || error}
-                //   css={
-                //     type === "search" &&
-                //     "color: var(--primary); font-size: 25px; left: 11px;"
-                //   }
-                // >
-                //   {prefix}
-                // </InputIcon>
-                <></>
+                <InputIcon
+                  disabled={disabled}
+                  // as={type === 'search' && 'button'}
+                  // type={type === 'search' ? 'button' : undefined}
+                  prefix={prefix}
+                  invalid={invalid || error}
+                  css={
+                    type === "search" &&
+                    "color: var(--primary); font-size: 25px; left: 11px;"
+                  }
+                >
+                  {prefix}
+                </InputIcon>
+              )}
+              {suffix && (
+                <InputIcon
+                  suffix={suffix}
+                  disabled={disabled}
+                  invalid={invalid || error}
+                >
+                  {suffix}
+                </InputIcon>
               )}
               {/* {datePicker && <DatePicker inputProps={inputProps} />} */}
               {/* password field */}
               {type === "password" ? (
                 <>
-                  {/* <Input
+                  <Input
                     ref={ref}
                     {...inputProps}
                     $prefix={prefix}
@@ -143,8 +158,8 @@ const Field = forwardRef(
                     disabled={disabled}
                     $button={button && true}
                     autoComplete="on"
-                  /> */}
-                  {/* <InputIcon
+                  />
+                  <InputIcon
                     disabled={disabled}
                     suffix
                     css="cursor: pointer"
@@ -155,22 +170,20 @@ const Field = forwardRef(
                     ) : (
                       <i className="material-icons-outlined">visibility_off</i>
                     )}
-                  </InputIcon> */}
+                  </InputIcon>
                 </>
               ) : type === "datepicker" ? (
-                // <DatePicker
-                //   {...inputProps}
-                //   prefix={prefix}
-                //   $invalid={invalid || error}
-                <></>
-              ) : // />
-              type === "chooseFile" ? (
-                // <ChooseFile {...inputProps} />
-                <></>
+                <DatePicker
+                  {...inputProps}
+                  prefix={prefix}
+                  $invalid={invalid || error}
+                />
+              ) : type === "chooseFile" ? (
+                <ChooseFile {...inputProps} />
               ) : (
                 <>
                   {/* any other input type */}
-                  {/* <Input
+                  <Input
                     ref={ref}
                     {...inputProps}
                     $prefix={prefix}
@@ -179,17 +192,16 @@ const Field = forwardRef(
                     $invalid={invalid || error}
                     $rounded={rounded}
                     $button={button && true}
-                  /> */}
+                  />
                   {/* input right icon */}
                   {suffix && (
-                    // <InputIcon
-                    //   suffix={suffix}
-                    //   disabled={disabled}
-                    //   invalid={invalid || error}
-                    // >
-                    //   {suffix}
-                    // </InputIcon>
-                    <></>
+                    <InputIcon
+                      suffix={suffix}
+                      disabled={disabled}
+                      invalid={invalid || error}
+                    >
+                      {suffix}
+                    </InputIcon>
                   )}
                   {button && (
                     <div
@@ -220,7 +232,5 @@ const Field = forwardRef(
 );
 
 Field.defaultProps = defaultProps;
-
-Field.displayName = "Field";
 
 export default Field;

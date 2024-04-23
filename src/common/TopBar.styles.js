@@ -86,13 +86,13 @@ export const StyledTopBar = styled.header`
   .sideNav {
     position: absolute;
     left: -500px;
-    transition: all 0.3s ease-in-out;
+    transition: all 1s ease-in-out;
     height: 100%;
   }
 
   .sideNav.show {
     left: 0;
-    transition: linear 0.3s;
+    transition: linear 1s;
   }
 
   .buttonWrapper {

@@ -13,20 +13,20 @@ const index = () => {
         <div className="nav-logo">
           <Image src={logo} alt="logo" />
           <div className="profile">
-            <Image src={line} />
+            <Image src={line} alt="line" />
             <div className="profile-details">
-              <Image src={profile} width={40} height={40} />
+              <Image src={profile} width={40} height={40} alt="profile" />
               <div className="user-details">
                 <span>Guest Mode</span>
                 <span className="sub">Guest Mode</span>
               </div>
             </div>
-            <Image src={line} />
+            <Image src={line} alt="line" />
           </div>
           <div className="menu">
             <span>Menu</span>
             <div className="textField">
-              <Image src={store} />
+              <Image src={store} alt="store" />
               <span>Marketplace</span>
             </div>
           </div>

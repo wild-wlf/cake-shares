@@ -1,4 +1,4 @@
-import TopBar from "@/pages/common/TopBar";
+import TopBar from "../../common/TopBar";
 import React from "react";
 import Categories from "../../components/atoms/categories";
 import ProductDetail from "../../components/atoms/productDetail";
@@ -8,7 +8,6 @@ import Amenities from "../../components/atoms/amenities";
 const ProductDetails = ({ userData }) => {
   return (
     <>
-      <TopBar />
       <ProductDetail />
       <ProductDescription />
       <Amenities />

@@ -4,6 +4,8 @@ import Button from "../Button";
 import { IoMdArrowDropdown } from "react-icons/io";
 import Field from "../Field";
 import Link from "next/link";
+import RangeSlider from "../rangeSlider";
+import { FaMinus } from "react-icons/fa";
 
 const AdvanceSearch = () => {
   const [investmentBox, setInvestmentBox] = useState(false);
@@ -70,6 +72,7 @@ const AdvanceSearch = () => {
       private: !prev.private,
     }));
   };
+
   console.log(searchQuery);
   return (
     <Wrapper>
@@ -199,6 +202,18 @@ const AdvanceSearch = () => {
             </div>
           </Sort>
         </div>
+      </div>
+
+      <div className="rangeSlider">
+        <div className="volume-div">
+          <span className="heading">Investment Volume</span>
+          <div className="inputWrapper">
+            <input type="text" placeholder="$0" />
+            <FaMinus size={30} />
+            <input type="text" placeholder="$0" />
+          </div>
+        </div>
+        <RangeSlider />
       </div>
 
       <div className="minvalues">

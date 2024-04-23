@@ -1,5 +1,5 @@
 import React from "react";
-import TopBar from "./common/TopBar";
+import TopBar from "../common/TopBar";
 import Banner from "../components/atoms/banner";
 import Categories from "../components/atoms/categories";
 import CategoriesBar from "../components/atoms/categoriesbar";
@@ -10,7 +10,6 @@ import KycBuyerLevelTwo from "@/components/atoms/KYC/KYCBuyerTwo";
 const index = () => {
   return (
     <>
-      <TopBar />
       <Banner />
       <CategoriesBar />
       <Categories />

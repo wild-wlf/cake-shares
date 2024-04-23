@@ -48,7 +48,7 @@
     serif;
 
   /* Body */
-  --base-text-color: var(--primary-text-color);
+  --base-text-color: #313131;
   --base-background-color: var(--white);
   --font-size-xs: 0.75rem; /* 12px */
   --font-size-sm: 0.875rem; /* 14px */

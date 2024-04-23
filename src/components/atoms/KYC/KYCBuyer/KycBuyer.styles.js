@@ -49,6 +49,12 @@ export const StyledKycBuyer = styled.div`
     justify-content: space-between;
     gap: 20px;
   }
+  .combineFields {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
 `;
 
 export const StepWrapperContainar = styled.div`

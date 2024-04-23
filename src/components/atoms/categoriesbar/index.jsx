@@ -68,7 +68,7 @@ const CategoriesBar = () => {
             <Slider {...settings}>
               <div>
                 <Button rounded sm btntype="new" className="button">
-                  <Image src={all} />
+                  <Image src={all} alt="all" />
                   All
                 </Button>
               </div>
@@ -103,13 +103,13 @@ const CategoriesBar = () => {
                 </Button>
               </div>
               <div>
-                <Button rounded sm btntype="white" className="button">
+                <Button rounded sm btntype="white" className="button lg">
                   <HiHeart />
                   My Favorites
                 </Button>
               </div>
               <div>
-                <Button rounded sm btntype="white" className="button">
+                <Button rounded sm btntype="white" className="button lg">
                   <AiFillDollarCircle />
                   High Funding
                 </Button>

@@ -46,6 +46,7 @@ export const Wrapper = styled.div`
     }
   }
   .viewprofile {
+    cursor: pointer;
     display: flex;
     gap: 6px;
     color: rgba(64, 143, 140, 1);
@@ -54,6 +55,7 @@ export const Wrapper = styled.div`
     }
   }
   .message {
+    cursor: pointer;
     color: rgba(78, 97, 153, 1);
     display: flex;
     gap: 6px;

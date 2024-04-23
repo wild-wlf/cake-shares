@@ -42,6 +42,9 @@ export const StyledButton = styled.button`
     if (btntype === "blue") {
       return "rgba(78, 97, 153, 1)";
     }
+    if (btntype === "white-blue") {
+      return "#4E6199";
+    }
 
     if (btntype === "white") {
       return "#313131";
@@ -77,6 +80,9 @@ export const StyledButton = styled.button`
     if (btntype === "blue") {
       return "rgba(78, 97, 153, 0.1)";
     }
+    if (btntype === "white-blue") {
+      return "#FEFEFE";
+    }
 
     if (btntype === "white") {
       return "var(--white)";
@@ -107,6 +113,9 @@ export const StyledButton = styled.button`
     }
     if (btntype === "dropdown") {
       return "1px solid rgba(241, 241, 241, 1)";
+    }
+    if (btntype === "white-blue") {
+      return "1px solid #4E6199";
     }
   }};
 

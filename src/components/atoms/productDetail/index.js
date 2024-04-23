@@ -9,21 +9,25 @@ import property from "../../../_assets/property.png";
 import property2 from "../../../_assets/property2.png";
 import property3 from "../../../_assets/property3.png";
 import CenterModal from "../Modal/CenterModal";
-import AdvanceSearch from "../advanceSearch";
+import NotAccessModal from "../notAccessModal";
+import NotAccessPic from "../../../_assets/notaccess.svg";
 import { useRouter } from "next/router";
 
 const ProductDetail = () => {
   const router = useRouter();
   const [modal, setModal] = useState(false);
+  const handleCloseModal = () => {
+    setModal(false);
+  };
   return (
     <>
       <CenterModal
         open={modal}
         setOpen={setModal}
-        title={"Advance Search"}
-        width="670"
+        title={<Image src={NotAccessPic} alt="notaccess"/>}
+        width="543"
       >
-        <AdvanceSearch />
+        <NotAccessModal handleCloseModal={handleCloseModal} />
       </CenterModal>
       <Wrapper>
         <div className="btnwrapper">
