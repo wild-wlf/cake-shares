@@ -2,7 +2,10 @@ import React from "react";
 import { Wrapper } from "./loginSignupModal.style";
 import Field from "../Field";
 import Form, { useForm } from "@/components/molecules/Form";
-import Select from "../Select";
+import Button from "../Button";
+import { FcGoogle } from "react-icons/fc";
+import Facebook from "../../../_assets/facebook.svg";
+import Image from "next/image";
 
 const LoginSignupModal = () => {
   const [form] = useForm();
@@ -10,17 +13,17 @@ const LoginSignupModal = () => {
   return (
     <Wrapper>
       <div>
-        <span>Please provide the details to proceed.</span>
+        <span className="description">Please provide the details to proceed.</span>
       </div>
       <Form form={form}>
-        <div>
+        <div className="input-div">
           <Form.Item
             type="text"
-            label="Email Address"
-            name="email"
+            label="Username"
+            name="name"
             sm
             rounded
-            placeholder="Your Email or Username"
+            placeholder="Alex123"
             rules={[
               {
                 required: true,
@@ -28,8 +31,50 @@ const LoginSignupModal = () => {
               },
             ]}
           >
-            <Select />
+            <Field />
           </Form.Item>
+          <Form.Item
+            type="text"
+            label="Email Address"
+            name="email"
+            sm
+            rounded
+            placeholder="alex123@gmail.com"
+            rules={[
+              {
+                required: true,
+                message: "Maximum Character Length is 256",
+              },
+            ]}
+          >
+            <Field />
+          </Form.Item>
+        </div>
+        <div className="socialbtns">
+          <div>
+          <Button
+            type="dropdown"
+            rounded
+            sm
+            width="500"
+            onClick={() => setCountryBox(!countryBox)}
+            className="button"
+          >
+            <FcGoogle size={20} />
+            Continue with Google
+          </Button>
+          <Button
+            type="dropdown"
+            rounded
+            sm
+            width="500"
+            onClick={() => setCountryBox(!countryBox)}
+            className="button"
+          >
+            <Image src={Facebook} alt="Facebook" width={20} />
+            Continue with Facebook
+          </Button>
+          </div>
         </div>
       </Form>
     </Wrapper>

@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import FakeInput from "../FakeInput";
 
 export const styles = css`
-  border: 2px solid
+  border: 1px solid
     ${({ $invalid }) => ($invalid ? "var(--danger)" : "var(--light)")};
   background: var(--white);
   outline: none;
@@ -12,8 +12,9 @@ export const styles = css`
   width: 100%;
   transition: border var(--animation-speed) ease-in-out;
   color: var(--secondary-text-color);
-  font-size: var(--font-size-lg);
-  font-weight: 500;
+  font: var(--base-font-sans-serif);
+  font-size: var(--font-size-xs);
+  font-weight: 400;
   border-radius: ${({ $straight }) => ($straight ? "6px" : "60px")};
   padding-left: ${({ $prefix }) => $prefix && "2.5rem"};
   padding-right: ${({ $suffix, $button }) => {
@@ -142,8 +143,7 @@ export const styles = css`
     display: none;
     &:checked {
       + ${FakeInput} {
-        background: rgba(64, 143, 140, 1)
-;
+        background: rgba(64, 143, 140, 1);
         .icon-check,
         &:before {
           opacity: 1;
