@@ -6,6 +6,7 @@ import CategoriesBar from "../components/atoms/categoriesbar";
 import CenterModal from "@/components/atoms/Modal/CenterModal";
 import KycBuyerLevelOne from "@/components/atoms/KYC/KYCBuyer";
 import KycBuyerLevelTwo from "@/components/atoms/KYC/KYCBuyerTwo";
+import KYCBuyerThree from "@/components/atoms/KYC/KYCBuyerThree";
 
 const index = () => {
   return (
@@ -17,9 +18,12 @@ const index = () => {
       {/* <CenterModal open={true} width="688" title="Upgrade to KYC Level 1">
         <KycBuyerLevelOne />
       </CenterModal> */}
-      <CenterModal open={true} width="688" title="Upgrade to KYC Level 2">
+      {/* <CenterModal open={true} width="688" title="Upgrade to KYC Level 2">
         <KycBuyerLevelTwo />
-      </CenterModal>
+      </CenterModal> */}
+      {/* <CenterModal open={true} width="688" title="Upgrade to KYC Level 3">
+        <KYCBuyerThree />
+      </CenterModal> */}
     </>
   );
 };

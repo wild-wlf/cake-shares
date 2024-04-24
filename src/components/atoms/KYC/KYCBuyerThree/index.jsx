@@ -11,8 +11,9 @@ import { useForm } from "@/components/molecules/Form";
 import Form from "@/components/molecules/Form/Form";
 import Select from "../../Select";
 import Field from "../../Field";
+import WebCam from "../../WebCam";
 
-const KycBuyerLevelTwo = () => {
+const KYCBuyerThree = () => {
   const [form] = useForm();
 
   const [step, setStep] = useState(1);
@@ -20,16 +21,7 @@ const KycBuyerLevelTwo = () => {
   return (
     <StyledKycBuyer>
       <div className="twoCol">
-        <span className="kycdiscreption">
-          Verification required. Please provide some details.
-        </span>
-        <StepWrapperContainar>
-          <span className="stepStatus">Step {step} of 2</span>
-          <StepWrapper $width={step}>
-            <Step $bg={step >= 1} />
-            <Step $bg={step == 2} />
-          </StepWrapper>
-        </StepWrapperContainar>
+        <span className="kycdiscreption">Biometric Verification required.</span>
       </div>
       <Form form={form}>
         {step == 1 && (
@@ -107,8 +99,9 @@ const KycBuyerLevelTwo = () => {
           </>
         )}
       </Form>
+      <WebCam />
     </StyledKycBuyer>
   );
 };
 
-export default KycBuyerLevelTwo;
+export default KYCBuyerThree;

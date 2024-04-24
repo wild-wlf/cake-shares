@@ -6,14 +6,14 @@ export const styles = css`
     ${({ $invalid }) => ($invalid ? "var(--danger)" : "var(--light)")};
   background: var(--white);
   outline: none;
-  height: ${({ sm }) => (sm ? "40px" : "60px")};
+  height: ${({ sm }) => (sm ? "45px" : "45px")};
   padding: ${({ sm }) =>
     sm ? "0.3125rem .9375rem" : "var(--form-element-padding-lg)"};
   width: 100%;
   transition: border var(--animation-speed) ease-in-out;
   color: var(--secondary-text-color);
   font: var(--base-font-sans-serif);
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   font-weight: 400;
   border-radius: ${({ $straight }) => ($straight ? "6px" : "60px")};
   padding-left: ${({ $prefix }) => $prefix && "2.5rem"};

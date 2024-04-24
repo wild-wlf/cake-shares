@@ -51,9 +51,16 @@ export const StyledKycBuyer = styled.div`
   }
   .combineFields {
     width: 100%;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
+    @media screen and (min-width: 768px) {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+  }
+  .stepOneButton {
+    @media screen and (max-width: 767px) {
+      margin-top: 25px;
+    }
   }
 `;
 
