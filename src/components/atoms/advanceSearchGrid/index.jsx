@@ -44,11 +44,11 @@ const AdvanceSearchGrid = () => {
           <div className="card-div">
             <div className="card">
               <div className="image-div">
-                <Image src={data.image} alt="card-image" />
+                <image src={data.image} alt="card-image" />
                 <div className="tagWrapper">
                   <div className="tag">Properties</div>
                   <div className="icon-div">
-                    <Image src={Heart} alt="Heart" className="heart" />
+                    <image src={Heart} alt="Heart" className="heart" />
                   </div>
                 </div>
               </div>
