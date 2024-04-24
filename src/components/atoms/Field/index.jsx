@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { forwardRef, useState } from "react";
 
 // eslint-disable-next-line no-unused-vars
@@ -159,7 +160,8 @@ const Field = forwardRef(
                     $rounded={rounded}
                     disabled={disabled}
                     $button={button && true}
-                    autoComplete="off"
+                    // autocomplete="off"
+                    autocomplete="new-password"
                   />
                   <InputIcon
                     disabled={disabled}
