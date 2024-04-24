@@ -160,7 +160,8 @@ const Field = forwardRef(
                     $rounded={rounded}
                     disabled={disabled}
                     $button={button && true}
-                    autoComplete="off"
+                    // autocomplete="off"
+                    autocomplete="new-password"
                   />
                   <InputIcon
                     disabled={disabled}
