@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const BannerWrapper = styled.div`
-  padding: 0px 50px;
   width: 100%;
   .banner2 {
     display: none;
@@ -15,5 +14,8 @@ export const BannerWrapper = styled.div`
       display: block;
       width: 100%;
     }
+  }
+  *:focus {
+    outline: none;
   }
 `;

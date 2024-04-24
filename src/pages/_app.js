@@ -5,6 +5,7 @@ import { createGlobalStyle } from "styled-components";
 import Variables from "../styles/variables.css";
 import { HelperClasses, Styling } from "../styles/GlobalStyles.styles";
 import TopBar from "../common/TopBar";
+import { Wrapper } from "@/styles/helpers.styles";
 
 export default function App({ Component, pageProps }) {
   const GlobalStyles = createGlobalStyle`
@@ -15,8 +16,10 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyles />
-      <TopBar />
-      <Component {...pageProps} />
+      <Wrapper>
+        <TopBar />
+        <Component {...pageProps} />
+      </Wrapper>
     </>
   );
 }
