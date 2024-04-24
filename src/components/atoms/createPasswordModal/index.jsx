@@ -51,8 +51,11 @@ const CreatePasswordModal = () => {
           </Form.Item>
         </div>
         <div className="continue-btn">
+          <Button rounded md btntype="white-blue" width="170" htmlType="submit">
+            Complete Registration
+          </Button>
           <Button rounded md btntype="green" width="170" htmlType="submit">
-            Continue
+            I&apos;ll do later
           </Button>
         </div>
       </Form>
