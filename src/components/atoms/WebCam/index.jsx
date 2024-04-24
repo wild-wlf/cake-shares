@@ -16,7 +16,7 @@ import { Error } from "../Field/Field.styles";
 import { StyledFormGroup } from "../../../styles/helpers.styles";
 import Button from "../Button";
 import Image from "next/image";
-
+import { FaRedoAlt } from "react-icons/fa";
 const propTypes = {
   onClick: PropTypes.func,
   value: PropTypes.string,
@@ -52,7 +52,7 @@ const WebCam = () => {
         message="Please place your face inside the frame and take photo."
         css="margin-bottom: 20px;"
       /> */}
-      <WebCamHolder>
+      <WebCamHolder $preview={url}>
         {url == null && (
           <>
             <StyledWebCam
@@ -64,7 +64,6 @@ const WebCam = () => {
               onUserMedia={onUserMedia}
             />
             <Button
-              className={"stepOneButton"}
               rounded
               sm
               btntype="green"
@@ -84,21 +83,25 @@ const WebCam = () => {
             </div>
 
             <Button
-              className={"stepOneButton"}
+              className={"undoButton"}
               rounded
               sm
               btntype="green"
-              width="214"
               onClick={() => setUrl(null)}
             >
-              undo
-              {/* <Tooltip title="Recapture Selfie">
-              <i className="icon-refresh" />
-            </Tooltip> */}
+              <FaRedoAlt />
             </Button>
           </>
         )}
       </WebCamHolder>
+      {url && (
+        <Button rounded sm btntype="green" width="214">
+          Save
+          {/* <Tooltip title="Recapture Selfie">
+              <i className="icon-refresh" />
+            </Tooltip> */}
+        </Button>
+      )}
       {/* {error && <Error role="alert">{error}</Error>} */}
     </StyledFormGroup>
   );

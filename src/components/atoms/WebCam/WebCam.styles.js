@@ -15,7 +15,7 @@ export const WebCamHolder = styled.div`
   &:after {
     content: "";
     position: absolute;
-    inset: 5px 5px 60px 5px;
+    inset: 5px 5px ${({ $preview }) => ($preview ? "22px" : "60px")} 5px;
     z-index: 1;
     background: url(${SelfieFrame.src}) no-repeat;
     background-size: contain;
@@ -37,8 +37,14 @@ export const WebCamHolder = styled.div`
   .previewWrapper {
     background: black;
     border-radius: 25px;
-    /* padding: 10px 0; */
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+  }
+  .undoButton {
+    position: absolute;
+    z-index: 10;
+    right: 10px;
+    top: 10px;
+    min-width: 50px;
   }
 `;
 

@@ -23,7 +23,9 @@ const KYCBuyerThree = () => {
       <div className="twoCol">
         <span className="kycdiscreption">Biometric Verification required.</span>
       </div>
-
+      <label htmlFor="" className="fakelabel">
+        Facial Recognition
+      </label>
       <WebCam />
     </StyledKycBuyer>
   );
