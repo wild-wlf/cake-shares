@@ -11,7 +11,7 @@ import Button from "../Button";
 import Link from "next/link";
 
 const AdvanceSearchGrid = () => {
-  const images = [
+  const imagesArray = [
     {
       image: Property,
       id: "1",
@@ -39,7 +39,7 @@ const AdvanceSearchGrid = () => {
   ];
   return (
     <Wrapper>
-      {images.map((data, index) => (
+      {imagesArray.map((data, index) => (
         <div className="CardWrapper" key={index}>
           <div className="card-div">
             <div className="card">
