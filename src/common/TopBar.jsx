@@ -16,12 +16,14 @@ import AdvanceSearch from "../components/atoms/advanceSearch";
 import InheritenceAddedModal from "@/components/atoms/inheritanceaddedmodal";
 import GreenTick from "../_assets/Green-Tick.svg";
 import RegisterAsBuyer from "@/components/atoms/registerAsBuyer";
+import CreatePasswordModal from "@/components/atoms/createPasswordModal";
 
 const TopBar = () => {
   const [sideNav, setSidenav] = useState(false);
   const [notifications, setNotifications] = useState(false);
   const [registermodal, setRegisterModal] = useState(false);
   const [buyermodal, setBuyerModal] = useState(false);
+  const [passwordModal, setPasswordModal] = useState(false);
 
   const handleRegisterModal = () => {
     setRegisterModal(false);
@@ -29,6 +31,10 @@ const TopBar = () => {
   };
   const handleSellerModal = () => {
     console.log("running");
+  };
+  const handleBuyerModal = () => {
+    setBuyerModal(false);
+    setPasswordModal(true);
   };
 
   return (
@@ -58,9 +64,17 @@ const TopBar = () => {
         open={buyermodal}
         setOpen={setBuyerModal}
         title="Register As a Buyer"
-        width="543"
+        width="666"
       >
-        <RegisterAsBuyer />
+        <RegisterAsBuyer handleBuyerModal={handleBuyerModal} />
+      </CenterModal>
+      <CenterModal
+        open={passwordModal}
+        setOpen={setPasswordModal}
+        title="Register As a Buyer"
+        width="666"
+      >
+        <CreatePasswordModal />
       </CenterModal>
       <StyledTopBar>
         <div className="logoWrapper">
@@ -108,7 +122,7 @@ const TopBar = () => {
               <Image src={register} alt="register" />
               Register
             </Button>
-            <Button rounded sm btntype="blue" className="button">
+            <Button rounded sm btntype="white-blue" className="button">
               Login
             </Button>
           </div>

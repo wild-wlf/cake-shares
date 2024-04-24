@@ -1,10 +1,10 @@
 import React from "react";
 import LoginSignupModal from "../loginSignupModal";
 
-const RegisterAsBuyer = () => {
+const RegisterAsBuyer = ({ handleBuyerModal }) => {
   return (
     <div>
-      <LoginSignupModal />
+      <LoginSignupModal handleBuyerModal={handleBuyerModal} />
     </div>
   );
 };

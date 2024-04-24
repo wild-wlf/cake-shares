@@ -12,6 +12,8 @@ import { StyledFormGroup } from "../../../styles/helpers.styles";
 import ChooseFile from "../../molecules/ChooseFile";
 import { Error, InputHolder } from "./Field.styles";
 import DatePicker from "../DatePicker";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
 const defaultProps = {
   type: "text",
@@ -157,7 +159,7 @@ const Field = forwardRef(
                     $rounded={rounded}
                     disabled={disabled}
                     $button={button && true}
-                    autoComplete="on"
+                    autoComplete="off"
                   />
                   <InputIcon
                     disabled={disabled}
@@ -165,11 +167,7 @@ const Field = forwardRef(
                     css="cursor: pointer"
                     onClick={() => setIsRevealPwd((prevState) => !prevState)}
                   >
-                    {isRevealPwd ? (
-                      <i className="material-icons-outlined">visibility</i>
-                    ) : (
-                      <i className="material-icons-outlined">visibility_off</i>
-                    )}
+                    {isRevealPwd ? <FaEyeSlash /> : <FaEye />}
                   </InputIcon>
                 </>
               ) : type === "datepicker" ? (
