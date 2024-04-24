@@ -17,13 +17,19 @@ import InheritenceAddedModal from "@/components/atoms/inheritanceaddedmodal";
 import GreenTick from "../_assets/Green-Tick.svg";
 import RegisterAsBuyer from "@/components/atoms/registerAsBuyer";
 import CreatePasswordModal from "@/components/atoms/createPasswordModal";
+import CompleteRegistrationModal from "@/components/atoms/completeRegistrationModal";
+import LoginAsBuyerModal from "@/components/atoms/loginAsBuyerModal";
 
 const TopBar = () => {
   const [sideNav, setSidenav] = useState(false);
   const [notifications, setNotifications] = useState(false);
   const [registermodal, setRegisterModal] = useState(false);
+  const [loginmodal, setLoginModal] = useState(false);
   const [buyermodal, setBuyerModal] = useState(false);
+  const [buyerloginmodal, setBuyerLoginModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
+  const [completeRegistrationModal, setCompleteRegistrationModal] =
+    useState(false);
 
   const handleRegisterModal = () => {
     setRegisterModal(false);
@@ -37,8 +43,26 @@ const TopBar = () => {
     setPasswordModal(true);
   };
 
+  const createPasswordModal = () => {
+    setPasswordModal(false);
+  };
+  const handleCompleteRegistration = () => {
+    setPasswordModal(false);
+    setCompleteRegistrationModal(true);
+  };
+
+  const handleRegistration = () => {
+    setCompleteRegistrationModal(false);
+  };
+
+  const handleLoginModal = () => {
+    setLoginModal(false);
+    setBuyerLoginModal(true);
+  };
+
   return (
     <>
+      {/* Registration Modals */}
       <CenterModal
         open={registermodal}
         setOpen={setRegisterModal}
@@ -48,18 +72,10 @@ const TopBar = () => {
         <RegisterModal
           handleRegisterModal={handleRegisterModal}
           handleSellerModal={handleSellerModal}
+          type="Register"
+          description="Select Account Type"
         />
       </CenterModal>
-
-      {/* <CenterModal
-        open={buyermodal}
-        setOpen={setBuyerModal}
-        title={"Register as a Buyer"}
-        width="646"
-      >
-        <AdvanceSearch />
-      </CenterModal> */}
-
       <CenterModal
         open={buyermodal}
         setOpen={setBuyerModal}
@@ -74,7 +90,41 @@ const TopBar = () => {
         title="Register As a Buyer"
         width="666"
       >
-        <CreatePasswordModal />
+        <CreatePasswordModal
+          createPasswordModal={createPasswordModal}
+          handleCompleteRegistration={handleCompleteRegistration}
+        />
+      </CenterModal>
+      <CenterModal
+        open={completeRegistrationModal}
+        setOpen={setCompleteRegistrationModal}
+        title="Complete Registration"
+        width="804"
+      >
+        <CompleteRegistrationModal handleRegistration={handleRegistration}/>
+      </CenterModal>
+
+      {/* Login Modals */}
+      <CenterModal
+        open={loginmodal}
+        setOpen={setLoginModal}
+        title={"Cakeshare Login"}
+        width="622"
+      >
+        <RegisterModal
+          handleRegisterModal={handleLoginModal}
+          handleSellerModal={handleSellerModal}
+          type="Login"
+          description="Welcome to cakeshares, please select the account type to proceed."
+        />
+      </CenterModal>
+      <CenterModal
+        open={buyerloginmodal}
+        setOpen={setBuyerLoginModal}
+        title="Login As a Buyer"
+        width="666"
+      >
+        <LoginAsBuyerModal handleLoginModal={() => setBuyerLoginModal(false)} />
       </CenterModal>
       <StyledTopBar>
         <div className="logoWrapper">
@@ -122,7 +172,13 @@ const TopBar = () => {
               <Image src={register} alt="register" />
               Register
             </Button>
-            <Button rounded sm btntype="white-blue" className="button">
+            <Button
+              rounded
+              sm
+              btntype="white-blue"
+              className="button"
+              onClick={() => setLoginModal(true)}
+            >
               Login
             </Button>
           </div>

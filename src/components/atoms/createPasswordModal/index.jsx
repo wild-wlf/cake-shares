@@ -3,16 +3,18 @@ import { Wrapper } from "./createPasswordModal.style";
 import Field from "../Field";
 import Form, { useForm } from "@/components/molecules/Form";
 import Button from "../Button";
-const CreatePasswordModal = () => {
+import Link from "next/link";
+const CreatePasswordModal = ({
+  createPasswordModal,
+  handleCompleteRegistration,
+}) => {
   const [form] = useForm();
 
   return (
     <Wrapper>
-      <div>
-        <span className="description">
-          Please provide the details to proceed.
-        </span>
-      </div>
+      <span className="description">
+        Add a profile picture and create a password to secure your account.
+      </span>
       <Form form={form}>
         <div className="input-div">
           <Form.Item
@@ -33,15 +35,15 @@ const CreatePasswordModal = () => {
             <Field />
           </Form.Item>
           <Form.Item
-            type="text"
-            label="Email Address"
-            name="email"
+            type="password"
+            label="Confirm Password"
+            name="name"
             sm
             rounded
-            placeholder="alex123@gmail.com"
+            placeholder="***********"
             rules={[
               {
-                pattern: /^.{0,256}$/,
+                pattern: /^.{8,64}$/,
                 required: true,
                 message: "Maximum Character Length is 256",
               },
@@ -50,13 +52,31 @@ const CreatePasswordModal = () => {
             <Field />
           </Form.Item>
         </div>
-        <div className="continue-btn">
-          <Button rounded md btntype="white-blue" width="170" htmlType="submit">
+        <div className="btnWrapper">
+          <Button
+            rounded
+            md
+            btntype="white-blue"
+            width="170"
+            htmlType="submit"
+            className="button"
+            onClick={handleCompleteRegistration}
+          >
             Complete Registration
           </Button>
-          <Button rounded md btntype="green" width="170" htmlType="submit">
-            I&apos;ll do later
-          </Button>
+          <Link href={"/"}>
+            <Button
+              rounded
+              md
+              btntype="green"
+              width="170"
+              htmlType="submit"
+              className="button"
+              onClick={createPasswordModal}
+            >
+              I&apos;ll do later
+            </Button>
+          </Link>
         </div>
       </Form>
     </Wrapper>

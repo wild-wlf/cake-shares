@@ -5,7 +5,12 @@ import Buyer from "../../../_assets/buyer.svg";
 import Seller from "../../../_assets/seller.svg";
 import Button from "../Button";
 
-const RegisterModal = ({ handleRegisterModal, handleSellerModal }) => {
+const RegisterModal = ({
+  handleRegisterModal,
+  handleSellerModal,
+  type,
+  description,
+}) => {
   // const [register, setRegister] = useState("register");
 
   // const handleRadioChecked = (e) => {
@@ -29,7 +34,7 @@ const RegisterModal = ({ handleRegisterModal, handleSellerModal }) => {
   return (
     <>
       <Container>
-        <span className="heading">Select Account Type</span>
+        <span className="heading">{description}</span>
 
         <OptionsWrapper>
           <Option onClick={() => handleOptionSelect("bank")}>
@@ -37,7 +42,7 @@ const RegisterModal = ({ handleRegisterModal, handleSellerModal }) => {
               <Image src={Buyer} alt="buyer" />
             </div>
             <div className="textContainer">
-              <span className="optionName">Register as Buyer</span>
+              <span className="optionName">{type} as Buyer</span>
               <p>
                 Lorem Ipsum adalah contoh teks atau dummy dalam industri
                 percetakan dan penataan huruf atau typesetting. Lorem Ipsum
@@ -61,7 +66,7 @@ const RegisterModal = ({ handleRegisterModal, handleSellerModal }) => {
               <Image src={Seller} alt="seller" />
             </div>
             <div className="textContainer">
-              <span className="optionName">Register as Seller</span>
+              <span className="optionName">{type} as Seller</span>
               <p>
                 Lorem Ipsum adalah contoh teks atau dummy dalam industri
                 percetakan dan penataan huruf atau typesetting. Lorem Ipsum

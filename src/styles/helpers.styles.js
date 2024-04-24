@@ -65,9 +65,9 @@ export const StyledFormGroup = styled.div`
     $invalid || noMargin ? "0px" : "1.625rem"};
   /* position: relative; */
 
-  &:nth-last-child(1) {
+  /* &:nth-last-child(1) {
     margin-bottom: 0;
-  }
+  } */
 `;
 
 export const InputHolder = styled.div`

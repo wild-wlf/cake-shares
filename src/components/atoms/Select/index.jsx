@@ -10,6 +10,7 @@ import { StyledSelect, StyledSelectAsync } from "./Select.styles";
 import InputIcon from "../../molecules/InputIcon";
 import Label from "../../molecules/Label";
 import { IoMdArrowDropdown } from "react-icons/io";
+import Image from "next/image";
 
 const DropdownIndicator = (props) =>
   components.DropdownIndicator && (
