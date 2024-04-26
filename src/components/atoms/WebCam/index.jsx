@@ -32,7 +32,7 @@ const videoConstraints = {
   width: 300,
   facingMode: "environment",
 };
-const WebCam = () => {
+const WebCam = ({ handelKycLevel }) => {
   const webcamRef = useRef(null);
   const [url, setUrl] = useState(null);
 
@@ -95,7 +95,7 @@ const WebCam = () => {
         )}
       </WebCamHolder>
       {url && (
-        <Button rounded sm btntype="green" width="214">
+        <Button rounded sm btntype="green" width="214" onClick={handelKycLevel}>
           Save
           {/* <Tooltip title="Recapture Selfie">
               <i className="icon-refresh" />

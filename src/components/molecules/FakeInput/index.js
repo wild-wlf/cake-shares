@@ -9,6 +9,12 @@ const FakeInput = styled.span`
   border: 1px solid ${({ $radioBorder }) => $radioBorder ?? "var(--white)"};
   margin-right: 14px;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  line-height: 1px;
+
   ${({ $labelReverse }) =>
     $labelReverse &&
     css`

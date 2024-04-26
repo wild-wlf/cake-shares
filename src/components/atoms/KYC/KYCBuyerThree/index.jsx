@@ -13,11 +13,15 @@ import Select from "../../Select";
 import Field from "../../Field";
 import WebCam from "../../WebCam";
 
-const KYCBuyerThree = () => {
+const KYCBuyerThree = ({ setOpen, setKycLevel }) => {
   const [form] = useForm();
 
   const [step, setStep] = useState(1);
   const optionData = [{ label: "Buyer Level Two", value: "Buyer Level Two" }];
+  function handelKycLevel() {
+    setOpen(false);
+    setKycLevel(4);
+  }
   return (
     <StyledKycBuyer>
       <div className="twoCol">
@@ -26,7 +30,7 @@ const KYCBuyerThree = () => {
       <label htmlFor="" className="fakelabel">
         Facial Recognition
       </label>
-      <WebCam />
+      <WebCam handelKycLevel={handelKycLevel} />
     </StyledKycBuyer>
   );
 };

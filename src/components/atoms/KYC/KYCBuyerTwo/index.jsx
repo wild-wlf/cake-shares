@@ -12,11 +12,15 @@ import Form from "@/components/molecules/Form/Form";
 import Select from "../../Select";
 import Field from "../../Field";
 
-const KycBuyerLevelTwo = () => {
+const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
   const [form] = useForm();
 
   const [step, setStep] = useState(1);
   const optionData = [{ label: "Buyer Level Two", value: "Buyer Level Two" }];
+  function handelKycLevel() {
+    setOpen(false);
+    setKycLevel(3);
+  }
   return (
     <StyledKycBuyer>
       <div className="twoCol">
@@ -99,9 +103,18 @@ const KycBuyerLevelTwo = () => {
               Residence Proof
             </label>
             <div className="combineField">
-              <UploadFile uploadTitle="Upload a copy of bills, bank statement" />
+              <UploadFile
+                uploadTitle="Upload a copy of bills, bank statement"
+                onChange={(e) => console.log(e)}
+              />
             </div>
-            <Button rounded md btntype="green" width="214" htmlType="submit">
+            <Button
+              rounded
+              md
+              btntype="green"
+              width="214"
+              onClick={handelKycLevel}
+            >
               Complete Verification
             </Button>
           </>

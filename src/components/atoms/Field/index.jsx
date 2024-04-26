@@ -15,7 +15,7 @@ import { Error, InputHolder } from "./Field.styles";
 import DatePicker from "../DatePicker";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-
+import { TbCheck } from "react-icons/tb";
 const defaultProps = {
   type: "text",
 };
@@ -87,9 +87,7 @@ const Field = forwardRef(
               }
             />
             <FakeInput $radioBorder={radioBorder} $labelReverse={labelReverse}>
-              {type === "checkbox" && (
-                <i className="icon-check material-icons-outlined">check</i>
-              )}
+              {type === "checkbox" && <TbCheck color="var(--white)" />}
             </FakeInput>
             <FakeLabel
               $labelColor={labelColor}
