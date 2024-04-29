@@ -5,7 +5,7 @@ export const StyledKycLevel = styled.div`
   position: relative;
   height: 8px;
   border-radius: 8px;
-  background: var(--white);
+  background: ${({ $bg }) => ($bg ? "rgba(241, 241, 241, 1)" : "var(--white)")};
   overflow: hidden;
   &::before {
     content: "";

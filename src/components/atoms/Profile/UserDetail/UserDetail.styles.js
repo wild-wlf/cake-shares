@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const StyledUserDetail = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
+  margin-bottom: 40px;
 
   .colWrapper {
     width: 100%;
@@ -22,10 +24,18 @@ export const StyledUserDetail = styled.div`
         line-height: 20px;
       }
     }
+    .chatButton {
+      color: rgba(78, 97, 153, 1);
+      width: 62px;
+      height: 29px;
+      background: rgba(78, 97, 153, 0.1);
+      border-radius: 62px;
+    }
     .colBody {
+      width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      row-gap: 30px;
+      row-gap: 50px;
     }
     .col-content {
       display: flex;
@@ -51,12 +61,23 @@ export const StyledUserDetail = styled.div`
         font-weight: 300;
         line-height: 18px;
         .title {
+          color: var(--dark);
           display: block;
           margin-bottom: 5px;
           font-size: 16px;
           font-weight: 500;
           line-height: 20px;
         }
+      }
+      .discreptionWrap {
+        display: flex;
+        gap: 10px;
+      }
+    }
+    .danger {
+      color: red;
+      .iconWrap {
+        background: rgba(215, 65, 32, 0.1);
       }
     }
   }

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import React from "react";
 import { StyledProfile } from "./Profile.styles";
 import Button from "../Button";

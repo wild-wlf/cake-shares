@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import React, { useMemo } from "react";
 import { StyledUserDetail } from "./UserDetail.styles";
 import Button from "../../Button";
@@ -11,9 +12,69 @@ import emailAddress from "../../../../_assets/emailAddress.svg";
 import password from "../../../../_assets/password.svg";
 import flagIcon from "../../../../_assets/flagIcon.svg";
 import countryflgIcon from "../../../../_assets/countryflgIcon.svg";
+import dltIcon from "../../../../_assets/dltIcon.svg";
+import accDelete from "../../../../_assets/accDelete.svg";
 import Image from "next/image";
+import Inheritance from "./Inheritance";
+import TableLayout from "../../TableLayout";
+import Table from "@/components/molecules/Table";
+import { IoIosArrowBack } from "react-icons/io";
+import Field from "../../Field";
 
 const UserDetail = () => {
+  const reports_data = [
+    {
+      product_name: "Gov. Egypt Property",
+      category: "Properties",
+      total_share: "Sales",
+      amount: "$40,256.000",
+    },
+    {
+      product_name: "Audi A8 Car",
+      category: "Accessories",
+      amount: "$40,256.000",
+      total_share: "Refund",
+    },
+    {
+      product_name: "Rolex Watch (GMT-Master II)",
+      category: "Properties",
+      total_share: "Sales",
+      amount: "$40,256.000",
+    },
+    {
+      product_name: "Audi A8 Car",
+      category: "Car",
+      total_share: "Refund",
+      amount: "$40,256.000",
+    },
+  ];
+  const actionBtns = () => (
+    // eslint-disable-next-line react/jsx-filename-extension
+    <button type="button" className="chatButton">
+      Chat
+    </button>
+  );
+  const { report_rows, totalItems } = useMemo(
+    () => ({
+      report_rows: reports_data?.map((report) => [
+        report.product_name,
+        report.category,
+        report.total_share,
+        report.amount,
+
+        actionBtns(),
+      ]),
+      totalItems: reports_data?.length || 0,
+    }),
+    [reports_data]
+  );
+  const columnNames = [
+    `Product`,
+    `Category`,
+    `Total Shares`,
+    `Amount`,
+    `Chat (Stakeholders)`,
+  ];
   return (
     <StyledUserDetail>
       <div className="colWrapper">
@@ -63,6 +124,7 @@ const UserDetail = () => {
           </div>
         </div>
       </div>
+      <Inheritance />
       <div className="colWrapper">
         <div className="colHeader">
           <strong className="colTitle">Personal Information:</strong>
@@ -114,8 +176,10 @@ const UserDetail = () => {
             </div>
             <div className="textWrap">
               <strong className="title">Country</strong>
-              <Image src={countryflgIcon} alt="countryflgIcon" />
-              <span>Turkey</span>
+              <div className="discreptionWrap">
+                <Image src={countryflgIcon} alt="countryflgIcon" />
+                <span>Turkey</span>
+              </div>
             </div>
           </div>
           <div className="col-content">
@@ -127,7 +191,44 @@ const UserDetail = () => {
               <span>03/05/2024</span>
             </div>
           </div>
+          <div className="col-content danger">
+            <div className="iconWrap">
+              <Image src={dltIcon} alt="dltIcon" />
+            </div>
+            <div className="textWrap">
+              <strong className="title">Account Deactivation</strong>
+              <div className="discreptionWrap">
+                <span>Deactivate Account</span>
+                <Image src={accDelete} alt="accDelete" />
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div className="colWrapper">
+        {/* <div className="colHeader">
+          <strong className="colTitle">My Assets:</strong>
+          <div className="filters">
+            <div className="inputWrapp">
+              <Field placeholder="Search Assets" />
+            </div>
+          </div>
+        </div> */}
+        <TableLayout
+          ReportsFilters
+          tableHeading="My Assets:"
+          // currentPage={searchQuery.page}
+          // pageSize={searchQuery.pageSize}
+          totalCount={totalItems}
+          onChangeFilters={(filters) => {
+            setSearchQuery((_) => ({
+              ..._,
+              ...filters,
+            }));
+          }}
+        >
+          <Table rowsData={report_rows} columnNames={columnNames} noPadding />
+        </TableLayout>
       </div>
     </StyledUserDetail>
   );

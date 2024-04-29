@@ -39,6 +39,8 @@ export const Wrapper = styled.div`
   .profilepic {
     width: 90px;
     height: 90px;
+    background: var(--dark);
+    border-radius: 90px;
     img {
       object-fit: cover;
       height: 100%;
