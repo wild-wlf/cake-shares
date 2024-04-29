@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import Notifications from "../components/molecules/Notifications";
-import { StyledTopBar } from "./TopBar.styles";
+import { NavLinks, StyledTopBar } from "./TopBar.styles";
 import logo from "../_assets/logo.svg";
 import Image from "next/image";
 import bell from "../_assets/bell.svg";
@@ -9,12 +9,8 @@ import Button from "@/components/atoms/Button";
 import register from "../_assets/register.svg";
 import store from "../_assets/store.svg";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
-import SideNav from "../components/atoms/sideNav/index.js";
 import RegisterModal from "../components/atoms/registerModal";
 import CenterModal from "@/components/atoms/Modal/CenterModal";
-import AdvanceSearch from "../components/atoms/advanceSearch";
-import InheritenceAddedModal from "@/components/atoms/inheritanceaddedmodal";
-import GreenTick from "../_assets/Green-Tick.svg";
 import RegisterAsBuyer from "@/components/atoms/registerAsBuyer";
 import CreatePasswordModal from "@/components/atoms/createPasswordModal";
 import CompleteRegistrationModal from "@/components/atoms/completeRegistrationModal";
@@ -23,6 +19,8 @@ import KycBuyerLevelOne from "@/components/atoms/KYC/KYCBuyer";
 import { KycContext } from "@/components/Context/KycContext";
 import KycBuyerLevelTwo from "@/components/atoms/KYC/KYCBuyerTwo";
 import KYCBuyerThree from "@/components/atoms/KYC/KYCBuyerThree";
+import line from "../_assets/sidenav-line.svg";
+import profile from "../_assets/profile.svg";
 
 const TopBar = () => {
   const [sideNav, setSidenav] = useState(false);
@@ -161,13 +159,31 @@ const TopBar = () => {
           <div className="closedNav" onClick={() => setSidenav(true)}>
             <HiOutlineMenuAlt1 />
           </div>
-          <div className="logo">
-            <Image src={logo} alt="logo" />
-          </div>
-          <div className="textField">
-            <Image src={store} alt="store" />
-            <span>Marketplace</span>
-          </div>
+          <NavLinks
+            $active={sideNav}
+            onMouseLeave={() => {
+              setSidenav(false);
+            }}
+          >
+            <div className="logo">
+              <Image src={logo} alt="logo" />
+            </div>
+            <div className="profile">
+              <Image src={line} alt="line" />
+              <div className="profile-details">
+                <Image src={profile} width={40} height={40} alt="profile" />
+                <div className="user-details">
+                  <span>Guest Mode</span>
+                  <span className="sub">Guest Mode</span>
+                </div>
+              </div>
+              <Image src={line} alt="line" />
+            </div>
+            <div className="textField">
+              <Image src={store} alt="store" />
+              <span>Marketplace</span>
+            </div>
+          </NavLinks>
         </div>
         <div className="actions" style={{ display: "Flex", gap: "10px" }}>
           <div
@@ -212,15 +228,6 @@ const TopBar = () => {
               Login
             </Button>
           </div>
-        </div>
-        {/* ///////////////// */}
-        <div
-          className={sideNav ? "sideNav show" : "sideNav"}
-          onMouseLeave={() => {
-            setSidenav(false);
-          }}
-        >
-          <SideNav />
         </div>
       </StyledTopBar>
     </>

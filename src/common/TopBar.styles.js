@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-imports */
 import styled from "styled-components";
 
 export const StyledTopBar = styled.header`
@@ -13,10 +12,7 @@ export const StyledTopBar = styled.header`
   .closedNav {
     display: none;
   }
-  .logoWrapper {
-    display: flex;
-    gap: 32px;
-  }
+
   .logo {
     max-width: 206px;
     img {
@@ -32,7 +28,6 @@ export const StyledTopBar = styled.header`
     align-items: center;
     position: relative;
     gap: 8px;
-    background: var(--white);
     color: var(--green);
   }
   .textField::after {
@@ -82,8 +77,7 @@ export const StyledTopBar = styled.header`
     opacity: 0;
     transition: 0.4s;
   }
-
-  .sideNav {
+  /* .sideNav {
     position: absolute;
     left: -500px;
     transition: all 1s ease-in-out;
@@ -93,7 +87,7 @@ export const StyledTopBar = styled.header`
   .sideNav.show {
     left: 0;
     transition: linear 1s;
-  }
+  } */
 
   .buttonWrapper {
     display: flex;
@@ -109,12 +103,10 @@ export const StyledTopBar = styled.header`
       cursor: pointer;
       font-size: 24px;
     }
-    .logo {
+
+    /* .textField {
       display: none;
-    }
-    .textField {
-      display: none;
-    }
+    } */
     /* .button {
       background-color: var(--white);
     }
@@ -128,6 +120,49 @@ export const StyledTopBar = styled.header`
     } */
   }
   @media (max-width: 576px) {
-    padding: 30px 20px 20px 20px;
+    padding: 30px 20px 26px 20px;
+  }
+`;
+
+export const NavLinks = styled.div`
+  display: flex;
+  gap: 32px;
+  position: relative;
+  .profile {
+    display: none;
+  }
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    width: 260px;
+    padding: 40px 0px 0px 20px;
+    border-radius: 0px 40px 40px 0px;
+    background: rgba(255, 255, 255, 1);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    transition: all 1s ease-in-out;
+    transform: ${({ $active }) =>
+      $active ? "translateX(0%)" : "translateX(-100%)"};
+    .profile {
+      padding-top: 30px;
+      padding-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .profile-details {
+      display: flex;
+      gap: 9px;
+    }
+    .user-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .sub {
+      font-size: 10px;
+    }
   }
 `;

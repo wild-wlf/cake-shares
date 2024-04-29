@@ -1,5 +1,5 @@
 import React from "react";
-import { Wrapper } from "./amenities.style";
+import { AmentitiesWrapper } from "./amenities.style";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 
 const index = () => {
@@ -12,7 +12,7 @@ const index = () => {
     "Premium Collection",
   ];
   return (
-    <Wrapper>
+    <AmentitiesWrapper>
       <div>
         <span>Amenities</span>
       </div>
@@ -26,7 +26,7 @@ const index = () => {
           </div>
         ))}
       </div>
-    </Wrapper>
+    </AmentitiesWrapper>
   );
 };
 

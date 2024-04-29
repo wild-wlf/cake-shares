@@ -12,7 +12,7 @@ export const CategoriesWrapper = styled.div`
     padding: 20px;
   }
   .slick-track {
-    padding-bottom: 70px;
+    padding-bottom: 34.72px;
   }
   .slider {
     padding-top: 21px;
@@ -41,7 +41,7 @@ export const CategoriesWrapper = styled.div`
       right: 0%;
       z-index: 1;
       @media only screen and (max-width: 576px) {
-        background-size: 21px 21px;
+        /* background-size: 21px 21px; */
         border-radius: 21px;
         top: -34px;
         width: 21px;
@@ -67,7 +67,7 @@ export const CategoriesWrapper = styled.div`
       @media only screen and (max-width: 576px) {
         top: -45px;
         right: 29px;
-        background-size: 21px 21px;
+        /* background-size: 21px 21px; */
         border-radius: 21px;
         width: 21px;
         height: 21px;
@@ -93,11 +93,7 @@ export const CategoriesWrapper = styled.div`
       background-color: #cdcdcd !important;
     }
   }
-  @media only screen and (max-width: 768px) {
-    padding: 0px 30px;
-  }
   @media only screen and (max-width: 576px) {
-    padding: 0px 20px;
     .title {
       font-size: var(--h5-font-size);
       font-weight: 500;

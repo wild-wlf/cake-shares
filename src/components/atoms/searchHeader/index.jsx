@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import Button from "../Button";
-import { Wrapper } from "./searchHeader.style";
 import { useRouter } from "next/router";
 import { RiExpandUpDownFill } from "react-icons/ri";
 import { IoIosRemoveCircle } from "react-icons/io";
@@ -9,6 +8,7 @@ import { IoIosListBox } from "react-icons/io";
 import { Sort } from "../advanceSearch/advanceSearch.style";
 import Field from "../Field";
 import { BsFillGridFill } from "react-icons/bs";
+import { SearchHeaderWrapper } from "./searchHeader.style";
 
 const SearchHeader = ({ handleViewController, listview }) => {
   const router = useRouter();
@@ -30,7 +30,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
     setSortBox(false);
   };
   return (
-    <Wrapper>
+    <SearchHeaderWrapper>
       <div>
         <Button
           rounded
@@ -121,7 +121,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
           </Button>
         </div>
       </div>
-    </Wrapper>
+    </SearchHeaderWrapper>
   );
 };
 

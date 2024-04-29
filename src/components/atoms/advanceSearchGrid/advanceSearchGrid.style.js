@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const SearchGridWrapper = styled.div`
   .CardWrapper {
     width: 100%;
     border-radius: 20px;
@@ -90,7 +90,7 @@ export const Wrapper = styled.div`
     flex-grow: 1;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 20px;
     /* max-width: 650px; */
     min-height: 126px;
@@ -129,7 +129,7 @@ export const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: 768px) {
-    padding: 0px 30px 0px 30px;
+    padding: 0px;
     .btnWrapper {
       flex-direction: row;
       .button {
@@ -144,7 +144,7 @@ export const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: 576px) {
-    padding: 0px 20px 0px 20px;
+    padding: 0px;
     .values-div {
       padding: 0px;
       span {

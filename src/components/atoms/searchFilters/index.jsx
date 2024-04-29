@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Wrapper } from "./searchFilters.style";
+import { SearchFiltersWrapper } from "./searchFilters.style";
 import { Sort } from "../advanceSearch/advanceSearch.style";
 import Field from "../Field";
 import Button from "../Button";
@@ -72,7 +72,7 @@ const SearchFilters = () => {
     }));
   };
   return (
-    <Wrapper>
+    <SearchFiltersWrapper>
       <div className="dropdown-div">
         <span>Investment Type</span>
         <Sort className={investmentBox && "active"}>
@@ -217,7 +217,7 @@ const SearchFilters = () => {
         <span>Max Days Left</span>
         <input type="text" placeholder="0" />
       </div>
-    </Wrapper>
+    </SearchFiltersWrapper>
   );
 };
 

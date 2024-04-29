@@ -141,4 +141,7 @@ export const ActionBtnHolder = styled.div`
 export const Wrapper = styled.div`
   padding: 0 50px;
   width: 100%;
+  @media only screen and (max-width: 768px) {
+    padding: 0 20px;
+  }
 `;

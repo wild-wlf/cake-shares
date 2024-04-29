@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-  padding: 30px 50px 0px 50px;
+export const ProductDetailWrapper = styled.div`
+  padding: 30px 0px;
 
   .btnwrapper {
     width: 100%;
@@ -73,6 +73,7 @@ export const Wrapper = styled.div`
     width: 74%;
     h4 {
       font-size: var(--h2-font-size);
+      padding-bottom: 16px;
       font-weight: 500;
     }
     span {
@@ -80,8 +81,10 @@ export const Wrapper = styled.div`
     }
   }
   .investment {
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 25%;
+    gap: 10px;
     span {
       font-size: var(--font-size-sm);
     }
@@ -140,7 +143,7 @@ export const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: 768px) {
-    padding: 30px 30px 0px 30px;
+    padding: 30px 0px;
     .title {
       font-size: var(--font-size-xl);
       font-weight: 500;
@@ -176,11 +179,11 @@ export const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: 576px) {
-    padding: 00px 20px 0px 20px;
+    padding: 00px 0px;
     .headings {
       font-size: 10px;
     }
-    .investwrapper{
+    .investwrapper {
       gap: 32px;
     }
     .whyinvest {

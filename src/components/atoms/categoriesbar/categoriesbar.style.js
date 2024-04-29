@@ -64,7 +64,6 @@ export const CategoriesBarWrapper = styled.div`
     }
   }
   @media only screen and (max-width: 768px) {
-    padding: 40px 30px;
     .slider {
       width: 340px;
     }
@@ -80,8 +79,5 @@ export const CategoriesBarWrapper = styled.div`
     .search {
       width: 100%;
     }
-  }
-  @media only screen and (max-width: 576px) {
-    padding: 40px 20px;
   }
 `;
