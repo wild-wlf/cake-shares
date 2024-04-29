@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const CardWrapper = styled.div`
-  width: 221px;
   height: 272px;
   border-radius: 24px;
   cursor: pointer;
   background-color: rgba(241, 241, 241, 1);
   box-shadow: 1px 8px 17px 0 rgba(0, 0, 0, 0.1),
     4px 31px 31px 0 rgba(0, 0, 0, 0.09);
+  position: relative;
   .image-div {
     padding: 10px 10px 0px;
     height: 204px;
@@ -23,8 +23,9 @@ export const CardWrapper = styled.div`
     position: absolute;
     top: 16px;
     left: 16px;
+    right: 16px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: end;
     gap: 95px;
   }
@@ -40,7 +41,6 @@ export const CardWrapper = styled.div`
     align-items: center;
   }
   .decription {
-    width: 201px;
     height: 49px;
     border-radius: 0px 0px 20px 20px;
     padding: 10px;
@@ -78,6 +78,7 @@ export const CardWrapper = styled.div`
       gap: 57px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
     }
     .heart {
       width: 11.16px;

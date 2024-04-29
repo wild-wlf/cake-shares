@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-  padding: 0px 50px;
-
+export const CategoriesWrapper = styled.div`
   .title {
     display: flex;
     align-items: center;
@@ -10,20 +8,31 @@ export const Wrapper = styled.div`
     font-size: var(--font-size-xl);
     font-weight: 500;
   }
+  .slick-slide {
+    padding: 20px;
+  }
+  .slick-track {
+    padding-bottom: 70px;
+  }
   .slider {
     padding-top: 21px;
+    width: 100%;
+
     .slick-slide {
+      width: 100%;
       height: 333px;
+
       @media only screen and (max-width: 768px) {
         height: 226px;
       }
     }
     .slick-arrow.slick-next {
       background-image: url(${(props) => props.image.src});
-      background-size: 26px 26px;
+      background-color: #4e6199;
+      background-size: 10px 17px;
       border-radius: 21px;
       background-repeat: no-repeat;
-      background-position: center center;
+      background-position: 10px;
       width: 26px;
       height: 26px;
       border-radius: 100%;
@@ -41,10 +50,11 @@ export const Wrapper = styled.div`
     }
     .slick-arrow.slick-prev {
       background-image: url(${(props) => props.image.src});
-      background-size: 26px 26px;
+      background-color: #4e6199;
+      background-size: 10px 17px;
       border-radius: 21px;
       background-repeat: no-repeat;
-      background-position: center center;
+      background-position: 10px;
       width: 26px;
       height: 26px;
       border-radius: 100%;
@@ -78,6 +88,9 @@ export const Wrapper = styled.div`
     .slick-next:hover:after,
     .slick-prev:hover:after {
       opacity: 0;
+    }
+    .slick-disabled {
+      background-color: #cdcdcd !important;
     }
   }
   @media only screen and (max-width: 768px) {

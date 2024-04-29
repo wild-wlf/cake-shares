@@ -1,8 +1,8 @@
 import React from "react";
-import { Wrapper } from "./categories.style";
+import { CategoriesWrapper } from "./categories.style";
 import Slider from "react-slick";
 import Card from "../card";
-import arrowRight from "../../../_assets/arrow-right.svg";
+import arrowRight from "../../../_assets/arrow.png";
 import Property from "../../../_assets/property.png";
 import Property2 from "../../../_assets/property2.png";
 import Property3 from "../../../_assets/property3.png";
@@ -81,7 +81,7 @@ const index = () => {
     ],
   };
   return (
-    <Wrapper image={arrowRight}>
+    <CategoriesWrapper image={arrowRight}>
       <div className="title">
         <span>Popular Investments</span>
       </div>
@@ -94,7 +94,7 @@ const index = () => {
           ))}
         </Slider>
       </div>
-    </Wrapper>
+    </CategoriesWrapper>
   );
 };
 

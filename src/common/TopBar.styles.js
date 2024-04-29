@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const StyledTopBar = styled.header`
   position: relative;
-  padding: 30px 50px 0px 50px;
+  padding: 30px 0 0px 0;
   font-family: var(--base-font-sans-serif);
   background: var(--white);
   display: flex;

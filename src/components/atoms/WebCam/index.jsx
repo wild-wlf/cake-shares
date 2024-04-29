@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import React from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import PropTypes from "prop-types";
 import {
@@ -8,12 +8,15 @@ import {
   CaptureButton,
   RefreshButton,
   ImgPreview,
+  ImageWrapper,
 } from "./WebCam.styles";
 // import Alert from "../Alert";
 // import Tooltip from "../../atoms/Tooltip";
 import { Error } from "../Field/Field.styles";
 import { StyledFormGroup } from "../../../styles/helpers.styles";
-
+import Button from "../Button";
+import Image from "next/image";
+import { FaRedoAlt } from "react-icons/fa";
 const propTypes = {
   onClick: PropTypes.func,
   value: PropTypes.string,
@@ -25,77 +28,84 @@ const propTypes = {
   error: PropTypes.string,
   success: PropTypes.bool,
 };
+const videoConstraints = {
+  width: 300,
+  facingMode: "environment",
+};
+const WebCam = ({ handelKycLevel }) => {
+  const webcamRef = useRef(null);
+  const [url, setUrl] = useState(null);
 
-const WebCam = React.forwardRef(
-  (
-    {
-      onClick,
-      flash,
-      setSelfie,
-      setFlash,
-      value,
-      noMargin,
-      onChange,
-      error,
-      success,
-      ...props
-    },
-    ref
-  ) => (
+  const capturePhoto = useCallback(async () => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    setUrl(imageSrc);
+    console.log("here");
+  }, [webcamRef]);
+
+  const onUserMedia = (e) => {
+    console.log(e);
+  };
+  return (
     <StyledFormGroup>
       {/* <Alert
         type="info"
         message="Please place your face inside the frame and take photo."
         css="margin-bottom: 20px;"
       /> */}
-      <WebCamHolder
-        error={error}
-        success={success}
-        flash={flash}
-        noMargin={noMargin}
-      >
-        <StyledWebCam
-          {...props}
-          mirrored
-          audio={false}
-          ref={ref}
-          screenshotFormat="image/jpeg"
-          setSelfie={(x) => onChange({ target: { value: x } })}
-        />
-        <CaptureButton
-          type="primary"
-          shape="circle"
-          size={58}
-          onClick={onClick}
-        >
-          ddd
-          {/* <Tooltip title="Take Photo">
-            <i className="icon-camera" />
-          </Tooltip> */}
-        </CaptureButton>
-        {value && (
-          <RefreshButton
-            type="primary"
-            shape="circle"
-            size={32}
-            onClick={() => {
-              onChange({ target: { value: "" } });
-              setFlash(false);
-            }}
-          >
-            ddd
-            {/* <Tooltip title="Recapture Selfie">
+      <WebCamHolder $preview={url}>
+        {url == null && (
+          <>
+            <StyledWebCam
+              mirrored
+              ref={webcamRef}
+              audio={false}
+              screenshotFormat="image/jpeg"
+              videoConstraints={videoConstraints}
+              onUserMedia={onUserMedia}
+            />
+            <Button
+              rounded
+              sm
+              btntype="green"
+              width="214"
+              onClick={capturePhoto}
+            >
+              Continue
+            </Button>
+          </>
+        )}
+        {url && (
+          <>
+            <div className="previewWrapper">
+              <ImageWrapper>
+                <Image src={url} width={200} height={200} alt="user" />
+              </ImageWrapper>
+            </div>
+
+            <Button
+              className={"undoButton"}
+              rounded
+              sm
+              btntype="green"
+              onClick={() => setUrl(null)}
+            >
+              <FaRedoAlt />
+            </Button>
+          </>
+        )}
+      </WebCamHolder>
+      {url && (
+        <Button rounded sm btntype="green" width="214" onClick={handelKycLevel}>
+          Save
+          {/* <Tooltip title="Recapture Selfie">
               <i className="icon-refresh" />
             </Tooltip> */}
-          </RefreshButton>
-        )}
-        {value && <ImgPreview src={value} />}
-      </WebCamHolder>
-      {error && <Error role="alert">{error}</Error>}
+        </Button>
+      )}
+      {/* {error && <Error role="alert">{error}</Error>} */}
     </StyledFormGroup>
-  )
-);
+  );
+};
 
-WebCam.propTypes = propTypes;
 
 export default WebCam;

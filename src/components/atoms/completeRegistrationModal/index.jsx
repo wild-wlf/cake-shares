@@ -15,14 +15,15 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
     const newArr = arr.map((elem, index) => ({
       ...elem,
       label: (
-        <div key={index} style={{ display: "flex", gap: "9px" }}>
-          <Image
-            src={`https://flagsapi.com/${elem.value}/flat/64.png`}
-            width={19}
-            height={19}
-            alt={`Flag of ${elem.value}`}
-            style={{ borderRadius: "50%" }}
-          />
+        <div key={index} className="countrySelect">
+          <figure>
+            <Image
+              src={`https://flagsapi.com/${elem.value}/shiny/48.png`}
+              width={48}
+              height={48}
+              alt={`Flag of ${elem.value}`}
+            />
+          </figure>
           {elem.label}
         </div>
       ),

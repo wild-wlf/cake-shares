@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Wrapper } from "./categoriesbar.style";
+import { CategoriesBarWrapper } from "./categoriesbar.style";
 import Button from "@/components/atoms/Button";
 import Slider from "react-slick";
 import all from "../../../_assets/all.svg";
@@ -62,7 +62,7 @@ const CategoriesBar = () => {
       >
         <AdvanceSearch />
       </CenterModal>
-      <Wrapper>
+      <CategoriesBarWrapper>
         <div className="maindiv">
           <div className="slider">
             <Slider {...settings}>
@@ -121,7 +121,7 @@ const CategoriesBar = () => {
             <CiSearch className="searchicon" />
           </div>
         </div>
-      </Wrapper>
+      </CategoriesBarWrapper>
     </>
   );
 };

@@ -137,3 +137,8 @@ export const ActionBtnHolder = styled.div`
     color: var(--primary);
   }
 `;
+
+export const Wrapper = styled.div`
+  padding: 0 50px;
+  width: 100%;
+`;

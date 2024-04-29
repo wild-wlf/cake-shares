@@ -7,6 +7,7 @@ import Property from "../../../_assets/property.png";
 import Property2 from "../../../_assets/property2.png";
 import Property3 from "../../../_assets/property3.png";
 import Link from "next/link";
+import { CategoriesWrapper } from "../categories/categories.style";
 
 const index = () => {
   const images = [
@@ -87,7 +88,7 @@ const index = () => {
   };
 
   return (
-    <Wrapper image={arrowRight}>
+    <CategoriesWrapper image={arrowRight}>
       <div className="slider">
         <Slider {...settings}>
           {images.map((data, index) => (
@@ -97,7 +98,7 @@ const index = () => {
           ))}
         </Slider>
       </div>
-    </Wrapper>
+    </CategoriesWrapper>
   );
 };
 

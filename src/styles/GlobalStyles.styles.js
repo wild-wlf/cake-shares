@@ -16,7 +16,7 @@ export const Styling = css`
     scroll-behavior: smooth;
     box-sizing: border-box;
   }
-  
+
   *:before,
   *:after {
     box-sizing: inherit;
@@ -32,9 +32,7 @@ export const Styling = css`
     min-width: var(--base-min-width);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 auto;
+
     &.nav-active {
       @media (max-width: 575px) {
         overflow: hidden;
@@ -493,4 +491,26 @@ export const HelperClasses = css`
   .star-rating {
     font-size: 24px !important;
   }
+  .countrySelect {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    figure {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    img {
+      display: block;
+      width: 20px;
+      height: 20px;
+      object-fit: cover;
+    }
+  }
 `;
+

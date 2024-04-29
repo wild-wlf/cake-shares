@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Notifications from "../components/molecules/Notifications";
 import { StyledTopBar } from "./TopBar.styles";
 import logo from "../_assets/logo.svg";
@@ -19,6 +19,10 @@ import RegisterAsBuyer from "@/components/atoms/registerAsBuyer";
 import CreatePasswordModal from "@/components/atoms/createPasswordModal";
 import CompleteRegistrationModal from "@/components/atoms/completeRegistrationModal";
 import LoginAsBuyerModal from "@/components/atoms/loginAsBuyerModal";
+import KycBuyerLevelOne from "@/components/atoms/KYC/KYCBuyer";
+import { KycContext } from "@/components/Context/KycContext";
+import KycBuyerLevelTwo from "@/components/atoms/KYC/KYCBuyerTwo";
+import KYCBuyerThree from "@/components/atoms/KYC/KYCBuyerThree";
 
 const TopBar = () => {
   const [sideNav, setSidenav] = useState(false);
@@ -59,9 +63,36 @@ const TopBar = () => {
     setLoginModal(false);
     setBuyerLoginModal(true);
   };
-
+  const { kycLevel, setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } =
+    useContext(KycContext);
   return (
     <>
+      {/* KYC MODAL */}
+      <CenterModal
+        open={kyc1}
+        setOpen={setKyc1}
+        width="688"
+        title="Upgrade to KYC Level 1"
+      >
+        <KycBuyerLevelOne setKycLevel={setKycLevel} setOpen={setKyc1} />
+      </CenterModal>
+      <CenterModal
+        open={kyc2}
+        setOpen={setKyc2}
+        width="688"
+        title="Upgrade to KYC Level 2"
+      >
+        <KycBuyerLevelTwo setKycLevel={setKycLevel} setOpen={setKyc2} />
+      </CenterModal>
+      <CenterModal
+        open={kyc3}
+        setOpen={setKyc3}
+        width="688"
+        title="Upgrade to KYC Level 3"
+      >
+        <KYCBuyerThree setKycLevel={setKycLevel} setOpen={setKyc3} />
+      </CenterModal>
+      {/* KYC MODAL
       {/* Registration Modals */}
       <CenterModal
         open={registermodal}
@@ -101,9 +132,8 @@ const TopBar = () => {
         title="Complete Registration"
         width="804"
       >
-        <CompleteRegistrationModal handleRegistration={handleRegistration}/>
+        <CompleteRegistrationModal handleRegistration={handleRegistration} />
       </CenterModal>
-
       {/* Login Modals */}
       <CenterModal
         open={loginmodal}

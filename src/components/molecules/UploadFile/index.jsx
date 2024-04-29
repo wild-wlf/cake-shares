@@ -27,6 +27,7 @@ const UploadFile = ({
   csv,
   icon,
   img = "",
+  id = "upload",
   ...props
 }) => {
   const { CSVReader } = useCSVReader();
@@ -78,13 +79,9 @@ const UploadFile = ({
 
   return (
     <StyledUploadFile $bg={bg}>
-      {label && (
-        <span htmlFor="upload" className="label-text">
-          {title}
-        </span>
-      )}
+      {label && <span className="label-text">{title}</span>}
       {type === "img" && (
-        <label htmlFor="upload" className="labelButton">
+        <label htmlFor={id} className="labelButton">
           {!uploaded && (
             <span className="upload-text">
               <Image className="icon-img" src={UploadImg} alt="icon" />
@@ -107,7 +104,7 @@ const UploadFile = ({
         </label>
       )}
       {type === "file" && (
-        <label htmlFor="upload" className="labelButton">
+        <label htmlFor={id} className="labelButton">
           <span className="upload-text">
             <Image className="icon-img" src={UploadImg} alt="icon" />
             <span className="text-lg">{uploadTitle}</span>
@@ -122,7 +119,7 @@ const UploadFile = ({
       )}
       <input
         type="file"
-        id="upload"
+        id={id}
         accept={accept}
         onChange={(e) => handelChange(e)}
       />

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  padding: 0px 50px 0px 50px;
   .CardWrapper {
     width: 100%;
     border-radius: 20px;
@@ -88,10 +87,12 @@ export const Wrapper = styled.div`
     }
   }
   .values-div {
+    flex-grow: 1;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
-    max-width: 650px;
+    /* max-width: 650px; */
     min-height: 126px;
     padding: 0px 20px;
     flex-wrap: wrap;
