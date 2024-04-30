@@ -1,4 +1,3 @@
-import "../global.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { createGlobalStyle } from "styled-components";
@@ -6,6 +5,10 @@ import Variables from "../styles/variables.css";
 import { HelperClasses, Styling } from "../styles/GlobalStyles.styles";
 import TopBar from "../common/TopBar";
 import { Wrapper } from "@/styles/helpers.styles";
+import { KycContextProvider } from "@/components/Context/KycContext";
+import CenterModal from "@/components/atoms/Modal/CenterModal";
+import KycBuyerLevelOne from "@/components/atoms/KYC/KYCBuyer";
+import { useState } from "react";
 
 export default function App({ Component, pageProps }) {
   const GlobalStyles = createGlobalStyle`
@@ -13,13 +16,17 @@ export default function App({ Component, pageProps }) {
   ${Styling}
   ${HelperClasses}
 `;
+
   return (
     <>
-      <GlobalStyles />
-      <Wrapper>
-        <TopBar />
-        <Component {...pageProps} />
-      </Wrapper>
+      <KycContextProvider>
+        <GlobalStyles />
+
+        <Wrapper>
+          <TopBar />
+          <Component {...pageProps} />
+        </Wrapper>
+      </KycContextProvider>
     </>
   );
 }

@@ -1,15 +1,30 @@
 import styled from "styled-components";
 
 export const Sidenav = styled.div`
-  display: flex;
   position: absolute;
-  left: 0;
+  left: ${({ open }) => (open ? "0" : "-200%")};
+  top: 0;
   background-color: white;
   width: 260px;
   padding-top: 39px;
   padding-left: 20px;
-  height: 1000%;
+  height: 100%;
+  transition: left 0.3s ease-in-out;
+  z-index: 1000;
   border-top-right-radius: 40px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+
+  .backdrop {
+    display: ${({ open }) => (open ? "block" : "none")};
+    transition: display 0.3s ease-in-out;
+    position: fixed;
+    top: 0;
+    right: -260px;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(4px);
+    z-index: -1;
+  }
 
   .nav-content {
     display: flex;
