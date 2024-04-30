@@ -2,10 +2,12 @@ import styled from "styled-components";
 
 export const StyledUserDetail = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(1, 1fr);
   gap: 20px;
   margin-bottom: 40px;
-
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .colWrapper {
     width: 100%;
     padding: 20px;
@@ -19,9 +21,9 @@ export const StyledUserDetail = styled.div`
       margin-bottom: 30px;
 
       .colTitle {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 400;
-        line-height: 20px;
+        line-height: 18px;
       }
     }
     .chatButton {
@@ -34,8 +36,11 @@ export const StyledUserDetail = styled.div`
     .colBody {
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
       row-gap: 50px;
+      @media screen and (min-width: 1439px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
     .col-content {
       display: flex;
@@ -50,7 +55,8 @@ export const StyledUserDetail = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 5px;
+        flex-shrink: 0;
+        padding: 7px;
         img {
           max-width: 100%;
           height: auto;
@@ -64,9 +70,9 @@ export const StyledUserDetail = styled.div`
           color: var(--dark);
           display: block;
           margin-bottom: 5px;
-          font-size: 16px;
+          font-size: 14px;
           font-weight: 500;
-          line-height: 20px;
+          line-height: 18px;
         }
       }
       .discreptionWrap {

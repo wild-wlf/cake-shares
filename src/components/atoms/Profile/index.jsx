@@ -24,8 +24,8 @@ const Profile = () => {
         <IoIosArrowBack />
         Go Back
       </Button>
-      <ProfileBanner />
-      <UserInfo />
+      {/* <ProfileBanner />
+      <UserInfo /> */}
       <UserDetail />
     </StyledProfile>
   );
