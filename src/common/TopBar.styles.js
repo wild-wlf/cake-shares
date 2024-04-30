@@ -4,7 +4,7 @@ export const StyledTopBar = styled.header`
   position: relative;
   padding-top: 30px;
   font-family: var(--base-font-sans-serif);
-  background: var(--white);
+  /* background: var(--white); */
   display: flex;
   align-items: center;
   justify-content: space-between;

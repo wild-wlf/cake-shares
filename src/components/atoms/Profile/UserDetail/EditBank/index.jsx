@@ -45,8 +45,6 @@ const EditBank = () => {
         >
           <Field />
         </Form.Item>
-      </div>
-      <div className="combine-fields">
         <Form.Item
           type="text"
           label="SWIFT / BIC Number"

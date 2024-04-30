@@ -12,20 +12,22 @@ const Profile = () => {
   const router = useRouter();
   return (
     <StyledProfile>
-      <Button
-        rounded
-        sm
-        btntype="blue"
-        className="button"
-        onClick={() => {
-          router.back();
-        }}
-      >
-        <IoIosArrowBack />
-        Go Back
-      </Button>
-      {/* <ProfileBanner />
-      <UserInfo /> */}
+      <div className="previousButton">
+        <Button
+          rounded
+          sm
+          btntype="blue"
+          className="button"
+          onClick={() => {
+            router.back();
+          }}
+        >
+          <IoIosArrowBack />
+          Go Back
+        </Button>
+      </div>
+      <ProfileBanner />
+      <UserInfo />
       <UserDetail />
     </StyledProfile>
   );

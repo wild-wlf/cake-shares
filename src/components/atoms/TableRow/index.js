@@ -14,7 +14,7 @@ export const TableRow = styled.tr`
     css`
       @media (max-width: 991px) {
         background: var(--white);
-        border: 1px solid var(--table-border);
+        /* border: 1px solid var(--table-border); */
         display: block;
         padding: 15px;
         position: relative;

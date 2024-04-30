@@ -5,14 +5,18 @@ export const StyledUserDetail = styled.div`
   grid-template-columns: repeat(1, 1fr);
   gap: 20px;
   margin-bottom: 40px;
+
   @media screen and (min-width: 1200px) {
     grid-template-columns: repeat(2, 1fr);
   }
   .colWrapper {
     width: 100%;
-    padding: 20px;
+    padding: 15px;
     box-shadow: 0px 8px 18px 0px rgba(0, 0, 0, 0.05);
     border-radius: 20px;
+    @media screen and (min-width: 767px) {
+      padding: 20px;
+    }
     .colHeader {
       width: 100%;
       display: flex;
@@ -36,8 +40,11 @@ export const StyledUserDetail = styled.div`
     .colBody {
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      row-gap: 50px;
+      grid-template-columns: repeat(1, 1fr);
+      row-gap: 25px;
+      @media screen and (min-width: 576px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
       @media screen and (min-width: 1439px) {
         grid-template-columns: repeat(3, 1fr);
       }
