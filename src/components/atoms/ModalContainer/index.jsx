@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import Modal from '../Modal/CenterModal';
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from "react";
+import Modal from "../Modal/CenterModal";
 
 function ModalContainer({
   btnComponent,
@@ -14,18 +15,22 @@ function ModalContainer({
   imgPreview,
   width,
   helpModal,
+  stateChanged = () => {},
 }) {
   const [isVisible, setIsVisible] = useState(!!isOpen);
+  const [p_isVisible, p_setIsVisible] = useState(!!isOpen);
   const showModal = () => {
+    stateChanged({ [title]: true });
     setIsVisible(true);
+    p_setIsVisible(true);
   };
-
   const handleCancel = () => {
-    onModalClose();
+    stateChanged({ [title]: false });
     setIsVisible(false);
   };
   useEffect(() => {
-    if (!isVisible) {
+    if (p_isVisible && !isVisible) {
+      stateChanged({ [title]: false });
       onModalClose();
     }
   }, [isVisible]);
@@ -35,20 +40,16 @@ function ModalContainer({
       {btnComponent && btnComponent({ onClick: showModal })}
       <Modal
         title={title}
-        isOpen={isVisible}
-        setIsOpen={x => {
-          setIsVisible(x);
-        }}
-        onClose={() => {
-          onModalClose();
-        }}
+        open={isVisible}
+        setOpen={setIsVisible}
         xl={xl}
         lg={lg}
         sm={sm}
         width={width}
         isClosable={isClosable}
         helpModal={helpModal}
-        imgPreview={imgPreview}>
+        imgPreview={imgPreview}
+      >
         {content({ onClose: handleCancel })}
       </Modal>
     </>

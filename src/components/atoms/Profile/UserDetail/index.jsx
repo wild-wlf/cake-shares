@@ -20,6 +20,8 @@ import TableLayout from "../../TableLayout";
 import Table from "@/components/molecules/Table";
 import { IoIosArrowBack } from "react-icons/io";
 import Field from "../../Field";
+import ModalContainer from "../../ModalContainer";
+import EditBank from "./EditBank";
 
 const UserDetail = () => {
   const reports_data = [
@@ -75,53 +77,60 @@ const UserDetail = () => {
     `Amount`,
     `Chat (Stakeholders)`,
   ];
+
+  const bankInfo = [
+    {
+      icon: bankIcon,
+      title: "Bank Name",
+      discreption: "Bank of Americe",
+    },
+    {
+      icon: numIcon,
+      title: "IBAN",
+      discreption: "PK033310084246213",
+    },
+
+    {
+      icon: userIcon,
+      title: "SWIFT / BIC Number",
+      discreption: "PK033310084246213",
+    },
+    {
+      icon: userId,
+      title: "User ID",
+      discreption: "33445554",
+    },
+  ];
   return (
     <StyledUserDetail>
       <div className="colWrapper">
         <div className="colHeader">
           <strong className="colTitle">Bank Info:</strong>
-          <Button type="green" rounded sm>
-            <MdModeEdit />
-            Edit Info
-          </Button>
+          <ModalContainer
+            lg
+            width={673}
+            title="Edit Bank Info"
+            btnComponent={({ onClick }) => (
+              <Button type="green" rounded sm onClick={onClick}>
+                <MdModeEdit />
+                Edit Info
+              </Button>
+            )}
+            content={({ onClose }) => <EditBank onClose={onClose} />}
+          />
         </div>
         <div className="colBody">
-          <div className="col-content">
-            <div className="iconWrap">
-              <Image src={bankIcon} alt="bankIcon" />
+          {bankInfo.map((elem, ind) => (
+            <div className="col-content" key={ind}>
+              <div className="iconWrap">
+                <Image src={elem.icon} alt="bankIcon" />
+              </div>
+              <div className="textWrap">
+                <strong className="title">{elem.title}</strong>
+                <span>{elem.discreption}</span>
+              </div>
             </div>
-            <div className="textWrap">
-              <strong className="title">Bank Name</strong>
-              <span>Bank of Americe</span>
-            </div>
-          </div>
-          <div className="col-content">
-            <div className="iconWrap">
-              <Image src={numIcon} alt="numIcon" />
-            </div>
-            <div className="textWrap">
-              <strong className="title">IBAN</strong>
-              <span>PK033310084246213</span>
-            </div>
-          </div>
-          <div className="col-content">
-            <div className="iconWrap">
-              <Image src={userIcon} alt="userIcon" />
-            </div>
-            <div className="textWrap">
-              <strong className="title">SWIFT / BIC Number</strong>
-              <span>PK033310084246213</span>
-            </div>
-          </div>
-          <div className="col-content">
-            <div className="iconWrap">
-              <Image src={userId} alt="userId" />
-            </div>
-            <div className="textWrap">
-              <strong className="title">User ID</strong>
-              <span>33445554</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       <Inheritance />
@@ -206,14 +215,6 @@ const UserDetail = () => {
         </div>
       </div>
       <div className="colWrapper">
-        {/* <div className="colHeader">
-          <strong className="colTitle">My Assets:</strong>
-          <div className="filters">
-            <div className="inputWrapp">
-              <Field placeholder="Search Assets" />
-            </div>
-          </div>
-        </div> */}
         <TableLayout
           ReportsFilters
           tableHeading="My Assets:"
