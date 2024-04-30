@@ -211,7 +211,7 @@ const TopBar = () => {
             <Button
               rounded
               sm
-              btntype="new"
+              btntype="light-green"
               className="button"
               onClick={() => setRegisterModal(true)}
             >

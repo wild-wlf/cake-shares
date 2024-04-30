@@ -67,7 +67,7 @@ const CategoriesBar = () => {
           <div className="slider">
             <Slider {...settings}>
               <div>
-                <Button rounded sm btntype="new" className="button">
+                <Button rounded sm btntype="light-green" className="button">
                   <Image src={all} alt="all" />
                   All
                 </Button>

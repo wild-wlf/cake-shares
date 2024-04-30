@@ -45,7 +45,7 @@ const ProductDetail = () => {
           <Button
             rounded
             sm
-            btntype="green"
+            btntype="primary"
             className="button"
             onClick={() => setModal(true)}
           >

@@ -89,7 +89,7 @@ const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
               className={"stepOneButton"}
               rounded
               sm
-              btntype="green"
+              btntype="primary"
               width="134"
               onClick={() => setStep(2)}
             >
@@ -111,7 +111,7 @@ const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
             <Button
               rounded
               md
-              btntype="green"
+              btntype="primary"
               width="214"
               onClick={handelKycLevel}
             >

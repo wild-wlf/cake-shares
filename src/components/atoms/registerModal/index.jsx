@@ -85,7 +85,14 @@ const RegisterModal = ({
           </Option>
         </OptionsWrapper>
 
-        <Button rounded s md btntype="green" width="170" onClick={handleModal}>
+        <Button
+          rounded
+          s
+          md
+          btntype="primary"
+          width="170"
+          onClick={handleModal}
+        >
           Continue
         </Button>
       </Container>

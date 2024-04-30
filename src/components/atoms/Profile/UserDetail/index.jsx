@@ -19,7 +19,7 @@ const UserDetail = () => {
       <div className="colWrapper">
         <div className="colHeader">
           <strong className="colTitle">Bank Info:</strong>
-          <Button type="green" rounded sm>
+          <Button type="primary" rounded sm>
             <MdModeEdit />
             Edit Info
           </Button>
@@ -66,7 +66,7 @@ const UserDetail = () => {
       <div className="colWrapper">
         <div className="colHeader">
           <strong className="colTitle">Personal Information:</strong>
-          <Button type="green" rounded sm>
+          <Button type="primary" rounded sm>
             <MdModeEdit />
             Edit Info
           </Button>

@@ -104,7 +104,7 @@ const AdvanceSearchGrid = () => {
             </div>
           </div>
           <div className="btnWrapper">
-            <Button rounded sm btntype="green" className="button">
+            <Button rounded sm btntype="primary" className="button">
               <RiFilePaperFill />
               Initiate Investment
             </Button>

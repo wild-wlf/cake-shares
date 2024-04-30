@@ -95,7 +95,7 @@ const LoginSignupModal = ({ handleBuyerModal }) => {
           <Button
             rounded
             md
-            btntype="green"
+            btntype="primary"
             width="170"
             onClick={handleBuyerModal}
             htmlType="submit"

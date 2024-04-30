@@ -8,7 +8,7 @@ const InheritenceAddedModal = () => {
     <Wrapper>
       <h3>Inheritance Added Successfully!</h3>
       <Link href={"/"}>
-        <Button rounded md btntype="green" width="170">
+        <Button rounded md btntype="primary" width="170">
           Go To Home
         </Button>
       </Link>
