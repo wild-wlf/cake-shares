@@ -9,13 +9,16 @@ export const StyledTopBar = styled.header`
   align-items: center;
   justify-content: space-between;
   z-index: 5;
-
   .actions {
     display: flex;
     gap: 10px;
   }
   .closedNav {
     display: none;
+    svg {
+      width: 30px;
+      height: 30px;
+    }
   }
 
   .logo {
@@ -27,6 +30,7 @@ export const StyledTopBar = styled.header`
       height: auto;
     }
   }
+
   .textField {
     display: flex;
     width: 100%;
@@ -35,7 +39,24 @@ export const StyledTopBar = styled.header`
     align-items: center;
     position: relative;
     gap: 8px;
-    color: var(--green);
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: 1px;
+      width: 0;
+      transition: all 0.6s ease-in-out;
+      left: 0;
+      bottom: 0;
+      background: var(--green);
+    }
+
+    &.textField-home {
+      color: var(--green);
+      &::before {
+        width: 70px;
+      }
+    }
   }
   .textField::after {
     content: "";
@@ -44,7 +65,20 @@ export const StyledTopBar = styled.header`
     left: 0;
     width: 70px;
     height: 1px;
-    background-color: var(--green);
+  }
+  .textFieldRight {
+    display: flex;
+    width: 100%;
+    height: 26px;
+    padding: 0 10px 10px 0;
+    align-items: center;
+    position: relative;
+    gap: 8px;
+    background: var(--white);
+    font-weight: 500;
+    .heading {
+      padding-right: 69px;
+    }
   }
 
   .notification {
@@ -59,6 +93,7 @@ export const StyledTopBar = styled.header`
     font-weight: 400;
     line-height: 17px;
     cursor: pointer;
+    z-index: 1;
     .bell-white {
       display: none;
     }
@@ -85,25 +120,79 @@ export const StyledTopBar = styled.header`
     opacity: 0;
     transition: 0.4s;
   }
-
-  .buttonWrapper {
+  .wallet {
     display: flex;
+    padding: 8px 15px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 50px;
+    border: 1px solid #313131;
+    color: var(--dark);
+    font-size: 13px;
+    line-height: 17px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: 0.4s;
+
+    &:hover {
+      background: rgba(64, 143, 140, 0.7);
+      border: 1px solid var(--green);
+      color: var(--white);
+    }
+  }
+
+  @media (max-width: 992px) {
+    .wallet {
+      padding: 6px 10px !important;
+      font-size: 12px;
+    }
+    .textFieldRight {
+      padding: 0 10px 5px 0;
+      .heading {
+        padding-right: 30px;
+      }
+    }
+  }
+  .authContainer {
+    display: flex;
+    align-items: center;
     gap: 10px;
   }
 
-  @media (max-width: 768px) {
-    padding-top: 20px;
+  @media (max-width: 850px) {
+    .textFieldRight {
+      padding: 0 10px 5px 0;
+      .heading {
+        font-size: 13px;
+        padding-right: 10px;
+      }
+    }
+  }
 
+  @media (max-width: 576px) {
+    padding: 20px 0;
+    .wallet {
+      display: none;
+    }
+    .buttonWrapper {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
     .closedNav {
       display: block;
       cursor: pointer;
-      font-size: 24px;
+    }
+
+    .textField {
+      display: none;
+    }
+    .textFieldRight {
+      display: none;
     }
   }
-  @media (max-width: 576px) {
-    padding: 30px 20px 26px 20px;
-  }
-  .nav-active & {
+  .active-nav & {
     @media (max-width: 768px) {
       .layer {
         position: fixed;
@@ -114,7 +203,6 @@ export const StyledTopBar = styled.header`
     }
   }
 `;
-
 export const NavLinks = styled.div`
   display: flex;
   gap: 32px;

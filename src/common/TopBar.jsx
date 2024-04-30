@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Notifications from "../components/molecules/Notifications";
 import { NavLinks, StyledTopBar } from "./TopBar.styles";
 import logo from "../_assets/logo.svg";
@@ -7,10 +7,13 @@ import bell from "../_assets/bell.svg";
 import bellWhite from "../_assets/bell-white.svg";
 import Button from "@/components/atoms/Button";
 import register from "../_assets/register.svg";
-import store from "../_assets/store.svg";
-import { HiOutlineMenuAlt1 } from "react-icons/hi";
+import { HiMenuAlt1, HiOutlineMenuAlt1 } from "react-icons/hi";
+import SideNav from "../components/atoms/sideNav/index.js";
 import RegisterModal from "../components/atoms/registerModal";
 import CenterModal from "@/components/atoms/Modal/CenterModal";
+import AdvanceSearch from "../components/atoms/advanceSearch";
+import InheritenceAddedModal from "@/components/atoms/inheritanceaddedmodal";
+import GreenTick from "../_assets/Green-Tick.svg";
 import RegisterAsBuyer from "@/components/atoms/registerAsBuyer";
 import CreatePasswordModal from "@/components/atoms/createPasswordModal";
 import CompleteRegistrationModal from "@/components/atoms/completeRegistrationModal";
@@ -19,20 +22,30 @@ import KycBuyerLevelOne from "@/components/atoms/KYC/KYCBuyer";
 import { KycContext } from "@/components/Context/KycContext";
 import KycBuyerLevelTwo from "@/components/atoms/KYC/KYCBuyerTwo";
 import KYCBuyerThree from "@/components/atoms/KYC/KYCBuyerThree";
+import ProfileMenu from "@/components/molecules/ProfileMenu/ProfileMenu";
+import { MdArrowDropDown, MdStorefront } from "react-icons/md";
+import profile from "../_assets/profile.png";
+import KycLevel from "@/components/atoms/KYC/KycLevel";
 import line from "../_assets/sidenav-line.svg";
-import profile from "../_assets/profile.svg";
+import { FaWallet } from "react-icons/fa";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const TopBar = () => {
-  const [sideNav, setSidenav] = useState(false);
-  const [notifications, setNotifications] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [sideNav, setSideNav] = useState(false);
   const [registermodal, setRegisterModal] = useState(false);
   const [loginmodal, setLoginModal] = useState(false);
   const [buyermodal, setBuyerModal] = useState(false);
   const [buyerloginmodal, setBuyerLoginModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
+  const [notifications, setNotifications] = useState(false);
+
   const [completeRegistrationModal, setCompleteRegistrationModal] =
     useState(false);
-  // const sideNavRef = useRef(null);
+  const router = usePathname();
 
   const handleRegisterModal = () => {
     setRegisterModal(false);
@@ -62,17 +75,16 @@ const TopBar = () => {
     setLoginModal(false);
     setBuyerLoginModal(true);
   };
-  const { kycLevel, setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } =
-    useContext(KycContext);
-
   useEffect(() => {
     if (sideNav) {
-      document.body.classList.add("nav-active");
+      document.body.classList.add("active-nav");
     } else {
-      document.body.classList.remove("nav-active");
+      document.body.classList.remove("active-nav");
     }
-  });
+  }, [sideNav]);
 
+  const { kycLevel, setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } =
+    useContext(KycContext);
   return (
     <>
       {/* KYC MODAL */}
@@ -157,8 +169,8 @@ const TopBar = () => {
       </CenterModal>
       <StyledTopBar>
         <div className="logoWrapper">
-          <div className="layer" onClick={() => setSidenav(false)} />
-          <div className="closedNav" onClick={() => setSidenav(true)}>
+          <div className="layer" onClick={() => setSideNav(false)} />
+          <div className="closedNav" onClick={() => setSideNav(true)}>
             <HiOutlineMenuAlt1 />
           </div>
           <NavLinks $active={sideNav}>
@@ -176,13 +188,32 @@ const TopBar = () => {
               </div>
               <Image src={line} alt="line" />
             </div>
-            <div className="textField">
-              <Image src={store} alt="store" />
+            <Link
+              href="/"
+              className={
+                router === "/" ? "textField textField-home" : "textField"
+              }>
+              <MdStorefront />
               <span>Marketplace</span>
-            </div>
+            </Link>
           </NavLinks>
         </div>
+
         <div className="actions">
+          {isLoggedIn ? (
+            <>
+              <div className="textfeildWrapper">
+                <div className="textFieldRight">
+                  <span className="heading">My Kyc Level</span>
+                  <span>{kycLevel - 1}</span>
+                </div>
+                <KycLevel level={kycLevel} bg />
+              </div>
+            </>
+          ) : (
+            ""
+          )}
+
           <div
             className="notification"
             onClick={() => {
@@ -199,26 +230,52 @@ const TopBar = () => {
               <Notifications />
             </div>
           </div>
-          <div className="buttonWrapper">
-            <Button
-              rounded
-              sm
-              btntype="light-green"
-              className="button"
-              onClick={() => setRegisterModal(true)}>
-              <Image src={register} alt="register" />
-              Register
-            </Button>
-            <Button
-              rounded
-              sm
-              btntype="white-blue"
-              className="button"
-              onClick={() => setLoginModal(true)}>
-              Login
-            </Button>
-          </div>
+
+          {isLoggedIn ? (
+            <>
+              <div className="wallet">
+                <FaWallet />
+                <span>My Wallet</span>
+              </div>
+              <div className="buttonWrapper">
+                <Button
+                  rounded
+                  sm
+                  btntype="new"
+                  onClick={() => {
+                    setOpenProfile(!openProfile);
+                  }}>
+                  <Image src={profile} alt="profile" />
+                  Alex
+                  <MdArrowDropDown />
+                </Button>
+                <ProfileMenu />
+              </div>
+            </>
+          ) : (
+            <div className="authContainer">
+              <Button
+                type="new"
+                rounded
+                sm
+                onClick={() => setRegisterModal(true)}>
+                <Image src={register} alt="register" />
+                Register
+              </Button>
+              <Button
+                rounded
+                sm
+                btntype="white-blue"
+                onClick={() => {
+                  setLoginModal(true);
+                  setIsLoggedIn(true);
+                }}>
+                Login
+              </Button>
+            </div>
+          )}
         </div>
+        <ProfileMenu openProfile={openProfile} />
       </StyledTopBar>
     </>
   );
