@@ -7,7 +7,10 @@ import { useForm } from "@/components/molecules/Form";
 import { countries } from "@/components/Constant";
 import Image from "next/image";
 import Select from "@/components/atoms/Select";
-
+import ModalContainer from "@/components/atoms/ModalContainer";
+import { MdModeEdit } from "react-icons/md";
+import changePassword from "../../../../../_assets/changePassword.svg";
+import ChangePassword from "../ChangePassword";
 const EditProfile = () => {
   const [arr, setArr] = useState(countries);
   const [form] = useForm();
@@ -40,7 +43,7 @@ const EditProfile = () => {
   }
   useEffect(() => {
     form.setFieldsValue({
-      full_name: "hamza",
+      // full_name: "hamza",
       //  email: admin?.email,
       //  roles: roles?.filter(({ value }) =>
       //    admin?.roles?.find(({ id }) => id === value)
@@ -59,9 +62,9 @@ const EditProfile = () => {
             rounded
             placeholder="Alex Mertiz"
             rules={[
+              { required: true },
               {
                 pattern: /^.{0,40}$/,
-                required: true,
                 message: "Maximum Character Length is 256",
               },
             ]}
@@ -76,9 +79,9 @@ const EditProfile = () => {
             rounded
             placeholder="alex123"
             rules={[
+              { required: true },
               {
                 pattern: /^.{0,40}$/,
-                required: true,
                 message: "Maximum Character Length is 256",
               },
             ]}
@@ -93,9 +96,10 @@ const EditProfile = () => {
             rounded
             placeholder="alex123@gmail.com"
             rules={[
+              { required: true },
+
               {
                 pattern: /^.{0,40}$/,
-                required: true,
                 message: "Maximum Character Length is 256",
               },
             ]}
@@ -110,9 +114,9 @@ const EditProfile = () => {
             rounded
             placeholder="Select"
             rules={[
+              { required: true },
               {
                 pattern: /^.{0,40}$/,
-                required: true,
                 message: "Maximum Character Length is 256",
               },
             ]}
@@ -127,9 +131,10 @@ const EditProfile = () => {
             rounded
             placeholder="03/05/2001"
             rules={[
+              { required: true },
+
               {
                 pattern: /^.{0,40}$/,
-                required: true,
                 message: "Maximum Character Length is 256",
               },
             ]}
@@ -137,6 +142,18 @@ const EditProfile = () => {
             <Field />
           </Form.Item>
         </div>
+        <ModalContainer
+          lg
+          width={673}
+          title="Change Password"
+          btnComponent={({ onClick }) => (
+            <strong onClick={onClick} className="fake-label">
+              Change Password!
+              <Image src={changePassword} alt="changePassword" />
+            </strong>
+          )}
+          content={({ onClose }) => <ChangePassword onClose={onClose} />}
+        />
         <Form.Item
           type="password"
           label="Current Password"
@@ -146,7 +163,6 @@ const EditProfile = () => {
           placeholder="**********"
           rules={[
             { required: true },
-
             {
               pattern: /^.{0,40}$/,
               message: "Maximum Character Length is 256",

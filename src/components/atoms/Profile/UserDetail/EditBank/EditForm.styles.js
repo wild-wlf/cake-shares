@@ -12,4 +12,14 @@ export const StyledEditForm = styled.div`
       grid-template-columns: repeat(2, 1fr);
     }
   }
+  .fake-label {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: left;
+    cursor: pointer;
+  }
 `;
