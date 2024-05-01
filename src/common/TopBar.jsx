@@ -299,7 +299,7 @@ const TopBar = () => {
                 <Button
                   rounded
                   sm
-                  btntype="new"
+                  btntype="light-green"
                   onClick={() => {
                     setOpenProfile(!openProfile);
                   }}
@@ -314,7 +314,7 @@ const TopBar = () => {
           ) : (
             <div className="authContainer">
               <Button
-                type="new"
+                type="light-green"
                 rounded
                 sm
                 onClick={() => setRegisterModal(true)}
