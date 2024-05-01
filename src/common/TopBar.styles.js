@@ -4,7 +4,7 @@ export const StyledTopBar = styled.header`
   position: relative;
   padding-top: 30px;
   font-family: var(--base-font-sans-serif);
-  /* background: var(--white); */
+  background: var(--white);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -170,7 +170,9 @@ export const StyledTopBar = styled.header`
   }
 
   @media (max-width: 576px) {
-    padding: 20px 0;
+    padding: 20px 15px;
+    margin: 0 -15px;
+
     .wallet {
       display: none;
     }

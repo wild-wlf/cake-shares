@@ -54,6 +54,17 @@ export const Wrapper = styled.div`
       }
     }
   }
+  .register {
+    width: 100%;
+    text-align: center;
+    padding-top: 26px;
+    span {
+      color: #4e6199;
+      font-weight: 500;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
   @media only screen and (max-width: 576px) {
     .description {
       font-size: 16px;

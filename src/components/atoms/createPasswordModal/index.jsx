@@ -4,9 +4,12 @@ import Field from "../Field";
 import Form, { useForm } from "@/components/molecules/Form";
 import Button from "../Button";
 import Link from "next/link";
+import UploadImg from "@/components/molecules/UploadImg";
 const CreatePasswordModal = ({
   createPasswordModal,
   handleCompleteRegistration,
+  handleSellerPasswordModal,
+  type,
 }) => {
   const [form] = useForm();
 
@@ -16,6 +19,13 @@ const CreatePasswordModal = ({
         Add a profile picture and create a password to secure your account.
       </span>
       <Form form={form}>
+        {type === "Register As Seller" ? (
+          <div>
+            <UploadImg />
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="input-div">
           <Form.Item
             type="password"
@@ -53,18 +63,7 @@ const CreatePasswordModal = ({
           </Form.Item>
         </div>
         <div className="btnWrapper">
-          <Button
-            rounded
-            md
-            btntype="white-blue"
-            width="170"
-            htmlType="submit"
-            className="button"
-            onClick={handleCompleteRegistration}
-          >
-            Complete Registration
-          </Button>
-          <Link href={"/"}>
+          {type === "Register As Seller" ? (
             <Button
               rounded
               md
@@ -72,11 +71,38 @@ const CreatePasswordModal = ({
               width="170"
               htmlType="submit"
               className="button"
-              onClick={createPasswordModal}
+              onClick={handleSellerPasswordModal}
             >
-              I&apos;ll do later
+              Finish!
             </Button>
-          </Link>
+          ) : (
+            <>
+              <Button
+                rounded
+                md
+                btntype="white-blue"
+                width="170"
+                htmlType="submit"
+                className="button"
+                onClick={handleCompleteRegistration}
+              >
+                Complete Registration
+              </Button>
+              <Link href={"/"}>
+                <Button
+                  rounded
+                  md
+                  btntype="primary"
+                  width="170"
+                  htmlType="submit"
+                  className="button"
+                  onClick={createPasswordModal}
+                >
+                  I&apos;ll do later
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
       </Form>
     </Wrapper>

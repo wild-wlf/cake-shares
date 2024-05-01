@@ -2,16 +2,22 @@ import React from "react";
 import LoginSignupModal from "../loginSignupModal";
 
 const LoginAsBuyerModal = ({
+  handleRegisterModal,
   handleLoginModal,
   handleSellerLoginModal,
+  handleSellerRegisterModal,
   type,
 }) => {
   return (
-    <LoginSignupModal
-      handleBuyerModal={handleLoginModal}
-      handleSellerLoginModal={handleSellerLoginModal}
-      type={type}
-    />
+    <div>
+      <LoginSignupModal
+        handleRegisterModal={handleRegisterModal}
+        handleBuyerModal={handleLoginModal}
+        handleSellerLoginModal={handleSellerLoginModal}
+        handleSellerRegisterModal={handleSellerRegisterModal}
+        type={type}
+      />
+    </div>
   );
 };
 

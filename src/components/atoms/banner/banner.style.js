@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 export const BannerWrapper = styled.div`
-  width: 100%;
+  /* width: 100%; */
   padding-top: 14px;
   .banner2 {
     display: none;
   }
   @media only screen and (max-width: 650px) {
     padding: 0;
+    margin: 0 -15px;
     .banner {
       display: none;
     }

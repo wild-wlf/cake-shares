@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Notifications from "../components/molecules/Notifications";
 import { NavLinks, StyledTopBar } from "./TopBar.styles";
 import logo from "../_assets/logo.svg";
@@ -36,14 +36,22 @@ const TopBar = () => {
   const [buyermodal, setBuyerModal] = useState(false);
   const [buyerloginmodal, setBuyerLoginModal] = useState(false);
   const [sellerloginmodal, setSellerLoginModal] = useState(false);
+  const [sellerregistermodal, setSellerRegisterModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
+  const [sellerpasswordModal, setSellerPasswordModal] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [notifications, setNotifications] = useState(false);
 
   const [completeRegistrationModal, setCompleteRegistrationModal] =
     useState(false);
-  const router = usePathname();
+  const ProfileRef = useRef(null);
 
+  const router = usePathname();
+  const handleClickOutsideProfile = (event) => {
+    if (ProfileRef.current && !ProfileRef.current.contains(event.target)) {
+      setOpenProfile(false);
+    }
+  };
   const handleRegisterModal = () => {
     setRegisterModal(false);
     setBuyerModal(true);
@@ -73,6 +81,16 @@ const TopBar = () => {
     setLoginModal(false);
     setBuyerLoginModal(true);
   };
+  const handleSellerLoginModal = () => {
+    setRegisterModal(false);
+    setSellerRegisterModal(true);
+  };
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutsideProfile);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideProfile);
+    };
+  }, []);
   useEffect(() => {
     if (sideNav) {
       document.body.classList.add("active-nav");
@@ -83,6 +101,7 @@ const TopBar = () => {
 
   const { kycLevel, setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } =
     useContext(KycContext);
+
   return (
     <>
       {/* KYC MODAL */}
@@ -120,7 +139,7 @@ const TopBar = () => {
       >
         <RegisterModal
           handleRegisterModal={handleRegisterModal}
-          handleSellerModal={handleSellerModal}
+          handleSellerModal={handleSellerLoginModal}
           type="Register"
           description="Select Account Type"
         />
@@ -152,6 +171,33 @@ const TopBar = () => {
       >
         <CompleteRegistrationModal handleRegistration={handleRegistration} />
       </CenterModal>
+      <CenterModal
+        open={sellerregistermodal}
+        setOpen={setSellerRegisterModal}
+        title="Register As a Seller"
+        width="666"
+      >
+        <LoginAsBuyerModal
+          handleSellerRegisterModal={() => {
+            setSellerRegisterModal(false);
+            setSellerPasswordModal(true);
+          }}
+          type="Register As Seller"
+        />
+      </CenterModal>
+      <CenterModal
+        open={sellerpasswordModal}
+        setOpen={setSellerPasswordModal}
+        title="Register As a Seller"
+        width="666"
+      >
+        <CreatePasswordModal
+          type="Register As Seller"
+          handleSellerPasswordModal={() => {
+            setSellerPasswordModal(false);
+          }}
+        />
+      </CenterModal>
       {/* Login Modals */}
       <CenterModal
         open={loginmodal}
@@ -181,6 +227,10 @@ const TopBar = () => {
         width="666"
       >
         <LoginAsBuyerModal
+          handleRegisterModal={() => {
+            setRegisterModal(true);
+            setSellerLoginModal(false);
+          }}
           handleSellerLoginModal={() => setSellerLoginModal(false)}
           type="Seller"
         />
@@ -258,7 +308,7 @@ const TopBar = () => {
                 <FaWallet />
                 <span>My Wallet</span>
               </div>
-              <div className="buttonWrapper">
+              <div className="buttonWrapper" ref={ProfileRef}>
                 <Button
                   rounded
                   sm

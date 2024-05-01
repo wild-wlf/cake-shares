@@ -1,9 +1,9 @@
-import TopBar from "../../common/TopBar";
 import React from "react";
 import Categories from "../../components/atoms/categories";
 import ProductDetail from "../../components/atoms/productDetail";
 import ProductDescription from "../../components/atoms/productDescription";
 import Amenities from "../../components/atoms/amenities";
+import { images } from "..";
 
 const ProductDetails = ({ userData }) => {
   return (
@@ -11,7 +11,7 @@ const ProductDetails = ({ userData }) => {
       <ProductDetail />
       <ProductDescription />
       <Amenities />
-      <Categories />
+      <Categories arr={images} />
     </>
   );
 };

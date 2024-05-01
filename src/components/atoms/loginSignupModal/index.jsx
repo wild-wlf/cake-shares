@@ -9,8 +9,10 @@ import Image from "next/image";
 import Select from "../Select";
 
 const LoginSignupModal = ({
+  handleRegisterModal,
   handleBuyerModal,
   handleSellerLoginModal,
+  handleSellerRegisterModal,
   type,
 }) => {
   const [form] = useForm();
@@ -22,7 +24,7 @@ const LoginSignupModal = ({
         </span>
       </div>
       <Form form={form}>
-        {type === "Seller" ? (
+        {type === "Seller" || "Register As Seller" ? (
           <div>
             <Form.Item
               type="text"
@@ -37,7 +39,12 @@ const LoginSignupModal = ({
                 },
               ]}
             >
-              <Select options={["Individual Seller", "Company Seller"]} />
+              <Select
+                options={[
+                  { label: "Individual Seller", value: "indiviual_seller" },
+                  { label: "Company Seller", value: "company_seller" },
+                ]}
+              />
             </Form.Item>
           </div>
         ) : (
@@ -127,13 +134,25 @@ const LoginSignupModal = ({
             btntype="primary"
             width="170"
             onClick={
-              type === "Seller" ? handleSellerLoginModal : handleBuyerModal
+              type === "Seller"
+                ? handleSellerLoginModal
+                : type === "Register As Seller"
+                ? handleSellerRegisterModal
+                : handleBuyerModal
             }
             // htmlType="submit"
           >
             Continue
           </Button>
         </div>
+        {type === "Seller" ? (
+          <div className="register">
+            Don&apos;t have an account?{" "}
+            <span onClick={handleRegisterModal}> Register</span>
+          </div>
+        ) : (
+          <></>
+        )}
       </Form>
     </Wrapper>
   );
