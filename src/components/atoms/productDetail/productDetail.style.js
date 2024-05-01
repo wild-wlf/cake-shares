@@ -109,8 +109,13 @@ export const ProductDetailWrapper = styled.div`
     }
   }
   .amountdiv {
+    padding: 0;
     display: flex;
+    justify-content: space-between;
     gap: 32px;
+    @media screen and (min-width: 768px) {
+      padding: 0 25px;
+    }
   }
 
   @media only screen and (max-width: 1200px) {

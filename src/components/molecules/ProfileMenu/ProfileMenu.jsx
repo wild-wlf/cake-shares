@@ -9,10 +9,10 @@ import termsIcon from "../../../_assets/termsIcon.png";
 import Image from "next/image";
 import Link from "next/link";
 
-const ProfileMenu = ({ openProfile }) => {
+const ProfileMenu = ({ openProfile, ...rest }) => {
   return (
     <>
-      <ProfileSec show={openProfile}>
+      <ProfileSec $show={openProfile} {...rest}>
         <div className="top">
           <div className="Dp">
             <Image

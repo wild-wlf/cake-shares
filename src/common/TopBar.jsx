@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Notifications from "../components/molecules/Notifications";
 import { NavLinks, StyledTopBar } from "./TopBar.styles";
 import logo from "../_assets/logo.svg";
@@ -44,8 +44,14 @@ const TopBar = () => {
 
   const [completeRegistrationModal, setCompleteRegistrationModal] =
     useState(false);
-  const router = usePathname();
+  const ProfileRef = useRef(null);
 
+  const router = usePathname();
+  const handleClickOutsideProfile = (event) => {
+    if (ProfileRef.current && !ProfileRef.current.contains(event.target)) {
+      setOpenProfile(false);
+    }
+  };
   const handleRegisterModal = () => {
     setRegisterModal(false);
     setBuyerModal(true);
@@ -80,6 +86,12 @@ const TopBar = () => {
     setSellerRegisterModal(true);
   };
   useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutsideProfile);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideProfile);
+    };
+  }, []);
+  useEffect(() => {
     if (sideNav) {
       document.body.classList.add("active-nav");
     } else {
@@ -89,6 +101,7 @@ const TopBar = () => {
 
   const { kycLevel, setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } =
     useContext(KycContext);
+
   return (
     <>
       {/* KYC MODAL */}
@@ -295,7 +308,7 @@ const TopBar = () => {
                 <FaWallet />
                 <span>My Wallet</span>
               </div>
-              <div className="buttonWrapper">
+              <div className="buttonWrapper" ref={ProfileRef}>
                 <Button
                   rounded
                   sm

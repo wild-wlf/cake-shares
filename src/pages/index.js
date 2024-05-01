@@ -6,33 +6,33 @@ import Property from "../_assets/property.png";
 import Property2 from "../_assets/property2.png";
 import Property3 from "../_assets/property3.png";
 
+export const images = [
+  {
+    image: Property,
+    id: "1",
+  },
+  {
+    id: "2",
+    image: Property2,
+  },
+  {
+    image: Property3,
+    id: "3",
+  },
+  {
+    image: Property,
+    id: "4",
+  },
+  {
+    image: Property2,
+    id: "5",
+  },
+  {
+    image: Property3,
+    id: "6",
+  },
+];
 const index = () => {
-  const images = [
-    {
-      image: Property,
-      id: "1",
-    },
-    {
-      id: "2",
-      image: Property2,
-    },
-    {
-      image: Property3,
-      id: "3",
-    },
-    {
-      image: Property,
-      id: "4",
-    },
-    {
-      image: Property2,
-      id: "5",
-    },
-    {
-      image: Property3,
-      id: "6",
-    },
-  ];
   return (
     <>
       <Banner />
