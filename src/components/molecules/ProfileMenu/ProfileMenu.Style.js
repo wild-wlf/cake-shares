@@ -13,7 +13,7 @@ export const ProfileSec = styled.div`
   opacity: ${({ show }) => (show ? "1" : "0")};
   transform: ${({ show }) => (show ? "translateY(5px)" : "translateY(-5px)")};
   top: 70px;
-  right: 50px;
+  right: 0;
   z-index: 999;
   overflow: hidden;
   .Profile-Picture {
