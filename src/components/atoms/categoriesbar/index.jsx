@@ -14,10 +14,11 @@ import { AiFillDollarCircle } from "react-icons/ai";
 import { CiSearch } from "react-icons/ci";
 import CenterModal from "../Modal/CenterModal";
 import AdvanceSearch from "../advanceSearch";
+import { BiSolidCategory } from "react-icons/bi";
 
 const CategoriesBar = () => {
   const [modal, setModal] = useState(false);
-  const [Tab, setTab] = useState(1);
+  const [Tab, setTab] = useState(0);
 
   var settings = {
     dots: false,
@@ -30,7 +31,7 @@ const CategoriesBar = () => {
     responsive: [
       {
         breakpoint: 1250,
-        settings: { slidesToShow: 6.5 },
+        settings: { slidesToShow: 6 },
       },
       {
         breakpoint: 1100,
@@ -56,7 +57,7 @@ const CategoriesBar = () => {
   };
   const categoryData = [
     {
-      image: <FaCarAlt />,
+      image: <BiSolidCategory />,
       text: "All",
     },
     {
@@ -107,62 +108,13 @@ const CategoriesBar = () => {
                     rounded
                     sm
                     btntype="white"
-                    className={Tab === index ? "active" : "button"}
+                    className={Tab === index ? "button active" : "button"}
                     onClick={() => setTab(index)}>
-                    {/* <Image src={item.image} alt="all" /> */}
                     {item.image}
                     {item.text}
                   </Button>
                 </div>
               ))}
-              {/* <div>
-                <Button rounded sm btntype="new" className="button">
-                  <Image src={all} alt="all" />
-                  All
-                </Button>
-              </div>
-              <div>
-                <Button rounded sm btntype="white" className="button">
-                  <FaFire />
-                  Popular
-                </Button>
-              </div>
-              <div>
-                <Button rounded sm btntype="white" className="button">
-                  <FaHouseChimney />
-                  Properties
-                </Button>
-              </div>
-              <div>
-                <Button rounded sm btntype="white" className="button">
-                  <TbBuildingFactory />
-                  Ventures
-                </Button>
-              </div>
-              <div>
-                <Button rounded sm btntype="white" className="button">
-                  <PiStorefrontFill />
-                  Bazaar
-                </Button>
-              </div>
-              <div>
-                <Button rounded sm btntype="white" className="button">
-                  <FaCarAlt />
-                  Vehicles
-                </Button>
-              </div>
-              <div>
-                <Button rounded sm btntype="white" className="button lg">
-                  <HiHeart />
-                  My Favorites
-                </Button>
-              </div>
-              <div>
-                <Button rounded sm btntype="white" className="button lg">
-                  <AiFillDollarCircle />
-                  High Funding
-                </Button>
-              </div> */}
             </Slider>
           </div>
           <div className="search" onClick={() => setModal(true)}>
