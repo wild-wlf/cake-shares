@@ -49,6 +49,9 @@ export const StyledButton = styled.button`
     if (btntype === "dropdown") {
       return "#313131";
     }
+    if (btntype === "danger") {
+      return "var(--danger)";
+    }
     return "rgba(49, 49, 49, 1)";
   }};
 
@@ -71,6 +74,9 @@ export const StyledButton = styled.button`
 
     if (btntype === "white") {
       return "var(--white)";
+    }
+    if (btntype === "danger") {
+      return "rgba(215, 65, 32, 0.1)";
     }
     // if (btntype === "danger") {
     //   return "var(--danger-dark)";
