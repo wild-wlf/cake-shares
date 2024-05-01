@@ -5,7 +5,9 @@ import { IoPerson } from "react-icons/io5";
 import { MdModeEdit, MdOutlineDeleteForever } from "react-icons/md";
 import ModalContainer from "@/components/atoms/ModalContainer";
 import EditProfile from "../EditBank/EditProfile";
-
+import DeleteInheritance from "../EditBank/DeleteInheritance";
+import notaccess from "../../../../../_assets/notaccess.svg";
+import Image from "next/image";
 const Inheritance = () => {
   const inheritanceData = [
     {
@@ -63,10 +65,23 @@ const Inheritance = () => {
                   )}
                   content={({ onClose }) => <EditProfile onClose={onClose} />}
                 />
-
-                <div className="delete">
-                  <MdOutlineDeleteForever />
-                </div>
+                <ModalContainer
+                  lg
+                  width={543}
+                  title={
+                    <>
+                      <Image src={notaccess} alt="notaccess" />
+                    </>
+                  }
+                  btnComponent={({ onClick }) => (
+                    <div className="delete" onClick={onClick}>
+                      <MdOutlineDeleteForever />
+                    </div>
+                  )}
+                  content={({ onClose }) => (
+                    <DeleteInheritance onClose={onClose} />
+                  )}
+                />
               </div>
               <span className="text">{elem.country}</span>
             </div>

@@ -131,7 +131,7 @@ const LoginSignupModal = ({
             }
             // htmlType="submit"
           >
-            Continueddd
+            Continue
           </Button>
         </div>
       </Form>
