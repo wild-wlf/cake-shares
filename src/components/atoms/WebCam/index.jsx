@@ -66,7 +66,7 @@ const WebCam = ({ handelKycLevel }) => {
             <Button
               rounded
               sm
-              btntype="green"
+              btntype="primary"
               width="214"
               onClick={capturePhoto}
             >
@@ -86,7 +86,7 @@ const WebCam = ({ handelKycLevel }) => {
               className={"undoButton"}
               rounded
               sm
-              btntype="green"
+              btntype="primary"
               onClick={() => setUrl(null)}
             >
               <FaRedoAlt />
@@ -95,7 +95,13 @@ const WebCam = ({ handelKycLevel }) => {
         )}
       </WebCamHolder>
       {url && (
-        <Button rounded sm btntype="green" width="214" onClick={handelKycLevel}>
+        <Button
+          rounded
+          sm
+          btntype="primary"
+          width="214"
+          onClick={handelKycLevel}
+        >
           Save
           {/* <Tooltip title="Recapture Selfie">
               <i className="icon-refresh" />
@@ -106,6 +112,5 @@ const WebCam = ({ handelKycLevel }) => {
     </StyledFormGroup>
   );
 };
-
 
 export default WebCam;

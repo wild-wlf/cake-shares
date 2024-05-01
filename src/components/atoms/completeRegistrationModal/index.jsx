@@ -97,7 +97,6 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
               <Form.Item
                 label="Country"
                 name="select"
-                // placeholder="Your Email or Username"
                 rules={[
                   { required: true },
                   {
@@ -290,7 +289,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
         <Button
           rounded
           md
-          btntype="green"
+          btntype="primary"
           width="170"
           onClick={handleRegistration}
           htmlType="submit"

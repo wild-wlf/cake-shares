@@ -6,10 +6,14 @@ import Button from "../Button";
 import { FcGoogle } from "react-icons/fc";
 import Facebook from "../../../_assets/facebook.svg";
 import Image from "next/image";
+import Select from "../Select";
 
-const LoginSignupModal = ({ handleBuyerModal }) => {
+const LoginSignupModal = ({
+  handleBuyerModal,
+  handleSellerLoginModal,
+  type,
+}) => {
   const [form] = useForm();
-
   return (
     <Wrapper>
       <div>
@@ -18,6 +22,27 @@ const LoginSignupModal = ({ handleBuyerModal }) => {
         </span>
       </div>
       <Form form={form}>
+        {type === "Seller" ? (
+          <div>
+            <Form.Item
+              type="text"
+              label="Seller Type"
+              name="name"
+              sm
+              rounded
+              placeholder="Select Type"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Select options={["Individual Seller", "Company Seller"]} />
+            </Form.Item>
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="input-div">
           <Form.Item
             type="text"
@@ -28,8 +53,10 @@ const LoginSignupModal = ({ handleBuyerModal }) => {
             placeholder="Alex123"
             rules={[
               {
-                pattern: /^.{0,40}$/,
                 required: true,
+              },
+              {
+                pattern: /^.{0,40}$/,
                 message: "Maximum Character Length is 256",
               },
             ]}
@@ -45,8 +72,10 @@ const LoginSignupModal = ({ handleBuyerModal }) => {
             placeholder="alex123@gmail.com"
             rules={[
               {
-                pattern: /^.{0,256}$/,
                 required: true,
+              },
+              {
+                pattern: /^.{0,256}$/,
                 message: "Maximum Character Length is 256",
               },
             ]}
@@ -95,10 +124,12 @@ const LoginSignupModal = ({ handleBuyerModal }) => {
           <Button
             rounded
             md
-            btntype="green"
+            btntype="primary"
             width="170"
-            onClick={handleBuyerModal}
-            htmlType="submit"
+            onClick={
+              type === "Seller" ? handleSellerLoginModal : handleBuyerModal
+            }
+            // htmlType="submit"
           >
             Continue
           </Button>

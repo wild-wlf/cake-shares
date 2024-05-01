@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const SearchFiltersWrapper = styled.div`
   padding: 26px 0 40px 0;
   display: flex;
   justify-content: space-between;
@@ -54,9 +54,9 @@ export const Wrapper = styled.div`
   }
 
   @media only screen and (max-width: 768px) {
-    padding: 30px 30px 40px 30px;
+    padding: 30px 0px 30px 0px;
   }
   @media only screen and (max-width: 576px) {
-    padding: 30px 20px 40px 20px;
+    padding: 30px 0px 20px 0px;
   }
 `;

@@ -81,7 +81,7 @@ const EditBank = () => {
         </Form.Item>
       </div>
 
-      <Button rounded md btntype="green" width="170" htmlType="submit">
+      <Button rounded md btntype="primary" width="170" htmlType="submit">
         Save Changes
       </Button>
     </StyledEditForm>

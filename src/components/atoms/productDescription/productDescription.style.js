@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-  padding: 33px 50px 30px 50px;
+export const ProductDescriptionWrapper = styled.div`
+  padding: 33px 0px 30px 0px;
   .descwrapper {
     padding-top: 36px;
     display: flex;
@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
     h4 {
       font-size: var(--h2-font-size);
       font-weight: 500;
+      padding-bottom: 16px;
     }
     span {
       font-size: var(--h4-font-size);
@@ -103,7 +104,7 @@ export const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: 768px) {
-    padding: 30px 30px 30px 30px;
+    padding: 30px 0px;
     .descwrapper {
       flex-direction: column;
       align-items: flex-start;
@@ -121,7 +122,7 @@ export const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: 576px) {
-    padding: 00px 20px 26px 20px;
+    padding: 00px 0px;
     .descwrapper {
       gap: 26px;
     }

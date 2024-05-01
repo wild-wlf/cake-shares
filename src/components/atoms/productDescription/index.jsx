@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Wrapper } from "./productDescription.style";
+import { ProductDescriptionWrapper, Wrapper } from "./productDescription.style";
 import Profilepic from "../../../_assets/userProfile.png";
 import Image from "next/image";
 import { TbExternalLink } from "react-icons/tb";
@@ -19,12 +19,14 @@ const ProductDescription = () => {
       <CenterModal
         open={modal}
         setOpen={setModal}
-        title={<Image src={NotAccessPic} className="notaccesspic" alt="notaccess"/>}
+        title={
+          <Image src={NotAccessPic} className="notaccesspic" alt="notaccess" />
+        }
         width="543"
       >
         <NotAccessModal handleCloseModal={handleCloseModal} />
       </CenterModal>
-      <Wrapper>
+      <ProductDescriptionWrapper>
         <div className="descwrapper">
           <div className="description">
             <h4>Description</h4>
@@ -40,7 +42,7 @@ const ProductDescription = () => {
           </div>
           <div className="seller">
             <div className="profilepic">
-              <Image src={Profilepic} alt="profilepic"/>
+              <Image src={Profilepic} alt="profilepic" />
             </div>
             <div className="profiledesc">
               <h3>Logan Paulson</h3>
@@ -57,7 +59,7 @@ const ProductDescription = () => {
             </div>
           </div>
         </div>
-      </Wrapper>
+      </ProductDescriptionWrapper>
     </>
   );
 };

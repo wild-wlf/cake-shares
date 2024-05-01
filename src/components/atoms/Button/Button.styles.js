@@ -33,10 +33,7 @@ export const StyledButton = styled.button`
     if (btntype === "primary") {
       return "var(--white)";
     }
-    if (btntype === "green") {
-      return "var(--white)";
-    }
-    if (btntype === "new") {
+    if (btntype === "light-green") {
       return "rgba(64,143,140,1)";
     }
     if (btntype === "blue") {
@@ -52,29 +49,17 @@ export const StyledButton = styled.button`
     if (btntype === "dropdown") {
       return "#313131";
     }
-    if (btntype === "gray") {
-      return "var(--primary)";
-    }
-    if (btntype === "light-danger") {
-      return "#E90000";
-    }
-    if (btntype === "info") {
-      return "var(--blue)";
-    }
     return "rgba(49, 49, 49, 1)";
   }};
 
   background: ${({ btntype }) => {
-    if (btntype === "primary") {
-      return "var(--primary)";
-    }
     if (btntype === "dropdown") {
       return "var(--white)";
     }
-    if (btntype === "green") {
+    if (btntype === "primary") {
       return "rgba(64, 143, 140, 1)";
     }
-    if (btntype === "new") {
+    if (btntype === "light-green") {
       return "rgba(64,143,140,0.1)";
     }
     if (btntype === "blue") {
@@ -87,24 +72,9 @@ export const StyledButton = styled.button`
     if (btntype === "white") {
       return "var(--white)";
     }
-    if (btntype === "danger") {
-      return "var(--danger-dark)";
-    }
-    if (btntype === "secondary") {
-      return "var(--purple)";
-    }
-    if (btntype === "gray") {
-      return "var(--gray-2)";
-    }
-    if (btntype === "light-danger") {
-      return "var(--danger-light)";
-    }
-    if (btntype === "blue-grt") {
-      return "var(--blue-grt)";
-    }
-    if (btntype === "info") {
-      return "var(--light-blue)";
-    }
+    // if (btntype === "danger") {
+    //   return "var(--danger-dark)";
+    // }
     return "var(--white)";
   }};
   border: ${({ btntype }) => {

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Wrapper } from "./productDetail.style";
+import { ProductDetailWrapper } from "./productDetail.style";
 import Button from "../Button";
 import { IoIosArrowBack } from "react-icons/io";
-import Link from "next/link";
 import { RiFilePaperFill } from "react-icons/ri";
 import Image from "next/image";
 import property from "../../../_assets/property.png";
@@ -24,12 +23,12 @@ const ProductDetail = () => {
       <CenterModal
         open={modal}
         setOpen={setModal}
-        title={<Image src={NotAccessPic} alt="notaccess"/>}
+        title={<Image src={NotAccessPic} alt="notaccess" />}
         width="543"
       >
         <NotAccessModal handleCloseModal={handleCloseModal} />
       </CenterModal>
-      <Wrapper>
+      <ProductDetailWrapper>
         <div className="btnwrapper">
           <Button
             rounded
@@ -46,7 +45,7 @@ const ProductDetail = () => {
           <Button
             rounded
             sm
-            btntype="green"
+            btntype="primary"
             className="button"
             onClick={() => setModal(true)}
           >
@@ -134,7 +133,7 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
-      </Wrapper>
+      </ProductDetailWrapper>
     </>
   );
 };

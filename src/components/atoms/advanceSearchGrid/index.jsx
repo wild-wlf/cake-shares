@@ -1,5 +1,5 @@
 import React from "react";
-import { Wrapper } from "./advanceSearchGrid.style";
+import { SearchGridWrapper } from "./advanceSearchGrid.style";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Property from "../../../_assets/property.png";
 import Property2 from "../../../_assets/property2.png";
@@ -38,7 +38,7 @@ const AdvanceSearchGrid = () => {
     },
   ];
   return (
-    <Wrapper>
+    <SearchGridWrapper>
       {imagesArray.map((data, index) => (
         <div className="CardWrapper" key={index}>
           <div className="card-div">
@@ -104,7 +104,7 @@ const AdvanceSearchGrid = () => {
             </div>
           </div>
           <div className="btnWrapper">
-            <Button rounded sm btntype="green" className="button">
+            <Button rounded sm btntype="primary" className="button">
               <RiFilePaperFill />
               Initiate Investment
             </Button>
@@ -117,7 +117,7 @@ const AdvanceSearchGrid = () => {
           </div>
         </div>
       ))}
-    </Wrapper>
+    </SearchGridWrapper>
   );
 };
 

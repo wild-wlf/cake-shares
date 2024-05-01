@@ -90,7 +90,4 @@ export const CategoriesBarWrapper = styled.div`
       width: 100%;
     }
   }
-  /* @media only screen and (max-width: 576px) {
-    padding: 30px 0;
-  } */
 `;

@@ -68,7 +68,7 @@ const CreatePasswordModal = ({
             <Button
               rounded
               md
-              btntype="green"
+              btntype="primary"
               width="170"
               htmlType="submit"
               className="button"

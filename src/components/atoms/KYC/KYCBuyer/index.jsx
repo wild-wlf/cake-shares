@@ -25,7 +25,7 @@ const KycBuyerLevelOne = ({ setOpen, setKycLevel }) => {
           id="back"
         />
       </div>
-      <Button rounded md btntype="green" width="214" onClick={handelKycLevel}>
+      <Button rounded md btntype="primary" width="214" onClick={handelKycLevel}>
         Complete Verification
       </Button>
     </StyledKycBuyer>

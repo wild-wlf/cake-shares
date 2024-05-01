@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-  padding: 30px 50px 30px 50px;
+export const AmentitiesWrapper = styled.div`
+  padding: 30px 0px 30px 0px;
 
   span {
     font-size: var(--h2-font-size);
@@ -40,10 +40,10 @@ export const Wrapper = styled.div`
     }
   }
   @media only screen and (max-width: 768px) {
-    padding: 15px 30px 30px 30px;
+    padding: 26px 0px 30px 0px;
   }
   @media only screen and (max-width: 576px) {
-    padding: 0px 20px 26px 20px;
+    padding: 26px 0px 26px 0px;
     .amenities {
       width: 100%;
       gap: 16px;

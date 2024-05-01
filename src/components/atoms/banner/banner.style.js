@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const BannerWrapper = styled.div`
   width: 100%;
+  padding-top: 14px;
   .banner2 {
     display: none;
   }
@@ -17,5 +18,11 @@ export const BannerWrapper = styled.div`
   }
   *:focus {
     outline: none;
+  }
+  @media only screen and (max-width: 768px) {
+    padding-top: 0px;
+  }
+  img {
+    width: 100%;
   }
 `;

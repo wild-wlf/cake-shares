@@ -111,7 +111,7 @@ const UserDetail = () => {
             width={673}
             title="Edit Bank Info"
             btnComponent={({ onClick }) => (
-              <Button type="green" rounded sm onClick={onClick}>
+              <Button btntype="primary" rounded sm onClick={onClick}>
                 <MdModeEdit />
                 Edit Info
               </Button>
@@ -137,7 +137,7 @@ const UserDetail = () => {
       <div className="colWrapper">
         <div className="colHeader">
           <strong className="colTitle">Personal Information:</strong>
-          <Button type="green" rounded sm>
+          <Button type="primary" rounded sm>
             <MdModeEdit />
             Edit Info
           </Button>

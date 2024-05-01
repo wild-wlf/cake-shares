@@ -52,6 +52,10 @@ export const CategoriesWrapper = styled.div`
       background-image: url(${(props) => props.image.src});
       right: 0;
     }
+    .slick-arrow.slick-next {
+      background-image: url(${(props) => props.image.src});
+      right: 0;
+    }
     .slick-arrow.slick-prev {
       background-image: url(${(props) => props.image.src});
       left: auto;

@@ -22,7 +22,7 @@ const NotAccess = ({ handleCloseModal }) => {
         >
           Cancel
         </Button>
-        <Button rounded md btntype="green" width="170">
+        <Button rounded md btntype="primary" width="170">
           Register Account
         </Button>
       </div>
