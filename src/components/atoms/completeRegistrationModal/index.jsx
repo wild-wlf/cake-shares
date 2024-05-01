@@ -7,6 +7,7 @@ import Select from "../Select";
 import Image from "next/image";
 import { countries } from "@/components/Constant";
 import SingleValueSlider from "../singleValueSlider";
+import UploadImg from "@/components/molecules/UploadImg";
 const CompleteRegistrationModal = ({ handleRegistration }) => {
   const [arr, setArr] = useState(countries);
   const [form] = useForm();
@@ -40,6 +41,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
           <h5>Personal Info:</h5>
 
           <div>
+            <UploadImg />
             <div className="input-div">
               <Form.Item
                 type="text"
