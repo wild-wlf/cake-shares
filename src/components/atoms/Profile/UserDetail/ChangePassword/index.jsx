@@ -64,7 +64,7 @@ const ChangePassword = () => {
             <Field />
           </Form.Item>
         </div>
-        <Button rounded md btntype="green" width="170" htmlType="submit">
+        <Button rounded md btntype="primary" width="170" htmlType="submit">
           Change Password
         </Button>
       </Form>

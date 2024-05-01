@@ -111,7 +111,7 @@ const UserDetail = () => {
             width={673}
             title="Edit Bank Info"
             btnComponent={({ onClick }) => (
-              <Button type="green" rounded sm onClick={onClick}>
+              <Button btntype="primary" rounded sm onClick={onClick}>
                 <MdModeEdit />
                 Edit Info
               </Button>

@@ -22,4 +22,7 @@ export const BannerWrapper = styled.div`
   @media only screen and (max-width: 768px) {
     padding-top: 0px;
   }
+  img {
+    width: 100%;
+  }
 `;

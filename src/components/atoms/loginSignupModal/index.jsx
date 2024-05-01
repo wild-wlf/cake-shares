@@ -53,8 +53,10 @@ const LoginSignupModal = ({
             placeholder="Alex123"
             rules={[
               {
-                pattern: /^.{0,40}$/,
                 required: true,
+              },
+              {
+                pattern: /^.{0,40}$/,
                 message: "Maximum Character Length is 256",
               },
             ]}
@@ -70,8 +72,10 @@ const LoginSignupModal = ({
             placeholder="alex123@gmail.com"
             rules={[
               {
-                pattern: /^.{0,256}$/,
                 required: true,
+              },
+              {
+                pattern: /^.{0,256}$/,
                 message: "Maximum Character Length is 256",
               },
             ]}
@@ -125,9 +129,9 @@ const LoginSignupModal = ({
             onClick={
               type === "Seller" ? handleSellerLoginModal : handleBuyerModal
             }
-            htmlType="submit"
+            // htmlType="submit"
           >
-            Continue
+            Continueddd
           </Button>
         </div>
       </Form>

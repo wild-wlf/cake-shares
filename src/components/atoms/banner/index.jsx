@@ -19,7 +19,7 @@ const Banner = () => {
     responsive: [],
   };
   return (
-    <BannerWrapper image={banner}>
+    <BannerWrapper>
       <Slider {...settings}>
         <div>
           <Image src={banner} className="banner" alt="banner" />
