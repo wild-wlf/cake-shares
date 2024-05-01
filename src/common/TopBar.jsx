@@ -36,7 +36,9 @@ const TopBar = () => {
   const [buyermodal, setBuyerModal] = useState(false);
   const [buyerloginmodal, setBuyerLoginModal] = useState(false);
   const [sellerloginmodal, setSellerLoginModal] = useState(false);
+  const [sellerregistermodal, setSellerRegisterModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
+  const [sellerpasswordModal, setSellerPasswordModal] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [notifications, setNotifications] = useState(false);
 
@@ -72,6 +74,10 @@ const TopBar = () => {
   const handleLoginModal = () => {
     setLoginModal(false);
     setBuyerLoginModal(true);
+  };
+  const handleSellerLoginModal = () => {
+    setRegisterModal(false);
+    setSellerRegisterModal(true);
   };
   useEffect(() => {
     if (sideNav) {
@@ -120,7 +126,7 @@ const TopBar = () => {
       >
         <RegisterModal
           handleRegisterModal={handleRegisterModal}
-          handleSellerModal={handleSellerModal}
+          handleSellerModal={handleSellerLoginModal}
           type="Register"
           description="Select Account Type"
         />
@@ -152,6 +158,33 @@ const TopBar = () => {
       >
         <CompleteRegistrationModal handleRegistration={handleRegistration} />
       </CenterModal>
+      <CenterModal
+        open={sellerregistermodal}
+        setOpen={setSellerRegisterModal}
+        title="Register As a Seller"
+        width="666"
+      >
+        <LoginAsBuyerModal
+          handleSellerRegisterModal={() => {
+            setSellerRegisterModal(false);
+            setSellerPasswordModal(true);
+          }}
+          type="Register As Seller"
+        />
+      </CenterModal>
+      <CenterModal
+        open={sellerpasswordModal}
+        setOpen={setSellerPasswordModal}
+        title="Register As a Seller"
+        width="666"
+      >
+        <CreatePasswordModal
+          type="Register As Seller"
+          handleSellerPasswordModal={() => {
+            setSellerPasswordModal(false);
+          }}
+        />
+      </CenterModal>
       {/* Login Modals */}
       <CenterModal
         open={loginmodal}
@@ -181,6 +214,10 @@ const TopBar = () => {
         width="666"
       >
         <LoginAsBuyerModal
+          handleRegisterModal={() => {
+            setRegisterModal(true);
+            setSellerLoginModal(false);
+          }}
           handleSellerLoginModal={() => setSellerLoginModal(false)}
           type="Seller"
         />

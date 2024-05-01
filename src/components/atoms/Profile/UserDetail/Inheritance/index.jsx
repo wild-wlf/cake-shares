@@ -11,6 +11,8 @@ import confirmIcon from "../../../../../_assets/confirmIcon.svg";
 import Image from "next/image";
 import CenterModal from "@/components/atoms/Modal/CenterModal";
 import ConfirmationModal from "../EditBank/ConfirmationModal";
+import AddInheritance from "../EditBank/AddInheritance";
+import EditInheritance from "../EditBank/EditInheritance";
 const Inheritance = () => {
   const inheritanceData = [
     {
@@ -53,10 +55,18 @@ const Inheritance = () => {
       <StyledInheritance>
         <div className="head">
           <span className="heading">My Inheritance</span>
-          <div className="add-new">
-            <IoIosAdd />
-            <span>Add New</span>
-          </div>
+          <ModalContainer
+            lg
+            width={668}
+            title="Add Inheritance"
+            btnComponent={({ onClick }) => (
+              <div className="add-new" onClick={onClick}>
+                <IoIosAdd />
+                <span>Add New</span>
+              </div>
+            )}
+            content={({ onClose }) => <AddInheritance />}
+          />
         </div>
         <div className="col-holder">
           {inheritanceData.map((elem, ind) => (
@@ -75,13 +85,15 @@ const Inheritance = () => {
                   <ModalContainer
                     lg
                     width={673}
-                    title="Edit Profile"
+                    title="Edit  Inheritance"
                     btnComponent={({ onClick }) => (
                       <div className="edit" onClick={onClick}>
                         <MdModeEdit />
                       </div>
                     )}
-                    content={({ onClose }) => <EditProfile onClose={onClose} />}
+                    content={({ onClose }) => (
+                      <EditInheritance onClose={onClose} />
+                    )}
                   />
                   <ModalContainer
                     lg
