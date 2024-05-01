@@ -32,12 +32,18 @@ export const StyledInheritance = styled.div`
 
   .col-holder {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 30px;
+    @media screen and (min-width: 576px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
   .col {
     width: 100%;
-    max-width: 330px;
+    max-width: 100%;
+    @media screen and (min-width: 576px) {
+      max-width: 330px;
+    }
     @media screen and (min-width: 1439px) {
       display: flex;
       align-items: center;

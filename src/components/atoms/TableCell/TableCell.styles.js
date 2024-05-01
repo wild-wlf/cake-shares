@@ -48,12 +48,13 @@ export const Td = styled.td`
     responsive &&
     css`
       display: flex;
+      align-items: center;
       justify-content: space-between;
       @media (max-width: 991px) {
         padding: 10px 15px;
         &:last-child {
-          height: 0;
-          padding: 0;
+          /* height: 0;
+          padding: 0; */
         }
         &:nth-child(odd) {
           background: var(--gray-3);

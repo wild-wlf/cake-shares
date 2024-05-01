@@ -3,30 +3,51 @@ import bgImage from "../../../../_assets/banerImage.jpg";
 
 export const StyledProfileBanner = styled.div`
   position: relative;
-  min-height: 306px;
-  background-image: ${({ $image }) =>
-    $image === null ? `url(${bgImage.src})` : `url(${$image})`};
-  background-size: cover;
+  min-height: 550px;
+  background: linear-gradient(180deg, #000 38.78%, rgba(0, 0, 0, 0) 78.11%),
+    ${({ $image }) =>
+        $image === null ? `url(${bgImage.src})` : `url(${$image})`}
+      lightgray 50%;
+
+  background-size: 130% 100%;
   background-position: center;
   background-repeat: no-repeat;
-  margin: 30px -50px 15px -50px;
+  margin: -95px -15px 15px -15px;
   padding: 0 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   font-family: "Oleo Script";
   color: var(--white);
+  border-bottom-left-radius: 560px 250px;
+  border-bottom-right-radius: 560px 250px;
+  @media screen and (min-width: 576px) {
+    background-image: ${({ $image }) =>
+      $image === null ? `url(${bgImage.src})` : `url(${$image})`};
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin: 30px -15px 15px -15px;
+    min-height: 306px;
+  }
+  @media screen and (min-width: 1300px) {
+    margin: 30px -50px 15px -50px;
+  }
   .title {
-    max-width: 334px;
-    margin: 0 auto;
-    font-size: 42px;
+    display: block;
+    max-width: 216px;
+    margin: 0 auto 15px;
+    font-size: 26px;
+    line-height: 30px;
     font-weight: 700;
-    line-height: 58.09px;
     text-align: center;
+    @media screen and (min-width: 992px) {
+      font-size: 42px;
+      line-height: 58.09px;
+      max-width: 334px;
+    }
   }
   button {
-    position: absolute;
-    z-index: 5;
     bottom: 20px;
     right: 50px;
     color: var(--white);
@@ -37,6 +58,10 @@ export const StyledProfileBanner = styled.div`
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
 
+    @media screen and (min-width: 576px) {
+      position: absolute;
+      z-index: 5;
+    }
     input {
       display: none;
     }
