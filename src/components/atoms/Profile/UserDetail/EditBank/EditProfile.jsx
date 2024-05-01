@@ -9,10 +9,12 @@ import Image from "next/image";
 import Select from "@/components/atoms/Select";
 import ModalContainer from "@/components/atoms/ModalContainer";
 import { MdModeEdit } from "react-icons/md";
-import changePassword from "../../../../../_assets/changePassword.svg";
+import Password from "../../../../../_assets/changePassword.svg";
 import ChangePassword from "../ChangePassword";
+import CenterModal from "@/components/atoms/Modal/CenterModal";
 const EditProfile = () => {
   const [arr, setArr] = useState(countries);
+  const [changePassword, setChangePassword] = useState(false);
   const [form] = useForm();
 
   function handelChange(value = "PK") {
@@ -51,88 +53,124 @@ const EditProfile = () => {
     });
   }, []);
   return (
-    <StyledEditForm>
-      <Form form={form} onSubmit={handelSubmit}>
-        <div className="combine-fields">
-          <Form.Item
-            type="text"
-            label="Full Name"
-            name="full_name"
-            sm
-            rounded
-            placeholder="Alex Mertiz"
-            rules={[
-              { required: true },
-              {
-                pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
-              },
-            ]}
-          >
-            <Field />
-          </Form.Item>
-          <Form.Item
-            type="text"
-            label="Username"
-            name="user_name"
-            sm
-            rounded
-            placeholder="alex123"
-            rules={[
-              { required: true },
-              {
-                pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
-              },
-            ]}
-          >
-            <Field />
-          </Form.Item>
-          <Form.Item
-            type="text"
-            label="Email Address"
-            name="email_address"
-            sm
-            rounded
-            placeholder="alex123@gmail.com"
-            rules={[
-              { required: true },
+    <>
+      <CenterModal
+        open={changePassword}
+        setOpen={setChangePassword}
+        width={663}
+        title="Change Password"
+      >
+        <ChangePassword />
+      </CenterModal>
+      <StyledEditForm>
+        <Form form={form} onSubmit={handelSubmit}>
+          <div className="combine-fields">
+            <Form.Item
+              type="text"
+              label="Full Name"
+              name="full_name"
+              sm
+              rounded
+              placeholder="Alex Mertiz"
+              rules={[
+                { required: true },
+                {
+                  pattern: /^.{0,40}$/,
+                  message: "Maximum Character Length is 256",
+                },
+              ]}
+            >
+              <Field />
+            </Form.Item>
+            <Form.Item
+              type="text"
+              label="Username"
+              name="user_name"
+              sm
+              rounded
+              placeholder="alex123"
+              rules={[
+                { required: true },
+                {
+                  pattern: /^.{0,40}$/,
+                  message: "Maximum Character Length is 256",
+                },
+              ]}
+            >
+              <Field />
+            </Form.Item>
+            <Form.Item
+              type="text"
+              label="Email Address"
+              name="email_address"
+              sm
+              rounded
+              placeholder="alex123@gmail.com"
+              rules={[
+                { required: true },
 
-              {
-                pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
-              },
-            ]}
-          >
-            <Field />
-          </Form.Item>
-          <Form.Item
-            type="text"
-            label="Country"
-            name="country"
-            sm
-            rounded
-            placeholder="Select"
-            rules={[
-              { required: true },
-              {
-                pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
-              },
-            ]}
-          >
-            <Select options={arr} />
-          </Form.Item>
-          <Form.Item
-            type="text"
-            label="Birthdate (D.O.B)"
-            name="dob"
-            sm
-            rounded
-            placeholder="03/05/2001"
-            rules={[
-              { required: true },
+                {
+                  pattern: /^.{0,40}$/,
+                  message: "Maximum Character Length is 256",
+                },
+              ]}
+            >
+              <Field />
+            </Form.Item>
+            <Form.Item
+              type="text"
+              label="Country"
+              name="country"
+              sm
+              rounded
+              placeholder="Select"
+              rules={[
+                { required: true },
+                {
+                  pattern: /^.{0,40}$/,
+                  message: "Maximum Character Length is 256",
+                },
+              ]}
+            >
+              <Select options={arr} />
+            </Form.Item>
+            <Form.Item
+              type="text"
+              label="Birthdate (D.O.B)"
+              name="dob"
+              sm
+              rounded
+              placeholder="03/05/2001"
+              rules={[
+                { required: true },
 
+                {
+                  pattern: /^.{0,40}$/,
+                  message: "Maximum Character Length is 256",
+                },
+              ]}
+            >
+              <Field />
+            </Form.Item>
+          </div>
+
+          <strong
+            className="fake-label"
+            onClick={() => setChangePassword(!changePassword)}
+          >
+            Change Password!
+            <Image src={Password} alt="changePassword" />
+          </strong>
+
+          <Form.Item
+            type="password"
+            label="Current Password"
+            name="current_password"
+            sm
+            rounded
+            placeholder="**********"
+            rules={[
+              { required: true },
               {
                 pattern: /^.{0,40}$/,
                 message: "Maximum Character Length is 256",
@@ -141,41 +179,12 @@ const EditProfile = () => {
           >
             <Field />
           </Form.Item>
-        </div>
-        <ModalContainer
-          lg
-          width={673}
-          title="Change Password"
-          btnComponent={({ onClick }) => (
-            <strong onClick={onClick} className="fake-label">
-              Change Password!
-              <Image src={changePassword} alt="changePassword" />
-            </strong>
-          )}
-          content={({ onClose }) => <ChangePassword onClose={onClose} />}
-        />
-        <Form.Item
-          type="password"
-          label="Current Password"
-          name="current_password"
-          sm
-          rounded
-          placeholder="**********"
-          rules={[
-            { required: true },
-            {
-              pattern: /^.{0,40}$/,
-              message: "Maximum Character Length is 256",
-            },
-          ]}
-        >
-          <Field />
-        </Form.Item>
-        <Button rounded md btntype="green" width="170" htmlType="submit">
-          Save Changes
-        </Button>
-      </Form>
-    </StyledEditForm>
+          <Button rounded md btntype="green" width="170" htmlType="submit">
+            Save Changes
+          </Button>
+        </Form>
+      </StyledEditForm>
+    </>
   );
 };
 

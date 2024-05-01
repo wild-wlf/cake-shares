@@ -13,7 +13,7 @@ export const StyledEditForm = styled.div`
     }
   }
   .fake-label {
-    display: flex;
+    display: inline-flex;
     gap: 10px;
     margin-bottom: 15px;
     font-size: 16px;
