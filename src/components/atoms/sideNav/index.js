@@ -6,9 +6,10 @@ import line from "../../../_assets/sidenav-line.svg";
 import store from "../../../_assets/store.svg";
 import profile from "../../../_assets/profile.svg";
 
-const index = () => {
+const index = ({ openSideNav }) => {
   return (
-    <Sidenav>
+    <Sidenav open={openSideNav}>
+      <div className="backdrop" />
       <div className="nav-content">
         <div className="nav-logo">
           <Image src={logo} alt="logo" />

@@ -10,13 +10,18 @@ export const CategoriesBarWrapper = styled.div`
   }
   .slick-track {
     display: flex;
-    gap: 16px;
+    gap: 6px;
   }
   .slider {
     width: 995px;
   }
   .button {
     width: 100%;
+  }
+  .active {
+    width: 100%;
+    color: var(--green);
+    border-color: var(--green);
   }
   .lg {
     width: 140px;

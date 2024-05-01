@@ -8,69 +8,63 @@ export const CategoriesWrapper = styled.div`
     font-size: var(--font-size-xl);
     font-weight: 500;
   }
-  .slick-slide {
-    padding: 20px;
-  }
+
   .slick-track {
-    padding-bottom: 34.72px;
+    display: flex;
+    gap: 10px;
+    padding: 20px 0 50px 0;
+
+    @media (min-width: 992px) {
+      padding: 20px 0 70px 0;
+    }
+    @media (min-width: 576px) {
+      gap: 20px;
+      margin: 0 -20px;
+    }
   }
   .slider {
-    padding-top: 21px;
     width: 100%;
-
     .slick-slide {
       width: 100%;
-      height: 333px;
-
-      @media only screen and (max-width: 768px) {
-        height: 226px;
+    }
+    .slick-arrow.slick-next,
+    .slick-arrow.slick-prev {
+      background-color: #4e6199;
+      background-position: center;
+      background-size: 8px 10px;
+      background-repeat: no-repeat;
+      border-radius: 21px;
+      width: 20px;
+      height: 20px;
+      border-radius: 100%;
+      position: absolute;
+      z-index: 1;
+      top: -10px;
+      @media (min-width: 992px) {
+        background-size: 10px 12px;
+      }
+      @media (min-width: 576px) {
+        width: 26px;
+        height: 26px;
       }
     }
     .slick-arrow.slick-next {
       background-image: url(${(props) => props.image.src});
-      background-color: #4e6199;
-      background-size: 10px 17px;
-      border-radius: 21px;
-      background-repeat: no-repeat;
-      background-position: 10px;
-      width: 26px;
-      height: 26px;
-      border-radius: 100%;
-      position: absolute;
-      top: -35px;
-      right: 0%;
-      z-index: 1;
-      @media only screen and (max-width: 576px) {
-        /* background-size: 21px 21px; */
-        border-radius: 21px;
-        top: -34px;
-        width: 21px;
-        height: 21px;
-      }
+      right: 0;
+    }
+    .slick-arrow.slick-next {
+      background-image: url(${(props) => props.image.src});
+      right: 0;
     }
     .slick-arrow.slick-prev {
       background-image: url(${(props) => props.image.src});
-      background-color: #4e6199;
-      background-size: 10px 17px;
-      border-radius: 21px;
-      background-repeat: no-repeat;
-      background-position: 10px;
-      width: 26px;
-      height: 26px;
-      border-radius: 100%;
-      position: absolute;
-      top: -49px;
       left: auto;
-      right: 36px;
-      z-index: 1;
-      transform: rotate(178deg);
-      @media only screen and (max-width: 576px) {
-        top: -45px;
-        right: 29px;
-        /* background-size: 21px 21px; */
-        border-radius: 21px;
-        width: 21px;
-        height: 21px;
+      transform: rotate(180deg);
+      top: -20px;
+      right: 25px;
+      @media (min-width: 576px) {
+        top: -23px;
+        right: 36px;
       }
     }
     .slick-next:before,
@@ -93,6 +87,7 @@ export const CategoriesWrapper = styled.div`
       background-color: #cdcdcd !important;
     }
   }
+
   @media only screen and (max-width: 576px) {
     .title {
       font-size: var(--h5-font-size);

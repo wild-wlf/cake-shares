@@ -3,14 +3,9 @@ import { PaginationList } from "../Pagination/Pagination.styles";
 
 export const StyledTableLayout = styled.div`
   width: 100%;
-  padding: 15px 10px;
   border-radius: 20px;
   margin: ${({ noNegativeMargin }) => (noNegativeMargin ? "" : "0 0 0")};
   background: var(--white);
-
-  @media (min-width: 768px) {
-    padding: 20px;
-  }
 
   ${({ noPagination }) =>
     noPagination &&
@@ -22,11 +17,10 @@ export const StyledTableLayout = styled.div`
 
   .table-heading {
     display: block;
-    font-size: 22px;
-    line-height: 25px;
-    font-weight: 500;
-    text-transform: capitalize;
-    margin: 0 0 15px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20.16px;
   }
 
   .inner-wrap {
@@ -40,7 +34,7 @@ export const StyledTableLayout = styled.div`
       padding: 5px 10px 10px;
     }
     .pagination {
-      background: var(--gray-4);
+      background: var(--white);
       border-radius: 0 0 10px 10px;
       padding-bottom: 20px;
     }

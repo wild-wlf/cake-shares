@@ -5,6 +5,7 @@ import { Th, Td } from "./TableCell.styles";
 
 function TableCell({ heading, children, ...rest }) {
   // const { isLoading } = useContext(LoadingContext);
+  const isLoading = false;
   const CellType = (props) => (heading ? <Th {...props} /> : <Td {...props} />);
 
   return (

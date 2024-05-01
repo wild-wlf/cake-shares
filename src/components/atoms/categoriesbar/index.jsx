@@ -17,6 +17,8 @@ import AdvanceSearch from "../advanceSearch";
 
 const CategoriesBar = () => {
   const [modal, setModal] = useState(false);
+  const [Tab, setTab] = useState(1);
+
   var settings = {
     dots: false,
     arrows: false,
@@ -52,6 +54,40 @@ const CategoriesBar = () => {
       },
     ],
   };
+  const categoryData = [
+    {
+      image: <FaCarAlt />,
+      text: "All",
+    },
+    {
+      image: <FaFire />,
+      text: "Popular",
+    },
+    {
+      image: <FaHouseChimney />,
+      text: "Properties",
+    },
+    {
+      image: <TbBuildingFactory />,
+      text: "Ventures",
+    },
+    {
+      image: <PiStorefrontFill />,
+      text: "Bazaar",
+    },
+    {
+      image: <FaCarAlt />,
+      text: "Vahicals",
+    },
+    {
+      image: <HiHeart />,
+      text: "My Favorite",
+    },
+    {
+      image: <AiFillDollarCircle />,
+      text: "High Funding",
+    },
+  ];
   return (
     <>
       <CenterModal
@@ -66,8 +102,23 @@ const CategoriesBar = () => {
         <div className="maindiv">
           <div className="slider">
             <Slider {...settings}>
-              <div>
-                <Button rounded sm btntype="light-green" className="button">
+              {categoryData?.map((item, index) => (
+                <div key={index}>
+                  <Button
+                    rounded
+                    sm
+                    btntype="white"
+                    className={Tab === index ? "active" : "button"}
+                    onClick={() => setTab(index)}
+                  >
+                    {/* <Image src={item.image} alt="all" /> */}
+                    {item.image}
+                    {item.text}
+                  </Button>
+                </div>
+              ))}
+              {/* <div>
+                <Button rounded sm btntype="new" className="button">
                   <Image src={all} alt="all" />
                   All
                 </Button>
@@ -113,7 +164,7 @@ const CategoriesBar = () => {
                   <AiFillDollarCircle />
                   High Funding
                 </Button>
-              </div>
+              </div> */}
             </Slider>
           </div>
           <div className="search" onClick={() => setModal(true)}>

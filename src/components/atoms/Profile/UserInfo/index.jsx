@@ -9,7 +9,6 @@ import KycLevel from "../../KYC/KycLevel";
 import { KycContext } from "@/components/Context/KycContext";
 const UserInfo = () => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
-  console.log(checkKycLevel);
   return (
     <StyledUserInfo>
       <div className="userInfo">

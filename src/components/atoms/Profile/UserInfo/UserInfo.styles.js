@@ -1,23 +1,44 @@
 import styled from "styled-components";
 
 export const StyledUserInfo = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  display: block;
   margin-bottom: 20px;
+  @media screen and (min-width: 1200px) {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  @media screen and (min-width: 1300px) {
+    align-items: flex-end;
+  }
   .userInfo {
     width: 100%;
     position: relative;
-    margin-top: -100px;
+    margin-top: 0px;
+    margin-bottom: 20px;
     z-index: 2;
-    display: flex;
-    align-items: flex-end;
-    flex-grow: 1;
+
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
+    @media screen and (min-width: 1024px) {
+      display: flex;
+      align-items: flex-end;
+      flex-grow: 1;
+    }
+    @media screen and (min-width: 1200px) {
+      margin-bottom: 0;
+    }
+    @media screen and (min-width: 1300px) {
+      margin-top: -100px;
+    }
+
     .textWrapper {
-      padding: 0 20px;
+      margin-bottom: 20px;
+      @media screen and (min-width: 1024px) {
+        padding: 0 20px;
+        margin-bottom: 0px;
+      }
       .discreption {
         span {
           padding: 0 10px 0 0;
@@ -37,8 +58,13 @@ export const StyledUserInfo = styled.div`
   }
   .addbefore {
     position: relative;
-    padding-left: 15px !important;
+    padding-left: 0;
+    @media screen and (min-width: 1024px) {
+      padding-left: 15px !important;
+    }
     &:before {
+      display: none;
+
       position: absolute;
       content: "";
       width: 2px;
@@ -46,6 +72,9 @@ export const StyledUserInfo = styled.div`
       background: rgba(0, 0, 0, 0.1);
       top: 2px;
       bottom: 2px;
+      @media screen and (min-width: 1024px) {
+        display: block;
+      }
     }
   }
   .categoriesWrapper {
@@ -71,11 +100,14 @@ export const StyledUserInfo = styled.div`
     margin-bottom: 10px;
   }
   .kycWrapper {
-    max-width: 356px;
+    max-width: 100%;
     width: 100%;
     padding: 13px 15px;
     background: rgba(64, 143, 140, 0.1);
     border-radius: 10px;
+    @media screen and (min-width: 1200px) {
+      max-width: 356px;
+    }
     .updgradeKyc {
       display: flex;
       align-items: flex-end;
@@ -107,11 +139,20 @@ export const StyledUserInfo = styled.div`
 export const ProfileWrapper = styled.div`
   display: flex;
   flex-shrink: 0;
-  width: 170px;
-  height: 170px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   overflow: hidden;
   background: var(--dark);
+  margin-top: -100px;
+  margin-bottom: 20px;
+  @media screen and (min-width: 576px) {
+    margin-top: 0px;
+  }
+  @media screen and (min-width: 992px) {
+    width: 170px;
+    height: 170px;
+  }
   img {
     width: 100%;
     height: auto;

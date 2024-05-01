@@ -139,9 +139,9 @@ export const ActionBtnHolder = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  padding: 0 50px;
+  padding: 0 15px;
   width: 100%;
-  @media only screen and (max-width: 768px) {
-    padding: 0 20px;
+  @media (min-width: 1500px) {
+    padding: 0 50px;
   }
 `;

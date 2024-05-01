@@ -2,27 +2,43 @@ import React from "react";
 import Banner from "../components/atoms/banner";
 import Categories from "../components/atoms/categories";
 import CategoriesBar from "../components/atoms/categoriesbar";
-import CenterModal from "@/components/atoms/Modal/CenterModal";
-import KycBuyerLevelOne from "@/components/atoms/KYC/KYCBuyer";
-import KycBuyerLevelTwo from "@/components/atoms/KYC/KYCBuyerTwo";
-import KYCBuyerThree from "@/components/atoms/KYC/KYCBuyerThree";
+import Property from "../_assets/property.png";
+import Property2 from "../_assets/property2.png";
+import Property3 from "../_assets/property3.png";
 
 const index = () => {
+  const images = [
+    {
+      image: Property,
+      id: "1",
+    },
+    {
+      id: "2",
+      image: Property2,
+    },
+    {
+      image: Property3,
+      id: "3",
+    },
+    {
+      image: Property,
+      id: "4",
+    },
+    {
+      image: Property2,
+      id: "5",
+    },
+    {
+      image: Property3,
+      id: "6",
+    },
+  ];
   return (
     <>
       <Banner />
       <CategoriesBar />
-      <Categories />
-      <Categories />
-      {/* <CenterModal open={true} width="688" title="Upgrade to KYC Level 1">
-        <KycBuyerLevelOne />
-      </CenterModal> */}
-      {/* <CenterModal open={true} width="688" title="Upgrade to KYC Level 2">
-        <KycBuyerLevelTwo />
-      </CenterModal> */}
-      {/* <CenterModal open={true} width="688" title="Upgrade to KYC Level 3">
-        <KYCBuyerThree />
-      </CenterModal> */}
+      <Categories title="Popular Investments" arr={images} />
+      <Categories title="Recommended Investments" arr={images} />
     </>
   );
 };

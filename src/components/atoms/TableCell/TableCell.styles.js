@@ -3,22 +3,19 @@ import styled, { css } from "styled-components";
 const styles = css`
   text-align: ${({ center }) => (center ? "center" : "left")};
   font-size: var(--font-size-sm);
-
   ${({ responsive }) =>
     responsive
       ? css`
           @media (min-width: 992px) {
-            background-color: var(--gray-4);
+            background-color: var(--white);
             display: table-cell;
-            padding: 0.8rem 0.5rem;
+            padding: 0.85rem 0.5rem;
 
             &:first-child {
               padding-left: 25px;
-              /* border-radius: 10px 0 0 10px; */
             }
             &:last-child {
               padding-right: 1.25rem;
-              /* border-radius: 0 10px 10px 0; */
             }
           }
         `
@@ -36,10 +33,13 @@ const styles = css`
 
 export const Th = styled.th`
   ${styles}
-  /* background: var(--gray-4); */
-  padding-top: 0.9375rem;
-  padding-bottom: 0.9375rem;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
   text-transform: capitalize;
+  text-align: center;
+  &:first-child {
+    text-align: left;
+  }
 `;
 
 export const Td = styled.td`
@@ -48,12 +48,13 @@ export const Td = styled.td`
     responsive &&
     css`
       display: flex;
+      align-items: center;
       justify-content: space-between;
       @media (max-width: 991px) {
         padding: 10px 15px;
         &:last-child {
-          height: 0;
-          padding: 0;
+          /* height: 0;
+          padding: 0; */
         }
         &:nth-child(odd) {
           background: var(--gray-3);

@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 
 export const TableHolder = styled.div`
   padding: ${({ noPadding }) => (noPadding ? "0" : "20px 20px 9px")};
-  /* background: var(--base-background-color); */
   padding-top: 15px;
   @media (min-width: 1200px) {
     padding-top: 10px;
@@ -36,8 +35,7 @@ export const TableScroll = styled.div`
 export const StyledTable = styled.table`
   border-collapse: collapse;
   width: 100%;
-  color: var(--primary-text-color);
-
+  color: rgba(49, 49, 49, 1);
   ${({ responsive }) =>
     responsive
       ? css`
@@ -66,13 +64,15 @@ export const Thead = styled.thead`
   .table-head {
     border-bottom: none;
     th {
+      background: rgba(241, 241, 241, 1);
+
       &:first-child {
         padding-left: 25px;
-        border-radius: 10px 0 0 10px;
+        border-radius: 100px 0 0 100px;
       }
       &:last-child {
         padding-right: 1.25rem;
-        border-radius: 0 10px 10px 0;
+        border-radius: 0 100px 100px 0;
       }
     }
   }

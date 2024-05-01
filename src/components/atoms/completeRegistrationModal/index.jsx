@@ -97,7 +97,6 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
               <Form.Item
                 label="Country"
                 name="select"
-                // placeholder="Your Email or Username"
                 rules={[
                   { required: true },
                   {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { ProductDescriptionWrapper } from "./productDescription.style";
-import Profilepic from "../../../_assets/profile.png";
+import { ProductDescriptionWrapper, Wrapper } from "./productDescription.style";
+import Profilepic from "../../../_assets/userProfile.png";
 import Image from "next/image";
 import { TbExternalLink } from "react-icons/tb";
 import { PiChatTeardropTextFill } from "react-icons/pi";

@@ -92,6 +92,7 @@ const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
               btntype="primary"
               width="134"
               onClick={() => setStep(2)}
+              // htmlType="submit"
             >
               Continue
             </Button>

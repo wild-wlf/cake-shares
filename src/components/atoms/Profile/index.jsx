@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import React from "react";
 import { StyledProfile } from "./Profile.styles";
 import Button from "../Button";
@@ -11,18 +12,20 @@ const Profile = () => {
   const router = useRouter();
   return (
     <StyledProfile>
-      <Button
-        rounded
-        sm
-        btntype="blue"
-        className="button"
-        onClick={() => {
-          router.back();
-        }}
-      >
-        <IoIosArrowBack />
-        Go Back
-      </Button>
+      <div className="previousButton">
+        <Button
+          rounded
+          sm
+          btntype="blue"
+          className="button"
+          onClick={() => {
+            router.back();
+          }}
+        >
+          <IoIosArrowBack />
+          Go Back
+        </Button>
+      </div>
       <ProfileBanner />
       <UserInfo />
       <UserDetail />
