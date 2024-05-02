@@ -27,3 +27,13 @@ export const BannerWrapper = styled.div`
     width: 100%;
   }
 `;
+
+export const SlideWrapp = styled.div`
+  width: 100%;
+  min-height: 364px;
+  background-image: url(${(props) => props.$bg.src});
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+`;

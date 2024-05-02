@@ -1,10 +1,12 @@
 import React from "react";
 import Image from "next/image";
-import { BannerWrapper } from "./banner.style";
-import banner from "../../../_assets/slider.svg";
-import banner3 from "../../../_assets/slider-3.svg";
-import banner5 from "../../../_assets/slider-5.svg";
-import banner2 from "../../../_assets/slider-2.png";
+import { BannerWrapper, SlideWrapp } from "./banner.style";
+import banner1desk from "../../../_assets/slide1desk.png";
+import banner2desk from "../../../_assets/slide2desk.png";
+import banner3desk from "../../../_assets/slide3desk.png";
+import banner1resp from "../../../_assets/slide1resp.png";
+import banner2resp from "../../../_assets/slide2resp.png";
+import banner3resp from "../../../_assets/slide3resp.png";
 import Slider from "react-slick";
 
 const Banner = () => {
@@ -19,20 +21,21 @@ const Banner = () => {
     swipeToSlide: true,
     responsive: [],
   };
+
   return (
     <BannerWrapper>
       <Slider {...settings}>
+        <SlideWrapp $bg={banner1desk}>
+          {/* <Image src={banner1desk} className="banner" alt="banner" /> */}
+          <Image src={banner1resp} className="banner2" alt="banner" />
+        </SlideWrapp>
         <div>
-          <Image src={banner} className="banner" alt="banner" />
-          <Image src={banner2} className="banner2" alt="banner" />
+          <Image src={banner2desk} className="banner" alt="banner" />
+          <Image src={banner2resp} className="banner2" alt="banner" />
         </div>
         <div>
-          <Image src={banner3} className="banner" alt="banner" />
-          <Image src={banner2} className="banner2" alt="banner" />
-        </div>
-        <div>
-          <Image src={banner5} className="banner" alt="banner" />
-          <Image src={banner2} className="banner2" alt="banner" />
+          <Image src={banner3desk} className="banner" alt="banner" />
+          <Image src={banner3resp} className="banner2" alt="banner" />
         </div>
       </Slider>
     </BannerWrapper>
