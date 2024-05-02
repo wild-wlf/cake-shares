@@ -112,7 +112,7 @@ const CategoriesBar = () => {
                   <Button
                     rounded
                     sm
-                    btntype="white"
+                    btntype={Tab === index ? "light-green" : "white"}
                     className={Tab === index ? "button active" : "button"}
                     onClick={() => setTab(index)}
                   >

@@ -24,7 +24,7 @@ export const CategoriesBarWrapper = styled.div`
     }
     &.active {
       color: var(--green);
-      border-color: var(--green);
+      border: 1px solid rgba(64, 143, 140, 0.1);
     }
   }
   .lg {

@@ -119,6 +119,7 @@ export const Styling = css`
   }
 
   button {
+    font-family: var(--base-font-sans-serif);
     padding: 0;
     border: none;
     background: none;

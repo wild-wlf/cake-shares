@@ -21,7 +21,6 @@ export default function App({ Component, pageProps }) {
     <>
       <KycContextProvider>
         <GlobalStyles />
-
         <Wrapper>
           <TopBar />
           <Component {...pageProps} />
