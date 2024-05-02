@@ -4,28 +4,13 @@ import Profilepic from "../../../_assets/userProfile.png";
 import Image from "next/image";
 import { TbExternalLink } from "react-icons/tb";
 import { PiChatTeardropTextFill } from "react-icons/pi";
-import CenterModal from "../Modal/CenterModal";
-import NotAccessModal from "../notAccessModal";
-import NotAccessPic from "../../../_assets/notaccess.svg";
-const ProductDescription = () => {
-  const [modal, setModal] = useState(false);
+import { useRouter } from "next/router";
 
-  const handleCloseModal = () => {
-    setModal(false);
-  };
+const ProductDescription = () => {
+  const router = useRouter();
 
   return (
     <>
-      <CenterModal
-        open={modal}
-        setOpen={setModal}
-        title={
-          <Image src={NotAccessPic} className="notaccesspic" alt="notaccess" />
-        }
-        width="543"
-      >
-        <NotAccessModal handleCloseModal={handleCloseModal} />
-      </CenterModal>
       <ProductDescriptionWrapper>
         <div className="descwrapper">
           <div className="description">
@@ -49,7 +34,9 @@ const ProductDescription = () => {
               <span>Private Seller</span>
               <br />
               <div className="btnwrapper">
-                <span className="viewprofile" onClick={() => setModal(true)}>
+                <span
+                  className="viewprofile"
+                  onClick={() => router.push("/seller-profile")}>
                   View Profile <TbExternalLink className="icon" />
                 </span>
                 <span className="message" onClick={() => setModal(true)}>
