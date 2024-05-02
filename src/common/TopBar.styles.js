@@ -170,7 +170,6 @@ export const StyledTopBar = styled.header`
   }
 
   @media (max-width: 576px) {
-    padding: 20px 15px;
     margin: 0 -15px;
 
     .wallet {
@@ -182,6 +181,8 @@ export const StyledTopBar = styled.header`
   }
 
   @media (max-width: 768px) {
+    padding: 20px 15px;
+
     .closedNav {
       display: block;
       cursor: pointer;

@@ -11,10 +11,10 @@ export const CategoriesBarWrapper = styled.div`
   }
   .slick-track {
     display: flex;
-    gap: 6px;
+    gap: 16px;
   }
   .slider {
-    width: 995px;
+    max-width: 80%;
   }
   .button {
     width: 100%;
@@ -31,7 +31,8 @@ export const CategoriesBarWrapper = styled.div`
     width: 140px;
   }
   .search {
-    width: 300px;
+    max-width: 300px;
+    width: 100%;
     position: relative;
 
     input {
@@ -57,37 +58,29 @@ export const CategoriesBarWrapper = styled.div`
       color: rgba(64, 143, 140, 1);
     }
   }
-  @media only screen and (max-width: 1250px) {
-    .slider {
-      width: 850px;
-    }
-  }
-  @media only screen and (max-width: 1100px) {
-    .slider {
-      width: 700px;
-    }
-  }
-  @media only screen and (max-width: 992px) {
-    .slider {
-      width: 580px;
-    }
-  }
+
   @media only screen and (max-width: 768px) {
     padding: 30px 0;
+
     .slider {
-      width: 370px;
+      max-width: 70%;
+    }
+
+    .search {
+      max-width: 30%;
     }
   }
-  @media only screen and (max-width: 620px) {
+  @media only screen and (max-width: 576px) {
     .maindiv {
       flex-direction: column;
       gap: 16px;
     }
     .slider {
-      width: 100%;
+      max-width: 100%;
     }
+
     .search {
-      width: 100%;
+      max-width: 100%;
     }
   }
 `;

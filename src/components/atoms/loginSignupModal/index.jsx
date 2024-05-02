@@ -24,7 +24,30 @@ const LoginSignupModal = ({
         </span>
       </div>
       <Form form={form}>
-        {type === "Seller" || "Register As Seller" ? (
+        {type === "Register As Seller" ? (
+          <div>
+            <Form.Item
+              type="text"
+              label="Seller Type"
+              name="seller_type"
+              sm
+              rounded
+              placeholder="Select Type"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Select
+                options={[
+                  { label: "Individual Seller", value: "indiviual_seller" },
+                  { label: "Company Seller", value: "company_seller" },
+                ]}
+              />
+            </Form.Item>
+          </div>
+        ) : type === "Seller" ? (
           <div>
             <Form.Item
               type="text"
