@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const AmentitiesWrapper = styled.div`
-  padding: 30px 0px 30px 0px;
+  padding-bottom: 30px;
 
   span {
     font-size: var(--h2-font-size);

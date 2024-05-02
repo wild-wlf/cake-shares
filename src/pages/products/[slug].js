@@ -9,7 +9,7 @@ const ProductDetails = ({ userData }) => {
   return (
     <>
       <ProductDetail />
-      <ProductDescription />
+      {/* <ProductDescription /> */}
       <Amenities />
       <Categories arr={images} />
     </>

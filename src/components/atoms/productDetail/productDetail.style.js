@@ -64,57 +64,48 @@ export const ProductDetailWrapper = styled.div`
   }
 
   .investwrapper {
-    padding-top: 36px;
+    padding-top: 50px;
     display: flex;
-    align-items: flex-end;
-    gap: 75px;
-  }
-  .whyinvest {
-    width: 74%;
-    h4 {
-      font-size: var(--h2-font-size);
-      padding-bottom: 16px;
-      font-weight: 500;
-    }
-    span {
-      font-size: var(--h4-font-size);
-    }
-  }
-  .investment {
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-    gap: 10px;
-    span {
-      font-size: var(--font-size-sm);
-    }
-    h3 {
-      font-size: 1.375rem;
-      font-weight: 600;
-    }
-  }
-  .total {
-    width: 100%;
-    background-color: rgba(78, 97, 153, 0.1);
-    border-radius: 40px;
-    height: 49px;
-    display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: var(--font-size-sm);
-    span {
-      font-size: var(--font-size-xl);
-      font-weight: 600;
-      padding-left: 6px;
+    gap: 30px;
+    flex-direction: column-reverse;
+    @media (min-width: 992px) {
+      flex-direction: row;
     }
-  }
-  .amountdiv {
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    gap: 32px;
-    @media screen and (min-width: 768px) {
-      padding: 0 25px;
+    @media (min-width: 1400px) {
+      gap: 75px;
+    }
+
+    .content-holder {
+      font-size: 16px;
+      line-height: 20px;
+      @media (min-width: 992px) {
+        max-width: 60%;
+      }
+      @media (min-width: 1200px) {
+        font-size: 18px;
+        line-height: 22px;
+        max-width: 65%;
+      }
+      @media (min-width: 1400px) {
+        max-width: 70%;
+      }
+      strong {
+        display: block;
+        font-size: 24px;
+        line-height: 28px;
+        font-weight: 500;
+        padding-bottom: 10px;
+      }
+      p {
+        margin-bottom: 20px;
+        @media (min-width: 768px) {
+          margin-bottom: 30px;
+        }
+        &:nth-last-child(1) {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 
@@ -128,23 +119,11 @@ export const ProductDetailWrapper = styled.div`
       display: flex;
       justify-content: space-between;
     }
-    .whyinvest {
-      width: 69%;
-    }
-    .investment {
-      width: 30%;
-    }
   }
   @media only screen and (max-width: 992px) {
     .product1,
     .product2 {
       height: 300px;
-    }
-    .whyinvest {
-      width: 64%;
-    }
-    .investment {
-      width: 35%;
     }
   }
   @media only screen and (max-width: 768px) {
@@ -171,45 +150,11 @@ export const ProductDetailWrapper = styled.div`
       width: 100%;
       height: 185px;
     }
-    .investwrapper {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 50px;
-    }
-    .whyinvest {
-      width: 100%;
-    }
-    .investment {
-      width: 60%;
-    }
   }
   @media only screen and (max-width: 576px) {
     padding: 00px 0px;
     .headings {
       font-size: 10px;
-    }
-    .investwrapper {
-      gap: 32px;
-    }
-    .whyinvest {
-      h4 {
-        font-size: var(--font-size-xl);
-      }
-      span {
-        font-size: var(--font-size-sm);
-      }
-    }
-    .investment {
-      width: 80%;
-      span {
-        font-size: var(--font-size-sm);
-      }
-      h3 {
-        font-size: var(--font-size-lg);
-      }
-    }
-    .amountdiv {
-      gap: 20px;
     }
   }
 `;

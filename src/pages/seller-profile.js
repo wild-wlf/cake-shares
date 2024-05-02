@@ -10,7 +10,7 @@ import sellerHeroImage from "../_assets/seller-hero-bg.png";
 import SellerPersonalInfo from "@/components/atoms/SellerPersonalInfo";
 import Categories from "@/components/atoms/categories";
 
-const index = () => {
+const SellerProfile = () => {
   const router = useRouter();
   return (
     <StyledProfile>
@@ -21,7 +21,8 @@ const index = () => {
         className="button"
         onClick={() => {
           router.back();
-        }}>
+        }}
+      >
         <IoIosArrowBack />
         Go Back
       </Button>
@@ -37,4 +38,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default SellerProfile;
