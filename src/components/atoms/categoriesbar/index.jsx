@@ -23,37 +23,13 @@ const CategoriesBar = () => {
   var settings = {
     dots: false,
     arrows: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
-    slidesToShow: 7.2,
-    slidesToScroll: 1,
+    autoplay: true,
+    slidesToShow: 1,
+    // slidesToScroll: 1,
+    variableWidth: true,
     swipeToSlide: true,
-    responsive: [
-      {
-        breakpoint: 1250,
-        settings: { slidesToShow: 6 },
-      },
-      {
-        breakpoint: 1100,
-        settings: { slidesToShow: 5.5 },
-      },
-      {
-        breakpoint: 992,
-        settings: { slidesToShow: 4.2 },
-      },
-      {
-        breakpoint: 768,
-        settings: { slidesToShow: 3 },
-      },
-      {
-        breakpoint: 620,
-        settings: { slidesToShow: 3.5 },
-      },
-      {
-        breakpoint: 576,
-        settings: { slidesToShow: 3 },
-      },
-    ],
   };
   const categoryData = [
     {
@@ -78,7 +54,35 @@ const CategoriesBar = () => {
     },
     {
       image: <FaCarAlt />,
-      text: "Vahicals",
+      text: "Vehicals",
+    },
+    {
+      image: <HiHeart />,
+      text: "My Favorite",
+    },
+    {
+      image: <AiFillDollarCircle />,
+      text: "High Funding",
+    },
+    {
+      image: <FaFire />,
+      text: "Popular",
+    },
+    {
+      image: <FaHouseChimney />,
+      text: "Properties",
+    },
+    {
+      image: <TbBuildingFactory />,
+      text: "Ventures",
+    },
+    {
+      image: <PiStorefrontFill />,
+      text: "Bazaar",
+    },
+    {
+      image: <FaCarAlt />,
+      text: "Vehicals",
     },
     {
       image: <HiHeart />,
@@ -95,7 +99,8 @@ const CategoriesBar = () => {
         open={modal}
         setOpen={setModal}
         title={"Advance Search"}
-        width="670">
+        width="670"
+      >
         <AdvanceSearch />
       </CenterModal>
       <CategoriesBarWrapper>
@@ -109,7 +114,8 @@ const CategoriesBar = () => {
                     sm
                     btntype="white"
                     className={Tab === index ? "button active" : "button"}
-                    onClick={() => setTab(index)}>
+                    onClick={() => setTab(index)}
+                  >
                     {item.image}
                     {item.text}
                   </Button>

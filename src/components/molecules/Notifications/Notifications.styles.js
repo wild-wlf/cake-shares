@@ -8,7 +8,7 @@ export const NotificationsHolder = styled.div`
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   .holder {
     padding: 10px 0;
-    border-bottom: 1px solid var(--gray-150);
+    border-bottom: 1px solid rgba(240, 242, 243, 1);
     &:nth-child(1) {
       padding-top: 0;
     }
@@ -21,10 +21,7 @@ export const NotificationsHolder = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 14px;
     border: 0;
-    border-top: 1px solid rgba(240, 242, 243, 1);
-    border-bottom: 1px solid rgba(240, 242, 243, 1);
     padding: 14px 0px;
     .content {
       display: flex;
@@ -54,8 +51,8 @@ export const NotificationsHolder = styled.div`
     .tag {
       padding: 5px 10px;
       border-radius: 60px;
-      color: var(--success);
-      background: rgba(76, 175, 80, 0.1);
+      color: rgba(64, 143, 140, 1);
+      background: rgba(64, 143, 140, 0.1);
     }
   }
   .text {

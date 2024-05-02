@@ -217,6 +217,7 @@ const TopBar = () => {
         setOpen={setBuyerLoginModal}
         title="Login As a Buyer"
         width="666"
+        type="Login As a Buyer"
       >
         <LoginAsBuyerModal handleLoginModal={() => setBuyerLoginModal(false)} />
       </CenterModal>
@@ -312,7 +313,7 @@ const TopBar = () => {
                 <Button
                   rounded
                   sm
-                  btntype="new"
+                  btntype="light-green"
                   onClick={() => {
                     setOpenProfile(!openProfile);
                   }}
@@ -327,7 +328,7 @@ const TopBar = () => {
           ) : (
             <div className="authContainer">
               <Button
-                type="new"
+                type="light-green"
                 rounded
                 sm
                 onClick={() => setRegisterModal(true)}

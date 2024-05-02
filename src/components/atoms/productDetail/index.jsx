@@ -8,25 +8,37 @@ import property from "../../../_assets/property.png";
 import property2 from "../../../_assets/property2.png";
 import property3 from "../../../_assets/property3.png";
 import CenterModal from "../Modal/CenterModal";
-import NotAccessModal from "../notAccessModal";
-import NotAccessPic from "../../../_assets/notaccess.svg";
+import ConfirmIcon from "../../../_assets/confirmIcon.svg";
 import { useRouter } from "next/router";
+import InitiateInvestmentModal from "../InitiateInvestmentModal";
+import InvestmentSuccesModal from "../InvestmentSuccesModal";
 
 const ProductDetail = () => {
   const router = useRouter();
   const [modal, setModal] = useState(false);
-  const handleCloseModal = () => {
-    setModal(false);
-  };
+  const [successmodal, setSuccessModal] = useState(false);
   return (
     <>
       <CenterModal
         open={modal}
         setOpen={setModal}
-        title={<Image src={NotAccessPic} alt="notaccess" />}
+        title="Initiate Investment"
         width="543"
       >
-        <NotAccessModal handleCloseModal={handleCloseModal} />
+        <InitiateInvestmentModal
+          handleCloseModal={() => {
+            setModal(false);
+            setSuccessModal(true);
+          }}
+        />
+      </CenterModal>
+      <CenterModal
+        open={successmodal}
+        setOpen={setSuccessModal}
+        title={<Image src={ConfirmIcon} alt="success" />}
+        width="543"
+      >
+        <InvestmentSuccesModal />
       </CenterModal>
       <ProductDetailWrapper>
         <div className="btnwrapper">
