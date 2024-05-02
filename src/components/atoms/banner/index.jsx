@@ -12,6 +12,7 @@ const Banner = () => {
     dots: false,
     arrows: false,
     infinite: true,
+    autoplay: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -19,7 +20,7 @@ const Banner = () => {
     responsive: [],
   };
   return (
-    <BannerWrapper image={banner}>
+    <BannerWrapper>
       <Slider {...settings}>
         <div>
           <Image src={banner} className="banner" alt="banner" />

@@ -5,6 +5,7 @@ export const CategoriesBarWrapper = styled.div`
   .maindiv {
     width: 100%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     gap: 46px;
   }
@@ -17,11 +18,14 @@ export const CategoriesBarWrapper = styled.div`
   }
   .button {
     width: 100%;
-  }
-  .active {
-    width: 100%;
-    color: var(--green);
-    border-color: var(--green);
+    @media (max-width: 768px) {
+      padding: 7px 5px;
+      gap: 5px;
+    }
+    &.active {
+      color: var(--green);
+      border-color: var(--green);
+    }
   }
   .lg {
     width: 140px;
@@ -65,12 +69,13 @@ export const CategoriesBarWrapper = styled.div`
   }
   @media only screen and (max-width: 992px) {
     .slider {
-      width: 500px;
+      width: 580px;
     }
   }
   @media only screen and (max-width: 768px) {
+    padding: 30px 0;
     .slider {
-      width: 340px;
+      width: 370px;
     }
   }
   @media only screen and (max-width: 620px) {

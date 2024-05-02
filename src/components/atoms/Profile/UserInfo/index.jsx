@@ -1,14 +1,18 @@
 import React, { useContext } from "react";
 import { ProfileWrapper, StyledUserInfo } from "./UserInfo.styles";
-import userImage from "../../../../_assets/userProfile.png";
+
 import popular from "../../../../_assets/popular.svg";
 import PropertyIcon from "../../../../_assets/PropertyIcon.svg";
 import VentureIcon from "../../../../_assets/VentureIcon.svg";
+import chatIcon from "../../../../_assets/chat-icon.svg";
 import Image from "next/image";
 import KycLevel from "../../KYC/KycLevel";
 import { KycContext } from "@/components/Context/KycContext";
-const UserInfo = () => {
+import { usePathname } from "next/navigation";
+import Button from "../../Button";
+const UserInfo = ({ userImage }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
+  const router = usePathname();
   return (
     <StyledUserInfo>
       <div className="userInfo">
@@ -40,18 +44,25 @@ const UserInfo = () => {
           </ul>
         </div>
       </div>
-      <div className="kycWrapper">
-        <div className="headingWrapper">
-          <strong className="headingText">My KYC Level</strong>
-          <strong className="headingText">{kycLevel - 1}</strong>
+      {router == "/profile" ? (
+        <div className="kycWrapper">
+          <div className="headingWrapper">
+            <strong className="headingText">My KYC Level</strong>
+            <strong className="headingText">{kycLevel - 1}</strong>
+          </div>
+          <div className="updgradeKyc">
+            <KycLevel level={kycLevel} />
+            <span className="discreption" onClick={checkKycLevel}>
+              Upgrade KYC
+            </span>
+          </div>
         </div>
-        <div className="updgradeKyc">
-          <KycLevel level={kycLevel} />
-          <span className="discreption" onClick={checkKycLevel}>
-            Upgrade KYC
-          </span>
-        </div>
-      </div>
+      ) : (
+        <Button type="primary" md rounded width="200">
+          Chat with Lagan
+          <Image src={chatIcon} alt="chatIcon" />
+        </Button>
+      )}
     </StyledUserInfo>
   );
 };

@@ -22,6 +22,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import Field from "../../Field";
 import ModalContainer from "../../ModalContainer";
 import EditBank from "./EditBank";
+import EditProfile from "./EditBank/EditProfile";
 
 const UserDetail = () => {
   const reports_data = [
@@ -111,7 +112,7 @@ const UserDetail = () => {
             width={673}
             title="Edit Bank Info"
             btnComponent={({ onClick }) => (
-              <Button type="green" rounded sm onClick={onClick}>
+              <Button btntype="primary" rounded sm onClick={onClick}>
                 <MdModeEdit />
                 Edit Info
               </Button>
@@ -137,10 +138,18 @@ const UserDetail = () => {
       <div className="colWrapper">
         <div className="colHeader">
           <strong className="colTitle">Personal Information:</strong>
-          <Button type="primary" rounded sm>
-            <MdModeEdit />
-            Edit Info
-          </Button>
+          <ModalContainer
+            lg
+            width={673}
+            title="Edit Profile"
+            btnComponent={({ onClick }) => (
+              <Button type="primary" rounded sm onClick={onClick}>
+                <MdModeEdit />
+                Edit Info
+              </Button>
+            )}
+            content={({ onClose }) => <EditProfile onClose={onClose} />}
+          />
         </div>
         <div className="colBody">
           <div className="col-content">

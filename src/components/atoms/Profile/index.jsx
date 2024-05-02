@@ -7,6 +7,8 @@ import { IoIosArrowBack } from "react-icons/io";
 import ProfileBanner from "./ProfileBanner";
 import UserInfo from "./UserInfo";
 import UserDetail from "./UserDetail";
+import UserImage from "../../../_assets/userProfile.png";
+import bgImage from "../../../_assets/banerImage.jpg";
 
 const Profile = () => {
   const router = useRouter();
@@ -20,14 +22,13 @@ const Profile = () => {
           className="button"
           onClick={() => {
             router.back();
-          }}
-        >
+          }}>
           <IoIosArrowBack />
           Go Back
         </Button>
       </div>
-      <ProfileBanner />
-      <UserInfo />
+      <ProfileBanner image={bgImage} />
+      <UserInfo userImage={UserImage} />
       <UserDetail />
     </StyledProfile>
   );

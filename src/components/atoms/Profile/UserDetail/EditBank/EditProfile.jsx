@@ -179,7 +179,7 @@ const EditProfile = () => {
           >
             <Field />
           </Form.Item>
-          <Button rounded md btntype="green" width="170" htmlType="submit">
+          <Button rounded md btntype="primary" width="170" htmlType="submit">
             Save Changes
           </Button>
         </Form>
