@@ -109,24 +109,21 @@ const TopBar = () => {
         open={kyc1}
         setOpen={setKyc1}
         width="688"
-        title="Upgrade to KYC Level 1"
-      >
+        title="Upgrade to KYC Level 1">
         <KycBuyerLevelOne setKycLevel={setKycLevel} setOpen={setKyc1} />
       </CenterModal>
       <CenterModal
         open={kyc2}
         setOpen={setKyc2}
         width="688"
-        title="Upgrade to KYC Level 2"
-      >
+        title="Upgrade to KYC Level 2">
         <KycBuyerLevelTwo setKycLevel={setKycLevel} setOpen={setKyc2} />
       </CenterModal>
       <CenterModal
         open={kyc3}
         setOpen={setKyc3}
         width="688"
-        title="Upgrade to KYC Level 3"
-      >
+        title="Upgrade to KYC Level 3">
         <KYCBuyerThree setKycLevel={setKycLevel} setOpen={setKyc3} />
       </CenterModal>
       {/* KYC MODAL
@@ -135,8 +132,7 @@ const TopBar = () => {
         open={registermodal}
         setOpen={setRegisterModal}
         title={"Register an Account!"}
-        width="646"
-      >
+        width="646">
         <RegisterModal
           handleRegisterModal={handleRegisterModal}
           handleSellerModal={handleSellerLoginModal}
@@ -148,16 +144,14 @@ const TopBar = () => {
         open={buyermodal}
         setOpen={setBuyerModal}
         title="Register As a Buyer"
-        width="666"
-      >
+        width="666">
         <RegisterAsBuyer handleBuyerModal={handleBuyerModal} />
       </CenterModal>
       <CenterModal
         open={passwordModal}
         setOpen={setPasswordModal}
         title="Register As a Buyer"
-        width="666"
-      >
+        width="666">
         <CreatePasswordModal
           createPasswordModal={createPasswordModal}
           handleCompleteRegistration={handleCompleteRegistration}
@@ -167,16 +161,14 @@ const TopBar = () => {
         open={completeRegistrationModal}
         setOpen={setCompleteRegistrationModal}
         title="Complete Registration"
-        width="804"
-      >
+        width="804">
         <CompleteRegistrationModal handleRegistration={handleRegistration} />
       </CenterModal>
       <CenterModal
         open={sellerregistermodal}
         setOpen={setSellerRegisterModal}
         title="Register As a Seller"
-        width="666"
-      >
+        width="666">
         <LoginAsBuyerModal
           handleSellerRegisterModal={() => {
             setSellerRegisterModal(false);
@@ -189,8 +181,7 @@ const TopBar = () => {
         open={sellerpasswordModal}
         setOpen={setSellerPasswordModal}
         title="Register As a Seller"
-        width="666"
-      >
+        width="666">
         <CreatePasswordModal
           type="Register As Seller"
           handleSellerPasswordModal={() => {
@@ -203,8 +194,7 @@ const TopBar = () => {
         open={loginmodal}
         setOpen={setLoginModal}
         title={"Cakeshare Login"}
-        width="622"
-      >
+        width="622">
         <RegisterModal
           handleRegisterModal={handleLoginModal}
           handleSellerModal={handleSellerModal}
@@ -216,16 +206,14 @@ const TopBar = () => {
         open={buyerloginmodal}
         setOpen={setBuyerLoginModal}
         title="Login As a Buyer"
-        width="666"
-      >
+        width="666">
         <LoginAsBuyerModal handleLoginModal={() => setBuyerLoginModal(false)} />
       </CenterModal>
       <CenterModal
         open={sellerloginmodal}
         setOpen={setSellerLoginModal}
         title="Login As a Seller"
-        width="666"
-      >
+        width="666">
         <LoginAsBuyerModal
           handleRegisterModal={() => {
             setRegisterModal(true);
@@ -260,8 +248,7 @@ const TopBar = () => {
               href="/"
               className={
                 router === "/" ? "textField textField-home" : "textField"
-              }
-            >
+              }>
               <MdStorefront />
               <span>Marketplace</span>
             </Link>
@@ -287,8 +274,7 @@ const TopBar = () => {
             className="notification"
             onClick={() => {
               setNotifications(!notifications);
-            }}
-          >
+            }}>
             <Image src={bell} alt="bell" className="bell" />
             <Image src={bellWhite} alt="bell" className="bell-white" />
             <div
@@ -296,8 +282,7 @@ const TopBar = () => {
                 notifications
                   ? "notificationWrapper-visible"
                   : "notificationWrapper"
-              }
-            >
+              }>
               <Notifications />
             </div>
           </div>
@@ -312,11 +297,10 @@ const TopBar = () => {
                 <Button
                   rounded
                   sm
-                  btntype="new"
+                  btntype="primary"
                   onClick={() => {
                     setOpenProfile(!openProfile);
-                  }}
-                >
+                  }}>
                   <Image src={profile} alt="profile" />
                   Alex
                   <MdArrowDropDown />
@@ -330,8 +314,7 @@ const TopBar = () => {
                 type="new"
                 rounded
                 sm
-                onClick={() => setRegisterModal(true)}
-              >
+                onClick={() => setRegisterModal(true)}>
                 <Image src={register} alt="register" />
                 Register
               </Button>
@@ -342,8 +325,7 @@ const TopBar = () => {
                 onClick={() => {
                   setLoginModal(true);
                   setIsLoggedIn(true);
-                }}
-              >
+                }}>
                 Login
               </Button>
             </div>
