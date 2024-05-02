@@ -56,10 +56,17 @@ export const BannerWrapper = styled.div`
       transform: rotate(180deg);
     }
     .slick-dots {
-      bottom: 35px;
-      right: auto;
-      left: 50px;
-      text-align: left;
+      top: 35px;
+      left: auto;
+      right: 50px;
+      text-align: right;
+      @media screen and (min-width: 992px) {
+        top: auto;
+        bottom: 35px;
+        right: auto;
+        left: 50px;
+        text-align: left;
+      }
       li {
         width: 10px;
         height: 10px;
@@ -85,24 +92,20 @@ export const BannerWrapper = styled.div`
 `;
 
 export const SlideWrapp = styled.div`
-  min-height: 364px;
+  min-height: 600px;
   overflow: hidden;
-  border-radius: 40px;
-  background-image: url(${(props) => props.$bg.src});
+  background-image: url(${(props) => props.$resp.src});
   background-size: 100% 100%;
-  /* background-size: cover; */
   background-position: center;
   background-repeat: no-repeat;
-  display: flex !important;
-  align-items: flex-end;
   color: white;
   .textWrapp {
-    max-width: 503px;
-    font-size: 40px;
+    max-width: 350px;
+    font-size: 25px;
+    line-height: 29px;
     font-weight: 500;
-    line-height: 50px;
     text-align: left;
-    padding: 20px 20px 50px 50px;
+    padding: 120px 50px 100px 20px;
     strong {
       display: block;
       margin-bottom: 20px;
@@ -116,6 +119,28 @@ export const SlideWrapp = styled.div`
       font-weight: 400;
       line-height: 20px;
       color: var(--white);
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    background-image: url(${(props) => props.$bg.src});
+    background-size: 100% 100%;
+    display: flex !important;
+    align-items: flex-end;
+    min-height: 364px;
+    border-radius: 40px;
+    .textWrapp {
+      max-width: 400px;
+      padding: 20px 20px 70px 50px;
+      font-size: 30px;
+      line-height: 40px;
+    }
+  }
+  @media screen and (min-width: 1350px) {
+    .textWrapp {
+      max-width: 503px;
+      font-size: 40px;
+      line-height: 50px;
     }
   }
   @media screen and (min-width: 1500px) {

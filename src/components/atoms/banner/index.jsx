@@ -27,21 +27,21 @@ const Banner = () => {
   return (
     <BannerWrapper>
       <Slider {...settings}>
-        <SlideWrapp $bg={banner1desk}>
+        <SlideWrapp $bg={banner1desk} $resp={banner1resp}>
           <div className="textWrapp">
             <strong>Turkish Government, House Bonds!</strong>
             <button className="btn">Buy Now</button>
           </div>
           {/* <Image src={banner1resp} className="banner2" alt="banner" /> */}
         </SlideWrapp>
-        <SlideWrapp $bg={banner2desk}>
+        <SlideWrapp $bg={banner2desk} $resp={banner2resp}>
           <div className="textWrapp">
             <strong>Find Best Apartments to make an Investment!</strong>
             <button className="btn">Buy Now</button>
           </div>
           {/* <Image src={banner2resp} className="banner2" alt="banner" /> */}
         </SlideWrapp>
-        <SlideWrapp $bg={banner3desk}>
+        <SlideWrapp $bg={banner3desk} $resp={banner3resp}>
           <div className="textWrapp">
             <strong>Ferrari Car Shares Investment Scheme!</strong>
             <button className="btn">Buy Now</button>
