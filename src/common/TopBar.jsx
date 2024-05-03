@@ -217,7 +217,6 @@ const TopBar = () => {
         setOpen={setBuyerLoginModal}
         title="Login As a Buyer"
         width="666"
-        type="Login As a Buyer"
       >
         <LoginAsBuyerModal handleLoginModal={() => setBuyerLoginModal(false)} />
       </CenterModal>

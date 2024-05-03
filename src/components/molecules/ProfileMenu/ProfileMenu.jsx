@@ -40,17 +40,7 @@ const ProfileMenu = ({ openProfile, ...rest }) => {
               <h5>My Profile</h5>
             </div>
           </Link>
-          <Link href="/seller-profile">
-            <div className="DarkTheme">
-              <Image
-                src={myProfileIcon}
-                alt="My profile"
-                width={17}
-                height={17}
-              />
-              <h5>Seller Profile</h5>
-            </div>
-          </Link>
+
           <div className="DarkTheme">
             <Image
               src={privacyPolicyIcon}

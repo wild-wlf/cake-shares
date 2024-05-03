@@ -12,6 +12,7 @@ import ConfirmIcon from "../../../_assets/confirmIcon.svg";
 import { useRouter } from "next/router";
 import InitiateInvestmentModal from "../InitiateInvestmentModal";
 import InvestmentSuccesModal from "../InvestmentSuccesModal";
+import ProductDescription from "../productDescription";
 
 const ProductDetail = () => {
   const router = useRouter();
@@ -117,9 +118,9 @@ const ProductDetail = () => {
         </div>
 
         <div className="investwrapper">
-          <div className="whyinvest">
-            <h4>Why Invest in this?</h4>
-            <span>
+          <div className="content-holder">
+            <strong>Why Invest in this?</strong>
+            <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
               ultricies et mi quis scelerisque. Integer vitae posuere est, nec
               mollis diam. Donec feugiat eu mauris sed rutrum. Interdum et
@@ -127,23 +128,19 @@ const ProductDetail = () => {
               gravida nulla. Donec feugiat eu mauris sed rutrum. Interdum et
               malesuada fames ac ante ipsum primis in faucibus. Aliquam auctor
               gravida nulla.
-            </span>
+            </p>
+            <strong>Description</strong>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+              ultricies et mi quis scelerisque. Integer vitae posuere est, nec
+              mollis diam. Donec feugiat eu mauris sed rutrum. Interdum et
+              malesuada fames ac ante ipsum primis in faucibus. Aliquam auctor
+              gravida nulla. Donec feugiat eu mauris sed rutrum. Interdum et
+              malesuada fames ac ante ipsum primis in faucibus. Aliquam auctor
+              gravida nulla.
+            </p>
           </div>
-          <div className="investment">
-            <div className="amountdiv">
-              <div>
-                <span>Min Investment (USD)</span>
-                <h3>$ 5000</h3>
-              </div>
-              <div>
-                <span>Asset Value (USD)</span>
-                <h3>$ 2,000,000</h3>
-              </div>
-            </div>
-            <div className="total">
-              Total Value Raised (USD) <span> $ 50,000</span>
-            </div>
-          </div>
+          <ProductDescription />
         </div>
       </ProductDetailWrapper>
     </>
