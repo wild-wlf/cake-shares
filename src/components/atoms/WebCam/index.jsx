@@ -43,7 +43,14 @@ const WebCam = ({ handelKycLevel }) => {
   }, [webcamRef]);
 
   useEffect(() => {
-    console.log({ win: window.navigator });
+     navigator?.mediaDevices.getUserMedia({
+       video: true,
+     });
+     console.log({
+       win: navigator.mediaDevices.getUserMedia({
+         video: true,
+       }),
+     });
   }, []);
   // console.log({ webcamRef });
   const onUserMedia = (e) => {
