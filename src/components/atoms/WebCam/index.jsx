@@ -36,6 +36,24 @@ const videoConstraints = {
 const WebCam = ({ handelKycLevel }) => {
   const webcamRef = useRef(null);
   const [url, setUrl] = useState(null);
+  const [stream, setStream] = useState(null);
+  const [fetch, setFetch] = useState(false);
+  const [error, setError] = useState(null);
+
+  const requestAccess = async () => {
+    try {
+      console.log("inside");
+      const mediaStream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+      });
+
+      console.log({ mediaStream });
+      setStream(mediaStream);
+    } catch (err) {
+      console.error("Error accessing camera and/or microphone:", err);
+      setError(err.message);
+    }
+  };
 
   const capturePhoto = useCallback(async () => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -45,17 +63,22 @@ const WebCam = ({ handelKycLevel }) => {
 
   // console.log({ webcamRef });
   const onUserMedia = (e) => {
-    console.log(e);
+    //  console.log(e);
   };
   return (
     <StyledFormGroup>
+      <button onClick={requestAccess}>
+        Request Camera and Microphone Access
+      </button>
+      <button onClick={() => setFetch(!fetch)}>reload</button>
       <WebCamHolder $preview={url}>
-        {url == null && (
+        {url == null && fetch && (
           <>
             <StyledWebCam
               mirrored
               ref={webcamRef}
               audio={false}
+              srcObject={stream}
               screenshotFormat="image/jpeg"
               videoConstraints={videoConstraints}
               onUserMedia={onUserMedia}
