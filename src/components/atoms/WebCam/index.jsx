@@ -1,4 +1,5 @@
 /* eslint-disable react/display-name */
+"use client";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import PropTypes from "prop-types";
@@ -35,33 +36,12 @@ const videoConstraints = {
 const WebCam = ({ handelKycLevel }) => {
   const webcamRef = useRef(null);
   const [url, setUrl] = useState(null);
-  const [stream, setStream] = useState(null);
-
-  const webCamperm = useCallback(async () => {
-    try {
-      const mediaStream = await navigator?.mediaDevices.getUserMedia({
-        video: true,
-      });
-      setStream(mediaStream);
-      if (webcamRef.current) {
-        webcamRef.current.srcObject = mediaStream;
-      }
-    } catch (err) {
-      console.error("Error accessing camera:", err);
-    }
-  }, []);
-
-  useEffect(() => {
-    webCamperm();
-  }, []);
 
   const capturePhoto = useCallback(async () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setUrl(imageSrc);
     console.log("here");
   }, [webcamRef]);
-
-
 
   // console.log({ webcamRef });
   const onUserMedia = (e) => {
