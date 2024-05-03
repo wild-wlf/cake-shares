@@ -1,5 +1,4 @@
 /* eslint-disable react/display-name */
-"use client";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import PropTypes from "prop-types";
@@ -36,24 +35,6 @@ const videoConstraints = {
 const WebCam = ({ handelKycLevel }) => {
   const webcamRef = useRef(null);
   const [url, setUrl] = useState(null);
-  const [stream, setStream] = useState(null);
-  const [fetch, setFetch] = useState(false);
-  const [error, setError] = useState(null);
-
-  const requestAccess = async () => {
-    try {
-      console.log("inside");
-      const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-      });
-
-      console.log({ mediaStream });
-      setStream(mediaStream);
-    } catch (err) {
-      console.error("Error accessing camera and/or microphone:", err);
-      setError(err.message);
-    }
-  };
 
   const capturePhoto = useCallback(async () => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -61,24 +42,23 @@ const WebCam = ({ handelKycLevel }) => {
     console.log("here");
   }, [webcamRef]);
 
-  // console.log({ webcamRef });
   const onUserMedia = (e) => {
-    //  console.log(e);
+    console.log(e);
   };
   return (
     <StyledFormGroup>
-      <button onClick={requestAccess}>
-        Request Camera and Microphone Access
-      </button>
-      <button onClick={() => setFetch(!fetch)}>reload</button>
+      {/* <Alert
+        type="info"
+        message="Please place your face inside the frame and take photo."
+        css="margin-bottom: 20px;"
+      /> */}
       <WebCamHolder $preview={url}>
-        {url == null && fetch && (
+        {url == null && (
           <>
             <StyledWebCam
               mirrored
               ref={webcamRef}
               audio={false}
-              srcObject={stream}
               screenshotFormat="image/jpeg"
               videoConstraints={videoConstraints}
               onUserMedia={onUserMedia}
