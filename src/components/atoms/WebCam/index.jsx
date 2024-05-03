@@ -42,16 +42,15 @@ const WebCam = ({ handelKycLevel }) => {
     console.log("here");
   }, [webcamRef]);
 
+  useEffect(() => {
+    console.log({ win: window.navigator });
+  }, []);
+  // console.log({ webcamRef });
   const onUserMedia = (e) => {
     console.log(e);
   };
   return (
     <StyledFormGroup>
-      {/* <Alert
-        type="info"
-        message="Please place your face inside the frame and take photo."
-        css="margin-bottom: 20px;"
-      /> */}
       <WebCamHolder $preview={url}>
         {url == null && (
           <>
