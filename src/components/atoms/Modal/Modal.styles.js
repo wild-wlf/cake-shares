@@ -7,7 +7,6 @@ export const StyledModal = styled.div`
   inset: 0;
   background: rgba(50, 59, 75, 0.1);
   backdrop-filter: blur(4px);
-  z-index: 1;
   padding: 20px;
   visibility: ${({ open }) => (open ? "visible" : "hidden")};
   opacity: ${({ open }) => (open ? "1" : "0")};
@@ -16,7 +15,7 @@ export const StyledModal = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9;
+  z-index: ${({ $zIndex }) => ($zIndex ? $zIndex : "99")};
 `;
 
 export const ContentHolder = styled.div`

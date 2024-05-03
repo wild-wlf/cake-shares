@@ -106,6 +106,7 @@ const TopBar = () => {
     <>
       {/* KYC MODAL */}
       <CenterModal
+        zIndex={9999}
         open={kyc1}
         setOpen={setKyc1}
         width="688"
@@ -114,6 +115,7 @@ const TopBar = () => {
         <KycBuyerLevelOne setKycLevel={setKycLevel} setOpen={setKyc1} />
       </CenterModal>
       <CenterModal
+        zIndex={9999}
         open={kyc2}
         setOpen={setKyc2}
         width="688"
@@ -122,6 +124,7 @@ const TopBar = () => {
         <KycBuyerLevelTwo setKycLevel={setKycLevel} setOpen={setKyc2} />
       </CenterModal>
       <CenterModal
+        zIndex={9999}
         open={kyc3}
         setOpen={setKyc3}
         width="688"
@@ -321,7 +324,7 @@ const TopBar = () => {
                   Alex
                   <MdArrowDropDown />
                 </Button>
-                <ProfileMenu />
+                <ProfileMenu setIsLoggedIn={setIsLoggedIn} />
               </div>
             </>
           ) : (
@@ -349,7 +352,7 @@ const TopBar = () => {
             </div>
           )}
         </div>
-        <ProfileMenu openProfile={openProfile} />
+        <ProfileMenu openProfile={openProfile} setIsLoggedIn={setIsLoggedIn} />
       </StyledTopBar>
     </>
   );

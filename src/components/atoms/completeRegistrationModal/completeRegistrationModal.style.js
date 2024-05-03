@@ -42,7 +42,12 @@ export const Wrapper = styled.div`
       span {
         font-size: 14px;
         font-weight: 500;
+        white-space: nowrap;
       }
+    }
+    .kyc-wrap {
+      display: flex;
+      gap: 10px;
     }
   }
   .upgrade-kyc {

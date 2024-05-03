@@ -9,10 +9,10 @@ import termsIcon from "../../../_assets/termsIcon.png";
 import Image from "next/image";
 import Link from "next/link";
 
-const ProfileMenu = ({ openProfile, ...rest }) => {
+const ProfileMenu = ({ openProfile, setIsLoggedIn }) => {
   return (
     <>
-      <ProfileSec $show={openProfile} {...rest}>
+      <ProfileSec $show={openProfile}>
         <div className="top">
           <div className="Dp">
             <Image
@@ -69,7 +69,7 @@ const ProfileMenu = ({ openProfile, ...rest }) => {
             <h5>Terms & Conditions</h5>
           </div>
           <hr />
-          <div className="LogOut">
+          <div className="LogOut" onClick={() => setIsLoggedIn(false)}>
             <Image
               className="Logo"
               width={20}

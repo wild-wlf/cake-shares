@@ -16,6 +16,7 @@ const CenterModal = ({
   desktopTop,
   title,
   setIsEditing,
+  zIndex,
 }) => {
   // const { clearFormData } = useContext(AuthContext);
   useEffect(() => {
@@ -49,6 +50,7 @@ const CenterModal = ({
   return (
     open && (
       <StyledModal
+        $zIndex={zIndex}
         open={open}
         onClick={handleClose}
         onKeyDown={(e) => {

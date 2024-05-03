@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Wrapper } from "./completeRegistrationModal.style";
 import Field from "../Field";
 import Form, { useForm } from "@/components/molecules/Form";
@@ -8,7 +8,11 @@ import Image from "next/image";
 import { countries } from "@/components/Constant";
 import SingleValueSlider from "../singleValueSlider";
 import UploadImg from "@/components/molecules/UploadImg";
+import KycLevel from "../KYC/KycLevel";
+import { KycContext } from "@/components/Context/KycContext";
 const CompleteRegistrationModal = ({ handleRegistration }) => {
+  const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
+
   const [arr, setArr] = useState(countries);
   const [form] = useForm();
 
@@ -213,11 +217,14 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
             <div className="kyc-div">
               <div>
                 <span>My KYC Level</span>
-                <span>0</span>
+                <span>{kycLevel - 1}</span>
               </div>
-              <div>
-                <SingleValueSlider />
-                <span className="upgrade-kyc">Upgrade KYC</span>
+              <div className="kyc-wrap">
+                <KycLevel level={kycLevel} />
+
+                <span className="upgrade-kyc" onClick={checkKycLevel}>
+                  Upgrade KYC
+                </span>
               </div>
             </div>
           </div>

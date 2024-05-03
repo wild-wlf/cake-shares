@@ -8,14 +8,13 @@ import banner1resp from "../../../_assets/slide1resp.png";
 import banner2resp from "../../../_assets/slide2resp.png";
 import banner3resp from "../../../_assets/slide3resp.png";
 import Slider from "react-slick";
-import arrowRight from "../../../_assets/arrow.png";
 
 const Banner = () => {
   var settings = {
     dots: true,
     arrows: true,
     infinite: true,
-    autoplay: false,
+    autoplay: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
