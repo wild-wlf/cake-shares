@@ -35,7 +35,7 @@ const videoConstraints = {
 const WebCam = ({ handelKycLevel }) => {
   const webcamRef = useRef(null);
   const [url, setUrl] = useState(null);
-  const [stream, setstream] = useState(null);
+  const [stream, setStream] = useState(null);
 
   const webCamperm = useCallback(async () => {
     try {
