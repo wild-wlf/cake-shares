@@ -35,6 +35,25 @@ const videoConstraints = {
 const WebCam = ({ handelKycLevel }) => {
   const webcamRef = useRef(null);
   const [url, setUrl] = useState(null);
+  const [stream, setstream] = useState(null);
+
+  const webCamperm = useCallback(async () => {
+    try {
+      const mediaStream = await navigator?.mediaDevices.getUserMedia({
+        video: true,
+      });
+      setStream(mediaStream);
+      if (webcamRef.current) {
+        webcamRef.current.srcObject = mediaStream;
+      }
+    } catch (err) {
+      console.error("Error accessing camera:", err);
+    }
+  }, []);
+
+  useEffect(() => {
+    webCamperm();
+  }, []);
 
   const capturePhoto = useCallback(async () => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -42,16 +61,8 @@ const WebCam = ({ handelKycLevel }) => {
     console.log("here");
   }, [webcamRef]);
 
-  useEffect(() => {
-     navigator?.mediaDevices.getUserMedia({
-       video: true,
-     });
-     console.log({
-       win: navigator.mediaDevices.getUserMedia({
-         video: true,
-       }),
-     });
-  }, []);
+
+
   // console.log({ webcamRef });
   const onUserMedia = (e) => {
     console.log(e);
