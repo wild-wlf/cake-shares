@@ -32,16 +32,22 @@ export const BannerWrapper = styled.div`
   .slick-slider {
     .slick-prev,
     .slick-next {
-      width: 30px;
-      height: 30px;
+      width: 25px;
+      height: 25px;
       z-index: 5;
-      top: auto;
+      top: 215px;
       background: red;
       right: 20px;
-      bottom: 25px;
       background: url(${arrowRight.src});
       background-size: 100% 100%;
       background-repeat: no-repeat;
+      @media screen and (min-width: 992px) {
+        width: 30px;
+        height: 30px;
+        right: 20px;
+        bottom: 25px;
+        top: auto;
+      }
       &:before {
         display: none;
       }
@@ -52,15 +58,19 @@ export const BannerWrapper = styled.div`
     .slick-prev {
       left: auto;
       right: 55px;
-      bottom: 40px;
+      top: 204px;
       transform: rotate(180deg);
+      @media screen and (min-width: 992px) {
+        top: auto;
+        left: auto;
+        right: 55px;
+        bottom: 40px;
+      }
     }
     .slick-dots {
-      top: 35px;
-      left: auto;
-      right: 50px;
-      text-align: right;
+      display: none;
       @media screen and (min-width: 992px) {
+        display: block;
         top: auto;
         bottom: 35px;
         right: auto;
@@ -95,14 +105,14 @@ export const SlideWrapp = styled.div`
   min-height: 600px;
   overflow: hidden;
   background-image: url(${(props) => props.$resp.src});
-  background-size: 100% 100%;
+  background-size: 120% 100%;
   background-position: center;
   background-repeat: no-repeat;
   color: white;
   .textWrapp {
-    max-width: 350px;
-    font-size: 25px;
-    line-height: 29px;
+    max-width: 300px;
+    font-size: 20px;
+    line-height: 24px;
     font-weight: 500;
     text-align: left;
     padding: 120px 50px 100px 20px;
@@ -119,6 +129,16 @@ export const SlideWrapp = styled.div`
       font-weight: 400;
       line-height: 20px;
       color: var(--white);
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 25px;
+    line-height: 29px;
+    background-size: 100% 100%;
+
+    .textWrapp {
+      max-width: 350px;
     }
   }
 

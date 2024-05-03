@@ -20,8 +20,14 @@ const Banner = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     swipeToSlide: true,
-    fade: true,
-    responsive: [],
+    responsive: [
+      {
+        breakpoint: 992,
+        settings: {
+          fade: true,
+        },
+      },
+    ],
   };
 
   return (
