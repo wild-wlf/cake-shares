@@ -171,13 +171,6 @@ export const StyledTopBar = styled.header`
 
   @media (max-width: 576px) {
     margin: 0 -15px;
-
-    .wallet {
-      display: none;
-    }
-    .buttonWrapper {
-      display: none;
-    }
   }
 
   @media (max-width: 768px) {
