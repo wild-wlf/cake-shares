@@ -11,6 +11,10 @@ import SellerPersonalInfo from "@/components/atoms/SellerPersonalInfo";
 import Categories from "@/components/atoms/categories";
 
 const SellerProfile = () => {
+  const usertype = {
+    userType: "Individual Seller",
+    categories: "Seller’s Product Top Categories:",
+  };
   const router = useRouter();
   return (
     <StyledProfile>
@@ -30,7 +34,7 @@ const SellerProfile = () => {
         title="Real Estate Broker Things mate!"
         image={sellerHeroImage}
       />
-      <UserInfo userImage={sellerImage} />
+      <UserInfo userImage={sellerImage} type={usertype} />
       <SellerPersonalInfo />
       <Categories title="Seller’s Other Products" />
       <Categories title="Seller’s Fully Funded Products" />

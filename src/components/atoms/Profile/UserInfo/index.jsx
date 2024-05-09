@@ -11,7 +11,13 @@ import { usePathname } from "next/navigation";
 import Button from "../../Button";
 import editIcon from "../../../../_assets/editIcon.svg";
 import { MdEdit } from "react-icons/md";
-const UserInfo = ({ userImage }) => {
+const UserInfo = ({
+  userImage,
+  type = {
+    userType: "CakeShare Buyer",
+    categories: "My Investments in Categories:",
+  },
+}) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
   const router = usePathname();
   const [profileImg, setProfileImg] = useState("");
@@ -48,12 +54,12 @@ const UserInfo = ({ userImage }) => {
         <div className="textWrapper">
           <strong className="name">Alex Mertiz</strong>
           <div className="discreption">
-            <span className="active">CakeShare Buyer </span>
+            <span className="active">{type.userType}</span>
             <span className="addbefore"> Member since Feb 15, 2024</span>
           </div>
         </div>
         <div className="textWrapper addbefore">
-          <span className="categoriesText">My Investments in Categories:</span>
+          <span className="categoriesText">{type.categories}</span>
           <ul className="categoriesWrapper">
             <li className="categoriesList">
               <Image src={popular} alt="popular" />
