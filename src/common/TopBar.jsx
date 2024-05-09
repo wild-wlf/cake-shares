@@ -26,6 +26,7 @@ import line from "../_assets/sidenav-line.svg";
 import { FaWallet } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 
 const TopBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -47,6 +48,7 @@ const TopBar = () => {
   const ProfileRef = useRef(null);
 
   const router = usePathname();
+  const navigate = useRouter();
   const handleClickOutsideProfile = (event) => {
     if (ProfileRef.current && !ProfileRef.current.contains(event.target)) {
       setOpenProfile(false);
@@ -132,7 +134,7 @@ const TopBar = () => {
       >
         <KYCBuyerThree setKycLevel={setKycLevel} setOpen={setKyc3} />
       </CenterModal>
-      {/* KYC MODAL
+      {/* KYC MODAL */}
       {/* Registration Modals */}
       <CenterModal
         open={registermodal}
@@ -234,7 +236,7 @@ const TopBar = () => {
             setRegisterModal(true);
             setSellerLoginModal(false);
           }}
-          handleSellerLoginModal={() => setSellerLoginModal(false)}
+          handleSellerLoginModal={(e) => setSellerLoginModal(false)}
           type="Seller"
         />
       </CenterModal>
@@ -307,7 +309,15 @@ const TopBar = () => {
 
           {isLoggedIn ? (
             <>
-              <div className="wallet">
+              <div
+                className="wallet"
+                onClick={() =>
+                  window.open(
+                    "https://cake-admin.webevis.com/?type=buyer",
+                    "_blank"
+                  )
+                }
+              >
                 <FaWallet />
                 <span>My Wallet</span>
               </div>
@@ -345,6 +355,10 @@ const TopBar = () => {
                 onClick={() => {
                   setLoginModal(true);
                   setIsLoggedIn(true);
+                  // navigate.push({
+                  //   pathname: "http://localhost:3000/",
+                  //   query: { type: "seller" },
+                  // });
                 }}
               >
                 Login

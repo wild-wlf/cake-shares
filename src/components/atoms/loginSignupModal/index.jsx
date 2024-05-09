@@ -7,6 +7,7 @@ import { FcGoogle } from "react-icons/fc";
 import Facebook from "../../../_assets/facebook.svg";
 import Image from "next/image";
 import Select from "../Select";
+import { useRouter } from "next/router";
 
 const LoginSignupModal = ({
   handleRegisterModal,
@@ -16,6 +17,22 @@ const LoginSignupModal = ({
   type,
 }) => {
   const [form] = useForm();
+  const router = useRouter();
+  function handelSubmit(e) {
+    console.log(e);
+    if (e?.select_type.value === "company_seller") {
+      router.push({
+        pathname: "https://cake-admin.webevis.com/",
+        query: { type: "company" },
+      });
+    } else {
+      router.push({
+        pathname: "https://cake-admin.webevis.com/",
+        query: { type: "seller" },
+      });
+    }
+    handleSellerLoginModal();
+  }
   return (
     <Wrapper>
       <div>
@@ -23,7 +40,7 @@ const LoginSignupModal = ({
           Please provide the details to proceed.
         </span>
       </div>
-      <Form form={form}>
+      <Form form={form} onSubmit={handelSubmit}>
         {type === "Register As Seller" ? (
           <div>
             <Form.Item
@@ -33,11 +50,13 @@ const LoginSignupModal = ({
               sm
               rounded
               placeholder="Select Type"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
+              rules={
+                [
+                  // {
+                  //   required: true,
+                  // },
+                ]
+              }
             >
               <Select
                 options={[
@@ -52,13 +71,14 @@ const LoginSignupModal = ({
             <Form.Item
               type="text"
               label="Seller Type"
-              name="name"
+              name="select_type"
               sm
               rounded
               placeholder="Select Type"
               rules={[
+                { required: true },
                 {
-                  required: true,
+                  message: "Maximum Character Length is 256",
                 },
               ]}
             >
@@ -77,14 +97,14 @@ const LoginSignupModal = ({
           <Form.Item
             type="text"
             label="Username"
-            name="name"
+            name="userName"
             sm
             rounded
             placeholder="Alex123"
             rules={[
-              {
-                required: true,
-              },
+              // {
+              //   required: true,
+              // },
               {
                 pattern: /^.{0,40}$/,
                 message: "Maximum Character Length is 256",
@@ -101,9 +121,9 @@ const LoginSignupModal = ({
             rounded
             placeholder="alex123@gmail.com"
             rules={[
-              {
-                required: true,
-              },
+              // {
+              //   required: true,
+              // },
               {
                 pattern: /^.{0,256}$/,
                 message: "Maximum Character Length is 256",
@@ -156,14 +176,14 @@ const LoginSignupModal = ({
             md
             btntype="primary"
             width="170"
-            onClick={
-              type === "Seller"
-                ? handleSellerLoginModal
-                : type === "Register As Seller"
-                ? handleSellerRegisterModal
-                : handleBuyerModal
-            }
-            // htmlType="submit"
+            // onClick={
+            // type === "Seller"
+            //   ? handleSellerLoginModal
+            //   : type === "Register As Seller"
+            //   ? handleSellerRegisterModal
+            //   : handleBuyerModal
+            // }
+            htmlType={type === "Seller" ? "submit" : "button"}
           >
             Continue
           </Button>

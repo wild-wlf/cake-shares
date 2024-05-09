@@ -9,15 +9,13 @@ const LoginAsBuyerModal = ({
   type,
 }) => {
   return (
-    <div>
-      <LoginSignupModal
-        handleRegisterModal={handleRegisterModal}
-        handleBuyerModal={handleLoginModal}
-        handleSellerLoginModal={handleSellerLoginModal}
-        handleSellerRegisterModal={handleSellerRegisterModal}
-        type={type}
-      />
-    </div>
+    <LoginSignupModal
+      handleRegisterModal={handleRegisterModal}
+      handleBuyerModal={handleLoginModal}
+      handleSellerLoginModal={handleSellerLoginModal}
+      handleSellerRegisterModal={handleSellerRegisterModal}
+      type={type}
+    />
   );
 };
 
