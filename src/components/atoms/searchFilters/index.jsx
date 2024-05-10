@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { SearchFiltersWrapper } from "./searchFilters.style";
-import { Sort } from "../advanceSearch/advanceSearch.style";
 import Field from "../Field";
 import Button from "../Button";
-import { IoMdArrowDropdown } from "react-icons/io";
 import { FaMinus } from "react-icons/fa6";
+import Form, { useForm } from "@/components/molecules/Form";
+import Select from "../Select";
 
 const SearchFilters = () => {
-  const [investmentBox, setInvestmentBox] = useState(false);
-  const [countryBox, setCountryBox] = useState(false);
-  const [kycBox, setKycBox] = useState(false);
+  const [form] = useForm();
   const [selected, setSelected] = useState({
     investment: "Select Type",
     country: "Select Country",
@@ -21,203 +19,177 @@ const SearchFilters = () => {
     private: false,
   });
 
-  const handleRadioChecked = (e) => {
-    const { name } = e.target;
-
-    setSelected((prev) => ({
-      ...prev,
-      investment: name,
-    }));
-    setSearchQuery((prev) => ({
-      ...prev,
-      investmentType: name,
-    }));
-    setInvestmentBox(false);
-  };
-  const handleCountryChecked = (e) => {
-    const { name } = e.target;
-
-    setSelected((prev) => ({
-      ...prev,
-      country: name,
-    }));
-    setSearchQuery((prev) => ({
-      ...prev,
-      country: name,
-    }));
-    setCountryBox(false);
-  };
-  const handleKycChecked = (e) => {
-    const { name } = e.target;
-    setSelected((prev) => ({
-      ...prev,
-      kyc: name,
-    }));
-    setSearchQuery((prev) => ({
-      ...prev,
-      kyc: name,
-    }));
-    setKycBox(false);
-  };
-  const handlePopularChecked = () => {
-    setSearchQuery((prev) => ({
-      ...prev,
-      popular: !prev.popular,
-    }));
-  };
-  const handlePrivateChecked = () => {
-    setSearchQuery((prev) => ({
-      ...prev,
-      private: !prev.private,
-    }));
-  };
   return (
-    <SearchFiltersWrapper>
-      <div className="dropdown-div">
-        <span>Investment Type</span>
-        <Sort className={investmentBox && "active"}>
-          <Button
-            type="dropdown"
-            rounded
+    <Form form={form}>
+      <SearchFiltersWrapper>
+        <div className="dropdown-div">
+          <Form.Item
+            type="text"
+            label="Investment Type"
+            name="investment_type"
             sm
-            width="500"
-            onClick={() => setInvestmentBox(!investmentBox)}
-            className="dropdown"
-          >
-            {selected.investment}
-            <IoMdArrowDropdown size={20} />
-          </Button>
-          <div className="sort-list">
-            {investmentBox && (
-              <div className="list">
-                <Field
-                  type="radio"
-                  label="Properties"
-                  name="Properties"
-                  radioBorder="var(--gray-2)"
-                  labelReverse
-                  onChange={handleRadioChecked}
-                  value={selected.investment === "Properties"}
-                />
-                <Field
-                  type="radio"
-                  label="Vehicles"
-                  name="Vehicles"
-                  radioBorder="var(--gray-2)"
-                  labelReverse
-                  onChange={handleRadioChecked}
-                  value={selected.investment === "Vehicles"}
-                />
-              </div>
-            )}
-          </div>
-        </Sort>
-      </div>
-      <div className="dropdown-div">
-        <span>Country</span>
-        <Sort className={countryBox && "active"}>
-          <Button
-            type="dropdown"
             rounded
-            sm
-            width="500"
-            onClick={() => setCountryBox(!countryBox)}
-            className="dropdown"
+            placeholder="Select Type"
+            rules={[
+              {
+                pattern: /^.{0,40}$/,
+                message: "Maximum Character Length is 256",
+              },
+            ]}
           >
-            {selected.country}
-            <IoMdArrowDropdown size={20} />
-          </Button>
-          <div className="sort-list">
-            {countryBox && (
-              <div className="list">
-                <Field
-                  type="radio"
-                  label="United States"
-                  name="United States"
-                  radioBorder="var(--gray-2)"
-                  labelReverse
-                  onChange={handleCountryChecked}
-                  value={selected.country === "United States"}
-                />
-                <Field
-                  type="radio"
-                  label="United Kingdom"
-                  name="United Kingdom"
-                  radioBorder="var(--gray-2)"
-                  labelReverse
-                  onChange={handleCountryChecked}
-                  value={selected.country === "United Kingdom"}
-                />
-              </div>
-            )}
-          </div>
-        </Sort>
-      </div>
-      <div className="dropdown-div">
-        <span>KYC Level</span>
-        <Sort className={kycBox && "active"}>
-          <Button
-            type="dropdown"
+            <Select
+              options={[
+                { label: "Properties", value: "properties" },
+                { label: "Vehicles", value: "vehicles" },
+              ]}
+            />
+          </Form.Item>
+        </div>
+        <div className="dropdown-div">
+          <Form.Item
+            type="text"
+            label="Country"
+            name="country"
+            sm
             rounded
-            sm
-            width="500"
-            onClick={() => setKycBox(!kycBox)}
-            className="dropdown"
+            placeholder="Select Country"
+            rules={[
+              {
+                pattern: /^.{0,40}$/,
+                message: "Maximum Character Length is 256",
+              },
+            ]}
           >
-            {selected.kyc}
-            <IoMdArrowDropdown size={20} />
-          </Button>
-          <div className="sort-list">
-            {kycBox && (
-              <div className="list">
-                <Field
-                  type="radio"
-                  label="Level 1"
-                  name="Level 1"
-                  radioBorder="var(--gray-2)"
-                  labelReverse
-                  onChange={handleKycChecked}
-                  value={selected.kyc === "Level 1"}
-                />
-                <Field
-                  type="radio"
-                  label="Level 2"
-                  name="Level 2"
-                  radioBorder="var(--gray-2)"
-                  labelReverse
-                  onChange={handleKycChecked}
-                  value={selected.kyc === "Level 2"}
-                />
-              </div>
-            )}
-          </div>
-        </Sort>
-      </div>
-      <div className="volumeWrapper">
-        <span>Investment Volume</span>
+            <Select
+              options={[
+                { label: "United States", value: "united_states" },
+                { label: "United Kingdom", value: "united_kingdom" },
+              ]}
+            />
+          </Form.Item>
+        </div>
+        <div className="dropdown-div">
+          <Form.Item
+            type="text"
+            label="KYC Level"
+            name="kyc_level"
+            sm
+            rounded
+            placeholder="Select Level"
+            rules={[
+              {
+                pattern: /^.{0,40}$/,
+                message: "Maximum Character Length is 256",
+              },
+            ]}
+          >
+            <Select
+              options={[
+                { label: "Level 1", value: "level_1" },
+                { label: "Level 2", value: "level_2" },
+                { label: "Level 3", value: "level_3" },
+              ]}
+            />
+          </Form.Item>
+        </div>
+        <div className="volumeWrapper">
+          {/* <span>Investment Volume</span>
         <div className="inputWrapper">
           <input type="text" placeholder="$0" />
           <FaMinus size={30} />
           <input type="text" placeholder="$0" />
+        </div> */}
+          <Form.Item
+            type="text"
+            label="Investment Volume"
+            name="investment_volume"
+            sm
+            rounded
+            placeholder="$0"
+            rules={[
+              {
+                pattern: /^.{0,40}$/,
+                message: "Maximum Character Length is 256",
+              },
+            ]}
+          >
+            <Field />
+          </Form.Item>
         </div>
-      </div>
-      <div className="dropdown-div">
-        <span>Min Annual Cost</span>
-        <input type="text" placeholder="0%" />
-      </div>
-      <div className="dropdown-div">
-        <span>Min Fund Raised</span>
-        <input type="text" placeholder="0%" />
-      </div>
-      <div className="dropdown-div">
-        <span>Min Backers</span>
-        <input type="text" placeholder="0" />
-      </div>
-      <div className="dropdown-div">
-        <span>Max Days Left</span>
-        <input type="text" placeholder="0" />
-      </div>
-    </SearchFiltersWrapper>
+        <div className="dropdown-div">
+          <Form.Item
+            type="text"
+            label="Min Annual Cost"
+            name="min_annual_cost"
+            sm
+            rounded
+            placeholder="0%"
+            rules={[
+              {
+                pattern: /^.{0,40}$/,
+                message: "Maximum Character Length is 256",
+              },
+            ]}
+          >
+            <Field />
+          </Form.Item>
+        </div>
+        <div className="dropdown-div">
+          <Form.Item
+            type="text"
+            label="Min Fund Raised"
+            name="min_fund_raised"
+            sm
+            rounded
+            placeholder="0"
+            rules={[
+              {
+                pattern: /^.{0,40}$/,
+                message: "Maximum Character Length is 256",
+              },
+            ]}
+          >
+            <Field />
+          </Form.Item>
+        </div>
+        <div className="dropdown-div">
+          <Form.Item
+            type="text"
+            label="Min Backers"
+            name="min_backers"
+            sm
+            rounded
+            placeholder="0"
+            rules={[
+              {
+                pattern: /^.{0,40}$/,
+                message: "Maximum Character Length is 256",
+              },
+            ]}
+          >
+            <Field />
+          </Form.Item>
+        </div>
+        <div className="dropdown-div">
+          <Form.Item
+            type="text"
+            label="Max Days Left"
+            name="max_days_left"
+            sm
+            rounded
+            placeholder="0%"
+            rules={[
+              {
+                pattern: /^.{0,40}$/,
+                message: "Maximum Character Length is 256",
+              },
+            ]}
+          >
+            <Field />
+          </Form.Item>
+        </div>
+      </SearchFiltersWrapper>
+    </Form>
   );
 };
 

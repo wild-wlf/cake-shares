@@ -14,7 +14,6 @@ export const SearchFiltersWrapper = styled.div`
       width: 100%;
       border: 1px solid rgba(241, 241, 241, 1);
       border-radius: 100px;
-      height: 40px;
       font-size: var(--font-size-xs);
       font-family: var(--base-font-family);
       outline: none;
