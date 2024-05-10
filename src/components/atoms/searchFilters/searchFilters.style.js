@@ -23,8 +23,9 @@ export const SearchFiltersWrapper = styled.div`
   .volumeWrapper {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 7px;
     width: 100%;
+    font-size: 14px;
     .inputWrapper {
       width: 100%;
       display: flex;
@@ -34,7 +35,7 @@ export const SearchFiltersWrapper = styled.div`
         width: 100%;
         border: 1px solid rgba(241, 241, 241, 1);
         border-radius: 100px;
-        height: 40px;
+        height: 45px;
         font-size: var(--font-size-xs);
         font-family: var(--base-font-family);
         outline: none;
