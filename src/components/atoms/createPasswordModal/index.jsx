@@ -12,13 +12,15 @@ const CreatePasswordModal = ({
   type,
 }) => {
   const [form] = useForm();
-
+  const handleSubmit = (e) => {
+    handleCompleteRegistration(e);
+  };
   return (
     <Wrapper>
       <span className="description">
         Add a profile picture and create a password to secure your account.
       </span>
-      <Form form={form}>
+      <Form form={form} onSubmit={handleSubmit}>
         {type === "Register As Seller" ? (
           <div>
             <UploadImg />
@@ -30,7 +32,7 @@ const CreatePasswordModal = ({
           <Form.Item
             type="password"
             label="New Password"
-            name="name"
+            name="new_password"
             sm
             rounded
             placeholder="***********"
@@ -47,7 +49,7 @@ const CreatePasswordModal = ({
           <Form.Item
             type="password"
             label="Confirm Password"
-            name="name"
+            name="confirm_password"
             sm
             rounded
             placeholder="***********"
@@ -84,7 +86,6 @@ const CreatePasswordModal = ({
                 width="170"
                 htmlType="submit"
                 className="button"
-                onClick={handleCompleteRegistration}
               >
                 Complete Registration
               </Button>

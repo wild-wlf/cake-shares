@@ -2,11 +2,7 @@ import React from "react";
 import LoginSignupModal from "../loginSignupModal";
 
 const RegisterAsBuyer = ({ handleBuyerModal }) => {
-  return (
-    <div>
-      <LoginSignupModal handleBuyerModal={handleBuyerModal} />
-    </div>
-  );
+  return <LoginSignupModal handleBuyerModal={handleBuyerModal} />;
 };
 
 export default RegisterAsBuyer;

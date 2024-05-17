@@ -41,7 +41,7 @@ const TopBar = () => {
     setPasswordModal,
     completeRegistrationModal,
     setCompleteRegistrationModal,
-    setBuyerDetails,
+    buyerRegistration,
   } = useContext(UserContext);
 
   const [sideNav, setSideNav] = useState(false);
@@ -69,25 +69,28 @@ const TopBar = () => {
     setLoginModal(false);
     setSellerLoginModal(true);
   };
-  const handleBuyerModal = () => {
+  const handleBuyerModal = (e) => {
     setBuyerModal(false);
     setPasswordModal(true);
-    setBuyerDetails({
+    console.log(e);
+    buyerRegistration({
       type: "Buyer",
+      ...e,
     });
-    console.log("first");
   };
 
   const createPasswordModal = () => {
     setPasswordModal(false);
   };
-  const handleCompleteRegistration = () => {
+  const handleCompleteRegistration = (e) => {
     setPasswordModal(false);
     setCompleteRegistrationModal(true);
+    buyerRegistration({ ...e });
   };
 
-  const handleRegistration = () => {
+  const handleRegistration = (e) => {
     setCompleteRegistrationModal(false);
+    buyerRegistration({ ...e });
   };
 
   const handleLoginModal = () => {
@@ -117,7 +120,8 @@ const TopBar = () => {
 
   return (
     <>
-      {/* KYC MODAL */}
+      {/******************************** KYC MODAL ******************************************/}
+
       <CenterModal
         zIndex={9999}
         open={kyc1}
@@ -145,8 +149,10 @@ const TopBar = () => {
       >
         <KYCBuyerThree setKycLevel={setKycLevel} setOpen={setKyc3} />
       </CenterModal>
-      {/* KYC MODAL */}
-      {/* Registration Modals */}
+      {/******************************** KYC MODAL ******************************************/}
+
+      {/******************************** Registration Modals ******************************************/}
+
       <CenterModal
         open={registermodal}
         setOpen={setRegisterModal}
@@ -160,6 +166,7 @@ const TopBar = () => {
           description="Select Account Type"
         />
       </CenterModal>
+
       <CenterModal
         open={buyermodal}
         setOpen={setBuyerModal}
@@ -168,6 +175,7 @@ const TopBar = () => {
       >
         <RegisterAsBuyer handleBuyerModal={handleBuyerModal} />
       </CenterModal>
+
       <CenterModal
         open={passwordModal}
         setOpen={setPasswordModal}
@@ -179,6 +187,7 @@ const TopBar = () => {
           handleCompleteRegistration={handleCompleteRegistration}
         />
       </CenterModal>
+
       <CenterModal
         open={completeRegistrationModal}
         setOpen={setCompleteRegistrationModal}
@@ -187,6 +196,7 @@ const TopBar = () => {
       >
         <CompleteRegistrationModal handleRegistration={handleRegistration} />
       </CenterModal>
+
       <CenterModal
         open={sellerregistermodal}
         setOpen={setSellerRegisterModal}
@@ -201,6 +211,7 @@ const TopBar = () => {
           type="Register As Seller"
         />
       </CenterModal>
+
       <CenterModal
         open={sellerpasswordModal}
         setOpen={setSellerPasswordModal}
@@ -214,7 +225,11 @@ const TopBar = () => {
           }}
         />
       </CenterModal>
-      {/* Login Modals */}
+
+      {/******************************** Registration Modals ******************************************/}
+
+      {/******************************** Login Modals ******************************************/}
+
       <CenterModal
         open={loginmodal}
         setOpen={setLoginModal}
@@ -254,6 +269,9 @@ const TopBar = () => {
           type="Login As Seller"
         />
       </CenterModal>
+
+      {/******************************** Login Modals ******************************************/}
+
       <StyledTopBar>
         <div className="logoWrapper">
           <div className="layer" onClick={() => setSideNav(false)} />

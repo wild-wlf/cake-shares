@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Wrapper } from "./loginSignupModal.style";
 import Field from "../Field";
 import Form, { useForm } from "@/components/molecules/Form";
@@ -8,6 +8,7 @@ import Facebook from "../../../_assets/facebook.svg";
 import Image from "next/image";
 import Select from "../Select";
 import { useRouter } from "next/router";
+import { UserContext } from "@/components/Context/UserContext";
 
 const LoginSignupModal = ({
   handleRegisterModal,
@@ -19,17 +20,16 @@ const LoginSignupModal = ({
   const [form] = useForm();
   const router = useRouter();
   function handelSubmit(e) {
-    console.log(e);
-    // type === "Login As Seller"
-    //             ? handleSellerLoginModal
-    //             : type === "Register As Seller"
-    //             ? handleSellerRegisterModal
-    //             : handleBuyerModal
+    // console.log(e);
 
-    //             if(type === "Login As Seller"){
-    //               handleSellerLoginModal
-    //             }
-    //             else if()
+    if (type === "Login As Seller") {
+      handleSellerLoginModal();
+    } else if (type === "Register As Seller") {
+      handleSellerRegisterModal();
+    } else {
+      // buyer Resgistration
+      handleBuyerModal(e);
+    }
     // if (e?.select_type.value === "company_seller") {
     //   router.push({
     //     pathname: "https://cake-admin.webevis.com/",
@@ -42,6 +42,7 @@ const LoginSignupModal = ({
     //   });
     // }
     // handleSellerLoginModal();
+    // setBuyerDetails((prev) => ({ ...prev, ...e }));
   }
   return (
     <Wrapper>
@@ -106,8 +107,8 @@ const LoginSignupModal = ({
         <div className="input-div">
           <Form.Item
             type="text"
-            label="Usern"
-            name="userName"
+            label="Username"
+            name="username"
             sm
             rounded
             placeholder="Alex123"

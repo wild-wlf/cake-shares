@@ -3,7 +3,7 @@ import { useState, createContext } from "react";
 export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
-  const [buyerDetails, setBuyerDetails] = useState({});
+  const [buyerRegistrationData, setBuyerRegistrationData] = useState({});
   const [registermodal, setRegisterModal] = useState(false);
   const [buyermodal, setBuyerModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
@@ -19,9 +19,14 @@ export const UserContextProvider = ({ children }) => {
     setPasswordModal,
     completeRegistrationModal,
     setCompleteRegistrationModal,
-    setBuyerDetails,
+    buyerRegistration,
+    buyerRegistrationData,
   };
-  console.log("buyerDetails : ", buyerDetails);
+
+  function buyerRegistration(elem) {
+    setBuyerRegistrationData((prev) => ({ ...prev, ...elem }));
+  }
+  console.log("buyerDetails : ", buyerRegistrationData);
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );

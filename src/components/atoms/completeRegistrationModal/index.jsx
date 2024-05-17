@@ -10,8 +10,10 @@ import SingleValueSlider from "../singleValueSlider";
 import UploadImg from "@/components/molecules/UploadImg";
 import KycLevel from "../KYC/KycLevel";
 import { KycContext } from "@/components/Context/KycContext";
+import { UserContext } from "@/components/Context/UserContext";
 const CompleteRegistrationModal = ({ handleRegistration }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
+  const { buyerRegistrationData } = useContext(UserContext);
 
   const [arr, setArr] = useState(countries);
   const [form] = useForm();
@@ -36,11 +38,18 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
     setArr(newArr);
   }
   useEffect(() => {
+    form.setFieldsValue({
+      username: buyerRegistrationData.username,
+      email: buyerRegistrationData?.email,
+    });
     handelChange();
   }, []);
+  const handleSubmit = (e) => {
+    handleRegistration(e);
+  };
   return (
     <Wrapper>
-      <Form form={form}>
+      <Form form={form} onSubmit={handleSubmit}>
         <div className="personal-info">
           <h5>Personal Info:</h5>
 
@@ -104,10 +113,9 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 label="Country"
                 name="select"
                 rules={[
-                  { required: true },
                   {
-                    pattern: /^.{0,256}$/,
-                    message: "Maximum Character Length is 256",
+                    required: true,
+                    // message: "Maximum Character Length is 256",
                   },
                 ]}
               >
@@ -117,7 +125,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
             <div className="DOB-div">
               <Form.Item
                 type="date"
-                label="*Birthdate (D.O.B)"
+                label="Birthdate (D.O.B)"
                 name="dob"
                 sm
                 rounded
@@ -295,14 +303,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
           </div>
         </div>
 
-        <Button
-          rounded
-          md
-          btntype="primary"
-          width="170"
-          onClick={handleRegistration}
-          htmlType="submit"
-        >
+        <Button rounded md btntype="primary" width="170" htmlType="submit">
           Go To Home
         </Button>
       </Form>
