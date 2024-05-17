@@ -20,13 +20,13 @@ const LoginSignupModal = ({
   const router = useRouter();
   function handelSubmit(e) {
     console.log(e);
-    // type === "Seller"
+    // type === "Login As Seller"
     //             ? handleSellerLoginModal
     //             : type === "Register As Seller"
     //             ? handleSellerRegisterModal
     //             : handleBuyerModal
 
-    //             if(type === "Seller"){
+    //             if(type === "Login As Seller"){
     //               handleSellerLoginModal
     //             }
     //             else if()
@@ -76,7 +76,7 @@ const LoginSignupModal = ({
               />
             </Form.Item>
           </div>
-        ) : type === "Seller" ? (
+        ) : type === "Login As Seller" ? (
           <div>
             <Form.Item
               type="text"
@@ -187,19 +187,19 @@ const LoginSignupModal = ({
             btntype="primary"
             width="170"
             // onClick={
-            //   type === "Seller"
+            //   type === "Login As Seller"
             //     ? handleSellerLoginModal
             //     : type === "Register As Seller"
             //     ? handleSellerRegisterModal
             //     : handleBuyerModal
             // }
-            // htmlType={type === "Seller" ? "submit" : "button"}
+            // htmlType={type === "Login As Seller" ? "submit" : "button"}
             htmlType={"submit"}
           >
             Continue
           </Button>
         </div>
-        {type === "Seller" ? (
+        {type === "Login As Seller" ? (
           <div className="register">
             Don&apos;t have an account?{" "}
             <span onClick={handleRegisterModal}> Register</span>
