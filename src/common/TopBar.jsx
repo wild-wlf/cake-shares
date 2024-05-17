@@ -27,24 +27,31 @@ import { FaWallet } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
+import { UserContext } from "@/components/Context/UserContext";
 
 const TopBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const {
+    registermodal,
+    setRegisterModal,
+    buyermodal,
+    setBuyerModal,
+    passwordModal,
+    setPasswordModal,
+    completeRegistrationModal,
+    setCompleteRegistrationModal,
+    setBuyerDetails,
+  } = useContext(UserContext);
+
   const [sideNav, setSideNav] = useState(false);
-  const [registermodal, setRegisterModal] = useState(false);
   const [loginmodal, setLoginModal] = useState(false);
-  const [buyermodal, setBuyerModal] = useState(false);
   const [buyerloginmodal, setBuyerLoginModal] = useState(false);
   const [sellerloginmodal, setSellerLoginModal] = useState(false);
   const [sellerregistermodal, setSellerRegisterModal] = useState(false);
-  const [passwordModal, setPasswordModal] = useState(false);
   const [sellerpasswordModal, setSellerPasswordModal] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [notifications, setNotifications] = useState(false);
-
-  const [completeRegistrationModal, setCompleteRegistrationModal] =
-    useState(false);
   const ProfileRef = useRef(null);
 
   const router = usePathname();
@@ -65,6 +72,10 @@ const TopBar = () => {
   const handleBuyerModal = () => {
     setBuyerModal(false);
     setPasswordModal(true);
+    setBuyerDetails({
+      type: "Buyer",
+    });
+    console.log("first");
   };
 
   const createPasswordModal = () => {

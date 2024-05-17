@@ -9,6 +9,7 @@ import CenterModal from "@/components/atoms/Modal/CenterModal";
 import KycBuyerLevelOne from "@/components/atoms/KYC/KYCBuyer";
 import { useState } from "react";
 import TopBar from "../common/TopBar";
+import { UserContextProvider } from "@/components/Context/UserContext";
 
 export default function App({ Component, pageProps }) {
   const GlobalStyles = createGlobalStyle`
@@ -19,13 +20,15 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <KycContextProvider>
-        <GlobalStyles />
-        <Wrapper>
-          <TopBar />
-          <Component {...pageProps} />
-        </Wrapper>
-      </KycContextProvider>
+      <UserContextProvider>
+        <KycContextProvider>
+          <GlobalStyles />
+          <Wrapper>
+            <TopBar />
+            <Component {...pageProps} />
+          </Wrapper>
+        </KycContextProvider>
+      </UserContextProvider>
     </>
   );
 }

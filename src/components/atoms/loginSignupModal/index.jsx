@@ -20,18 +20,28 @@ const LoginSignupModal = ({
   const router = useRouter();
   function handelSubmit(e) {
     console.log(e);
-    if (e?.select_type.value === "company_seller") {
-      router.push({
-        pathname: "https://cake-admin.webevis.com/",
-        query: { type: "company" },
-      });
-    } else {
-      router.push({
-        pathname: "https://cake-admin.webevis.com/",
-        query: { type: "seller" },
-      });
-    }
-    handleSellerLoginModal();
+    // type === "Seller"
+    //             ? handleSellerLoginModal
+    //             : type === "Register As Seller"
+    //             ? handleSellerRegisterModal
+    //             : handleBuyerModal
+
+    //             if(type === "Seller"){
+    //               handleSellerLoginModal
+    //             }
+    //             else if()
+    // if (e?.select_type.value === "company_seller") {
+    //   router.push({
+    //     pathname: "https://cake-admin.webevis.com/",
+    //     query: { type: "company" },
+    //   });
+    // } else {
+    //   router.push({
+    //     pathname: "https://cake-admin.webevis.com/",
+    //     query: { type: "seller" },
+    //   });
+    // }
+    // handleSellerLoginModal();
   }
   return (
     <Wrapper>
@@ -96,15 +106,15 @@ const LoginSignupModal = ({
         <div className="input-div">
           <Form.Item
             type="text"
-            label="Username"
+            label="Usern"
             name="userName"
             sm
             rounded
             placeholder="Alex123"
             rules={[
-              // {
-              //   required: true,
-              // },
+              {
+                required: true,
+              },
               {
                 pattern: /^.{0,40}$/,
                 message: "Maximum Character Length is 256",
@@ -121,9 +131,9 @@ const LoginSignupModal = ({
             rounded
             placeholder="alex123@gmail.com"
             rules={[
-              // {
-              //   required: true,
-              // },
+              {
+                required: true,
+              },
               {
                 pattern: /^.{0,256}$/,
                 message: "Maximum Character Length is 256",
@@ -177,13 +187,14 @@ const LoginSignupModal = ({
             btntype="primary"
             width="170"
             // onClick={
-            // type === "Seller"
-            //   ? handleSellerLoginModal
-            //   : type === "Register As Seller"
-            //   ? handleSellerRegisterModal
-            //   : handleBuyerModal
+            //   type === "Seller"
+            //     ? handleSellerLoginModal
+            //     : type === "Register As Seller"
+            //     ? handleSellerRegisterModal
+            //     : handleBuyerModal
             // }
-            htmlType={type === "Seller" ? "submit" : "button"}
+            // htmlType={type === "Seller" ? "submit" : "button"}
+            htmlType={"submit"}
           >
             Continue
           </Button>
