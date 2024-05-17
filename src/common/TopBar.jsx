@@ -251,7 +251,7 @@ const TopBar = () => {
             setSellerLoginModal(false);
           }}
           handleSellerLoginModal={(e) => setSellerLoginModal(false)}
-          type="Seller"
+          type="Login As Seller"
         />
       </CenterModal>
       <StyledTopBar>
