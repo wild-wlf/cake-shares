@@ -28,6 +28,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import { UserContext } from "@/components/Context/UserContext";
+import userService from "@/services/userService";
 
 const TopBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -89,8 +90,8 @@ const TopBar = () => {
   };
 
   const handleRegistration = (e) => {
-    setCompleteRegistrationModal(false);
     buyerRegistration({ ...e });
+    setCompleteRegistrationModal(false);
   };
 
   const handleLoginModal = () => {

@@ -11,10 +11,11 @@ import UploadImg from "@/components/molecules/UploadImg";
 import KycLevel from "../KYC/KycLevel";
 import { KycContext } from "@/components/Context/KycContext";
 import { UserContext } from "@/components/Context/UserContext";
+import userService from "@/services/userService";
 const CompleteRegistrationModal = ({ handleRegistration }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
   const { buyerRegistrationData } = useContext(UserContext);
-
+  // const { message } = userService.createUser();
   const [arr, setArr] = useState(countries);
   const [form] = useForm();
 
@@ -63,8 +64,10 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
 
     return formData;
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     let obj = {
+      type: buyerRegistrationData.type,
+      password: buyerRegistrationData.password,
       dob: e.dob,
       email: e.email,
       fullName: e.name,
@@ -83,8 +86,32 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
       },
     };
     const formData = convertToFormData(obj);
-    console.log("formData", formData);
-    // handleRegistration(obj);
+    await userService.createUser(obj);
+    // console.log(message);
+    // console.log("formData", formData);
+
+    // const submitFormData = async (formData) => {
+    //   try {
+    //     const response = await fetch(
+    //       `${process.env.NEXT_PUBLIC_USER_URL}/v1/user/`,
+    //       {
+    //         method: "POST",
+    //         body: formData,
+    //       }
+    //     );
+
+    //     if (!response.ok) {
+    //       throw new Error("Network response was not ok " + response.statusText);
+    //     }
+
+    //     const data = await response.json();
+    //     console.log("Success:", data);
+    //   } catch (error) {
+    //     console.error("Error:", error);
+    //   }
+    // };
+    // submitFormData(formData);
+    handleRegistration(obj);
   };
   return (
     <Wrapper>
