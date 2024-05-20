@@ -13,7 +13,8 @@ const CreatePasswordModal = ({
 }) => {
   const [form] = useForm();
   const handleSubmit = (e) => {
-    handleCompleteRegistration(e);
+    let password = e.new_password;
+    handleCompleteRegistration({ password });
   };
   return (
     <Wrapper>
@@ -38,6 +39,9 @@ const CreatePasswordModal = ({
             placeholder="***********"
             rules={[
               {
+                required: true,
+              },
+              {
                 pattern: /^.{8,64}$/,
                 required: true,
                 message: "Maximum Character Length is 256",
@@ -55,9 +59,12 @@ const CreatePasswordModal = ({
             placeholder="***********"
             rules={[
               {
-                pattern: /^.{8,64}$/,
                 required: true,
-                message: "Maximum Character Length is 256",
+              },
+              {
+                transform: (value) =>
+                  value !== form.getFieldValue("new_password"),
+                message: "The two passwords that you entered do not match!",
               },
             ]}
           >

@@ -44,8 +44,47 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
     });
     handelChange();
   }, []);
+  const convertToFormData = (obj) => {
+    const formData = new FormData();
+
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        if (typeof obj[key] === "object" && obj[key] !== null) {
+          for (const subKey in obj[key]) {
+            if (obj[key].hasOwnProperty(subKey)) {
+              formData.append(`${key}[${subKey}]`, obj[key][subKey]);
+            }
+          }
+        } else {
+          formData.append(key, obj[key]);
+        }
+      }
+    }
+
+    return formData;
+  };
   const handleSubmit = (e) => {
-    handleRegistration(e);
+    let obj = {
+      dob: e.dob,
+      email: e.email,
+      fullName: e.name,
+      username: e.username,
+      country: e.select.value,
+      bank: {
+        bank_name: e.bank_name,
+        iban_number: e.iban_number,
+        bic_number: e.bic_number,
+        user_id: e.user_id,
+      },
+      Inheritance: {
+        Inheritance_person_name: e.person_name,
+        Inheritance_passport_number: e.passport_number,
+        Inheritance_country: e.country,
+      },
+    };
+    const formData = convertToFormData(obj);
+    console.log("formData", formData);
+    // handleRegistration(obj);
   };
   return (
     <Wrapper>
@@ -54,7 +93,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
           <h5>Personal Info:</h5>
 
           <div>
-            <UploadImg />
+            <UploadImg onChange={(e) => console.log(e)} />
             <div className="input-div">
               <Form.Item
                 type="text"
@@ -148,7 +187,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
               <Form.Item
                 type="text"
                 label="Back Name"
-                name="bank_name"
+                name="bank_bank_name"
                 sm
                 rounded
                 placeholder="Bank of Americe"
@@ -165,7 +204,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
               <Form.Item
                 type="text"
                 label="IBAN"
-                name="iban"
+                name="bank_iban_number"
                 sm
                 rounded
                 placeholder="PK033310084246213"
