@@ -2,7 +2,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { StyledUploadImage } from "./UploadImg.style";
 import Camera from "../../../_assets/camera.svg";
-import ProfilePic from "../../../_assets/profilepic.svg";
+import ProfilePic from "../../../_assets/avatar-icon.svg";
 
 const UploadImg = ({
   id = "upload",

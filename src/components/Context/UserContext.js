@@ -21,6 +21,7 @@ export const UserContextProvider = ({ children }) => {
     setCompleteRegistrationModal,
     buyerRegistration,
     buyerRegistrationData,
+    setBuyerRegistrationData,
   };
 
   function buyerRegistration(elem) {

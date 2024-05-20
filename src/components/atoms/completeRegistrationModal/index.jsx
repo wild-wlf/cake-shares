@@ -6,7 +6,6 @@ import Button from "../Button";
 import Select from "../Select";
 import Image from "next/image";
 import { countries } from "@/components/Constant";
-import SingleValueSlider from "../singleValueSlider";
 import UploadImg from "@/components/molecules/UploadImg";
 import KycLevel from "../KYC/KycLevel";
 import { KycContext } from "@/components/Context/KycContext";
@@ -18,6 +17,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
   const { buyerRegistrationData } = useContext(UserContext);
   // const { message } = userService.createUser();
   const [arr, setArr] = useState(countries);
+  const [image, setImage] = useState("");
   const [form] = useForm();
 
   function handelChange(value = "PK") {
@@ -60,11 +60,11 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
         formData.append(key, obj[key]);
       }
     });
-
     return formData;
   };
   const handleSubmit = async (e) => {
     let obj = {
+      profilePicture: image,
       type: buyerRegistrationData.type,
       password: buyerRegistrationData.password,
       dob: e.dob,
@@ -86,14 +86,18 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
     };
 
     const formData = convertToFormData(obj);
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
     try {
-      await userService.createUser(obj);
+      await userService.createUser(formData);
       toast.success("User Registered Successfully!");
-      handleRegistration(obj);
+      handleRegistration();
     } catch (error) {
       toast.error(error.message);
     }
   };
+  console.log(image);
   return (
     <Wrapper>
       <Form form={form} onSubmit={handleSubmit}>
@@ -101,7 +105,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
           <h5>Personal Info:</h5>
 
           <div>
-            <UploadImg onChange={(e) => console.log(e)} />
+            <UploadImg onChange={(e) => setImage(e)} />
             <div className="input-div">
               <Form.Item
                 type="text"
