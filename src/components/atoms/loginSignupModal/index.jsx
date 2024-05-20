@@ -92,8 +92,8 @@ const LoginSignupModal = ({
                 required: true,
               },
               {
-                pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
+                pattern: /^[a-zA-Z0-9_-]{8,40}$/,
+                message: "Characters length should be between 8 and 40",
               },
             ]}
           >
@@ -132,8 +132,8 @@ const LoginSignupModal = ({
                   required: true,
                 },
                 {
-                  pattern: /^.{0,256}$/,
-                  message: "Minimum Character Length is 8",
+                  pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+                  message: "Invalid Email Address",
                 },
               ]}
             >

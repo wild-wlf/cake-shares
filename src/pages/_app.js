@@ -1,4 +1,5 @@
 import "slick-carousel/slick/slick.css";
+import "react-toastify/dist/ReactToastify.min.css";
 import "slick-carousel/slick/slick-theme.css";
 import { createGlobalStyle } from "styled-components";
 import Variables from "../styles/variables.css";

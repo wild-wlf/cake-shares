@@ -12,6 +12,7 @@ import KycLevel from "../KYC/KycLevel";
 import { KycContext } from "@/components/Context/KycContext";
 import { UserContext } from "@/components/Context/UserContext";
 import userService from "@/services/userService";
+import { Toast, toast } from "react-toastify";
 const CompleteRegistrationModal = ({ handleRegistration }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
   const { buyerRegistrationData } = useContext(UserContext);
@@ -46,21 +47,19 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
     handelChange();
   }, []);
   const convertToFormData = (obj) => {
+    console.log(obj);
     const formData = new FormData();
 
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        if (typeof obj[key] === "object" && obj[key] !== null) {
-          for (const subKey in obj[key]) {
-            if (obj[key].hasOwnProperty(subKey)) {
-              formData.append(`${key}[${subKey}]`, obj[key][subKey]);
-            }
-          }
-        } else {
-          formData.append(key, obj[key]);
-        }
+    Object.keys(obj).forEach((key) => {
+      if (
+        key === "bankInfo" ||
+        (key === "inheritanceInfo" && typeof obj[key] === "object")
+      ) {
+        formData.append(key, JSON.stringify(obj[key]));
+      } else {
+        formData.append(key, obj[key]);
       }
-    }
+    });
 
     return formData;
   };
@@ -73,45 +72,27 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
       fullName: e.name,
       username: e.username,
       country: e.select.value,
-      bank: {
-        bank_name: e.bank_name,
-        iban_number: e.iban_number,
-        bic_number: e.bic_number,
-        user_id: e.user_id,
+      bankInfo: {
+        bankName: e.bank_bank_name,
+        iban: e.bank_iban_number,
+        swiftBicNumber: e.bic_number,
+        userId: e.user_id,
       },
-      Inheritance: {
-        Inheritance_person_name: e.person_name,
-        Inheritance_passport_number: e.passport_number,
-        Inheritance_country: e.country,
+      inheritanceInfo: {
+        name: e.person_name,
+        passportNumber: e.passport_number,
+        country: e.country,
       },
     };
+
     const formData = convertToFormData(obj);
-    await userService.createUser(obj);
-    // console.log(message);
-    // console.log("formData", formData);
-
-    // const submitFormData = async (formData) => {
-    //   try {
-    //     const response = await fetch(
-    //       `${process.env.NEXT_PUBLIC_USER_URL}/v1/user/`,
-    //       {
-    //         method: "POST",
-    //         body: formData,
-    //       }
-    //     );
-
-    //     if (!response.ok) {
-    //       throw new Error("Network response was not ok " + response.statusText);
-    //     }
-
-    //     const data = await response.json();
-    //     console.log("Success:", data);
-    //   } catch (error) {
-    //     console.error("Error:", error);
-    //   }
-    // };
-    // submitFormData(formData);
-    handleRegistration(obj);
+    try {
+      await userService.createUser(obj);
+      toast.success("User Registered Successfully!");
+      handleRegistration(obj);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   return (
     <Wrapper>
@@ -131,8 +112,10 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 placeholder="Alex Mertiz"
                 rules={[
                   {
-                    pattern: /^.{0,40}$/,
                     required: true,
+                  },
+                  {
+                    pattern: /^.{0,40}$/,
                     message: "Maximum Character Length is 256",
                   },
                 ]}
@@ -148,8 +131,10 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 placeholder="alex123"
                 rules={[
                   {
-                    pattern: /^.{0,256}$/,
                     required: true,
+                  },
+                  {
+                    pattern: /^[a-zA-Z0-9_-]{8,40}$/,
                     message: "Maximum Character Length is 256",
                   },
                 ]}
@@ -167,8 +152,10 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 placeholder="alex123@gmail.com"
                 rules={[
                   {
-                    pattern: /^.{0,256}$/,
                     required: true,
+                  },
+                  {
+                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
                     message: "Maximum Character Length is 256",
                   },
                 ]}
@@ -181,7 +168,6 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
-                    // message: "Maximum Character Length is 256",
                   },
                 ]}
               >
@@ -213,16 +199,18 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
             <div className="input-div">
               <Form.Item
                 type="text"
-                label="Back Name"
+                label="Bank Name"
                 name="bank_bank_name"
                 sm
                 rounded
                 placeholder="Bank of Americe"
                 rules={[
                   {
-                    pattern: /^.{0,40}$/,
                     required: true,
-                    message: "Maximum Character Length is 256",
+                  },
+                  {
+                    pattern: /^.{8,256}$/,
+                    message: "Please enter a valid Bank Name",
                   },
                 ]}
               >
@@ -237,9 +225,11 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 placeholder="PK033310084246213"
                 rules={[
                   {
-                    pattern: /^.{0,256}$/,
                     required: true,
-                    message: "Maximum Character Length is 256",
+                  },
+                  {
+                    pattern: /^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/,
+                    message: "Please enter a valid IBAN number",
                   },
                 ]}
               >
@@ -256,9 +246,11 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 placeholder="PK033310084246213"
                 rules={[
                   {
-                    pattern: /^.{0,256}$/,
                     required: true,
-                    message: "Maximum Character Length is 256",
+                  },
+                  {
+                    pattern: /^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
+                    message: "Invalid SWIFT/BIC format",
                   },
                 ]}
               >
@@ -273,9 +265,12 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 placeholder="33445554"
                 rules={[
                   {
-                    pattern: /^.{0,256}$/,
                     required: true,
-                    message: "Maximum Character Length is 256",
+                  },
+                  {
+                    pattern: /^[a-zA-Z0-9_-]{8,256}$/,
+                    message:
+                      "User ID must be between 8 and 256 characters long",
                   },
                 ]}
               >
@@ -318,9 +313,11 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 placeholder="Logan Paulson"
                 rules={[
                   {
-                    pattern: /^.{0,40}$/,
                     required: true,
-                    message: "Maximum Character Length is 256",
+                  },
+                  {
+                    pattern: /^.{0,40}$/,
+                    message: "Please enter a valid name",
                   },
                 ]}
               >
@@ -335,9 +332,12 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 placeholder="123467894562339"
                 rules={[
                   {
-                    pattern: /^.{0,256}$/,
                     required: true,
-                    message: "Maximum Character Length is 256",
+                  },
+                  {
+                    pattern: /^[a-zA-Z0-9]{6,9}$/,
+                    message:
+                      "Passport number must be between 6 and 9 characters long",
                   },
                 ]}
               >
@@ -354,18 +354,20 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 placeholder="United States"
                 rules={[
                   {
-                    pattern: /^.{0,256}$/,
                     required: true,
-                    message: "Maximum Character Length is 256",
+                  },
+                  {
+                    pattern: /^.{0,40}$/,
+                    message: "Please enter a valid country",
                   },
                 ]}
               >
                 <Field />
               </Form.Item>
             </div>
-            <div className="addmore">
+            {/* <div className="addmore">
               <span>+Add more</span>
-            </div>
+            </div> */}
           </div>
         </div>
 
