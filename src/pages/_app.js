@@ -5,11 +5,9 @@ import Variables from "../styles/variables.css";
 import { HelperClasses, Styling } from "../styles/GlobalStyles.styles";
 import { Wrapper } from "@/styles/helpers.styles";
 import { KycContextProvider } from "@/components/Context/KycContext";
-import CenterModal from "@/components/atoms/Modal/CenterModal";
-import KycBuyerLevelOne from "@/components/atoms/KYC/KYCBuyer";
-import { useState } from "react";
 import TopBar from "../common/TopBar";
 import { UserContextProvider } from "@/components/Context/UserContext";
+import { ToastContainer } from "react-toastify";
 
 export default function App({ Component, pageProps }) {
   const GlobalStyles = createGlobalStyle`
@@ -29,6 +27,7 @@ export default function App({ Component, pageProps }) {
           </Wrapper>
         </KycContextProvider>
       </UserContextProvider>
+      <ToastContainer />
     </>
   );
 }
