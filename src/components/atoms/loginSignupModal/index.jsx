@@ -44,6 +44,7 @@ const LoginSignupModal = ({
     // handleSellerLoginModal();
     // setBuyerDetails((prev) => ({ ...prev, ...e }));
   }
+
   return (
     <Wrapper>
       <div>
@@ -52,7 +53,7 @@ const LoginSignupModal = ({
         </span>
       </div>
       <Form form={form} onSubmit={handelSubmit}>
-        {type === "Register As Seller" ? (
+        {type === "Register As Seller" || type === "Login As Seller" ? (
           <div>
             <Form.Item
               type="text"
@@ -61,35 +62,9 @@ const LoginSignupModal = ({
               sm
               rounded
               placeholder="Select Type"
-              rules={
-                [
-                  // {
-                  //   required: true,
-                  // },
-                ]
-              }
-            >
-              <Select
-                options={[
-                  { label: "Individual Seller", value: "indiviual_seller" },
-                  { label: "Company Seller", value: "company_seller" },
-                ]}
-              />
-            </Form.Item>
-          </div>
-        ) : type === "Login As Seller" ? (
-          <div>
-            <Form.Item
-              type="text"
-              label="Seller Type"
-              name="select_type"
-              sm
-              rounded
-              placeholder="Select Type"
               rules={[
-                { required: true },
                 {
-                  message: "Maximum Character Length is 256",
+                  required: true,
                 },
               ]}
             >
@@ -124,25 +99,47 @@ const LoginSignupModal = ({
           >
             <Field />
           </Form.Item>
-          <Form.Item
-            type="text"
-            label="Email Address"
-            name="email"
-            sm
-            rounded
-            placeholder="alex123@gmail.com"
-            rules={[
-              {
-                required: true,
-              },
-              {
-                pattern: /^.{0,256}$/,
-                message: "Maximum Character Length is 256",
-              },
-            ]}
-          >
-            <Field />
-          </Form.Item>
+          {type === "Login As Buyer" || type === "Login As Seller" ? (
+            <Form.Item
+              type="password"
+              label="Password"
+              name="password"
+              sm
+              rounded
+              placeholder="***********"
+              rules={[
+                {
+                  required: true,
+                },
+                {
+                  pattern: /^.{8,64}$/,
+                  message: "Maximum Character Length is 256",
+                },
+              ]}
+            >
+              <Field />
+            </Form.Item>
+          ) : (
+            <Form.Item
+              type="text"
+              label="Email Address"
+              name="email"
+              sm
+              rounded
+              placeholder="alex123@gmail.com"
+              rules={[
+                {
+                  required: true,
+                },
+                {
+                  pattern: /^.{0,256}$/,
+                  message: "Minimum Character Length is 8",
+                },
+              ]}
+            >
+              <Field />
+            </Form.Item>
+          )}
         </div>
         <div className="other-section">
           <div className="hr">
