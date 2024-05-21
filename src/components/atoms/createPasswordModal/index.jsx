@@ -16,9 +16,12 @@ const CreatePasswordModal = ({
   const handleSubmit = (e) => {
     let password = e.new_password;
     if (!submitForm) {
+      // Complete Registration Scenerio
       handleCompleteRegistration({ password });
     }
     if (submitForm) {
+      // I'll do later Scenerio
+
       createPasswordModal(password);
     }
   };

@@ -102,6 +102,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
+                    message: "Please enter Full Name",
                   },
                   {
                     pattern: /^.{0,40}$/,
@@ -121,6 +122,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
+                    message: "Please enter username",
                   },
                   {
                     pattern: /^[a-zA-Z0-9_-]{8,40}$/,
@@ -142,6 +144,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
+                    message: "Please enter email address",
                   },
                   {
                     pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
@@ -173,6 +176,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
+                    message: "Please enter Date Of Birth",
                   },
                 ]}
               >
@@ -196,6 +200,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
+                    message: "Please enter Bank Name",
                   },
                   {
                     pattern: /^.{8,256}$/,
@@ -237,6 +242,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
+                    message: "Please enter SWIFT / BIC Number",
                   },
                   {
                     pattern: /^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
@@ -256,6 +262,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
+                    message: "Please enter User ID",
                   },
                   {
                     pattern: /^[a-zA-Z0-9_-]{8,256}$/,
@@ -304,6 +311,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
+                    message: "Please enter Name of Person",
                   },
                   {
                     pattern: /^.{0,40}$/,
@@ -323,6 +331,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
+                    message: "Please enter Passport Number",
                   },
                   {
                     pattern: /^[a-zA-Z0-9]{6,9}$/,
@@ -345,6 +354,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
+                    message: "Please enter Country",
                   },
                   {
                     pattern: /^.{0,40}$/,

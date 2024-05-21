@@ -29,6 +29,8 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import { UserContext } from "@/components/Context/UserContext";
 import userService from "@/services/userService";
+import { toast } from "react-toastify";
+import { convertToFormData } from "@/helpers/common";
 
 const TopBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -82,19 +84,23 @@ const TopBar = () => {
     });
   };
 
-  const createPasswordModal = (e) => {
-    setPasswordModal(false);
-    console.log(e);
-    // setBuyerRegistrationData({});
+  const createPasswordModal = async (e) => {
     let obj = {
       type: buyerRegistrationData.type,
       password: e,
       email: buyerRegistrationData.email,
       username: buyerRegistrationData.username,
     };
-    console.log(obj);
+    const formData = convertToFormData(obj);
+    try {
+      await userService.createUser(formData);
+      toast.success("User Registered Successfully!");
+      setPasswordModal(false);
+      setBuyerRegistrationData({});
+    } catch (error) {
+      toast.error(error.message);
+    }
     //API
-    // setBuyerRegistrationData({});
   };
   const handleCompleteRegistration = (e) => {
     setPasswordModal(false);
