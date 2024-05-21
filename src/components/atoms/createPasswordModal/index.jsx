@@ -96,19 +96,17 @@ const CreatePasswordModal = ({
               >
                 Complete Registration
               </Button>
-              <Link href={"/"}>
-                <Button
-                  rounded
-                  md
-                  btntype="primary"
-                  width="170"
-                  htmlType="submit"
-                  className="button"
-                  onClick={createPasswordModal}
-                >
-                  I&apos;ll do later
-                </Button>
-              </Link>
+              <Button
+                rounded
+                md
+                btntype="primary"
+                width="170"
+                htmlType="submit"
+                className="button"
+                onClick={createPasswordModal}
+              >
+                I&apos;ll do later
+              </Button>
             </>
           )}
         </div>

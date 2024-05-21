@@ -43,6 +43,7 @@ const TopBar = () => {
     completeRegistrationModal,
     setCompleteRegistrationModal,
     buyerRegistration,
+    setBuyerRegistrationData,
   } = useContext(UserContext);
 
   const [sideNav, setSideNav] = useState(false);
@@ -80,8 +81,16 @@ const TopBar = () => {
     });
   };
 
-  const createPasswordModal = () => {
+  const createPasswordModal = (e) => {
     setPasswordModal(false);
+    console.log(e);
+    // setBuyerRegistrationData({});
+    // let obj = {
+    //   type: buyerRegistrationData.type,
+    //   password: password,
+    //   email: e.email,
+    //   username: e.username,
+    // };
   };
   const handleCompleteRegistration = (e) => {
     setPasswordModal(false);
@@ -90,7 +99,7 @@ const TopBar = () => {
   };
 
   const handleRegistration = (e) => {
-    buyerRegistration({ ...e });
+    setBuyerRegistrationData({});
     setCompleteRegistrationModal(false);
   };
 
@@ -184,6 +193,7 @@ const TopBar = () => {
         width="666"
       >
         <CreatePasswordModal
+          type={"Register As Buyer"}
           createPasswordModal={createPasswordModal}
           handleCompleteRegistration={handleCompleteRegistration}
         />

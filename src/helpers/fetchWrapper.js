@@ -62,7 +62,7 @@ function post(url, body, debounce = false) {
   else return fetch(url, requestOptions).then((res) => handleResponse(res));
 }
 
-function upload(url, body, debounce = false) {
+function upload(url, method, body, debounce = false) {
   const headers = {
     "X-path": window.location.pathname,
     // 'Content-Type': 'multipart/form-data',
@@ -70,7 +70,7 @@ function upload(url, body, debounce = false) {
   };
 
   const requestOptions = {
-    method: "PATCH",
+    method: method === "POST" ? "POST" : "PUT",
     headers,
     // body: JSON.stringify(body),
     body,

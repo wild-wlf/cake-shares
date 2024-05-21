@@ -87,7 +87,7 @@ const userService = {
     throw new Error(message ?? "Something went wrong");
   },
   async createUser(payload) {
-    let res = await Fetch.post(`${this._url}/registeration`, payload);
+    let res = await Fetch.upload(`${this._url}/registeration`, "POST", payload);
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
       return res;
