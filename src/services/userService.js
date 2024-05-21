@@ -77,8 +77,8 @@ const userService = {
   //   throw new Error(message ?? "Something went wrong");
   // },
 
-  async login({ email = "", password = "" }) {
-    let res = await Fetch.post(`${this._url}/login`, { email, password });
+  async login(payload) {
+    let res = await Fetch.post(`${this._url}/login`, payload);
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
       return res;

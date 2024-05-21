@@ -100,8 +100,21 @@ const TopBar = () => {
     } catch (error) {
       toast.error(error.message);
     }
-    //API
   };
+
+  const handleBuyerLogin = async (e) => {
+    console.log(e);
+    // const formData = convertToFormData(e);
+    try {
+      const res = await userService.login(e);
+      console.log("res", res);
+      toast.success("User Logged In Successfully!");
+      setBuyerLoginModal(false);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   const handleCompleteRegistration = (e) => {
     setPasswordModal(false);
     setCompleteRegistrationModal(true);
@@ -272,7 +285,7 @@ const TopBar = () => {
       >
         <LoginAsBuyerModal
           type={"Login As Buyer"}
-          handleLoginModal={() => setBuyerLoginModal(false)}
+          handleLoginModal={handleBuyerLogin}
         />
       </CenterModal>
       <CenterModal

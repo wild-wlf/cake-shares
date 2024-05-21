@@ -19,14 +19,14 @@ const LoginSignupModal = ({
 }) => {
   const [form] = useForm();
   const router = useRouter();
-  function handelSubmit(e) {
+  function handleSubmit(e) {
     // console.log(e);
 
     if (type === "Login As Seller") {
       handleSellerLoginModal();
     } else if (type === "Register As Seller") {
       handleSellerRegisterModal();
-    } else {
+    } else if (type === "Login As Buyer") {
       // buyer Resgistration
       handleBuyerModal(e);
     }
@@ -52,7 +52,7 @@ const LoginSignupModal = ({
           Please provide the details to proceed.
         </span>
       </div>
-      <Form form={form} onSubmit={handelSubmit}>
+      <Form form={form} onSubmit={handleSubmit}>
         {type === "Register As Seller" || type === "Login As Seller" ? (
           <div>
             <Form.Item
