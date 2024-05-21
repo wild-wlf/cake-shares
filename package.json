@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "env-cmd -e development next dev -p 3003",
+    "dev": "env-cmd -e development next dev -p 3000",
     "build": "env-cmd -e production next build",
     "start": "env-cmd -e production next start -p 3004",
     "lint": "next lint"

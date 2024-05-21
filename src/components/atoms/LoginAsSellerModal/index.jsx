@@ -1,7 +1,7 @@
 import React from "react";
 import LoginSignupModal from "../loginSignupModal";
 
-const LoginAsBuyerModal = ({
+const LoginAsSellerModal = ({
   handleRegisterModal,
   handleLoginModal,
   handleSellerLoginModal,
@@ -19,4 +19,4 @@ const LoginAsBuyerModal = ({
   );
 };
 
-export default LoginAsBuyerModal;
+export default LoginAsSellerModal;

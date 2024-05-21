@@ -13,7 +13,7 @@ import CenterModal from "@/components/atoms/Modal/CenterModal";
 import RegisterAsBuyer from "@/components/atoms/registerAsBuyer";
 import CreatePasswordModal from "@/components/atoms/createPasswordModal";
 import CompleteRegistrationModal from "@/components/atoms/completeRegistrationModal";
-import LoginAsBuyerModal from "@/components/atoms/loginAsBuyerModal";
+import LoginAsBuyerModal from "@/components/atoms/LoginAsSellerModal";
 import KycBuyerLevelOne from "@/components/atoms/KYC/KYCBuyer";
 import { KycContext } from "@/components/Context/KycContext";
 import KycBuyerLevelTwo from "@/components/atoms/KYC/KYCBuyerTwo";
@@ -31,6 +31,8 @@ import { UserContext } from "@/components/Context/UserContext";
 import userService from "@/services/userService";
 import { toast } from "react-toastify";
 import { convertToFormData } from "@/helpers/common";
+import BuyerLoginSignupModal from "@/components/atoms/buyerloginSignupModal";
+import LoginAsSellerModal from "@/components/atoms/LoginAsSellerModal";
 
 const TopBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -206,9 +208,9 @@ const TopBar = () => {
         title="Register As a Buyer"
         width="666"
       >
-        <RegisterAsBuyer
+        <BuyerLoginSignupModal
           handleBuyerModal={handleBuyerModal}
-          type="Register As Buyer"
+          type={"Register As Buyer"}
         />
       </CenterModal>
 
@@ -240,7 +242,7 @@ const TopBar = () => {
         title="Register As a Seller"
         width="666"
       >
-        <LoginAsBuyerModal
+        <LoginAsSellerModal
           handleSellerRegisterModal={() => {
             setSellerRegisterModal(false);
             setSellerPasswordModal(true);
@@ -286,8 +288,8 @@ const TopBar = () => {
         title="Login As a Buyer"
         width="666"
       >
-        <LoginAsBuyerModal
-          type={"Login As Buyer"}
+        <BuyerLoginSignupModal
+          type="Login As Buyer"
           handleLoginModal={handleBuyerLogin}
         />
       </CenterModal>
@@ -297,7 +299,7 @@ const TopBar = () => {
         title="Login As a Seller"
         width="666"
       >
-        <LoginAsBuyerModal
+        <LoginAsSellerModal
           handleRegisterModal={() => {
             setRegisterModal(true);
             setSellerLoginModal(false);

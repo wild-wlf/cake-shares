@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Wrapper } from "./loginSignupModal.style";
+import { Wrapper } from "./buyerloginSignupModal.style";
 import Field from "../Field";
 import Form, { useForm } from "@/components/molecules/Form";
 import Button from "../Button";
@@ -10,10 +10,10 @@ import Select from "../Select";
 import { useRouter } from "next/router";
 import { UserContext } from "@/components/Context/UserContext";
 
-const LoginSignupModal = ({
-  handleRegisterModal,
+const BuyerLoginSignupModal = ({
+  handleBuyerModal,
+  handleLoginModal,
   handleSellerLoginModal,
-  handleSellerRegisterModal,
   type,
 }) => {
   const [form] = useForm();
@@ -21,10 +21,11 @@ const LoginSignupModal = ({
   function handleSubmit(e) {
     // console.log(e);
 
-    if (type === "Login As Seller") {
-      handleSellerLoginModal();
-    } else if (type === "Register As Seller") {
-      handleSellerRegisterModal();
+    if (type === "Login As Buyer") {
+      handleLoginModal(e);
+    } else {
+      // buyer Registration
+      handleBuyerModal(e);
     }
     // if (e?.select_type.value === "company_seller") {
     //   router.push({
@@ -49,28 +50,6 @@ const LoginSignupModal = ({
         </span>
       </div>
       <Form form={form} onSubmit={handleSubmit}>
-        <div>
-          <Form.Item
-            type="text"
-            label="Seller Type"
-            name="seller_type"
-            sm
-            rounded
-            placeholder="Select Type"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-          >
-            <Select
-              options={[
-                { label: "Individual Seller", value: "indiviual_seller" },
-                { label: "Company Seller", value: "company_seller" },
-              ]}
-            />
-          </Form.Item>
-        </div>
         <div className="input-div">
           <Form.Item
             type="text"
@@ -91,7 +70,7 @@ const LoginSignupModal = ({
           >
             <Field />
           </Form.Item>
-          {type === "Login As Seller" ? (
+          {type === "Login As Buyer" ? (
             <Form.Item
               type="password"
               label="Password"
@@ -175,17 +154,9 @@ const LoginSignupModal = ({
             Continue
           </Button>
         </div>
-        {type === "Login As Seller" ? (
-          <div className="register">
-            Don&apos;t have an account?{" "}
-            <span onClick={handleRegisterModal}> Register</span>
-          </div>
-        ) : (
-          <></>
-        )}
       </Form>
     </Wrapper>
   );
 };
 
-export default LoginSignupModal;
+export default BuyerLoginSignupModal;
