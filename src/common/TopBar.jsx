@@ -29,10 +29,10 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import { UserContext } from "@/components/Context/UserContext";
 import userService from "@/services/userService";
-import { toast } from "react-toastify";
-import { convertToFormData } from "@/helpers/common";
+import { convertToFormData, setCookie } from "@/helpers/common";
 import BuyerLoginSignupModal from "@/components/atoms/buyerloginSignupModal";
 import LoginAsSellerModal from "@/components/atoms/LoginAsSellerModal";
+import Toast from "@/components/molecules/Toast";
 
 const TopBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -96,11 +96,17 @@ const TopBar = () => {
     const formData = convertToFormData(obj);
     try {
       await userService.createUser(formData);
-      toast.success("User Registered Successfully!");
+      Toast({
+        type: "success",
+        message: "User Registered Successfully!",
+      });
       setPasswordModal(false);
       setBuyerRegistrationData({});
     } catch (error) {
-      toast.error(error.message);
+      Toast({
+        type: "error",
+        message: error.message,
+      });
     }
   };
 
@@ -110,10 +116,17 @@ const TopBar = () => {
     try {
       const res = await userService.login(e);
       console.log("res", res);
-      toast.success("User Logged In Successfully!");
+      Toast({
+        type: "success",
+        message: "User Logged In Successfully!",
+      });
+      setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
       setBuyerLoginModal(false);
     } catch (error) {
-      toast.error(error.message);
+      Toast({
+        type: "error",
+        message: error.message,
+      });
     }
   };
 
