@@ -29,6 +29,8 @@ const LoginSignupModal = ({
     } else if (type === "Login As Buyer") {
       // buyer Resgistration
       handleBuyerModal(e);
+    } else if (type === "Register As Buyer") {
+      handleBuyerModal(e);
     }
     // if (e?.select_type.value === "company_seller") {
     //   router.push({

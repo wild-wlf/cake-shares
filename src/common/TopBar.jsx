@@ -206,7 +206,10 @@ const TopBar = () => {
         title="Register As a Buyer"
         width="666"
       >
-        <RegisterAsBuyer handleBuyerModal={handleBuyerModal} />
+        <RegisterAsBuyer
+          handleBuyerModal={handleBuyerModal}
+          type="Register As Buyer"
+        />
       </CenterModal>
 
       <CenterModal
