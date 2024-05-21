@@ -12,6 +12,7 @@ import { KycContext } from "@/components/Context/KycContext";
 import { UserContext } from "@/components/Context/UserContext";
 import userService from "@/services/userService";
 import { Toast, toast } from "react-toastify";
+import { convertToFormData } from "@/helpers/common";
 const CompleteRegistrationModal = ({ handleRegistration }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
   const { buyerRegistrationData } = useContext(UserContext);
@@ -27,7 +28,8 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
         <div key={index} className="countrySelect">
           <figure>
             <Image
-              src={`https://flagsapi.com/${elem.value}/shiny/48.png`}
+              src={`https://countryflagsapi.netlify.app/flag/${elem.value}.svg`}
+              // src={`https://flagsapi.com/${elem.value}/shiny/48.png`}
               width={48}
               height={48}
               alt={`Flag of ${elem.value}`}
@@ -46,22 +48,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
     });
     handelChange();
   }, []);
-  const convertToFormData = (obj) => {
-    console.log(obj);
-    const formData = new FormData();
 
-    Object.keys(obj).forEach((key) => {
-      if (
-        key === "bankInfo" ||
-        (key === "inheritanceInfo" && typeof obj[key] === "object")
-      ) {
-        formData.append(key, JSON.stringify(obj[key]));
-      } else {
-        formData.append(key, obj[key]);
-      }
-    });
-    return formData;
-  };
   const handleSubmit = async (e) => {
     let obj = {
       profilePicture: image,
@@ -86,9 +73,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
     };
 
     const formData = convertToFormData(obj);
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
+
     try {
       await userService.createUser(formData);
       toast.success("User Registered Successfully!");

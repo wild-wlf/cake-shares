@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Wrapper } from "./createPasswordModal.style";
 import Field from "../Field";
 import Form, { useForm } from "@/components/molecules/Form";
@@ -11,10 +11,16 @@ const CreatePasswordModal = ({
   handleSellerPasswordModal,
   type,
 }) => {
+  const [submitForm, setsubmitForm] = useState(false);
   const [form] = useForm();
   const handleSubmit = (e) => {
     let password = e.new_password;
-    handleCompleteRegistration({ password });
+    if (!submitForm) {
+      handleCompleteRegistration({ password });
+    }
+    if (submitForm) {
+      createPasswordModal(password);
+    }
   };
   return (
     <Wrapper>
@@ -103,7 +109,7 @@ const CreatePasswordModal = ({
                 width="170"
                 htmlType="submit"
                 className="button"
-                onClick={createPasswordModal}
+                onClick={() => setsubmitForm(true)}
               >
                 I&apos;ll do later
               </Button>

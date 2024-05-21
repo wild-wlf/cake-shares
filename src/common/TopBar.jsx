@@ -44,6 +44,7 @@ const TopBar = () => {
     setCompleteRegistrationModal,
     buyerRegistration,
     setBuyerRegistrationData,
+    buyerRegistrationData,
   } = useContext(UserContext);
 
   const [sideNav, setSideNav] = useState(false);
@@ -85,12 +86,15 @@ const TopBar = () => {
     setPasswordModal(false);
     console.log(e);
     // setBuyerRegistrationData({});
-    // let obj = {
-    //   type: buyerRegistrationData.type,
-    //   password: password,
-    //   email: e.email,
-    //   username: e.username,
-    // };
+    let obj = {
+      type: buyerRegistrationData.type,
+      password: e,
+      email: buyerRegistrationData.email,
+      username: buyerRegistrationData.username,
+    };
+    console.log(obj);
+    //API
+    // setBuyerRegistrationData({});
   };
   const handleCompleteRegistration = (e) => {
     setPasswordModal(false);
