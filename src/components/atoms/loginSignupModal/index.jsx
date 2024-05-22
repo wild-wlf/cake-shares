@@ -19,13 +19,18 @@ const LoginSignupModal = ({
   const [form] = useForm();
   const router = useRouter();
   function handleSubmit(e) {
-    // console.log(e);
+    const obj = {
+      username: e.username,
+      email: e.email,
+      sellerType: e.sellerType.value,
+    };
 
     if (type === "Login As Seller") {
-      handleSellerLoginModal();
+      handleSellerLoginModal(e);
     } else if (type === "Register As Seller") {
-      handleSellerRegisterModal();
+      handleSellerRegisterModal(obj);
     }
+
     // if (e?.select_type.value === "company_seller") {
     //   router.push({
     //     pathname: "https://cake-admin.webevis.com/",
@@ -53,20 +58,21 @@ const LoginSignupModal = ({
           <Form.Item
             type="text"
             label="Seller Type"
-            name="seller_type"
+            name="sellerType"
             sm
             rounded
             placeholder="Select Type"
             rules={[
               {
                 required: true,
+                message: "Please enter a valid Seller Type",
               },
             ]}
           >
             <Select
               options={[
-                { label: "Individual Seller", value: "indiviual_seller" },
-                { label: "Company Seller", value: "company_seller" },
+                { label: "Individual Seller", value: "Individual" },
+                { label: "Company Seller", value: "Company" },
               ]}
             />
           </Form.Item>
