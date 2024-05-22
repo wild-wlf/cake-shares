@@ -76,10 +76,16 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
 
     try {
       await userService.createUser(formData);
-      toast.success("User Registered Successfully!");
+      Toast({
+        type: "success",
+        message: "User Registered Successfully!",
+      });
       handleRegistration();
     } catch (error) {
-      toast.error(error.message);
+      Toast({
+        type: "error",
+        message: error.message,
+      });
     }
   };
   console.log(image);

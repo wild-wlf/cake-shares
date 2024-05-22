@@ -86,6 +86,30 @@ const TopBar = () => {
     });
   };
 
+  const handleSellerRegisterModal = (e) => {
+    setSellerRegisterModal(false);
+    setSellerPasswordModal(true);
+    console.log(e);
+    buyerRegistration({
+      type: "Seller",
+      ...e,
+    });
+  };
+  const handleSellerPasswordModal = (e) => {
+    setSellerPasswordModal(false);
+    buyerRegistration({
+      ...e,
+    });
+  };
+  const handleLoginSellerModal = (e) => {
+    setSellerLoginModal(false);
+    const obj = {
+      type: "Seller",
+      username: e.username,
+      password: e.password,
+    };
+    console.log("obj", obj);
+  };
   const createPasswordModal = async (e) => {
     let obj = {
       type: buyerRegistrationData.type,
@@ -256,10 +280,7 @@ const TopBar = () => {
         width="666"
       >
         <LoginAsSellerModal
-          handleSellerRegisterModal={() => {
-            setSellerRegisterModal(false);
-            setSellerPasswordModal(true);
-          }}
+          handleSellerRegisterModal={handleSellerRegisterModal}
           type="Register As Seller"
         />
       </CenterModal>
@@ -272,9 +293,7 @@ const TopBar = () => {
       >
         <CreatePasswordModal
           type="Register As Seller"
-          handleSellerPasswordModal={() => {
-            setSellerPasswordModal(false);
-          }}
+          handleSellerPasswordModal={handleSellerPasswordModal}
         />
       </CenterModal>
 
@@ -317,7 +336,7 @@ const TopBar = () => {
             setRegisterModal(true);
             setSellerLoginModal(false);
           }}
-          handleSellerLoginModal={(e) => setSellerLoginModal(false)}
+          handleSellerLoginModal={handleLoginSellerModal}
           type="Login As Seller"
         />
       </CenterModal>

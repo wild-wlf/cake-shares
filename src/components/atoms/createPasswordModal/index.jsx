@@ -11,18 +11,20 @@ const CreatePasswordModal = ({
   handleSellerPasswordModal,
   type,
 }) => {
-  const [submitForm, setsubmitForm] = useState(false);
+  const [submitForm, setsubmitForm] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
   const [form] = useForm();
   const handleSubmit = (e) => {
     let password = e.new_password;
-    if (!submitForm) {
+    if (submitForm === "complete") {
       // Complete Registration Scenerio
       handleCompleteRegistration({ password });
-    }
-    if (submitForm) {
+    } else if (submitForm === "later") {
       // I'll do later Scenerio
 
       createPasswordModal(password);
+    } else if (submitForm === "finish") {
+      handleSellerPasswordModal({ password, profilePicture });
     }
   };
   return (
@@ -33,7 +35,7 @@ const CreatePasswordModal = ({
       <Form form={form} onSubmit={handleSubmit}>
         {type === "Register As Seller" ? (
           <div>
-            <UploadImg />
+            <UploadImg onChange={(e) => setProfilePicture(e)} />
           </div>
         ) : (
           <></>
@@ -89,7 +91,7 @@ const CreatePasswordModal = ({
               width="170"
               htmlType="submit"
               className="button"
-              onClick={handleSellerPasswordModal}
+              onClick={() => setsubmitForm("finish")}
             >
               Finish!
             </Button>
@@ -101,6 +103,7 @@ const CreatePasswordModal = ({
                 btntype="white-blue"
                 width="170"
                 htmlType="submit"
+                onClick={() => setsubmitForm("complete")}
                 className="button"
               >
                 Complete Registration
@@ -112,7 +115,7 @@ const CreatePasswordModal = ({
                 width="170"
                 htmlType="submit"
                 className="button"
-                onClick={() => setsubmitForm(true)}
+                onClick={() => setsubmitForm("later")}
               >
                 I&apos;ll do later
               </Button>
