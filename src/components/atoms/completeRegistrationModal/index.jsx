@@ -11,8 +11,8 @@ import KycLevel from "../KYC/KycLevel";
 import { KycContext } from "@/components/Context/KycContext";
 import { UserContext } from "@/components/Context/UserContext";
 import userService from "@/services/userService";
-import { Toast, toast } from "react-toastify";
 import { convertToFormData } from "@/helpers/common";
+import Toast from "@/components/molecules/Toast";
 const CompleteRegistrationModal = ({ handleRegistration }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
   const { buyerRegistrationData } = useContext(UserContext);

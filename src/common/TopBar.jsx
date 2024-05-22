@@ -95,8 +95,31 @@ const TopBar = () => {
       ...e,
     });
   };
-  const handleSellerPasswordModal = (e) => {
-    setSellerPasswordModal(false);
+  const handleSellerPasswordModal = async (e) => {
+    const obj = {
+      password: e.password,
+      profilePicture: e.profilePicture,
+      type: buyerRegistrationData.type,
+      username: buyerRegistrationData.username,
+      email: buyerRegistrationData.email,
+      sellerType: buyerRegistrationData.sellerType,
+    };
+    const formData = convertToFormData(obj);
+    try {
+      await userService.createUser(formData);
+      Toast({
+        type: "success",
+        message: "User Registered Successfully!",
+      });
+      setSellerPasswordModal(false);
+      setBuyerRegistrationData({});
+    } catch (error) {
+      Toast({
+        type: "error",
+        message: error.message,
+      });
+    }
+    console.log("obj", obj);
     buyerRegistration({
       ...e,
     });
