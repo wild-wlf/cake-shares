@@ -11,8 +11,8 @@ import KycLevel from "../KYC/KycLevel";
 import { KycContext } from "@/components/Context/KycContext";
 import { UserContext } from "@/components/Context/UserContext";
 import userService from "@/services/userService";
-import { Toast, toast } from "react-toastify";
 import { convertToFormData } from "@/helpers/common";
+import Toast from "@/components/molecules/Toast";
 const CompleteRegistrationModal = ({ handleRegistration }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
   const { buyerRegistrationData } = useContext(UserContext);
@@ -59,6 +59,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
       fullName: e.name,
       username: e.username,
       country: e.select.value,
+      kycLevel: kycLevel - 1,
       bankInfo: {
         bankName: e.bank_bank_name,
         iban: e.bank_iban_number,
@@ -291,6 +292,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 <span>My KYC Level</span>
                 <span>{kycLevel - 1}</span>
               </div>
+
               <div className="kyc-wrap">
                 <KycLevel level={kycLevel} />
 
