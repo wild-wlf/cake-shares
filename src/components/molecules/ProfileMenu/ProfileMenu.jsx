@@ -8,6 +8,7 @@ import privacySettingIcon from "../../../_assets/privacySettingIcon.png";
 import termsIcon from "../../../_assets/termsIcon.png";
 import Image from "next/image";
 import Link from "next/link";
+import { clearCookie } from "@/helpers/common";
 
 const ProfileMenu = ({ openProfile, setIsLoggedIn }) => {
   return (
@@ -69,7 +70,13 @@ const ProfileMenu = ({ openProfile, setIsLoggedIn }) => {
             <h5>Terms & Conditions</h5>
           </div>
           <hr />
-          <div className="LogOut" onClick={() => setIsLoggedIn(false)}>
+          <div
+            className="LogOut"
+            onClick={() => {
+              setIsLoggedIn(false),
+                clearCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE);
+            }}
+          >
             <Image
               className="Logo"
               width={20}
