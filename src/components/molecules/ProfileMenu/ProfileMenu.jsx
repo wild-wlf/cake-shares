@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ProfileSec } from "./ProfileMenu.Style";
 import profileImg from "../../../_assets/userProfile.png";
 import LogOut from "../../../_assets/logoutIcon.png";
@@ -9,8 +9,16 @@ import termsIcon from "../../../_assets/termsIcon.png";
 import Image from "next/image";
 import Link from "next/link";
 import { clearCookie } from "@/helpers/common";
+import { useRouter } from "next/router";
+import { UserContext } from "@/components/Context/UserContext";
+import { useContextHook } from "use-context-hook";
+import { AuthContext } from "@/components/Context/authContext";
 
-const ProfileMenu = ({ openProfile, setIsLoggedIn }) => {
+const ProfileMenu = ({ openProfile }) => {
+  const { onLogout } = useContextHook(AuthContext, (v) => ({
+    onLogout: v.onLogout,
+  }));
+  const router = useRouter();
   return (
     <>
       <ProfileSec $show={openProfile}>
@@ -73,8 +81,7 @@ const ProfileMenu = ({ openProfile, setIsLoggedIn }) => {
           <div
             className="LogOut"
             onClick={() => {
-              setIsLoggedIn(false),
-                clearCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE);
+              onLogout();
             }}
           >
             <Image

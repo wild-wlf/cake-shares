@@ -33,10 +33,10 @@ import { convertToFormData, setCookie } from "@/helpers/common";
 import BuyerLoginSignupModal from "@/components/atoms/buyerloginSignupModal";
 import LoginAsSellerModal from "@/components/atoms/LoginAsSellerModal";
 import Toast from "@/components/molecules/Toast";
+import { AuthContext } from "@/components/Context/authContext";
+import { useContextHook } from "use-context-hook";
 
 const TopBar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const {
     registermodal,
     setRegisterModal,
@@ -50,6 +50,11 @@ const TopBar = () => {
     setBuyerRegistrationData,
     buyerRegistrationData,
   } = useContext(UserContext);
+  const { onLogin, loading, isLoggedIn } = useContextHook(AuthContext, (v) => ({
+    onLogin: v.onLogin,
+    loading: v.loading,
+    isLoggedIn: v.isLoggedIn,
+  }));
 
   const [sideNav, setSideNav] = useState(false);
   const [loginmodal, setLoginModal] = useState(false);
@@ -158,23 +163,27 @@ const TopBar = () => {
   };
 
   const handleBuyerLogin = async (e) => {
-    console.log(e);
+    // console.log(e);
+    const login = onLogin(e);
+    setBuyerLoginModal(false);
     // const formData = convertToFormData(e);
-    try {
-      const res = await userService.login(e);
-      console.log("res", res);
-      Toast({
-        type: "success",
-        message: "User Logged In Successfully!",
-      });
-      setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
-      setBuyerLoginModal(false);
-    } catch (error) {
-      Toast({
-        type: "error",
-        message: error.message,
-      });
-    }
+    // try {
+    //   const res = await userService.login(e);
+    //   console.log("res", res);
+    //   Toast({
+    //     type: "success",
+    //     message: "User Logged In Successfully!",
+    //   });
+    //   setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
+    //   setIslogin(true);
+    //   setUserData(res?.user);
+    //   setBuyerLoginModal(false);
+    // } catch (error) {
+    //   Toast({
+    //     type: "error",
+    //     message: error.message,
+    //   });
+    // }
   };
 
   const handleCompleteRegistration = (e) => {
@@ -212,7 +221,6 @@ const TopBar = () => {
 
   const { kycLevel, setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } =
     useContext(KycContext);
-
   return (
     <>
       {/******************************** KYC MODAL ******************************************/}
@@ -460,7 +468,7 @@ const TopBar = () => {
                   Alex
                   <MdArrowDropDown />
                 </Button>
-                <ProfileMenu setIsLoggedIn={setIsLoggedIn} />
+                <ProfileMenu />
               </div>
             </>
           ) : (
@@ -480,7 +488,7 @@ const TopBar = () => {
                 btntype="white-blue"
                 onClick={() => {
                   setLoginModal(true);
-                  setIsLoggedIn(true);
+                  // setIsLoggedIn(true);
                   // navigate.push({
                   //   pathname: "http://localhost:3000/",
                   //   query: { type: "seller" },
@@ -492,7 +500,7 @@ const TopBar = () => {
             </div>
           )}
         </div>
-        <ProfileMenu openProfile={openProfile} setIsLoggedIn={setIsLoggedIn} />
+        <ProfileMenu openProfile={openProfile} />
       </StyledTopBar>
     </>
   );

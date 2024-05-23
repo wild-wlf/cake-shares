@@ -31,7 +31,8 @@
     "sharp": "^0.33.3",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.8",
-    "terser-webpack-plugin": "^5.3.10"
+    "terser-webpack-plugin": "^5.3.10",
+    "use-context-hook": "^2.0.5"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",

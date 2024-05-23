@@ -14,9 +14,10 @@ import { MdEdit } from "react-icons/md";
 const UserInfo = ({
   userImage,
   type = {
-    userType: "CakeShare Buyer",
+    userType: "Buyer",
     categories: "My Investments in Categories:",
   },
+  userData,
 }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
   const router = usePathname();
@@ -52,14 +53,14 @@ const UserInfo = ({
           )}
         </ProfileWrapper>
         <div className="textWrapper">
-          <strong className="name">Alex Mertiz</strong>
+          <strong className="name">{userData?.fullName}</strong>
           <div className="discreption">
-            <span className="active">{type.userType}</span>
+            <span className="active"> CakeShare {userData?.type}</span>
             <span className="addbefore"> Member since Feb 15, 2024</span>
           </div>
         </div>
         <div className="textWrapper addbefore">
-          <span className="categoriesText">{type.categories}</span>
+          <span className="categoriesText">{type?.categories}</span>
           <ul className="categoriesWrapper">
             <li className="categoriesList">
               <Image src={popular} alt="popular" />

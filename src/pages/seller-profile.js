@@ -10,12 +10,15 @@ import sellerHeroImage from "../_assets/seller-hero-bg.png";
 import SellerPersonalInfo from "@/components/atoms/SellerPersonalInfo";
 import Categories from "@/components/atoms/categories";
 
+
 const SellerProfile = () => {
   const usertype = {
-    userType: "Individual Seller",
+    userType: "Seller",
     categories: "Seller’s Product Top Categories:",
   };
   const router = useRouter();
+
+  console.log(user);
   return (
     <StyledProfile>
       <Button
