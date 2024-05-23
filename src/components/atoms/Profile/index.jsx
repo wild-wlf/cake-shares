@@ -9,9 +9,15 @@ import UserInfo from "./UserInfo";
 import UserDetail from "./UserDetail";
 import UserImage from "../../../_assets/userProfile.png";
 import bgImage from "../../../_assets/banerImage.jpg";
+import { useContextHook } from "use-context-hook";
+import { AuthContext } from "@/components/Context/authContext";
 
 const Profile = () => {
   const router = useRouter();
+  const { user } = useContextHook(AuthContext, (v) => ({
+    user: v.user,
+  }));
+  // console.log(user);
   return (
     <StyledProfile>
       <div className="previousButton">
@@ -22,14 +28,15 @@ const Profile = () => {
           className="button"
           onClick={() => {
             router.back();
-          }}>
+          }}
+        >
           <IoIosArrowBack />
           Go Back
         </Button>
       </div>
       <ProfileBanner image={bgImage} />
-      <UserInfo userImage={UserImage} />
-      <UserDetail />
+      <UserInfo userImage={UserImage} userData={user} />
+      <UserDetail userData={user} />
     </StyledProfile>
   );
 };

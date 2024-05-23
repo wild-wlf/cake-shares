@@ -149,6 +149,7 @@ const BuyerLoginSignupModal = ({
             //     : handleBuyerModal
             // }
             // htmlType={type === "Login As Seller" ? "submit" : "button"}
+            // loader={true}
             htmlType={"submit"}
           >
             Continue

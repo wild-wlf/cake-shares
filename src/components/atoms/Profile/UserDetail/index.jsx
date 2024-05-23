@@ -24,7 +24,7 @@ import ModalContainer from "../../ModalContainer";
 import EditBank from "./EditBank";
 import EditProfile from "./EditBank/EditProfile";
 
-const UserDetail = () => {
+const UserDetail = ({ userData }) => {
   const reports_data = [
     {
       product_name: "Gov. Egypt Property",
@@ -79,29 +79,29 @@ const UserDetail = () => {
     `Chat (Stakeholders)`,
   ];
 
-  const bankInfo = [
-    {
-      icon: bankIcon,
-      title: "Bank Name",
-      discreption: "Bank of Americe",
-    },
-    {
-      icon: numIcon,
-      title: "IBAN",
-      discreption: "PK033310084246213",
-    },
+  // const bankInfo = [
+  //   {
+  //     icon: bankIcon,
+  //     title: "Bank Name",
+  //     discreption: "Bank of Americe",
+  //   },
+  //   {
+  //     icon: numIcon,
+  //     title: "IBAN",
+  //     discreption: "PK033310084246213",
+  //   },
 
-    {
-      icon: userIcon,
-      title: "SWIFT / BIC Number",
-      discreption: "PK033310084246213",
-    },
-    {
-      icon: userId,
-      title: "User ID",
-      discreption: "33445554",
-    },
-  ];
+  //   {
+  //     icon: userIcon,
+  //     title: "SWIFT / BIC Number",
+  //     discreption: "PK033310084246213",
+  //   },
+  //   {
+  //     icon: userId,
+  //     title: "User ID",
+  //     discreption: "33445554",
+  //   },
+  // ];
   return (
     <StyledUserDetail>
       <div className="colWrapper">
@@ -121,20 +121,47 @@ const UserDetail = () => {
           />
         </div>
         <div className="colBody">
-          {bankInfo.map((elem, ind) => (
-            <div className="col-content" key={ind}>
+          <>
+            <div className="col-content">
               <div className="iconWrap">
-                <Image src={elem.icon} alt="bankIcon" />
+                <Image src={bankIcon} alt="bankIcon" />
               </div>
               <div className="textWrap">
-                <strong className="title">{elem.title}</strong>
-                <span>{elem.discreption}</span>
+                <strong className="title">Bank Name</strong>
+                <span>{userData?.bank?.bankName}</span>
               </div>
             </div>
-          ))}
+            <div className="col-content">
+              <div className="iconWrap">
+                <Image src={numIcon} alt="bankIcon" />
+              </div>
+              <div className="textWrap">
+                <strong className="title">IBAN</strong>
+                <span>{userData?.bank?.iban}</span>
+              </div>
+            </div>
+            <div className="col-content">
+              <div className="iconWrap">
+                <Image src={userIcon} alt="bankIcon" />
+              </div>
+              <div className="textWrap">
+                <strong className="title">SWIFT / BIC Number</strong>
+                <span>{userData?.bank?.swiftBicNumber}</span>
+              </div>
+            </div>
+            <div className="col-content">
+              <div className="iconWrap">
+                <Image src={userId} alt="bankIcon" />
+              </div>
+              <div className="textWrap">
+                <strong className="title">User ID</strong>
+                <span>{userData?.bank?.userId}</span>
+              </div>
+            </div>
+          </>
         </div>
       </div>
-      <Inheritance />
+      <Inheritance userData={userData} />
       <div className="colWrapper">
         <div className="colHeader">
           <strong className="colTitle">Personal Information:</strong>
@@ -158,7 +185,7 @@ const UserDetail = () => {
             </div>
             <div className="textWrap">
               <strong className="title">Full Name</strong>
-              <span>Alex Mertiz</span>
+              <span>{userData?.fullName}</span>
             </div>
           </div>
           <div className="col-content">
@@ -167,7 +194,7 @@ const UserDetail = () => {
             </div>
             <div className="textWrap">
               <strong className="title">Username</strong>
-              <span>alex123</span>
+              <span>{userData?.username}</span>
             </div>
           </div>
           <div className="col-content">
@@ -176,7 +203,7 @@ const UserDetail = () => {
             </div>
             <div className="textWrap">
               <strong className="title">Email Address</strong>
-              <span>alex123@gmail.com</span>
+              <span>{userData?.email}</span>
             </div>
           </div>
           <div className="col-content">

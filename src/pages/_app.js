@@ -9,6 +9,8 @@ import { KycContextProvider } from "@/components/Context/KycContext";
 import TopBar from "../common/TopBar";
 import { UserContextProvider } from "@/components/Context/UserContext";
 import { ToastContainer } from "react-toastify";
+import { AuthContextProvider } from "@/components/Context/authContext";
+import Layout from "@/components/atoms/Layout";
 
 export const StyledToastContainer = styled(ToastContainer)`
   z-index: 99999;
@@ -42,15 +44,16 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <UserContextProvider>
-        <KycContextProvider>
-          <GlobalStyles />
-          <Wrapper>
-            <TopBar />
-            <Component {...pageProps} />
-          </Wrapper>
-        </KycContextProvider>
-      </UserContextProvider>
+      <AuthContextProvider>
+        <UserContextProvider>
+          <KycContextProvider>
+            <GlobalStyles />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </KycContextProvider>
+        </UserContextProvider>
+      </AuthContextProvider>
       <StyledToastContainer />
     </>
   );
