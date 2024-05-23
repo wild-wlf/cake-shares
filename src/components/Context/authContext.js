@@ -43,6 +43,7 @@ export const AuthContextProvider = (props) => {
       Toast({ type: "success", message: "Logout Successfully" });
       setLoadingUser(false);
       setIsLoggedIn(false);
+      setUser({});
     }
   };
 
