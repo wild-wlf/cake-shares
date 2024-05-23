@@ -59,6 +59,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
       fullName: e.name,
       username: e.username,
       country: e.select.value,
+      kycLevel: kycLevel - 1,
       bankInfo: {
         bankName: e.bank_bank_name,
         iban: e.bank_iban_number,
@@ -244,7 +245,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 name="bic_number"
                 sm
                 rounded
-                placeholder="PK033310084246213"
+                placeholder="ABCDEF12"
                 rules={[
                   {
                     required: true,
@@ -264,7 +265,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 name="user_id"
                 sm
                 rounded
-                placeholder="33445554"
+                placeholder="12345678"
                 rules={[
                   {
                     required: true,
@@ -291,6 +292,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 <span>My KYC Level</span>
                 <span>{kycLevel - 1}</span>
               </div>
+
               <div className="kyc-wrap">
                 <KycLevel level={kycLevel} />
 
@@ -333,7 +335,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 name="passport_number"
                 sm
                 rounded
-                placeholder="123467894562339"
+                placeholder="123456789"
                 rules={[
                   {
                     required: true,
