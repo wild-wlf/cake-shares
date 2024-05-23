@@ -23,8 +23,34 @@ import Field from "../../Field";
 import ModalContainer from "../../ModalContainer";
 import EditBank from "./EditBank";
 import EditProfile from "./EditBank/EditProfile";
+import { countries } from "@/components/Constant";
 
 const UserDetail = ({ userData }) => {
+  const fromatDate = (value) => {
+    const date = new Date(value);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-indexed in JavaScript
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+  const bankInfo = {
+    bankId: userData?.bank?._id,
+    bankName: userData?.bank?.bankName,
+    iban: userData?.bank?.iban,
+    swiftBicNumber: userData?.bank?.swiftBicNumber,
+    userId: userData?.bank?.userId,
+  };
+  const personalInfo = {
+    Id: userData._id,
+    fullName: userData?.fullName,
+    username: userData?.username,
+    email: userData?.email,
+    country: userData?.country,
+    countryLabel: countries.find((elem) => elem.value === userData?.country)
+      ?.label,
+    dob: fromatDate(userData?.dob),
+  };
+  console.log(personalInfo.Id);
   const reports_data = [
     {
       product_name: "Gov. Egypt Property",
@@ -117,7 +143,9 @@ const UserDetail = ({ userData }) => {
                 Edit Info
               </Button>
             )}
-            content={({ onClose }) => <EditBank onClose={onClose} />}
+            content={({ onClose }) => (
+              <EditBank onClose={onClose} bankInfo={bankInfo} />
+            )}
           />
         </div>
         <div className="colBody">
@@ -128,7 +156,7 @@ const UserDetail = ({ userData }) => {
               </div>
               <div className="textWrap">
                 <strong className="title">Bank Name</strong>
-                <span>{userData?.bank?.bankName}</span>
+                <span>{bankInfo?.bankName}</span>
               </div>
             </div>
             <div className="col-content">
@@ -137,7 +165,7 @@ const UserDetail = ({ userData }) => {
               </div>
               <div className="textWrap">
                 <strong className="title">IBAN</strong>
-                <span>{userData?.bank?.iban}</span>
+                <span>{bankInfo?.iban}</span>
               </div>
             </div>
             <div className="col-content">
@@ -146,7 +174,7 @@ const UserDetail = ({ userData }) => {
               </div>
               <div className="textWrap">
                 <strong className="title">SWIFT / BIC Number</strong>
-                <span>{userData?.bank?.swiftBicNumber}</span>
+                <span>{bankInfo?.swiftBicNumber}</span>
               </div>
             </div>
             <div className="col-content">
@@ -155,7 +183,7 @@ const UserDetail = ({ userData }) => {
               </div>
               <div className="textWrap">
                 <strong className="title">User ID</strong>
-                <span>{userData?.bank?.userId}</span>
+                <span>{bankInfo?.userId}</span>
               </div>
             </div>
           </>
@@ -175,7 +203,9 @@ const UserDetail = ({ userData }) => {
                 Edit Info
               </Button>
             )}
-            content={({ onClose }) => <EditProfile onClose={onClose} />}
+            content={({ onClose }) => (
+              <EditProfile onClose={onClose} personalInfo={personalInfo} />
+            )}
           />
         </div>
         <div className="colBody">
@@ -185,7 +215,7 @@ const UserDetail = ({ userData }) => {
             </div>
             <div className="textWrap">
               <strong className="title">Full Name</strong>
-              <span>{userData?.fullName}</span>
+              <span>{personalInfo?.fullName}</span>
             </div>
           </div>
           <div className="col-content">
@@ -194,7 +224,7 @@ const UserDetail = ({ userData }) => {
             </div>
             <div className="textWrap">
               <strong className="title">Username</strong>
-              <span>{userData?.username}</span>
+              <span>{personalInfo?.username}</span>
             </div>
           </div>
           <div className="col-content">
@@ -203,7 +233,7 @@ const UserDetail = ({ userData }) => {
             </div>
             <div className="textWrap">
               <strong className="title">Email Address</strong>
-              <span>{userData?.email}</span>
+              <span>{personalInfo?.email}</span>
             </div>
           </div>
           <div className="col-content">
@@ -222,8 +252,15 @@ const UserDetail = ({ userData }) => {
             <div className="textWrap">
               <strong className="title">Country</strong>
               <div className="discreptionWrap">
-                <Image src={countryflgIcon} alt="countryflgIcon" />
-                <span>Turkey</span>
+                <figure className="flagicon">
+                  <Image
+                    src={`https://countryflagsapi.netlify.app/flag/${personalInfo?.country}.svg`}
+                    alt="countryflgIcon"
+                    width={18}
+                    height={18}
+                  />
+                </figure>
+                <span>{personalInfo.countryLabel}</span>
               </div>
             </div>
           </div>
@@ -233,7 +270,7 @@ const UserDetail = ({ userData }) => {
             </div>
             <div className="textWrap">
               <strong className="title">Date of Birth</strong>
-              <span>03/05/2024</span>
+              <span>{personalInfo.dob}</span>
             </div>
           </div>
           <div className="col-content danger">

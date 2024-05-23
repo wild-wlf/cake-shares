@@ -86,6 +86,18 @@ const userService = {
     const { message } = await res.json();
     throw new Error(message ?? "Something went wrong");
   },
+  async update(payload, id) {
+    let res = await Fetch.patch(
+      `${this._url}/update-chunk-info/${id}`,
+      payload
+    );
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return res;
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? "Something went wrong");
+  },
 
   // register
   async createUser(payload) {

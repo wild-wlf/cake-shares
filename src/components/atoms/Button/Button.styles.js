@@ -136,9 +136,9 @@ export const StyledButton = styled.button`
     height: 20px;
     border-radius: 50%;
     display: inline-block;
-    border-top: 3px solid var(--primary);
+    border-top: 3px solid var(--white);
     border-top: ${({ color }) =>
-      color ? `3px solid ${color}` : `3px solid var(--primary)`};
+      color ? `3px solid ${color}` : `3px solid var(--white)`};
     /* border-top: 3px solid var(--primary); */
     border-right: 3px solid transparent;
     box-sizing: border-box;
