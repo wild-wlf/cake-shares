@@ -683,3 +683,7 @@ export const convertToFormData = (obj) => {
   });
   return formData;
 };
+ export const convertDateToISO = (dateStr) => {
+   const [day, month, year] = dateStr.split("/");
+   return `${year}-${month}-${day}`;
+ };

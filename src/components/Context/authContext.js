@@ -22,6 +22,7 @@ export const AuthContextProvider = (props) => {
   const [fetch_user, setFetchUser] = useState(false);
   const [socketData, setSocketData] = useState(null);
   const { cancellablePromise } = useCancellablePromise();
+  const [permission, setPermission] = useState(false);
   const [reFetch, setRefetch] = useState(false);
   const [showTokenModal, setShowTokenModal] = useState(false);
   const [allowedPages, setAllowedPages] = useState(
@@ -44,6 +45,7 @@ export const AuthContextProvider = (props) => {
       Toast({ type: "success", message: "Logout Successfully" });
       setLoadingUser(false);
       setIsLoggedIn(false);
+      setUser({});
     }
   };
 
@@ -55,7 +57,7 @@ export const AuthContextProvider = (props) => {
       .then((res) => {
         setLoadingUser(false);
         setUser(res?.user);
-        router.push("/");
+        // router.push("/");
       })
       .catch((err) => {
         setLoadingUser(false);
@@ -67,14 +69,15 @@ export const AuthContextProvider = (props) => {
   };
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn || permission) {
       getPermissions();
+      setPermission(false);
     } else if (!isLoggedIn) {
       if (privatePages.includes(router.pathname)) {
         router.push("/sign-in");
       }
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, permission]);
 
   useEffect(() => {
     if (socketData?.approved) {
@@ -186,6 +189,7 @@ export const AuthContextProvider = (props) => {
         fetch: reFetch,
         user,
         setUser,
+        setPermission,
         loading_user,
       }}
     >
