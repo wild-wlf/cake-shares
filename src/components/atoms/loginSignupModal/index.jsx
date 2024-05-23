@@ -89,10 +89,6 @@ const LoginSignupModal = ({
               {
                 required: true,
               },
-              {
-                pattern: /^[a-zA-Z0-9_-]{8,40}$/,
-                message: "Characters length should be between 8 and 40",
-              },
             ]}
           >
             <Field />
@@ -108,10 +104,6 @@ const LoginSignupModal = ({
               rules={[
                 {
                   required: true,
-                },
-                {
-                  pattern: /^.{8,64}$/,
-                  message: "Maximum Character Length is 256",
                 },
               ]}
             >
