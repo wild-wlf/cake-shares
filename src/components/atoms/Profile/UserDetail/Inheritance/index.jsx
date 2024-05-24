@@ -65,7 +65,7 @@ const Inheritance = ({ userData }) => {
                 <span>Add New</span>
               </div>
             )}
-            content={({ onClose }) => <AddInheritance />}
+            content={({ onClose }) => <AddInheritance onClose={onClose} />}
           />
         </div>
         <div className="col-holder">
@@ -92,7 +92,11 @@ const Inheritance = ({ userData }) => {
                       </div>
                     )}
                     content={({ onClose }) => (
-                      <EditInheritance onClose={onClose} />
+                      <EditInheritance
+                        onClose={onClose}
+                        selectedItem={elem}
+                        userData={userData}
+                      />
                     )}
                   />
                   <ModalContainer

@@ -62,7 +62,7 @@ const EditProfile = ({ personalInfo, onClose }) => {
   }, []);
   async function handelSubmit(e) {
     setLoading(true);
-    console.log(e);
+    // console.log(e);
     const obj = {
       type: "personal",
       info: {
@@ -187,31 +187,14 @@ const EditProfile = ({ personalInfo, onClose }) => {
           </Form.Item>
         </div>
 
-        {/* <strong
-            className="fake-label"
-            onClick={() => setChangePassword(!changePassword)}
-          >
-            Change Password!
-            <Image src={Password} alt="changePassword" />
-          </strong>
+        <strong
+          className="fake-label"
+          onClick={() => setChangePassword(!changePassword)}
+        >
+          Change Password!
+          <Image src={Password} alt="changePassword" />
+        </strong>
 
-          <Form.Item
-            type="password"
-            label="Current Password"
-            name="current_password"
-            sm
-            rounded
-            placeholder="**********"
-            rules={[
-              { required: true },
-              {
-                pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
-              },
-            ]}
-          >
-            <Field />
-          </Form.Item> */}
         <Button
           rounded
           md

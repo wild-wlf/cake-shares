@@ -18,12 +18,14 @@ const EditBank = ({ bankInfo, onClose }) => {
   const [form] = useForm();
   console.log("Bank Info", bankInfo);
   useEffect(() => {
-    form.setFieldsValue({
-      bankName: bankInfo.bankName,
-      iban: bankInfo.iban,
-      swiftBicNumber: bankInfo.swiftBicNumber,
-      userId: bankInfo.userId,
-    });
+    if (bankInfo && Object.keys(bankInfo)?.length > 0) {
+      form.setFieldsValue({
+        bankName: bankInfo.bankName,
+        iban: bankInfo.iban,
+        swiftBicNumber: bankInfo.swiftBicNumber,
+        userId: bankInfo.userId,
+      });
+    }
   }, []);
   async function handelSubmit(e) {
     setloading(true);

@@ -109,7 +109,17 @@ const userService = {
     const { message } = await res.json();
     throw new Error(message ?? "Something went wrong");
   },
+  // update password
 
+  async updatePassword(payload, id) {
+    let res = await Fetch.patch(`${this._url}/update-password/${id}`, payload);
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return res;
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? "Something went wrong");
+  },
   async logout() {
     let res = await Fetch.delete(`${this._url}/logout`);
     if (res.status >= 200 && res.status < 300) {

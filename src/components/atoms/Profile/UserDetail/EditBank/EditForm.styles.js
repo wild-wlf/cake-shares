@@ -13,7 +13,7 @@ export const StyledEditForm = styled(Form)`
     }
   }
   .fake-label {
-    display: inline-flex;
+    display: block;
     gap: 10px;
     margin-bottom: 15px;
     font-size: 16px;
@@ -21,6 +21,9 @@ export const StyledEditForm = styled(Form)`
     line-height: 20px;
     text-align: left;
     cursor: pointer;
+    img {
+      margin-left: 8px;
+    }
   }
   .subTitle {
     display: block;
