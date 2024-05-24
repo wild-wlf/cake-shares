@@ -24,9 +24,14 @@ const LoginSignupModal = ({
       email: e.email,
       sellerType: e.sellerType.value,
     };
+    const loginObj = {
+      username: e.username,
+      password: e.password,
+      sellerType: e.sellerType.value,
+    };
 
     if (type === "Login As Seller") {
-      handleSellerLoginModal(e);
+      handleSellerLoginModal({ ...loginObj, type: "Seller" });
     } else if (type === "Register As Seller") {
       handleSellerRegisterModal(obj);
     }
