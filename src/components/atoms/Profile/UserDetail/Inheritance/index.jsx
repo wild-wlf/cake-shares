@@ -116,7 +116,7 @@ const Inheritance = ({ userData }) => {
                     )}
                   />
                 </div>
-                <span className="country">{elem.country}</span>
+                <span className="text country">{elem.country}</span>
               </div>
             </div>
           ))}

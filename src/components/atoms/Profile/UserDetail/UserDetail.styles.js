@@ -85,6 +85,20 @@ export const StyledUserDetail = styled.div`
       .discreptionWrap {
         display: flex;
         gap: 10px;
+        .flagicon {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
       }
     }
     .danger {
