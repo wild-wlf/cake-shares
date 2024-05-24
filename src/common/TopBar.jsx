@@ -163,9 +163,9 @@ const TopBar = () => {
   };
 
   const handleBuyerLogin = async (e) => {
-    // console.log(e);
+    console.log(e);
     const login = onLogin(e);
-    setBuyerLoginModal(false);
+    // setBuyerLoginModal(false);
     // const formData = convertToFormData(e);
     // try {
     //   const res = await userService.login(e);

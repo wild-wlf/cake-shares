@@ -77,13 +77,15 @@ export const AuthContextProvider = (props) => {
     }
   }, [isLoggedIn, permission]);
 
-  const onLogin = async ({ username, password, rememberMe }) => {
+  const onLogin = async ({ username, password, type, sellerType }) => {
     setLoadingUser(true);
     setLoading(true);
     try {
       const res = await userService.login({
         username,
         password,
+        type,
+        sellerType,
       });
 
       if (!res?.token) {
