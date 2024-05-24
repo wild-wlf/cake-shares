@@ -14,54 +14,47 @@ import ChangePassword from "../ChangePassword";
 import CenterModal from "@/components/atoms/Modal/CenterModal";
 import { AuthContext } from "@/components/Context/authContext";
 import { useContextHook } from "use-context-hook";
-const AddInheritance = () => {
+import userService from "@/services/userService";
+import Toast from "@/components/molecules/Toast";
+const AddInheritance = ({ onClose }) => {
   const [arr, setArr] = useState(countries);
   const [changePassword, setChangePassword] = useState(false);
   const [form] = useForm();
-  const { setPermission } = useContextHook(AuthContext, (v) => ({
+  const { user, setPermission } = useContextHook(AuthContext, (v) => ({
+    user: v.user,
     setPermission: v.setPermission,
   }));
-  const [loding, setLoding] = useState(false);
+  const [loading, setLoading] = useState(false);
   async function handelSubmit(e) {
-    console.log(e);
-    // const obj = {
-    //   type: "inheritance",
-    //   info: {
-    //     userId: userData?._id,
-    //     name: e?.name,
-    //     passportNumber: e?.passportNumber,
-    //     country: e?.country,
-    //   },
-    // };
-    // setLoding(true);
-
-    // try {
-    //   await userService.update(obj, selectedItem._id);
-    //   Toast({
-    //     type: "success",
-    //     message: "updated successfully",
-    //   });
-    //   setPermission(true);
-    //   onClose();
-    // } catch (error) {
-    //   Toast({
-    //     type: "error",
-    //     message: error.message,
-    //   });
-    // } finally {
-    //   setLoding(false);
-    // }
+    const obj = {
+      type: "inheritance",
+      info: {
+        userId: user?._id,
+        name: e?.name,
+        passportNumber: e?.passportNumber,
+        country: e?.country,
+      },
+    };
+    console.log(obj);
+    setLoading(true);
+    try {
+      await userService.addInheritance(obj);
+      Toast({
+        type: "success",
+        message: "updated successfully",
+      });
+      setPermission(true);
+      onClose();
+    } catch (error) {
+      Toast({
+        type: "error",
+        message: error.message,
+      });
+    } finally {
+      setLoading(false);
+    }
   }
 
-  useEffect(() => {
-    form.setFieldsValue({
-      // full_name: "hamza",
-      //  email: admin?.email,
-      //  roles: roles?.filter(({ value }) =>
-      //    admin?.roles?.find(({ id }) => id === value)
-      //  ),
-    });
-  }, []);
   return (
     <>
       <StyledEditForm form={form} onSubmit={handelSubmit}>
@@ -122,7 +115,15 @@ const AddInheritance = () => {
             <Field />
           </Form.Item>
         </div>
-        <Button rounded md btntype="primary" width="170" htmlType="submit">
+        <Button
+          rounded
+          md
+          btntype="primary"
+          width="170"
+          htmlType="submit"
+          disabled={loading}
+          loader={loading}
+        >
           Add
         </Button>
       </StyledEditForm>

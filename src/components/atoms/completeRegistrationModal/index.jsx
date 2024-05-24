@@ -89,7 +89,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
       });
     }
   };
-  console.log(image);
+  // console.log(image);
   return (
     <Wrapper>
       <Form form={form} onSubmit={handleSubmit}>
@@ -283,7 +283,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
             </div>
           </div>
         </div>
-        <div className="kyc-info">
+        {/* <div className="kyc-info">
           <h5>KYC Info:</h5>
 
           <div>
@@ -302,7 +302,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="inheritance-info">
           <h5>Inheritance Info:</h5>

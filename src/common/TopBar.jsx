@@ -5,6 +5,8 @@ import logo from "../_assets/logo.svg";
 import Image from "next/image";
 import bell from "../_assets/bell.svg";
 import bellWhite from "../_assets/bell-white.svg";
+import profilePlaceHolder from "../_assets/profileplaceHolder.jpg";
+
 import Button from "@/components/atoms/Button";
 import register from "../_assets/register.svg";
 import { HiMenuAlt1, HiOutlineMenuAlt1 } from "react-icons/hi";
@@ -50,11 +52,15 @@ const TopBar = () => {
     setBuyerRegistrationData,
     buyerRegistrationData,
   } = useContext(UserContext);
-  const { onLogin, loading, isLoggedIn } = useContextHook(AuthContext, (v) => ({
-    onLogin: v.onLogin,
-    loading: v.loading,
-    isLoggedIn: v.isLoggedIn,
-  }));
+  const { onLogin, loading, isLoggedIn, user } = useContextHook(
+    AuthContext,
+    (v) => ({
+      onLogin: v.onLogin,
+      loading: v.loading,
+      isLoggedIn: v.isLoggedIn,
+      user: v.user,
+    })
+  );
 
   const [sideNav, setSideNav] = useState(false);
   const [loginmodal, setLoginModal] = useState(false);
@@ -159,9 +165,9 @@ const TopBar = () => {
   };
 
   const handleBuyerLogin = async (e) => {
-    console.log(e);
+    // console.log(e);
     const login = onLogin(e);
-    // setBuyerLoginModal(false);
+    setBuyerLoginModal(false);
     // const formData = convertToFormData(e);
     // try {
     //   const res = await userService.login(e);
@@ -383,7 +389,12 @@ const TopBar = () => {
             <div className="profile">
               <Image src={line} alt="line" />
               <div className="profile-details">
-                <Image src={profile} width={40} height={40} alt="profile" />
+                <Image
+                  src={profilePlaceHolder}
+                  width={40}
+                  height={40}
+                  alt="profile"
+                />
                 <div className="user-details">
                   <span>Guest Mode</span>
                   <span className="sub">Guest Mode</span>
@@ -460,8 +471,25 @@ const TopBar = () => {
                     setOpenProfile(!openProfile);
                   }}
                 >
-                  <Image src={profile} alt="profile" />
-                  Alex
+                  <figure className="profile">
+                    {/* <Image src={profile} alt="profile" /> */}
+                    {user?.profilePicture ? (
+                      <Image
+                        src={user?.profilePicture}
+                        alt="profile"
+                        width={25}
+                        height={25}
+                      />
+                    ) : (
+                      <Image
+                        src={profilePlaceHolder}
+                        alt="profile"
+                        width={25}
+                        height={25}
+                      />
+                    )}
+                  </figure>
+                  <span className="userName">{user?.fullName}</span>
                   <MdArrowDropDown />
                 </Button>
                 <ProfileMenu />

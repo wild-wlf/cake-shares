@@ -35,7 +35,7 @@ const Profile = () => {
         </Button>
       </div>
       <ProfileBanner image={bgImage} />
-      <UserInfo userImage={UserImage} userData={user} />
+      <UserInfo userImage={user?.profilePicture} userData={user} />
       <UserDetail userData={user} />
     </StyledProfile>
   );

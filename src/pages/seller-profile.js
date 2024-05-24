@@ -1,5 +1,4 @@
 import React from "react";
-import ProfileBanner from "@/components/atoms/Profile/ProfileBanner";
 import UserInfo from "@/components/atoms/Profile/UserInfo";
 import Button from "@/components/atoms/Button";
 import { IoIosArrowBack } from "react-icons/io";
@@ -9,7 +8,7 @@ import sellerImage from "../_assets/seller-img.png";
 import sellerHeroImage from "../_assets/seller-hero-bg.png";
 import SellerPersonalInfo from "@/components/atoms/SellerPersonalInfo";
 import Categories from "@/components/atoms/categories";
-
+import SellerProfileBanner from "@/components/atoms/Profile/ProfileBanner/sellerProfileBanner";
 
 const SellerProfile = () => {
   const usertype = {
@@ -18,7 +17,6 @@ const SellerProfile = () => {
   };
   const router = useRouter();
 
-  console.log(user);
   return (
     <StyledProfile>
       <Button
@@ -33,7 +31,7 @@ const SellerProfile = () => {
         <IoIosArrowBack />
         Go Back
       </Button>
-      <ProfileBanner
+      <SellerProfileBanner
         title="Real Estate Broker Things mate!"
         image={sellerHeroImage}
       />
