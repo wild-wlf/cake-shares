@@ -130,13 +130,9 @@ const TopBar = () => {
     });
   };
   const handleLoginSellerModal = (e) => {
+    console.log("E", e);
+    const Login = onLogin(e);
     setSellerLoginModal(false);
-    const obj = {
-      type: "Seller",
-      username: e.username,
-      password: e.password,
-    };
-    console.log("obj", obj);
   };
   const createPasswordModal = async (e) => {
     let obj = {
@@ -163,9 +159,9 @@ const TopBar = () => {
   };
 
   const handleBuyerLogin = async (e) => {
-    // console.log(e);
+    console.log(e);
     const login = onLogin(e);
-    setBuyerLoginModal(false);
+    // setBuyerLoginModal(false);
     // const formData = convertToFormData(e);
     // try {
     //   const res = await userService.login(e);

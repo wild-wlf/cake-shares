@@ -11,6 +11,7 @@ import { UserContextProvider } from "@/components/Context/UserContext";
 import { ToastContainer } from "react-toastify";
 import { AuthContextProvider } from "@/components/Context/authContext";
 import Layout from "@/components/atoms/Layout";
+import { SocketContextProvider } from "@/components/Context/socketContext";
 
 export const StyledToastContainer = styled(ToastContainer)`
   z-index: 99999;
@@ -45,14 +46,16 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <AuthContextProvider>
-        <UserContextProvider>
-          <KycContextProvider>
-            <GlobalStyles />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </KycContextProvider>
-        </UserContextProvider>
+        <SocketContextProvider>
+          <UserContextProvider>
+            <KycContextProvider>
+              <GlobalStyles />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </KycContextProvider>
+          </UserContextProvider>
+        </SocketContextProvider>
       </AuthContextProvider>
       <StyledToastContainer />
     </>

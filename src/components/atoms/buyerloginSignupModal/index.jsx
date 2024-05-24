@@ -22,7 +22,7 @@ const BuyerLoginSignupModal = ({
     // console.log(e);
 
     if (type === "Login As Buyer") {
-      handleLoginModal(e);
+      handleLoginModal({ ...e, type: "Buyer" });
     } else {
       // buyer Registration
       handleBuyerModal(e);

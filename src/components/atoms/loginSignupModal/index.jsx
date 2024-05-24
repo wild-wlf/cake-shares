@@ -24,9 +24,14 @@ const LoginSignupModal = ({
       email: e.email,
       sellerType: e.sellerType.value,
     };
+    const loginObj = {
+      username: e.username,
+      password: e.password,
+      sellerType: e.sellerType.value,
+    };
 
     if (type === "Login As Seller") {
-      handleSellerLoginModal(e);
+      handleSellerLoginModal({ ...loginObj, type: "Seller" });
     } else if (type === "Register As Seller") {
       handleSellerRegisterModal(obj);
     }
@@ -89,10 +94,6 @@ const LoginSignupModal = ({
               {
                 required: true,
               },
-              {
-                pattern: /^[a-zA-Z0-9_-]{8,40}$/,
-                message: "Characters length should be between 8 and 40",
-              },
             ]}
           >
             <Field />
@@ -108,10 +109,6 @@ const LoginSignupModal = ({
               rules={[
                 {
                   required: true,
-                },
-                {
-                  pattern: /^.{8,64}$/,
-                  message: "Maximum Character Length is 256",
                 },
               ]}
             >

@@ -20,6 +20,7 @@ export const AuthContextProvider = (props) => {
   const [user, setUser] = useState({});
   const [loading_user, setLoadingUser] = useState(false);
   const [fetch_user, setFetchUser] = useState(false);
+  const [socketData, setSocketData] = useState(null);
   const { cancellablePromise } = useCancellablePromise();
   const [permission, setPermission] = useState(false);
   const [reFetch, setRefetch] = useState(false);
@@ -36,6 +37,7 @@ export const AuthContextProvider = (props) => {
     try {
       await userService.logout();
     } finally {
+      setUser({});
       clearCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE);
       clearCookie("is_email_verified");
       clearCookie("email");
@@ -77,17 +79,37 @@ export const AuthContextProvider = (props) => {
     }
   }, [isLoggedIn, permission]);
 
-  const onLogin = async ({ username, password, rememberMe }) => {
+  useEffect(() => {
+    if (socketData?.approved) {
+      setTimeout(() => {
+        getPermissions();
+      }, 1000);
+    }
+  }, [socketData]);
+
+  const onLogin = async ({ username, password, type, sellerType }) => {
     setLoadingUser(true);
     setLoading(true);
     try {
       const res = await userService.login({
         username,
         password,
+        type,
+        sellerType,
       });
 
       if (!res?.token) {
         throw new Error(res?.message);
+      }
+      if (res?.type !== "Buyer" && res?.isVerified) {
+        console.log("I am in");
+        setCookie(
+          process.env.NEXT_PUBLIC_ADMIN_TOKEN_COOKIE,
+          res?.token,
+          null,
+          process.env.NEXT_PUBLIC_ADMIN_DOMAIN
+        );
+        window.open(`${process.env.NEXT_PUBLIC_ADMIN_URL}`, "_blank");
       }
 
       setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
@@ -149,7 +171,6 @@ export const AuthContextProvider = (props) => {
   }, []);
 
   const hasPermission = (perm) => user?.permissions?.includes(perm);
-  console.log("auth :", user);
   return (
     <AuthContext.Provider
       value={{
@@ -161,6 +182,8 @@ export const AuthContextProvider = (props) => {
         setShowTokenModal,
         setLoading,
         hasPermission,
+        setSocketData,
+        socketData,
         allowedPages,
         showTokenModal,
         loading,
