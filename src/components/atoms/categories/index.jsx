@@ -34,7 +34,7 @@ const images = [
     id: "6",
   },
 ];
-const Categories = ({ title, arr = images }) => {
+const Categories = ({ title, arr = images, data }) => {
   var settings = {
     dots: false,
     infinite: false,
@@ -88,9 +88,9 @@ const Categories = ({ title, arr = images }) => {
       </div>
       <div className="slider">
         <Slider {...settings}>
-          {arr?.map((data, index) => (
-            <Link href={`/products/${data.id}`} key={index}>
-              <Card Cardimage={data.image} />
+          {data?.products?.map((_, index) => (
+            <Link href={`/products/${_._id}`} key={index}>
+              <Card c_data={_} Cardimage={_.media[0] || Property} />
             </Link>
           ))}
         </Slider>

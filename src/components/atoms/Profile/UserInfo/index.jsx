@@ -30,7 +30,9 @@ const UserInfo = ({
     user: v.user,
     setPermission: v.setPermission,
   }));
-
+  const formattedDate = user?.created_at
+    ? format(parseISO(user?.created_at), "MMM dd, yyyy")
+    : "N/A";
   const router = usePathname();
   async function handelProfileImage(e) {
     const file = e.target.files[0];
@@ -95,9 +97,7 @@ const UserInfo = ({
               {" "}
               CakeShare {userData?.type ? userData?.type : type.userType}
             </span>
-            <span className="addbefore">
-              Member since {format(parseISO(user?.created_at), "MMM dd, yyyy")}
-            </span>
+            <span className="addbefore">Member since {formattedDate}</span>
           </div>
         </div>
         <div className="textWrapper addbefore">

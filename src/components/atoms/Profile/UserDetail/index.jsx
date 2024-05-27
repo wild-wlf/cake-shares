@@ -250,7 +250,7 @@ const UserDetail = ({ userData }) => {
               <span>{personalInfo.dob}</span>
             </div>
           </div>
-          <div className="col-content danger">
+          {/* <div className="col-content danger">
             <div className="iconWrap">
               <Image src={dltIcon} alt="dltIcon" />
             </div>
@@ -261,7 +261,7 @@ const UserDetail = ({ userData }) => {
                 <Image src={accDelete} alt="accDelete" />
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="colWrapper">

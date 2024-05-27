@@ -420,9 +420,9 @@ const TopBar = () => {
               <div className="textfeildWrapper">
                 <div className="textFieldRight">
                   <span className="heading">My Kyc Level</span>
-                  <span>{kycLevel - 1}</span>
+                  <span>{user?.kycLevel}</span>
                 </div>
-                <KycLevel level={kycLevel} bg />
+                <KycLevel level={user?.kycLevel} bg />
               </div>
             </>
           ) : (

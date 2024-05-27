@@ -14,7 +14,7 @@ const EditBank = ({ bankInfo, onClose }) => {
     setPermission: v.setPermission,
   }));
   const [loading, setloading] = useState(false);
-
+  console.log(bankInfo);
   const [form] = useForm();
   console.log("Bank Info", bankInfo);
   useEffect(() => {

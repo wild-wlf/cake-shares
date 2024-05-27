@@ -15,7 +15,7 @@ const productService = {
 
   GetProducts(searchQuery, refetch) {
     const [products, setProducts] = useState({
-      users: [],
+      products: [],
       totalItems: 0,
     });
     const { cancellablePromise } = useCancellablePromise();
@@ -44,6 +44,34 @@ const productService = {
     };
   },
 
+  GetMyAssets(searchQuery, refetch) {
+    const [assets, setAssets] = useState({
+      users: [],
+      totalItems: 0,
+    });
+    const { cancellablePromise } = useCancellablePromise();
+    const [status, setStatus] = useState(STATUS.LOADING);
+    useEffect(() => {
+      setStatus(STATUS.LOADING);
+      cancellablePromise(this.getAssets(searchQuery))
+        .then((res) => {
+          setAssets(() => res);
+          setStatus(STATUS.SUCCESS);
+        })
+        .catch(() => setStatus(STATUS.ERROR));
+    }, [
+      searchQuery?.searchText,
+      searchQuery?.page,
+      searchQuery?.pageSize,
+      refetch,
+    ]);
+    return {
+      assets_loading: status === STATUS.LOADING,
+      assets_error: status === STATUS.ERROR ? status : "",
+      assets_data: assets,
+    };
+  },
+
   async health() {
     const res = await Fetch.get(`${this._url}/health`);
     if (res.status >= 200 && res.status < 300) {
@@ -62,12 +90,26 @@ const productService = {
     getAll = true,
   }) {
     let res = await Fetch.get(
-      `${this._url}/prducts?itemsPerPage=${pageSize}&page=${page}&searchText=${searchText}&startDate=${startDate}&endDate=${endDate}&getAll=${getAll}`
+      `${this._url}/products?itemsPerPage=${pageSize}&page=${page}&searchText=${searchText}&startDate=${startDate}&endDate=${endDate}&getAll=${getAll}`
     );
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
+      console.log(res);
       return {
-        admins: res.items,
+        products: res.items,
+        totalItems: res.totalItems,
+      };
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? "Something went wrong");
+  },
+
+  async getAssets() {
+    let res = await Fetch.get(`${this._url}/get-all-assets`);
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return {
+        assets: res.items,
         totalItems: res.totalItems,
       };
     }
