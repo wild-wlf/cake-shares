@@ -50,7 +50,7 @@ const UserDetail = ({ userData }) => {
       ?.label,
     dob: fromatDate(userData?.dob),
   };
-  console.log(personalInfo.Id);
+
   const reports_data = [
     {
       product_name: "Gov. Egypt Property",
@@ -105,29 +105,6 @@ const UserDetail = ({ userData }) => {
     `Chat (Stakeholders)`,
   ];
 
-  // const bankInfo = [
-  //   {
-  //     icon: bankIcon,
-  //     title: "Bank Name",
-  //     discreption: "Bank of Americe",
-  //   },
-  //   {
-  //     icon: numIcon,
-  //     title: "IBAN",
-  //     discreption: "PK033310084246213",
-  //   },
-
-  //   {
-  //     icon: userIcon,
-  //     title: "SWIFT / BIC Number",
-  //     discreption: "PK033310084246213",
-  //   },
-  //   {
-  //     icon: userId,
-  //     title: "User ID",
-  //     discreption: "33445554",
-  //   },
-  // ];
   return (
     <StyledUserDetail>
       <div className="colWrapper">

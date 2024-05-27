@@ -17,7 +17,7 @@ const Profile = () => {
   const { user } = useContextHook(AuthContext, (v) => ({
     user: v.user,
   }));
-  // console.log(user);
+  console.log(user);
   return (
     <StyledProfile>
       <div className="previousButton">
@@ -34,7 +34,7 @@ const Profile = () => {
           Go Back
         </Button>
       </div>
-      <ProfileBanner image={bgImage} />
+      <ProfileBanner image={user.bannerImage || bgImage} />
       <UserInfo userImage={user?.profilePicture} userData={user} />
       <UserDetail userData={user} />
     </StyledProfile>
