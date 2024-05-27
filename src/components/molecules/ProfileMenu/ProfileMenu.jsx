@@ -6,6 +6,7 @@ import myProfileIcon from "../../../_assets/myProfileIcon.png";
 import privacyPolicyIcon from "../../../_assets/privacyPolicyIcon.png";
 import privacySettingIcon from "../../../_assets/privacySettingIcon.png";
 import termsIcon from "../../../_assets/termsIcon.png";
+import profilePlaceHolder from "../../../_assets/profileplaceHolder.jpg";
 import Image from "next/image";
 import Link from "next/link";
 import { clearCookie } from "@/helpers/common";
@@ -15,8 +16,9 @@ import { useContextHook } from "use-context-hook";
 import { AuthContext } from "@/components/Context/authContext";
 
 const ProfileMenu = ({ openProfile }) => {
-  const { onLogout } = useContextHook(AuthContext, (v) => ({
+  const { onLogout, user } = useContextHook(AuthContext, (v) => ({
     onLogout: v.onLogout,
+    user: v.user,
   }));
   const router = useRouter();
   return (
@@ -24,14 +26,26 @@ const ProfileMenu = ({ openProfile }) => {
       <ProfileSec $show={openProfile}>
         <div className="top">
           <div className="Dp">
-            <Image
-              src={profileImg}
-              alt="Profile Picture"
-              className="Profile-Picture"
-            />
+            {user.profilePicture ? (
+              <Image
+                src={user?.profilePicture}
+                alt="Profile Picture"
+                className="Profile-Picture"
+                width={60}
+                height={60}
+              />
+            ) : (
+              <Image
+                src={profilePlaceHolder}
+                alt="Profile Picture"
+                className="Profile-Picture"
+                width={60}
+                height={60}
+              />
+            )}
           </div>
           <div className="Edit">
-            <h3>Alex</h3>
+            <h3>{user?.fullName}</h3>
             <h4>Buyer Account</h4>
           </div>
         </div>

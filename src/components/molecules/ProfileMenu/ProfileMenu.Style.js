@@ -44,15 +44,22 @@ export const ProfileSec = styled.div`
       }
     }
     .Edit {
-      width: 65%;
+      max-width: 125px;
+
       h3 {
+        max-width: 125px;
+        overflow: hidden;
         font-size: 16px;
         font-weight: 500;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
       h4 {
         font-size: 12px;
         font-weight: 300;
         padding-top: 5px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }

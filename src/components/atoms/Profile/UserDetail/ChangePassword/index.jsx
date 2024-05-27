@@ -12,14 +12,14 @@ const ChangePassword = () => {
   const { user } = useContextHook(AuthContext, (v) => ({
     user: v.user,
   }));
-  console.log(user, "user");
+  // console.log(user, "user");
   const [form] = useForm();
   async function handelSubmit(e) {
     let obj = {
       currentPassword: e.current_Password,
       newPassword: e.new_Password,
     };
-    console.log("obj :", obj);
+    // console.log("obj :", obj);
     await userService.updatePassword(obj, user?._id);
   }
   return (

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const StyledUserInfo = styled.div`
   display: block;
@@ -157,7 +157,7 @@ export const ProfileWrapper = styled.label`
   }
   img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
   }
   &::before {
@@ -180,12 +180,15 @@ export const ProfileWrapper = styled.label`
     opacity: 0;
     visibility: hidden;
   }
-
-  &:hover {
-    .rounded-icon,
-    &::before {
-      opacity: 1;
-      visibility: visible;
-    }
-  }
+  ${({ showEffect }) =>
+    showEffect === "Buyer" &&
+    css`
+      &:hover {
+        .rounded-icon,
+        &::before {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    `}
 `;
