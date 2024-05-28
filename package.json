@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "env-cmd -e development next dev -p 3000",
+    "build": "env-cmd -e production next build",
+    "start": "env-cmd -e production next start -p 3004",
     "lint": "next lint"
   },
   "dependencies": {
@@ -30,10 +30,13 @@
     "react-webcam": "^7.2.0",
     "sharp": "^0.33.3",
     "slick-carousel": "^1.8.1",
+    "socket.io-client": "^4.7.5",
     "styled-components": "^6.1.8",
-    "terser-webpack-plugin": "^5.3.10"
+    "terser-webpack-plugin": "^5.3.10",
+    "use-context-hook": "^2.0.5"
   },
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "eslint": "^8",
     "eslint-config-next": "14.1.4"
   }

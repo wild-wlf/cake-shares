@@ -63,6 +63,8 @@ export const Wrapper = styled.div`
     font-size: 16px !important;
     padding-bottom: 20px;
     margin-top: -6px;
+    cursor: pointer;
+    display: inline-block;
   }
   @media only screen and (max-width: 576px) {
     h5 {

@@ -3,12 +3,26 @@ import { StyledProfileBanner } from "./ProfileBanner.styles";
 import editIcon from "../../../../_assets/editIcon.svg";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useContextHook } from "use-context-hook";
+import { AuthContext } from "@/components/Context/authContext";
+import userService from "@/services/userService";
+import { convertToFormData } from "@/helpers/common";
+import Toast from "@/components/molecules/Toast";
 
-const ProfileBanner = ({ title = "Master the World of NFT’s!" }) => {
+const ProfileBanner = ({
+  title = "Master the World of NFT’s!",
+  type = "Buyer",
+}) => {
+  const { user, setPermission } = useContextHook(AuthContext, (v) => ({
+    user: v.user,
+    setPermission: v.setPermission,
+  }));
   const [bannerImg, setBannerImg] = useState(null);
+  console.log(user);
   const router = usePathname();
-  function handleBannerImg(e) {
+  async function handleBannerImg(e) {
     const file = e.target.files[0];
+    console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = (event) => {
@@ -16,10 +30,28 @@ const ProfileBanner = ({ title = "Master the World of NFT’s!" }) => {
       };
       reader.readAsDataURL(file);
     }
+    let obj = {
+      type: "picture",
+      bannerImage: file,
+    };
+    const data = convertToFormData(obj);
+    try {
+      await userService.uploadMedia(data, user._id);
+      Toast({
+        type: "success",
+        message: "profile updated successfully",
+      });
+      setPermission(true);
+    } catch (error) {
+      Toast({
+        type: "error",
+        message: error.message,
+      });
+    }
   }
   return (
     <>
-      <StyledProfileBanner $image={bannerImg}>
+      <StyledProfileBanner $image={user?.bannerImage}>
         <strong className="title">{title}</strong>
         {router === "/profile" && (
           <button type="button">

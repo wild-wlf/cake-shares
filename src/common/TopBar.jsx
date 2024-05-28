@@ -5,6 +5,8 @@ import logo from "../_assets/logo.svg";
 import Image from "next/image";
 import bell from "../_assets/bell.svg";
 import bellWhite from "../_assets/bell-white.svg";
+import profilePlaceHolder from "../_assets/profileplaceHolder.jpg";
+
 import Button from "@/components/atoms/Button";
 import register from "../_assets/register.svg";
 import { HiMenuAlt1, HiOutlineMenuAlt1 } from "react-icons/hi";
@@ -13,7 +15,7 @@ import CenterModal from "@/components/atoms/Modal/CenterModal";
 import RegisterAsBuyer from "@/components/atoms/registerAsBuyer";
 import CreatePasswordModal from "@/components/atoms/createPasswordModal";
 import CompleteRegistrationModal from "@/components/atoms/completeRegistrationModal";
-import LoginAsBuyerModal from "@/components/atoms/loginAsBuyerModal";
+import LoginAsBuyerModal from "@/components/atoms/LoginAsSellerModal";
 import KycBuyerLevelOne from "@/components/atoms/KYC/KYCBuyer";
 import { KycContext } from "@/components/Context/KycContext";
 import KycBuyerLevelTwo from "@/components/atoms/KYC/KYCBuyerTwo";
@@ -28,10 +30,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import { UserContext } from "@/components/Context/UserContext";
+import userService from "@/services/userService";
+import { convertToFormData, setCookie } from "@/helpers/common";
+import BuyerLoginSignupModal from "@/components/atoms/buyerloginSignupModal";
+import LoginAsSellerModal from "@/components/atoms/LoginAsSellerModal";
+import Toast from "@/components/molecules/Toast";
+import { AuthContext } from "@/components/Context/authContext";
+import { useContextHook } from "use-context-hook";
 
 const TopBar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const {
     registermodal,
     setRegisterModal,
@@ -42,7 +49,18 @@ const TopBar = () => {
     completeRegistrationModal,
     setCompleteRegistrationModal,
     buyerRegistration,
+    setBuyerRegistrationData,
+    buyerRegistrationData,
   } = useContext(UserContext);
+  const { onLogin, loading, isLoggedIn, user } = useContextHook(
+    AuthContext,
+    (v) => ({
+      onLogin: v.onLogin,
+      loading: v.loading,
+      isLoggedIn: v.isLoggedIn,
+      user: v.user,
+    })
+  );
 
   const [sideNav, setSideNav] = useState(false);
   const [loginmodal, setLoginModal] = useState(false);
@@ -79,9 +97,97 @@ const TopBar = () => {
     });
   };
 
-  const createPasswordModal = () => {
-    setPasswordModal(false);
+  const handleSellerRegisterModal = (e) => {
+    setSellerRegisterModal(false);
+    setSellerPasswordModal(true);
+    console.log(e);
+    buyerRegistration({
+      type: "Seller",
+      ...e,
+    });
   };
+  const handleSellerPasswordModal = async (e) => {
+    const obj = {
+      password: e.password,
+      profilePicture: e.profilePicture,
+      type: buyerRegistrationData.type,
+      username: buyerRegistrationData.username,
+      email: buyerRegistrationData.email,
+      sellerType: buyerRegistrationData.sellerType,
+    };
+    const formData = convertToFormData(obj);
+    try {
+      await userService.createUser(formData);
+      Toast({
+        type: "success",
+        message: "User Registered Successfully!",
+      });
+      setSellerPasswordModal(false);
+      setBuyerRegistrationData({});
+    } catch (error) {
+      Toast({
+        type: "error",
+        message: error.message,
+      });
+    }
+    console.log("obj", obj);
+    buyerRegistration({
+      ...e,
+    });
+  };
+  const handleLoginSellerModal = (e) => {
+    console.log("E", e);
+    const Login = onLogin(e);
+    setSellerLoginModal(false);
+  };
+  const createPasswordModal = async (e) => {
+    let obj = {
+      type: buyerRegistrationData.type,
+      password: e,
+      email: buyerRegistrationData.email,
+      username: buyerRegistrationData.username,
+    };
+    const formData = convertToFormData(obj);
+    try {
+      await userService.createUser(formData);
+      Toast({
+        type: "success",
+        message: "User Registered Successfully!",
+      });
+      setPasswordModal(false);
+      setBuyerRegistrationData({});
+    } catch (error) {
+      Toast({
+        type: "error",
+        message: error.message,
+      });
+    }
+  };
+
+  const handleBuyerLogin = async (e) => {
+    // console.log(e);
+    const login = onLogin(e);
+    setBuyerLoginModal(false);
+    // const formData = convertToFormData(e);
+    // try {
+    //   const res = await userService.login(e);
+    //   console.log("res", res);
+    //   Toast({
+    //     type: "success",
+    //     message: "User Logged In Successfully!",
+    //   });
+    //   setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
+    //   setIslogin(true);
+    //   setUserData(res?.user);
+    //   setBuyerLoginModal(false);
+    // } catch (error) {
+    //   Toast({
+    //     type: "error",
+    //     message: error.message,
+    //   });
+    // }
+  };
+
   const handleCompleteRegistration = (e) => {
     setPasswordModal(false);
     setCompleteRegistrationModal(true);
@@ -89,8 +195,8 @@ const TopBar = () => {
   };
 
   const handleRegistration = (e) => {
+    setBuyerRegistrationData({});
     setCompleteRegistrationModal(false);
-    buyerRegistration({ ...e });
   };
 
   const handleLoginModal = () => {
@@ -117,7 +223,6 @@ const TopBar = () => {
 
   const { kycLevel, setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } =
     useContext(KycContext);
-
   return (
     <>
       {/******************************** KYC MODAL ******************************************/}
@@ -173,7 +278,10 @@ const TopBar = () => {
         title="Register As a Buyer"
         width="666"
       >
-        <RegisterAsBuyer handleBuyerModal={handleBuyerModal} />
+        <BuyerLoginSignupModal
+          handleBuyerModal={handleBuyerModal}
+          type={"Register As Buyer"}
+        />
       </CenterModal>
 
       <CenterModal
@@ -183,6 +291,7 @@ const TopBar = () => {
         width="666"
       >
         <CreatePasswordModal
+          type={"Register As Buyer"}
           createPasswordModal={createPasswordModal}
           handleCompleteRegistration={handleCompleteRegistration}
         />
@@ -203,11 +312,8 @@ const TopBar = () => {
         title="Register As a Seller"
         width="666"
       >
-        <LoginAsBuyerModal
-          handleSellerRegisterModal={() => {
-            setSellerRegisterModal(false);
-            setSellerPasswordModal(true);
-          }}
+        <LoginAsSellerModal
+          handleSellerRegisterModal={handleSellerRegisterModal}
           type="Register As Seller"
         />
       </CenterModal>
@@ -220,9 +326,7 @@ const TopBar = () => {
       >
         <CreatePasswordModal
           type="Register As Seller"
-          handleSellerPasswordModal={() => {
-            setSellerPasswordModal(false);
-          }}
+          handleSellerPasswordModal={handleSellerPasswordModal}
         />
       </CenterModal>
 
@@ -249,9 +353,9 @@ const TopBar = () => {
         title="Login As a Buyer"
         width="666"
       >
-        <LoginAsBuyerModal
-          type={"Login As Buyer"}
-          handleLoginModal={() => setBuyerLoginModal(false)}
+        <BuyerLoginSignupModal
+          type="Login As Buyer"
+          handleLoginModal={handleBuyerLogin}
         />
       </CenterModal>
       <CenterModal
@@ -260,12 +364,12 @@ const TopBar = () => {
         title="Login As a Seller"
         width="666"
       >
-        <LoginAsBuyerModal
+        <LoginAsSellerModal
           handleRegisterModal={() => {
             setRegisterModal(true);
             setSellerLoginModal(false);
           }}
-          handleSellerLoginModal={(e) => setSellerLoginModal(false)}
+          handleSellerLoginModal={handleLoginSellerModal}
           type="Login As Seller"
         />
       </CenterModal>
@@ -285,7 +389,12 @@ const TopBar = () => {
             <div className="profile">
               <Image src={line} alt="line" />
               <div className="profile-details">
-                <Image src={profile} width={40} height={40} alt="profile" />
+                <Image
+                  src={profilePlaceHolder}
+                  width={40}
+                  height={40}
+                  alt="profile"
+                />
                 <div className="user-details">
                   <span>Guest Mode</span>
                   <span className="sub">Guest Mode</span>
@@ -311,9 +420,9 @@ const TopBar = () => {
               <div className="textfeildWrapper">
                 <div className="textFieldRight">
                   <span className="heading">My Kyc Level</span>
-                  <span>{kycLevel - 1}</span>
+                  <span>{user?.kycLevel}</span>
                 </div>
-                <KycLevel level={kycLevel} bg />
+                <KycLevel level={user?.kycLevel} bg />
               </div>
             </>
           ) : (
@@ -362,11 +471,28 @@ const TopBar = () => {
                     setOpenProfile(!openProfile);
                   }}
                 >
-                  <Image src={profile} alt="profile" />
-                  Alex
+                  <figure className="profile">
+                    {/* <Image src={profile} alt="profile" /> */}
+                    {user?.profilePicture ? (
+                      <Image
+                        src={user?.profilePicture}
+                        alt="profile"
+                        width={25}
+                        height={25}
+                      />
+                    ) : (
+                      <Image
+                        src={profilePlaceHolder}
+                        alt="profile"
+                        width={25}
+                        height={25}
+                      />
+                    )}
+                  </figure>
+                  <span className="userName">{user?.fullName}</span>
                   <MdArrowDropDown />
                 </Button>
-                <ProfileMenu setIsLoggedIn={setIsLoggedIn} />
+                <ProfileMenu />
               </div>
             </>
           ) : (
@@ -386,7 +512,7 @@ const TopBar = () => {
                 btntype="white-blue"
                 onClick={() => {
                   setLoginModal(true);
-                  setIsLoggedIn(true);
+                  // setIsLoggedIn(true);
                   // navigate.push({
                   //   pathname: "http://localhost:3000/",
                   //   query: { type: "seller" },
@@ -398,7 +524,7 @@ const TopBar = () => {
             </div>
           )}
         </div>
-        <ProfileMenu openProfile={openProfile} setIsLoggedIn={setIsLoggedIn} />
+        <ProfileMenu openProfile={openProfile} />
       </StyledTopBar>
     </>
   );

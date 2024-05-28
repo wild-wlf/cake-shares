@@ -12,6 +12,27 @@ export const StyledTopBar = styled.header`
   .actions {
     display: flex;
     gap: 10px;
+    .userName {
+      max-width: 60px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .profile {
+      width: 20px;
+      height: 20px;
+      background: var(--dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
   }
   .closedNav {
     display: none;

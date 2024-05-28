@@ -63,11 +63,19 @@ export const StyledInheritance = styled.div`
       margin-bottom: 0;
       display: flex;
       flex-grow: 1;
+      max-width: 140px;
+      width: 100%;
       @media screen and (min-width: 1439px) {
         border-right: 1px solid #989898;
         padding-right: 8px;
         display: block;
       }
+    }
+    .country {
+      text-transform: capitalize;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 20px;
     }
     .user-col {
       display: flex;

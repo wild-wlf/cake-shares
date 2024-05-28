@@ -499,7 +499,7 @@ export const HelperClasses = css`
     figure {
       width: 20px;
       height: 20px;
-      border-radius: 5px;
+      border-radius: 50%;
       overflow: hidden;
       display: flex;
       align-items: center;

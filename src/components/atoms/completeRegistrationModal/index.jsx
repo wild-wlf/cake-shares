@@ -6,16 +6,19 @@ import Button from "../Button";
 import Select from "../Select";
 import Image from "next/image";
 import { countries } from "@/components/Constant";
-import SingleValueSlider from "../singleValueSlider";
 import UploadImg from "@/components/molecules/UploadImg";
 import KycLevel from "../KYC/KycLevel";
 import { KycContext } from "@/components/Context/KycContext";
 import { UserContext } from "@/components/Context/UserContext";
+import userService from "@/services/userService";
+import { convertToFormData } from "@/helpers/common";
+import Toast from "@/components/molecules/Toast";
 const CompleteRegistrationModal = ({ handleRegistration }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
   const { buyerRegistrationData } = useContext(UserContext);
-
+  // const { message } = userService.createUser();
   const [arr, setArr] = useState(countries);
+  const [image, setImage] = useState("");
   const [form] = useForm();
 
   function handelChange(value = "PK") {
@@ -25,7 +28,8 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
         <div key={index} className="countrySelect">
           <figure>
             <Image
-              src={`https://flagsapi.com/${elem.value}/shiny/48.png`}
+              src={`https://countryflagsapi.netlify.app/flag/${elem.value}.svg`}
+              // src={`https://flagsapi.com/${elem.value}/shiny/48.png`}
               width={48}
               height={48}
               alt={`Flag of ${elem.value}`}
@@ -44,9 +48,48 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
     });
     handelChange();
   }, []);
-  const handleSubmit = (e) => {
-    handleRegistration(e);
+
+  const handleSubmit = async (e) => {
+    let obj = {
+      profilePicture: image,
+      type: buyerRegistrationData.type,
+      password: buyerRegistrationData.password,
+      dob: e.dob,
+      email: e.email,
+      fullName: e.name,
+      username: e.username,
+      country: e.select.value,
+      kycLevel: kycLevel - 1,
+      bankInfo: {
+        bankName: e.bank_bank_name,
+        iban: e.bank_iban_number,
+        swiftBicNumber: e.bic_number,
+        userId: e.user_id,
+      },
+      inheritanceInfo: {
+        name: e.person_name,
+        passportNumber: e.passport_number,
+        country: e.country,
+      },
+    };
+
+    const formData = convertToFormData(obj);
+
+    try {
+      await userService.createUser(formData);
+      Toast({
+        type: "success",
+        message: "User Registered Successfully!",
+      });
+      handleRegistration();
+    } catch (error) {
+      Toast({
+        type: "error",
+        message: error.message,
+      });
+    }
   };
+  // console.log(image);
   return (
     <Wrapper>
       <Form form={form} onSubmit={handleSubmit}>
@@ -54,7 +97,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
           <h5>Personal Info:</h5>
 
           <div>
-            <UploadImg />
+            <UploadImg onChange={(e) => setImage(e)} />
             <div className="input-div">
               <Form.Item
                 type="text"
@@ -65,8 +108,11 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 placeholder="Alex Mertiz"
                 rules={[
                   {
-                    pattern: /^.{0,40}$/,
                     required: true,
+                    message: "Please enter Full Name",
+                  },
+                  {
+                    pattern: /^.{0,40}$/,
                     message: "Maximum Character Length is 256",
                   },
                 ]}
@@ -82,8 +128,11 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 placeholder="alex123"
                 rules={[
                   {
-                    pattern: /^.{0,256}$/,
                     required: true,
+                    message: "Please enter username",
+                  },
+                  {
+                    pattern: /^[a-zA-Z0-9_-]{8,40}$/,
                     message: "Maximum Character Length is 256",
                   },
                 ]}
@@ -101,8 +150,11 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 placeholder="alex123@gmail.com"
                 rules={[
                   {
-                    pattern: /^.{0,256}$/,
                     required: true,
+                    message: "Please enter email address",
+                  },
+                  {
+                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
                     message: "Maximum Character Length is 256",
                   },
                 ]}
@@ -115,7 +167,6 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
-                    // message: "Maximum Character Length is 256",
                   },
                 ]}
               >
@@ -132,6 +183,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
+                    message: "Please enter Date Of Birth",
                   },
                 ]}
               >
@@ -147,16 +199,19 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
             <div className="input-div">
               <Form.Item
                 type="text"
-                label="Back Name"
-                name="bank_name"
+                label="Bank Name"
+                name="bank_bank_name"
                 sm
                 rounded
                 placeholder="Bank of Americe"
                 rules={[
                   {
-                    pattern: /^.{0,40}$/,
                     required: true,
-                    message: "Maximum Character Length is 256",
+                    message: "Please enter Bank Name",
+                  },
+                  {
+                    pattern: /^.{8,256}$/,
+                    message: "Please enter a valid Bank Name",
                   },
                 ]}
               >
@@ -165,15 +220,18 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
               <Form.Item
                 type="text"
                 label="IBAN"
-                name="iban"
+                name="bank_iban_number"
                 sm
                 rounded
                 placeholder="PK033310084246213"
                 rules={[
                   {
-                    pattern: /^.{0,256}$/,
                     required: true,
-                    message: "Maximum Character Length is 256",
+                    message: "Please enter IBAN number",
+                  },
+                  {
+                    pattern: /^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/,
+                    message: "Please enter a valid IBAN number",
                   },
                 ]}
               >
@@ -187,12 +245,15 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 name="bic_number"
                 sm
                 rounded
-                placeholder="PK033310084246213"
+                placeholder="ABCDEF12"
                 rules={[
                   {
-                    pattern: /^.{0,256}$/,
                     required: true,
-                    message: "Maximum Character Length is 256",
+                    message: "Please enter SWIFT / BIC Number",
+                  },
+                  {
+                    pattern: /^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
+                    message: "Invalid SWIFT/BIC format",
                   },
                 ]}
               >
@@ -204,12 +265,16 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 name="user_id"
                 sm
                 rounded
-                placeholder="33445554"
+                placeholder="12345678"
                 rules={[
                   {
-                    pattern: /^.{0,256}$/,
                     required: true,
-                    message: "Maximum Character Length is 256",
+                    message: "Please enter User ID",
+                  },
+                  {
+                    pattern: /^[a-zA-Z0-9_-]{8,256}$/,
+                    message:
+                      "User ID must be between 8 and 256 characters long",
                   },
                 ]}
               >
@@ -218,7 +283,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
             </div>
           </div>
         </div>
-        <div className="kyc-info">
+        {/* <div className="kyc-info">
           <h5>KYC Info:</h5>
 
           <div>
@@ -227,6 +292,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 <span>My KYC Level</span>
                 <span>{kycLevel - 1}</span>
               </div>
+
               <div className="kyc-wrap">
                 <KycLevel level={kycLevel} />
 
@@ -236,7 +302,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="inheritance-info">
           <h5>Inheritance Info:</h5>
@@ -252,9 +318,12 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 placeholder="Logan Paulson"
                 rules={[
                   {
-                    pattern: /^.{0,40}$/,
                     required: true,
-                    message: "Maximum Character Length is 256",
+                    message: "Please enter Name of Person",
+                  },
+                  {
+                    pattern: /^.{0,40}$/,
+                    message: "Please enter a valid name",
                   },
                 ]}
               >
@@ -266,12 +335,16 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 name="passport_number"
                 sm
                 rounded
-                placeholder="123467894562339"
+                placeholder="123456789"
                 rules={[
                   {
-                    pattern: /^.{0,256}$/,
                     required: true,
-                    message: "Maximum Character Length is 256",
+                    message: "Please enter Passport Number",
+                  },
+                  {
+                    pattern: /^[a-zA-Z0-9]{6,9}$/,
+                    message:
+                      "Passport number must be between 6 and 9 characters long",
                   },
                 ]}
               >
@@ -288,18 +361,21 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 placeholder="United States"
                 rules={[
                   {
-                    pattern: /^.{0,256}$/,
                     required: true,
-                    message: "Maximum Character Length is 256",
+                    message: "Please enter Country",
+                  },
+                  {
+                    pattern: /^.{0,40}$/,
+                    message: "Please enter a valid country",
                   },
                 ]}
               >
                 <Field />
               </Form.Item>
             </div>
-            <div className="addmore">
+            {/* <div className="addmore">
               <span>+Add more</span>
-            </div>
+            </div> */}
           </div>
         </div>
 

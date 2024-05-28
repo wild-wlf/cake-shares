@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Wrapper } from "./createPasswordModal.style";
 import Field from "../Field";
 import Form, { useForm } from "@/components/molecules/Form";
@@ -11,9 +11,21 @@ const CreatePasswordModal = ({
   handleSellerPasswordModal,
   type,
 }) => {
+  const [submitForm, setsubmitForm] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
   const [form] = useForm();
   const handleSubmit = (e) => {
-    handleCompleteRegistration(e);
+    let password = e.new_password;
+    if (submitForm === "complete") {
+      // Complete Registration Scenerio
+      handleCompleteRegistration({ password });
+    } else if (submitForm === "later") {
+      // I'll do later Scenerio
+
+      createPasswordModal(password);
+    } else if (submitForm === "finish") {
+      handleSellerPasswordModal({ password, profilePicture });
+    }
   };
   return (
     <Wrapper>
@@ -23,7 +35,7 @@ const CreatePasswordModal = ({
       <Form form={form} onSubmit={handleSubmit}>
         {type === "Register As Seller" ? (
           <div>
-            <UploadImg />
+            <UploadImg onChange={(e) => setProfilePicture(e)} />
           </div>
         ) : (
           <></>
@@ -37,6 +49,9 @@ const CreatePasswordModal = ({
             rounded
             placeholder="***********"
             rules={[
+              {
+                required: true,
+              },
               {
                 pattern: /^.{8,64}$/,
                 required: true,
@@ -55,9 +70,12 @@ const CreatePasswordModal = ({
             placeholder="***********"
             rules={[
               {
-                pattern: /^.{8,64}$/,
                 required: true,
-                message: "Maximum Character Length is 256",
+              },
+              {
+                transform: (value) =>
+                  value !== form.getFieldValue("new_password"),
+                message: "The two passwords that you entered do not match!",
               },
             ]}
           >
@@ -73,7 +91,7 @@ const CreatePasswordModal = ({
               width="170"
               htmlType="submit"
               className="button"
-              onClick={handleSellerPasswordModal}
+              onClick={() => setsubmitForm("finish")}
             >
               Finish!
             </Button>
@@ -85,23 +103,22 @@ const CreatePasswordModal = ({
                 btntype="white-blue"
                 width="170"
                 htmlType="submit"
+                onClick={() => setsubmitForm("complete")}
                 className="button"
               >
                 Complete Registration
               </Button>
-              <Link href={"/"}>
-                <Button
-                  rounded
-                  md
-                  btntype="primary"
-                  width="170"
-                  htmlType="submit"
-                  className="button"
-                  onClick={createPasswordModal}
-                >
-                  I&apos;ll do later
-                </Button>
-              </Link>
+              <Button
+                rounded
+                md
+                btntype="primary"
+                width="170"
+                htmlType="submit"
+                className="button"
+                onClick={() => setsubmitForm("later")}
+              >
+                I&apos;ll do later
+              </Button>
             </>
           )}
         </div>

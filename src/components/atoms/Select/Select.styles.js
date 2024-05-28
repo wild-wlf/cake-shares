@@ -9,6 +9,8 @@ const Styles = css`
     min-height: inherit;
     padding-top: 0;
     padding-bottom: 0;
+    padding-left: 20px;
+    padding-right: 20px;
     border-color: ${({ error }) => error && "var(--danger) !important"};
     box-shadow: none;
     ${({ $gray }) =>

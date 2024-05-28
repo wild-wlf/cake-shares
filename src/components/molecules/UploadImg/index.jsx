@@ -2,9 +2,14 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { StyledUploadImage } from "./UploadImg.style";
 import Camera from "../../../_assets/camera.svg";
-import ProfilePic from "../../../_assets/profilepic.svg";
+import ProfilePic from "../../../_assets/avatar-icon.svg";
 
-const UploadImg = ({ id = "upload", fileSize = 2, accept = ".png , .jpg" }) => {
+const UploadImg = ({
+  id = "upload",
+  fileSize = 2,
+  accept = ".png , .jpg",
+  ...props
+}) => {
   const [uploaded, setUploaded] = useState("");
 
   function handelChange(e) {
@@ -13,6 +18,7 @@ const UploadImg = ({ id = "upload", fileSize = 2, accept = ".png , .jpg" }) => {
       const fileLength = file.size / (1024 * 1024);
       if (fileLength <= fileSize) {
         setUploaded(e.target.files[0]);
+        props.onChange(e.target.files[0]);
         // onChange(e.target.files[0]);
       } else {
         alert("file size exceeded");
@@ -43,7 +49,9 @@ const UploadImg = ({ id = "upload", fileSize = 2, accept = ".png , .jpg" }) => {
           type="file"
           id={id}
           accept={accept}
-          onChange={(e) => handelChange(e)}
+          onChange={(e) => {
+            handelChange(e);
+          }}
         />
         <Image src={Camera} alt="Camera" className="camera" />
       </label>

@@ -13,11 +13,11 @@ import CenterModal from "@/components/atoms/Modal/CenterModal";
 import ConfirmationModal from "../EditBank/ConfirmationModal";
 import AddInheritance from "../EditBank/AddInheritance";
 import EditInheritance from "../EditBank/EditInheritance";
-const Inheritance = () => {
+const Inheritance = ({ userData }) => {
   const inheritanceData = [
     {
       name: "Logan Paulson",
-      accNo: "123456123564262854",
+      accNo: "12345",
       country: "United States",
     },
     {
@@ -65,11 +65,11 @@ const Inheritance = () => {
                 <span>Add New</span>
               </div>
             )}
-            content={({ onClose }) => <AddInheritance />}
+            content={({ onClose }) => <AddInheritance onClose={onClose} />}
           />
         </div>
         <div className="col-holder">
-          {inheritanceData.map((elem, ind) => (
+          {userData?.inheritances?.map((elem, ind) => (
             <div className="col" key={ind}>
               <div className="user-col">
                 <div className="img-holder">
@@ -77,7 +77,7 @@ const Inheritance = () => {
                 </div>
                 <div>
                   <span className="name">{elem.name}</span>
-                  <span className="text">{elem.accNo}</span>
+                  <span className="text">{elem.passportNumber}</span>
                 </div>
               </div>
               <div className="user-edit-del">
@@ -92,7 +92,11 @@ const Inheritance = () => {
                       </div>
                     )}
                     content={({ onClose }) => (
-                      <EditInheritance onClose={onClose} />
+                      <EditInheritance
+                        onClose={onClose}
+                        selectedItem={elem}
+                        userData={userData}
+                      />
                     )}
                   />
                   <ModalContainer
@@ -116,7 +120,7 @@ const Inheritance = () => {
                     )}
                   />
                 </div>
-                <span className="text">{elem.country}</span>
+                <span className="text country">{elem.country}</span>
               </div>
             </div>
           ))}

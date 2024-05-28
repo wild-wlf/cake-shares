@@ -17,6 +17,7 @@ const CenterModal = ({
   title,
   setIsEditing,
   zIndex,
+  iscloseAble = true,
 }) => {
   // const { clearFormData } = useContext(AuthContext);
   useEffect(() => {
@@ -44,7 +45,9 @@ const CenterModal = ({
     // setIsEditing?.({
     //   status: false,
     // });
-    setOpen(false);
+    if (iscloseAble) {
+      setOpen(false);
+    }
   };
 
   return (
@@ -54,8 +57,10 @@ const CenterModal = ({
         open={open}
         onClick={handleClose}
         onKeyDown={(e) => {
-          if (e.key === "Escape") {
-            handleClose();
+          if (iscloseAble) {
+            if (e.key === "Escape") {
+              handleClose();
+            }
           }
         }}
       >
@@ -73,14 +78,16 @@ const CenterModal = ({
         >
           <Head>
             <strong>{title}</strong>
-            <button
-              type="button"
-              className="closer"
-              onClick={handleClose}
-              tabIndex={0}
-            >
-              <Image src={close} alt="Close-Modal" />
-            </button>
+            {iscloseAble && (
+              <button
+                type="button"
+                className="closer"
+                onClick={handleClose}
+                tabIndex={0}
+              >
+                <Image src={close} alt="Close-Modal" />
+              </button>
+            )}
           </Head>
           {children}
         </ContentHolder>

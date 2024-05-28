@@ -12,11 +12,19 @@ import { MdModeEdit } from "react-icons/md";
 import Password from "../../../../../_assets/changePassword.svg";
 import ChangePassword from "../ChangePassword";
 import CenterModal from "@/components/atoms/Modal/CenterModal";
-const EditProfile = () => {
+import userService from "@/services/userService";
+import Toast from "@/components/molecules/Toast";
+import { useContextHook } from "use-context-hook";
+import { AuthContext } from "@/components/Context/authContext";
+import { convertDateToISO } from "@/helpers/common";
+const EditProfile = ({ personalInfo, onClose }) => {
   const [arr, setArr] = useState(countries);
+  const [loading, setLoading] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
   const [form] = useForm();
-
+  const { setPermission } = useContextHook(AuthContext, (v) => ({
+    setPermission: v.setPermission,
+  }));
   function handelChange(value = "PK") {
     const newArr = arr.map((elem, index) => ({
       ...elem,
@@ -39,19 +47,51 @@ const EditProfile = () => {
   useEffect(() => {
     handelChange();
   }, []);
-
-  function handelSubmit(e) {
-    console.log(e);
-  }
+  // console.log("personalInfo : ", personalInfo);
   useEffect(() => {
+    const country = countries.find(
+      (ele) => ele.value === personalInfo?.country
+    );
     form.setFieldsValue({
-      // full_name: "hamza",
-      //  email: admin?.email,
-      //  roles: roles?.filter(({ value }) =>
-      //    admin?.roles?.find(({ id }) => id === value)
-      //  ),
+      fullName: personalInfo?.fullName,
+      username: personalInfo?.username,
+      email: personalInfo?.email,
+      dob: personalInfo?.dob,
+      country: country || { value: "", label: "" },
     });
   }, []);
+  async function handelSubmit(e) {
+    setLoading(true);
+    // console.log(e);
+    const obj = {
+      type: "personal",
+      info: {
+        fullName: e.fullName,
+        username: e.username,
+        email: e.email,
+        country: e.country.value,
+        dob: convertDateToISO(e.dob),
+      },
+    };
+    try {
+      await userService.update(obj, personalInfo.Id);
+      setPermission(true);
+      onClose();
+      Toast({
+        type: "success",
+        message: "Profile updated successfully",
+      });
+    } catch (error) {
+      console.log(error);
+      Toast({
+        type: "error",
+        message: error.message,
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <>
       <CenterModal
@@ -62,113 +102,15 @@ const EditProfile = () => {
       >
         <ChangePassword />
       </CenterModal>
-      <StyledEditForm>
-        <Form form={form} onSubmit={handelSubmit}>
-          <div className="combine-fields">
-            <Form.Item
-              type="text"
-              label="Full Name"
-              name="full_name"
-              sm
-              rounded
-              placeholder="Alex Mertiz"
-              rules={[
-                { required: true },
-                {
-                  pattern: /^.{0,40}$/,
-                  message: "Maximum Character Length is 256",
-                },
-              ]}
-            >
-              <Field />
-            </Form.Item>
-            <Form.Item
-              type="text"
-              label="Username"
-              name="user_name"
-              sm
-              rounded
-              placeholder="alex123"
-              rules={[
-                { required: true },
-                {
-                  pattern: /^.{0,40}$/,
-                  message: "Maximum Character Length is 256",
-                },
-              ]}
-            >
-              <Field />
-            </Form.Item>
-            <Form.Item
-              type="text"
-              label="Email Address"
-              name="email_address"
-              sm
-              rounded
-              placeholder="alex123@gmail.com"
-              rules={[
-                { required: true },
-
-                {
-                  pattern: /^.{0,40}$/,
-                  message: "Maximum Character Length is 256",
-                },
-              ]}
-            >
-              <Field />
-            </Form.Item>
-            <Form.Item
-              type="text"
-              label="Country"
-              name="country"
-              sm
-              rounded
-              placeholder="Select"
-              rules={[
-                { required: true },
-                {
-                  pattern: /^.{0,40}$/,
-                  message: "Maximum Character Length is 256",
-                },
-              ]}
-            >
-              <Select options={arr} />
-            </Form.Item>
-            <Form.Item
-              type="text"
-              label="Birthdate (D.O.B)"
-              name="dob"
-              sm
-              rounded
-              placeholder="03/05/2001"
-              rules={[
-                { required: true },
-
-                {
-                  pattern: /^.{0,40}$/,
-                  message: "Maximum Character Length is 256",
-                },
-              ]}
-            >
-              <Field />
-            </Form.Item>
-          </div>
-
-          <strong
-            className="fake-label"
-            onClick={() => setChangePassword(!changePassword)}
-          >
-            Change Password!
-            <Image src={Password} alt="changePassword" />
-          </strong>
-
+      <StyledEditForm form={form} onSubmit={handelSubmit}>
+        <div className="combine-fields">
           <Form.Item
-            type="password"
-            label="Current Password"
-            name="current_password"
+            type="text"
+            label="Full Name"
+            name="fullName"
             sm
             rounded
-            placeholder="**********"
+            placeholder="Alex Mertiz"
             rules={[
               { required: true },
               {
@@ -179,10 +121,91 @@ const EditProfile = () => {
           >
             <Field />
           </Form.Item>
-          <Button rounded md btntype="primary" width="170" htmlType="submit">
-            Save Changes
-          </Button>
-        </Form>
+          <Form.Item
+            type="text"
+            label="Username"
+            name="username"
+            sm
+            rounded
+            placeholder="alex123"
+            rules={[
+              { required: true },
+              {
+                pattern: /^.{0,40}$/,
+                message: "Maximum Character Length is 256",
+              },
+            ]}
+          >
+            <Field />
+          </Form.Item>
+          <Form.Item
+            type="text"
+            label="Email Address"
+            name="email"
+            sm
+            rounded
+            placeholder="alex123@gmail.com"
+            rules={[
+              { required: true },
+
+              {
+                pattern: /^.{0,40}$/,
+                message: "Maximum Character Length is 256",
+              },
+            ]}
+          >
+            <Field />
+          </Form.Item>
+          <Form.Item
+            label="Country"
+            name="country"
+            sm
+            rounded
+            placeholder="Select"
+            options={arr}
+            rules={[{ required: true }]}
+          >
+            <Select />
+          </Form.Item>
+          <Form.Item
+            type="text"
+            label="Birthdate (D.O.B)"
+            name="dob"
+            sm
+            rounded
+            placeholder="03/05/2001"
+            rules={[
+              { required: true },
+
+              {
+                pattern: /^.{0,40}$/,
+                message: "Maximum Character Length is 256",
+              },
+            ]}
+          >
+            <Field />
+          </Form.Item>
+        </div>
+
+        <strong
+          className="fake-label"
+          onClick={() => setChangePassword(!changePassword)}
+        >
+          Change Password!
+          <Image src={Password} alt="changePassword" />
+        </strong>
+
+        <Button
+          rounded
+          md
+          btntype="primary"
+          width="170"
+          htmlType="submit"
+          disabled={loading}
+          loader={loading}
+        >
+          Save Changes
+        </Button>
       </StyledEditForm>
     </>
   );

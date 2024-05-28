@@ -5,7 +5,6 @@ export const StyledUploadImage = styled.div`
   max-width: 100px;
   margin: 0 0 30px;
   position: relative;
-
   .label-text {
     display: block;
     font-size: 20px;

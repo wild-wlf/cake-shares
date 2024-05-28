@@ -23,8 +23,34 @@ import Field from "../../Field";
 import ModalContainer from "../../ModalContainer";
 import EditBank from "./EditBank";
 import EditProfile from "./EditBank/EditProfile";
+import { countries } from "@/components/Constant";
 
-const UserDetail = () => {
+const UserDetail = ({ userData }) => {
+  const fromatDate = (value) => {
+    const date = new Date(value);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-indexed in JavaScript
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+  const bankInfo = {
+    bankId: userData?.bank?._id,
+    bankName: userData?.bank?.bankName,
+    iban: userData?.bank?.iban,
+    swiftBicNumber: userData?.bank?.swiftBicNumber,
+    userId: userData?.bank?.userId,
+  };
+  const personalInfo = {
+    Id: userData._id,
+    fullName: userData?.fullName,
+    username: userData?.username,
+    email: userData?.email,
+    country: userData?.country,
+    countryLabel: countries.find((elem) => elem.value === userData?.country)
+      ?.label,
+    dob: fromatDate(userData?.dob),
+  };
+
   const reports_data = [
     {
       product_name: "Gov. Egypt Property",
@@ -79,29 +105,6 @@ const UserDetail = () => {
     `Chat (Stakeholders)`,
   ];
 
-  const bankInfo = [
-    {
-      icon: bankIcon,
-      title: "Bank Name",
-      discreption: "Bank of Americe",
-    },
-    {
-      icon: numIcon,
-      title: "IBAN",
-      discreption: "PK033310084246213",
-    },
-
-    {
-      icon: userIcon,
-      title: "SWIFT / BIC Number",
-      discreption: "PK033310084246213",
-    },
-    {
-      icon: userId,
-      title: "User ID",
-      discreption: "33445554",
-    },
-  ];
   return (
     <StyledUserDetail>
       <div className="colWrapper">
@@ -117,24 +120,53 @@ const UserDetail = () => {
                 Edit Info
               </Button>
             )}
-            content={({ onClose }) => <EditBank onClose={onClose} />}
+            content={({ onClose }) => (
+              <EditBank onClose={onClose} bankInfo={bankInfo} />
+            )}
           />
         </div>
         <div className="colBody">
-          {bankInfo.map((elem, ind) => (
-            <div className="col-content" key={ind}>
+          <>
+            <div className="col-content">
               <div className="iconWrap">
-                <Image src={elem.icon} alt="bankIcon" />
+                <Image src={bankIcon} alt="bankIcon" />
               </div>
               <div className="textWrap">
-                <strong className="title">{elem.title}</strong>
-                <span>{elem.discreption}</span>
+                <strong className="title">Bank Name</strong>
+                <span>{bankInfo?.bankName}</span>
               </div>
             </div>
-          ))}
+            <div className="col-content">
+              <div className="iconWrap">
+                <Image src={numIcon} alt="bankIcon" />
+              </div>
+              <div className="textWrap">
+                <strong className="title">IBAN</strong>
+                <span>{bankInfo?.iban}</span>
+              </div>
+            </div>
+            <div className="col-content">
+              <div className="iconWrap">
+                <Image src={userIcon} alt="bankIcon" />
+              </div>
+              <div className="textWrap">
+                <strong className="title">SWIFT / BIC Number</strong>
+                <span>{bankInfo?.swiftBicNumber}</span>
+              </div>
+            </div>
+            <div className="col-content">
+              <div className="iconWrap">
+                <Image src={userId} alt="bankIcon" />
+              </div>
+              <div className="textWrap">
+                <strong className="title">User ID</strong>
+                <span>{bankInfo?.userId}</span>
+              </div>
+            </div>
+          </>
         </div>
       </div>
-      <Inheritance />
+      <Inheritance userData={userData} />
       <div className="colWrapper">
         <div className="colHeader">
           <strong className="colTitle">Personal Information:</strong>
@@ -148,7 +180,9 @@ const UserDetail = () => {
                 Edit Info
               </Button>
             )}
-            content={({ onClose }) => <EditProfile onClose={onClose} />}
+            content={({ onClose }) => (
+              <EditProfile onClose={onClose} personalInfo={personalInfo} />
+            )}
           />
         </div>
         <div className="colBody">
@@ -158,7 +192,7 @@ const UserDetail = () => {
             </div>
             <div className="textWrap">
               <strong className="title">Full Name</strong>
-              <span>Alex Mertiz</span>
+              <span>{personalInfo?.fullName}</span>
             </div>
           </div>
           <div className="col-content">
@@ -167,7 +201,7 @@ const UserDetail = () => {
             </div>
             <div className="textWrap">
               <strong className="title">Username</strong>
-              <span>alex123</span>
+              <span>{personalInfo?.username}</span>
             </div>
           </div>
           <div className="col-content">
@@ -176,7 +210,7 @@ const UserDetail = () => {
             </div>
             <div className="textWrap">
               <strong className="title">Email Address</strong>
-              <span>alex123@gmail.com</span>
+              <span>{personalInfo?.email}</span>
             </div>
           </div>
           <div className="col-content">
@@ -195,8 +229,15 @@ const UserDetail = () => {
             <div className="textWrap">
               <strong className="title">Country</strong>
               <div className="discreptionWrap">
-                <Image src={countryflgIcon} alt="countryflgIcon" />
-                <span>Turkey</span>
+                <figure className="flagicon">
+                  <Image
+                    src={`https://countryflagsapi.netlify.app/flag/${personalInfo?.country}.svg`}
+                    alt="countryflgIcon"
+                    width={18}
+                    height={18}
+                  />
+                </figure>
+                <span>{personalInfo.countryLabel}</span>
               </div>
             </div>
           </div>
@@ -206,10 +247,10 @@ const UserDetail = () => {
             </div>
             <div className="textWrap">
               <strong className="title">Date of Birth</strong>
-              <span>03/05/2024</span>
+              <span>{personalInfo.dob}</span>
             </div>
           </div>
-          <div className="col-content danger">
+          {/* <div className="col-content danger">
             <div className="iconWrap">
               <Image src={dltIcon} alt="dltIcon" />
             </div>
@@ -220,7 +261,7 @@ const UserDetail = () => {
                 <Image src={accDelete} alt="accDelete" />
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="colWrapper">
