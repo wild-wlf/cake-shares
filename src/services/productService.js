@@ -8,7 +8,7 @@ const STATUS = {
   ERROR: "error",
 };
 const productService = {
-  _url: `${process.env.NEXT_PUBLIC_USER_URL}/v1/product`,
+  _url: `${process.env.NEXT_PUBLIC_PRODUCT_URL}`,
   /**
    * Hooks
    */
