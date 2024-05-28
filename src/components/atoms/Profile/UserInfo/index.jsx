@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ProfileWrapper, StyledUserInfo } from "./UserInfo.styles";
 import popular from "../../../../_assets/popular.svg";
 import PropertyIcon from "../../../../_assets/PropertyIcon.svg";
@@ -16,6 +16,7 @@ import userService from "@/services/userService";
 import { useContextHook } from "use-context-hook";
 import { AuthContext } from "@/components/Context/authContext";
 import Toast from "@/components/molecules/Toast";
+import { format, parseISO } from "date-fns";
 const UserInfo = ({
   userImage,
   type = {
@@ -29,7 +30,9 @@ const UserInfo = ({
     user: v.user,
     setPermission: v.setPermission,
   }));
-  console.log(user);
+  const formattedDate = user?.created_at
+    ? format(parseISO(user?.created_at), "MMM dd, yyyy")
+    : "N/A";
   const router = usePathname();
   async function handelProfileImage(e) {
     const file = e.target.files[0];
@@ -94,7 +97,7 @@ const UserInfo = ({
               {" "}
               CakeShare {userData?.type ? userData?.type : type.userType}
             </span>
-            <span className="addbefore"> Member since Feb 15, 2024</span>
+            <span className="addbefore">Member since {formattedDate}</span>
           </div>
         </div>
         <div className="textWrapper addbefore">
@@ -119,13 +122,13 @@ const UserInfo = ({
         <div className="kycWrapper">
           <div className="headingWrapper">
             <strong className="headingText">My KYC Level</strong>
-            <strong className="headingText">{kycLevel - 1}</strong>
+            <strong className="headingText">{user.kycLevel}</strong>
           </div>
           <div className="updgradeKyc">
-            <KycLevel level={kycLevel} />
-            <span className="discreption" onClick={checkKycLevel}>
+            <KycLevel level={user.kycLevel} />
+            {/* <span className="discreption" onClick={checkKycLevel}>
               Upgrade KYC
-            </span>
+            </span> */}
           </div>
         </div>
       ) : (

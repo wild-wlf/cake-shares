@@ -109,7 +109,7 @@ export const AuthContextProvider = (props) => {
           null,
           process.env.NEXT_PUBLIC_ADMIN_DOMAIN
         );
-        window.open(`${process.env.NEXT_PUBLIC_ADMIN_URL}`, "_blank");
+        window.open(`${process.env.NEXT_PUBLIC_ADMIN_URL}`);
       }
 
       setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
