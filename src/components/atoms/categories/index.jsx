@@ -7,37 +7,12 @@ import Property from "../../../_assets/property.png";
 import Property2 from "../../../_assets/property2.png";
 import Property3 from "../../../_assets/property3.png";
 import Link from "next/link";
+import Loader from "../Loader";
 
-const images = [
-  {
-    image: Property,
-    id: "1",
-  },
-  {
-    id: "2",
-    image: Property2,
-  },
-  {
-    image: Property3,
-    id: "3",
-  },
-  {
-    image: Property,
-    id: "4",
-  },
-  {
-    image: Property2,
-    id: "5",
-  },
-  {
-    image: Property3,
-    id: "6",
-  },
-];
-const Categories = ({ title, arr = images, data }) => {
-  var settings = {
+const Categories = ({ title, data, loading }) => {
+  const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 5.2,
     slidesToScroll: 1,
@@ -86,15 +61,19 @@ const Categories = ({ title, arr = images, data }) => {
       <div className="title">
         <span>{title}</span>
       </div>
-      <div className="slider">
-        <Slider {...settings}>
-          {data?.products?.map((_, index) => (
-            <Link href={`/products/${_._id}`} key={index}>
-              <Card c_data={_} Cardimage={_.media[0] || Property} />
-            </Link>
-          ))}
-        </Slider>
-      </div>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="slider">
+          <Slider {...settings}>
+            {data?.map((_, index) => (
+              <Link href={`/products/${_._id}`} key={index}>
+                <Card c_data={_} Cardimage={_.media[0] || Property} />
+              </Link>
+            ))}
+          </Slider>
+        </div>
+      )}
     </CategoriesWrapper>
   );
 };
