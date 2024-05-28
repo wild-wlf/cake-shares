@@ -126,9 +126,9 @@ const UserInfo = ({
           </div>
           <div className="updgradeKyc">
             <KycLevel level={user.kycLevel} />
-            {/* <span className="discreption" onClick={checkKycLevel}>
+            <span className="discreption" onClick={checkKycLevel}>
               Upgrade KYC
-            </span> */}
+            </span>
           </div>
         </div>
       ) : (

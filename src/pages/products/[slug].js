@@ -18,7 +18,6 @@ export default ProductDetails;
 
 export async function getServerSideProps({ params, res }) {
   const slug = params?.slug;
-  console.log(slug);
   return {
     props: {
       userData: slug,

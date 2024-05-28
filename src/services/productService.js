@@ -100,6 +100,7 @@ const productService = {
     let res = await Fetch.get(`${this._url}/get-single-product/${id}`);
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
+      console.log(res);
       return res;
     }
     const { message } = await res.json();
