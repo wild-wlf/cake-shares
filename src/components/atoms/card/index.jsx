@@ -5,9 +5,8 @@ import Heart from "../../../_assets/heart.svg";
 import ProgressBar from "@ramonak/react-progress-bar";
 
 const Card = ({ Cardimage, c_data }) => {
-  {
-    console.log((c_data.currentBackers / c_data.maximumBackers) * 100);
-  }
+  console.log((c_data?.currentBackers / c_data?.maximumBackers) * 100);
+
   return (
     <CardWrapper>
       <div className="card">
@@ -22,20 +21,20 @@ const Card = ({ Cardimage, c_data }) => {
         </div>
         <div className="decription">
           <div className="title-div">
-            <span>{c_data.productName}</span>
+            <span>{c_data?.productName}</span>
             <span>
-              {c_data.currentBackers == 0
+              {c_data?.currentBackers == 0
                 ? "0%"
-                : (c_data.currentBackers / c_data.maximumBackers) * 100}
+                : (c_data?.currentBackers / c_data?.maximumBackers) * 100}
             </span>
           </div>
 
           <div className="progress">
             <ProgressBar
               completed={
-                c_data.currentBackers === 0
+                c_data?.currentBackers === 0
                   ? 0
-                  : (c_data.currentBackers / c_data.maximumBackers) * 100
+                  : (c_data?.currentBackers / c_data?.maximumBackers) * 100
               }
               bgColor="#408F8C"
               height="5px"
