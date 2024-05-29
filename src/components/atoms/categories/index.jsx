@@ -68,7 +68,11 @@ const Categories = ({ title, data, loading }) => {
           <Slider {...settings}>
             {data?.map((_, index) => (
               <Link href={`/products/${_._id}`} key={index}>
-                <Card c_data={_} Cardimage={_.media[0] || Property} />
+                <Card
+                  c_data={_}
+                  Cardimage={_.media[0] || Property}
+                  onClick={() => ProductDetail()}
+                />
               </Link>
             ))}
           </Slider>
