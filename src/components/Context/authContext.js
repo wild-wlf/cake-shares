@@ -113,7 +113,7 @@ export const AuthContextProvider = (props) => {
 
       if (res.type === "Buyer") {
         setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
-        router.push("/");
+        // router.push("/");
         setIsLoggedIn(true);
         Toast({ type: "success", message: "Logged In Successfully!" });
         setLoadingUser(false);

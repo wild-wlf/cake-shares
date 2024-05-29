@@ -28,7 +28,6 @@ export const UserContextProvider = ({ children }) => {
   function buyerRegistration(elem) {
     setBuyerRegistrationData((prev) => ({ ...prev, ...elem }));
   }
-  // console.log("buyerDetails : ", buyerRegistrationData);
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );

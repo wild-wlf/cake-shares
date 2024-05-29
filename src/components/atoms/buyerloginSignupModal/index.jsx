@@ -19,7 +19,6 @@ const BuyerLoginSignupModal = ({
   const [form] = useForm();
   const router = useRouter();
   function handleSubmit(e) {
-    // console.log(e);
 
     if (type === "Login As Buyer") {
       handleLoginModal({ ...e, type: "Buyer" });

@@ -11,7 +11,6 @@ import Loader from "@/components/atoms/Loader";
 
 const ProductDetails = ({ userData }) => {
   const [productData, setProductData] = useState(null);
-  console.log(productData);
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleProductDetail(userData) {
@@ -29,7 +28,6 @@ const ProductDetails = ({ userData }) => {
     }
     return null;
   }
-  console.log(userData);
   useEffect(() => {
     handleProductDetail(userData);
   }, [userData]);

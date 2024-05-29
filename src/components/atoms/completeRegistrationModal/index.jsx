@@ -89,7 +89,6 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
       });
     }
   };
-  // console.log(image);
   return (
     <Wrapper>
       <Form form={form} onSubmit={handleSubmit}>
