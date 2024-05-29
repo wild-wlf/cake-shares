@@ -90,7 +90,6 @@ const TopBar = () => {
   const handleBuyerModal = (e) => {
     setBuyerModal(false);
     setPasswordModal(true);
-    console.log(e);
     buyerRegistration({
       type: "Buyer",
       ...e,
@@ -100,7 +99,6 @@ const TopBar = () => {
   const handleSellerRegisterModal = (e) => {
     setSellerRegisterModal(false);
     setSellerPasswordModal(true);
-    console.log(e);
     buyerRegistration({
       type: "Seller",
       ...e,
@@ -130,13 +128,11 @@ const TopBar = () => {
         message: error.message,
       });
     }
-    console.log("obj", obj);
     buyerRegistration({
       ...e,
     });
   };
   const handleLoginSellerModal = (e) => {
-    console.log("E", e);
     const Login = onLogin(e);
     setSellerLoginModal(false);
   };
@@ -165,27 +161,8 @@ const TopBar = () => {
   };
 
   const handleBuyerLogin = async (e) => {
-    // console.log(e);
     const login = onLogin(e);
     setBuyerLoginModal(false);
-    // const formData = convertToFormData(e);
-    // try {
-    //   const res = await userService.login(e);
-    //   console.log("res", res);
-    //   Toast({
-    //     type: "success",
-    //     message: "User Logged In Successfully!",
-    //   });
-    //   setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
-    //   setIslogin(true);
-    //   setUserData(res?.user);
-    //   setBuyerLoginModal(false);
-    // } catch (error) {
-    //   Toast({
-    //     type: "error",
-    //     message: error.message,
-    //   });
-    // }
   };
 
   const handleCompleteRegistration = (e) => {

@@ -14,9 +14,7 @@ const EditBank = ({ bankInfo, onClose }) => {
     setPermission: v.setPermission,
   }));
   const [loading, setloading] = useState(false);
-  console.log(bankInfo);
   const [form] = useForm();
-  console.log("Bank Info", bankInfo);
   useEffect(() => {
     if (bankInfo && Object.keys(bankInfo)?.length > 0) {
       form.setFieldsValue({
@@ -55,7 +53,6 @@ const EditBank = ({ bankInfo, onClose }) => {
         type: "error",
         message: error.message,
       });
-      console.log(error);
     }
   }
 

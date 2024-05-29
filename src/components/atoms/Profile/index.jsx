@@ -17,7 +17,6 @@ const Profile = () => {
   const { user } = useContextHook(AuthContext, (v) => ({
     user: v.user,
   }));
-  console.log(user);
   return (
     <StyledProfile>
       <div className="previousButton">

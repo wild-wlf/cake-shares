@@ -40,6 +40,10 @@ export const clearCookie = (name) => {
   return true;
 };
 
+export const formatNumber = (number) => {
+  return new Intl.NumberFormat().format(number);
+};
+
 export const convertPdfBase64 = (file) =>
   new Promise((resolve) => {
     const reader = new FileReader();
@@ -668,7 +672,6 @@ export const checkInValidImage = async (url) => {
 };
 
 export const convertToFormData = (obj) => {
-  console.log(obj);
   const formData = new FormData();
 
   Object.keys(obj).forEach((key) => {
