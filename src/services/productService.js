@@ -97,7 +97,6 @@ const productService = {
   },
 
   async getProductDetail(id) {
-    console.log(id, "idddddddddd");
     let res = await Fetch.get(`${this._url}/get-single-product/${id}`);
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();

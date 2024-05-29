@@ -11,7 +11,8 @@ import Loader from "@/components/atoms/Loader";
 
 const ProductDetails = ({ userData }) => {
   const [productData, setProductData] = useState(null);
-  console.log(productData);
+  const [userProfileData, setUserProfileData] = useState(null);
+  console.log(userProfileData);
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleProductDetail(userData) {
@@ -19,6 +20,7 @@ const ProductDetails = ({ userData }) => {
       setIsLoading(true);
       const res = await productService.getProductDetail(userData);
       setProductData(res.data.product);
+      setUserProfileData(res.data.product.userId);
     } catch (error) {
       Toast({
         type: "error",
@@ -40,7 +42,7 @@ const ProductDetails = ({ userData }) => {
         <Loader />
       ) : (
         <>
-          <ProductDetail data={productData} />
+          <ProductDetail data={productData} user={userProfileData} />
           <Amenities data={productData} />
           <Categories arr={images} />
         </>

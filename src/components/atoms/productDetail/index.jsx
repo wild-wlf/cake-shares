@@ -15,7 +15,7 @@ import InvestmentSuccesModal from "../InvestmentSuccesModal";
 import ProductDescription from "../productDescription";
 import { daysLeft, formatDateWithSuffix } from "@/helpers/common";
 
-const ProductDetail = ({ data }) => {
+const ProductDetail = ({ data, user }) => {
   const router = useRouter();
   const [modal, setModal] = useState(false);
   const [successmodal, setSuccessModal] = useState(false);
@@ -146,7 +146,7 @@ const ProductDetail = ({ data }) => {
             <strong>Description</strong>
             <p>{data?.description}</p>
           </div>
-          <ProductDescription data={data} />
+          <ProductDescription data={data} user={user} />
         </div>
       </ProductDetailWrapper>
     </>

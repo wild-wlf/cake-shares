@@ -3,14 +3,15 @@ import UserInfo from "@/components/atoms/Profile/UserInfo";
 import Button from "@/components/atoms/Button";
 import { IoIosArrowBack } from "react-icons/io";
 import { useRouter } from "next/router";
-import { StyledProfile } from "../components/atoms/Profile/Profile.styles";
-import sellerImage from "../_assets/seller-img.png";
-import sellerHeroImage from "../_assets/seller-hero-bg.png";
+import { StyledProfile } from "../../components/atoms/Profile/Profile.styles";
+import sellerImage from "../../_assets/seller-img.png";
+import sellerHeroImage from "../../_assets/seller-hero-bg.png";
 import SellerPersonalInfo from "@/components/atoms/SellerPersonalInfo";
 import Categories from "@/components/atoms/categories";
 import SellerProfileBanner from "@/components/atoms/Profile/ProfileBanner/sellerProfileBanner";
 
-const SellerProfile = () => {
+const SellerProfile = ({ userProfileData }) => {
+  console.log(userProfileData);
   const usertype = {
     userType: "Seller",
     categories: "Seller’s Product Top Categories:",
@@ -26,8 +27,7 @@ const SellerProfile = () => {
         className="button"
         onClick={() => {
           router.back();
-        }}
-      >
+        }}>
         <IoIosArrowBack />
         Go Back
       </Button>
@@ -44,3 +44,13 @@ const SellerProfile = () => {
 };
 
 export default SellerProfile;
+
+export async function getServerSideProps({ params }) {
+  const slug = params?.slug;
+  console.log(params?.slug);
+  return {
+    props: {
+      userProfileData: slug,
+    },
+  };
+}
