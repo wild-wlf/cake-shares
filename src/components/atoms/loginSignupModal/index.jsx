@@ -20,13 +20,13 @@ const LoginSignupModal = ({
   const router = useRouter();
   function handleSubmit(e) {
     const obj = {
-      username: e.username,
-      email: e.email,
-      sellerType: e.sellerType.value,
+      username: e.username?.trim(),
+      email: e.email?.trim(),
+      sellerType: e.sellerType?.value,
     };
     const loginObj = {
-      username: e.username,
-      password: e.password,
+      username: e.username?.trim(),
+      password: e.password?.trim(),
       sellerType: e.sellerType.value,
     };
 

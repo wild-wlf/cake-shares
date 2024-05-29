@@ -15,8 +15,8 @@ const productService = {
 
   GetProducts(searchQuery, refetch) {
     const [products, setProducts] = useState({
-      products: [],
-      totalItems: 0,
+      recommendedProducts: [],
+      popularProducts: [],
     });
     const { cancellablePromise } = useCancellablePromise();
     const [status, setStatus] = useState(STATUS.LOADING);
@@ -24,16 +24,16 @@ const productService = {
       setStatus(STATUS.LOADING);
       cancellablePromise(this.getProducts(searchQuery))
         .then((res) => {
+          console.log(res);
           setProducts(() => res);
           setStatus(STATUS.SUCCESS);
         })
         .catch(() => setStatus(STATUS.ERROR));
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
       searchQuery?.searchText,
       searchQuery?.page,
       searchQuery?.pageSize,
-      searchQuery?.startDate,
-      searchQuery?.endDate,
       searchQuery?.searchText,
       refetch,
     ]);
@@ -81,24 +81,27 @@ const productService = {
     throw new Error(message ?? "Something went wrong");
   },
 
-  async getProducts({
-    page = 1,
-    pageSize = 10,
-    searchText,
-    startDate,
-    endDate,
-    getAll = true,
-  }) {
+  async getProducts({ page = 1, pageSize = 10, searchText, getAll = true }) {
     let res = await Fetch.get(
-      `${this._url}/products?itemsPerPage=${pageSize}&page=${page}&searchText=${searchText}&startDate=${startDate}&endDate=${endDate}&getAll=${getAll}`
+      `${this._url}/products?itemsPerPage=${pageSize}&page=${page}&searchText=${searchText}&getAll=${getAll}`
     );
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
-      console.log(res);
       return {
-        products: res.items,
-        totalItems: res.totalItems,
+        popularProducts: res.popularProducts.items,
+        recommendedProducts: res.recommendedProducts.items,
       };
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? "Something went wrong");
+  },
+
+  async getProductDetail(id) {
+    let res = await Fetch.get(`${this._url}/get-single-product/${id}`);
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      console.log(res);
+      return res;
     }
     const { message } = await res.json();
     throw new Error(message ?? "Something went wrong");
