@@ -6,7 +6,7 @@ import { TbExternalLink } from "react-icons/tb";
 import { PiChatTeardropTextFill } from "react-icons/pi";
 import { useRouter } from "next/router";
 
-const ProductDescription = () => {
+const ProductDescription = ({ data }) => {
   const router = useRouter();
 
   return (
@@ -16,11 +16,11 @@ const ProductDescription = () => {
           <div className="amountdiv">
             <div>
               <span>Min Investment (USD)</span>
-              <strong className="amount">$ 5000</strong>
+              <strong className="amount">$ {data?.minimumInvestment}</strong>
             </div>
             <div>
               <span>Asset Value (USD)</span>
-              <strong className="amount">$ 2,000,000</strong>
+              <strong className="amount">$ {data?.assetValue}</strong>
             </div>
           </div>
           <div className="total">

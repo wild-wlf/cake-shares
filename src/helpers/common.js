@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable no-plusplus */
-import { format } from "date-fns";
+import { differenceInCalendarDays, format } from "date-fns";
 import Compress from "react-image-file-resizer";
 import styled from "styled-components";
 import Grid from "../components/atoms/Grid";
@@ -683,7 +683,39 @@ export const convertToFormData = (obj) => {
   });
   return formData;
 };
- export const convertDateToISO = (dateStr) => {
-   const [day, month, year] = dateStr.split("/");
-   return `${year}-${month}-${day}`;
- };
+export const convertDateToISO = (dateStr) => {
+  const [day, month, year] = dateStr.split("/");
+  return `${year}-${month}-${day}`;
+};
+// Format the date
+const getOrdinalSuffix = (day) => {
+  if (day > 3 && day < 21) return "th";
+  switch (day % 10) {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
+};
+export const formatDateWithSuffix = (dateObj) => {
+  const date = new Date(dateObj);
+
+  const day = format(date, "d"); // get the day without leading zeros
+  const monthYear = format(date, "MMMM, yyyy"); // get the month and year
+  const ordinalSuffix = getOrdinalSuffix(parseInt(day)); // get the ordinal suffix
+  return `${day}${ordinalSuffix} ${monthYear}`;
+};
+
+// Calculate the number of days left
+export const daysLeft = (dateObj) => {
+  const date = new Date(dateObj);
+  const daysLeft = differenceInCalendarDays(date, new Date());
+
+  return daysLeft < 10 ? `0${daysLeft} days` : `${daysLeft.toString()} days`;
+  // console.log(formatDistanceToNow(date));
+  // return formatDistanceToNow(date, {addSuffix: false});
+};
