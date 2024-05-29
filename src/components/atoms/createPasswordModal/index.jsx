@@ -15,7 +15,7 @@ const CreatePasswordModal = ({
   const [profilePicture, setProfilePicture] = useState("");
   const [form] = useForm();
   const handleSubmit = (e) => {
-    let password = e.new_password;
+    let password = e.new_password?.trim();
     if (submitForm === "complete") {
       // Complete Registration Scenerio
       handleCompleteRegistration({ password });
@@ -59,7 +59,7 @@ const CreatePasswordModal = ({
               },
             ]}
           >
-            <Field />
+            <Field maxLength={64}/>
           </Form.Item>
           <Form.Item
             type="password"
@@ -79,7 +79,7 @@ const CreatePasswordModal = ({
               },
             ]}
           >
-            <Field />
+            <Field maxLength={64} />
           </Form.Item>
         </div>
         <div className="btnWrapper">
