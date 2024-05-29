@@ -59,7 +59,7 @@ const CreatePasswordModal = ({
               },
             ]}
           >
-            <Field />
+            <Field maxLength={64}/>
           </Form.Item>
           <Form.Item
             type="password"
@@ -79,7 +79,7 @@ const CreatePasswordModal = ({
               },
             ]}
           >
-            <Field />
+            <Field maxLength={64} />
           </Form.Item>
         </div>
         <div className="btnWrapper">

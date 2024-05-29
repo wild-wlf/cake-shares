@@ -62,25 +62,26 @@ const BuyerLoginSignupModal = ({
       </div>
       <Form form={form} onSubmit={handleSubmit}>
         <div className="input-div">
-          <Form.Item
-            type="text"
-            label="Username"
-            name="username"
-            sm
-            rounded
-            placeholder="Alex123"
-            rules={[
-              {
-                required: true,
-              },
-              {
-                pattern: /^(?!.*\s)[a-zA-Z0-9_-]{8,40}$/,
-                message: "Characters length should be between 8 and 40",
-              },
-            ]}
-          >
-            <Field />
-          </Form.Item>
+        <Form.Item
+                type="text"
+                label="Username"
+                name="username"
+                sm
+                rounded
+                placeholder="alex123"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter username",
+                  },
+                  {
+                    pattern: /^(?!.*\s)[a-zA-Z0-9_-]{5,20}$/,
+                    message: "Maximum Character Length is 256",
+                  },
+                ]}
+              >
+                <Field maxLength={20}/>
+              </Form.Item>
           {type === "Login As Buyer" ? (
             <Form.Item
               type="password"
@@ -103,24 +104,25 @@ const BuyerLoginSignupModal = ({
             </Form.Item>
           ) : (
             <Form.Item
-              type="text"
-              label="Email Address"
-              name="email"
-              sm
-              rounded
-              placeholder="alex123@gmail.com"
-              rules={[
-                {
-                  required: true,
-                },
-                {
-                  pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-                  message: "Invalid Email Address",
-                },
-              ]}
-            >
-              <Field />
-            </Form.Item>
+                type="text"
+                label="Email Address"
+                name="email"
+                sm
+                rounded
+                placeholder="alex123@gmail.com"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter email address",
+                  },
+                  {
+                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+                    message: "Maximum Character Length is 256",
+                  },
+                ]}
+              >
+                <Field maxLength={40}/>
+              </Form.Item>
           )}
         </div>
         <div className="other-section">
