@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import { ProfileSec } from "./ProfileMenu.Style";
-import profileImg from "../../../_assets/userProfile.png";
 import LogOut from "../../../_assets/logoutIcon.png";
 import myProfileIcon from "../../../_assets/myProfileIcon.png";
 import privacyPolicyIcon from "../../../_assets/privacyPolicyIcon.png";
@@ -9,9 +8,6 @@ import termsIcon from "../../../_assets/termsIcon.png";
 import profilePlaceHolder from "../../../_assets/profileplaceHolder.jpg";
 import Image from "next/image";
 import Link from "next/link";
-import { clearCookie } from "@/helpers/common";
-import { useRouter } from "next/router";
-import { UserContext } from "@/components/Context/UserContext";
 import { useContextHook } from "use-context-hook";
 import { AuthContext } from "@/components/Context/authContext";
 
@@ -20,7 +16,6 @@ const ProfileMenu = ({ openProfile }) => {
     onLogout: v.onLogout,
     user: v.user,
   }));
-  const router = useRouter();
   return (
     <>
       <ProfileSec $show={openProfile}>

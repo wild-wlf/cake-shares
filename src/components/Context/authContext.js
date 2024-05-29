@@ -79,13 +79,13 @@ export const AuthContextProvider = (props) => {
     }
   }, [isLoggedIn, permission]);
 
-  useEffect(() => {
-    if (socketData?.approved) {
-      setTimeout(() => {
-        getPermissions();
-      }, 1000);
-    }
-  }, [socketData]);
+  // useEffect(() => {
+  //   if (socketData?.approved) {
+  //     setTimeout(() => {
+  //       getPermissions();
+  //     }, 1000);
+  //   }
+  // }, [socketData]);
 
   const onLogin = async ({ username, password, type, sellerType }) => {
     setLoadingUser(true);
