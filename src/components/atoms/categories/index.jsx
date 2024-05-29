@@ -1,18 +1,16 @@
 import React from "react";
-import { CategoriesWrapper } from "./categories.style";
+import { CategoriesWrapper, NoRecord } from "./categories.style";
 import Slider from "react-slick";
 import Card from "../card";
 import arrowRight from "../../../_assets/arrow.png";
 import Property from "../../../_assets/property.png";
-import Property2 from "../../../_assets/property2.png";
-import Property3 from "../../../_assets/property3.png";
 import Link from "next/link";
 import Loader from "../Loader";
 
 const Categories = ({ title, data, loading }) => {
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 5.2,
     slidesToScroll: 1,
@@ -63,20 +61,18 @@ const Categories = ({ title, data, loading }) => {
       </div>
       {loading ? (
         <Loader />
-      ) : (
+      ) : data && data?.length > 0 ? (
         <div className="slider">
           <Slider {...settings}>
-            {data?.map((_, index) => (
-              <Link href={`/products/${_._id}`} key={index}>
-                <Card
-                  c_data={_}
-                  Cardimage={_.media[0] || Property}
-                  onClick={() => ProductDetail()}
-                />
+            {data?.map((item, index) => (
+              <Link href={`/products/${item._id}`} key={index}>
+                <Card c_data={item} Cardimage={item.media[0] || Property} />
               </Link>
             ))}
           </Slider>
         </div>
+      ) : (
+        <NoRecord>No records found</NoRecord>
       )}
     </CategoriesWrapper>
   );
