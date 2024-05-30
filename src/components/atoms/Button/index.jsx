@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { StyledButton } from './Button.styles';
+import * as React from "react";
+import { StyledButton } from "./Button.styles";
 
 function Button({
   children,
@@ -17,15 +17,16 @@ function Button({
 }) {
   return (
     <StyledButton
-      type={htmlType === 'submit' ? 'submit' : 'button'}
+      type={htmlType === "submit" ? "submit" : "button"}
       btntype={type}
       width={width}
       rounded={rounded?.toString()}
       color={color}
       className={className}
-      disabled={disabled || loading}
+      disabled={disabled || loading || loader}
       style={style}
-      {...rest}>
+      {...rest}
+    >
       {loader ? <span className="loader" /> : children}
     </StyledButton>
   );

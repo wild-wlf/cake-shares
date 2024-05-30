@@ -101,19 +101,19 @@ export const AuthContextProvider = (props) => {
       if (!res?.token) {
         throw new Error(res?.message);
       }
-      if (res?.type !== "Buyer" && res?.isVerified) {
+      if (res?.type !== "Buyer") {
         setCookie(
           process.env.NEXT_PUBLIC_ADMIN_TOKEN_COOKIE,
           res?.token,
           null,
           process.env.NEXT_PUBLIC_ADMIN_DOMAIN
         );
-        window.open(`${process.env.NEXT_PUBLIC_ADMIN_URL}`);
+        window.open(`${process.env.NEXT_PUBLIC_ADMIN_URL}`, "_blank");
       }
 
-      if (type === "Buyer") {
+      if (res.type === "Buyer") {
         setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
-        router.push("/");
+        // router.push("/");
         setIsLoggedIn(true);
         Toast({ type: "success", message: "Logged In Successfully!" });
         setLoadingUser(false);

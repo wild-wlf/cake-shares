@@ -13,13 +13,39 @@ import { useRouter } from "next/router";
 import InitiateInvestmentModal from "../InitiateInvestmentModal";
 import InvestmentSuccesModal from "../InvestmentSuccesModal";
 import ProductDescription from "../productDescription";
+import { daysLeft, formatDateWithSuffix } from "@/helpers/common";
+import { useContextHook } from "use-context-hook";
+import { AuthContext } from "@/components/Context/authContext";
+import HandleLoginModal from "@/components/molecules/HandleLoginModal";
 
-const ProductDetail = () => {
+const ProductDetail = ({ data }) => {
+  const { isLoggedIn } = useContextHook(AuthContext, (v) => ({
+    isLoggedIn: v.isLoggedIn,
+  }));
   const router = useRouter();
   const [modal, setModal] = useState(false);
+  const [handleLoginModal, setHandleLoginModal] = useState(false);
   const [successmodal, setSuccessModal] = useState(false);
+  const [ownershipPercentage, setOwnershipPercentage] = useState();
+
+  const handleInitiateInvestment = () => {
+    if (isLoggedIn) {
+      setModal(true);
+    } else {
+      setHandleLoginModal(true);
+    }
+  };
   return (
     <>
+      <CenterModal
+        open={handleLoginModal}
+        setOpen={setHandleLoginModal}
+        iscloseAble={false}
+        title="Please Login to Perform this Operation!"
+        width="689"
+      >
+        <HandleLoginModal setOpen={setHandleLoginModal} />
+      </CenterModal>
       <CenterModal
         open={modal}
         setOpen={setModal}
@@ -27,6 +53,9 @@ const ProductDetail = () => {
         width="543"
       >
         <InitiateInvestmentModal
+          productId={data?._id}
+          assetValue={data?.assetValue}
+          setOwnershipPercentage={setOwnershipPercentage}
           handleCloseModal={() => {
             setModal(false);
             setSuccessModal(true);
@@ -39,8 +68,9 @@ const ProductDetail = () => {
         title={<Image src={ConfirmIcon} alt="success" />}
         width="543"
       >
-        <InvestmentSuccesModal />
+        <InvestmentSuccesModal ownershipPercentage={ownershipPercentage} />
       </CenterModal>
+
       <ProductDetailWrapper>
         <div className="btnwrapper">
           <Button
@@ -60,7 +90,7 @@ const ProductDetail = () => {
             sm
             btntype="primary"
             className="button"
-            onClick={() => setModal(true)}
+            onClick={handleInitiateInvestment}
           >
             Initiate Investment
             <RiFilePaperFill />
@@ -69,15 +99,20 @@ const ProductDetail = () => {
         <div className="titlewrapper">
           <div>
             <div className="title">
-              <span>Egypt Gov. Property</span>
+              <span>{data?.productName}</span>
             </div>
             <div className="titledesc">
-              <span>Sector 9, Faiyum, Egypt</span>
+              <span>{data?.address}</span>
               <span>
-                <span className="deadline">Deadline:</span> (12th March, 2024 /
-                05 days left)
+                {data?.deadline && (
+                  <>
+                    <span className="deadline">Deadline:</span> (
+                    {formatDateWithSuffix(data?.deadline)} /{" "}
+                    {daysLeft(data?.deadline)} left)
+                  </>
+                )}
               </span>
-              <span>KYC (Level 3)</span>
+              <span>KYC ({data?.kycLevel})</span>
             </div>
           </div>
 
@@ -85,7 +120,7 @@ const ProductDetail = () => {
             <div className="headings">
               <div>
                 <span>Investment type</span>
-                <h3>Property</h3>
+                <h3>{data?.investmentType}</h3>
               </div>
               <div>
                 <span>Return (%)</span>
@@ -97,7 +132,7 @@ const ProductDetail = () => {
               </div>
               <div>
                 <span>Backers Limit</span>
-                <h3>20</h3>
+                <h3>{data?.maximumBackers}</h3>
               </div>
               <div>
                 <span>Annual Cost (est.)</span>
@@ -109,38 +144,41 @@ const ProductDetail = () => {
 
         <div className="imagewrapper">
           <div className="product1">
-            <Image src={property} alt="Product-Image" />
+            <Image
+              src={data?.media[0]}
+              alt="Product-Image"
+              width={660}
+              height={360}
+            />
           </div>
           <div className="product2">
-            <Image src={property2} alt="Product-Image" />
-            <Image src={property3} alt="Product-Image" />
+            {data?.media[1] && (
+              <Image
+                src={data?.media[1]}
+                alt="Product-Image"
+                width={365}
+                height={360}
+              />
+            )}
+            {data?.media[2] && (
+              <Image
+                src={data?.media[2]}
+                alt="Product-Image"
+                width={365}
+                height={360}
+              />
+            )}
           </div>
         </div>
 
         <div className="investwrapper">
           <div className="content-holder">
             <strong>Why Invest in this?</strong>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-              ultricies et mi quis scelerisque. Integer vitae posuere est, nec
-              mollis diam. Donec feugiat eu mauris sed rutrum. Interdum et
-              malesuada fames ac ante ipsum primis in faucibus. Aliquam auctor
-              gravida nulla. Donec feugiat eu mauris sed rutrum. Interdum et
-              malesuada fames ac ante ipsum primis in faucibus. Aliquam auctor
-              gravida nulla.
-            </p>
+            <p>{data?.investmentReason}</p>
             <strong>Description</strong>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-              ultricies et mi quis scelerisque. Integer vitae posuere est, nec
-              mollis diam. Donec feugiat eu mauris sed rutrum. Interdum et
-              malesuada fames ac ante ipsum primis in faucibus. Aliquam auctor
-              gravida nulla. Donec feugiat eu mauris sed rutrum. Interdum et
-              malesuada fames ac ante ipsum primis in faucibus. Aliquam auctor
-              gravida nulla.
-            </p>
+            <p>{data?.description}</p>
           </div>
-          <ProductDescription />
+          <ProductDescription data={data} />
         </div>
       </ProductDetailWrapper>
     </>

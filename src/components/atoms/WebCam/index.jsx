@@ -39,7 +39,6 @@ const WebCam = ({ handelKycLevel }) => {
   const capturePhoto = useCallback(async () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setUrl(imageSrc);
-    console.log("here");
   }, [webcamRef]);
 
   const onUserMedia = (e) => {
