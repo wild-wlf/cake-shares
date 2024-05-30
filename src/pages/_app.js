@@ -14,7 +14,7 @@ import { AuthContextProvider } from "@/components/Context/authContext";
 import Layout from "@/components/atoms/Layout";
 import { SocketContextProvider } from "@/components/Context/socketContext";
 import { useRouter } from "next/router";
-import PreLoader from "@/components/molecules/PreLoader";
+import Loader from "@/components/atoms/Loader";
 
 export const StyledToastContainer = styled(ToastContainer)`
   z-index: 99999;
@@ -67,17 +67,10 @@ export default function App({ Component, pageProps }) {
           <UserContextProvider>
             <KycContextProvider>
               <GlobalStyles />
-              {loading && <PreLoader />}
-              <div
-                style={{
-                  filter: loading ? "blur(3px)" : "none",
-                  transition: "filter 0.3s",
-                }}
-              >
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-              </div>
+              {loading && <Loader />}
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
             </KycContextProvider>
           </UserContextProvider>
         </SocketContextProvider>

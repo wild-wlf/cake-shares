@@ -5,22 +5,22 @@ import userNameImage from "../../../_assets/user-name-icon.svg";
 import emailAddressImage from "../../../_assets/email-address-icon.svg";
 import Image from "next/image";
 
-const SellerPersonalInfo = () => {
+const SellerPersonalInfo = ({ userInfo }) => {
   const personalInfoData = [
     {
       image: personImage,
       title: "Full Name",
-      text: "Logan Paulson",
+      text: userInfo?.fullName,
     },
     {
       image: userNameImage,
       title: "Username",
-      text: "logan123",
+      text: userInfo?.username,
     },
     {
       image: emailAddressImage,
       title: "Email Address",
-      text: "loganpa123@gmail.com",
+      text: userInfo?.email,
     },
   ];
   const finentialInfoData = [
