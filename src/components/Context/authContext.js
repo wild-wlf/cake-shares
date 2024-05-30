@@ -169,7 +169,7 @@ export const AuthContextProvider = (props) => {
     listenCookieChange((value, cookie) => {
       if (cookie === process.env.NEXT_PUBLIC_TOKEN_COOKIE) {
         if (!value) {
-          // onLogout();
+          onLogout();
         }
       }
       if (cookie === process.env.NEXT_PUBLIC_ALLOWED_PAGES_COOKIE) {
