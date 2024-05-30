@@ -1,42 +1,42 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import Notifications from "../components/molecules/Notifications";
-import { NavLinks, StyledTopBar } from "./TopBar.styles";
-import logo from "../_assets/logo.svg";
-import Image from "next/image";
-import bell from "../_assets/bell.svg";
-import bellWhite from "../_assets/bell-white.svg";
-import profilePlaceHolder from "../_assets/profileplaceHolder.jpg";
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import Notifications from '../components/molecules/Notifications';
+import { NavLinks, StyledTopBar } from './TopBar.styles';
+import logo from '../_assets/logo.svg';
+import Image from 'next/image';
+import bell from '../_assets/bell.svg';
+import bellWhite from '../_assets/bell-white.svg';
+import profilePlaceHolder from '../_assets/profileplaceHolder.jpg';
 
-import Button from "@/components/atoms/Button";
-import register from "../_assets/register.svg";
-import { HiMenuAlt1, HiOutlineMenuAlt1 } from "react-icons/hi";
-import RegisterModal from "../components/atoms/registerModal";
-import CenterModal from "@/components/atoms/Modal/CenterModal";
-import RegisterAsBuyer from "@/components/atoms/registerAsBuyer";
-import CreatePasswordModal from "@/components/atoms/createPasswordModal";
-import CompleteRegistrationModal from "@/components/atoms/completeRegistrationModal";
-import LoginAsBuyerModal from "@/components/atoms/LoginAsSellerModal";
-import KycBuyerLevelOne from "@/components/atoms/KYC/KYCBuyer";
-import { KycContext } from "@/components/Context/KycContext";
-import KycBuyerLevelTwo from "@/components/atoms/KYC/KYCBuyerTwo";
-import KYCBuyerThree from "@/components/atoms/KYC/KYCBuyerThree";
-import ProfileMenu from "@/components/molecules/ProfileMenu/ProfileMenu";
-import { MdArrowDropDown, MdStorefront } from "react-icons/md";
-import profile from "../_assets/profile.png";
-import KycLevel from "@/components/atoms/KYC/KycLevel";
-import line from "../_assets/sidenav-line.svg";
-import { FaWallet } from "react-icons/fa";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
-import { UserContext } from "@/components/Context/UserContext";
-import userService from "@/services/userService";
-import { convertToFormData, setCookie } from "@/helpers/common";
-import BuyerLoginSignupModal from "@/components/atoms/buyerloginSignupModal";
-import LoginAsSellerModal from "@/components/atoms/LoginAsSellerModal";
-import Toast from "@/components/molecules/Toast";
-import { AuthContext } from "@/components/Context/authContext";
-import { useContextHook } from "use-context-hook";
+import Button from '@/components/atoms/Button';
+import register from '../_assets/register.svg';
+import { HiMenuAlt1, HiOutlineMenuAlt1 } from 'react-icons/hi';
+import RegisterModal from '../components/atoms/registerModal';
+import CenterModal from '@/components/atoms/Modal/CenterModal';
+import RegisterAsBuyer from '@/components/atoms/registerAsBuyer';
+import CreatePasswordModal from '@/components/atoms/createPasswordModal';
+import CompleteRegistrationModal from '@/components/atoms/completeRegistrationModal';
+import LoginAsBuyerModal from '@/components/atoms/LoginAsSellerModal';
+import KycBuyerLevelOne from '@/components/atoms/KYC/KYCBuyer';
+import { KycContext } from '@/components/Context/KycContext';
+import KycBuyerLevelTwo from '@/components/atoms/KYC/KYCBuyerTwo';
+import KYCBuyerThree from '@/components/atoms/KYC/KYCBuyerThree';
+import ProfileMenu from '@/components/molecules/ProfileMenu/ProfileMenu';
+import { MdArrowDropDown, MdStorefront } from 'react-icons/md';
+import profile from '../_assets/profile.png';
+import KycLevel from '@/components/atoms/KYC/KycLevel';
+import line from '../_assets/sidenav-line.svg';
+import { FaWallet } from 'react-icons/fa';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/router';
+import { UserContext } from '@/components/Context/UserContext';
+import userService from '@/services/userService';
+import { convertToFormData, setCookie } from '@/helpers/common';
+import BuyerLoginSignupModal from '@/components/atoms/buyerloginSignupModal';
+import LoginAsSellerModal from '@/components/atoms/LoginAsSellerModal';
+import Toast from '@/components/molecules/Toast';
+import { AuthContext } from '@/components/Context/authContext';
+import { useContextHook } from 'use-context-hook';
 
 const TopBar = () => {
   const {
@@ -52,15 +52,12 @@ const TopBar = () => {
     setBuyerRegistrationData,
     buyerRegistrationData,
   } = useContext(UserContext);
-  const { onLogin, loading, isLoggedIn, user } = useContextHook(
-    AuthContext,
-    (v) => ({
-      onLogin: v.onLogin,
-      loading: v.loading,
-      isLoggedIn: v.isLoggedIn,
-      user: v.user,
-    })
-  );
+  const { onLogin, loading, isLoggedIn, user } = useContextHook(AuthContext, v => ({
+    onLogin: v.onLogin,
+    loading: v.loading,
+    isLoggedIn: v.isLoggedIn,
+    user: v.user,
+  }));
 
   const [sideNav, setSideNav] = useState(false);
   const [loginmodal, setLoginModal] = useState(false);
@@ -74,7 +71,7 @@ const TopBar = () => {
 
   const router = usePathname();
   const navigate = useRouter();
-  const handleClickOutsideProfile = (event) => {
+  const handleClickOutsideProfile = event => {
     if (ProfileRef.current && !ProfileRef.current.contains(event.target)) {
       setOpenProfile(false);
     }
@@ -87,24 +84,24 @@ const TopBar = () => {
     setLoginModal(false);
     setSellerLoginModal(true);
   };
-  const handleBuyerModal = (e) => {
+  const handleBuyerModal = e => {
     setBuyerModal(false);
     setPasswordModal(true);
     buyerRegistration({
-      type: "Buyer",
+      type: 'Buyer',
       ...e,
     });
   };
 
-  const handleSellerRegisterModal = (e) => {
+  const handleSellerRegisterModal = e => {
     setSellerRegisterModal(false);
     setSellerPasswordModal(true);
     buyerRegistration({
-      type: "Seller",
+      type: 'Seller',
       ...e,
     });
   };
-  const handleSellerPasswordModal = async (e) => {
+  const handleSellerPasswordModal = async e => {
     const obj = {
       password: e.password,
       profilePicture: e.profilePicture,
@@ -117,14 +114,14 @@ const TopBar = () => {
     try {
       await userService.createUser(formData);
       Toast({
-        type: "success",
-        message: "User Registered Successfully!",
+        type: 'success',
+        message: 'User Registered Successfully!',
       });
       setSellerPasswordModal(false);
       setBuyerRegistrationData({});
     } catch (error) {
       Toast({
-        type: "error",
+        type: 'error',
         message: error.message,
       });
     }
@@ -132,11 +129,11 @@ const TopBar = () => {
       ...e,
     });
   };
-  const handleLoginSellerModal = (e) => {
+  const handleLoginSellerModal = e => {
     const Login = onLogin(e);
     setSellerLoginModal(false);
   };
-  const createPasswordModal = async (e) => {
+  const createPasswordModal = async e => {
     let obj = {
       type: buyerRegistrationData.type,
       password: e,
@@ -147,31 +144,31 @@ const TopBar = () => {
     try {
       await userService.createUser(formData);
       Toast({
-        type: "success",
-        message: "User Registered Successfully!",
+        type: 'success',
+        message: 'User Registered Successfully!',
       });
       setPasswordModal(false);
       setBuyerRegistrationData({});
     } catch (error) {
       Toast({
-        type: "error",
+        type: 'error',
         message: error.message,
       });
     }
   };
 
-  const handleBuyerLogin = async (e) => {
+  const handleBuyerLogin = async e => {
     const login = onLogin(e);
     setBuyerLoginModal(false);
   };
 
-  const handleCompleteRegistration = (e) => {
+  const handleCompleteRegistration = e => {
     setPasswordModal(false);
     setCompleteRegistrationModal(true);
     buyerRegistration({ ...e });
   };
 
-  const handleRegistration = (e) => {
+  const handleRegistration = e => {
     setBuyerRegistrationData({});
     setCompleteRegistrationModal(false);
   };
@@ -185,62 +182,38 @@ const TopBar = () => {
     setSellerRegisterModal(true);
   };
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutsideProfile);
+    document.addEventListener('mousedown', handleClickOutsideProfile);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutsideProfile);
+      document.removeEventListener('mousedown', handleClickOutsideProfile);
     };
   }, []);
   useEffect(() => {
     if (sideNav) {
-      document.body.classList.add("active-nav");
+      document.body.classList.add('active-nav');
     } else {
-      document.body.classList.remove("active-nav");
+      document.body.classList.remove('active-nav');
     }
   }, [sideNav]);
 
-  const { kycLevel, setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } =
-    useContext(KycContext);
+  const { kycLevel, setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } = useContext(KycContext);
   return (
     <>
       {/******************************** KYC MODAL ******************************************/}
 
-      <CenterModal
-        zIndex={9999}
-        open={kyc1}
-        setOpen={setKyc1}
-        width="688"
-        title="Upgrade to KYC Level 1"
-      >
+      <CenterModal zIndex={9999} open={kyc1} setOpen={setKyc1} width="688" title="Upgrade to KYC Level 1">
         <KycBuyerLevelOne setKycLevel={setKycLevel} setOpen={setKyc1} />
       </CenterModal>
-      <CenterModal
-        zIndex={9999}
-        open={kyc2}
-        setOpen={setKyc2}
-        width="688"
-        title="Upgrade to KYC Level 2"
-      >
+      <CenterModal zIndex={9999} open={kyc2} setOpen={setKyc2} width="688" title="Upgrade to KYC Level 2">
         <KycBuyerLevelTwo setKycLevel={setKycLevel} setOpen={setKyc2} />
       </CenterModal>
-      <CenterModal
-        zIndex={9999}
-        open={kyc3}
-        setOpen={setKyc3}
-        width="688"
-        title="Upgrade to KYC Level 3"
-      >
+      <CenterModal zIndex={9999} open={kyc3} setOpen={setKyc3} width="688" title="Upgrade to KYC Level 3">
         <KYCBuyerThree setKycLevel={setKycLevel} setOpen={setKyc3} />
       </CenterModal>
       {/******************************** KYC MODAL ******************************************/}
 
       {/******************************** Registration Modals ******************************************/}
 
-      <CenterModal
-        open={registermodal}
-        setOpen={setRegisterModal}
-        title={"Register an Account!"}
-        width="646"
-      >
+      <CenterModal open={registermodal} setOpen={setRegisterModal} title={'Register an Account!'} width="646">
         <RegisterModal
           handleRegisterModal={handleRegisterModal}
           handleSellerModal={handleSellerLoginModal}
@@ -249,26 +222,13 @@ const TopBar = () => {
         />
       </CenterModal>
 
-      <CenterModal
-        open={buyermodal}
-        setOpen={setBuyerModal}
-        title="Register As a Buyer"
-        width="666"
-      >
-        <BuyerLoginSignupModal
-          handleBuyerModal={handleBuyerModal}
-          type={"Register As Buyer"}
-        />
+      <CenterModal open={buyermodal} setOpen={setBuyerModal} title="Register As a Buyer" width="666">
+        <BuyerLoginSignupModal handleBuyerModal={handleBuyerModal} type={'Register As Buyer'} />
       </CenterModal>
 
-      <CenterModal
-        open={passwordModal}
-        setOpen={setPasswordModal}
-        title="Register As a Buyer"
-        width="666"
-      >
+      <CenterModal open={passwordModal} setOpen={setPasswordModal} title="Register As a Buyer" width="666">
         <CreatePasswordModal
-          type={"Register As Buyer"}
+          type={'Register As Buyer'}
           createPasswordModal={createPasswordModal}
           handleCompleteRegistration={handleCompleteRegistration}
         />
@@ -278,45 +238,23 @@ const TopBar = () => {
         open={completeRegistrationModal}
         setOpen={setCompleteRegistrationModal}
         title="Complete Registration"
-        width="804"
-      >
+        width="804">
         <CompleteRegistrationModal handleRegistration={handleRegistration} />
       </CenterModal>
 
-      <CenterModal
-        open={sellerregistermodal}
-        setOpen={setSellerRegisterModal}
-        title="Register As a Seller"
-        width="666"
-      >
-        <LoginAsSellerModal
-          handleSellerRegisterModal={handleSellerRegisterModal}
-          type="Register As Seller"
-        />
+      <CenterModal open={sellerregistermodal} setOpen={setSellerRegisterModal} title="Register As a Seller" width="666">
+        <LoginAsSellerModal handleSellerRegisterModal={handleSellerRegisterModal} type="Register As Seller" />
       </CenterModal>
 
-      <CenterModal
-        open={sellerpasswordModal}
-        setOpen={setSellerPasswordModal}
-        title="Register As a Seller"
-        width="666"
-      >
-        <CreatePasswordModal
-          type="Register As Seller"
-          handleSellerPasswordModal={handleSellerPasswordModal}
-        />
+      <CenterModal open={sellerpasswordModal} setOpen={setSellerPasswordModal} title="Register As a Seller" width="666">
+        <CreatePasswordModal type="Register As Seller" handleSellerPasswordModal={handleSellerPasswordModal} />
       </CenterModal>
 
       {/******************************** Registration Modals ******************************************/}
 
       {/******************************** Login Modals ******************************************/}
 
-      <CenterModal
-        open={loginmodal}
-        setOpen={setLoginModal}
-        title={"Cakeshare Login"}
-        width="622"
-      >
+      <CenterModal open={loginmodal} setOpen={setLoginModal} title={'Cakeshare Login'} width="622">
         <RegisterModal
           handleRegisterModal={handleLoginModal}
           handleSellerModal={handleSellerModal}
@@ -324,23 +262,10 @@ const TopBar = () => {
           description="Welcome to cakeshares, please select the account type to proceed."
         />
       </CenterModal>
-      <CenterModal
-        open={buyerloginmodal}
-        setOpen={setBuyerLoginModal}
-        title="Login As a Buyer"
-        width="666"
-      >
-        <BuyerLoginSignupModal
-          type="Login As Buyer"
-          handleLoginModal={handleBuyerLogin}
-        />
+      <CenterModal open={buyerloginmodal} setOpen={setBuyerLoginModal} title="Login As a Buyer" width="666">
+        <BuyerLoginSignupModal type="Login As Buyer" handleLoginModal={handleBuyerLogin} />
       </CenterModal>
-      <CenterModal
-        open={sellerloginmodal}
-        setOpen={setSellerLoginModal}
-        title="Login As a Seller"
-        width="666"
-      >
+      <CenterModal open={sellerloginmodal} setOpen={setSellerLoginModal} title="Login As a Seller" width="666">
         <LoginAsSellerModal
           handleRegisterModal={() => {
             setRegisterModal(true);
@@ -366,12 +291,7 @@ const TopBar = () => {
             <div className="profile">
               <Image src={line} alt="line" />
               <div className="profile-details">
-                <Image
-                  src={profilePlaceHolder}
-                  width={40}
-                  height={40}
-                  alt="profile"
-                />
+                <Image src={profilePlaceHolder} width={40} height={40} alt="profile" />
                 <div className="user-details">
                   <span>Guest Mode</span>
                   <span className="sub">Guest Mode</span>
@@ -379,12 +299,7 @@ const TopBar = () => {
               </div>
               <Image src={line} alt="line" />
             </div>
-            <Link
-              href="/"
-              className={
-                router === "/" ? "textField textField-home" : "textField"
-              }
-            >
+            <Link href="/" className={router === '/' ? 'textField textField-home' : 'textField'}>
               <MdStorefront />
               <span>Marketplace</span>
             </Link>
@@ -392,35 +307,25 @@ const TopBar = () => {
         </div>
 
         <div className="actions">
-          {isLoggedIn ? (
+          {isLoggedIn && (
             <>
               <div className="textfeildWrapper">
                 <div className="textFieldRight">
                   <span className="heading">My Kyc Level</span>
                   <span>{user?.kycLevel}</span>
                 </div>
-                <KycLevel level={user?.kycLevel} bg />
+                <KycLevel level={user?.kycLevel + 1} bg />
               </div>
             </>
-          ) : (
-            ""
           )}
-
           <div
             className="notification"
             onClick={() => {
               setNotifications(!notifications);
-            }}
-          >
+            }}>
             <Image src={bell} alt="bell" className="bell" />
             <Image src={bellWhite} alt="bell" className="bell-white" />
-            <div
-              className={
-                notifications
-                  ? "notificationWrapper-visible"
-                  : "notificationWrapper"
-              }
-            >
+            <div className={notifications ? 'notificationWrapper-visible' : 'notificationWrapper'}>
               <Notifications />
             </div>
           </div>
@@ -429,13 +334,7 @@ const TopBar = () => {
             <>
               <div
                 className="wallet"
-                onClick={() =>
-                  window.open(
-                    "https://cake-admin.webevis.com/?type=buyer",
-                    "_blank"
-                  )
-                }
-              >
+                onClick={() => window.open('https://cake-admin.webevis.com/?type=buyer', '_blank')}>
                 <FaWallet />
                 <span>My Wallet</span>
               </div>
@@ -446,24 +345,13 @@ const TopBar = () => {
                   btntype="light-green"
                   onClick={() => {
                     setOpenProfile(!openProfile);
-                  }}
-                >
+                  }}>
                   <figure className="profile">
                     {/* <Image src={profile} alt="profile" /> */}
                     {user?.profilePicture ? (
-                      <Image
-                        src={user?.profilePicture}
-                        alt="profile"
-                        width={25}
-                        height={25}
-                      />
+                      <Image src={user?.profilePicture} alt="profile" width={25} height={25} />
                     ) : (
-                      <Image
-                        src={profilePlaceHolder}
-                        alt="profile"
-                        width={25}
-                        height={25}
-                      />
+                      <Image src={profilePlaceHolder} alt="profile" width={25} height={25} />
                     )}
                   </figure>
                   <span className="userName">{user?.fullName}</span>
@@ -474,12 +362,7 @@ const TopBar = () => {
             </>
           ) : (
             <div className="authContainer">
-              <Button
-                type="light-green"
-                rounded
-                sm
-                onClick={() => setRegisterModal(true)}
-              >
+              <Button type="light-green" rounded sm onClick={() => setRegisterModal(true)}>
                 <Image src={register} alt="register" />
                 Register
               </Button>
@@ -494,8 +377,7 @@ const TopBar = () => {
                   //   pathname: "http://localhost:3000/",
                   //   query: { type: "seller" },
                   // });
-                }}
-              >
+                }}>
                 Login
               </Button>
             </div>

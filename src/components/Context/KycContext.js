@@ -1,22 +1,34 @@
-import { useState, createContext } from "react";
+import { useState, useEffect, createContext } from 'react';
+import { useContextHook } from 'use-context-hook';
+import { AuthContext } from './authContext';
 
 export const KycContext = createContext();
 
 export const KycContextProvider = ({ children }) => {
-  const [kycLevel, setKycLevel] = useState(1);
+  const { user } = useContextHook(AuthContext, v => ({
+    user: v.user,
+  }));
+  const [kycLevel, setKycLevel] = useState(user?.kycLevel);
   const [kyc1, setKyc1] = useState(false);
   const [kyc2, setKyc2] = useState(false);
   const [kyc3, setKyc3] = useState(false);
 
   function checkKycLevel() {
-    if (kycLevel == 1) {
+    if (kycLevel === 0) {
       setKyc1(true);
-    } else if (kycLevel == 2) {
+    } else if (kycLevel === 1) {
       setKyc2(true);
-    } else if (kycLevel == 3) {
+    } else if (kycLevel === 2) {
       setKyc3(true);
     }
   }
+
+  useEffect(() => {
+    if (user && user.kycLevel !== undefined) {
+      setKycLevel(user.kycLevel);
+    }
+  }, [user]);
+
   const contextValue = {
     kycLevel,
     setKycLevel,
@@ -28,7 +40,5 @@ export const KycContextProvider = ({ children }) => {
     setKyc3,
     checkKycLevel,
   };
-  return (
-    <KycContext.Provider value={contextValue}>{children}</KycContext.Provider>
-  );
+  return <KycContext.Provider value={contextValue}>{children}</KycContext.Provider>;
 };
