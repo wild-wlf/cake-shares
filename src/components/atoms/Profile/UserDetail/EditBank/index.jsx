@@ -74,12 +74,12 @@ const EditBank = ({ bankInfo, onClose }) => {
               required: true,
             },
             {
-              pattern: /^.{0,40}$/,
+              pattern: /^.{0,50}$/,
               message: "Maximum Character Length is 256",
             },
           ]}
         >
-          <Field />
+          <Field maxLength={50} />
         </Form.Item>
         <Form.Item
           type="text"
@@ -91,14 +91,15 @@ const EditBank = ({ bankInfo, onClose }) => {
           rules={[
             {
               required: true,
+              message: "Please enter IBAN number",
             },
             {
-              pattern: /^.{0,256}$/,
-              message: "Maximum Character Length is 256",
+              pattern: /^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/,
+              message: "Please enter a valid IBAN number",
             },
           ]}
         >
-          <Field />
+          <Field maxLength={30} />
         </Form.Item>
         <Form.Item
           type="text"
@@ -106,19 +107,19 @@ const EditBank = ({ bankInfo, onClose }) => {
           name="swiftBicNumber"
           sm
           rounded
-          placeholder="PK033310084246213"
+          placeholder="ABCDEF12"
           rules={[
             {
               required: true,
+              message: "Please enter SWIFT / BIC Number",
             },
             {
-              pattern: /^.{0,40}$/,
-
-              message: "Maximum Character Length is 256",
+              pattern: /^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
+              message: "Invalid SWIFT/BIC format",
             },
           ]}
         >
-          <Field />
+          <Field maxLength={11} />
         </Form.Item>
         <Form.Item
           type="text"
@@ -126,18 +127,19 @@ const EditBank = ({ bankInfo, onClose }) => {
           name="userId"
           sm
           rounded
-          placeholder="33445554"
+          placeholder="12345678"
           rules={[
             {
               required: true,
+              message: "Please enter User ID",
             },
             {
-              pattern: /^.{0,256}$/,
-              message: "Maximum Character Length is 256",
+              pattern: /^[a-zA-Z0-9_-]{8,40}$/,
+              message: "User ID must be between 8 and 256 characters long",
             },
           ]}
         >
-          <Field />
+          <Field maxLength={40} />
         </Form.Item>
       </div>
 
