@@ -103,6 +103,7 @@ export const AuthContextProvider = (props) => {
         throw new Error(res?.message);
       }
       if (res?.type !== "Buyer") {
+        console.log( process.env.NEXT_PUBLIC_ADMIN_DOMAIN)
         setCookie(
           process.env.NEXT_PUBLIC_ADMIN_TOKEN_COOKIE,
           res?.token,
