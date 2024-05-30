@@ -10,11 +10,11 @@ import { useContextHook } from "use-context-hook";
 import { AuthContext } from "@/components/Context/authContext";
 
 const EditBank = ({ bankInfo, onClose }) => {
-  const { setPermission } = useContextHook(AuthContext, (v) => ({
+  const { setPermission, user } = useContextHook(AuthContext, (v) => ({
     setPermission: v.setPermission,
+    user: v.user,
   }));
   const [loading, setloading] = useState(false);
-  console.log(bankInfo);
   const [form] = useForm();
   console.log("Bank Info", bankInfo);
   useEffect(() => {
@@ -32,15 +32,15 @@ const EditBank = ({ bankInfo, onClose }) => {
     let obj = {
       type: "bank",
       info: {
-        bankName: e.bankName,
-        iban: e.iban,
-        swiftBicNumber: e.swiftBicNumber,
-        userId: e.userId,
+        bankName: e?.bankName?.trim(),
+        iban: e?.iban?.trim(),
+        swiftBicNumber: e?.swiftBicNumber?.trim(),
+        userId: e?.userId?.trim(),
       },
     };
 
     try {
-      await userService.update(obj, bankInfo.bankId);
+      await userService.update(obj, bankInfo?.bankId);
 
       Toast({
         type: "success",
