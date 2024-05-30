@@ -108,6 +108,15 @@ export const AuthContextProvider = (props) => {
           null,
           process.env.NEXT_PUBLIC_ADMIN_DOMAIN
         );
+        setCookie(
+          process.env.NEXT_PUBLIC_USER_TYPE_COOKIE,
+          JSON.stringify({
+            type: res?.type,
+            isIndividualSeller: res?.isIndividualSeller,
+          }),
+          null,
+          process.env.NEXT_PUBLIC_ADMIN_DOMAIN
+        );
         window.open(`${process.env.NEXT_PUBLIC_ADMIN_URL}`, "_blank");
       }
 
@@ -160,7 +169,7 @@ export const AuthContextProvider = (props) => {
     listenCookieChange((value, cookie) => {
       if (cookie === process.env.NEXT_PUBLIC_TOKEN_COOKIE) {
         if (!value) {
-          // onLogout();
+          onLogout();
         }
       }
       if (cookie === process.env.NEXT_PUBLIC_ALLOWED_PAGES_COOKIE) {
