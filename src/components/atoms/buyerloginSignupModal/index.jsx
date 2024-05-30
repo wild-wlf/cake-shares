@@ -19,14 +19,22 @@ const BuyerLoginSignupModal = ({
   const [form] = useForm();
   const router = useRouter();
   function handleSubmit(e) {
-    // console.log(e);
+    let registerObj = {
+      username: e.username?.trim(),
+      email: e.email?.trim(),
+    };
+    let loginObj = {
+      username: e.username?.trim(),
+      password: e.password?.trim(),
+    };
 
     if (type === "Login As Buyer") {
-      handleLoginModal({ ...e, type: "Buyer" });
+      handleLoginModal({ ...loginObj, type: "Buyer" });
     } else {
       // buyer Registration
-      handleBuyerModal(e);
+      handleBuyerModal(registerObj);
     }
+
     // if (e?.select_type.value === "company_seller") {
     //   router.push({
     //     pathname: "https://cake-admin.webevis.com/",
@@ -57,18 +65,19 @@ const BuyerLoginSignupModal = ({
             name="username"
             sm
             rounded
-            placeholder="Alex123"
+            placeholder="alex123"
             rules={[
               {
                 required: true,
+                message: "Please enter username",
               },
               {
-                pattern: /^[a-zA-Z0-9_-]{8,40}$/,
-                message: "Characters length should be between 8 and 40",
+                pattern: /^(?!.*\s)[a-zA-Z0-9_-]{5,20}$/,
+                message: "Maximum Character Length is 256",
               },
             ]}
           >
-            <Field />
+            <Field maxLength={20} />
           </Form.Item>
           {type === "Login As Buyer" ? (
             <Form.Item
@@ -101,14 +110,15 @@ const BuyerLoginSignupModal = ({
               rules={[
                 {
                   required: true,
+                  message: "Please enter email address",
                 },
                 {
                   pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-                  message: "Invalid Email Address",
+                  message: "Maximum Character Length is 256",
                 },
               ]}
             >
-              <Field />
+              <Field maxLength={40} />
             </Form.Item>
           )}
         </div>

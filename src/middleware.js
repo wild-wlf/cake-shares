@@ -7,7 +7,7 @@ const privatePages = ["/profile"];
 
 export function middleware(request) {
   const cookieHeader = cookies(request.headers);
-  const token = cookieHeader.get("_devcksu");
+  const token = cookieHeader.get(process.env.NEXT_PUBLIC_ADMIN_TOKEN_COOKIE);
   // const allowedPages = cookieHeader.get('_allowedpagecks');
   const path = new URL(request.url).pathname;
 

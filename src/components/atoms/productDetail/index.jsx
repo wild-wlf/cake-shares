@@ -14,19 +14,46 @@ import InitiateInvestmentModal from "../InitiateInvestmentModal";
 import InvestmentSuccesModal from "../InvestmentSuccesModal";
 import ProductDescription from "../productDescription";
 import { daysLeft, formatDateWithSuffix } from "@/helpers/common";
+import { useContextHook } from "use-context-hook";
+import { AuthContext } from "@/components/Context/authContext";
+import HandleLoginModal from "@/components/molecules/HandleLoginModal";
 
 const ProductDetail = ({ data, user }) => {
+  const { isLoggedIn } = useContextHook(AuthContext, (v) => ({
+    isLoggedIn: v.isLoggedIn,
+  }));
   const router = useRouter();
   const [modal, setModal] = useState(false);
+  const [handleLoginModal, setHandleLoginModal] = useState(false);
   const [successmodal, setSuccessModal] = useState(false);
+  const [ownershipPercentage, setOwnershipPercentage] = useState();
+
+  const handleInitiateInvestment = () => {
+    if (isLoggedIn) {
+      setModal(true);
+    } else {
+      setHandleLoginModal(true);
+    }
+  };
   return (
     <>
+      <CenterModal
+        open={handleLoginModal}
+        setOpen={setHandleLoginModal}
+        iscloseAble={false}
+        title="Please Login to Perform this Operation!"
+        width="689">
+        <HandleLoginModal setOpen={setHandleLoginModal} />
+      </CenterModal>
       <CenterModal
         open={modal}
         setOpen={setModal}
         title="Initiate Investment"
         width="543">
         <InitiateInvestmentModal
+          productId={data?._id}
+          assetValue={data?.assetValue}
+          setOwnershipPercentage={setOwnershipPercentage}
           handleCloseModal={() => {
             setModal(false);
             setSuccessModal(true);
@@ -38,7 +65,7 @@ const ProductDetail = ({ data, user }) => {
         setOpen={setSuccessModal}
         title={<Image src={ConfirmIcon} alt="success" />}
         width="543">
-        <InvestmentSuccesModal />
+        <InvestmentSuccesModal ownershipPercentage={ownershipPercentage} />
       </CenterModal>
 
       <ProductDetailWrapper>
@@ -59,7 +86,7 @@ const ProductDetail = ({ data, user }) => {
             sm
             btntype="primary"
             className="button"
-            onClick={() => setModal(true)}>
+            onClick={handleInitiateInvestment}>
             Initiate Investment
             <RiFilePaperFill />
           </Button>

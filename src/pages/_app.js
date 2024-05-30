@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import "slick-carousel/slick/slick.css";
 import "react-toastify/dist/ReactToastify.min.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -12,6 +13,8 @@ import { ToastContainer } from "react-toastify";
 import { AuthContextProvider } from "@/components/Context/authContext";
 import Layout from "@/components/atoms/Layout";
 import { SocketContextProvider } from "@/components/Context/socketContext";
+import { useRouter } from "next/router";
+import Loader from "@/components/atoms/Loader";
 
 export const StyledToastContainer = styled(ToastContainer)`
   z-index: 99999;
@@ -37,11 +40,25 @@ export const StyledToastContainer = styled(ToastContainer)`
 `;
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const GlobalStyles = createGlobalStyle`
   ${Variables}
   ${Styling}
   ${HelperClasses}
 `;
+
+  useEffect(() => {
+    router.events.on("routeChangeError", () => setLoading(false));
+    router.events.on("routeChangeStart", () => setLoading(true));
+    router.events.on("routeChangeComplete", () => setLoading(false));
+
+    return () => {
+      router.events.off("routeChangeError", () => setLoading(false));
+      router.events.off("routeChangeStart", () => setLoading(true));
+      router.events.off("routeChangeComplete", () => setLoading(false));
+    };
+  }, [router.events]);
 
   return (
     <>
@@ -50,6 +67,7 @@ export default function App({ Component, pageProps }) {
           <UserContextProvider>
             <KycContextProvider>
               <GlobalStyles />
+              {loading && <Loader />}
               <Layout>
                 <Component {...pageProps} />
               </Layout>

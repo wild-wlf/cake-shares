@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import UserInfo from "@/components/atoms/Profile/UserInfo";
 import Button from "@/components/atoms/Button";
 import { IoIosArrowBack } from "react-icons/io";
@@ -9,37 +9,69 @@ import sellerHeroImage from "../../_assets/seller-hero-bg.png";
 import SellerPersonalInfo from "@/components/atoms/SellerPersonalInfo";
 import Categories from "@/components/atoms/categories";
 import SellerProfileBanner from "@/components/atoms/Profile/ProfileBanner/sellerProfileBanner";
+import userService from "@/services/userService";
+import { useState } from "react";
+import SellerInfo from "@/components/atoms/Profile/UserInfo/SellerInfo";
+import Loader from "@/components/atoms/Loader";
 
 const SellerProfile = ({ userProfileData }) => {
-  console.log(userProfileData);
-  const usertype = {
-    userType: "Seller",
-    categories: "Seller’s Product Top Categories:",
-  };
   const router = useRouter();
+  const [userProfile, setUserProfile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function UserProfileData(userProfileData) {
+    try {
+      setIsLoading(true);
+      const res = await userService.getUserProfile(userProfileData);
+      setUserProfile(res);
+    } catch (error) {
+      Toast({
+        type: error,
+        message: error.message,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    UserProfileData(userProfileData);
+  }, [userProfileData]);
 
   return (
-    <StyledProfile>
-      <Button
-        rounded
-        sm
-        btntype="blue"
-        className="button"
-        onClick={() => {
-          router.back();
-        }}>
-        <IoIosArrowBack />
-        Go Back
-      </Button>
-      <SellerProfileBanner
-        title="Real Estate Broker Things mate!"
-        image={sellerHeroImage}
-      />
-      <UserInfo userImage={sellerImage} type={usertype} />
-      <SellerPersonalInfo />
-      <Categories title="Seller’s Other Products" />
-      <Categories title="Seller’s Fully Funded Products" />
-    </StyledProfile>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <StyledProfile>
+          <Button
+            rounded
+            sm
+            btntype="blue"
+            className="button"
+            onClick={() => {
+              router.back();
+            }}>
+            <IoIosArrowBack />
+            Go Back
+          </Button>
+          <SellerProfileBanner
+            title="Real Estate Broker Things mate!"
+            image={userProfile?.bannerImage}
+          />
+          <SellerInfo userInfo={userProfile?.user} />
+          <SellerPersonalInfo userInfo={userProfile?.user} />
+          <Categories
+            title="Seller’s Other Products"
+            data={userProfile?.otherProducts}
+          />
+          <Categories
+            title="Seller’s Fully Funded Products"
+            data={userProfile?.fullyFundedProducts}
+          />
+        </StyledProfile>
+      )}
+    </>
   );
 };
 

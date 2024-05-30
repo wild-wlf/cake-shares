@@ -18,11 +18,10 @@ const ProfileBanner = ({
     setPermission: v.setPermission,
   }));
   const [bannerImg, setBannerImg] = useState(null);
-  console.log(user);
+  (user);
   const router = usePathname();
   async function handleBannerImg(e) {
     const file = e.target.files[0];
-    console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = (event) => {

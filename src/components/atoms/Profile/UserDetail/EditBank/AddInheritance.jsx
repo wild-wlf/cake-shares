@@ -35,7 +35,6 @@ const AddInheritance = ({ onClose }) => {
         country: e?.country,
       },
     };
-    console.log(obj);
     setLoading(true);
     try {
       await userService.addInheritance(obj);
