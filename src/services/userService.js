@@ -129,7 +129,7 @@ const userService = {
 
   // register
   async createUser(payload) {
-    let res = await Fetch.upload(`${this._url}/registeration`, "POST", payload);
+    let res = await Fetch.upload(`${this._url}/registration`, "POST", payload);
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
       return res;

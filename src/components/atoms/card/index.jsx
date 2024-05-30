@@ -5,15 +5,13 @@ import Heart from "../../../_assets/heart.svg";
 import ProgressBar from "@ramonak/react-progress-bar";
 
 const Card = ({ Cardimage, c_data }) => {
-  console.log((c_data?.currentBackers / c_data?.maximumBackers) * 100);
-
   return (
     <CardWrapper>
       <div className="card">
         <div className="image-div">
           <Image src={Cardimage} alt="card-image" width={300} height={300} />
           <div className="tagWrapper">
-            <div className="tag">Properties</div>
+            <div className="tag">{c_data?.investmentType}</div>
             <div className="icon-div">
               <Image src={Heart} alt="Heart" className="heart" />
             </div>
