@@ -6,7 +6,7 @@ import { TbExternalLink } from "react-icons/tb";
 import { PiChatTeardropTextFill } from "react-icons/pi";
 import { useRouter } from "next/router";
 
-const ProductDescription = ({ data, user }) => {
+const ProductDescription = ({ data, SellerData }) => {
   const router = useRouter();
 
   return (
@@ -30,19 +30,19 @@ const ProductDescription = ({ data, user }) => {
         <div className="seller">
           <div className="profilepic">
             <Image
-              src={user?.profilePicture}
+              src={SellerData?.profilePicture}
               alt="profilepic"
               width={90}
               height={90}
             />
           </div>
           <div className="profiledesc">
-            <strong className="user-name">{user?.fullName}</strong>
-            <span className="text">{user?.sellerType}</span>
+            <strong className="user-name">{SellerData?.fullName}</strong>
+            <span className="text">{SellerData?.sellerType}</span>
             <div className="btnwrapper">
               <div
                 className="viewprofile"
-                onClick={() => router.push(`/seller/${user._id}`)}>
+                onClick={() => router.push(`/seller/${SellerData._id}`)}>
                 <span>View Profile</span> <TbExternalLink className="icon" />
               </div>
               <div className="message" onClick={() => setModal(true)}>

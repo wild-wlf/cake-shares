@@ -17,26 +17,48 @@ import { daysLeft, formatDateWithSuffix } from "@/helpers/common";
 import { useContextHook } from "use-context-hook";
 import { AuthContext } from "@/components/Context/authContext";
 import HandleLoginModal from "@/components/molecules/HandleLoginModal";
+import UpgradeKycLevelModal from "@/components/molecules/upgradeKycLevelModal";
+import InfoIcon from "../../../_assets/info-icon.svg";
 
-const ProductDetail = ({ data, user }) => {
-  const { isLoggedIn } = useContextHook(AuthContext, (v) => ({
+const ProductDetail = ({ data, SellerData }) => {
+  const { isLoggedIn,user } = useContextHook(AuthContext, (v) => ({
     isLoggedIn: v.isLoggedIn,
+    user: v.user,
   }));
   const router = useRouter();
   const [modal, setModal] = useState(false);
   const [handleLoginModal, setHandleLoginModal] = useState(false);
+  const [upgradeKycLevel, setUpgradeKycLevel] = useState(false);
   const [successmodal, setSuccessModal] = useState(false);
   const [ownershipPercentage, setOwnershipPercentage] = useState();
 
   const handleInitiateInvestment = () => {
-    if (isLoggedIn) {
-      setModal(true);
-    } else {
+    if (!isLoggedIn) {
       setHandleLoginModal(true);
+
+    }
+    else if (user.kycLevel == data.kycLevel) {
+      setModal(true);
+    }
+    
+    else {
+      console.log("first")
+      setUpgradeKycLevel(true);
     }
   };
+  // console.log(user);
+  console.log(data);
+    
   return (
     <>
+      <CenterModal
+        open={upgradeKycLevel}
+        setOpen={setUpgradeKycLevel}
+        // iscloseAble={false}
+        title={<><Image src={InfoIcon} alt="InfoIcon"/></>}
+        width="689">
+        <UpgradeKycLevelModal setOpen={setUpgradeKycLevel} />
+      </CenterModal>
       <CenterModal
         open={handleLoginModal}
         setOpen={setHandleLoginModal}
@@ -173,7 +195,7 @@ const ProductDetail = ({ data, user }) => {
             <strong>Description</strong>
             <p>{data?.description}</p>
           </div>
-          <ProductDescription data={data} user={user} />
+          <ProductDescription data={data} SellerData={SellerData} />
         </div>
       </ProductDetailWrapper>
     </>

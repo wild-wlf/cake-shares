@@ -16,7 +16,7 @@ const Home = () => {
 
   const { products_data, products_loading } =
     productService.GetProducts(searchQuery);
-
+console.log(products_data);
   return (
     <>
       <Banner />

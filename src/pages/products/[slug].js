@@ -40,7 +40,7 @@ const ProductDetails = ({ userData }) => {
         <Loader />
       ) : (
         <>
-          <ProductDetail data={productData} user={userProfileData} />
+          <ProductDetail data={productData} SellerData={userProfileData} />
           <Amenities data={productData} />
           <Categories arr={images} />
         </>

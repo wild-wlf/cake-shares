@@ -19,14 +19,15 @@ const HandleLoginModal = ({ setOpen }) => {
       </span>
       <div className="btn-holder">
         <Button
-          type="success"
+          btntype="light-green"
           color="success"
           rounded
-          width="290"
+          md
+          width="300"
           onClick={() => setOpen(false)}
         >
           Close
-          <Image src={close} alt="arrow" />
+          {/* <Image src={close} alt="arrow" /> */}
         </Button>
       </div>
     </HandleLoginModalWrapper>

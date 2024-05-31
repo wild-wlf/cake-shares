@@ -111,13 +111,12 @@ const UserInfo = ({
             <KycLevel level={user.kycLevel + 1} />
             {user?.kycLevel < 3 && (
               <>
-                {!user?.isKycRequested ? (
+                {!user?.isKycRequested && (
                   <span className="discreption" onClick={checkKycLevel}>
                     Upgrade KYC
                   </span>
-                ) : (
-                  <span>KYC Requested for Level {user?.kycRequestLevel}</span>
-                )}
+                )
+                }
               </>
             )}
           </div>

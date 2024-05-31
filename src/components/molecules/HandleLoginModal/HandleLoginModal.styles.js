@@ -29,4 +29,9 @@ export const HandleLoginModalWrapper = styled.div`
       font-weight: 300;
     }
   }
+  .btn-holder {
+    button {
+      width: 250px;
+    }
+  }
 `;
