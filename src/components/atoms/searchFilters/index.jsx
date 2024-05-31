@@ -219,7 +219,7 @@ const SearchFilters = ({ setSearchQuery }) => {
             <Field />
           </Form.Item>
         </div>
-        <div className="btnwrapper">
+        <div className="btn-wrapper">
           <Button rounded md btntype="primary" width="200px" htmlType="submit">
             Search
           </Button>
