@@ -1,35 +1,36 @@
 /* eslint-disable react/jsx-key */
-import React, { useMemo } from "react";
-import { StyledUserDetail } from "./UserDetail.styles";
-import Button from "../../Button";
-import { MdModeEdit } from "react-icons/md";
-import bankIcon from "../../../../_assets/bankIcon.svg";
-import numIcon from "../../../../_assets/numIcon.svg";
-import userIcon from "../../../../_assets/userIcon.svg";
-import userId from "../../../../_assets/userId.svg";
-import userName from "../../../../_assets/userName.svg";
-import emailAddress from "../../../../_assets/emailAddress.svg";
-import password from "../../../../_assets/password.svg";
-import flagIcon from "../../../../_assets/flagIcon.svg";
-import countryflgIcon from "../../../../_assets/countryflgIcon.svg";
-import dltIcon from "../../../../_assets/dltIcon.svg";
-import accDelete from "../../../../_assets/accDelete.svg";
-import Image from "next/image";
-import Inheritance from "./Inheritance";
-import TableLayout from "../../TableLayout";
-import Table from "@/components/molecules/Table";
-import { IoIosArrowBack } from "react-icons/io";
-import Field from "../../Field";
-import ModalContainer from "../../ModalContainer";
-import EditBank from "./EditBank";
-import EditProfile from "./EditBank/EditProfile";
-import { countries } from "@/components/Constant";
+import React, { useMemo } from 'react';
+import { StyledUserDetail } from './UserDetail.styles';
+import Button from '../../Button';
+import { MdModeEdit } from 'react-icons/md';
+import bankIcon from '../../../../_assets/bankIcon.svg';
+import numIcon from '../../../../_assets/numIcon.svg';
+import userIcon from '../../../../_assets/userIcon.svg';
+import userId from '../../../../_assets/userId.svg';
+import userName from '../../../../_assets/userName.svg';
+import emailAddress from '../../../../_assets/emailAddress.svg';
+import password from '../../../../_assets/password.svg';
+import flagIcon from '../../../../_assets/flagIcon.svg';
+import countryflgIcon from '../../../../_assets/countryflgIcon.svg';
+import dltIcon from '../../../../_assets/dltIcon.svg';
+import accDelete from '../../../../_assets/accDelete.svg';
+import Image from 'next/image';
+import Inheritance from './Inheritance';
+import TableLayout from '../../TableLayout';
+import Table from '@/components/molecules/Table';
+import { IoIosArrowBack } from 'react-icons/io';
+import Field from '../../Field';
+import ModalContainer from '../../ModalContainer';
+import EditBank from './EditBank';
+import EditProfile from './EditBank/EditProfile';
+import { countries } from '@/components/Constant';
 
-const UserDetail = ({ userData }) => {
-  const fromatDate = (value) => {
+const UserDetail = ({ userData, assetsData, searchQuery, setSearchQuery }) => {
+  console.log(assetsData);
+  const fromatDate = value => {
     const date = new Date(value);
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-indexed in JavaScript
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed in JavaScript
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
@@ -46,37 +47,10 @@ const UserDetail = ({ userData }) => {
     username: userData?.username,
     email: userData?.email,
     country: userData?.country,
-    countryLabel: countries.find((elem) => elem.value === userData?.country)
-      ?.label,
+    countryLabel: countries.find(elem => elem.value === userData?.country)?.label,
     dob: fromatDate(userData?.dob),
   };
 
-  const reports_data = [
-    {
-      product_name: "Gov. Egypt Property",
-      category: "Properties",
-      total_share: "Sales",
-      amount: "$40,256.000",
-    },
-    {
-      product_name: "Audi A8 Car",
-      category: "Accessories",
-      amount: "$40,256.000",
-      total_share: "Refund",
-    },
-    {
-      product_name: "Rolex Watch (GMT-Master II)",
-      category: "Properties",
-      total_share: "Sales",
-      amount: "$40,256.000",
-    },
-    {
-      product_name: "Audi A8 Car",
-      category: "Car",
-      total_share: "Refund",
-      amount: "$40,256.000",
-    },
-  ];
   const actionBtns = () => (
     // eslint-disable-next-line react/jsx-filename-extension
     <button type="button" className="chatButton">
@@ -85,25 +59,19 @@ const UserDetail = ({ userData }) => {
   );
   const { report_rows, totalItems } = useMemo(
     () => ({
-      report_rows: reports_data?.map((report) => [
-        report.product_name,
-        report.category,
-        report.total_share,
-        report.amount,
+      report_rows: assetsData?.items?.map(report => [
+        report.product?.productName,
+        report.product?.investmentType?.name,
+        report.share || 0,
+        report.investmentAmount,
 
         actionBtns(),
       ]),
-      totalItems: reports_data?.length || 0,
+      totalItems: assetsData?.totalItems,
     }),
-    [reports_data]
+    [assetsData],
   );
-  const columnNames = [
-    `Product`,
-    `Category`,
-    `Total Shares`,
-    `Amount`,
-    `Chat (Stakeholders)`,
-  ];
+  const columnNames = [`Product`, `Category`, `Total Shares`, `Amount`, `Chat (Stakeholders)`];
 
   return (
     <StyledUserDetail>
@@ -120,9 +88,7 @@ const UserDetail = ({ userData }) => {
                 Edit Info
               </Button>
             )}
-            content={({ onClose }) => (
-              <EditBank onClose={onClose} bankInfo={bankInfo} />
-            )}
+            content={({ onClose }) => <EditBank onClose={onClose} bankInfo={bankInfo} />}
           />
         </div>
         <div className="colBody">
@@ -180,9 +146,7 @@ const UserDetail = ({ userData }) => {
                 Edit Info
               </Button>
             )}
-            content={({ onClose }) => (
-              <EditProfile onClose={onClose} personalInfo={personalInfo} />
-            )}
+            content={({ onClose }) => <EditProfile onClose={onClose} personalInfo={personalInfo} />}
           />
         </div>
         <div className="colBody">
@@ -268,16 +232,15 @@ const UserDetail = ({ userData }) => {
         <TableLayout
           ReportsFilters
           tableHeading="My Assets:"
-          // currentPage={searchQuery.page}
-          // pageSize={searchQuery.pageSize}
+          currentPage={searchQuery.page}
+          pageSize={searchQuery.pageSize}
           totalCount={totalItems}
-          onChangeFilters={(filters) => {
-            setSearchQuery((_) => ({
+          onChangeFilters={filters => {
+            setSearchQuery(_ => ({
               ..._,
               ...filters,
             }));
-          }}
-        >
+          }}>
           <Table rowsData={report_rows} columnNames={columnNames} noPadding />
         </TableLayout>
       </div>

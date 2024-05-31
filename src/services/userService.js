@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { Fetch } from "../helpers/fetchWrapper";
-import { useCancellablePromise } from "../helpers/promiseHandler";
+import { useEffect, useState } from 'react';
+import { Fetch } from '../helpers/fetchWrapper';
+import { useCancellablePromise } from '../helpers/promiseHandler';
 
 const STATUS = {
-  LOADING: "loading",
-  SUCCESS: "success",
-  ERROR: "error",
+  LOADING: 'loading',
+  SUCCESS: 'success',
+  ERROR: 'error',
 };
 const userService = {
   _url: `${process.env.NEXT_PUBLIC_USER_URL}`,
@@ -23,7 +23,7 @@ const userService = {
     useEffect(() => {
       setStatus(STATUS.LOADING);
       cancellablePromise(this.getUsers(searchQuery))
-        .then((res) => {
+        .then(res => {
           setUsers(() => res);
           setStatus(STATUS.SUCCESS);
         })
@@ -40,7 +40,7 @@ const userService = {
     ]);
     return {
       users_loading: status === STATUS.LOADING,
-      users_error: status === STATUS.ERROR ? status : "",
+      users_error: status === STATUS.ERROR ? status : '',
       users_data: users,
     };
   },
@@ -51,7 +51,7 @@ const userService = {
       return res;
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
   },
 
   // async getUsers({
@@ -84,7 +84,7 @@ const userService = {
       return res;
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
   },
   async update(payload, id) {
     let res = await Fetch.put(`${this._url}/update-chunk-info/${id}`, payload);
@@ -93,20 +93,16 @@ const userService = {
       return res;
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
   },
   async uploadMedia(payload, id) {
-    let res = await Fetch.upload(
-      `${this._url}/update-chunk-info/${id}`,
-      "PUT",
-      payload
-    );
+    let res = await Fetch.upload(`${this._url}/update-chunk-info/${id}`, 'PUT', payload);
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
       return res;
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
   },
   async addInheritance(payload) {
     let res = await Fetch.put(`${this._url}/update-chunk-info`, payload);
@@ -115,7 +111,7 @@ const userService = {
       return res;
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
   },
   async deleteInheritance(id) {
     let res = await Fetch.delete(`${this._url}/delete-inhertance/${id}`);
@@ -124,18 +120,18 @@ const userService = {
       return res;
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
   },
 
   // register
   async createUser(payload) {
-    let res = await Fetch.upload(`${this._url}/registration`, "POST", payload);
+    let res = await Fetch.upload(`${this._url}/registration`, 'POST', payload);
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
       return res;
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
   },
   // update password
 
@@ -146,7 +142,7 @@ const userService = {
       return res;
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
   },
   async logout() {
     let res = await Fetch.delete(`${this._url}/logout`);
@@ -155,7 +151,7 @@ const userService = {
       return res;
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
   },
 
   async getCurrentAdmin() {
@@ -165,7 +161,7 @@ const userService = {
       return res;
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
   },
   async getUserProfile(id) {
     let res = await Fetch.get(`${this._url}/get-single-user/${id}`);
@@ -174,7 +170,7 @@ const userService = {
       return res;
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
   },
 };
 export default userService;

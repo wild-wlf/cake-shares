@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { Fetch } from "../helpers/fetchWrapper";
-import { useCancellablePromise } from "../helpers/promiseHandler";
+import { useEffect, useState } from 'react';
+import { Fetch } from '../helpers/fetchWrapper';
+import { useCancellablePromise } from '../helpers/promiseHandler';
 
 const STATUS = {
-  LOADING: "loading",
-  SUCCESS: "success",
-  ERROR: "error",
+  LOADING: 'loading',
+  SUCCESS: 'success',
+  ERROR: 'error',
 };
 const productService = {
   _url: `${process.env.NEXT_PUBLIC_PRODUCT_URL}`,
@@ -46,7 +46,7 @@ const productService = {
     const [status, setStatus] = useState(STATUS.LOADING);
     useEffect(() => {
       setStatus(STATUS.LOADING);
-      cancellablePromise(this.getAssets(searchQuery))
+      cancellablePromise(this.getUserAssets(searchQuery))
         .then(res => {
           setAssets(() => res);
           setStatus(STATUS.SUCCESS);
@@ -113,6 +113,16 @@ const productService = {
       return {
         items: res.items,
       };
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? 'Something went wrong');
+  },
+
+  async getUserAssets() {
+    let res = await Fetch.get(`${this._url}/get-all-assets`);
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return res;
     }
     const { message } = await res.json();
     throw new Error(message ?? 'Something went wrong');
