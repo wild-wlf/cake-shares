@@ -19,7 +19,6 @@ import { BiSolidCategory } from "react-icons/bi";
 const CategoriesBar = ({categories,loading}) => {
   const [modal, setModal] = useState(false);
   const [Tab, setTab] = useState(0);
-console.log(categories)
   var settings = {
     dots: false,
     arrows: false,
