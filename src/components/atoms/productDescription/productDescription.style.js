@@ -43,6 +43,8 @@ export const ProductDescriptionWrapper = styled.div`
     }
   }
   .profilepic {
+    display: flex;
+    align-items: flex-start;
     width: 90px;
     height: 90px;
     background: var(--dark);
@@ -51,7 +53,7 @@ export const ProductDescriptionWrapper = styled.div`
     flex-shrink: 0;
     img {
       width: 100%;
-      height: 100%;
+      height: auto;
       object-fit: cover;
     }
   }

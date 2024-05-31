@@ -138,6 +138,7 @@ export const StyledUserInfo = styled.div`
 
 export const ProfileWrapper = styled.label`
   display: flex;
+  align-items: flex-start;
   flex-shrink: 0;
   width: 120px;
   height: 120px;
@@ -157,7 +158,7 @@ export const ProfileWrapper = styled.label`
   }
   img {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
   }
   &::before {

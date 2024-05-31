@@ -5,8 +5,7 @@ export const StyledProfileBanner = styled.div`
   position: relative;
   min-height: 550px;
   background: linear-gradient(180deg, #000 38.78%, rgba(0, 0, 0, 0) 78.11%),
-    ${({ $image }) =>
-        $image === null ? `url(${bgImage.src})` : `url(${$image})`}
+    ${({ $image }) => (!$image ? `url(${bgImage.src})` : `url(${$image})`)}
       lightgray 50%;
 
   background-size: 130% 100%;
@@ -24,7 +23,7 @@ export const StyledProfileBanner = styled.div`
   border-bottom-right-radius: 560px 250px;
   @media screen and (min-width: 576px) {
     background-image: ${({ $image }) =>
-      $image === null ? `url(${bgImage.src})` : `url(${$image})`};
+      !$image ? `url(${bgImage.src})` : `url(${$image})`};
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     margin: 30px -15px 15px -15px;

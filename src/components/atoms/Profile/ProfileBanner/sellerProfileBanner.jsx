@@ -1,22 +1,13 @@
-import React, { useState } from "react";
-import editIcon from "../../../../_assets/editIcon.svg";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useContextHook } from "use-context-hook";
-import { AuthContext } from "@/components/Context/authContext";
+import React from "react";
 import { StyledProfileBanner } from "./ProfileBannerSeller.styles";
 
 const SellerProfileBanner = ({
   title = "Master the World of NFT’s!",
-  type = "Buyer",
+  image,
 }) => {
-  const [bannerImg, setBannerImg] = useState(null);
-
-  const router = usePathname();
-
   return (
     <>
-      <StyledProfileBanner $image={bannerImg}>
+      <StyledProfileBanner $image={image}>
         <strong className="title">{title}</strong>
       </StyledProfileBanner>
     </>
