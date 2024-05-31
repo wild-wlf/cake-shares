@@ -45,7 +45,7 @@ const ProductDetails = ({ userData }) => {
         <>
           <ProductDetail data={productData?.product} SellerData={productData?.product?.userId} />
           <Amenities data={productData?.product} />
-          <Categories data={productData?.otherProducts} />
+          {productData?.otherProducts.length > 0 && <Categories data={productData?.otherProducts} />}
         </>
       )}
     </>
