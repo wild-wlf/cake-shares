@@ -1,38 +1,38 @@
-import React from "react";
-import { StyledSellerPersonalInfo } from "./SellerPersonalInfo.styles";
-import personImage from "../../../_assets/person-icon.svg";
-import userNameImage from "../../../_assets/user-name-icon.svg";
-import emailAddressImage from "../../../_assets/email-address-icon.svg";
-import Image from "next/image";
+import React from 'react';
+import { StyledSellerPersonalInfo } from './SellerPersonalInfo.styles';
+import personImage from '../../../_assets/person-icon.svg';
+import userNameImage from '../../../_assets/user-name-icon.svg';
+import emailAddressImage from '../../../_assets/email-address-icon.svg';
+import Image from 'next/image';
 
 const SellerPersonalInfo = ({ userInfo }) => {
   const personalInfoData = [
     {
       image: personImage,
-      title: "Full Name",
+      title: 'Full Name',
       text: userInfo?.fullName,
     },
     {
       image: userNameImage,
-      title: "Username",
+      title: 'Username',
       text: userInfo?.username,
     },
     {
       image: emailAddressImage,
-      title: "Email Address",
+      title: 'Email Address',
       text: userInfo?.email,
     },
   ];
   const finentialInfoData = [
     {
       image: personImage,
-      title: "42",
-      text: "Ongoing Products   ",
+      title: '0',
+      text: 'Ongoing Products   ',
     },
     {
       image: userNameImage,
-      title: "$2,653,000",
-      text: "Total Return Made",
+      title: '$0',
+      text: 'Total Return Made',
     },
   ];
   return (

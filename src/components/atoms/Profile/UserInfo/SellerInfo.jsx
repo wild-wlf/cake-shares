@@ -1,13 +1,13 @@
-import React from "react";
-import { ProfileWrapper, StyledUserInfo } from "./UserInfo.styles";
-import popular from "../../../../_assets/popular.svg";
-import PropertyIcon from "../../../../_assets/PropertyIcon.svg";
-import VentureIcon from "../../../../_assets/VentureIcon.svg";
-import chatIcon from "../../../../_assets/chat-icon.svg";
-import Image from "next/image";
-import Button from "../../Button";
-import profile from "../../../../_assets/profileplaceHolder.jpg";
-import { formatDateWithSuffix } from "@/helpers/common";
+import React from 'react';
+import { ProfileWrapper, StyledUserInfo } from './UserInfo.styles';
+import popular from '../../../../_assets/popular.svg';
+import PropertyIcon from '../../../../_assets/PropertyIcon.svg';
+import VentureIcon from '../../../../_assets/VentureIcon.svg';
+import chatIcon from '../../../../_assets/chat-icon.svg';
+import Image from 'next/image';
+import Button from '../../Button';
+import profile from '../../../../_assets/profileplaceHolder.jpg';
+import { formatDateWithSuffix } from '@/helpers/common';
 
 const SellerInfo = ({ userInfo }) => {
   return (
@@ -15,12 +15,7 @@ const SellerInfo = ({ userInfo }) => {
       <div className="userInfo">
         {userInfo?.profilePicture ? (
           <ProfileWrapper>
-            <Image
-              src={userInfo?.profilePicture}
-              alt="userImage"
-              width={170}
-              height={170}
-            />
+            <Image src={userInfo?.profilePicture} alt="userImage" width={170} height={170} />
           </ProfileWrapper>
         ) : (
           <ProfileWrapper>
@@ -29,24 +24,16 @@ const SellerInfo = ({ userInfo }) => {
         )}
 
         <div className="textWrapper">
-          <strong className="name">
-            {userInfo?.fullName ? userInfo?.fullName : "Alex Mertiz"}
-          </strong>
+          <strong className="name">{userInfo?.fullName ? userInfo?.fullName : 'Alex Mertiz'}</strong>
           <div className="discreption">
-            <span className="active">
-              CakeShare {userInfo?.sellerType} Seller
-            </span>
+            <span className="active">CakeShare {userInfo?.sellerType} Seller</span>
             {userInfo?.created_at && (
-              <span className="addbefore">
-                Member since {formatDateWithSuffix(userInfo?.created_at)}
-              </span>
+              <span className="addbefore">Member since {formatDateWithSuffix(userInfo?.created_at)}</span>
             )}
           </div>
         </div>
         <div className="textWrapper addbefore">
-          <span className="categoriesText">
-            Seller’s Product Top Categories:
-          </span>
+          <span className="categoriesText">Seller’s Product Top Categories:</span>
           <ul className="categoriesWrapper">
             <li className="categoriesList">
               <Image src={popular} alt="popular" />
@@ -64,7 +51,7 @@ const SellerInfo = ({ userInfo }) => {
         </div>
       </div>
       <Button type="primary" md rounded width="200">
-        Chat with {userInfo?.fullName ? userInfo?.fullName : "Seller"}
+        <span className="username">Chat with {userInfo?.fullName ? userInfo?.fullName : 'Seller'}</span>
         <Image src={chatIcon} alt="chatIcon" />
       </Button>
     </StyledUserInfo>

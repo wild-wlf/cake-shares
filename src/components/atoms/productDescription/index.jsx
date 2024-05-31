@@ -1,10 +1,10 @@
-import React from "react";
-import { ProductDescriptionWrapper, } from "./productDescription.style";
-import Profilepic from "../../../_assets/userProfile.png";
-import Image from "next/image";
-import { TbExternalLink } from "react-icons/tb";
-import { PiChatTeardropTextFill } from "react-icons/pi";
-import { useRouter } from "next/router";
+import React from 'react';
+import { ProductDescriptionWrapper } from './productDescription.style';
+import Profilepic from '../../../_assets/userProfile.png';
+import Image from 'next/image';
+import { TbExternalLink } from 'react-icons/tb';
+import { PiChatTeardropTextFill } from 'react-icons/pi';
+import { useRouter } from 'next/router';
 
 const ProductDescription = ({ data, SellerData }) => {
   const router = useRouter();
@@ -29,20 +29,13 @@ const ProductDescription = ({ data, SellerData }) => {
         </div>
         <div className="seller">
           <div className="profilepic">
-            <Image
-              src={SellerData?.profilePicture}
-              alt="profilepic"
-              width={90}
-              height={90}
-            />
+            <Image src={SellerData?.profilePicture} alt="profilepic" width={90} height={90} />
           </div>
           <div className="profiledesc">
             <strong className="user-name">{SellerData?.fullName}</strong>
             <span className="text">{SellerData?.sellerType}</span>
             <div className="btnwrapper">
-              <div
-                className="viewprofile"
-                onClick={() => router.push(`/seller/${SellerData._id}`)}>
+              <div className="viewprofile" onClick={() => router.push(`/seller/${SellerData?._id}`)}>
                 <span>View Profile</span> <TbExternalLink className="icon" />
               </div>
               <div className="message" onClick={() => setModal(true)}>
