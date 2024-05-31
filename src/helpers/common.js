@@ -15,6 +15,7 @@ export const setCookie = (name, value, days, domain) => {
     expires = `; expires=${date.toUTCString()}`;
   }
   const domainString = domain ? `; domain=${domain}` : "";
+  console.log(domainString)
   document.cookie = `${name}=${value || ""}${expires}; path=/${domainString}`;
 
   return true;

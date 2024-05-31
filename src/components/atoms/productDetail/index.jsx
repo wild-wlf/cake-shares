@@ -115,15 +115,15 @@ const ProductDetail = ({ data, user }) => {
             <div className="headings">
               <div>
                 <span>Investment type</span>
-                <h3>{data?.investmentType}</h3>
+                <h3>{data?.investmentType?.name}</h3>
               </div>
               <div>
                 <span>Return (%)</span>
-                <h3>30%</h3>
+                <h3>00%</h3>
               </div>
               <div>
                 <span>Funding Ratio</span>
-                <h3>56%</h3>
+                <h3>0%</h3>
               </div>
               <div>
                 <span>Backers Limit</span>
@@ -131,7 +131,7 @@ const ProductDetail = ({ data, user }) => {
               </div>
               <div>
                 <span>Annual Cost (est.)</span>
-                <h3>$2,000</h3>
+                <h3>$0.00</h3>
               </div>
             </div>
           </div>

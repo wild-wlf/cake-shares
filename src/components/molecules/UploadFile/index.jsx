@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useCSVReader, formatFileSize } from "react-papaparse";
+import React, { useState, useEffect } from 'react';
+import { useCSVReader, formatFileSize } from 'react-papaparse';
 import {
   StyledUploadFile,
   StyledBtn,
@@ -9,57 +9,70 @@ import {
   FileName,
   ProgressBarHolder,
   RemoveBtn,
-} from "./UploadFile.styles";
-import UploadImg from "../../../_assets/uploadFile.svg";
-import Image from "next/image";
-// import Toast from "../Toast";
+} from './UploadFile.styles';
+import UploadImg from '../../../_assets/uploadFile.svg';
+import Image from 'next/image';
+import Toast from '../Toast';
 
 const UploadFile = ({
   bg,
   onChange,
-  disc = "File size must be less than 5MB in PDF, JPG, or PNG format.",
+  disc = 'File size must be less than 5MB in PDF, JPG, or PNG format.',
   title,
-  uploadTitle = "Upload Image",
+  uploadTitle = 'Upload Image',
   label = true,
   fileSize = 2,
-  accept = ".png , .jpg",
-  type = "img",
+  accept = 'image/jpeg, image/jpg, image/png',
+  type = 'img',
   csv,
   icon,
-  img = "",
-  id = "upload",
+  img = '',
+  id = 'upload',
   ...props
 }) => {
   const { CSVReader } = useCSVReader();
-  const [uploaded, setUploaded] = useState("");
+  const [uploaded, setUploaded] = useState('');
   function handelChange(e) {
     const file = e.target.files[0];
+    const acceptableExtensions = accept.split(',').map(ext => ext.trim());
+    if (!acceptableExtensions.includes(file.type)) {
+      const extensions = acceptableExtensions
+        .map(ext => ext.split('/')[1].toUpperCase())
+        .join(', ')
+        .replace(/,(?=[^,]*$)/, ' and');
+
+      Toast({
+        type: 'error',
+        message: `File Must be in ${extensions} format!`,
+      });
+      return;
+    }
     if (file) {
       const fileLength = file.size / (1024 * 1024);
       if (fileLength <= fileSize) {
         setUploaded(e.target.files[0]);
         onChange(e.target.files[0]);
       } else {
-        alert("file size exceeded");
+        Toast({
+          type: 'error',
+          message: 'File Size Exceeded!',
+        });
       }
     }
   }
   const getFileExtension = () => {
     if (uploaded) {
-      const fileNameParts = uploaded.name.split(".");
+      const fileNameParts = uploaded.name.split('.');
       if (fileNameParts.length > 1) {
         return fileNameParts[fileNameParts.length - 1];
       }
     }
-    return "";
+    return '';
   };
   const getFileName = () => {
     if (uploaded) {
-      const fileNameParts = uploaded.name.split(".");
-      let fileName =
-        fileNameParts.length > 1
-          ? fileNameParts.slice(0, -1).join(".")
-          : uploaded.name;
+      const fileNameParts = uploaded.name.split('.');
+      let fileName = fileNameParts.length > 1 ? fileNameParts.slice(0, -1).join('.') : uploaded.name;
 
       // Truncate the file name if it's greater than 10 characters
       if (fileName.length > 20) {
@@ -68,7 +81,7 @@ const UploadFile = ({
 
       return fileName;
     }
-    return "";
+    return '';
   };
 
   useEffect(() => {
@@ -80,7 +93,7 @@ const UploadFile = ({
   return (
     <StyledUploadFile $bg={bg}>
       {label && <span className="label-text">{title}</span>}
-      {type === "img" && (
+      {type === 'img' && (
         <label htmlFor={id} className="labelButton">
           {!uploaded && (
             <span className="upload-text">
@@ -89,21 +102,14 @@ const UploadFile = ({
               <span className="text">{disc}</span>
             </span>
           )}
-          {uploaded && typeof uploaded === "string" ? (
+          {uploaded && typeof uploaded === 'string' ? (
             <Image src={uploaded} alt="img" width={250} height={300} />
           ) : (
-            uploaded && (
-              <Image
-                src={URL.createObjectURL(uploaded)}
-                alt="img"
-                width={250}
-                height={300}
-              />
-            )
+            uploaded && <Image src={URL.createObjectURL(uploaded)} alt="img" width={250} height={300} />
           )}
         </label>
       )}
-      {type === "file" && (
+      {type === 'file' && (
         <label htmlFor={id} className="labelButton">
           <span className="upload-text">
             <Image className="icon-img" src={UploadImg} alt="icon" />
@@ -117,13 +123,8 @@ const UploadFile = ({
           </span>
         </label>
       )}
-      <input
-        type="file"
-        id={id}
-        accept={accept}
-        onChange={(e) => handelChange(e)}
-      />
-      {type === "csv" && (
+      <input type="file" id={id} accept={accept} onChange={e => handelChange(e)} />
+      {type === 'csv' && (
         <CSVReader
           // onUploadRejected={(file) => {
           //   Toast({
@@ -131,29 +132,21 @@ const UploadFile = ({
           //     message: file[0].errors[0].message || "invalid file formate",
           //   });
           // }}
-          onDragOver={(event) => {
+          onDragOver={event => {
             event.preventDefault();
           }}
-          onDragLeave={(event) => {
+          onDragLeave={event => {
             event.preventDefault();
           }}
-          {...props}
-        >
-          {({
-            getRootProps,
-            acceptedFile,
-            ProgressBar,
-            getRemoveFileProps,
-            Remove,
-          }) => (
+          {...props}>
+          {({ getRootProps, acceptedFile, ProgressBar, getRemoveFileProps, Remove }) => (
             <StyledBtn
               as="div"
               {...getRootProps()}
               css={`
                 padding: 38px;
               `}
-              className="labelButton"
-            >
+              className="labelButton">
               <div>
                 {acceptedFile ? (
                   <FileUploadBox>
@@ -166,21 +159,18 @@ const UploadFile = ({
                     </ProgressBarHolder>
                     <RemoveBtn
                       {...getRemoveFileProps()}
-                      onMouseOver={(event) => {
+                      onMouseOver={event => {
                         event.preventDefault();
                       }}
-                      onMouseOut={(event) => {
+                      onMouseOut={event => {
                         event.preventDefault();
-                      }}
-                    >
+                      }}>
                       <Remove />
                     </RemoveBtn>
                   </FileUploadBox>
                 ) : (
                   <div className="upload-text">
-                    {icon && (
-                      <Image className="icon-img" src={UploadImg} alt="icon" />
-                    )}
+                    {icon && <Image className="icon-img" src={UploadImg} alt="icon" />}
                     <span className="text-lg">{uploadTitle}</span>
                     <span className="text">{disc}</span>
                   </div>

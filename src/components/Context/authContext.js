@@ -35,18 +35,19 @@ export const AuthContextProvider = (props) => {
 
   const onLogout = async () => {
     try {
-      await userService.logout();
-    } finally {
-      setUser({});
+    
       clearCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE);
       clearCookie("is_email_verified");
       clearCookie("email");
-      await router.push("/");
+       router.push("/");
       Toast({ type: "success", message: "Logout Successfully" });
       setLoadingUser(false);
       setIsLoggedIn(false);
       setUser({});
-    }
+      await userService.logout();
+    } catch (error) {
+            console.error("Error during logout:", error);
+        }
   };
 
   const getPermissions = () => {
@@ -102,6 +103,7 @@ export const AuthContextProvider = (props) => {
         throw new Error(res?.message);
       }
       if (res?.type !== "Buyer") {
+        console.log( process.env.NEXT_PUBLIC_ADMIN_DOMAIN)
         setCookie(
           process.env.NEXT_PUBLIC_ADMIN_TOKEN_COOKIE,
           res?.token,
@@ -174,7 +176,7 @@ export const AuthContextProvider = (props) => {
       }
       if (cookie === process.env.NEXT_PUBLIC_ALLOWED_PAGES_COOKIE) {
         if (JSON.stringify(allowedPages) !== value && isLoggedIn) {
-          getPermissions();
+          // getPermissions();
         }
       }
     }, 1000);
