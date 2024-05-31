@@ -18,7 +18,7 @@ const Home = () => {
   const [categoriesLoading, setCategoriesBarLoading] = useState(false);
 
   const { products_data, products_loading } = productService.GetProducts(searchQuery);
-  // console.log(products_data);
+  console.log(products_data);
   useEffect(() => {
     async function getCategories() {
       setCategoriesBarLoading(true);

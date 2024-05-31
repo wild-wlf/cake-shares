@@ -9,8 +9,9 @@ import Image from "next/image";
 import { RiFilePaperFill } from "react-icons/ri";
 import Button from "../Button";
 import Link from "next/link";
+import { daysLeft, formatDateWithSuffix } from "@/helpers/common";
 
-const AdvanceSearchGrid = () => {
+const AdvanceSearchGrid = ({data}) => {
   const imagesArray = [
     {
       image: Property,
@@ -39,14 +40,14 @@ const AdvanceSearchGrid = () => {
   ];
   return (
     <SearchGridWrapper>
-      {imagesArray.map((data, index) => (
+      {data.map((data, index) => (
         <div className="CardWrapper" key={index}>
           <div className="card-div">
             <div className="card">
               <div className="image-div">
-                <Image src={data.image} alt="card-image" />
+                <Image src={data.media[0]} alt="card-image" width={180} height={180}/>
                 <div className="tagWrapper">
-                  <div className="tag">Properties</div>
+                  <div className="tag">{data?.investmentType?.name}</div>
                   <div className="icon-div">
                     <Image src={Heart} alt="Heart" className="heart" />
                   </div>
@@ -54,7 +55,7 @@ const AdvanceSearchGrid = () => {
               </div>
               <div className="decription">
                 <div className="title-div">
-                  <span>Egypt Gov. Property</span>
+                  <span>{data?.productName}</span>
                   <span>30%</span>
                 </div>
                 <div className="progress">
@@ -70,37 +71,36 @@ const AdvanceSearchGrid = () => {
               </div>
             </div>
             <div className="desc-div">
-              <h3>Egypt Gov. Property</h3>
-              <span>Washington DC, United States</span>
+              <h3>{data?.productName}</h3>
+              <span>{data?.address}</span>
               <br />
               <span>
-                <span className="deadline">Deadline:</span> (12th March, 2024 /
-                5 Days Left)
+                <span className="deadline">Deadline:</span> ({formatDateWithSuffix(data?.deadline)} / { daysLeft(data?.deadline)} Left ) 
               </span>
               <br />
-              <span>KYC (Level 3)</span>
+              <span>KYC (Level {data?.kycLevel})</span>
             </div>
           </div>
           <div className="values-div">
             <div>
               <span>Investment type</span>
-              <h3>Property</h3>
+              <h3>{data?.investmentType?.name }</h3>
             </div>
             <div>
               <span>Return (%)</span>
-              <h3>30%</h3>
+              <h3>0%</h3>
             </div>
             <div>
               <span>Funding Ratio</span>
-              <h3>56%</h3>
+              <h3>0%</h3>
             </div>
             <div>
               <span>Backers Limit</span>
-              <h3>20</h3>
+              <h3>{data?.maximumBackers}</h3>
             </div>
             <div>
               <span>Annual Cost (est.)</span>
-              <h3>$2,000</h3>
+              <h3>$0</h3>
             </div>
           </div>
           <div className="btnWrapper">
@@ -108,7 +108,7 @@ const AdvanceSearchGrid = () => {
               <RiFilePaperFill />
               Initiate Investment
             </Button>
-            <Link href={`/products/${data.id}`}>
+            <Link href={`/products/${data._id}`}>
               <Button rounded sm btntype="white-blue" className="button">
                 <RiFilePaperFill />
                 View Details

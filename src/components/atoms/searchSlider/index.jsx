@@ -9,7 +9,7 @@ import Property3 from "../../../_assets/property3.png";
 import Link from "next/link";
 import { CategoriesWrapper } from "../categories/categories.style";
 
-const index = () => {
+const index = ({data}) => {
   const images = [
     {
       image: Property,
@@ -86,14 +86,14 @@ const index = () => {
       },
     ],
   };
-
+console.log(data)
   return (
     <CategoriesWrapper image={arrowRight}>
       <div className="slider">
         <Slider {...settings}>
-          {images.map((data, index) => (
-            <Link href={`/products/${data.id}`} key={index}>
-              <Card Cardimage={data.image} />
+          {data.map((c_data, index) => (
+            <Link href={`/products/${c_data?._id}`} key={index}>
+              <Card Cardimage={c_data?.media[0]} c_data={c_data} />
             </Link>
           ))}
         </Slider>

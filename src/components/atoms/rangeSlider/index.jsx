@@ -1,31 +1,30 @@
-import React, { useState } from "react";
-import { styled } from "@mui/material/styles";
-import Slider, { SliderThumb } from "@mui/material/Slider";
-import PropTypes from "prop-types";
+import React from 'react';
+import { styled } from '@mui/material/styles';
+import Slider, { SliderThumb } from '@mui/material/Slider';
+import PropTypes from 'prop-types';
+import { useState } from 'react';
 
-const RangeSlider = () => {
-  const [value, setValue] = useState([]);
-
+const RangeSlider = ({ searchQuery, setSearchQuery }) => {
   const AirbnbSlider = styled(Slider)(({ theme }) => ({
-    color: "#408F8C",
-    height: "10px",
-    padding: "13px 0",
-    "& .MuiSlider-thumb": {
+    color: '#408F8C',
+    height: '10px',
+    padding: '13px 0',
+    '& .MuiSlider-thumb': {
       height: 26,
       width: 26,
-      backgroundColor: "#fff",
-      border: "2px solid currentColor",
-      "&:hover": {
-        boxShadow: "0 0 0 8px rgba(58, 133, 137, 0.16)",
+      backgroundColor: '#fff',
+      border: '2px solid currentColor',
+      '&:hover': {
+        boxShadow: '0 0 0 8px rgba(58, 133, 137, 0.16)',
       },
     },
-    "& .MuiSlider-track": {
-      height: "10px",
+    '& .MuiSlider-track': {
+      height: '10px',
     },
-    "& .MuiSlider-rail": {
-      color: "#F1F1F1",
-      opacity: theme.palette.mode === "dark" ? undefined : 1,
-      height: "10px",
+    '& .MuiSlider-rail': {
+      color: '#F1F1F1',
+      opacity: theme.palette.mode === 'dark' ? undefined : 1,
+      height: '10px',
     },
   }));
 
@@ -46,13 +45,19 @@ const RangeSlider = () => {
   };
   return (
     <AirbnbSlider
-      onChange={(e, newValue) => console.log(newValue)}
+      onChange={(e, _) => {
+        console.log(_)
+        // setSearchQuery({
+        //   minInvestment: _[0],
+        //   maxInvestment: _[1],
+        // });
+      }}
+      defaultValue={[25,200]}
+      // defaultValue={[searchQuery.minInvestment, searchQuery.maxInvestment]}
       slots={{ thumb: AirbnbThumbComponent }}
-      getAriaLabel={(index) =>
-        index === 0 ? "Minimum price" : "Maximum price"
-      }
+      getAriaLabel={index => (index === 0 ? 'Minimum price' : 'Maximum price')}
       min={0}
-      max={100}
+      max={200}
     />
   );
 };

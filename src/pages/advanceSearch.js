@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import SearchHeader from "../components/atoms/searchHeader";
-import SearchFilterFields from "../components/atoms/searchFilters";
-import SearchSlider from "../components/atoms/searchSlider";
-import AdvanceSearchGrid from "@/components/atoms/advanceSearchGrid";
+import React, { useState } from 'react';
+import SearchHeader from '../components/atoms/searchHeader';
+import SearchFilterFields from '../components/atoms/searchFilters';
+import SearchSlider from '../components/atoms/searchSlider';
+import AdvanceSearchGrid from '@/components/atoms/advanceSearchGrid';
 import productService from '@/services/productService';
 
 const AdvanceSearch = () => {
@@ -11,23 +11,34 @@ const AdvanceSearch = () => {
   const handleViewController = () => {
     setListView(!listview);
   };
-  const { products_data, products_loading } = productService.GetProducts();
+
+  let [searchQuery, setSearchQuery] = useState({
+    investmentType: '',
+    country: '',
+    kycLevel: '',
+    minInvestment: '',
+    maxInvestment: '',
+    minBackers: '',
+    maxDaysLeft: '',
+    minFundsRaised: '',
+    minAnnualCost: '',
+  });
+  // console.log('page', searchQuery);
+
+  const { products_data, products_loading } = productService.GetProducts(searchQuery);
   console.log(products_data);
   return (
     <>
-      <SearchHeader
-        handleViewController={handleViewController}
-        listview={listview}
-      />
-      <SearchFilterFields />
+      <SearchHeader handleViewController={handleViewController} listview={listview} />
+      <SearchFilterFields setSearchQuery={setSearchQuery} />
       {listview ? (
         <>
-          <SearchSlider />
-          <SearchSlider />
-          <SearchSlider />
+          <SearchSlider data={products_data?.popularProducts} />
+          <SearchSlider data={products_data?.popularProducts} />
+          <SearchSlider data={products_data?.popularProducts} />
         </>
       ) : (
-        <AdvanceSearchGrid />
+        <AdvanceSearchGrid data={products_data?.popularProducts} />
       )}
     </>
   );
