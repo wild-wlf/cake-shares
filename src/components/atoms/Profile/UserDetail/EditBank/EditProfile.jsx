@@ -47,7 +47,6 @@ const EditProfile = ({ personalInfo, onClose }) => {
   useEffect(() => {
     handelChange();
   }, []);
-  // console.log("personalInfo : ", personalInfo);
   useEffect(() => {
     const country = countries.find(
       (ele) => ele.value === personalInfo?.country
@@ -62,7 +61,6 @@ const EditProfile = ({ personalInfo, onClose }) => {
   }, []);
   async function handelSubmit(e) {
     setLoading(true);
-    // console.log(e);
     const obj = {
       type: "personal",
       info: {

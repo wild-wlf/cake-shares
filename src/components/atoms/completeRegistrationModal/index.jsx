@@ -59,7 +59,6 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
       fullName: e.name?.trim(),
       username: e.username?.trim(),
       country: e.select.value,
-      kycLevel: kycLevel - 1,
       bankInfo: {
         bankName: e.bank_bank_name?.trim(),
         iban: e.bank_iban_number?.trim(),
@@ -91,7 +90,6 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
       });
     }
   };
-  // console.log(image);
   return (
     <Wrapper>
       <Form form={form} onSubmit={handleSubmit}>

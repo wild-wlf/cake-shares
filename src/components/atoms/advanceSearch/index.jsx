@@ -1,35 +1,37 @@
-import React, { useState } from "react";
-import { Sort, Wrapper } from "./advanceSearch.style";
-import Button from "../Button";
-import { IoMdArrowDropdown } from "react-icons/io";
-import Field from "../Field";
-import Link from "next/link";
-import RangeSlider from "../rangeSlider";
-import { FaMinus } from "react-icons/fa";
-import Form, { useForm } from "@/components/molecules/Form";
-import Select from "../Select";
+import React, { useState } from 'react';
+import { Sort, Wrapper } from './advanceSearch.style';
+import Button from '../Button';
+import { IoMdArrowDropdown } from 'react-icons/io';
+import Field from '../Field';
+import Link from 'next/link';
+import RangeSlider from '../rangeSlider';
+import { FaMinus } from 'react-icons/fa';
+import Form, { useForm } from '@/components/molecules/Form';
+import Select from '../Select';
 
 const AdvanceSearch = () => {
   const [form] = useForm();
   const [selected, setSelected] = useState({
-    investment: "Select Type",
-    country: "Select Country",
-    kyc: "Select Level",
+    investment: 'Select Type',
+    country: 'Select Country',
+    kyc: 'Select Level',
   });
   const [searchQuery, setSearchQuery] = useState({
-    searchText: "",
+    searchText: '',
     popular: false,
     private: false,
+    minInvestment: 0,
+    maxInvestment: 100,
   });
-
+  console.log(searchQuery);
   const handlePopularChecked = () => {
-    setSearchQuery((prev) => ({
+    setSearchQuery(prev => ({
       ...prev,
       popular: !prev.popular,
     }));
   };
   const handlePrivateChecked = () => {
-    setSearchQuery((prev) => ({
+    setSearchQuery(prev => ({
       ...prev,
       private: !prev.private,
     }));
@@ -55,14 +57,13 @@ const AdvanceSearch = () => {
               rules={[
                 {
                   pattern: /^.{0,40}$/,
-                  message: "Maximum Character Length is 256",
+                  message: 'Maximum Character Length is 256',
                 },
-              ]}
-            >
+              ]}>
               <Select
                 options={[
-                  { label: "Properties", value: "properties" },
-                  { label: "Vehicles", value: "vehicles" },
+                  { label: 'Properties', value: 'properties' },
+                  { label: 'Vehicles', value: 'vehicles' },
                 ]}
               />
             </Form.Item>
@@ -78,14 +79,13 @@ const AdvanceSearch = () => {
               rules={[
                 {
                   pattern: /^.{0,40}$/,
-                  message: "Maximum Character Length is 256",
+                  message: 'Maximum Character Length is 256',
                 },
-              ]}
-            >
+              ]}>
               <Select
                 options={[
-                  { label: "United States", value: "united_states" },
-                  { label: "United Kingdom", value: "united_kingdom" },
+                  { label: 'United States', value: 'united_states' },
+                  { label: 'United Kingdom', value: 'united_kingdom' },
                 ]}
               />
             </Form.Item>
@@ -101,15 +101,14 @@ const AdvanceSearch = () => {
               rules={[
                 {
                   pattern: /^.{0,40}$/,
-                  message: "Maximum Character Length is 256",
+                  message: 'Maximum Character Length is 256',
                 },
-              ]}
-            >
+              ]}>
               <Select
                 options={[
-                  { label: "Level 1", value: "level_1" },
-                  { label: "Level 2", value: "level_2" },
-                  { label: "Level 3", value: "level_3" },
+                  { label: 'Level 1', value: 'level_1' },
+                  { label: 'Level 2', value: 'level_2' },
+                  { label: 'Level 3', value: 'level_3' },
                 ]}
               />
             </Form.Item>
@@ -120,12 +119,12 @@ const AdvanceSearch = () => {
           <div className="volume-div">
             <span className="heading">Investment Volume</span>
             <div className="inputWrapper">
-              <input type="text" placeholder="$0" />
+              <input type="text" placeholder="$0" readOnly value={`$${searchQuery.minInvestment}`} />
               <FaMinus size={30} />
-              <input type="text" placeholder="$0" />
+              <input type="text" placeholder="$0" readOnly value={`$${searchQuery.maxInvestment}`} />
             </div>
           </div>
-          <RangeSlider />
+          <RangeSlider searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         </div>
 
         <div className="minvalues">
@@ -165,7 +164,7 @@ const AdvanceSearch = () => {
         </div>
 
         <div className="btnwrapper">
-          <Link href={{ pathname: "/advanceSearch" }}>
+          <Link href={{ pathname: '/advanceSearch' }}>
             <Button rounded md btntype="primary" width="170">
               Search
             </Button>

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ProductDescriptionWrapper, Wrapper } from "./productDescription.style";
+import React from "react";
+import { ProductDescriptionWrapper, } from "./productDescription.style";
 import Profilepic from "../../../_assets/userProfile.png";
 import Image from "next/image";
 import { TbExternalLink } from "react-icons/tb";
@@ -16,15 +16,15 @@ const ProductDescription = ({ data }) => {
           <div className="amountdiv">
             <div>
               <span>Min Investment (USD)</span>
-              <strong className="amount">$ {data?.minimumInvestment}</strong>
+              <strong className="amount">$ {data?.minimumInvestment?.toLocaleString('en-US')}</strong>
             </div>
             <div>
               <span>Asset Value (USD)</span>
-              <strong className="amount">$ {data?.assetValue}</strong>
+              <strong className="amount">$ {data?.assetValue?.toLocaleString('en-US')}</strong>
             </div>
           </div>
           <div className="total">
-            Total Value Raised (USD) <span> $ 50,000</span>
+            Total Value Raised (USD) <span> $ 0.00</span>
           </div>
         </div>
         <div className="seller">

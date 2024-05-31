@@ -15,6 +15,7 @@ export const setCookie = (name, value, days, domain) => {
     expires = `; expires=${date.toUTCString()}`;
   }
   const domainString = domain ? `; domain=${domain}` : "";
+  console.log(domainString)
   document.cookie = `${name}=${value || ""}${expires}; path=/${domainString}`;
 
   return true;
@@ -38,6 +39,10 @@ export const clearCookie = (name) => {
     console.warn("clearCookie function called in a non-browser environment");
   }
   return true;
+};
+
+export const formatNumber = (number) => {
+  return new Intl.NumberFormat().format(number);
 };
 
 export const convertPdfBase64 = (file) =>
@@ -668,7 +673,6 @@ export const checkInValidImage = async (url) => {
 };
 
 export const convertToFormData = (obj) => {
-  console.log(obj);
   const formData = new FormData();
 
   Object.keys(obj).forEach((key) => {

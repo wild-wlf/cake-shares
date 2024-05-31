@@ -14,19 +14,48 @@ import InitiateInvestmentModal from "../InitiateInvestmentModal";
 import InvestmentSuccesModal from "../InvestmentSuccesModal";
 import ProductDescription from "../productDescription";
 import { daysLeft, formatDateWithSuffix } from "@/helpers/common";
+import { useContextHook } from "use-context-hook";
+import { AuthContext } from "@/components/Context/authContext";
+import HandleLoginModal from "@/components/molecules/HandleLoginModal";
 
 const ProductDetail = ({ data }) => {
+  const { isLoggedIn } = useContextHook(AuthContext, (v) => ({
+    isLoggedIn: v.isLoggedIn,
+  }));
   const router = useRouter();
   const [modal, setModal] = useState(false);
+  const [handleLoginModal, setHandleLoginModal] = useState(false);
   const [successmodal, setSuccessModal] = useState(false);
+  const [ownershipPercentage, setOwnershipPercentage] = useState();
+
+  const handleInitiateInvestment = () => {
+    if (isLoggedIn) {
+      setModal(true);
+    } else {
+      setHandleLoginModal(true);
+    }
+  };
   return (
     <>
+      <CenterModal
+        open={handleLoginModal}
+        setOpen={setHandleLoginModal}
+        iscloseAble={false}
+        title="Please Login to Perform this Operation!"
+        width="689"
+      >
+        <HandleLoginModal setOpen={setHandleLoginModal} />
+      </CenterModal>
       <CenterModal
         open={modal}
         setOpen={setModal}
         title="Initiate Investment"
-        width="543">
+        width="543"
+      >
         <InitiateInvestmentModal
+          productId={data?._id}
+          assetValue={data?.assetValue}
+          setOwnershipPercentage={setOwnershipPercentage}
           handleCloseModal={() => {
             setModal(false);
             setSuccessModal(true);
@@ -37,8 +66,9 @@ const ProductDetail = ({ data }) => {
         open={successmodal}
         setOpen={setSuccessModal}
         title={<Image src={ConfirmIcon} alt="success" />}
-        width="543">
-        <InvestmentSuccesModal />
+        width="543"
+      >
+        <InvestmentSuccesModal ownershipPercentage={ownershipPercentage} />
       </CenterModal>
 
       <ProductDetailWrapper>
@@ -50,7 +80,8 @@ const ProductDetail = ({ data }) => {
             className="button"
             onClick={() => {
               router.back();
-            }}>
+            }}
+          >
             <IoIosArrowBack />
             Go Back
           </Button>
@@ -59,7 +90,8 @@ const ProductDetail = ({ data }) => {
             sm
             btntype="primary"
             className="button"
-            onClick={() => setModal(true)}>
+            onClick={handleInitiateInvestment}
+          >
             Initiate Investment
             <RiFilePaperFill />
           </Button>
@@ -88,15 +120,15 @@ const ProductDetail = ({ data }) => {
             <div className="headings">
               <div>
                 <span>Investment type</span>
-                <h3>{data?.investmentType}</h3>
+                <h3>{data?.investmentType?.name}</h3>
               </div>
               <div>
                 <span>Return (%)</span>
-                <h3>30%</h3>
+                <h3>00%</h3>
               </div>
               <div>
                 <span>Funding Ratio</span>
-                <h3>56%</h3>
+                <h3>0%</h3>
               </div>
               <div>
                 <span>Backers Limit</span>
@@ -104,7 +136,7 @@ const ProductDetail = ({ data }) => {
               </div>
               <div>
                 <span>Annual Cost (est.)</span>
-                <h3>$2,000</h3>
+                <h3>$0.00</h3>
               </div>
             </div>
           </div>

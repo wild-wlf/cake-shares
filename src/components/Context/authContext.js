@@ -35,18 +35,19 @@ export const AuthContextProvider = (props) => {
 
   const onLogout = async () => {
     try {
-      await userService.logout();
-    } finally {
-      setUser({});
+    
       clearCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE);
       clearCookie("is_email_verified");
       clearCookie("email");
-      await router.push("/");
+       router.push("/");
       Toast({ type: "success", message: "Logout Successfully" });
       setLoadingUser(false);
       setIsLoggedIn(false);
       setUser({});
-    }
+      await userService.logout();
+    } catch (error) {
+            console.error("Error during logout:", error);
+        }
   };
 
   const getPermissions = () => {
@@ -101,19 +102,29 @@ export const AuthContextProvider = (props) => {
       if (!res?.token) {
         throw new Error(res?.message);
       }
-      if (res?.type !== "Buyer" && res?.isVerified) {
+      if (res?.type !== "Buyer") {
+        console.log( process.env.NEXT_PUBLIC_ADMIN_DOMAIN)
         setCookie(
           process.env.NEXT_PUBLIC_ADMIN_TOKEN_COOKIE,
           res?.token,
           null,
           process.env.NEXT_PUBLIC_ADMIN_DOMAIN
         );
+        setCookie(
+          process.env.NEXT_PUBLIC_USER_TYPE_COOKIE,
+          JSON.stringify({
+            type: res?.type,
+            isIndividualSeller: res?.isIndividualSeller,
+          }),
+          null,
+          process.env.NEXT_PUBLIC_ADMIN_DOMAIN
+        );
         window.open(`${process.env.NEXT_PUBLIC_ADMIN_URL}`, "_blank");
       }
 
-      if (type === "Buyer") {
+      if (res.type === "Buyer") {
         setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
-        router.push("/");
+        // router.push("/");
         setIsLoggedIn(true);
         Toast({ type: "success", message: "Logged In Successfully!" });
         setLoadingUser(false);
@@ -160,12 +171,12 @@ export const AuthContextProvider = (props) => {
     listenCookieChange((value, cookie) => {
       if (cookie === process.env.NEXT_PUBLIC_TOKEN_COOKIE) {
         if (!value) {
-          // onLogout();
+          onLogout();
         }
       }
       if (cookie === process.env.NEXT_PUBLIC_ALLOWED_PAGES_COOKIE) {
         if (JSON.stringify(allowedPages) !== value && isLoggedIn) {
-          getPermissions();
+          // getPermissions();
         }
       }
     }, 1000);
