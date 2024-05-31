@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Slider, { SliderThumb } from "@mui/material/Slider";
 import PropTypes from "prop-types";
 
 const RangeSlider = () => {
+  const [value, setValue] = useState();
+
   const AirbnbSlider = styled(Slider)(({ theme }) => ({
     color: "#408F8C",
     height: "10px",
@@ -42,13 +44,17 @@ const RangeSlider = () => {
   AirbnbThumbComponent.propTypes = {
     children: PropTypes.node,
   };
+  console.log(value);
   return (
     <AirbnbSlider
+      onChange={(e, newValue) => setValue(newValue)}
       slots={{ thumb: AirbnbThumbComponent }}
       getAriaLabel={(index) =>
         index === 0 ? "Minimum price" : "Maximum price"
       }
-      defaultValue={[20, 40]}
+      defaultValue={value}
+      min={2000}
+      max={10000}
     />
   );
 };
