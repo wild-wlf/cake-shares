@@ -27,7 +27,6 @@ const Profile = () => {
   }));
 
   const { assets_data, assets_loading } = productService.GetMyAssets(searchQuery, fetch);
-  console.log(assets_data);
 
   return (
     <StyledProfile>

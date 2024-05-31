@@ -45,7 +45,13 @@ const ProductDetail = ({ data, SellerData, setProductData }) => {
       setInfoModalText(
         `You currently do not have sufficient wallet balance to perform this action. The minimum amount required to invest in this product is $${
           data?.minimumInvestment ?? 0
-        }, while your current account balance is $${user?.wallet}. Please top up your account.`,
+        }, while your current account balance is $${user?.wallet || 0}. Please top up your account.`,
+      );
+      setHandleLoginModal(true);
+    } else if (user?.isKycRequested) {
+      setInfoModalHeadingText('KYC Requested!');
+      setInfoModalText(
+        'Your KYC request is currently under review and has not yet been approved. We appreciate your patience and will notify you as soon as the process is complete. Thank you for your understanding.',
       );
       setHandleLoginModal(true);
     } else if (user.kycLevel >= data.kycLevel) {
@@ -144,7 +150,7 @@ const ProductDetail = ({ data, SellerData, setProductData }) => {
               </div>
               <div>
                 <span>Return (%)</span>
-                <h3>00%</h3>
+                <h3>0%</h3>
               </div>
               <div>
                 <span>Funding Ratio</span>

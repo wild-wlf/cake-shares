@@ -21,6 +21,7 @@ const InitiateInvestmentModal = ({
     user: v.user,
     setPermission: v.setPermission,
   }));
+  console.log(user);
   const [isLoading, setIsLoading] = useState(false);
   const [shareAmount, setShareAmount] = useState(0);
   const [form] = useForm();
@@ -64,7 +65,7 @@ const InitiateInvestmentModal = ({
       </div>
       <Form form={form} onSubmit={onSubmit}>
         <div className="current-wallet">
-          Current Wallet Balance: <span>${user?.wallet?.toLocaleString() || 0}</span>
+          Current Wallet Balance: <span>${formatNumber(user?.wallet) || 0}</span>
         </div>
         <div className="input-div">
           <Form.Item
@@ -87,13 +88,15 @@ const InitiateInvestmentModal = ({
               },
               {
                 transform: value => parseFloat(value) > parseFloat(user?.wallet),
-
-                // },
                 message: 'You cannot exceed your Wallet Amount!.',
               },
               {
                 min: minInvestValue,
-                message: `Maximum Investment Amount is $${minInvestValue}`,
+                message: `Minimum Investment Amount is $${formatNumber(minInvestValue)}`,
+              },
+              {
+                max: assetValue,
+                message: `Maximum Investment Amount is $${formatNumber(assetValue)}`,
               },
             ]}>
             <Field />

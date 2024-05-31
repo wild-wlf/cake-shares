@@ -26,7 +26,6 @@ import EditProfile from './EditBank/EditProfile';
 import { countries } from '@/components/Constant';
 
 const UserDetail = ({ userData, assetsData, searchQuery, setSearchQuery }) => {
-  console.log(assetsData);
   const fromatDate = value => {
     const date = new Date(value);
     const day = String(date.getDate()).padStart(2, '0');
@@ -60,10 +59,10 @@ const UserDetail = ({ userData, assetsData, searchQuery, setSearchQuery }) => {
   const { report_rows, totalItems } = useMemo(
     () => ({
       report_rows: assetsData?.items?.map(report => [
-        report.product?.productName,
-        report.product?.investmentType?.name,
-        report.share || 0,
-        report.investmentAmount,
+        report?.productName,
+        report?.category?.name,
+        report?.totalShares ?? 0,
+        report?.totalAmount ?? 0,
 
         actionBtns(),
       ]),
