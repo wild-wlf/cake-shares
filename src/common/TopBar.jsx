@@ -334,7 +334,7 @@ const TopBar = () => {
             <>
               <div
                 className="wallet"
-                onClick={() => window.open('https://cake-admin.webevis.com/?type=buyer', '_blank')}>
+                onClick={() => {}}>
                 <FaWallet />
                 <span>My Wallet</span>
               </div>
