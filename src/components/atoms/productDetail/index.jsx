@@ -37,17 +37,14 @@ const ProductDetail = ({ data, SellerData }) => {
       setHandleLoginModal(true);
 
     }
-    else if (user.kycLevel == data.kycLevel) {
+    else if (user.kycLevel >= data.kycLevel) {
       setModal(true);
     }
     
     else {
-      console.log("first")
       setUpgradeKycLevel(true);
     }
   };
-  // console.log(user);
-  console.log(data);
     
   return (
     <>
