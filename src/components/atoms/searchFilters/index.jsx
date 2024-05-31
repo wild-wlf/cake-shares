@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { SearchFiltersWrapper } from './searchFilters.style';
 import Field from '../Field';
 import Button from '../Button';
@@ -6,20 +6,16 @@ import { FaMinus } from 'react-icons/fa6';
 import Form, { useForm } from '@/components/molecules/Form';
 import Select from '../Select';
 import { countries } from '@/components/Constant';
+import { SearchContext } from '@/components/Context/SearchContext';
 
-const SearchFilters = ({ setSearchQuery }) => {
+const SearchFilters = () => {
   const [arr, setArr] = useState(countries);
   const [form] = useForm();
-  const [selected, setSelected] = useState({
-    investment: 'Select Type',
-    country: 'Select Country',
-    kyc: 'Select Level',
+  const { handleSearchQuery } = useContext(SearchContext);
+  const [investmentVolume, setInvestmentVolume] = useState({
+    min: '',
+    max: '',
   });
-  // const [searchQuery, setSearchQuery] = useState({
-  //   searchText: '',
-  //   popular: false,
-  //   private: false,
-  // });
   const handleSubmit = e => {
     let obj = {
       investmentType: e?.investment_type?.value,
@@ -29,11 +25,10 @@ const SearchFilters = ({ setSearchQuery }) => {
       maxDaysLeft: e?.max_days_left,
       minFundsRaised: e?.min_fund_raised,
       minAnnualCost: e?.min_annual_cost,
+      minInvestment: investmentVolume?.min,
+      maxInvestment: investmentVolume?.max,
     };
-    setSearchQuery(prev => ({
-      ...prev,
-      ...obj,
-    }));
+    handleSearchQuery(obj);
   };
   return (
     <Form form={form} onSubmit={handleSubmit}>
@@ -107,9 +102,9 @@ const SearchFilters = ({ setSearchQuery }) => {
               type="text"
               placeholder="$0"
               onChange={e => {
-                setSearchQuery(prev => ({
+                setInvestmentVolume(prev => ({
                   ...prev,
-                  minInvestment: e.target.value,
+                  min: e.target.value,
                 }));
               }}
             />
@@ -118,29 +113,13 @@ const SearchFilters = ({ setSearchQuery }) => {
               type="text"
               placeholder="$0"
               onChange={e => {
-                setSearchQuery(prev => ({
+                setInvestmentVolume(prev => ({
                   ...prev,
-                  maxInvestment: e.target.value,
+                  max: e.target.value,
                 }));
               }}
             />
           </div>
-          {/* <Form.Item
-            type="text"
-            label="Investment Volume"
-            name="investment_volume"
-            sm
-            rounded
-            placeholder="$0"
-            rules={[
-              {
-                pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
-              },
-            ]}
-          >
-            <Field />
-          </Form.Item> */}
         </div>
         <div className="dropdown-div">
           <Form.Item
@@ -150,15 +129,6 @@ const SearchFilters = ({ setSearchQuery }) => {
             sm
             rounded
             placeholder="0%"
-            onChange={e => {
-              setSearchQuery(prev => ({
-                ...prev,
-                minAnnualCost: e.target.value,
-              }));
-              form.setFieldsValue({
-                min_annual_cost: e.target.value,
-              });
-            }}
             rules={[
               {
                 pattern: /^.{0,40}$/,

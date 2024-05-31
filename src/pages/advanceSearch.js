@@ -11,22 +11,10 @@ const AdvanceSearch = () => {
     setListView(!listview);
   };
 
-  let [searchQuery, setSearchQuery] = useState({
-    investmentType: '',
-    country: '',
-    kycLevel: '',
-    minInvestment: '',
-    maxInvestment: '',
-    minBackers: '',
-    maxDaysLeft: '',
-    minFundsRaised: '',
-    minAnnualCost: '',
-  });
-  console.log('page', searchQuery);
   return (
     <>
       <SearchHeader handleViewController={handleViewController} listview={listview} />
-      <SearchFilterFields setSearchQuery={setSearchQuery} />
+      <SearchFilterFields />
       {listview ? (
         <>
           <SearchSlider />

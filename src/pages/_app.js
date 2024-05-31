@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from "react";
-import "slick-carousel/slick/slick.css";
-import "react-toastify/dist/ReactToastify.min.css";
-import "slick-carousel/slick/slick-theme.css";
-import styled, { createGlobalStyle } from "styled-components";
-import Variables from "../styles/variables.css";
-import { HelperClasses, Styling } from "../styles/GlobalStyles.styles";
-import { Wrapper } from "@/styles/helpers.styles";
-import { KycContextProvider } from "@/components/Context/KycContext";
-import TopBar from "../common/TopBar";
-import { UserContextProvider } from "@/components/Context/UserContext";
-import { ToastContainer } from "react-toastify";
-import { AuthContextProvider } from "@/components/Context/authContext";
-import Layout from "@/components/atoms/Layout";
-import { SocketContextProvider } from "@/components/Context/socketContext";
-import { useRouter } from "next/router";
-import Loader from "@/components/atoms/Loader";
+import React, { useState, useEffect } from 'react';
+import 'slick-carousel/slick/slick.css';
+import 'react-toastify/dist/ReactToastify.min.css';
+import 'slick-carousel/slick/slick-theme.css';
+import styled, { createGlobalStyle } from 'styled-components';
+import Variables from '../styles/variables.css';
+import { HelperClasses, Styling } from '../styles/GlobalStyles.styles';
+import { Wrapper } from '@/styles/helpers.styles';
+import { KycContextProvider } from '@/components/Context/KycContext';
+import TopBar from '../common/TopBar';
+import { UserContextProvider } from '@/components/Context/UserContext';
+import { ToastContainer } from 'react-toastify';
+import { AuthContextProvider } from '@/components/Context/authContext';
+import Layout from '@/components/atoms/Layout';
+import { SocketContextProvider } from '@/components/Context/socketContext';
+import { useRouter } from 'next/router';
+import Loader from '@/components/atoms/Loader';
+import { SearchContextProvider } from '@/components/Context/SearchContext';
 
 export const StyledToastContainer = styled(ToastContainer)`
   z-index: 99999;
@@ -49,14 +50,14 @@ export default function App({ Component, pageProps }) {
 `;
 
   useEffect(() => {
-    router.events.on("routeChangeError", () => setLoading(false));
-    router.events.on("routeChangeStart", () => setLoading(true));
-    router.events.on("routeChangeComplete", () => setLoading(false));
+    router.events.on('routeChangeError', () => setLoading(false));
+    router.events.on('routeChangeStart', () => setLoading(true));
+    router.events.on('routeChangeComplete', () => setLoading(false));
 
     return () => {
-      router.events.off("routeChangeError", () => setLoading(false));
-      router.events.off("routeChangeStart", () => setLoading(true));
-      router.events.off("routeChangeComplete", () => setLoading(false));
+      router.events.off('routeChangeError', () => setLoading(false));
+      router.events.off('routeChangeStart', () => setLoading(true));
+      router.events.off('routeChangeComplete', () => setLoading(false));
     };
   }, [router.events]);
 
@@ -66,11 +67,13 @@ export default function App({ Component, pageProps }) {
         <SocketContextProvider>
           <UserContextProvider>
             <KycContextProvider>
-              <GlobalStyles />
-              {loading && <Loader />}
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
+              <SearchContextProvider>
+                <GlobalStyles />
+                {loading && <Loader />}
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </SearchContextProvider>
             </KycContextProvider>
           </UserContextProvider>
         </SocketContextProvider>
