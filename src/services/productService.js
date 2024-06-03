@@ -127,5 +127,32 @@ const productService = {
     const { message } = await res.json();
     throw new Error(message ?? 'Something went wrong');
   },
+
+  async getSearchProducts({
+    page = 1,
+    itemsPerPage = 10,
+    searchText = '',
+    investmentType = '',
+    kycLevel = '',
+    minInvestment = '',
+    maxInvestment = '',
+    minBackers = '',
+    minFundsRaised = '',
+    minAnnualCost = '',
+    maxDaysLeft = '',
+    country = '',
+  }) {
+    let res = await Fetch.get(
+      `${this._url}/search-products?page=${page}&itemsPerPage=${itemsPerPage}&searchText=${searchText}&investmentType=${investmentType}&kycLevel=${kycLevel}&minInvestmentVolume=${minInvestment}&maxInvestmentVolume=${maxInvestment}&valueRaised=${minFundsRaised}&minimumBackers=${minBackers}&country=${country}&daysLeft=${maxDaysLeft}`,
+    );
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return {
+        items: res.items,
+      };
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? 'Something went wrong');
+  },
 };
 export default productService;
