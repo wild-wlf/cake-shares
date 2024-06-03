@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { Fetch } from "../helpers/fetchWrapper";
-import { useCancellablePromise } from "../helpers/promiseHandler";
+import { useEffect, useState } from 'react';
+import { Fetch } from '../helpers/fetchWrapper';
+import { useCancellablePromise } from '../helpers/promiseHandler';
 
 const STATUS = {
-  LOADING: "loading",
-  SUCCESS: "success",
-  ERROR: "error",
+  LOADING: 'loading',
+  SUCCESS: 'success',
+  ERROR: 'error',
 };
 const productService = {
   _url: `${process.env.NEXT_PUBLIC_PRODUCT_URL}`,
@@ -46,7 +46,7 @@ const productService = {
     const [status, setStatus] = useState(STATUS.LOADING);
     useEffect(() => {
       setStatus(STATUS.LOADING);
-      cancellablePromise(this.getAssets(searchQuery))
+      cancellablePromise(this.getUserAssets(searchQuery))
         .then(res => {
           setAssets(() => res);
           setStatus(STATUS.SUCCESS);
@@ -108,6 +108,43 @@ const productService = {
   },
   async getAllCategories() {
     let res = await Fetch.get(`${this._url}/get-all-categories`);
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return {
+        items: res.items,
+      };
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? 'Something went wrong');
+  },
+
+  async getUserAssets() {
+    let res = await Fetch.get(`${this._url}/get-all-assets`);
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return res;
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? 'Something went wrong');
+  },
+
+  async getSearchProducts({
+    page = 1,
+    itemsPerPage = 10,
+    searchText = '',
+    investmentType = '',
+    kycLevel = '',
+    minInvestment = '',
+    maxInvestment = '',
+    minBackers = '',
+    minFundsRaised = '',
+    minAnnualCost = '',
+    maxDaysLeft = '',
+    country = '',
+  }) {
+    let res = await Fetch.get(
+      `${this._url}/search-products?page=${page}&itemsPerPage=${itemsPerPage}&searchText=${searchText}&investmentType=${investmentType}&kycLevel=${kycLevel}&minInvestmentVolume=${minInvestment}&maxInvestmentVolume=${maxInvestment}&valueRaised=${minFundsRaised}&minimumBackers=${minBackers}&country=${country}&daysLeft=${maxDaysLeft}`,
+    );
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
       return {

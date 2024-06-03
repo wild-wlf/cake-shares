@@ -24,6 +24,7 @@ const UserInfo = ({
     categories: 'My Investments in Categories:',
   },
   userData,
+  categoriesData,
 }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
   const { user, setPermission } = useContextHook(AuthContext, v => ({
@@ -86,18 +87,14 @@ const UserInfo = ({
         <div className="textWrapper addbefore">
           <span className="categoriesText">{type?.categories}</span>
           <ul className="categoriesWrapper">
-            <li className="categoriesList">
-              <Image src={popular} alt="popular" />
-              Popular
-            </li>
-            <li className="categoriesList">
-              <Image src={PropertyIcon} alt="PropertyIcon" />
-              Properties
-            </li>
-            <li className="categoriesList">
-              <Image src={VentureIcon} alt="VentureIcon" />
-              Ventures
-            </li>
+            {categoriesData &&
+              categoriesData.length > 0 &&
+              categoriesData.map((ele, index) => (
+                <li key={index} className="categoriesList">
+                  <Image src={ele?.icon || popular} alt="popular" />
+                  {ele?.name}
+                </li>
+              ))}
           </ul>
         </div>
       </div>
@@ -115,8 +112,7 @@ const UserInfo = ({
                   <span className="discreption" onClick={checkKycLevel}>
                     Upgrade KYC
                   </span>
-                )
-                }
+                )}
               </>
             )}
           </div>

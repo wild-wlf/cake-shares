@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   span {
@@ -34,15 +34,13 @@ export const Wrapper = styled.div`
       width: 100%;
     }
   }
-
-  .minvalues {
+  .min-values-div {
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    div {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+    width: 100%;
+    .minvalues {
+      /* width: 25%; */
     }
   }
 
@@ -80,12 +78,11 @@ export const Wrapper = styled.div`
       display: flex;
       flex-direction: column;
     }
-    .minvalues {
+    .min-values-div {
       padding: 16px 0px;
       flex-wrap: wrap;
-      div {
+      .minvalues {
         width: 48%;
-        gap: 10px;
       }
     }
   }
