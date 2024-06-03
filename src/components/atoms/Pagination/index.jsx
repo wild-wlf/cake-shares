@@ -1,19 +1,13 @@
 /* eslint-disable radix */
-import React, { useEffect, useState } from "react";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { PaginationList, PaginationButton } from "./Pagination.styles";
+import React, { useEffect, useState } from 'react';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { PaginationList, PaginationButton } from './Pagination.styles';
 // import Tooltip from '../../atoms/Tooltip';
-import UsePagination from "../../atoms/UsePagination";
+import UsePagination from '../../atoms/UsePagination';
+import Input from '@/components/molecules/Input';
 
 function Pagination(props) {
-  const {
-    onPageChange,
-    totalCount,
-    siblingCount = 1,
-    currentPage,
-    pageSize,
-    customCss,
-  } = props;
+  const { onPageChange, totalCount, siblingCount = 1, currentPage, pageSize, customCss } = props;
 
   const [inputCurrentPage, setInputCurrentPage] = useState(1);
   const [error, setError] = useState(false);
@@ -37,67 +31,53 @@ function Pagination(props) {
     setInputCurrentPage(currentPage - 1);
   };
 
-  const onKeyPress = (event) => {
+  const onKeyPress = event => {
     const { key } = event;
-    if (
-      key === "Enter" &&
-      inputCurrentPage > 0 &&
-      inputCurrentPage <= Math.ceil(totalCount / pageSize)
-    ) {
+    if (key === 'Enter' && inputCurrentPage > 0 && inputCurrentPage <= Math.ceil(totalCount / pageSize)) {
       setInputCurrentPage(inputCurrentPage);
       onPageChange(inputCurrentPage);
     }
   };
-  const lastPage = paginationRange
-    ? paginationRange[paginationRange?.length - 1]
-    : 1;
+  const lastPage = paginationRange ? paginationRange[paginationRange?.length - 1] : 1;
   return (
     <PaginationList css={customCss}>
-      <PaginationButton
-        type="button"
-        onClick={onPrevious}
-        disabled={currentPage <= 1}
-        size={28}
-      >
+      <PaginationButton type="button" onClick={onPrevious} disabled={currentPage <= 1} size={28}>
         <IoIosArrowBack className="icon" />
       </PaginationButton>
-      {/* <Tooltip title={error ? 'Invalid Page Number' : 'Enter Page Number'} type={error ? 'error' : 'dark'} width={150}>
-        <Input
-          type="number"
-          className="page-input"
-          value={inputCurrentPage}
-          onKeyPress={onKeyPress}
-          onChange={event => {
-            if (!(+event.target.value > 0 && +event.target.value <= Math.ceil(totalCount / pageSize))) {
-              setError(true);
-            } else {
-              setError(false);
-            }
-            setInputCurrentPage(parseInt(event.target.value));
-          }}
-          sm
-          css={`
-            height: 35px !important;
-            width: 35px !important;
-            padding: 5px !important;
-            text-align: center;
-            background: none;
-            ${error && 'border-color: var(--danger) !important'}
-          `}
-        />
-      </Tooltip> */}
-      <PaginationButton
-        type="button"
-        onClick={onNext}
-        disabled={currentPage >= lastPage}
-      >
+      {/* <Tooltip title={error ? 'Invalid Page Number' : 'Enter Page Number'} type={error ? 'error' : 'dark'} width={150}> */}
+      <Input
+        type="number"
+        className="page-input"
+        value={inputCurrentPage}
+        onKeyPress={onKeyPress}
+        disabled={lastPage === 1}
+        onChange={event => {
+          if (!(+event.target.value > 0 && +event.target.value <= Math.ceil(totalCount / pageSize))) {
+            setError(true);
+          } else {
+            setError(false);
+          }
+          onPageChange(event.target.value);
+          setInputCurrentPage(parseInt(event.target.value));
+        }}
+        sm
+        css={`
+          height: 35px !important;
+          width: 35px !important;
+          padding: 5px !important;
+          text-align: center;
+          background: none;
+          ${error && 'border-color: var(--danger) !important'}
+        `}
+      />
+      {/* </Tooltip> */}
+      <PaginationButton type="button" onClick={onNext} disabled={currentPage >= lastPage}>
         <IoIosArrowForward className="icon" />
       </PaginationButton>
       <span className="flex">
         <span className="text">out of</span>
         {paginationRange?.map(
-          (pageNumber, index, arr) =>
-            arr.length - 1 === index && <span key={index}>{pageNumber}</span>
+          (pageNumber, index, arr) => arr.length - 1 === index && <span key={index}>{pageNumber}</span>,
         )}
       </span>
     </PaginationList>

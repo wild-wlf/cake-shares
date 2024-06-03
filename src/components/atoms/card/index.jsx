@@ -23,7 +23,7 @@ const Card = ({ Cardimage, c_data }) => {
             <span>
               {c_data?.currentBackers == 0
                 ? "0%"
-                : (c_data?.currentBackers / c_data?.maximumBackers) * 100}
+                : ((c_data?.currentBackers / c_data?.maximumBackers) * 100).toFixed(2)}
             </span>
           </div>
 
@@ -32,7 +32,7 @@ const Card = ({ Cardimage, c_data }) => {
               completed={
                 c_data?.currentBackers === 0
                   ? 0
-                  : (c_data?.currentBackers / c_data?.maximumBackers) * 100
+                  : ((c_data?.currentBackers / c_data?.maximumBackers) * 100).toFixed(2)
               }
               bgColor="#408F8C"
               height="5px"

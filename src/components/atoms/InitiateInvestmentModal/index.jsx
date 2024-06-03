@@ -1,24 +1,27 @@
-import React, { useState } from "react";
-import Field from "../Field";
-import Form, { useForm } from "@/components/molecules/Form";
-import Button from "../Button";
-import { InvestmentModalWrapper } from "./InitiateInvestmentModal.style";
-import { useContextHook } from "use-context-hook";
-import { AuthContext } from "@/components/Context/authContext";
-import { formatNumber } from "@/helpers/common";
-import walletService from "@/services/walletService";
-import Toast from "@/components/molecules/Toast";
+import React, { useState } from 'react';
+import Field from '../Field';
+import Form, { useForm } from '@/components/molecules/Form';
+import Button from '../Button';
+import { InvestmentModalWrapper } from './InitiateInvestmentModal.style';
+import { useContextHook } from 'use-context-hook';
+import { AuthContext } from '@/components/Context/authContext';
+import { formatNumber } from '@/helpers/common';
+import walletService from '@/services/walletService';
+import Toast from '@/components/molecules/Toast';
 
 const InitiateInvestmentModal = ({
   productId,
   assetValue,
+  minInvestValue,
   setOwnershipPercentage,
   handleCloseModal,
+  setProductData,
 }) => {
-  const { user, setPermission } = useContextHook(AuthContext, (v) => ({
+  const { user, setPermission } = useContextHook(AuthContext, v => ({
     user: v.user,
     setPermission: v.setPermission,
   }));
+  console.log(user);
   const [isLoading, setIsLoading] = useState(false);
   const [shareAmount, setShareAmount] = useState(0);
   const [form] = useForm();
@@ -33,13 +36,21 @@ const InitiateInvestmentModal = ({
         productId,
         boughtAmount,
       };
-      await walletService.initiateInvestment(payload);
+      const { raisedValue } = await walletService.initiateInvestment(payload);
+      setProductData(prev => ({
+        ...prev,
+        product: {
+          ...prev.product,
+          valueRaised: raisedValue,
+        },
+      }));
+
       setOwnershipPercentage(ownershipPercentage);
       handleCloseModal();
-      setPermission((prev) => !prev);
+      setPermission(prev => !prev);
     } catch ({ message }) {
       Toast({
-        type: "error",
+        type: 'error',
         message,
       });
     } finally {
@@ -50,14 +61,11 @@ const InitiateInvestmentModal = ({
   return (
     <InvestmentModalWrapper>
       <div>
-        <span className="description">
-          Please fill up the details to proceed.
-        </span>
+        <span className="description">Please fill up the details to proceed.</span>
       </div>
       <Form form={form} onSubmit={onSubmit}>
         <div className="current-wallet">
-          Current Wallet Balance:
-          <span>${user?.wallet?.toLocaleString() || 0}</span>
+          Current Wallet Balance: <span>${formatNumber(user?.wallet) || 0}</span>
         </div>
         <div className="input-div">
           <Form.Item
@@ -67,7 +75,7 @@ const InitiateInvestmentModal = ({
             sm
             rounded
             placeholder="$7,200"
-            onChange={(e) => {
+            onChange={e => {
               form.setFieldsValue({
                 boughtAmount: e.target.value,
               });
@@ -76,37 +84,30 @@ const InitiateInvestmentModal = ({
             rules={[
               {
                 required: true,
-                message: "Please enter Amount!  ",
+                message: 'Please enter Amount!  ',
               },
               {
-                transform: (value) =>
-                  parseFloat(value) > parseFloat(user?.wallet),
-
-                // },
-                message: "You cannot exceed your Wallet Amount!.",
+                transform: value => parseFloat(value) > parseFloat(user?.wallet),
+                message: 'You cannot exceed your Wallet Amount!.',
               },
-              // {
-              //   pattern: /^.{0,8}$/,
-              //   message: "Maximum Investment is 10,000,000",
-              // },
-            ]}
-          >
+              {
+                min: minInvestValue,
+                message: `Minimum Investment Amount is $${formatNumber(minInvestValue)}`,
+              },
+              {
+                max: assetValue,
+                message: `Maximum Investment Amount is $${formatNumber(assetValue)}`,
+              },
+            ]}>
             <Field />
           </Form.Item>
         </div>
         <div className="text-wrapper">
-          You will own <span>{ownershipPercentage}%</span> of the asset, valued
-          at a total of ${formatNumber(assetValue)}.
+          You will own <span>{ownershipPercentage}%</span> of the asset, valued at a total of $
+          {formatNumber(assetValue)}.
         </div>
         <div>
-          <Button
-            rounded
-            md
-            btntype="primary"
-            loader={isLoading}
-            width="170"
-            htmlType="submit"
-          >
+          <Button rounded md btntype="primary" loader={isLoading} width="170" htmlType="submit">
             Buy Shares
           </Button>
         </div>

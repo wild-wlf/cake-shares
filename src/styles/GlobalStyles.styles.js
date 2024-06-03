@@ -25,8 +25,7 @@ export const Styling = css`
   body {
     color: var(--base-text-color);
     background: rgba(254, 254, 254, 1);
-    font: var(--font-size-base) / var(--line-height-base)
-      var(--base-font-sans-serif);
+    font: var(--font-size-base) / var(--line-height-base) var(--base-font-sans-serif);
     font-weight: 400;
     position: relative;
     min-width: var(--base-min-width);
@@ -48,7 +47,7 @@ export const Styling = css`
 
     &:before {
       display: none;
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       bottom: -10%;
@@ -84,10 +83,10 @@ export const Styling = css`
   }
 
   button,
-  input[type="button"],
-  input[type="reset"],
-  input[type="file"],
-  input[type="submit"] {
+  input[type='button'],
+  input[type='reset'],
+  input[type='file'],
+  input[type='submit'] {
     cursor: pointer;
   }
 
@@ -102,19 +101,17 @@ export const Styling = css`
     text-decoration: none;
   }
 
-  input[type="search"]::-webkit-search-decoration,
-  input[type="search"]::-webkit-search-cancel-button,
-  input[type="search"]::-webkit-search-results-button,
-  input[type="search"]::-webkit-search-results-decoration {
+  input[type='search']::-webkit-search-decoration,
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-results-button,
+  input[type='search']::-webkit-search-results-decoration {
     display: none;
   }
 
   a,
   button {
-    transition: opacity var(--animation-speed) ease-in-out,
-      background var(--animation-speed) ease-in-out,
-      visibility var(--animation-speed) ease-in-out,
-      border var(--animation-speed) ease-in-out,
+    transition: opacity var(--animation-speed) ease-in-out, background var(--animation-speed) ease-in-out,
+      visibility var(--animation-speed) ease-in-out, border var(--animation-speed) ease-in-out,
       color var(--animation-speed) ease-in-out;
   }
 
@@ -151,6 +148,53 @@ export const Styling = css`
     &.inactive {
       color: #e90000;
       background: rgba(233, 0, 0, 0.15);
+    }
+  }
+  .rc-slide-customization {
+    margin: 20px 10px 30px 10px;
+    .rc-slider-rail {
+      height: 10px;
+    }
+    .rc-tooltip .rc-tooltip-placement-bottom {
+      padding: 0;
+    }
+    .rc-slider-track {
+      background: var(--green);
+      height: 10px;
+      z-index: 5;
+    }
+    .rc-slider-step {
+      height: 10px;
+      background: rgb(241, 241, 241);
+      border-radius: 10px;
+    }
+    .rc-slider-handle-1,
+    .rc-slider-handle-2 {
+      height: 26px;
+      width: 26px;
+      background-color: #fff;
+      border: 2px solid var(--green);
+      z-index: 10;
+      top: 4px;
+
+      &:hover {
+        box-shadow: 0 0 0 8px rgba(58, 133, 137, 0.16);
+      }
+    }
+    .rc-slider-handle-1 {
+      top: 3px;
+    }
+    .rc-slider-handle {
+      &:focus-visible,
+      &:active {
+        box-shadow: none;
+        border: 2px solid var(--green);
+      }
+    }
+    .rc-slider-mark-text-active {
+      background: var(--green);
+      height: 200px;
+      width: 200px;
     }
   }
 
@@ -202,16 +246,15 @@ export const Styling = css`
   }
 
   /* Firefox */
-  input[type="number"] {
+  input[type='number'] {
     appearance: textfield;
   }
 
   .react-datepicker {
     font-family: var(--base-font-sans-serif);
     border: none;
-    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-      0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
-      0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+      0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
       0 100px 80px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
   }

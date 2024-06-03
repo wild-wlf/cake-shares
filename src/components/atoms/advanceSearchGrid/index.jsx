@@ -1,10 +1,7 @@
 import React from "react";
 import { SearchGridWrapper } from "./advanceSearchGrid.style";
 import ProgressBar from "@ramonak/react-progress-bar";
-import Property from "../../../_assets/property.png";
-import Property2 from "../../../_assets/property2.png";
 import Heart from "../../../_assets/heart.svg";
-import Property3 from "../../../_assets/property3.png";
 import Image from "next/image";
 import { RiFilePaperFill } from "react-icons/ri";
 import Button from "../Button";
@@ -12,32 +9,7 @@ import Link from "next/link";
 import { daysLeft, formatDateWithSuffix } from "@/helpers/common";
 
 const AdvanceSearchGrid = ({data}) => {
-  const imagesArray = [
-    {
-      image: Property,
-      id: "1",
-    },
-    {
-      image: Property3,
-      id: "2",
-    },
-    {
-      image: Property,
-      id: "3",
-    },
-    {
-      image: Property,
-      id: "4",
-    },
-    {
-      image: Property2,
-      id: "5",
-    },
-    {
-      image: Property3,
-      id: "6",
-    },
-  ];
+  
   return (
     <SearchGridWrapper>
       {data.map((data, index) => (

@@ -20,7 +20,7 @@ import HandleLoginModal from '@/components/molecules/HandleLoginModal';
 import UpgradeKycLevelModal from '@/components/molecules/upgradeKycLevelModal';
 import InfoIcon from '../../../_assets/info-icon.svg';
 
-const ProductDetail = ({ data, SellerData }) => {
+const ProductDetail = ({ data, SellerData, setProductData }) => {
   const { isLoggedIn, user } = useContextHook(AuthContext, v => ({
     isLoggedIn: v.isLoggedIn,
     user: v.user,
@@ -28,6 +28,8 @@ const ProductDetail = ({ data, SellerData }) => {
   const [reqKycLevel, setReqKycLevel] = useState();
   const router = useRouter();
   const [modal, setModal] = useState(false);
+  const [infoModalHeadingText, setInfoModalHeadingText] = useState();
+  const [infoModalText, setInfoModalText] = useState();
   const [handleLoginModal, setHandleLoginModal] = useState(false);
   const [upgradeKycLevel, setUpgradeKycLevel] = useState(false);
   const [successmodal, setSuccessModal] = useState(false);
@@ -35,6 +37,22 @@ const ProductDetail = ({ data, SellerData }) => {
 
   const handleInitiateInvestment = () => {
     if (!isLoggedIn) {
+      setInfoModalHeadingText('Please Login to Perform this Operation!');
+      setInfoModalText('You are not currently logged in. Please log in to proceed with this action.');
+      setHandleLoginModal(true);
+    } else if (user?.wallet < data?.minimumInvestment) {
+      setInfoModalHeadingText('Insufficient Wallet Balance!');
+      setInfoModalText(
+        `You currently do not have sufficient wallet balance to perform this action. The minimum amount required to invest in this product is $${
+          data?.minimumInvestment ?? 0
+        }, while your current account balance is $${user?.wallet || 0}. Please top up your account.`,
+      );
+      setHandleLoginModal(true);
+    } else if (user?.isKycRequested) {
+      setInfoModalHeadingText('KYC Requested!');
+      setInfoModalText(
+        'Your KYC request is currently under review and has not yet been approved. We appreciate your patience and will notify you as soon as the process is complete. Thank you for your understanding.',
+      );
       setHandleLoginModal(true);
     } else if (user.kycLevel >= data.kycLevel) {
       setModal(true);
@@ -62,19 +80,21 @@ const ProductDetail = ({ data, SellerData }) => {
         open={handleLoginModal}
         setOpen={setHandleLoginModal}
         iscloseAble={false}
-        title="Please Login to Perform this Operation!"
+        title={infoModalHeadingText}
         width="689">
-        <HandleLoginModal setOpen={setHandleLoginModal} />
+        <HandleLoginModal setOpen={setHandleLoginModal} text={infoModalText} />
       </CenterModal>
       <CenterModal open={modal} setOpen={setModal} title="Initiate Investment" width="543">
         <InitiateInvestmentModal
           productId={data?._id}
           assetValue={data?.assetValue}
+          minInvestValue={data?.minimumInvestment}
           setOwnershipPercentage={setOwnershipPercentage}
           handleCloseModal={() => {
             setModal(false);
             setSuccessModal(true);
           }}
+          setProductData={setProductData}
         />
       </CenterModal>
       <CenterModal
@@ -130,7 +150,7 @@ const ProductDetail = ({ data, SellerData }) => {
               </div>
               <div>
                 <span>Return (%)</span>
-                <h3>00%</h3>
+                <h3>0%</h3>
               </div>
               <div>
                 <span>Funding Ratio</span>

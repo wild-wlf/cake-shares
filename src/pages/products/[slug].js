@@ -43,7 +43,11 @@ const ProductDetails = ({ userData }) => {
         <Loader />
       ) : (
         <>
-          <ProductDetail data={productData?.product} SellerData={productData?.product?.userId} />
+          <ProductDetail
+            data={productData?.product}
+            SellerData={productData?.product?.userId}
+            setProductData={setProductData}
+          />
           <Amenities data={productData?.product} />
           {productData?.otherProducts.length > 0 && <Categories data={productData?.otherProducts} />}
         </>
