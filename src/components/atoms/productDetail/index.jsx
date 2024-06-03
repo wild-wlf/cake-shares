@@ -70,6 +70,7 @@ const ProductDetail = ({ data, SellerData }) => {
         <InitiateInvestmentModal
           productId={data?._id}
           assetValue={data?.assetValue}
+          valueRaised={data?.valueRaised}
           setOwnershipPercentage={setOwnershipPercentage}
           handleCloseModal={() => {
             setModal(false);

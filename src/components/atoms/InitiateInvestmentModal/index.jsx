@@ -9,13 +9,8 @@ import { formatNumber } from "@/helpers/common";
 import walletService from "@/services/walletService";
 import Toast from "@/components/molecules/Toast";
 
-const InitiateInvestmentModal = ({
-  productId,
-  assetValue,
-  setOwnershipPercentage,
-  handleCloseModal,
-}) => {
-  const { user, setPermission } = useContextHook(AuthContext, (v) => ({
+const InitiateInvestmentModal = ({ productId, assetValue, setOwnershipPercentage, handleCloseModal, valueRaised }) => {
+  const { user, setPermission } = useContextHook(AuthContext, v => ({
     user: v.user,
     setPermission: v.setPermission,
   }));
@@ -36,10 +31,10 @@ const InitiateInvestmentModal = ({
       await walletService.initiateInvestment(payload);
       setOwnershipPercentage(ownershipPercentage);
       handleCloseModal();
-      setPermission((prev) => !prev);
+      setPermission(prev => !prev);
     } catch ({ message }) {
       Toast({
-        type: "error",
+        type: 'error',
         message,
       });
     } finally {
@@ -50,9 +45,7 @@ const InitiateInvestmentModal = ({
   return (
     <InvestmentModalWrapper>
       <div>
-        <span className="description">
-          Please fill up the details to proceed.
-        </span>
+        <span className="description">Please fill up the details to proceed.</span>
       </div>
       <Form form={form} onSubmit={onSubmit}>
         <div className="current-wallet">
@@ -67,7 +60,7 @@ const InitiateInvestmentModal = ({
             sm
             rounded
             placeholder="$7,200"
-            onChange={(e) => {
+            onChange={e => {
               form.setFieldsValue({
                 boughtAmount: e.target.value,
               });
@@ -76,37 +69,33 @@ const InitiateInvestmentModal = ({
             rules={[
               {
                 required: true,
-                message: "Please enter Amount!  ",
+                message: 'Please enter Amount!  ',
               },
-              {
-                transform: (value) =>
-                  parseFloat(value) > parseFloat(user?.wallet),
+              // {
+              //   transform: value => parseFloat(value) > parseFloat(user?.wallet),
 
-                // },
-                message: "You cannot exceed your Wallet Amount!.",
+              //   // },
+              //   message: 'You cannot exceed your Wallet Amount!.',
+              // },
+              {
+                transform: value => value > assetValue - valueRaised,
+                // transform: value => value  <= (assetValue - valueRaised),
+                message: `The investment must be less or equal to the $${formatNumber(assetValue - valueRaised)}`,
               },
               // {
               //   pattern: /^.{0,8}$/,
               //   message: "Maximum Investment is 10,000,000",
               // },
-            ]}
-          >
+            ]}>
             <Field />
           </Form.Item>
         </div>
         <div className="text-wrapper">
-          You will own <span>{ownershipPercentage}%</span> of the asset, valued
-          at a total of ${formatNumber(assetValue)}.
+          You will own <span>{ownershipPercentage}%</span> of the asset, valued at a total of $
+          {formatNumber(assetValue - valueRaised)}.
         </div>
         <div>
-          <Button
-            rounded
-            md
-            btntype="primary"
-            loader={isLoading}
-            width="170"
-            htmlType="submit"
-          >
+          <Button rounded md btntype="primary" loader={isLoading} width="170" htmlType="submit">
             Buy Shares
           </Button>
         </div>
