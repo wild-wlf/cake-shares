@@ -98,12 +98,12 @@ export const AuthContextProvider = (props) => {
         type,
         sellerType,
       });
-
-      if (!res?.token) {
-        throw new Error(res?.message);
-      }
-      if (res?.type !== "Buyer") {
-        console.log( process.env.NEXT_PUBLIC_ADMIN_DOMAIN)
+ window.open(`${process.env.NEXT_PUBLIC_ADMIN_URL}`, "_blank");
+      // if (!res?.token) {
+      //   throw new Error(res?.message);
+      // }
+      // if (res?.type !== "Buyer") {
+        console.log(process.env.NEXT_PUBLIC_ADMIN_DOMAIN)
         // setCookie(
         //   process.env.NEXT_PUBLIC_ADMIN_TOKEN_COOKIE,
         //   res?.token,
@@ -120,16 +120,16 @@ export const AuthContextProvider = (props) => {
         //   process.env.NEXT_PUBLIC_ADMIN_DOMAIN
         // );
         window.open(`${process.env.NEXT_PUBLIC_ADMIN_URL}`, "_blank");
-      }
+      // }
 
-      if (res.type === "Buyer") {
-        setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
-        // router.push("/");
-        setIsLoggedIn(true);
-        Toast({ type: "success", message: "Logged In Successfully!" });
-        setLoadingUser(false);
-        setLoading(false);
-      }
+      // if (res.type === "Buyer") {
+      //   setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
+      //   // router.push("/");
+      //   setIsLoggedIn(true);
+      //   Toast({ type: "success", message: "Logged In Successfully!" });
+      //   setLoadingUser(false);
+      //   setLoading(false);
+      // }
     } catch ({ message }) {
       setIsLoggedIn(false);
       setLoadingUser(false);
