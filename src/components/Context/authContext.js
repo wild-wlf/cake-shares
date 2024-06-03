@@ -104,21 +104,21 @@ export const AuthContextProvider = (props) => {
       }
       if (res?.type !== "Buyer") {
         console.log( process.env.NEXT_PUBLIC_ADMIN_DOMAIN)
-        setCookie(
-          process.env.NEXT_PUBLIC_ADMIN_TOKEN_COOKIE,
-          res?.token,
-          null,
-          process.env.NEXT_PUBLIC_ADMIN_DOMAIN
-        );
-        setCookie(
-          process.env.NEXT_PUBLIC_USER_TYPE_COOKIE,
-          JSON.stringify({
-            type: res?.type,
-            isIndividualSeller: res?.isIndividualSeller,
-          }),
-          null,
-          process.env.NEXT_PUBLIC_ADMIN_DOMAIN
-        );
+        // setCookie(
+        //   process.env.NEXT_PUBLIC_ADMIN_TOKEN_COOKIE,
+        //   res?.token,
+        //   null,
+        //   process.env.NEXT_PUBLIC_ADMIN_DOMAIN
+        // );
+        // setCookie(
+        //   process.env.NEXT_PUBLIC_USER_TYPE_COOKIE,
+        //   JSON.stringify({
+        //     type: res?.type,
+        //     isIndividualSeller: res?.isIndividualSeller,
+        //   }),
+        //   null,
+        //   process.env.NEXT_PUBLIC_ADMIN_DOMAIN
+        // );
         window.open(`${process.env.NEXT_PUBLIC_ADMIN_URL}`, "_blank");
       }
 

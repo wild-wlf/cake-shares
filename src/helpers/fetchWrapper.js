@@ -56,6 +56,7 @@ function post(url, body, debounce = false) {
     method: "POST",
     headers,
     body: JSON.stringify(body),
+        withCredentials: true 
   };
 
   if (debounce) return debounceFetch(url, requestOptions);
