@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { SearchFiltersWrapper } from './searchFilters.style';
 import Field from '../Field';
 import Button from '../Button';
@@ -6,34 +6,48 @@ import { FaMinus } from 'react-icons/fa6';
 import Form, { useForm } from '@/components/molecules/Form';
 import Select from '../Select';
 import { countries } from '@/components/Constant';
+import { SearchContext } from '@/components/Context/SearchContext';
 
-const SearchFilters = ({ setSearchQuery }) => {
+const SearchFilters = () => {
   const [arr, setArr] = useState(countries);
   const [form] = useForm();
-  const [selected, setSelected] = useState({
-    investment: 'Select Type',
-    country: 'Select Country',
-    kyc: 'Select Level',
+  const { handleSearchQuery,searchQuery } = useContext(SearchContext);
+  const [investmentVolume, setInvestmentVolume] = useState({
+    min: searchQuery?.minInvestment || "",
+    max: searchQuery?.maxInvestment || "",
   });
-  // const [searchQuery, setSearchQuery] = useState({
-  //   searchText: '',
-  //   popular: false,
-  //   private: false,
-  // });
+  useEffect(() => {
+    console.log("values searchQuery :",searchQuery)
+    const country = countries.find(
+      (ele) => ele.value === searchQuery?.country
+    );
+    form.setFieldsValue({
+      investment_type: searchQuery?.investmentType,
+      kyc_level: searchQuery?.kycLevel,
+      country: country || { value: "", label: "" },
+            min_backers: searchQuery?.minBackers,
+      max_days_left: searchQuery?.maxDaysLeft,
+      min_fund_raised: searchQuery?.minFundsRaised,
+      min_annual_cost: searchQuery?.minAnnualCost,
+      minInvestment: searchQuery?.minInvestment,
+      maxInvestment: searchQuery?.maxInvestment,
+      
+    })
+  }, [])
+  
   const handleSubmit = e => {
     let obj = {
-      investmentType: e?.investment_type?.value,
-      country: e?.country?.label,
-      kycLevel: e?.kyc_level?.label,
+      investmentType: e?.investment_type,
+      country: e?.country?.value,
+      kycLevel: e?.kyc_level,
       minBackers: e?.min_backers,
       maxDaysLeft: e?.max_days_left,
       minFundsRaised: e?.min_fund_raised,
       minAnnualCost: e?.min_annual_cost,
+      minInvestment: investmentVolume?.min,
+      maxInvestment: investmentVolume?.max,
     };
-    setSearchQuery(prev => ({
-      ...prev,
-      ...obj,
-    }));
+    handleSearchQuery(obj);
   };
   return (
     <Form form={form} onSubmit={handleSubmit}>
@@ -46,6 +60,10 @@ const SearchFilters = ({ setSearchQuery }) => {
             sm
             rounded
             placeholder="Select Type"
+            options={[
+                { label: 'Properties', value: 'properties' },
+                { label: 'Vehicles', value: 'vehicles' },
+              ]}
             rules={[
               {
                 pattern: /^.{0,40}$/,
@@ -53,10 +71,7 @@ const SearchFilters = ({ setSearchQuery }) => {
               },
             ]}>
             <Select
-              options={[
-                { label: 'Properties', value: 'properties' },
-                { label: 'Vehicles', value: 'vehicles' },
-              ]}
+              
             />
           </Form.Item>
         </div>
@@ -85,6 +100,11 @@ const SearchFilters = ({ setSearchQuery }) => {
             sm
             rounded
             placeholder="Select Level"
+            options={[
+                { label: 'Level 0', value: 'level_0' },
+                { label: 'Level 1', value: 'level_1' },
+                { label: 'Level 2', value: 'level_2' },
+              ]}
             rules={[
               {
                 pattern: /^.{0,40}$/,
@@ -92,11 +112,7 @@ const SearchFilters = ({ setSearchQuery }) => {
               },
             ]}>
             <Select
-              options={[
-                { label: 'Level 0', value: 'level_0' },
-                { label: 'Level 1', value: 'level_1' },
-                { label: 'Level 2', value: 'level_2' },
-              ]}
+              
             />
           </Form.Item>
         </div>
@@ -106,10 +122,11 @@ const SearchFilters = ({ setSearchQuery }) => {
             <input
               type="text"
               placeholder="$0"
+              value={investmentVolume?.min}
               onChange={e => {
-                setSearchQuery(prev => ({
+                setInvestmentVolume(prev => ({
                   ...prev,
-                  minInvestment: e.target.value,
+                  min: e.target.value,
                 }));
               }}
             />
@@ -117,30 +134,15 @@ const SearchFilters = ({ setSearchQuery }) => {
             <input
               type="text"
               placeholder="$0"
+              value={investmentVolume?.max}
               onChange={e => {
-                setSearchQuery(prev => ({
+                setInvestmentVolume(prev => ({
                   ...prev,
-                  maxInvestment: e.target.value,
+                  max: e.target.value,
                 }));
               }}
             />
           </div>
-          {/* <Form.Item
-            type="text"
-            label="Investment Volume"
-            name="investment_volume"
-            sm
-            rounded
-            placeholder="$0"
-            rules={[
-              {
-                pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
-              },
-            ]}
-          >
-            <Field />
-          </Form.Item> */}
         </div>
         <div className="dropdown-div">
           <Form.Item
@@ -150,15 +152,6 @@ const SearchFilters = ({ setSearchQuery }) => {
             sm
             rounded
             placeholder="0%"
-            onChange={e => {
-              setSearchQuery(prev => ({
-                ...prev,
-                minAnnualCost: e.target.value,
-              }));
-              form.setFieldsValue({
-                min_annual_cost: e.target.value,
-              });
-            }}
             rules={[
               {
                 pattern: /^.{0,40}$/,
