@@ -23,7 +23,7 @@
   "prettier.bracketSameLine": true,
   "prettier.printWidth": 120,
   "files.associations": {
-    "*.js": "javascript",
+    "*.js": "javascript"
   },
   "[scss]": {
     "editor.formatOnSave": false
@@ -39,6 +39,9 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }

@@ -86,7 +86,6 @@ const index = ({data}) => {
       },
     ],
   };
-console.log(data)
   return (
     <CategoriesWrapper image={arrowRight}>
       <div className="slider">
