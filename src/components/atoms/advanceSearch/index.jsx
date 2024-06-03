@@ -56,7 +56,7 @@ const AdvanceSearch = () => {
       minInvestment: searchQuery?.minInvestment,
       maxInvestment: searchQuery?.maxInvestment,
     };
-     handleSearchQuery(obj);
+    handleSearchQuery(obj);
     router.push('/advanceSearch');
   };
   return (
@@ -69,19 +69,7 @@ const AdvanceSearch = () => {
 
         <div className="investmenttype">
           <div className="dropdown-div">
-            <Form.Item
-              type="text"
-              label="Investment Type"
-              name="investment_type"
-              sm
-              rounded
-              placeholder="Select Type"
-              rules={[
-                {
-                  pattern: /^.{0,40}$/,
-                  message: 'Maximum Character Length is 256',
-                },
-              ]}>
+            <Form.Item type="text" label="Investment Type" name="investment_type" sm rounded placeholder="Select Type">
               <Select
                 options={[
                   { label: 'Properties', value: 'properties' },
@@ -91,36 +79,12 @@ const AdvanceSearch = () => {
             </Form.Item>
           </div>
           <div className="dropdown-div">
-            <Form.Item
-              type="text"
-              label="Country"
-              name="country"
-              sm
-              rounded
-              placeholder="Select Country"
-              rules={[
-                {
-                  pattern: /^.{0,40}$/,
-                  message: 'Maximum Character Length is 256',
-                },
-              ]}>
+            <Form.Item type="text" label="Country" name="country" sm rounded placeholder="Select Country">
               <Select options={arr} />
             </Form.Item>
           </div>
           <div className="dropdown-div">
-            <Form.Item
-              type="text"
-              label="KYC Level"
-              name="kyc_level"
-              sm
-              rounded
-              placeholder="Select Level"
-              rules={[
-                {
-                  pattern: /^.{0,40}$/,
-                  message: 'Maximum Character Length is 256',
-                },
-              ]}>
+            <Form.Item type="text" label="KYC Level" name="kyc_level" sm rounded placeholder="Select Level">
               <Select
                 options={[
                   { label: 'Level 0', value: 'level_0' },
@@ -141,13 +105,14 @@ const AdvanceSearch = () => {
               <input type="text" placeholder="$0" readOnly value={`$${searchQuery.maxInvestment}`} />
             </div>
           </div>
-          <RangeSlider  onChange={(_) =>{
-            setSearchQuery({
-          minInvestment: _[0],
-          maxInvestment: _[1],
-        })}
-
-           } />
+          <RangeSlider
+            onChange={_ => {
+              setSearchQuery({
+                minInvestment: _[0],
+                maxInvestment: _[1],
+              });
+            }}
+          />
         </div>
 
         <div className="min-values-div">
@@ -161,11 +126,11 @@ const AdvanceSearch = () => {
               placeholder="0%"
               rules={[
                 {
-                  pattern: /^.{0,40}$/,
-                  message: 'Maximum Character Length is 256',
+                  pattern: /^.{0,10}$/,
+                  message: 'Maximum Character Length is 10',
                 },
               ]}>
-              <Field />
+              <Field maxLength={10} />
             </Form.Item>
           </div>
           <div className="minvalues">
@@ -178,11 +143,11 @@ const AdvanceSearch = () => {
               placeholder="0"
               rules={[
                 {
-                  pattern: /^.{0,40}$/,
-                  message: 'Maximum Character Length is 256',
+                  pattern: /^.{0,10}$/,
+                  message: 'Maximum Character Length is 10',
                 },
               ]}>
-              <Field />
+              <Field maxLength={10} />
             </Form.Item>
           </div>
           <div className="minvalues">
@@ -195,11 +160,11 @@ const AdvanceSearch = () => {
               placeholder="0"
               rules={[
                 {
-                  pattern: /^.{0,40}$/,
-                  message: 'Maximum Character Length is 256',
+                  pattern: /^.{0,3}$/,
+                  message: 'Maximum Character Length is 3',
                 },
               ]}>
-              <Field />
+              <Field maxLength={3} />
             </Form.Item>
           </div>
           <div className="minvalues">
@@ -212,11 +177,11 @@ const AdvanceSearch = () => {
               placeholder="0%"
               rules={[
                 {
-                  pattern: /^.{0,40}$/,
-                  message: 'Maximum Character Length is 256',
+                  pattern: /^.{0,3}$/,
+                  message: 'Maximum Character Length is 3',
                 },
               ]}>
-              <Field />
+              <Field maxLength={3} />
             </Form.Item>
           </div>
         </div>
