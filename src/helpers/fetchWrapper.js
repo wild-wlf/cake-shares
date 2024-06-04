@@ -47,7 +47,7 @@ function get(url, debounce = false) {
 
 function post(url, body, debounce = false) {
   const headers = {
-    // "X-path": window.location.pathname,
+    "X-path": window.location.pathname,
     "Content-Type": "application/json",
     authorization: `Bearer ${getCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE)}`,
   };
@@ -56,7 +56,6 @@ function post(url, body, debounce = false) {
     method: "POST",
     headers,
     body: JSON.stringify(body),
-     credentials: 'include',
   };
 
   if (debounce) return debounceFetch(url, requestOptions);
