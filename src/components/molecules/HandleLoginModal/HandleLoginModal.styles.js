@@ -30,6 +30,8 @@ export const HandleLoginModalWrapper = styled.div`
     }
   }
   .btn-holder {
+    display: flex;
+    gap: 16px;
     button {
       width: 250px;
     }

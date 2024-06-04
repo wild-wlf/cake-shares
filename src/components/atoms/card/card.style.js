@@ -6,8 +6,7 @@ export const CardWrapper = styled.div`
   border-radius: 24px;
   cursor: pointer;
   background-color: rgba(241, 241, 241, 1);
-  box-shadow: 1px 8px 17px 0 rgba(0, 0, 0, 0.1),
-    4px 31px 31px 0 rgba(0, 0, 0, 0.09);
+  box-shadow: 1px 8px 17px 0 rgba(0, 0, 0, 0.1), 4px 31px 31px 0 rgba(0, 0, 0, 0.09);
   position: relative;
   padding: 10px;
   .image-div {
@@ -56,6 +55,22 @@ export const CardWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
+    .productNameWrapper {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      .producName {
+        max-width: 60px;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .currentBackers {
+        color: var(--primary);
+        font-weight: 500;
+      }
+    }
   }
 
   @media only screen and (max-width: 768px) {
