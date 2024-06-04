@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { Sort, Wrapper } from './advanceSearch.style';
 import Button from '../Button';
 import { IoMdArrowDropdown } from 'react-icons/io';
@@ -11,12 +11,34 @@ import Select from '../Select';
 import { countries } from '@/components/Constant';
 import { SearchContext } from '@/components/Context/SearchContext';
 import { useRouter } from 'next/router';
+import productService from '@/services/productService';
+import { useContextHook } from 'use-context-hook';
+import { AuthContext } from '@/components/Context/authContext';
+import categoryService from '@/services/categoryService';
 
 const AdvanceSearch = () => {
   const [arr, setArr] = useState(countries);
   const [form] = useForm();
   const router = useRouter();
+    const {  fetch } = useContextHook(AuthContext, v => ({
+  
+    fetch: v.fetch,
+  }));
+const { categories_data } = categoryService.GetAllCategories(
+    {
+      getAll: true,
+    },
+    fetch,
+  );
 
+  const categoriesOptions = useMemo(() => {
+    return categories_data?.items
+      ?.filter(item => item?.status !== 'Inactive')
+      ?.map(ele => ({
+        value: ele?._id,
+        label: ele?.name,
+      }));
+  }, [categories_data?.items]);
   const [selected, setSelected] = useState({
     investment: 'Select Type',
     country: 'Select Country',
@@ -26,10 +48,9 @@ const AdvanceSearch = () => {
     searchText: '',
     popular: false,
     private: false,
-    minInvestment: 1350,
-    maxInvestment: 10000,
+    minInvestment: "",
+    maxInvestment: "",
   });
-  console.log(searchQuery);
   const handlePopularChecked = () => {
     setSearchQuery(prev => ({
       ...prev,
@@ -46,9 +67,9 @@ const AdvanceSearch = () => {
 
   const handleSubmit = e => {
     let obj = {
-      investmentType: e?.investment_type,
+      investmentType: e?.investment_type?.value,
       country: e?.country?.value,
-      kycLevel: e?.kyc_level,
+      kycLevel: e?.kyc_level?.value,
       minBackers: e?.min_backers,
       maxDaysLeft: e?.max_days_left,
       minFundsRaised: e?.min_fund_raised,
@@ -56,6 +77,7 @@ const AdvanceSearch = () => {
       minInvestment: searchQuery?.minInvestment,
       maxInvestment: searchQuery?.maxInvestment,
     };
+    
      handleSearchQuery(obj);
     router.push('/advanceSearch');
   };
@@ -76,18 +98,16 @@ const AdvanceSearch = () => {
               sm
               rounded
               placeholder="Select Type"
+            options={categoriesOptions}
+
               rules={[
                 {
                   pattern: /^.{0,40}$/,
                   message: 'Maximum Character Length is 256',
                 },
-              ]}>
-              <Select
-                options={[
-                  { label: 'Properties', value: 'properties' },
-                  { label: 'Vehicles', value: 'vehicles' },
-                ]}
-              />
+              ]}
+            >
+              <Select              />
             </Form.Item>
           </div>
           <div className="dropdown-div">
@@ -115,6 +135,11 @@ const AdvanceSearch = () => {
               sm
               rounded
               placeholder="Select Level"
+              options={[
+                  { label: 'Level 0', value: 0 },
+                  { label: 'Level 1', value: 1 },
+                  { label: 'Level 2', value: 2 },
+                ]}
               rules={[
                 {
                   pattern: /^.{0,40}$/,
@@ -122,11 +147,7 @@ const AdvanceSearch = () => {
                 },
               ]}>
               <Select
-                options={[
-                  { label: 'Level 0', value: 'level_0' },
-                  { label: 'Level 1', value: 'level_1' },
-                  { label: 'Level 2', value: 'level_2' },
-                ]}
+                
               />
             </Form.Item>
           </div>
@@ -141,11 +162,7 @@ const AdvanceSearch = () => {
               <input type="text" placeholder="$0" readOnly value={`$${searchQuery.maxInvestment}`} />
             </div>
           </div>
-          <RangeSlider  onChange={(_) =>{
-            setSearchQuery({
-          minInvestment: _[0],
-          maxInvestment: _[1],
-        })}
+          <RangeSlider  onChange={(_) =>{setSearchQuery((prev)=> ({...prev, minInvestment:_[0] , maxInvestment:_[1], }))}
 
            } />
         </div>

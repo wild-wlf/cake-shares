@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { SearchFiltersWrapper } from './searchFilters.style';
 import Field from '../Field';
 import Button from '../Button';
@@ -7,39 +7,49 @@ import Form, { useForm } from '@/components/molecules/Form';
 import Select from '../Select';
 import { countries } from '@/components/Constant';
 import { SearchContext } from '@/components/Context/SearchContext';
+import { useContextHook } from 'use-context-hook';
+import { AuthContext } from '@/components/Context/authContext';
+import categoryService from '@/services/categoryService';
 
 const SearchFilters = () => {
+  const kycLevel = [
+    { label: 'Level 0', value: 0 },
+    { label: 'Level 1', value: 1 },
+    { label: 'Level 2', value: 2 },
+  ];
   const [arr, setArr] = useState(countries);
   const [form] = useForm();
-  const { handleSearchQuery,searchQuery } = useContext(SearchContext);
+  const { handleSearchQuery, searchQuery, categoriesOptions } = useContext(SearchContext);
+
   const [investmentVolume, setInvestmentVolume] = useState({
-    min: searchQuery?.minInvestment || "",
-    max: searchQuery?.maxInvestment || "",
+    min: searchQuery?.minInvestment || '',
+    max: searchQuery?.maxInvestment || '',
   });
   useEffect(() => {
-    console.log("values searchQuery :",searchQuery)
-    const country = countries.find(
-      (ele) => ele.value === searchQuery?.country
-    );
-    form.setFieldsValue({
-      investment_type: searchQuery?.investmentType,
-      kyc_level: searchQuery?.kycLevel,
-      country: country || { value: "", label: "" },
-            min_backers: searchQuery?.minBackers,
-      max_days_left: searchQuery?.maxDaysLeft,
-      min_fund_raised: searchQuery?.minFundsRaised,
-      min_annual_cost: searchQuery?.minAnnualCost,
-      minInvestment: searchQuery?.minInvestment,
-      maxInvestment: searchQuery?.maxInvestment,
-      
-    })
-  }, [])
-  
+    async function setFilters(params) {
+      const country = countries.find(ele => ele.value === searchQuery?.country);
+      const kyc = kycLevel.find(ele => ele.value === searchQuery?.kycLevel);
+      const investmentType = await categoriesOptions?.find(ele => ele.value === searchQuery?.investmentType);
+      form.setFieldsValue({
+        investment_type: investmentType,
+        kyc_level: kyc,
+        country: country,
+        min_backers: searchQuery?.minBackers,
+        max_days_left: searchQuery?.maxDaysLeft,
+        min_fund_raised: searchQuery?.minFundsRaised,
+        min_annual_cost: searchQuery?.minAnnualCost,
+        minInvestment: searchQuery?.minInvestment,
+        maxInvestment: searchQuery?.maxInvestment,
+      });
+    }
+    setFilters();
+  }, [searchQuery]);
+
   const handleSubmit = e => {
     let obj = {
-      investmentType: e?.investment_type,
+      investmentType: e?.investment_type.value,
       country: e?.country?.value,
-      kycLevel: e?.kyc_level,
+      kycLevel: e?.kyc_level?.value,
       minBackers: e?.min_backers,
       maxDaysLeft: e?.max_days_left,
       minFundsRaised: e?.min_fund_raised,
@@ -60,19 +70,14 @@ const SearchFilters = () => {
             sm
             rounded
             placeholder="Select Type"
-            options={[
-                { label: 'Properties', value: 'properties' },
-                { label: 'Vehicles', value: 'vehicles' },
-              ]}
+            options={categoriesOptions}
             rules={[
               {
                 pattern: /^.{0,40}$/,
                 message: 'Maximum Character Length is 256',
               },
             ]}>
-            <Select
-              
-            />
+            <Select />
           </Form.Item>
         </div>
         <div className="dropdown-div">
@@ -100,20 +105,14 @@ const SearchFilters = () => {
             sm
             rounded
             placeholder="Select Level"
-            options={[
-                { label: 'Level 0', value: 'level_0' },
-                { label: 'Level 1', value: 'level_1' },
-                { label: 'Level 2', value: 'level_2' },
-              ]}
+            options={kycLevel}
             rules={[
               {
                 pattern: /^.{0,40}$/,
                 message: 'Maximum Character Length is 256',
               },
             ]}>
-            <Select
-              
-            />
+            <Select />
           </Form.Item>
         </div>
         <div className="volumeWrapper">

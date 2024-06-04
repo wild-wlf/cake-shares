@@ -32,7 +32,11 @@ const AdvanceSearchGrid = ({data}) => {
                 </div>
                 <div className="progress">
                   <ProgressBar
-                    completed={30}
+                     completed={
+                data?.currentBackers === 0
+                  ? 0
+                  : (data?.currentBackers / data?.maximumBackers) * 100
+              }
                     bgColor="#408F8C"
                     height="5px"
                     borderRadius="60px"
