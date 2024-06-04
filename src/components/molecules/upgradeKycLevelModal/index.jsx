@@ -17,10 +17,10 @@ const UpgradeKycLevelModal = ({ reqKycLevel, setOpen }) => {
         type: 'info',
         message: 'You already reqeusted for upgrade!',
       });
-      setOpen(false);
     } else {
       checkKycLevel();
     }
+    setOpen(false);
   }
   return (
     <HandleKycModalWrapper>
