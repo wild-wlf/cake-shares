@@ -13,7 +13,7 @@ export const HandleLoginModalWrapper = styled.div`
   span {
     max-width: 500px;
     width: 100%;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 300;
     text-align: center;
   }
