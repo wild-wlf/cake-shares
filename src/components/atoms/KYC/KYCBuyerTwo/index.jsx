@@ -23,21 +23,27 @@ const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
   const optionData = [{ label: 'Buyer Level Two', value: 'Buyer Level Two' }];
 
   const onSubmit = async data => {
+    console.log(state);
     if (step === 1) {
       setStep(2);
       return;
     }
-    const { residenceProofImage } = state;
+    const { residenceProofImage, ...bankDetails } = state;
     try {
       setIsLoading(true);
       const payload = {
         userId: user?._id,
         kycRequestLevel: 2,
-        // residenceProofImage,
+        residenceProofImage,
+        bankDetails,
       };
       const formDataToSend = new FormData();
       Object.keys(payload).forEach(key => {
-        formDataToSend.append(key, payload[key]);
+        if (key === 'bankDetails' && typeof payload[key] === 'object') {
+          formDataToSend.append(key, JSON.stringify(payload[key]));
+        } else {
+          formDataToSend.append(key, payload[key]);
+        }
       });
       await kycService.requestKyc(formDataToSend);
       Toast({
@@ -89,7 +95,7 @@ const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
               <Form.Item
                 type="text"
                 label="Account Holder Name"
-                name="AccountHolderName"
+                name="accountHolder"
                 placeholder="Alex Mertiz"
                 rules={[
                   { required: true },
@@ -103,7 +109,7 @@ const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
               <Form.Item
                 type="num"
                 label="Account no"
-                name="accountNo"
+                name="accountNumber"
                 placeholder="35402755003895"
                 rules={[
                   { required: true },

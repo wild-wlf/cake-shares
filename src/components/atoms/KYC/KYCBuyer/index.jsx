@@ -23,8 +23,8 @@ const KycBuyerLevelOne = ({ setOpen, setKycLevel }) => {
       const payload = {
         userId: user?._id,
         kycRequestLevel: 1,
-        // passportImageFront,
-        // passportImageBack,
+        passportImageFront,
+        passportImageBack,
       };
       const formDataToSend = new FormData();
       Object.keys(payload).forEach(key => {
@@ -58,7 +58,7 @@ const KycBuyerLevelOne = ({ setOpen, setKycLevel }) => {
             rules={[{ required: true, message: 'Please Enter Front Side of Passport Image!' }]}>
             <Field
               type="file"
-              accept="image/jpeg, image/jpg, image/png"
+              accept="image/jpeg, image/jpg, image/png, application/pdf"
               uploadTitle="Upload Front Side of Passport"
               onChange={e => console.log(e)}
             />
@@ -69,7 +69,7 @@ const KycBuyerLevelOne = ({ setOpen, setKycLevel }) => {
             rules={[{ required: true, message: 'Please Enter Back Side of Passport Image!' }]}>
             <Field
               type="file"
-              accept="image/jpeg, image/jpg, image/png"
+              accept="image/jpeg, image/jpg, image/png, application/pdf"
               uploadTitle="Upload Back Side of Passport"
               onChange={e => console.log(e)}
               id="back"
