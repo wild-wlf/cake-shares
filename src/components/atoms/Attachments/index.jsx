@@ -9,29 +9,31 @@ const Attachments = () => {
   return (
     <AttachmentsWrapper>
       <h6>Attachments</h6>
-      <div>
-        <Image src={PdfIcon} alt="pdfIcon" width={18.33} height={22} />
-        <span>Competitor Analysis Template</span>
-      </div>
-      <div>
-        <Image src={DocumentIcon} alt="documentIcon" width={18.33} height={22} />
-        <span>How to Build a Case Study</span>
-      </div>
-      <div>
-        <Image src={ProjectIcon} alt="projectIcon" width={18.33} height={22} />
-        <span>Project Documents</span>
-      </div>
-      <div>
-        <Image src={PdfIcon} alt="pdfIcon" width={18.33} height={22} />
-        <span>Competitor Analysis Template</span>
-      </div>
-      <div>
-        <Image src={DocumentIcon} alt="documentIcon" width={18.33} height={22} />
-        <span>How to Build a Case Study</span>
-      </div>{' '}
-      <div>
-        <Image src={DocumentIcon} alt="documentIcon" width={18.33} height={22} />
-        <span>How to Build a Case Study</span>
+      <div className="attachmentWrap">
+        <div className="fileName">
+          <Image src={PdfIcon} alt="pdfIcon" width={18.33} height={22} />
+          <span>Competitor Analysis Template</span>
+        </div>
+        <div className="fileName">
+          <Image src={DocumentIcon} alt="documentIcon" width={18.33} height={22} />
+          <span>How to Build a Case Study</span>
+        </div>
+        <div className="fileName">
+          <Image src={ProjectIcon} alt="projectIcon" width={18.33} height={22} />
+          <span>Project Documents</span>
+        </div>
+        <div className="fileName">
+          <Image src={PdfIcon} alt="pdfIcon" width={18.33} height={22} />
+          <span>Competitor Analysis Template</span>
+        </div>
+        <div className="fileName">
+          <Image src={DocumentIcon} alt="documentIcon" width={18.33} height={22} />
+          <span>How to Build a Case Study</span>
+        </div>{' '}
+        <div className="fileName">
+          <Image src={DocumentIcon} alt="documentIcon" width={18.33} height={22} />
+          <span>How to Build a Case Study</span>
+        </div>
       </div>
     </AttachmentsWrapper>
   );

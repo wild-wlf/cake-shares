@@ -12,6 +12,7 @@ import CenterModal from '../../Modal/CenterModal';
 import Chat from '../../Chat';
 
 const SellerInfo = ({ userInfo }) => {
+
   const [chat, setChat] = useState(false);
   return (
     <>
@@ -20,15 +21,14 @@ const SellerInfo = ({ userInfo }) => {
       </CenterModal>
       <StyledUserInfo>
         <div className="userInfo">
-          {userInfo?.profilePicture ? (
-            <ProfileWrapper>
-              <Image src={userInfo?.profilePicture} alt="userImage" width={170} height={170} />
-            </ProfileWrapper>
-          ) : (
-            <ProfileWrapper>
-              <Image src={profile} alt="userImage" />
-            </ProfileWrapper>
-          )}
+          <ProfileWrapper>
+            <Image
+              src={userInfo?.profilePicture ? userInfo?.profilePicture : profile}
+              alt="userImage"
+              width={170}
+              height={170}
+            />
+          </ProfileWrapper>
 
           <div className="textWrapper">
             <strong className="name">{userInfo?.fullName ? userInfo?.fullName : 'Alex Mertiz'}</strong>
