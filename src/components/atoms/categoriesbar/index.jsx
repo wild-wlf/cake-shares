@@ -16,16 +16,15 @@ import CenterModal from "../Modal/CenterModal";
 import AdvanceSearch from "../advanceSearch";
 import { BiSolidCategory } from "react-icons/bi";
 
-const CategoriesBar = () => {
+const CategoriesBar = ({categories,loading}) => {
   const [modal, setModal] = useState(false);
   const [Tab, setTab] = useState(0);
-
   var settings = {
     dots: false,
     arrows: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
-    autoplay: true,
+    autoplay: false,
     slidesToShow: 1,
     // slidesToScroll: 1,
     variableWidth: true,
@@ -106,8 +105,12 @@ const CategoriesBar = () => {
       <CategoriesBarWrapper>
         <div className="maindiv">
           <div className="slider">
+            {
+              loading ? 
+                "Loading..." :
+
             <Slider {...settings}>
-              {categoryData?.map((item, index) => (
+              {categories?.map((item, index) => (
                 <div key={index}>
                   <Button
                     rounded
@@ -116,12 +119,12 @@ const CategoriesBar = () => {
                     className={Tab === index ? "button active" : "button"}
                     onClick={() => setTab(index)}
                   >
-                    {item.image}
-                    {item.text}
+                    {item.name}
                   </Button>
                 </div>
               ))}
             </Slider>
+            }
           </div>
           <div className="search" onClick={() => setModal(true)}>
             <input type="text" placeholder="Search" readOnly />

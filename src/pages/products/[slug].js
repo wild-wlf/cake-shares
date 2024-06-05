@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import Categories from '../../components/atoms/categories';
 import ProductDetail from '../../components/atoms/productDetail';
 import Amenities from '../../components/atoms/amenities';
@@ -34,13 +35,21 @@ const ProductDetails = ({ userData }) => {
 
   return (
     <>
+      <Head>
+        <title>{productData?.productName}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       {isLoading ? (
         <Loader />
       ) : (
         <>
-          <ProductDetail data={productData?.product} SellerData={productData?.product?.userId} />
+          <ProductDetail
+            data={productData?.product}
+            SellerData={productData?.product?.userId}
+            setProductData={setProductData}
+          />
           <Amenities data={productData?.product} />
-          <Categories data={productData?.otherProducts} />
+          {productData?.otherProducts.length > 0 && <Categories data={productData?.otherProducts} />}
         </>
       )}
     </>

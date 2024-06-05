@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { Fetch } from "../helpers/fetchWrapper";
-import { useCancellablePromise } from "../helpers/promiseHandler";
+import { useEffect, useState } from 'react';
+import { Fetch } from '../helpers/fetchWrapper';
+import { useCancellablePromise } from '../helpers/promiseHandler';
 
 const STATUS = {
-  LOADING: "loading",
-  SUCCESS: "success",
-  ERROR: "error",
+  LOADING: 'loading',
+  SUCCESS: 'success',
+  ERROR: 'error',
 };
 const productService = {
   _url: `${process.env.NEXT_PUBLIC_PRODUCT_URL}`,
@@ -23,22 +23,16 @@ const productService = {
     useEffect(() => {
       setStatus(STATUS.LOADING);
       cancellablePromise(this.getProducts(searchQuery))
-        .then((res) => {
+        .then(res => {
           setProducts(() => res);
           setStatus(STATUS.SUCCESS);
         })
         .catch(() => setStatus(STATUS.ERROR));
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [
-      searchQuery?.searchText,
-      searchQuery?.page,
-      searchQuery?.pageSize,
-      searchQuery?.searchText,
-      refetch,
-    ]);
+    }, [searchQuery?.searchText, searchQuery?.page, searchQuery?.pageSize, searchQuery?.searchText, refetch]);
     return {
       products_loading: status === STATUS.LOADING,
-      products_error: status === STATUS.ERROR ? status : "",
+      products_error: status === STATUS.ERROR ? status : '',
       products_data: products,
     };
   },
@@ -52,21 +46,16 @@ const productService = {
     const [status, setStatus] = useState(STATUS.LOADING);
     useEffect(() => {
       setStatus(STATUS.LOADING);
-      cancellablePromise(this.getAssets(searchQuery))
-        .then((res) => {
+      cancellablePromise(this.getUserAssets(searchQuery))
+        .then(res => {
           setAssets(() => res);
           setStatus(STATUS.SUCCESS);
         })
         .catch(() => setStatus(STATUS.ERROR));
-    }, [
-      searchQuery?.searchText,
-      searchQuery?.page,
-      searchQuery?.pageSize,
-      refetch,
-    ]);
+    }, [searchQuery?.searchText, searchQuery?.page, searchQuery?.pageSize, refetch]);
     return {
       assets_loading: status === STATUS.LOADING,
-      assets_error: status === STATUS.ERROR ? status : "",
+      assets_error: status === STATUS.ERROR ? status : '',
       assets_data: assets,
     };
   },
@@ -77,12 +66,12 @@ const productService = {
       return res;
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
   },
 
   async getProducts({ page = 1, pageSize = 10, searchText, getAll = true }) {
     let res = await Fetch.get(
-      `${this._url}/products?itemsPerPage=${pageSize}&page=${page}&searchText=${searchText}&getAll=${getAll}`
+      `${this._url}/products?itemsPerPage=${pageSize}&page=${page}&searchText=${searchText}&getAll=${getAll}`,
     );
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
@@ -92,7 +81,7 @@ const productService = {
       };
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
   },
 
   async getProductDetail(id) {
@@ -102,7 +91,7 @@ const productService = {
       return res;
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
   },
 
   async getAssets() {
@@ -115,7 +104,55 @@ const productService = {
       };
     }
     const { message } = await res.json();
-    throw new Error(message ?? "Something went wrong");
+    throw new Error(message ?? 'Something went wrong');
+  },
+  async getAllCategories() {
+    let res = await Fetch.get(`${this._url}/get-all-categories`);
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return {
+        items: res.items,
+      };
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? 'Something went wrong');
+  },
+
+  async getUserAssets() {
+    let res = await Fetch.get(`${this._url}/get-all-assets`);
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return res;
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? 'Something went wrong');
+  },
+
+  async getSearchProducts({
+    page = 1,
+    itemsPerPage = 10,
+    searchText = '',
+    investmentType = '',
+    kycLevel = '',
+    minInvestment = '',
+    maxInvestment = '',
+    minBackers = '',
+    minFundsRaised = '',
+    minAnnualCost = '',
+    maxDaysLeft = '',
+    country = '',
+  }) {
+    let res = await Fetch.get(
+      `${this._url}/search-products?page=${page}&itemsPerPage=${itemsPerPage}&searchText=${searchText}&investmentType=${investmentType}&kycLevel=${kycLevel}&minInvestmentVolume=${minInvestment}&maxInvestmentVolume=${maxInvestment}&valueRaised=${minFundsRaised}&minimumBackers=${minBackers}&country=${country}&daysLeft=${maxDaysLeft}`,
+    );
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return {
+        items: res.items,
+      };
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? 'Something went wrong');
   },
 };
 export default productService;

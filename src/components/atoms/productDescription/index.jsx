@@ -24,7 +24,7 @@ const ProductDescription = ({ data, SellerData }) => {
             </div>
           </div>
           <div className="total">
-            Total Value Raised (USD) <span> $ 0.00</span>
+            Total Value Raised (USD) <span> $ {data?.valueRaised || '0.00'}</span>
           </div>
         </div>
         <div className="seller">

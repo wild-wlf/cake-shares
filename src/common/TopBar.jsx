@@ -51,6 +51,8 @@ const TopBar = () => {
     buyerRegistration,
     setBuyerRegistrationData,
     buyerRegistrationData,
+    loginmodal,
+    setLoginModal,
   } = useContext(UserContext);
   const { onLogin, loading, isLoggedIn, user } = useContextHook(AuthContext, v => ({
     onLogin: v.onLogin,
@@ -60,7 +62,6 @@ const TopBar = () => {
   }));
 
   const [sideNav, setSideNav] = useState(false);
-  const [loginmodal, setLoginModal] = useState(false);
   const [buyerloginmodal, setBuyerLoginModal] = useState(false);
   const [sellerloginmodal, setSellerLoginModal] = useState(false);
   const [sellerregistermodal, setSellerRegisterModal] = useState(false);
@@ -332,9 +333,7 @@ const TopBar = () => {
 
           {isLoggedIn ? (
             <>
-              <div
-                className="wallet"
-                onClick={() => window.open('https://cake-admin.webevis.com/?type=buyer', '_blank')}>
+              <div className="wallet" onClick={() => {}}>
                 <FaWallet />
                 <span>My Wallet</span>
               </div>

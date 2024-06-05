@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import Button from "@/components/atoms/Button";
-import Field from "@/components/atoms/Field";
-import { useForm } from "@/components/molecules/Form";
-import { StyledEditForm } from "./EditForm.styles";
-import Form from "@/components/molecules/Form/Form";
-import userService from "@/services/userService";
-import Toast from "@/components/molecules/Toast";
-import { useContextHook } from "use-context-hook";
-import { AuthContext } from "@/components/Context/authContext";
+import React, { useEffect, useState } from 'react';
+import Button from '@/components/atoms/Button';
+import Field from '@/components/atoms/Field';
+import { useForm } from '@/components/molecules/Form';
+import { StyledEditForm } from './EditForm.styles';
+import Form from '@/components/molecules/Form/Form';
+import userService from '@/services/userService';
+import Toast from '@/components/molecules/Toast';
+import { useContextHook } from 'use-context-hook';
+import { AuthContext } from '@/components/Context/authContext';
 
 const EditBank = ({ bankInfo, onClose }) => {
-  const { setPermission ,user} = useContextHook(AuthContext, (v) => ({
+  const { setPermission, user } = useContextHook(AuthContext, v => ({
     setPermission: v.setPermission,
     user: v.user,
   }));
@@ -29,12 +29,12 @@ const EditBank = ({ bankInfo, onClose }) => {
   async function handelSubmit(e) {
     setloading(true);
     let obj = {
-      type: "bank",
+      type: 'bank',
       info: {
-        bankName: e.bankName,
-        iban: e.iban,
-        swiftBicNumber: e.swiftBicNumber,
-        userId: e.userId,
+        bankName: e?.bankName?.trim(),
+        iban: e?.iban?.trim(),
+        swiftBicNumber: e?.swiftBicNumber?.trim(),
+        userId: e?.userId?.trim(),
       },
     };
 
@@ -42,8 +42,8 @@ const EditBank = ({ bankInfo, onClose }) => {
       await userService.update(obj, user._id);
 
       Toast({
-        type: "success",
-        message: "updated successfully",
+        type: 'success',
+        message: 'updated successfully',
       });
       setloading(false);
       setPermission(true);
@@ -51,7 +51,7 @@ const EditBank = ({ bankInfo, onClose }) => {
     } catch (error) {
       setloading(false);
       Toast({
-        type: "error",
+        type: 'error',
         message: error.message,
       });
     }
@@ -72,12 +72,11 @@ const EditBank = ({ bankInfo, onClose }) => {
               required: true,
             },
             {
-              pattern: /^.{0,40}$/,
-              message: "Maximum Character Length is 256",
+              pattern: /^.{0,50}$/,
+              message: 'Maximum Character Length is 256',
             },
-          ]}
-        >
-          <Field />
+          ]}>
+          <Field maxLength={50} />
         </Form.Item>
         <Form.Item
           type="text"
@@ -89,14 +88,14 @@ const EditBank = ({ bankInfo, onClose }) => {
           rules={[
             {
               required: true,
+              message: 'Please enter IBAN number',
             },
             {
-              pattern: /^.{0,256}$/,
-              message: "Maximum Character Length is 256",
+              pattern: /^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/,
+              message: 'Please enter a valid IBAN number',
             },
-          ]}
-        >
-          <Field />
+          ]}>
+          <Field maxLength={30} />
         </Form.Item>
         <Form.Item
           type="text"
@@ -104,19 +103,18 @@ const EditBank = ({ bankInfo, onClose }) => {
           name="swiftBicNumber"
           sm
           rounded
-          placeholder="PK033310084246213"
+          placeholder="ABCDEF12"
           rules={[
             {
               required: true,
+              message: 'Please enter SWIFT / BIC Number',
             },
             {
-              pattern: /^.{0,40}$/,
-
-              message: "Maximum Character Length is 256",
+              pattern: /^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
+              message: 'Invalid SWIFT/BIC format',
             },
-          ]}
-        >
-          <Field />
+          ]}>
+          <Field maxLength={11} />
         </Form.Item>
         <Form.Item
           type="text"
@@ -124,30 +122,22 @@ const EditBank = ({ bankInfo, onClose }) => {
           name="userId"
           sm
           rounded
-          placeholder="33445554"
+          placeholder="12345678"
           rules={[
             {
               required: true,
+              message: 'Please enter User ID',
             },
             {
-              pattern: /^.{0,256}$/,
-              message: "Maximum Character Length is 256",
+              pattern: /^[a-zA-Z0-9_-]{8,40}$/,
+              message: 'User ID must be between 8 and 256 characters long',
             },
-          ]}
-        >
-          <Field />
+          ]}>
+          <Field maxLength={40} />
         </Form.Item>
       </div>
 
-      <Button
-        rounded
-        md
-        btntype="primary"
-        width="170"
-        htmlType="submit"
-        disabled={loading}
-        loader={loading}
-      >
+      <Button rounded md btntype="primary" width="170" htmlType="submit" disabled={loading} loader={loading}>
         Save Changes
       </Button>
     </StyledEditForm>

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SearchFiltersWrapper = styled.div`
   padding: 26px 0 40px 0;
@@ -43,6 +43,13 @@ export const SearchFiltersWrapper = styled.div`
       }
     }
   }
+  .btn-wrapper {
+    height: 45px;
+    max-width: 120px;
+    width: 100%;
+    margin-top: 25px;
+  }
+
   @media only screen and (max-width: 1200px) {
     flex-wrap: wrap;
     .dropdown-div {
@@ -51,6 +58,9 @@ export const SearchFiltersWrapper = styled.div`
     .volumeWrapper {
       width: 48%;
     }
+    .btn-wrapper {
+      max-width: 200px;
+    }
   }
 
   @media only screen and (max-width: 768px) {
@@ -58,5 +68,8 @@ export const SearchFiltersWrapper = styled.div`
   }
   @media only screen and (max-width: 576px) {
     padding: 30px 0px 20px 0px;
+    .btn-wrapper {
+      max-width: 48%;
+    }
   }
 `;
