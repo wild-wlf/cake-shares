@@ -58,6 +58,7 @@ const KycBuyerLevelOne = ({ setOpen, setKycLevel }) => {
             rules={[{ required: true, message: 'Please Enter Front Side of Passport Image!' }]}>
             <Field
               type="file"
+              fileSize="5"
               accept="image/jpeg, image/jpg, image/png, application/pdf"
               uploadTitle="Upload Front Side of Passport"
               onChange={e => console.log(e)}
@@ -69,6 +70,7 @@ const KycBuyerLevelOne = ({ setOpen, setKycLevel }) => {
             rules={[{ required: true, message: 'Please Enter Back Side of Passport Image!' }]}>
             <Field
               type="file"
+              fileSize="5"
               accept="image/jpeg, image/jpg, image/png, application/pdf"
               uploadTitle="Upload Back Side of Passport"
               onChange={e => console.log(e)}

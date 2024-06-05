@@ -20,7 +20,6 @@ const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
   const [state, setState] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(1);
-  const optionData = [{ label: 'Buyer Level Two', value: 'Buyer Level Two' }];
 
   const onSubmit = async data => {
     console.log(state);
@@ -78,9 +77,9 @@ const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
           <>
             <Form.Item
               type="text"
-              label="Email Address"
-              name="email"
-              placeholder="Your Email or Username"
+              label="Bank Name"
+              name="bankName"
+              placeholder="Bank of England"
               rules={[
                 { required: true },
                 {
@@ -142,7 +141,7 @@ const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
               <Form.Item
                 rounded
                 name="residenceProofImage"
-                rules={[{ required: true, message: 'Please Enter Residence Proof!' }]}>
+                rules={[{ required: true, message: 'Please Upload Residence Proof!' }]}>
                 <Field
                   type="file"
                   fileSize="5"
