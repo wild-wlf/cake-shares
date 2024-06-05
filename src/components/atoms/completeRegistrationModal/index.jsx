@@ -1,27 +1,27 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Wrapper } from "./completeRegistrationModal.style";
-import Field from "../Field";
-import Form, { useForm } from "@/components/molecules/Form";
-import Button from "../Button";
-import Select from "../Select";
-import Image from "next/image";
-import { countries } from "@/components/Constant";
-import UploadImg from "@/components/molecules/UploadImg";
-import KycLevel from "../KYC/KycLevel";
-import { KycContext } from "@/components/Context/KycContext";
-import { UserContext } from "@/components/Context/UserContext";
-import userService from "@/services/userService";
-import { convertToFormData } from "@/helpers/common";
-import Toast from "@/components/molecules/Toast";
+import React, { useContext, useEffect, useState } from 'react';
+import { Wrapper } from './completeRegistrationModal.style';
+import Field from '../Field';
+import Form, { useForm } from '@/components/molecules/Form';
+import Button from '../Button';
+import Select from '../Select';
+import Image from 'next/image';
+import { countries } from '@/components/Constant';
+import UploadImg from '@/components/molecules/UploadImg';
+import KycLevel from '../KYC/KycLevel';
+import { KycContext } from '@/components/Context/KycContext';
+import { UserContext } from '@/components/Context/UserContext';
+import userService from '@/services/userService';
+import { convertToFormData } from '@/helpers/common';
+import Toast from '@/components/molecules/Toast';
 const CompleteRegistrationModal = ({ handleRegistration }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
   const { buyerRegistrationData } = useContext(UserContext);
   // const { message } = userService.createUser();
   const [arr, setArr] = useState(countries);
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState('');
   const [form] = useForm();
 
-  function handelChange(value = "PK") {
+  function handelChange(value = 'PK') {
     const newArr = arr.map((elem, index) => ({
       ...elem,
       label: (
@@ -49,7 +49,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
     handelChange();
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     let obj = {
       profilePicture: image,
       type: buyerRegistrationData.type,
@@ -69,6 +69,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
         name: e.person_name?.trim(),
         passportNumber: e.passport_number?.trim(),
         country: e.country?.trim(),
+        email: e.inheritanceEmail?.trim(),
       },
     };
 
@@ -79,13 +80,13 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
     try {
       await userService.createUser(formData);
       Toast({
-        type: "success",
-        message: "User Registered Successfully!",
+        type: 'success',
+        message: 'User Registered Successfully!',
       });
       handleRegistration();
     } catch (error) {
       Toast({
-        type: "error",
+        type: 'error',
         message: error.message,
       });
     }
@@ -97,7 +98,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
           <h5>Personal Info:</h5>
 
           <div>
-            <UploadImg onChange={(e) => setImage(e)} />
+            <UploadImg onChange={e => setImage(e)} />
             <div className="input-div">
               <Form.Item
                 type="text"
@@ -109,15 +110,14 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please enter Full Name",
+                    message: 'Please enter Full Name',
                   },
                   {
                     pattern: /^.{0,40}$/,
-                    message: "Maximum Character Length is 256",
+                    message: 'Maximum Character Length is 256',
                   },
-                ]}
-              >
-                <Field maxLength={40}/>
+                ]}>
+                <Field maxLength={40} />
               </Form.Item>
               <Form.Item
                 type="text"
@@ -129,15 +129,14 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please enter username",
+                    message: 'Please enter username',
                   },
                   {
                     pattern: /^(?!.*\s)[a-zA-Z0-9_-]{5,20}$/,
-                    message: "Maximum Character Length is 256",
+                    message: 'Maximum Character Length is 256',
                   },
-                ]}
-              >
-                <Field maxLength={20}/>
+                ]}>
+                <Field maxLength={20} />
               </Form.Item>
             </div>
             <div className="input-div">
@@ -151,15 +150,14 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please enter email address",
+                    message: 'Please enter email address',
                   },
                   {
                     pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-                    message: "Maximum Character Length is 256",
+                    message: 'Maximum Character Length is 256',
                   },
-                ]}
-              >
-                <Field maxLength={40}/>
+                ]}>
+                <Field maxLength={40} />
               </Form.Item>
               <Form.Item
                 label="Country"
@@ -168,8 +166,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                   {
                     required: true,
                   },
-                ]}
-              >
+                ]}>
                 <Select options={arr} />
               </Form.Item>
             </div>
@@ -183,10 +180,9 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please enter Date Of Birth",
+                    message: 'Please enter Date Of Birth',
                   },
-                ]}
-              >
+                ]}>
                 <Field />
               </Form.Item>
             </div>
@@ -207,15 +203,14 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please enter Bank Name",
+                    message: 'Please enter Bank Name',
                   },
                   {
                     pattern: /^.{8,50}$/,
-                    message: "Please enter a valid Bank Name",
+                    message: 'Please enter a valid Bank Name',
                   },
-                ]}
-              >
-                <Field maxLength={50}/>
+                ]}>
+                <Field maxLength={50} />
               </Form.Item>
               <Form.Item
                 type="text"
@@ -227,15 +222,14 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please enter IBAN number",
+                    message: 'Please enter IBAN number',
                   },
                   {
                     pattern: /^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/,
-                    message: "Please enter a valid IBAN number",
+                    message: 'Please enter a valid IBAN number',
                   },
-                ]}
-              >
-                <Field maxLength={30}/>
+                ]}>
+                <Field maxLength={30} />
               </Form.Item>
             </div>
             <div className="input-div">
@@ -249,15 +243,14 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please enter SWIFT / BIC Number",
+                    message: 'Please enter SWIFT / BIC Number',
                   },
                   {
                     pattern: /^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
-                    message: "Invalid SWIFT/BIC format",
+                    message: 'Invalid SWIFT/BIC format',
                   },
-                ]}
-              >
-                <Field maxLength={11}/>
+                ]}>
+                <Field maxLength={11} />
               </Form.Item>
               <Form.Item
                 type="text"
@@ -269,16 +262,14 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please enter User ID",
+                    message: 'Please enter User ID',
                   },
                   {
                     pattern: /^[a-zA-Z0-9_-]{8,40}$/,
-                    message:
-                      "User ID must be between 8 and 256 characters long",
+                    message: 'User ID must be between 8 and 256 characters long',
                   },
-                ]}
-              >
-                <Field maxLength={40}/>
+                ]}>
+                <Field maxLength={40} />
               </Form.Item>
             </div>
           </div>
@@ -319,15 +310,14 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please enter Name of Person",
+                    message: 'Please enter Name of Person',
                   },
                   {
                     pattern: /^.{2,40}$/,
-                    message: "Please enter a valid name",
+                    message: 'Please enter a valid name',
                   },
-                ]}
-              >
-                <Field maxLength={40}/>
+                ]}>
+                <Field maxLength={40} />
               </Form.Item>
               <Form.Item
                 type="number"
@@ -339,19 +329,17 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please enter Passport Number",
+                    message: 'Please enter Passport Number',
                   },
                   {
                     pattern: /^[a-zA-Z0-9]{6,9}$/,
-                    message:
-                      "Passport number must be between 6 and 9 characters long",
+                    message: 'Passport number must be between 6 and 9 characters long',
                   },
-                ]}
-              >
-                <Field maxLength={9}/>
+                ]}>
+                <Field maxLength={9} />
               </Form.Item>
             </div>
-            <div className="DOB-div">
+            <div className="input-div">
               <Form.Item
                 type="text"
                 label="Country of Residence"
@@ -362,15 +350,33 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please enter Country",
+                    message: 'Please enter Country',
                   },
                   {
                     pattern: /^.{0,40}$/,
-                    message: "Please enter a valid country",
+                    message: 'Please enter a valid country',
                   },
-                ]}
-              >
-                <Field maxLength={40}/>
+                ]}>
+                <Field maxLength={40} />
+              </Form.Item>
+              <Form.Item
+                type="text"
+                label="Email Address"
+                name="inheritanceEmail"
+                sm
+                rounded
+                placeholder="alex123@gmail.com"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please enter email address',
+                  },
+                  {
+                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+                    message: 'Maximum Character Length is 256',
+                  },
+                ]}>
+                <Field maxLength={40} />
               </Form.Item>
             </div>
             {/* <div className="addmore">

@@ -1,52 +1,53 @@
-import Button from "@/components/atoms/Button";
-import Field from "@/components/atoms/Field";
-import React, { useEffect, useState } from "react";
-import { StyledEditForm } from "./EditForm.styles";
-import Form from "@/components/molecules/Form/Form";
-import { useForm } from "@/components/molecules/Form";
-import { countries } from "@/components/Constant";
-import Image from "next/image";
-import Select from "@/components/atoms/Select";
-import ModalContainer from "@/components/atoms/ModalContainer";
-import { MdModeEdit } from "react-icons/md";
-import Password from "../../../../../_assets/changePassword.svg";
-import ChangePassword from "../ChangePassword";
-import CenterModal from "@/components/atoms/Modal/CenterModal";
-import { AuthContext } from "@/components/Context/authContext";
-import { useContextHook } from "use-context-hook";
-import userService from "@/services/userService";
-import Toast from "@/components/molecules/Toast";
+import Button from '@/components/atoms/Button';
+import Field from '@/components/atoms/Field';
+import React, { useEffect, useState } from 'react';
+import { StyledEditForm } from './EditForm.styles';
+import Form from '@/components/molecules/Form/Form';
+import { useForm } from '@/components/molecules/Form';
+import { countries } from '@/components/Constant';
+import Image from 'next/image';
+import Select from '@/components/atoms/Select';
+import ModalContainer from '@/components/atoms/ModalContainer';
+import { MdModeEdit } from 'react-icons/md';
+import Password from '../../../../../_assets/changePassword.svg';
+import ChangePassword from '../ChangePassword';
+import CenterModal from '@/components/atoms/Modal/CenterModal';
+import { AuthContext } from '@/components/Context/authContext';
+import { useContextHook } from 'use-context-hook';
+import userService from '@/services/userService';
+import Toast from '@/components/molecules/Toast';
 const AddInheritance = ({ onClose }) => {
   const [arr, setArr] = useState(countries);
   const [changePassword, setChangePassword] = useState(false);
   const [form] = useForm();
-  const { user, setPermission } = useContextHook(AuthContext, (v) => ({
+  const { user, setPermission } = useContextHook(AuthContext, v => ({
     user: v.user,
     setPermission: v.setPermission,
   }));
   const [loading, setLoading] = useState(false);
   async function handelSubmit(e) {
     const obj = {
-      type: "inheritance",
+      type: 'inheritance',
       info: {
         userId: user?._id,
-        name: e?.name,
-        passportNumber: e?.passportNumber,
-        country: e?.country,
+        name: e?.name?.trim(),
+        passportNumber: e?.passportNumber?.trim(),
+        country: e?.country?.trim(),
+        email: e?.inheritanceEmail?.trim(),
       },
     };
     setLoading(true);
     try {
       await userService.addInheritance(obj);
       Toast({
-        type: "success",
-        message: "updated successfully",
+        type: 'success',
+        message: 'updated successfully',
       });
       setPermission(true);
       onClose();
     } catch (error) {
       Toast({
-        type: "error",
+        type: 'error',
         message: error.message,
       });
     } finally {
@@ -68,14 +69,13 @@ const AddInheritance = ({ onClose }) => {
             rules={[
               {
                 required: true,
-                message: "Person name is required",
+                message: 'Person name is required',
               },
               {
                 pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
+                message: 'Maximum Character Length is 256',
               },
-            ]}
-          >
+            ]}>
             <Field />
           </Form.Item>
           <Form.Item
@@ -89,10 +89,9 @@ const AddInheritance = ({ onClose }) => {
               { required: true },
               {
                 pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
+                message: 'Maximum Character Length is 256',
               },
-            ]}
-          >
+            ]}>
             <Field />
           </Form.Item>
           <Form.Item
@@ -107,22 +106,32 @@ const AddInheritance = ({ onClose }) => {
 
               {
                 pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
+                message: 'Maximum Character Length is 256',
               },
-            ]}
-          >
+            ]}>
             <Field />
           </Form.Item>
+          <Form.Item
+            type="text"
+            label="Email Address"
+            name="inheritanceEmail"
+            sm
+            rounded
+            placeholder="alex123@gmail.com"
+            rules={[
+              {
+                required: true,
+                message: 'Please enter email address',
+              },
+              {
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+                message: 'Maximum Character Length is 256',
+              },
+            ]}>
+            <Field maxLength={40} />
+          </Form.Item>
         </div>
-        <Button
-          rounded
-          md
-          btntype="primary"
-          width="170"
-          htmlType="submit"
-          disabled={loading}
-          loader={loading}
-        >
+        <Button rounded md btntype="primary" width="170" htmlType="submit" disabled={loading} loader={loading}>
           Add
         </Button>
       </StyledEditForm>

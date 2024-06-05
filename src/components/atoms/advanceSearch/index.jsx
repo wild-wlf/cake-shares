@@ -20,11 +20,10 @@ const AdvanceSearch = () => {
   const [arr, setArr] = useState(countries);
   const [form] = useForm();
   const router = useRouter();
-    const {  fetch } = useContextHook(AuthContext, v => ({
-  
+  const { fetch } = useContextHook(AuthContext, v => ({
     fetch: v.fetch,
   }));
-const { categories_data } = categoryService.GetAllCategories(
+  const { categories_data } = categoryService.GetAllCategories(
     {
       getAll: true,
     },
@@ -48,8 +47,8 @@ const { categories_data } = categoryService.GetAllCategories(
     searchText: '',
     popular: false,
     private: false,
-    minInvestment: "",
-    maxInvestment: "",
+    minInvestment: '',
+    maxInvestment: '',
   });
   const handlePopularChecked = () => {
     setSearchQuery(prev => ({
@@ -77,8 +76,8 @@ const { categories_data } = categoryService.GetAllCategories(
       minInvestment: searchQuery?.minInvestment,
       maxInvestment: searchQuery?.maxInvestment,
     };
-    
-     handleSearchQuery(obj);
+
+    handleSearchQuery(obj);
     router.push('/advanceSearch');
   };
   return (
@@ -98,32 +97,18 @@ const { categories_data } = categoryService.GetAllCategories(
               sm
               rounded
               placeholder="Select Type"
-            options={categoriesOptions}
-
-              rules={[
-                {
-                  pattern: /^.{0,40}$/,
-                  message: 'Maximum Character Length is 256',
-                },
-              ]}
-            >
-              <Select              />
-            </Form.Item>
-          </div>
-          <div className="dropdown-div">
-            <Form.Item
-              type="text"
-              label="Country"
-              name="country"
-              sm
-              rounded
-              placeholder="Select Country"
+              options={categoriesOptions}
               rules={[
                 {
                   pattern: /^.{0,40}$/,
                   message: 'Maximum Character Length is 256',
                 },
               ]}>
+              <Select />
+            </Form.Item>
+          </div>
+          <div className="dropdown-div">
+            <Form.Item type="text" label="Country" name="country" sm rounded placeholder="Select Country">
               <Select options={arr} />
             </Form.Item>
           </div>
@@ -136,19 +121,17 @@ const { categories_data } = categoryService.GetAllCategories(
               rounded
               placeholder="Select Level"
               options={[
-                  { label: 'Level 0', value: 0 },
-                  { label: 'Level 1', value: 1 },
-                  { label: 'Level 2', value: 2 },
-                ]}
+                { label: 'Level 0', value: 0 },
+                { label: 'Level 1', value: 1 },
+                { label: 'Level 2', value: 2 },
+              ]}
               rules={[
                 {
                   pattern: /^.{0,40}$/,
                   message: 'Maximum Character Length is 256',
                 },
               ]}>
-              <Select
-                
-              />
+              <Select />
             </Form.Item>
           </div>
         </div>
@@ -162,9 +145,11 @@ const { categories_data } = categoryService.GetAllCategories(
               <input type="text" placeholder="$0" readOnly value={`$${searchQuery.maxInvestment}`} />
             </div>
           </div>
-          <RangeSlider  onChange={(_) =>{setSearchQuery((prev)=> ({...prev, minInvestment:_[0] , maxInvestment:_[1], }))}
-
-           } />
+          <RangeSlider
+            onChange={_ => {
+              setSearchQuery(prev => ({ ...prev, minInvestment: _[0], maxInvestment: _[1] }));
+            }}
+          />
         </div>
 
         <div className="min-values-div">
@@ -178,11 +163,11 @@ const { categories_data } = categoryService.GetAllCategories(
               placeholder="0%"
               rules={[
                 {
-                  pattern: /^.{0,40}$/,
-                  message: 'Maximum Character Length is 256',
+                  pattern: /^.{0,10}$/,
+                  message: 'Maximum Character Length is 10',
                 },
               ]}>
-              <Field />
+              <Field maxLength={10} />
             </Form.Item>
           </div>
           <div className="minvalues">
@@ -195,11 +180,11 @@ const { categories_data } = categoryService.GetAllCategories(
               placeholder="0"
               rules={[
                 {
-                  pattern: /^.{0,40}$/,
-                  message: 'Maximum Character Length is 256',
+                  pattern: /^.{0,10}$/,
+                  message: 'Maximum Character Length is 10',
                 },
               ]}>
-              <Field />
+              <Field maxLength={10} />
             </Form.Item>
           </div>
           <div className="minvalues">
@@ -212,11 +197,11 @@ const { categories_data } = categoryService.GetAllCategories(
               placeholder="0"
               rules={[
                 {
-                  pattern: /^.{0,40}$/,
-                  message: 'Maximum Character Length is 256',
+                  pattern: /^.{0,3}$/,
+                  message: 'Maximum Character Length is 3',
                 },
               ]}>
-              <Field />
+              <Field maxLength={3} />
             </Form.Item>
           </div>
           <div className="minvalues">
@@ -229,11 +214,11 @@ const { categories_data } = categoryService.GetAllCategories(
               placeholder="0%"
               rules={[
                 {
-                  pattern: /^.{0,40}$/,
-                  message: 'Maximum Character Length is 256',
+                  pattern: /^.{0,3}$/,
+                  message: 'Maximum Character Length is 3',
                 },
               ]}>
-              <Field />
+              <Field maxLength={3} />
             </Form.Item>
           </div>
         </div>
