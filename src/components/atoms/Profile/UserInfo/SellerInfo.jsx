@@ -16,7 +16,7 @@ const SellerInfo = ({ userInfo }) => {
   return (
     <>
       <CenterModal zIndex={9999} open={chat} setOpen={setChat} width="1339" title="Logan's Chat">
-        <Chat />
+        <Chat userInfo={userInfo} />
       </CenterModal>
       <StyledUserInfo>
         <div className="userInfo">
