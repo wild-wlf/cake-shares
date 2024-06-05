@@ -13,19 +13,20 @@ const AdvanceSearch = () => {
     setListView(!listview);
   };
 
-  // console.log('page', searchQuery);
-
   const { searchQuery } = useContext(SearchContext);
   const { products_data, products_loading } = productService.GetProducts(searchQuery);
-
+  const [data, setData] = useState([]);
   useEffect(() => {
-    try {
-      const res = productService.getSearchProducts(searchQuery);
-      console.log(res);
-    } catch (err) {
-      console.log(err);
+    async function AdvanceFilter() {
+      try {
+        const res = await productService.getSearchProducts(searchQuery);
+        setData(res?.items);
+      } catch (err) {
+        console.log(err);
+      }
     }
-  }, []);
+    AdvanceFilter();
+  }, [searchQuery]);
 
   return (
     <>
@@ -33,12 +34,12 @@ const AdvanceSearch = () => {
       <SearchFilterFields />
       {listview ? (
         <>
-          <SearchSlider data={products_data?.popularProducts} />
-          <SearchSlider data={products_data?.popularProducts} />
-          <SearchSlider data={products_data?.popularProducts} />
+          <SearchSlider data={data} />
+          <SearchSlider data={data} />
+          <SearchSlider data={data} />
         </>
       ) : (
-        <AdvanceSearchGrid data={products_data?.popularProducts} />
+        <AdvanceSearchGrid data={data} />
       )}
     </>
   );
