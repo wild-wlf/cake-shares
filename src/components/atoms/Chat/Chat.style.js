@@ -14,4 +14,7 @@ export const ChatWrapper = styled.div`
 export const ChatBody = styled.div`
   height: 500px;
   overflow: auto;
+  .messages-holder {
+    margin-bottom: 20px;
+  }
 `;
