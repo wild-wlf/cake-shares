@@ -65,7 +65,7 @@ const SellerInfo = ({ userInfo }) => {
           onClick={() => {
             setChat(true);
           }}>
-          Chat with {userInfo?.fullName ? userInfo?.fullName : 'Seller'}
+          <span className="username">Chat with {userInfo?.fullName ? userInfo?.fullName : 'Seller'}</span>
           <Image src={chatIcon} alt="chatIcon" />
         </Button>
       </StyledUserInfo>

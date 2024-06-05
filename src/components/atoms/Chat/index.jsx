@@ -10,7 +10,288 @@ const Chat = ({ userInfo }) => {
     <ChatWrapper>
       <div className="chatWrapper">
         <ChatHeader userInfo={userInfo} />
-        <ChatBody></ChatBody>
+        <ChatBody>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+          <h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, corrupti! Dolor, vero eaque incidunt quia
+            reprehenderit laboriosam facilis quidem, enim autem quod iure totam, quos nemo adipisci cupiditate
+            architecto suscipit!
+          </h1>
+        </ChatBody>
         <ChatFooter />
       </div>
     </ChatWrapper>
