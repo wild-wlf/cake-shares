@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const ChatWrapper = styled.div`
   display: flex;
+  gap: 20px;
   width: 100%;
-  padding: 27px 0px 0;
+  padding: 27px 0px 10px;
   .chatWrapper {
     width: 100%;
     position: relative;
