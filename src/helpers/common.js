@@ -2,51 +2,51 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable no-plusplus */
-import { differenceInCalendarDays, format } from "date-fns";
-import Compress from "react-image-file-resizer";
-import styled from "styled-components";
-import Grid from "../components/atoms/Grid";
+import { differenceInCalendarDays, format } from 'date-fns';
+import Compress from 'react-image-file-resizer';
+import styled from 'styled-components';
+import Grid from '../components/atoms/Grid';
 
 export const setCookie = (name, value, days, domain) => {
-  let expires = "";
+  let expires = '';
   if (days) {
     const date = new Date();
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
     expires = `; expires=${date.toUTCString()}`;
   }
-  const domainString = domain ? `; domain=${domain}` : "";
-  console.log(domainString)
-  document.cookie = `${name}=${value || ""}${expires}; path=/${domainString}`;
+  const domainString = domain ? `; domain=${domain}` : '';
+  console.log(domainString);
+  document.cookie = `${name}=${value || ''}${expires}; path=/${domainString}`;
 
   return true;
 };
 
-export const getCookie = (name) => {
+export const getCookie = name => {
   const nameEQ = `${name}=`;
-  const ca = typeof document !== "undefined" && document.cookie.split(";");
+  const ca = typeof document !== 'undefined' && document.cookie.split(';');
   for (let i = 0; i < ca.length; i++) {
     let c = ca[i];
-    while (c.charAt(0) === " ") c = c.substring(1, c.length);
+    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
     if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
   }
   return null;
 };
 
-export const clearCookie = (name) => {
-  if (typeof document !== "undefined") {
+export const clearCookie = name => {
+  if (typeof document !== 'undefined') {
     document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
   } else {
-    console.warn("clearCookie function called in a non-browser environment");
+    console.warn('clearCookie function called in a non-browser environment');
   }
   return true;
 };
 
-export const formatNumber = (number) => {
+export const formatNumber = number => {
   return new Intl.NumberFormat().format(number);
 };
 
-export const convertPdfBase64 = (file) =>
-  new Promise((resolve) => {
+export const convertPdfBase64 = file =>
+  new Promise(resolve => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
@@ -54,8 +54,8 @@ export const convertPdfBase64 = (file) =>
     };
   });
 
-export const compressImage = (file, type = "JPEG") =>
-  new Promise((resolve) => {
+export const compressImage = (file, type = 'JPEG') =>
+  new Promise(resolve => {
     Compress.imageFileResizer(
       file,
       Infinity,
@@ -63,46 +63,46 @@ export const compressImage = (file, type = "JPEG") =>
       type,
       70,
       0,
-      (uri) => {
+      uri => {
         resolve(uri);
       },
-      "base64"
+      'base64',
     );
   });
 
-export const capitalize = (str = "") => {
-  const arr = str.toLowerCase().split(" ");
+export const capitalize = (str = '') => {
+  const arr = str.toLowerCase().split(' ');
 
   for (let i = 0; i < arr.length; i++) {
     arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
   }
-  const str2 = arr.join(" ");
+  const str2 = arr.join(' ');
   return str2;
 };
 
-export const getStatusIconClass = (status = "") => {
+export const getStatusIconClass = (status = '') => {
   switch (status.trim().toLowerCase()) {
-    case "pending":
-      return "icon-clock";
-    case "processing":
-      return "icon-clock";
-    case "approved":
-      return "icon-check-circle";
-    case "rejected":
-      return "icon-error-circle";
-    case "cancelled":
-      return "icon-times-circle";
+    case 'pending':
+      return 'icon-clock';
+    case 'processing':
+      return 'icon-clock';
+    case 'approved':
+      return 'icon-check-circle';
+    case 'rejected':
+      return 'icon-error-circle';
+    case 'cancelled':
+      return 'icon-times-circle';
     default:
-      return "icon-warning";
+      return 'icon-warning';
   }
 };
 
 function changeTimezone(date, ianatz) {
   // suppose the date is 12:00 UTC
   const invdate = new Date(
-    date.toLocaleString("en-US", {
+    date.toLocaleString('en-US', {
       timeZone: ianatz,
-    })
+    }),
   );
 
   // then invdate will be 07:00 in Toronto
@@ -113,14 +113,13 @@ function changeTimezone(date, ianatz) {
   return new Date(date.getTime() - diff); // needs to substract
 }
 
-export const getDateObject = (e) =>
-  changeTimezone(new Date(e), "Canada/Eastern");
+export const getDateObject = e => changeTimezone(new Date(e), 'Canada/Eastern');
 
-export const convertToCurrencyFormat = (amount = "0") =>
+export const convertToCurrencyFormat = (amount = '0') =>
   `$${Number(amount)
     .toFixed(2)
     .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
 
 export const shortenString = (str, len = 10) => {
   if (!str) return null;
@@ -137,25 +136,22 @@ export const convertReadable = (amount = 0) =>
       : Math.sign(amount) * Math.abs(amount)
   }`;
 
-export const GeoCode = async (value) => {
+export const GeoCode = async value => {
   try {
-    const { results } =
-      typeof window !== "undefined" &&
-      (await new window.google.maps.Geocoder().geocode(value));
+    const { results } = typeof window !== 'undefined' && (await new window.google.maps.Geocoder().geocode(value));
 
     if (!results) {
-      throw Error("Unable to load maps");
+      throw Error('Unable to load maps');
     }
-    const { address_components, geometry, place_id, formatted_address, types } =
-      results[0];
+    const { address_components, geometry, place_id, formatted_address, types } = results[0];
     const address = {};
     // eslint-disable-next-line no-shadow
     address_components?.forEach(({ short_name, types }) => {
-      if (types.includes("administrative_area_level_1")) {
+      if (types.includes('administrative_area_level_1')) {
         address.state = short_name;
-      } else if (types.includes("administrative_area_level_2")) {
+      } else if (types.includes('administrative_area_level_2')) {
         address.county = short_name;
-      } else if (types.includes("locality")) {
+      } else if (types.includes('locality')) {
         address.city = short_name;
       } else address[types[0]] = short_name;
     });
@@ -171,12 +167,12 @@ export const GeoCode = async (value) => {
       formatted_address,
     };
   } catch (err) {
-    throw Error(err?.message ?? "Unable to load maps");
+    throw Error(err?.message ?? 'Unable to load maps');
   }
 };
 
-export const convertToBase64 = (file) =>
-  new Promise((resolve) => {
+export const convertToBase64 = file =>
+  new Promise(resolve => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
@@ -184,7 +180,7 @@ export const convertToBase64 = (file) =>
     };
   });
 
-export const getVisitNo = (visit) => {
+export const getVisitNo = visit => {
   switch (visit) {
     case 1:
       return `${String(visit)}st`;
@@ -200,25 +196,12 @@ export const getVisitNo = (visit) => {
 export const getOfferDetails = ({
   offer_type,
   // eslint-disable-next-line no-unused-vars
-  offer_details: {
-    minimum_amount,
-    minimum_visit,
-    maximum_amount,
-    plastk_points_value,
-    plastk_points,
-  },
+  offer_details: { minimum_amount, minimum_visit, maximum_amount, plastk_points_value, plastk_points },
   stores,
   duration: { startDate, endDate },
   state,
 }) => {
-  if (
-    !stores.length ||
-    !offer_type ||
-    !plastk_points_value ||
-    !startDate ||
-    !endDate
-  )
-    return "";
+  if (!stores.length || !offer_type || !plastk_points_value || !startDate || !endDate) return '';
   const Text = styled.span`
     display: block;
     margin: 0 0 15px;
@@ -242,39 +225,30 @@ export const getOfferDetails = ({
   `;
   try {
     switch (offer_type) {
-      case "dollarBased":
+      case 'dollarBased':
         return (
           <>
             <Text>
-              Spend at least {convertToCurrencyFormat(minimum_amount)} and
-              receive {plastk_points_value} plastk points.
+              Spend at least {convertToCurrencyFormat(minimum_amount)} and receive {plastk_points_value} plastk points.
             </Text>
             <Text>
-              Offer valid between{" "}
-              {`${format(
-                getDateObject(new Date(startDate).toString()),
-                "MMM do yyyy hh:mm a"
-              )} To ${format(
+              Offer valid between{' '}
+              {`${format(getDateObject(new Date(startDate).toString()), 'MMM do yyyy hh:mm a')} To ${format(
                 getDateObject(new Date(endDate).toString()),
-                "MMM do yyyy hh:mm a"
+                'MMM do yyyy hh:mm a',
               )}`}
             </Text>
             <Text>*Terms And Conditions Apply</Text>
           </>
         );
 
-      case "repeatVisit":
+      case 'repeatVisit':
         return (
           <>
             <Text>
-              Visit {minimum_visit} times and receive {plastk_points_value}{" "}
-              plastk points on the{" "}
+              Visit {minimum_visit} times and receive {plastk_points_value} plastk points on the{' '}
               {(() => {
-                switch (
-                  +String(minimum_visit).split("")[
-                    String(minimum_visit).split("").length - 1
-                  ]
-                ) {
+                switch (+String(minimum_visit).split('')[String(minimum_visit).split('').length - 1]) {
                   case 1:
                     return `${String(minimum_visit)}st`;
                   case 2:
@@ -284,23 +258,20 @@ export const getOfferDetails = ({
                   default:
                     return `${String(minimum_visit)}th`;
                 }
-              })()}{" "}
+              })()}{' '}
               visit.
             </Text>
             <Text>
-              Offer valid between{" "}
-              {`${format(
-                getDateObject(new Date(startDate).toString()),
-                "MMM do yyyy hh:mm a"
-              )} to ${format(
+              Offer valid between{' '}
+              {`${format(getDateObject(new Date(startDate).toString()), 'MMM do yyyy hh:mm a')} to ${format(
                 getDateObject(new Date(endDate).toString()),
-                "MMM do yyyy hh:mm a"
+                'MMM do yyyy hh:mm a',
               )}`}
             </Text>
             <Text>*Terms And Conditions Apply</Text>
           </>
         );
-      case "initialOffer":
+      case 'initialOffer':
         return (
           <Grid xs={1} sm={2} gap={20} css="margin-top:20px">
             <TextWrap>
@@ -308,30 +279,17 @@ export const getOfferDetails = ({
               <Text>
                 {getVisitNo(Number(Object.keys(state?.initial_offer)[0]))}
                 &nbsp;Visit - Spend&nbsp;
-                {convertToCurrencyFormat(minimum_amount)}&nbsp;Or More And
-                Receive {state?.initial_offer["1"]}% In Plastk Points, Up to{" "}
-                {(
-                  (state?.initial_offer["1"] / 100) *
-                  state?.maximum_amount *
-                  200
-                ).toFixed(0)}
+                {convertToCurrencyFormat(minimum_amount)}&nbsp;Or More And Receive {state?.initial_offer['1']}% In
+                Plastk Points, Up to {((state?.initial_offer['1'] / 100) * state?.maximum_amount * 200).toFixed(0)}
                 &nbsp;Points
               </Text>
-              <Text>
-                Expires{" "}
-                {format(
-                  getDateObject(new Date(endDate).toString()),
-                  "MMM do yyyy hh:mm a"
-                )}
-              </Text>
+              <Text>Expires {format(getDateObject(new Date(endDate).toString()), 'MMM do yyyy hh:mm a')}</Text>
               <Text>*Terms And Conditions Apply</Text>
             </TextWrap>
             <TextWrap>
               {Object.values(state?.initial_offer).map((val, index) => (
                 <Text key={index + 1}>
-                  {`${getVisitNo(
-                    index + 1
-                  )} visit- ${val}% in Plastk Reward Points up to`}
+                  {`${getVisitNo(index + 1)} visit- ${val}% in Plastk Reward Points up to`}
                   &nbsp;
                   {`${((val / 100) * state?.maximum_amount * 200).toFixed(0)}`}
                   &nbsp;Points
@@ -341,37 +299,29 @@ export const getOfferDetails = ({
                 <Text>
                   {`Everyday visit- ${state?.every_day_offer}% in Plastk Reward Points up to`}
                   &nbsp;
-                  {`${(
-                    (state?.every_day_offer / 100) *
-                    state?.maximum_amount *
-                    200
-                  ).toFixed(0)}`}
+                  {`${((state?.every_day_offer / 100) * state?.maximum_amount * 200).toFixed(0)}`}
                   &nbsp;Points
                 </Text>
               )}
             </TextWrap>
           </Grid>
         );
-      case "percentBased":
+      case 'percentBased':
         return (
           <>
             <Text>
-              Spend ${minimum_amount} or more and receive {plastk_points}% in
-              plastk points, <br />
-              up to a maximum of{" "}
+              Spend ${minimum_amount} or more and receive {plastk_points}% in plastk points, <br />
+              up to a maximum of{' '}
               {plastk_points_value % 1 !== 0
                 ? convertToCurrencyFormat(plastk_points_value)
                 : convertToCurrencyFormat(0)}
               points.
             </Text>
             <Text>
-              Offer valid between{" "}
-              {`${format(
-                getDateObject(new Date(startDate).toString()),
-                "MMM do yyyy hh:mm a"
-              )} to ${format(
+              Offer valid between{' '}
+              {`${format(getDateObject(new Date(startDate).toString()), 'MMM do yyyy hh:mm a')} to ${format(
                 getDateObject(new Date(endDate).toString()),
-                "MMM do yyyy hh:mm a"
+                'MMM do yyyy hh:mm a',
               )}`}
             </Text>
             <Text>*Terms And Conditions Apply</Text>
@@ -413,18 +363,14 @@ export const getOfferText = ({
   duration: { startDate, endDate },
 }) => {
   switch (offer_type) {
-    case "dollarBased":
+    case 'dollarBased':
       return `Spend at least ${convertToCurrencyFormat(
-        minimum_amount
+        minimum_amount,
       )} And receive ${plastk_points_value} Plastk points`;
-    case "repeatVisit":
+    case 'repeatVisit':
       return `Visit ${minimum_visit} Times And recieve ${plastk_points_value} Plastk points on the
         ${(() => {
-          switch (
-            +String(minimum_visit).split("")[
-              String(minimum_visit).split("").length - 1
-            ]
-          ) {
+          switch (+String(minimum_visit).split('')[String(minimum_visit).split('').length - 1]) {
             case 1:
               return `${String(minimum_visit)}st`;
             case 2:
@@ -436,21 +382,17 @@ export const getOfferText = ({
           }
         })()} visit.`;
 
-    case "percentBased":
+    case 'percentBased':
       return `Spend ${parseFloat(+minimum_amount).toFixed(2)} Or More
                 And recieve ${plastk_points}% in Plastk points, up to a
                 maximum of
                 ${plastk_points * 2 * maximum_amount}
                 points.`;
 
-    case "initialOffer":
+    case 'initialOffer':
       return `Visit ${minimum_visit} times and receive ${plastk_points_value} plastk points on the
               ${(() => {
-                switch (
-                  +String(minimum_visit).split("")[
-                    String(minimum_visit).split("").length - 1
-                  ]
-                ) {
+                switch (+String(minimum_visit).split('')[String(minimum_visit).split('').length - 1]) {
                   case 1:
                     return `${String(minimum_visit)}st`;
                   case 2:
@@ -482,46 +424,31 @@ export const getOfferDetailsAppView = ({
   stores,
   duration: { startDate, endDate },
 }) => {
-  if (
-    !stores.length ||
-    !offer_type ||
-    !plastk_points_value ||
-    !startDate ||
-    !endDate
-  )
-    return "";
+  if (!stores.length || !offer_type || !plastk_points_value || !startDate || !endDate) return '';
   try {
     switch (offer_type) {
-      case "dollarBased":
+      case 'dollarBased':
         return (
           <>
             <p>
-              Spend at least {convertToCurrencyFormat(minimum_amount, 0)} and
-              receive {plastk_points_value} plastk points. Offer valid between{" "}
-              {`${format(
-                getDateObject(new Date(startDate).toString()),
-                "MMM do yyyy hh:mm a"
-              )} To ${format(
+              Spend at least {convertToCurrencyFormat(minimum_amount, 0)} and receive {plastk_points_value} plastk
+              points. Offer valid between{' '}
+              {`${format(getDateObject(new Date(startDate).toString()), 'MMM do yyyy hh:mm a')} To ${format(
                 getDateObject(new Date(endDate).toString()),
-                "MMM do yyyy hh:mm a"
+                'MMM do yyyy hh:mm a',
               )}`}
             </p>
             <p>*Terms And Conditions Apply</p>
           </>
         );
 
-      case "repeatVisit":
+      case 'repeatVisit':
         return (
           <>
             <p>
-              Visit {minimum_visit} times and receive {plastk_points_value}{" "}
-              plastk points on the{" "}
+              Visit {minimum_visit} times and receive {plastk_points_value} plastk points on the{' '}
               {(() => {
-                switch (
-                  +String(minimum_visit).split("")[
-                    String(minimum_visit).split("").length - 1
-                  ]
-                ) {
+                switch (+String(minimum_visit).split('')[String(minimum_visit).split('').length - 1]) {
                   case 1:
                     return `${String(minimum_visit)}st`;
                   case 2:
@@ -531,53 +458,41 @@ export const getOfferDetailsAppView = ({
                   default:
                     return `${String(minimum_visit)}th`;
                 }
-              })()}{" "}
-              visit. Offer valid between{" "}
-              {`${format(
-                getDateObject(new Date(startDate).toString()),
-                "MMM do yyyy hh:mm a"
-              )} to ${format(
+              })()}{' '}
+              visit. Offer valid between{' '}
+              {`${format(getDateObject(new Date(startDate).toString()), 'MMM do yyyy hh:mm a')} to ${format(
                 getDateObject(new Date(endDate).toString()),
-                "MMM do yyyy hh:mm a"
+                'MMM do yyyy hh:mm a',
               )}`}
             </p>
             <p>*Terms And Conditions Apply</p>
           </>
         );
 
-      case "percentBased":
+      case 'percentBased':
         return (
           <>
             <p>
-              Spend ${minimum_amount} or more and receive {plastk_points}% in
-              plastk points, up to a maximum of{" "}
+              Spend ${minimum_amount} or more and receive {plastk_points}% in plastk points, up to a maximum of{' '}
               {plastk_points_value % 1 !== 0
                 ? convertToCurrencyFormat(plastk_points_value, 2, false)
                 : convertToCurrencyFormat(plastk_points_value, 0, false)}
-              points. Offer valid between{" "}
-              {`${format(
-                getDateObject(new Date(startDate).toString()),
-                "MMM do yyyy hh:mm a"
-              )} to ${format(
+              points. Offer valid between{' '}
+              {`${format(getDateObject(new Date(startDate).toString()), 'MMM do yyyy hh:mm a')} to ${format(
                 getDateObject(new Date(endDate).toString()),
-                "MMM do yyyy hh:mm a"
+                'MMM do yyyy hh:mm a',
               )}`}
             </p>
             <p>*Terms And Conditions Apply</p>
           </>
         );
-      case "initialOffer":
+      case 'initialOffer':
         return (
           <>
             <p>
-              Visit {minimum_visit} times and receive {plastk_points_value}{" "}
-              plastk points on the &nbsp;
+              Visit {minimum_visit} times and receive {plastk_points_value} plastk points on the &nbsp;
               {(() => {
-                switch (
-                  +String(minimum_visit).split("")[
-                    String(minimum_visit).split("").length - 1
-                  ]
-                ) {
+                switch (+String(minimum_visit).split('')[String(minimum_visit).split('').length - 1]) {
                   case 1:
                     return `${String(minimum_visit)}st`;
                   case 2:
@@ -587,14 +502,11 @@ export const getOfferDetailsAppView = ({
                   default:
                     return `${String(minimum_visit)}th`;
                 }
-              })()}{" "}
+              })()}{' '}
               visit. Offer valid between
-              {`${format(
-                getDateObject(new Date(startDate).toString()),
-                "MMM do yyyy hh:mm a"
-              )} to ${format(
+              {`${format(getDateObject(new Date(startDate).toString()), 'MMM do yyyy hh:mm a')} to ${format(
                 getDateObject(new Date(endDate).toString()),
-                "MMM do yyyy hh:mm a"
+                'MMM do yyyy hh:mm a',
               )}`}
             </p>
             <p>*Terms And Conditions Apply</p>
@@ -632,7 +544,7 @@ export const getOfferDetailsAppView = ({
     );
   }
 };
-const validateImage = (url) =>
+const validateImage = url =>
   new Promise((resolve, reject) => {
     const img = new Image(url);
     // eslint-disable-next-line no-multi-assign
@@ -645,25 +557,21 @@ const validateImage = (url) =>
     img.src = url;
   });
 
-const checkValidImageProtocol = (url) => {
+const checkValidImageProtocol = url => {
   if (/(http(s?)):\/\//i.test(url)) {
     return true;
   }
   return false;
 };
 
-const checkValidImageExtension = (url) => {
-  if (
-    ["png", "PNG", "jpg", "JPG", "jpeg", "JPEG"].includes(
-      url.split(/[#?]/)[0].split(".").pop().trim()
-    )
-  ) {
+const checkValidImageExtension = url => {
+  if (['png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG'].includes(url.split(/[#?]/)[0].split('.').pop().trim())) {
     return true;
   }
   return false;
 };
 
-export const checkInValidImage = async (url) => {
+export const checkInValidImage = async url => {
   try {
     await validateImage(url);
     return !(checkValidImageExtension(url) && checkValidImageProtocol(url));
@@ -672,14 +580,11 @@ export const checkInValidImage = async (url) => {
   }
 };
 
-export const convertToFormData = (obj) => {
+export const convertToFormData = obj => {
   const formData = new FormData();
 
-  Object.keys(obj).forEach((key) => {
-    if (
-      key === "bankInfo" ||
-      (key === "inheritanceInfo" && typeof obj[key] === "object")
-    ) {
+  Object.keys(obj).forEach(key => {
+    if (key === 'bankInfo' || (key === 'inheritanceInfo' && typeof obj[key] === 'object')) {
       formData.append(key, JSON.stringify(obj[key]));
     } else {
       formData.append(key, obj[key]);
@@ -687,39 +592,45 @@ export const convertToFormData = (obj) => {
   });
   return formData;
 };
-export const convertDateToISO = (dateStr) => {
-  const [day, month, year] = dateStr.split("/");
+export const convertDateToISO = dateStr => {
+  const [day, month, year] = dateStr.split('/');
   return `${year}-${month}-${day}`;
 };
 // Format the date
-const getOrdinalSuffix = (day) => {
-  if (day > 3 && day < 21) return "th";
+const getOrdinalSuffix = day => {
+  if (day > 3 && day < 21) return 'th';
   switch (day % 10) {
     case 1:
-      return "st";
+      return 'st';
     case 2:
-      return "nd";
+      return 'nd';
     case 3:
-      return "rd";
+      return 'rd';
     default:
-      return "th";
+      return 'th';
   }
 };
-export const formatDateWithSuffix = (dateObj) => {
+export const formatDateWithSuffix = dateObj => {
   const date = new Date(dateObj);
 
-  const day = format(date, "d"); // get the day without leading zeros
-  const monthYear = format(date, "MMMM, yyyy"); // get the month and year
+  const day = format(date, 'd'); // get the day without leading zeros
+  const monthYear = format(date, 'MMMM, yyyy'); // get the month and year
   const ordinalSuffix = getOrdinalSuffix(parseInt(day)); // get the ordinal suffix
   return `${day}${ordinalSuffix} ${monthYear}`;
 };
 
 // Calculate the number of days left
-export const daysLeft = (dateObj) => {
+export const daysLeft = dateObj => {
   const date = new Date(dateObj);
   const daysLeft = differenceInCalendarDays(date, new Date());
 
   return daysLeft < 10 ? `0${daysLeft} days` : `${daysLeft.toString()} days`;
   // console.log(formatDistanceToNow(date));
   // return formatDistanceToNow(date, {addSuffix: false});
+};
+
+export const bas64toFile = async (dataUrl, fileName) => {
+  const res = await fetch(dataUrl);
+  const blob = await res.blob();
+  return new File([blob], fileName, { type: 'image/jpg' });
 };

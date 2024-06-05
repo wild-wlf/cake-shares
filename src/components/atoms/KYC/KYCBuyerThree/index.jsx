@@ -11,6 +11,7 @@ import kycService from '@/services/kycService';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/components/Context/authContext';
 import Toast from '@/components/molecules/Toast';
+import { bas64toFile } from '@/helpers/common';
 
 const KYCBuyerThree = ({ setOpen, setKycLevel }) => {
   const [form] = useForm();
@@ -23,11 +24,12 @@ const KYCBuyerThree = ({ setOpen, setKycLevel }) => {
   const optionData = [{ label: 'Buyer Level Two', value: 'Buyer Level Two' }];
   async function handelKycLevel(imageSrc) {
     try {
+      const personalImage = await bas64toFile(imageSrc, `${user?.fullName}_personalImage`);
       setIsLoading(true);
       const payload = {
         userId: user?._id,
         kycRequestLevel: 3,
-        // imageSrc,
+        personalImage,
       };
       const formDataToSend = new FormData();
       Object.keys(payload).forEach(key => {
@@ -57,7 +59,7 @@ const KYCBuyerThree = ({ setOpen, setKycLevel }) => {
       <label htmlFor="" className="fakelabel">
         Facial Recognition
       </label>
-      <WebCam handelKycLevel={handelKycLevel} />
+      <WebCam handelKycLevel={handelKycLevel} isLoading={isLoading} />
     </StyledKycBuyer>
   );
 };
