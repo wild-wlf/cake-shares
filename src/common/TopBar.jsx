@@ -292,10 +292,15 @@ const TopBar = () => {
             <div className="profile">
               <Image src={line} alt="line" />
               <div className="profile-details">
-                <Image src={profilePlaceHolder} width={40} height={40} alt="profile" />
+                <Image
+                  src={user?.profilePicture ? user?.profilePicture : profilePlaceHolder}
+                  width={40}
+                  height={40}
+                  alt="profile"
+                />
                 <div className="user-details">
-                  <span>Guest Mode</span>
-                  <span className="sub">Guest Mode</span>
+                  <span>{user?.fullName ? user?.fullName : 'Guest Mode'}</span>
+                  <span className="sub">{user?.type ? user?.type : 'Guest Mode'}</span>
                 </div>
               </div>
               <Image src={line} alt="line" />

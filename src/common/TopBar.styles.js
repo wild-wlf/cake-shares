@@ -206,9 +206,6 @@ export const StyledTopBar = styled.header`
       cursor: pointer;
     }
 
-    .textField {
-      display: none;
-    }
     .textFieldRight {
       display: none;
     }
