@@ -4,6 +4,7 @@ import ChatHeader from '../ChatHeader';
 import ChatFooter from '../ChatFooter';
 import ChatMessage from './ChatMessage';
 import ChatMedia from './ChatMedia';
+import { RiMenu3Fill } from 'react-icons/ri';
 
 const Chat = ({ userInfo }) => {
   console.log('userInfo', userInfo);
@@ -14,34 +15,6 @@ const Chat = ({ userInfo }) => {
     },
     {
       text: 'The Points of Using Lorem Ipsum',
-      time: 'Yesterday, 12:29 PM',
-    },
-    {
-      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
-      time: 'Yesterday, 12:29 PM',
-    },
-    {
-      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
-      time: 'Yesterday, 12:29 PM',
-    },
-    {
-      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
-      time: 'Yesterday, 12:29 PM',
-    },
-    {
-      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
-      time: 'Yesterday, 12:29 PM',
-    },
-    {
-      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
-      time: 'Yesterday, 12:29 PM',
-    },
-    {
-      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
-      time: 'Yesterday, 12:29 PM',
-    },
-    {
-      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
       time: 'Yesterday, 12:29 PM',
     },
     {
@@ -105,6 +78,9 @@ const Chat = ({ userInfo }) => {
         <ChatFooter />
       </div>
       <ChatMedia userInfo={userInfo} />
+      <div className="hamburger">
+        <RiMenu3Fill size={30} />
+      </div>
     </ChatWrapper>
   );
 };
