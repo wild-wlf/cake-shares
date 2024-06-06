@@ -6,6 +6,7 @@ import Attachments from '../../Attachments';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/components/Context/authContext';
 import profileplaceHolder from '../../../../_assets/profileplaceHolder.jpg';
+import MediaSlide from './MediaSlide';
 const ChatMedia = ({ userInfo }) => {
   const { user } = useContextHook(AuthContext, v => ({
     user: v.user,
@@ -42,6 +43,7 @@ const ChatMedia = ({ userInfo }) => {
           <span>Me</span>
         </div>
       </div>
+      <MediaSlide />
       <Attachments />
     </StyledChatMedia>
   );

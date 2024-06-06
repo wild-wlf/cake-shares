@@ -5,7 +5,7 @@ export const StyledChatMedia = styled.div`
   width: 100%;
   border-radius: 40px 40px 20px 20px;
   background: rgba(64, 143, 140, 0.1);
-  padding: 73px 36px 10px 36px;
+  padding: 73px 33px 10px 33px;
   margin-top: 70px;
   position: relative;
   color: var(--base-text-color);
@@ -63,6 +63,66 @@ export const StyledChatMedia = styled.div`
         font-size: 16px;
         font-weight: 400;
         line-height: 20px;
+      }
+    }
+  }
+`;
+
+export const StyledMediaSlide = styled.div`
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  position: relative;
+  .slideTitle {
+    display: block;
+    margin-bottom: 15px;
+    color: #313131;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: left;
+  }
+  .slick-dots {
+    display: block;
+    top: auto;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    li {
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
+      background: red;
+      margin: 0 3px;
+      background: #333;
+    }
+    .slick-active {
+      width: 35px;
+      background: white;
+    }
+    button {
+      &:before {
+        display: none;
+      }
+      &::after {
+        display: none;
+      }
+    }
+  }
+  .col-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    padding: 0 2px;
+    .col {
+      width: 96px;
+      height: 80px;
+      background: red;
+      border-radius: 10px;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     }
   }
