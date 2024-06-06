@@ -1,8 +1,44 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const AmentitiesWrapper = styled.div`
+export const ContainerWrapper = styled.div`
+  width: 100%;
   padding-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  .chatWrapper {
+    width: 127px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    gap: 11px;
+    div {
+      width: 54px;
+      height: 54px;
+      border-radius: 46.96px;
+      background: #4e6199;
+      box-shadow: 0px 4px 14px 0px #00000026;
+      display: flex;
+      justify-content: center;
+    }
+    h6 {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 20.16px;
+      text-align: center;
+    }
+  }
 
+  @media only screen and (max-width: 576px) {
+    flex-direction: column-reverse;
+    padding-top: 20px;
+    .chatWrapper {
+      margin-left: auto;
+    }
+  }
+`;
+export const AmentitiesWrapper = styled.div`
+  width: 70%;
   span {
     font-size: var(--h2-font-size);
     font-weight: 500;
@@ -44,6 +80,7 @@ export const AmentitiesWrapper = styled.div`
   }
   @media only screen and (max-width: 576px) {
     padding: 26px 0px 26px 0px;
+    width: 100%;
     .amenities {
       width: 100%;
       gap: 16px;

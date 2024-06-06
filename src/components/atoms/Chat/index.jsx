@@ -5,7 +5,7 @@ import ChatFooter from '../ChatFooter';
 import ChatMessage from './ChatMessage';
 import ChatMedia from './ChatMedia';
 
-const Chat = ({ userInfo }) => {
+const Chat = ({ userInfo, type }) => {
   console.log('userInfo', userInfo);
   const chatMessages = [
     {
@@ -76,7 +76,7 @@ const Chat = ({ userInfo }) => {
         </ChatBody>
         <ChatFooter />
       </div>
-      <ChatMedia userInfo={userInfo} />
+      <ChatMedia userInfo={userInfo} type={type} />
     </ChatWrapper>
   );
 };

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ProductDetailWrapper = styled.div`
   padding: 30px 0px;
@@ -45,8 +45,7 @@ export const ProductDetailWrapper = styled.div`
       object-fit: cover;
       height: 100%;
       border-radius: 30px;
-      box-shadow: 1px 8px 17px 0 rgba(0, 0, 0, 0.1),
-        4px 31px 31px 0 rgba(0, 0, 0, 0.09);
+      box-shadow: 1px 8px 17px 0 rgba(0, 0, 0, 0.1), 4px 31px 31px 0 rgba(0, 0, 0, 0.09);
     }
   }
   .product1 {
@@ -62,12 +61,11 @@ export const ProductDetailWrapper = styled.div`
   .product2 {
     display: flex;
     gap: 20px;
-    max-width: 365px;
     width: 100%;
     height: 360px;
 
     img {
-      width: 100%;
+      width: 50%;
       height: 100%;
       object-fit: cover;
     }
@@ -160,6 +158,9 @@ export const ProductDetailWrapper = styled.div`
     .product2 {
       width: 100%;
       height: 185px;
+    }
+    .product2 {
+      gap: 12px;
     }
   }
   @media only screen and (max-width: 576px) {
