@@ -223,13 +223,13 @@ const TopBar = () => {
         />
       </CenterModal>
 
-      <CenterModal open={buyermodal} setOpen={setBuyerModal} title="Register As a Buyer" width="666">
+      <CenterModal open={buyermodal} setOpen={setBuyerModal} title="Register as a Buyer" width="666">
         <BuyerLoginSignupModal handleBuyerModal={handleBuyerModal} type={'Register As Buyer'} />
       </CenterModal>
 
-      <CenterModal open={passwordModal} setOpen={setPasswordModal} title="Register As a Buyer" width="666">
+      <CenterModal open={passwordModal} setOpen={setPasswordModal} title="Register as a Buyer" width="666">
         <CreatePasswordModal
-          type={'Register As Buyer'}
+          type={'Register as Buyer'}
           createPasswordModal={createPasswordModal}
           handleCompleteRegistration={handleCompleteRegistration}
         />
@@ -243,12 +243,12 @@ const TopBar = () => {
         <CompleteRegistrationModal handleRegistration={handleRegistration} />
       </CenterModal>
 
-      <CenterModal open={sellerregistermodal} setOpen={setSellerRegisterModal} title="Register As a Seller" width="666">
+      <CenterModal open={sellerregistermodal} setOpen={setSellerRegisterModal} title="Register as a Seller" width="666">
         <LoginAsSellerModal handleSellerRegisterModal={handleSellerRegisterModal} type="Register As Seller" />
       </CenterModal>
 
-      <CenterModal open={sellerpasswordModal} setOpen={setSellerPasswordModal} title="Register As a Seller" width="666">
-        <CreatePasswordModal type="Register As Seller" handleSellerPasswordModal={handleSellerPasswordModal} />
+      <CenterModal open={sellerpasswordModal} setOpen={setSellerPasswordModal} title="Register as a Seller" width="666">
+        <CreatePasswordModal type="Register as Seller" handleSellerPasswordModal={handleSellerPasswordModal} />
       </CenterModal>
 
       {/******************************** Registration Modals ******************************************/}
@@ -263,10 +263,10 @@ const TopBar = () => {
           description="Welcome to cakeshares, please select the account type to proceed."
         />
       </CenterModal>
-      <CenterModal open={buyerloginmodal} setOpen={setBuyerLoginModal} title="Login As a Buyer" width="666">
+      <CenterModal open={buyerloginmodal} setOpen={setBuyerLoginModal} title="Login as a Buyer" width="666">
         <BuyerLoginSignupModal type="Login As Buyer" handleLoginModal={handleBuyerLogin} />
       </CenterModal>
-      <CenterModal open={sellerloginmodal} setOpen={setSellerLoginModal} title="Login As a Seller" width="666">
+      <CenterModal open={sellerloginmodal} setOpen={setSellerLoginModal} title="Login as a Seller" width="666">
         <LoginAsSellerModal
           handleRegisterModal={() => {
             setRegisterModal(true);
@@ -304,6 +304,13 @@ const TopBar = () => {
               <MdStorefront />
               <span>Marketplace</span>
             </Link>
+            <div className="kycFieldWrapper">
+              <div className="kycField">
+                <span className="heading">My Kyc Level</span>
+                <span>{user?.kycLevel}</span>
+              </div>
+              <KycLevel level={user?.kycLevel + 1} bg />
+            </div>
           </NavLinks>
         </div>
 
