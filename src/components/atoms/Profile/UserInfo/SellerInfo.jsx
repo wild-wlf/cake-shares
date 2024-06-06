@@ -12,23 +12,23 @@ import CenterModal from '../../Modal/CenterModal';
 import Chat from '../../Chat';
 
 const SellerInfo = ({ userInfo }) => {
+
   const [chat, setChat] = useState(false);
   return (
     <>
       <CenterModal zIndex={9999} open={chat} setOpen={setChat} width="1339" title="Logan's Chat">
-        <Chat />
+        <Chat userInfo={userInfo} />
       </CenterModal>
       <StyledUserInfo>
         <div className="userInfo">
-          {userInfo?.profilePicture ? (
-            <ProfileWrapper>
-              <Image src={userInfo?.profilePicture} alt="userImage" width={170} height={170} />
-            </ProfileWrapper>
-          ) : (
-            <ProfileWrapper>
-              <Image src={profile} alt="userImage" />
-            </ProfileWrapper>
-          )}
+          <ProfileWrapper>
+            <Image
+              src={userInfo?.profilePicture ? userInfo?.profilePicture : profile}
+              alt="userImage"
+              width={170}
+              height={170}
+            />
+          </ProfileWrapper>
 
           <div className="textWrapper">
             <strong className="name">{userInfo?.fullName ? userInfo?.fullName : 'Alex Mertiz'}</strong>
@@ -65,7 +65,7 @@ const SellerInfo = ({ userInfo }) => {
           onClick={() => {
             setChat(true);
           }}>
-          Chat with {userInfo?.fullName ? userInfo?.fullName : 'Seller'}
+          <span className="username">Chat with {userInfo?.fullName ? userInfo?.fullName : 'Seller'}</span>
           <Image src={chatIcon} alt="chatIcon" />
         </Button>
       </StyledUserInfo>

@@ -35,7 +35,7 @@ const ProductDescription = ({ data, SellerData }) => {
             <strong className="user-name">{SellerData?.fullName}</strong>
             <span className="text">{SellerData?.sellerType}</span>
             <div className="btnwrapper">
-              <div className="viewprofile" onClick={() => router.push(`/seller/${SellerData._id}`)}>
+              <div className="viewprofile" onClick={() => router.push(`/seller/${SellerData?._id}`)}>
                 <span>View Profile</span> <TbExternalLink className="icon" />
               </div>
               <div className="message" onClick={() => setModal(true)}>

@@ -58,7 +58,18 @@ export const Styling = css`
       z-index: 9;
     }
   }
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
 
+  ::-webkit-scrollbar-track {
+    background-color: #ffff;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #408f8c;
+    border-radius: 10px;
+  }
   img {
     max-width: 100%;
     height: auto;
@@ -214,27 +225,6 @@ export const Styling = css`
   /************* custom scrollbar styles ************/
 
   /* This will work on Firefox */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: #408f8c;
-  }
-
-  /* Targtes on Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  *::-webkit-scrollbar-track {
-    border-radius: 30px;
-    background: #408f8c;
-  }
-
-  *::-webkit-scrollbar-thumb {
-    background: #408f8c;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.03);
-    border-radius: 30px;
-  }
 
   /* Remove Arrows/Spinners from input type number */
 

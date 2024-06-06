@@ -32,7 +32,7 @@ const Home = () => {
     }
     getCategories();
   }, []);
-console.log(products_data.popularProducts);
+  console.log(products_data.popularProducts);
   return (
     <>
       <Head>

@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const StyledUserInfo = styled.div`
   display: block;
@@ -66,7 +66,7 @@ export const StyledUserInfo = styled.div`
       display: none;
 
       position: absolute;
-      content: "";
+      content: '';
       width: 2px;
       left: 0;
       background: rgba(0, 0, 0, 0.1);
@@ -134,6 +134,12 @@ export const StyledUserInfo = styled.div`
       line-height: 17.64px;
     }
   }
+  .username {
+    max-width: 120px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 `;
 
 export const ProfileWrapper = styled.label`
@@ -163,7 +169,7 @@ export const ProfileWrapper = styled.label`
   }
   &::before {
     position: absolute;
-    content: "";
+    content: '';
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
     opacity: 0;
@@ -182,7 +188,7 @@ export const ProfileWrapper = styled.label`
     visibility: hidden;
   }
   ${({ showEffect }) =>
-    showEffect === "Buyer" &&
+    showEffect === 'Buyer' &&
     css`
       &:hover {
         .rounded-icon,

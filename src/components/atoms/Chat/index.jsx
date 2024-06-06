@@ -1,41 +1,82 @@
 import React from 'react';
-import { ChatBody, ChatFooter, ChatHeader, ChatWrapper } from './Chat.style';
-import Image from 'next/image';
-import Pic from '../../../_assets/seller-img.png';
-import SendIcon from '../../../_assets/send-icon.svg';
-import LinkIcon from '../../../_assets/link-icon.svg';
-import MicIcon from '../../../_assets/mic-icon.svg';
-import PollIcon from '../../../_assets/poll-icon.svg';
-import GalleryIcon from '../../../_assets/gallery-icon.svg';
-const Chat = () => {
+import { ChatBody, ChatWrapper } from './Chat.style';
+import ChatHeader from '../ChatHeader';
+import ChatFooter from '../ChatFooter';
+import ChatMessage from './ChatMessage';
+import ChatMedia from './ChatMedia';
+
+const Chat = ({ userInfo }) => {
+  console.log('userInfo', userInfo);
+  const chatMessages = [
+    {
+      text: 'There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration',
+      time: 'Yesterday, 12:29 PM',
+    },
+    {
+      text: 'The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
+    {
+      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
+    {
+      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
+    {
+      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
+    {
+      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
+    {
+      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
+    {
+      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
+    {
+      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
+  ];
+
   return (
     <ChatWrapper>
-      <div className="chat-div">
-        <ChatHeader>
-          <Image src={Pic} alt="profilePic" width={40} height={40} />
-          <div>
-            <h6>Logan Paulson</h6>
-            <span>You & Logan Paulson</span>
+      <div className="chatWrapper">
+        <ChatHeader userInfo={userInfo} />
+        <ChatBody>
+          <div className="messages-holder">
+            {chatMessages?.map((item, index) => (
+              <ChatMessage
+                key={index}
+                type="send"
+                message={item.text}
+                time={index === chatMessages.length - 1 && item?.time}
+                showImage={index === chatMessages.length - 1}
+              />
+            ))}
           </div>
-        </ChatHeader>
-        <ChatBody></ChatBody>
-        <ChatFooter>
-          <div className="input-wrapper">
-            <div className="input-div">
-              <Image src={MicIcon} alt="PollIcon" width={14} height={14} />
-              <input placeholder="Type your message..." />
-            </div>
-            <div className="icons-div">
-              <Image src={PollIcon} alt="PollIcon" width={14} height={14} />
-              <Image src={LinkIcon} alt="LinkIcon" width={14} height={14} />
-              <Image src={GalleryIcon} alt="GalleryIcon" width={14} height={14} />
-            </div>
+          <div className="messages-holder">
+            {chatMessages?.map((item, index) => (
+              <ChatMessage
+                key={index}
+                type="seen"
+                message={item.text}
+                time={index === chatMessages.length - 1 && item?.time}
+                showImage={index === chatMessages.length - 1}
+              />
+            ))}
           </div>
-          <div className="send-icon">
-            <Image src={SendIcon} alt="sendIcon" width={19} height={19} />
-          </div>
-        </ChatFooter>
+        </ChatBody>
+        <ChatFooter />
       </div>
+      <ChatMedia userInfo={userInfo} />
     </ChatWrapper>
   );
 };
