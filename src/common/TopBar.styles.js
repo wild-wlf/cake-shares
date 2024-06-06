@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledTopBar = styled.header`
   position: relative;
@@ -62,7 +62,7 @@ export const StyledTopBar = styled.header`
     gap: 8px;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       height: 1px;
       width: 0;
@@ -80,14 +80,15 @@ export const StyledTopBar = styled.header`
     }
   }
   .textField::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 70px;
     height: 1px;
   }
-  .textFieldRight {
+  .textFieldRight,
+  .kycField {
     display: flex;
     width: 100%;
     height: 26px;
@@ -162,6 +163,9 @@ export const StyledTopBar = styled.header`
     }
   }
 
+  .kycFieldWrapper {
+    display: none;
+  }
   @media (max-width: 992px) {
     .wallet {
       padding: 6px 10px !important;
@@ -202,11 +206,13 @@ export const StyledTopBar = styled.header`
       cursor: pointer;
     }
 
-    .textField {
-      display: none;
-    }
     .textFieldRight {
       display: none;
+    }
+    .kycFieldWrapper {
+      display: block;
+      max-width: 190px;
+      width: 100%;
     }
   }
   .active-nav & {
@@ -240,8 +246,7 @@ export const NavLinks = styled.div`
     left: 0;
     z-index: 9;
     transition: all 0.4s ease-in-out;
-    transform: ${({ $active }) =>
-      $active ? "translateX(0%)" : "translateX(-100%)"};
+    transform: ${({ $active }) => ($active ? 'translateX(0%)' : 'translateX(-100%)')};
     .profile {
       padding-top: 30px;
       padding-bottom: 20px;
