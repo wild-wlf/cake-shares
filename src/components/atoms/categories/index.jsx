@@ -53,7 +53,7 @@ const Categories = ({ title, data, loading }) => {
       },
     ],
   };
-
+console.log(data);
   return (
     <CategoriesWrapper image={arrowRight}>
       <div className="title">
