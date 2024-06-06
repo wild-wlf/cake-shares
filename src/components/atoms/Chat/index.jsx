@@ -44,6 +44,34 @@ const Chat = ({ userInfo, type }) => {
       text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
       time: 'Yesterday, 12:29 PM',
     },
+    {
+      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
+    {
+      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
+    {
+      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
+    {
+      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
+    {
+      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
+    {
+      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
+    {
+      text: 'The Points of Using Lorem Ipsum The Points of Using Lorem Ipsum',
+      time: 'Yesterday, 12:29 PM',
+    },
   ];
 
   return (

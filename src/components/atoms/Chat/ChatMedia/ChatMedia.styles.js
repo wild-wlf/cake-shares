@@ -120,11 +120,11 @@ export const StyledMediaSlide = styled.div`
       border-radius: 10px;
       background: red;
       margin: 0 3px;
-      background: #333;
+      background: rgba(78, 97, 153, 0.2);
     }
     .slick-active {
       width: 35px;
-      background: white;
+      background: #4e6199;
     }
     button {
       &:before {
@@ -143,7 +143,6 @@ export const StyledMediaSlide = styled.div`
     .col {
       width: 96px;
       height: 80px;
-      background: red;
       border-radius: 10px;
       overflow: hidden;
       img {
