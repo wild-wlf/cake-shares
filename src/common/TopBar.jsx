@@ -68,6 +68,7 @@ const TopBar = () => {
   const [sellerpasswordModal, setSellerPasswordModal] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [notifications, setNotifications] = useState(false);
+  const [fetchNotifications, setfetchNotifications] = useState(false);
   const ProfileRef = useRef(null);
 
   const router = usePathname();
@@ -195,6 +196,19 @@ const TopBar = () => {
       document.body.classList.remove('active-nav');
     }
   }, [sideNav]);
+
+   useEffect(() => {
+    const handleBuyerNotification = () => {
+      setfetchNotifications(_ => !_);
+    };
+
+    window.addEventListener('buyer_notification', handleBuyerNotification);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('buyer_notification', handleBuyerNotification);
+    };
+  }, []);
 
   const { kycLevel, setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } = useContext(KycContext);
   return (
@@ -327,7 +341,7 @@ const TopBar = () => {
             <Image src={bell} alt="bell" className="bell" />
             <Image src={bellWhite} alt="bell" className="bell-white" />
             <div className={notifications ? 'notificationWrapper-visible' : 'notificationWrapper'}>
-              <Notifications />
+              <Notifications fetchNotifications={fetchNotifications} />
             </div>
           </div>
 

@@ -1,41 +1,31 @@
-import { io } from "socket.io-client";
+import { io } from 'socket.io-client';
 let socket = null;
 
-const SOCKET_URL = process.env.NEXT_PUBLIC_BACKEND_ORIGIN;
-console.log(SOCKET_URL);
-
-export const connectionWithSocketServer = (token, onUserUpdated, onExpire) => {
+export const connectionWithSocketServer = token => {
   const jwtToken = token;
-  socket = io(SOCKET_URL, {
+
+  socket = io(process.env.NEXT_PUBLIC_BACKEND_ORIGIN, {
+    path: '/websocket',
     auth: {
       token: jwtToken,
-      type: "user",
+      type: 'user',
     },
   });
 
-  socket.on("connect", () => {
-    console.log("User Connected");
+  socket.on('connect', () => {
+    console.log('User Connected');
   });
-
-  socket.on("tokenExpire", (data) => {
-    if (data && data.expire) {
-      onExpire(data.expire);
-    }
-  });
-
-  socket.on("userUpdated", (data) => {
-    console.log("DATA: ", data);
+  socket.on('userUpdated', data => {
     onUserUpdated(data);
   });
 
-  socket.on("disconnect", () => {
-    console.log("User disconnect");
+  socket.on('buyerNotification', data => {
+    window.dispatchEvent(new CustomEvent('buyer_notification', { detail: data }));
   });
 
-  // socket.on('online-users', data => {
-  //   const { onlineUsers } = data;
-  //   console.log('onlineUsers', onlineUsers);
-  // });
+  socket.on('disconnect', () => {
+    console.log('User disconnect');
+  });
 };
 
 export const socketServer = () => socket;
