@@ -6,6 +6,7 @@ export const ChatWrapper = styled.div`
   width: 100%;
   padding: 27px 0px 10px;
   position: relative;
+  overflow: hidden;
   .chatWrapper {
     width: 100%;
     position: relative;
@@ -13,14 +14,19 @@ export const ChatWrapper = styled.div`
   }
   .hamburger {
     cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 40px;
+
     @media screen and (min-width: 1199px) {
       display: none;
+      position: static;
     }
   }
 `;
 
 export const ChatBody = styled.div`
-  height: 733px;
+  height: 680px;
   overflow: auto;
   padding-right: 8px;
   .messages-holder {

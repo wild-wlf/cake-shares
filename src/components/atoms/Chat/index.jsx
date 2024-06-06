@@ -6,7 +6,7 @@ import ChatMessage from './ChatMessage';
 import ChatMedia from './ChatMedia';
 import { RiMenu3Fill } from 'react-icons/ri';
 
-const Chat = ({ userInfo }) => {
+const Chat = ({ userInfo, type }) => {
   console.log('userInfo', userInfo);
   const chatMessages = [
     {
@@ -77,8 +77,8 @@ const Chat = ({ userInfo }) => {
         </ChatBody>
         <ChatFooter />
       </div>
-      <ChatMedia userInfo={userInfo} />
-      <div className="hamburger">
+      <ChatMedia userInfo={userInfo} type={type} />
+      <div className="hamburger" onClick={() => document.body.classList.toggle('chat-sidebar-active')}>
         <RiMenu3Fill size={30} />
       </div>
     </ChatWrapper>
