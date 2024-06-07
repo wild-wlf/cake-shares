@@ -1,11 +1,11 @@
-import React from "react";
-import { CategoriesWrapper, NoRecord } from "./categories.style";
-import Slider from "react-slick";
-import Card from "../card";
-import arrowRight from "../../../_assets/arrow.png";
-import Property from "../../../_assets/property.png";
-import Link from "next/link";
-import Loader from "../Loader";
+import React from 'react';
+import { CategoriesWrapper, NoRecord } from './categories.style';
+import Slider from 'react-slick';
+import Card from '../card';
+import arrowRight from '../../../_assets/arrow.png';
+import Property from '../../../_assets/property.png';
+import Link from 'next/link';
+import Loader from '../Loader';
 
 const Categories = ({ title, data, loading }) => {
   const settings = {
@@ -53,7 +53,6 @@ const Categories = ({ title, data, loading }) => {
       },
     ],
   };
-console.log(data);
   return (
     <CategoriesWrapper image={arrowRight}>
       <div className="title">
@@ -66,7 +65,7 @@ console.log(data);
           <Slider {...settings}>
             {data?.map((item, index) => (
               <Link href={`/products/${item._id}`} key={index}>
-                <Card c_data={item} Cardimage={item.media[0] || Property} />
+                <Card c_data={item} Cardimage={item?.media[0] || Property} />
               </Link>
             ))}
           </Slider>

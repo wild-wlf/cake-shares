@@ -112,7 +112,7 @@ const AddInheritance = ({ onClose }) => {
             <Field />
           </Form.Item>
           <Form.Item
-            type="text"
+            type="email"
             label="Email Address"
             name="inheritanceEmail"
             sm
