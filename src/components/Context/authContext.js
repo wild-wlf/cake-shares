@@ -101,7 +101,7 @@ export const AuthContextProvider = props => {
       }
       if (res?.type !== 'Buyer') {
         // Construct the URL with token query parameter
-        const url = `http://localhost:3004?token=${res?.token}`;
+        const url = `${process.env.NEXT_PUBLIC_URL}?token=${res?.token}`;
 
         // Open the URL in a new tab
         window.open(url, '_blank');

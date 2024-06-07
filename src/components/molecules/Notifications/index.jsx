@@ -41,11 +41,11 @@ const [searchQuery, setSearchQuery] = useState({
     return data;
   };
   return (
-     <NotificationsHolder>
+    <NotificationsHolder>
       {notification_data.length > 0
         ? notification_data.map((item, index) => (
             <div key={index} className="holder">
-              <div className="notification">
+              <div className="notifications">
                 <div className="content">
                   <ImageHolder background={getImageAndBackground(item.actionType).background}>
                     <Image src={getImageAndBackground(item.actionType).image} alt="notification" />

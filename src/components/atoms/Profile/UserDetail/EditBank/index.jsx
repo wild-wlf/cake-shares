@@ -14,6 +14,8 @@ const EditBank = ({ bankInfo, onClose }) => {
     setPermission: v.setPermission,
     user: v.user,
   }));
+  // console.log(user);
+
   const [loading, setloading] = useState(false);
   const [form] = useForm();
   useEffect(() => {
@@ -37,9 +39,19 @@ const EditBank = ({ bankInfo, onClose }) => {
         userId: e?.userId?.trim(),
       },
     };
+    let objCreate = {
+      bankName: e?.bankName?.trim(),
+      iban: e?.iban?.trim(),
+      swiftBicNumber: e?.swiftBicNumber?.trim(),
+      userId: e?.userId?.trim(),
+    };
 
     try {
-      await userService.update(obj, user._id);
+      if (user?.bank) {
+        await userService.update(obj, user?.bank?._id);
+      } else {
+        await userService.createBank(objCreate, user._id);
+      }
 
       Toast({
         type: 'success',
