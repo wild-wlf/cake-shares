@@ -125,6 +125,7 @@ export const StyledTopBar = styled.header`
     transform: translateY(0);
     opacity: 1;
     max-width: 432px;
+    width: 100%;
     position: absolute;
     top: 30px;
     right: 0px;
@@ -133,6 +134,7 @@ export const StyledTopBar = styled.header`
   }
   .notificationWrapper {
     max-width: 432px;
+    width: 100%;
     position: absolute;
     top: 20px;
     right: 0px;

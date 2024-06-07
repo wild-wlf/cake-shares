@@ -70,12 +70,18 @@ const TopBar = () => {
   const [notifications, setNotifications] = useState(false);
   const [fetchNotifications, setfetchNotifications] = useState(false);
   const ProfileRef = useRef(null);
+  const NotificationRef = useRef(null);
 
   const router = usePathname();
   const navigate = useRouter();
   const handleClickOutsideProfile = event => {
     if (ProfileRef.current && !ProfileRef.current.contains(event.target)) {
       setOpenProfile(false);
+    }
+  };
+  const handleClickOutsideNotification = event => {
+    if (NotificationRef.current && !NotificationRef.current.contains(event.target)) {
+      setNotifications(false);
     }
   };
   const handleRegisterModal = () => {
@@ -185,11 +191,14 @@ const TopBar = () => {
   };
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutsideProfile);
+    document.addEventListener('mousedown', handleClickOutsideNotification);
     return () => {
       document.removeEventListener('mousedown', handleClickOutsideProfile);
+      document.removeEventListener('mousedown', handleClickOutsideNotification);
     };
   }, []);
   useEffect(() => {
+    //  navigator.vibrate(20000);
     if (sideNav) {
       document.body.classList.add('active-nav');
     } else {
@@ -197,7 +206,7 @@ const TopBar = () => {
     }
   }, [sideNav]);
 
-   useEffect(() => {
+  useEffect(() => {
     const handleBuyerNotification = () => {
       setfetchNotifications(_ => !_);
     };
@@ -349,7 +358,8 @@ const TopBar = () => {
             className="notification"
             onClick={() => {
               setNotifications(!notifications);
-            }}>
+            }}
+            ref={NotificationRef}>
             <Image src={bell} alt="bell" className="bell" />
             <Image src={bellWhite} alt="bell" className="bell-white" />
             <div className={notifications ? 'notificationWrapper-visible' : 'notificationWrapper'}>
