@@ -84,7 +84,7 @@ export const StyledUserInfo = styled.div`
     color: var(--secondary-50);
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: space-evenly;
     max-width: 220px;
     width: 100%;
     .categoriesList {
