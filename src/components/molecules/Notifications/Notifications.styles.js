@@ -1,20 +1,26 @@
 import styled from "styled-components";
 
 export const NotificationsHolder = styled.div`
+  max-width: 432px;
   width: 100%;
   background: var(--white);
   padding: 25px;
   border-radius: 0px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   .holder {
+    max-width: 432px;
+    width: 100%;
     padding: 10px 0;
     border-bottom: 1px solid rgba(240, 242, 243, 1);
+    margin-bottom: 15px;
+
     &:nth-child(1) {
       padding-top: 0;
     }
     &:nth-last-child(1) {
       border: 0;
       padding-bottom: 0;
+      margin-bottom: 0;
     }
   }
   .notifications {
@@ -22,10 +28,11 @@ export const NotificationsHolder = styled.div`
     align-items: center;
     justify-content: space-between;
     border: 0;
-    padding: 14px 0px;
+    margin-bottom: 15px;
     .content {
       display: flex;
-      gap: 10px;
+      align-items: center;
+      gap: 15px;
       color: var(--matte-black);
       .heading {
         font-weight: 600;
@@ -36,7 +43,7 @@ export const NotificationsHolder = styled.div`
         .date {
           position: relative;
           &::before {
-            content: "";
+            content: '';
             position: absolute;
             top: 50%;
             transform: translateY(-50%);

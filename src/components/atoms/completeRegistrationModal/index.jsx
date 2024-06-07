@@ -11,7 +11,7 @@ import KycLevel from '../KYC/KycLevel';
 import { KycContext } from '@/components/Context/KycContext';
 import { UserContext } from '@/components/Context/UserContext';
 import userService from '@/services/userService';
-import { convertToFormData } from '@/helpers/common';
+import { checkAge, convertToFormData } from '@/helpers/common';
 import Toast from '@/components/molecules/Toast';
 const CompleteRegistrationModal = ({ handleRegistration }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
@@ -50,6 +50,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
   }, []);
 
   const handleSubmit = async e => {
+    // console.log(e);
     let obj = {
       profilePicture: image,
       type: buyerRegistrationData.type,
@@ -73,7 +74,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
       },
     };
 
-    console.log(obj);
+    // console.log(obj);
 
     const formData = convertToFormData(obj);
 
@@ -182,6 +183,10 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                     required: true,
                     message: 'Please enter Date Of Birth',
                   },
+                  {
+                    transform: value => checkAge(value) === false,
+                    message: 'Age must be 18',
+                  },
                 ]}>
                 <Field />
               </Form.Item>
@@ -274,26 +279,6 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
             </div>
           </div>
         </div>
-        {/* <div className="kyc-info">
-          <h5>KYC Info:</h5>
-
-          <div>
-            <div className="kyc-div">
-              <div>
-                <span>My KYC Level</span>
-                <span>{kycLevel - 1}</span>
-              </div>
-
-              <div className="kyc-wrap">
-                <KycLevel level={kycLevel} />
-
-                <span className="upgrade-kyc" onClick={checkKycLevel}>
-                  Upgrade KYC
-                </span>
-              </div>
-            </div>
-          </div>
-        </div> */}
 
         <div className="inheritance-info">
           <h5>Inheritance Info:</h5>
@@ -379,9 +364,6 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 <Field maxLength={40} />
               </Form.Item>
             </div>
-            {/* <div className="addmore">
-              <span>+Add more</span>
-            </div> */}
           </div>
         </div>
 
