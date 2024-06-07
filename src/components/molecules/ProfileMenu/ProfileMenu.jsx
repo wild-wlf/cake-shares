@@ -1,23 +1,34 @@
-import React from "react";
-import { ProfileSec } from "./ProfileMenu.Style";
-import LogOut from "../../../_assets/logoutIcon.png";
-import myProfileIcon from "../../../_assets/myProfileIcon.png";
-import privacyPolicyIcon from "../../../_assets/privacyPolicyIcon.png";
-import privacySettingIcon from "../../../_assets/privacySettingIcon.png";
-import termsIcon from "../../../_assets/termsIcon.png";
-import profilePlaceHolder from "../../../_assets/profileplaceHolder.jpg";
-import Image from "next/image";
-import Link from "next/link";
-import { useContextHook } from "use-context-hook";
-import { AuthContext } from "@/components/Context/authContext";
+import React, { useState } from 'react';
+import { ProfileSec } from './ProfileMenu.Style';
+import LogOut from '../../../_assets/logoutIcon.png';
+import myProfileIcon from '../../../_assets/myProfileIcon.png';
+import privacyPolicyIcon from '../../../_assets/privacyPolicyIcon.png';
+import privacySettingIcon from '../../../_assets/privacySettingIcon.png';
+import termsIcon from '../../../_assets/termsIcon.png';
+import profilePlaceHolder from '../../../_assets/profileplaceHolder.jpg';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useContextHook } from 'use-context-hook';
+import { AuthContext } from '@/components/Context/authContext';
+import CenterModal from '../../atoms/Modal/CenterModal';
+import PrivacyPolicy from '@/components/atoms/PrivacyPolicyModal/PrivacyPolicy';
+import TermsConditions from '@/components/atoms/TermsConditions/TermsConditions';
 
 const ProfileMenu = ({ openProfile }) => {
-  const { onLogout, user } = useContextHook(AuthContext, (v) => ({
+  const [privacyPolicy, setPrivacyPolicy] = useState(false);
+  const [termsCondition, setTermsCondition] = useState(false);
+  const { onLogout, user } = useContextHook(AuthContext, v => ({
     onLogout: v.onLogout,
     user: v.user,
   }));
   return (
     <>
+      <CenterModal open={privacyPolicy} setOpen={setPrivacyPolicy} title="Privacy Policy" width="996">
+        <PrivacyPolicy />
+      </CenterModal>
+      <CenterModal open={termsCondition} setOpen={setTermsCondition} title="Terms & Conditions" width="996">
+        <TermsConditions />
+      </CenterModal>
       <ProfileSec $show={openProfile}>
         <div className="top">
           <div className="Dp">
@@ -49,41 +60,30 @@ const ProfileMenu = ({ openProfile }) => {
         <div className="Dets">
           <Link href="/profile">
             <div className="DarkTheme">
-              <Image
-                src={myProfileIcon}
-                alt="My profile"
-                width={17}
-                height={17}
-              />
+              <Image src={myProfileIcon} alt="My profile" width={17} height={17} />
               <h5>My Profile</h5>
             </div>
           </Link>
 
-          <div className="DarkTheme">
-            <Image
-              src={privacyPolicyIcon}
-              alt="Privacy Policies"
-              width={17}
-              height={17}
-            />
+          <div
+            className="DarkTheme"
+            onClick={() => {
+              setPrivacyPolicy(true);
+            }}>
+            <Image src={privacyPolicyIcon} alt="Privacy Policies" width={17} height={17} />
             <h5>Privacy Policy</h5>
           </div>
           <div className="DarkTheme">
-            <Image
-              src={privacySettingIcon}
-              alt="Privacy Settings"
-              width={17}
-              height={17}
-            />
+            <Image src={privacySettingIcon} alt="Privacy Settings" width={17} height={17} />
             <h5>Privacy Settings</h5>
           </div>
-          <div className="DarkTheme" style={{ paddingBottom: "14px" }}>
-            <Image
-              src={termsIcon}
-              alt="Terms & Conditions"
-              width={17}
-              height={17}
-            />
+          <div
+            className="DarkTheme"
+            style={{ paddingBottom: '14px' }}
+            onClick={() => {
+              setTermsCondition(true);
+            }}>
+            <Image src={termsIcon} alt="Terms & Conditions" width={17} height={17} />
             <h5>Terms & Conditions</h5>
           </div>
           <hr />
@@ -91,15 +91,8 @@ const ProfileMenu = ({ openProfile }) => {
             className="LogOut"
             onClick={() => {
               onLogout();
-            }}
-          >
-            <Image
-              className="Logo"
-              width={20}
-              height={20}
-              src={LogOut}
-              alt="Settings"
-            />
+            }}>
+            <Image className="Logo" width={20} height={20} src={LogOut} alt="Settings" />
             <h5>Logout</h5>
           </div>
         </div>
