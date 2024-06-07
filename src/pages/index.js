@@ -9,15 +9,13 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState({
     page: 1,
     pageSize: 10,
-    searchText: '',
-    startDate: '',
-    endDate: '',
-    filterRoles: '',
+    category: '',
   });
   const [categories, setCategoriesBar] = useState([]);
   const [categoriesLoading, setCategoriesBarLoading] = useState(false);
 
   const { products_data, products_loading } = productService.GetProducts(searchQuery);
+
   useEffect(() => {
     async function getCategories() {
       setCategoriesBarLoading(true);
@@ -40,9 +38,10 @@ const Home = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Banner />
-      <CategoriesBar categories={categories} loading={categoriesLoading} />
-      <Categories title="Popular Investments" data={products_data.popularProducts} loading={products_loading} />
-      <Categories title="Recommended Investments" data={products_data.recommendedProducts} loading={products_loading} />
+      <CategoriesBar categories={categories} loading={categoriesLoading} setSearchQuery={setSearchQuery} />
+      <Categories title="Popular Investments" data={products_data?.popularProducts} loading={products_loading} />
+      {/* <Categories title="Recommended Investments" data={products_data?.recommendedProducts} loading={products_loading} /> */}
+      <Categories title="Advertised Investments" data={products_data?.advertisedProducts} loading={products_loading} />
     </>
   );
 };

@@ -1,28 +1,29 @@
-import Button from "@/components/atoms/Button";
-import Field from "@/components/atoms/Field";
-import React, { useEffect, useState } from "react";
-import { StyledEditForm } from "./EditForm.styles";
-import Form from "@/components/molecules/Form/Form";
-import { useForm } from "@/components/molecules/Form";
-import userService from "@/services/userService";
-import { AuthContext } from "@/components/Context/authContext";
-import { useContextHook } from "use-context-hook";
-import Toast from "@/components/molecules/Toast";
+import Button from '@/components/atoms/Button';
+import Field from '@/components/atoms/Field';
+import React, { useEffect, useState } from 'react';
+import { StyledEditForm } from './EditForm.styles';
+import Form from '@/components/molecules/Form/Form';
+import { useForm } from '@/components/molecules/Form';
+import userService from '@/services/userService';
+import { AuthContext } from '@/components/Context/authContext';
+import { useContextHook } from 'use-context-hook';
+import Toast from '@/components/molecules/Toast';
 
-const EditInheritance = ({ selectedItem, userData ,onClose }) => {
-  const { setPermission } = useContextHook(AuthContext, (v) => ({
+const EditInheritance = ({ selectedItem, userData, onClose }) => {
+  const { setPermission } = useContextHook(AuthContext, v => ({
     setPermission: v.setPermission,
   }));
   const [loding, setLoding] = useState(false);
   const [form] = useForm();
   async function handelSubmit(e) {
     const obj = {
-      type: "inheritance",
+      type: 'inheritance',
       info: {
         userId: userData?._id,
         name: e?.name,
         passportNumber: e?.passportNumber,
         country: e?.country,
+        email: e?.inheritanceEmail?.trim(),
       },
     };
     setLoding(true);
@@ -30,14 +31,14 @@ const EditInheritance = ({ selectedItem, userData ,onClose }) => {
     try {
       await userService.update(obj, selectedItem._id);
       Toast({
-        type: "success",
-        message: "updated successfully",
+        type: 'success',
+        message: 'updated successfully',
       });
       setPermission(true);
       onClose();
     } catch (error) {
       Toast({
-        type: "error",
+        type: 'error',
         message: error.message,
       });
     } finally {
@@ -65,14 +66,13 @@ const EditInheritance = ({ selectedItem, userData ,onClose }) => {
             rules={[
               {
                 required: true,
-                message: "Person name is required",
+                message: 'Person name is required',
               },
               {
                 pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
+                message: 'Maximum Character Length is 256',
               },
-            ]}
-          >
+            ]}>
             <Field />
           </Form.Item>
           <Form.Item
@@ -86,10 +86,9 @@ const EditInheritance = ({ selectedItem, userData ,onClose }) => {
               { required: true },
               {
                 pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
+                message: 'Maximum Character Length is 256',
               },
-            ]}
-          >
+            ]}>
             <Field />
           </Form.Item>
           <Form.Item
@@ -104,11 +103,29 @@ const EditInheritance = ({ selectedItem, userData ,onClose }) => {
 
               {
                 pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
+                message: 'Maximum Character Length is 256',
               },
-            ]}
-          >
+            ]}>
             <Field />
+          </Form.Item>
+          <Form.Item
+            type="email"
+            label="Email Address"
+            name="inheritanceEmail"
+            sm
+            rounded
+            placeholder="alex123@gmail.com"
+            rules={[
+              {
+                required: true,
+                message: 'Please enter email address',
+              },
+              {
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+                message: 'Maximum Character Length is 256',
+              },
+            ]}>
+            <Field maxLength={40} />
           </Form.Item>
         </div>
         <Button rounded md btntype="primary" width="170" htmlType="submit">

@@ -13,7 +13,7 @@ const productService = {
    * Hooks
    */
 
-  GetProducts(searchQuery, refetch) {
+  GetProducts(searchQuery) {
     const [products, setProducts] = useState({
       recommendedProducts: [],
       popularProducts: [],
@@ -29,7 +29,7 @@ const productService = {
         })
         .catch(() => setStatus(STATUS.ERROR));
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searchQuery?.searchText, searchQuery?.page, searchQuery?.pageSize, searchQuery?.searchText, refetch]);
+    }, [searchQuery]);
     return {
       products_loading: status === STATUS.LOADING,
       products_error: status === STATUS.ERROR ? status : '',
@@ -69,15 +69,14 @@ const productService = {
     throw new Error(message ?? 'Something went wrong');
   },
 
-  async getProducts({ page = 1, pageSize = 10, searchText, getAll = true }) {
-    let res = await Fetch.get(
-      `${this._url}/products?itemsPerPage=${pageSize}&page=${page}&searchText=${searchText}&getAll=${getAll}`,
-    );
+  async getProducts({ page = 1, pageSize = 10, category }) {
+    let res = await Fetch.get(`${this._url}/products?itemsPerPage=${pageSize}&page=${page}&category=${category}`);
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
       return {
         popularProducts: res.popularProducts.items,
-        recommendedProducts: res.recommendedProducts.items,
+        advertisedProducts: res.advertisedProducts.items,
+        // recommendedProducts: res.recommendedProducts.items,
       };
     }
     const { message } = await res.json();
