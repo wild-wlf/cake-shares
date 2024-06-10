@@ -1,21 +1,16 @@
-import React, { useContext } from "react";
-import { Wrapper } from "./loginSignupModal.style";
-import Field from "../Field";
-import Form, { useForm } from "@/components/molecules/Form";
-import Button from "../Button";
-import { FcGoogle } from "react-icons/fc";
-import Facebook from "../../../_assets/facebook.svg";
-import Image from "next/image";
-import Select from "../Select";
-import { useRouter } from "next/router";
-import { UserContext } from "@/components/Context/UserContext";
+import React, { useContext } from 'react';
+import { Wrapper } from './loginSignupModal.style';
+import Field from '../Field';
+import Form, { useForm } from '@/components/molecules/Form';
+import Button from '../Button';
+import { FcGoogle } from 'react-icons/fc';
+import Facebook from '../../../_assets/facebook.svg';
+import Image from 'next/image';
+import Select from '../Select';
+import { useRouter } from 'next/router';
+import { UserContext } from '@/components/Context/UserContext';
 
-const LoginSignupModal = ({
-  handleRegisterModal,
-  handleSellerLoginModal,
-  handleSellerRegisterModal,
-  type,
-}) => {
+const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleSellerRegisterModal, type }) => {
   const [form] = useForm();
   const router = useRouter();
   function handleSubmit(e) {
@@ -30,9 +25,9 @@ const LoginSignupModal = ({
       sellerType: e.sellerType.value,
     };
 
-    if (type === "Login As Seller") {
-      handleSellerLoginModal({ ...loginObj, type: "Seller" });
-    } else if (type === "Register As Seller") {
+    if (type === 'Login As Seller') {
+      handleSellerLoginModal({ ...loginObj, type: 'Seller' });
+    } else if (type === 'Register As Seller') {
       handleSellerRegisterModal(obj);
     }
 
@@ -54,9 +49,7 @@ const LoginSignupModal = ({
   return (
     <Wrapper>
       <div>
-        <span className="description">
-          Please provide the details to proceed.
-        </span>
+        <span className="description">Please provide the details to proceed.</span>
       </div>
       <Form form={form} onSubmit={handleSubmit}>
         <div>
@@ -70,40 +63,46 @@ const LoginSignupModal = ({
             rules={[
               {
                 required: true,
-                message: "Please enter a valid Seller Type",
+                message: 'Please enter a valid Seller Type',
               },
-            ]}
-          >
+            ]}>
             <Select
               options={[
-                { label: "Individual Seller", value: "Individual" },
-                { label: "Company Seller", value: "Company" },
+                { label: 'Individual Seller', value: 'Individual' },
+                { label: 'Company Seller', value: 'Company' },
               ]}
             />
           </Form.Item>
         </div>
         <div className="input-div">
-        <Form.Item
-                type="text"
-                label="Username"
-                name="username"
-                sm
-                rounded
-                placeholder="alex123"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter username",
-                  },
-                  {
-                    pattern: /^(?!.*\s)[a-zA-Z0-9_-]{5,20}$/,
-                    message: "Maximum Character Length is 256",
-                  },
-                ]}
-              >
-                <Field maxLength={20}/>
-              </Form.Item>
-          {type === "Login As Seller" ? (
+          <Form.Item
+            type="text"
+            label="Username"
+            name="username"
+            sm
+            rounded
+            placeholder="alex123"
+            rules={[
+              {
+                required: true,
+                message: 'Please enter username',
+              },
+              {
+                pattern: /^.{5,20}$/,
+                message: 'Minimum character length is 5',
+              },
+              {
+                pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,
+                message: 'Please enter a valid username (no spaces, letters, numbers, underscores, and hyphens only)',
+              },
+              {
+                pattern: /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9_-]+$/,
+                message: 'Username must be a combination of characters and digits',
+              },
+            ]}>
+            <Field maxLength={20} />
+          </Form.Item>
+          {type === 'Login As Seller' ? (
             <Form.Item
               type="password"
               label="Password"
@@ -115,31 +114,30 @@ const LoginSignupModal = ({
                 {
                   required: true,
                 },
-              ]}
-            >
+              ]}>
               <Field />
             </Form.Item>
           ) : (
             <Form.Item
-            type="text"
-            label="Email Address"
-            name="email"
-            sm
-            rounded
-            placeholder="alex123@gmail.com"
-            rules={[
-              {
-                required: true,
-                message: "Please enter email address",
-              },
-              {
-                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-                message: "Maximum Character Length is 256",
-              },
-            ]}
-          >
-            <Field maxLength={40}/>
-          </Form.Item>
+              type="text"
+              label="Email Address"
+              name="email"
+              sm
+              rounded
+              placeholder="alex123@gmail.com"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter email address',
+                },
+                {
+                  // pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+                  // message: 'Please enter a valid email address',
+                  email: true,
+                },
+              ]}>
+              <Field maxLength={40} />
+            </Form.Item>
           )}
         </div>
         <div className="other-section">
@@ -179,15 +177,13 @@ const LoginSignupModal = ({
             //     : handleBuyerModal
             // }
             // htmlType={type === "Login As Seller" ? "submit" : "button"}
-            htmlType={"submit"}
-          >
+            htmlType={'submit'}>
             Continue
           </Button>
         </div>
-        {type === "Login As Seller" ? (
+        {type === 'Login As Seller' ? (
           <div className="register">
-            Don&apos;t have an account?{" "}
-            <span onClick={handleRegisterModal}> Register</span>
+            Don&apos;t have an account? <span onClick={handleRegisterModal}> Register</span>
           </div>
         ) : (
           <></>

@@ -16,6 +16,7 @@ import Loader from '@/components/atoms/Loader';
 import Toast from '@/components/molecules/Toast';
 
 const SellerProfile = ({ userProfileData }) => {
+  console.log(userProfileData);
   const router = useRouter();
   const [userProfile, setUserProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
