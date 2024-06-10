@@ -7,33 +7,34 @@ import Property from "../../../_assets/property.png";
 import Property2 from "../../../_assets/property2.png";
 import Property3 from "../../../_assets/property3.png";
 import Link from "next/link";
-import { CategoriesWrapper } from "../categories/categories.style";
+import { CategoriesWrapper, NoRecord } from '../categories/categories.style';
+import Skeletonn from '../skeleton/Skeletonn';
 
-const index = ({data}) => {
+const index = ({ data, loading }) => {
   const images = [
     {
       image: Property,
-      id: "1",
+      id: '1',
     },
     {
-      id: "2",
+      id: '2',
       image: Property2,
     },
     {
       image: Property3,
-      id: "3",
+      id: '3',
     },
     {
       image: Property,
-      id: "4",
+      id: '4',
     },
     {
       image: Property2,
-      id: "5",
+      id: '5',
     },
     {
       image: Property3,
-      id: "6",
+      id: '6',
     },
   ];
   var settings = {
@@ -89,13 +90,23 @@ const index = ({data}) => {
   return (
     <CategoriesWrapper image={arrowRight}>
       <div className="slider">
-        <Slider {...settings}>
-          {data.map((c_data, index) => (
-            <Link href={`/products/${c_data?._id}`} key={index}>
-              <Card Cardimage={c_data?.media[0]} c_data={c_data} />
-            </Link>
-          ))}
-        </Slider>
+        {loading ? (
+          <Slider {...settings}>
+            {Array.from({ length: 5 }).map((_, idx) => (
+              <Skeletonn height="238" radius="14px" key={idx} />
+            ))}
+          </Slider>
+        ) : data && data?.length > 0 ? (
+          <Slider {...settings}>
+            {data.map((c_data, index) => (
+              <Link href={`/products/${c_data?._id}`} key={index}>
+                <Card Cardimage={c_data?.media[0]} c_data={c_data} />
+              </Link>
+            ))}
+          </Slider>
+        ) : (
+          <NoRecord>No records found</NoRecord>
+        )}
       </div>
     </CategoriesWrapper>
   );

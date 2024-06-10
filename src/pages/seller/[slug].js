@@ -42,28 +42,28 @@ const SellerProfile = ({ userProfileData }) => {
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <StyledProfile>
-          <Button
-            rounded
-            sm
-            btntype="blue"
-            className="button"
-            onClick={() => {
-              router.back();
-            }}>
-            <IoIosArrowBack />
-            Go Back
-          </Button>
-          <SellerProfileBanner title="Real Estate Broker Things mate!" image={userProfile?.bannerImage} />
-          <SellerInfo userInfo={userProfile?.user} />
-          <SellerPersonalInfo userInfo={userProfile?.user} />
-          <Categories title="Seller’s Other Products" data={userProfile?.otherProducts} />
-          <Categories title="Seller’s Fully Funded Products" data={userProfile?.fullyFundedProducts} />
-        </StyledProfile>
-      )}
+      <StyledProfile>
+        <Button
+          rounded
+          sm
+          btntype="blue"
+          className="button"
+          onClick={() => {
+            router.back();
+          }}>
+          <IoIosArrowBack />
+          Go Back
+        </Button>
+        <SellerProfileBanner title="Real Estate Broker Things mate!" image={userProfile?.bannerImage} />
+        <SellerInfo userInfo={userProfile?.user} />
+        <SellerPersonalInfo userInfo={userProfile?.user} />
+        <Categories title="Seller’s Other Products" data={userProfile?.otherProducts} loading={isLoading} />
+        <Categories
+          title="Seller’s Fully Funded Products"
+          data={userProfile?.fullyFundedProducts}
+          loading={isLoading}
+        />
+      </StyledProfile>
     </>
   );
 };
