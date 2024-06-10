@@ -47,7 +47,7 @@ const SearchFilters = () => {
 
   const handleSubmit = e => {
     let obj = {
-      investmentType: e?.investment_type.value,
+      investmentType: e?.investment_type?.value,
       country: e?.country?.value,
       kycLevel: e?.kyc_level?.value,
       minBackers: e?.min_backers,
