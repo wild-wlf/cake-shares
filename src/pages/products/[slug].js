@@ -39,19 +39,17 @@ const ProductDetails = ({ userData }) => {
         <title>{productData?.productName}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <ProductDetail
-            data={productData?.product}
-            SellerData={productData?.product?.userId}
-            setProductData={setProductData}
-          />
-          <Amenities data={productData?.product} />
-          <Categories data={productData?.otherProducts} loading={isLoading} title="Seller’s Other Products" />
-        </>
-      )}
+
+      <>
+        <ProductDetail
+          loading={isLoading}
+          data={productData?.product}
+          SellerData={productData?.product?.userId}
+          setProductData={setProductData}
+        />
+        <Amenities data={productData?.product} loading={isLoading} />
+        <Categories data={productData?.otherProducts} loading={isLoading} title="Seller’s Other Products" />
+      </>
     </>
   );
 };

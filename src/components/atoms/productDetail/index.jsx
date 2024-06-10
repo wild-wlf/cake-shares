@@ -19,8 +19,9 @@ import { AuthContext } from '@/components/Context/authContext';
 import HandleLoginModal from '@/components/molecules/HandleLoginModal';
 import UpgradeKycLevelModal from '@/components/molecules/upgradeKycLevelModal';
 import InfoIcon from '../../../_assets/info-icon.svg';
+import Skeletonn from '../skeleton/Skeletonn';
 
-const ProductDetail = ({ data, SellerData, setProductData }) => {
+const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
   const { isLoggedIn, user } = useContextHook(AuthContext, v => ({
     isLoggedIn: v.isLoggedIn,
     user: v.user,
@@ -170,20 +171,53 @@ const ProductDetail = ({ data, SellerData, setProductData }) => {
 
         <div className="imagewrapper">
           <div className="product1">
-            <Image src={data?.media[0]} alt="Product-Image" width={660} height={360} />
+            {loading ? (
+              <Skeletonn height="360" radius="30px" width="100" />
+            ) : (
+              data?.media[2] && <Image src={data?.media[0]} alt="Product-Image" width={660} height={360} />
+            )}
           </div>
           <div className="product2">
-            {data?.media[1] && <Image src={data?.media[1]} alt="Product-Image" width={365} height={360} />}
-            {data?.media[2] && <Image src={data?.media[2]} alt="Product-Image" width={365} height={360} />}
+            {loading ? (
+              <Skeletonn height="360" radius="30px" width="100" />
+            ) : (
+              data?.media[1] && <Image src={data?.media[1]} alt="Product-Image" width={365} height={360} />
+            )}
+          </div>
+          <div className="product2">
+            {loading ? (
+              <Skeletonn height="360" radius="30px" width="100" />
+            ) : (
+              data?.media[2] && <Image src={data?.media[2]} alt="Product-Image" width={365} height={360} />
+            )}
           </div>
         </div>
 
         <div className="investwrapper">
           <div className="content-holder">
             <strong>Why Invest in this?</strong>
-            <p>{data?.investmentReason}</p>
+            {loading ? (
+              <>
+                <Skeletonn height="20" radius="12px" width="100" margin="10px" />
+                <Skeletonn height="20" radius="12px" width="80" margin="10px" />
+                <Skeletonn height="20" radius="12px" width="80" margin="10px" />
+                <Skeletonn height="20" radius="12px" width="60" margin="10px" />
+              </>
+            ) : (
+              <p>{data?.investmentReason}</p>
+            )}
             <strong>Description</strong>
-            <p>{data?.description}</p>
+
+            {loading ? (
+              <>
+                <Skeletonn height="20" radius="12px" width="100" margin="10px" />
+                <Skeletonn height="20" radius="12px" width="80" margin="10px" />
+                <Skeletonn height="20" radius="12px" width="80" margin="10px" />
+                <Skeletonn height="20" radius="12px" width="60" margin="10px" />
+              </>
+            ) : (
+              <p>{data?.description}</p>
+            )}
           </div>
           <ProductDescription data={data} SellerData={SellerData} />
         </div>
