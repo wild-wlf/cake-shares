@@ -6,7 +6,7 @@ import MessageIcon from '../../../_assets/chat-icon.svg';
 import CenterModal from '../Modal/CenterModal';
 import Chat from '../Chat';
 
-const index = ({ data }) => {
+const Amenities = ({ data }) => {
   const [chatModal, setChatModal] = useState(false);
   return (
     <>
@@ -47,4 +47,4 @@ const index = ({ data }) => {
   );
 };
 
-export default index;
+export default Amenities;
