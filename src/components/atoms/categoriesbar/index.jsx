@@ -15,6 +15,7 @@ import { CiSearch } from 'react-icons/ci';
 import CenterModal from '../Modal/CenterModal';
 import AdvanceSearch from '../advanceSearch';
 import { BiSolidCategory } from 'react-icons/bi';
+import Skeletonn from '../skeleton/Skeletonn';
 
 const CategoriesBar = ({ categories, loading, setSearchQuery }) => {
   const [modal, setModal] = useState(false);
@@ -45,70 +46,6 @@ const CategoriesBar = ({ categories, loading, setSearchQuery }) => {
     [categories],
   );
 
-  console.log(categoriesOptions);
-
-  const categoryData = [
-    {
-      image: <BiSolidCategory />,
-      text: 'All',
-    },
-    {
-      image: <FaFire />,
-      text: 'Popular',
-    },
-    {
-      image: <FaHouseChimney />,
-      text: 'Properties',
-    },
-    {
-      image: <TbBuildingFactory />,
-      text: 'Ventures',
-    },
-    {
-      image: <PiStorefrontFill />,
-      text: 'Bazaar',
-    },
-    {
-      image: <FaCarAlt />,
-      text: 'Vehicals',
-    },
-    {
-      image: <HiHeart />,
-      text: 'My Favorite',
-    },
-    {
-      image: <AiFillDollarCircle />,
-      text: 'High Funding',
-    },
-    {
-      image: <FaFire />,
-      text: 'Popular',
-    },
-    {
-      image: <FaHouseChimney />,
-      text: 'Properties',
-    },
-    {
-      image: <TbBuildingFactory />,
-      text: 'Ventures',
-    },
-    {
-      image: <PiStorefrontFill />,
-      text: 'Bazaar',
-    },
-    {
-      image: <FaCarAlt />,
-      text: 'Vehicals',
-    },
-    {
-      image: <HiHeart />,
-      text: 'My Favorite',
-    },
-    {
-      image: <AiFillDollarCircle />,
-      text: 'High Funding',
-    },
-  ];
   return (
     <>
       <CenterModal open={modal} setOpen={setModal} title={'Advance Search'} width="670">
@@ -118,7 +55,13 @@ const CategoriesBar = ({ categories, loading, setSearchQuery }) => {
         <div className="maindiv">
           <div className="slider">
             {loading ? (
-              'Loading...'
+              <Slider {...settings}>
+                {Array.from({ length: 10 }).map((_, ind) => (
+                  <Button rounded sm btntype={'white'} key={ind}>
+                    <Skeletonn width="100" height="20" />
+                  </Button>
+                ))}
+              </Slider>
             ) : (
               <Slider {...settings}>
                 {categoriesOptions?.map((item, index) => (

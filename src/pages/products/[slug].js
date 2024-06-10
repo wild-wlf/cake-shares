@@ -49,7 +49,7 @@ const ProductDetails = ({ userData }) => {
             setProductData={setProductData}
           />
           <Amenities data={productData?.product} />
-          {productData?.otherProducts.length > 0 && <Categories data={productData?.otherProducts} />}
+          <Categories data={productData?.otherProducts} loading={isLoading} title="Seller’s Other Products" />
         </>
       )}
     </>

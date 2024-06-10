@@ -6,6 +6,7 @@ import arrowRight from '../../../_assets/arrow.png';
 import Property from '../../../_assets/property.png';
 import Link from 'next/link';
 import Loader from '../Loader';
+import Skeletonn from '../skeleton/Skeletonn';
 
 const Categories = ({ title, data, loading }) => {
   const settings = {
@@ -59,7 +60,11 @@ const Categories = ({ title, data, loading }) => {
         <span>{title}</span>
       </div>
       {loading ? (
-        <Loader />
+        <Slider {...settings}>
+          {Array.from({ length: 5 }).map((_, idx) => (
+            <Skeletonn height="238" radius="14px" key={idx} />
+          ))}
+        </Slider>
       ) : data && data?.length > 0 ? (
         <div className="slider">
           <Slider {...settings}>
