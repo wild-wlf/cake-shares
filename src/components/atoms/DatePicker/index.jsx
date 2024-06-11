@@ -1,13 +1,11 @@
 /* eslint-disable jsx-a11y/no-onchange */
 import React from 'react';
 // eslint-disable-next-line no-unused-vars
-import styled from 'styled-components';
 
 import DatePickerHeader from '../DatePickerHeader';
 import { StyledDateRange } from './DatePicker.styles';
 
 function ReactDateRange({ prefix, suffix, disabled, excludeDateIntervals, invalid, error, onChange, ...props }) {
-  const today = new Date();
   return (
     <StyledDateRange
       disabled={disabled}
