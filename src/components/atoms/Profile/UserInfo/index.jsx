@@ -17,6 +17,7 @@ import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/components/Context/authContext';
 import Toast from '@/components/molecules/Toast';
 import { format, parseISO } from 'date-fns';
+import SmLoader from '../../Loader/SmLoader';
 const UserInfo = ({
   userImage,
   type = {
@@ -33,7 +34,9 @@ const UserInfo = ({
   }));
   const formattedDate = user?.created_at ? format(parseISO(user?.created_at), 'MMM dd, yyyy') : 'N/A';
   const router = usePathname();
+  const [loading, setloading] = useState(false);
   async function handelProfileImage(e) {
+    setloading(true);
     const file = e.target.files[0];
     if (file) {
       let obj = {
@@ -48,11 +51,13 @@ const UserInfo = ({
           message: 'profile updated successfully',
         });
         setPermission(true);
+        setloading(false);
       } catch (error) {
         Toast({
           type: 'error',
           message: error.message,
         });
+        setloading(false);
       }
     }
   }
@@ -66,9 +71,15 @@ const UserInfo = ({
               <MdEdit color="var(--white)" size={26} />
             </span>
             {user.profilePicture ? (
-              <Image src={user.profilePicture} alt="userImage" width={170} height={250} />
+              <>
+                <Image src={user.profilePicture} alt="userImage" width={170} height={250} />
+                {loading && <SmLoader />}
+              </>
             ) : (
-              <Image src={profile} alt="userImage" />
+              <>
+                <Image src={profile} alt="userImage" />
+                {loading && <SmLoader />}
+              </>
             )}
           </ProfileWrapper>
         )}
@@ -78,7 +89,7 @@ const UserInfo = ({
           </ProfileWrapper>
         )}
         <div className="textWrapper">
-          <strong className="name">{userData ? userData?.fullName : 'Alex Mertiz'}</strong>
+          <strong className="name">{userData.fullName ? userData?.fullName : userData.username}</strong>
           <div className="discreption">
             <span className="active"> CakeShare {userData?.type ? userData?.type : type.userType}</span>
             <span className="addbefore">Member since {formattedDate}</span>

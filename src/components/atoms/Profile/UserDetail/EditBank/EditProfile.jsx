@@ -1,31 +1,33 @@
-import Button from "@/components/atoms/Button";
-import Field from "@/components/atoms/Field";
-import React, { useEffect, useState } from "react";
-import { StyledEditForm } from "./EditForm.styles";
-import Form from "@/components/molecules/Form/Form";
-import { useForm } from "@/components/molecules/Form";
-import { countries } from "@/components/Constant";
-import Image from "next/image";
-import Select from "@/components/atoms/Select";
-import ModalContainer from "@/components/atoms/ModalContainer";
-import { MdModeEdit } from "react-icons/md";
-import Password from "../../../../../_assets/changePassword.svg";
-import ChangePassword from "../ChangePassword";
-import CenterModal from "@/components/atoms/Modal/CenterModal";
-import userService from "@/services/userService";
-import Toast from "@/components/molecules/Toast";
-import { useContextHook } from "use-context-hook";
-import { AuthContext } from "@/components/Context/authContext";
-import { convertDateToISO } from "@/helpers/common";
+import Button from '@/components/atoms/Button';
+import Field from '@/components/atoms/Field';
+import React, { useEffect, useState } from 'react';
+import { StyledEditForm } from './EditForm.styles';
+import Form from '@/components/molecules/Form/Form';
+import { useForm } from '@/components/molecules/Form';
+import { countries } from '@/components/Constant';
+import Image from 'next/image';
+import Select from '@/components/atoms/Select';
+import ModalContainer from '@/components/atoms/ModalContainer';
+import { MdModeEdit } from 'react-icons/md';
+import Password from '../../../../../_assets/changePassword.svg';
+import ChangePassword from '../ChangePassword';
+import CenterModal from '@/components/atoms/Modal/CenterModal';
+import userService from '@/services/userService';
+import Toast from '@/components/molecules/Toast';
+import { useContextHook } from 'use-context-hook';
+import { AuthContext } from '@/components/Context/authContext';
+import { convertDateToISO } from '@/helpers/common';
+import { checkAge, convertToFormData } from '@/helpers/common';
+
 const EditProfile = ({ personalInfo, onClose }) => {
   const [arr, setArr] = useState(countries);
   const [loading, setLoading] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
   const [form] = useForm();
-  const { setPermission } = useContextHook(AuthContext, (v) => ({
+  const { setPermission } = useContextHook(AuthContext, v => ({
     setPermission: v.setPermission,
   }));
-  function handelChange(value = "PK") {
+  function handelChange(value = 'PK') {
     const newArr = arr.map((elem, index) => ({
       ...elem,
       label: (
@@ -48,21 +50,20 @@ const EditProfile = ({ personalInfo, onClose }) => {
     handelChange();
   }, []);
   useEffect(() => {
-    const country = countries.find(
-      (ele) => ele.value === personalInfo?.country
-    );
+    const country = countries.find(ele => ele.value === personalInfo?.country);
     form.setFieldsValue({
       fullName: personalInfo?.fullName,
       username: personalInfo?.username,
       email: personalInfo?.email,
       dob: personalInfo?.dob,
-      country: country || { value: "", label: "" },
+      country: country || { value: '', label: '' },
     });
+    console.log('dob', personalInfo?.dob);
   }, []);
   async function handelSubmit(e) {
     setLoading(true);
     const obj = {
-      type: "personal",
+      type: 'personal',
       info: {
         fullName: e.fullName,
         username: e.username,
@@ -76,28 +77,22 @@ const EditProfile = ({ personalInfo, onClose }) => {
       setPermission(true);
       onClose();
       Toast({
-        type: "success",
-        message: "Profile updated successfully",
+        type: 'success',
+        message: 'Profile updated successfully',
       });
     } catch (error) {
       console.log(error);
       Toast({
-        type: "error",
+        type: 'error',
         message: error.message,
       });
     } finally {
       setLoading(false);
     }
   }
-
   return (
     <>
-      <CenterModal
-        open={changePassword}
-        setOpen={setChangePassword}
-        width={663}
-        title="Change Password"
-      >
+      <CenterModal open={changePassword} setOpen={setChangePassword} width={663} title="Change Password">
         <ChangePassword />
       </CenterModal>
       <StyledEditForm form={form} onSubmit={handelSubmit}>
@@ -113,10 +108,9 @@ const EditProfile = ({ personalInfo, onClose }) => {
               { required: true },
               {
                 pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
+                message: 'Maximum Character Length is 256',
               },
-            ]}
-          >
+            ]}>
             <Field />
           </Form.Item>
           <Form.Item
@@ -130,10 +124,9 @@ const EditProfile = ({ personalInfo, onClose }) => {
               { required: true },
               {
                 pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
+                message: 'Maximum Character Length is 256',
               },
-            ]}
-          >
+            ]}>
             <Field />
           </Form.Item>
           <Form.Item
@@ -142,16 +135,16 @@ const EditProfile = ({ personalInfo, onClose }) => {
             name="email"
             sm
             rounded
+            disabled
             placeholder="alex123@gmail.com"
             rules={[
               { required: true },
 
               {
                 pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
+                message: 'Maximum Character Length is 256',
               },
-            ]}
-          >
+            ]}>
             <Field />
           </Form.Item>
           <Form.Item
@@ -161,47 +154,34 @@ const EditProfile = ({ personalInfo, onClose }) => {
             rounded
             placeholder="Select"
             options={arr}
-            rules={[{ required: true }]}
-          >
+            rules={[{ required: true }]}>
             <Select />
           </Form.Item>
           <Form.Item
-            type="text"
+            type="date"
             label="Birthdate (D.O.B)"
             name="dob"
             sm
             rounded
             placeholder="03/05/2001"
             rules={[
-              { required: true },
+              { required: true, message: 'Birthdate is required' },
 
               {
-                pattern: /^.{0,40}$/,
-                message: "Maximum Character Length is 256",
+                transform: value => checkAge(value) === false,
+                message: 'Age must be 18',
               },
-            ]}
-          >
+            ]}>
             <Field />
           </Form.Item>
         </div>
 
-        <strong
-          className="fake-label"
-          onClick={() => setChangePassword(!changePassword)}
-        >
+        <strong className="fake-label" onClick={() => setChangePassword(!changePassword)}>
           Change Password!
           <Image src={Password} alt="changePassword" />
         </strong>
 
-        <Button
-          rounded
-          md
-          btntype="primary"
-          width="170"
-          htmlType="submit"
-          disabled={loading}
-          loader={loading}
-        >
+        <Button rounded md btntype="primary" width="170" htmlType="submit" disabled={loading} loader={loading}>
           Save Changes
         </Button>
       </StyledEditForm>
