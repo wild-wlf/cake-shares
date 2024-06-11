@@ -271,7 +271,7 @@ const TopBar = () => {
       </CenterModal>
 
       <CenterModal open={sellerpasswordModal} setOpen={setSellerPasswordModal} title="Register as a Seller" width="666">
-        <CreatePasswordModal type="Register as Seller" handleSellerPasswordModal={handleSellerPasswordModal} />
+        <CreatePasswordModal type="Register As Seller" handleSellerPasswordModal={handleSellerPasswordModal} />
       </CenterModal>
 
       {/******************************** Registration Modals ******************************************/}
