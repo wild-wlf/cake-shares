@@ -161,13 +161,14 @@ export const ProductDetailWrapper = styled.div`
     .product2 {
       width: 100%;
       height: 185px;
+      overflow: hidden;
     }
     .product2 {
       gap: 12px;
     }
   }
   @media only screen and (max-width: 576px) {
-    padding: 00px 0px;
+    padding: 0px 0px;
     .headings {
       font-size: 10px;
     }
