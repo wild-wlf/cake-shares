@@ -91,10 +91,6 @@ const BuyerLoginSignupModal = ({
                 {
                   required: true,
                 },
-                {
-                  pattern: /^.{8,64}$/,
-                  message: "Maximum Character Length is 256",
-                },
               ]}
             >
               <Field />
