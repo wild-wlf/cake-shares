@@ -155,12 +155,7 @@ const Field = forwardRef(
                   </InputIcon>
                 </>
               ) : type === 'datepicker' ? (
-                <DatePicker
-                  {...inputProps}
-                  placeholderText="Click to select a date"
-                  prefix={prefix}
-                  $invalid={invalid || error}
-                />
+                <DatePicker {...inputProps} prefix={prefix} $invalid={invalid || error} />
               ) : type === 'file' ? (
                 <UploadFile {...inputProps} $invalid={invalid || error} />
               ) : (
