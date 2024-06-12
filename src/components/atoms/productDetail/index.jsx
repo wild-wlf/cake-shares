@@ -174,7 +174,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
             {loading ? (
               <Skeletonn height="360" radius="30px" width="100" />
             ) : (
-              data?.media[2] && <Image src={data?.media[0]} alt="Product-Image" width={660} height={360} />
+              data?.media[0] && <Image src={data?.media[0]} alt="Product-Image" width={660} height={360} />
             )}
           </div>
           <div className="product2">
