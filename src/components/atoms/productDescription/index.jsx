@@ -39,7 +39,7 @@ const ProductDescription = ({ data, SellerData }) => {
           </div>
           <div className="profiledesc">
             <strong className="user-name">{SellerData?.fullName}</strong>
-            <span className="text">{SellerData?.sellerType}</span>
+            <span className="text">{SellerData?.sellerType} Seller</span>
             <div className="btnwrapper">
               <div className="viewprofile" onClick={() => router.push(`/seller/${SellerData?._id}`)}>
                 <span>View Profile</span> <TbExternalLink className="icon" />
