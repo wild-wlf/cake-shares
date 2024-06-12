@@ -23,6 +23,10 @@ const EditProfile = ({ personalInfo, onClose }) => {
   const [arr, setArr] = useState(countries);
   const [loading, setLoading] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
+  const [dob, setDob] = useState(
+    `${personalInfo?.dob.slice(6, 10)}-${personalInfo?.dob.slice(3, 5)}-${personalInfo?.dob.slice(0, 2)}`,
+  );
+  console.log(dob);
   const [form] = useForm();
   const { setPermission } = useContextHook(AuthContext, v => ({
     setPermission: v.setPermission,
@@ -163,7 +167,13 @@ const EditProfile = ({ personalInfo, onClose }) => {
             name="dob"
             sm
             rounded
-            placeholder="03/05/2001"
+            value={dob}
+            onChange={e => {
+              setDob(e.target.value);
+              form.setFieldsValue({
+                dob: e.target.value,
+              });
+            }}
             rules={[
               { required: true, message: 'Birthdate is required' },
 
