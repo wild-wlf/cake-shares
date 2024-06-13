@@ -15,9 +15,11 @@ const ProfileBanner = ({ title = 'Master the World of NFT’s!', type = 'Buyer' 
     setPermission: v.setPermission,
   }));
   const [bannerImg, setBannerImg] = useState(null);
-  user;
+  const [loading, setloading] = useState(false);
+
   const router = usePathname();
   async function handleBannerImg(e) {
+    setloading(true);
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -38,7 +40,9 @@ const ProfileBanner = ({ title = 'Master the World of NFT’s!', type = 'Buyer' 
         message: 'Banner updated successfully',
       });
       setPermission(true);
+      setloading(false);
     } catch (error) {
+      setloading(false);
       Toast({
         type: 'error',
         message: error.message,
@@ -47,7 +51,7 @@ const ProfileBanner = ({ title = 'Master the World of NFT’s!', type = 'Buyer' 
   }
   return (
     <>
-      <StyledProfileBanner $image={user?.bannerImage}>
+      <StyledProfileBanner $image={user?.bannerImage} $loading={loading}>
         <strong className="title">{title}</strong>
         {router === '/profile' && (
           <button type="button">

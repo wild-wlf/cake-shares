@@ -155,6 +155,13 @@ export const ProfileWrapper = styled.label`
   margin-bottom: 20px;
   position: relative;
   cursor: pointer;
+  .loaderSm {
+    display: block;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+  }
   @media screen and (min-width: 576px) {
     margin-top: 0px;
   }
@@ -164,7 +171,7 @@ export const ProfileWrapper = styled.label`
   }
   img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
   }
   &::before {

@@ -71,7 +71,6 @@ const UserDetail = ({ userData, assetsData, searchQuery, setSearchQuery }) => {
     [assetsData],
   );
   const columnNames = [`Product`, `Category`, `Total Shares`, `Amount`, `Chat (Stakeholders)`];
-console.log(personalInfo);
   return (
     <StyledUserDetail>
       <div className="colWrapper">

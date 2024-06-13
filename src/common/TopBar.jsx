@@ -389,7 +389,7 @@ const TopBar = () => {
                       <Image src={profilePlaceHolder} alt="profile" width={25} height={25} />
                     )}
                   </figure>
-                  <span className="userName">{user?.fullName}</span>
+                  <span className="userName">{user?.fullName || user?.username}</span>
                   <MdArrowDropDown />
                 </Button>
                 <ProfileMenu />
