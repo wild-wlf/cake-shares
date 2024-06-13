@@ -133,8 +133,17 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                     message: 'Please enter username',
                   },
                   {
-                    pattern: /^(?!.*\s)[a-zA-Z0-9_-]{5,20}$/,
-                    message: 'Maximum Character Length is 256',
+                    pattern: /^.{5,20}$/,
+                    message: 'Minimum character length is 5',
+                  },
+                  {
+                    pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,
+                    message:
+                      'Please enter a valid username (no spaces, letters, numbers, underscores, and hyphens only)',
+                  },
+                  {
+                    pattern: /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9_-]+$/,
+                    message: 'Username must be a combination of characters and digits',
                   },
                 ]}>
                 <Field maxLength={20} />
@@ -154,8 +163,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                     message: 'Please enter email address',
                   },
                   {
-                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-                    message: 'Maximum Character Length is 256',
+                    email: true,
                   },
                 ]}>
                 <Field maxLength={40} />
@@ -271,7 +279,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                   },
                   {
                     pattern: /^[a-zA-Z0-9_-]{8,40}$/,
-                    message: 'User ID must be between 8 and 256 characters long',
+                    message: 'User ID must be between 8 and 40 characters long',
                   },
                 ]}>
                 <Field maxLength={40} />
@@ -357,8 +365,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                     message: 'Please enter email address',
                   },
                   {
-                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-                    message: 'Maximum Character Length is 256',
+                    email: true,
                   },
                 ]}>
                 <Field maxLength={40} />

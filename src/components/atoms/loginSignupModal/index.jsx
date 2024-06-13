@@ -113,9 +113,14 @@ const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleS
               rules={[
                 {
                   required: true,
+                  message: 'Password is required',
+                },
+                {
+                  pattern: /^.{8,64}$/,
+                  message: 'Please enter a valid password',
                 },
               ]}>
-              <Field />
+              <Field maxLength={64} />
             </Form.Item>
           ) : (
             <Form.Item

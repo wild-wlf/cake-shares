@@ -59,8 +59,6 @@ const UserInfo = ({
   return (
     <StyledUserInfo>
       <div className="userInfo">
-        dss
-        <h1>hamza</h1>
         {type.userType === 'Buyer' && (
           <ProfileWrapper showEffect={type.userType}>
             <input type="file" id="bannerImg" accept=".png , .jpg" onChange={handelProfileImage} />
