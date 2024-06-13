@@ -14,6 +14,7 @@ const EditBank = ({ bankInfo, onClose }) => {
     setPermission: v.setPermission,
     user: v.user,
   }));
+
   const [loading, setloading] = useState(false);
   const [form] = useForm();
   useEffect(() => {
@@ -37,9 +38,19 @@ const EditBank = ({ bankInfo, onClose }) => {
         userId: e?.userId?.trim(),
       },
     };
+    let objCreate = {
+      bankName: e?.bankName?.trim(),
+      iban: e?.iban?.trim(),
+      swiftBicNumber: e?.swiftBicNumber?.trim(),
+      userId: e?.userId?.trim(),
+    };
 
     try {
-      await userService.update(obj, user._id);
+      if (user?.bank) {
+        await userService.update(obj, user?.bank?._id);
+      } else {
+        await userService.createBank(objCreate, user._id);
+      }
 
       Toast({
         type: 'success',
@@ -70,10 +81,11 @@ const EditBank = ({ bankInfo, onClose }) => {
           rules={[
             {
               required: true,
+              message: 'Please enter Bank Name',
             },
             {
-              pattern: /^.{0,50}$/,
-              message: 'Maximum Character Length is 256',
+              pattern: /^.{8,50}$/,
+              message: 'Please enter a valid Bank Name',
             },
           ]}>
           <Field maxLength={50} />
@@ -130,7 +142,7 @@ const EditBank = ({ bankInfo, onClose }) => {
             },
             {
               pattern: /^[a-zA-Z0-9_-]{8,40}$/,
-              message: 'User ID must be between 8 and 256 characters long',
+              message: 'User ID must be between 8 and 40 characters long',
             },
           ]}>
           <Field maxLength={40} />

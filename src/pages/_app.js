@@ -42,12 +42,16 @@ export const StyledToastContainer = styled(ToastContainer)`
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
+  const [load, setLoad] = useState(false);
   const [loading, setLoading] = useState(false);
   const GlobalStyles = createGlobalStyle`
   ${Variables}
   ${Styling}
   ${HelperClasses}
 `;
+  useEffect(() => {
+    setLoad(true);
+  }, []);
 
   useEffect(() => {
     router.events.on('routeChangeError', () => setLoading(false));
@@ -63,22 +67,26 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <AuthContextProvider>
-        <SocketContextProvider>
-          <UserContextProvider>
-            <KycContextProvider>
-              <SearchContextProvider>
-                <GlobalStyles />
-                {loading && <Loader />}
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-              </SearchContextProvider>
-            </KycContextProvider>
-          </UserContextProvider>
-        </SocketContextProvider>
-      </AuthContextProvider>
-      <StyledToastContainer />
+      {load && (
+        <>
+          <AuthContextProvider>
+            <SocketContextProvider>
+              <UserContextProvider>
+                <KycContextProvider>
+                  <SearchContextProvider>
+                    <GlobalStyles />
+                    {loading && <Loader />}
+                    <Layout>
+                      <Component {...pageProps} />
+                    </Layout>
+                  </SearchContextProvider>
+                </KycContextProvider>
+              </UserContextProvider>
+            </SocketContextProvider>
+          </AuthContextProvider>
+          <StyledToastContainer />
+        </>
+      )}
     </>
   );
 }

@@ -5,7 +5,7 @@ import Card from '../card';
 import arrowRight from '../../../_assets/arrow.png';
 import Property from '../../../_assets/property.png';
 import Link from 'next/link';
-import Loader from '../Loader';
+import Skeletonn from '../skeleton/Skeletonn';
 
 const Categories = ({ title, data, loading }) => {
   const settings = {
@@ -53,20 +53,23 @@ const Categories = ({ title, data, loading }) => {
       },
     ],
   };
-
   return (
     <CategoriesWrapper image={arrowRight}>
       <div className="title">
         <span>{title}</span>
       </div>
       {loading ? (
-        <Loader />
+        <Slider {...settings}>
+          {Array.from({ length: 5 }).map((_, idx) => (
+            <Skeletonn height="238" radius="14px" key={idx} />
+          ))}
+        </Slider>
       ) : data && data?.length > 0 ? (
         <div className="slider">
           <Slider {...settings}>
             {data?.map((item, index) => (
               <Link href={`/products/${item._id}`} key={index}>
-                <Card c_data={item} Cardimage={item.media[0] || Property} />
+                <Card c_data={item} Cardimage={item?.media[0] || Property} />
               </Link>
             ))}
           </Slider>

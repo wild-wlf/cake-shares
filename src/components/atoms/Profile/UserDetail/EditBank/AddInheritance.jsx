@@ -72,27 +72,30 @@ const AddInheritance = ({ onClose }) => {
                 message: 'Person name is required',
               },
               {
-                pattern: /^.{0,40}$/,
-                message: 'Maximum Character Length is 256',
+                pattern: /^.{3,40}$/,
+                message: 'Please enter a valid name',
               },
             ]}>
-            <Field />
+            <Field maxLength={40} />
           </Form.Item>
           <Form.Item
-            type="text"
+            type="number"
             label="Passport Number"
             name="passportNumber"
             sm
             rounded
             placeholder="123467894562339"
             rules={[
-              { required: true },
               {
-                pattern: /^.{0,40}$/,
-                message: 'Maximum Character Length is 256',
+                required: true,
+                message: 'Passport number is required',
+              },
+              {
+                pattern: /^[a-zA-Z0-9]{6,9}$/,
+                message: 'Passport number must be between 6 and 9 characters long',
               },
             ]}>
-            <Field />
+            <Field maxLength={9} />
           </Form.Item>
           <Form.Item
             type="text"
@@ -105,14 +108,14 @@ const AddInheritance = ({ onClose }) => {
               { required: true },
 
               {
-                pattern: /^.{0,40}$/,
-                message: 'Maximum Character Length is 256',
+                pattern: /^.{3,40}$/,
+                message: 'Please enter a valid country',
               },
             ]}>
-            <Field />
+            <Field maxLength={40} />
           </Form.Item>
           <Form.Item
-            type="text"
+            type="email"
             label="Email Address"
             name="inheritanceEmail"
             sm
@@ -124,8 +127,7 @@ const AddInheritance = ({ onClose }) => {
                 message: 'Please enter email address',
               },
               {
-                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-                message: 'Maximum Character Length is 256',
+                email: true,
               },
             ]}>
             <Field maxLength={40} />

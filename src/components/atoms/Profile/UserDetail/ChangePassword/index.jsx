@@ -1,24 +1,39 @@
-import React from "react";
-import { StyledEditForm } from "../EditBank/EditForm.styles";
-import Form from "@/components/molecules/Form/Form";
-import { useForm } from "@/components/molecules/Form";
-import Field from "@/components/atoms/Field";
-import Button from "@/components/atoms/Button";
-import userService from "@/services/userService";
-import { useContextHook } from "use-context-hook";
-import { AuthContext } from "@/components/Context/authContext";
+import React from 'react';
+import { StyledEditForm } from '../EditBank/EditForm.styles';
+import Form from '@/components/molecules/Form/Form';
+import { useForm } from '@/components/molecules/Form';
+import Field from '@/components/atoms/Field';
+import Button from '@/components/atoms/Button';
+import userService from '@/services/userService';
+import { useContextHook } from 'use-context-hook';
+import { AuthContext } from '@/components/Context/authContext';
+import Toast from '@/components/molecules/Toast';
 
 const ChangePassword = () => {
-  const { user } = useContextHook(AuthContext, (v) => ({
+  const { user, onLogout } = useContextHook(AuthContext, v => ({
     user: v.user,
+    onLogout: v.onLogout,
   }));
+  console.log(user);
   const [form] = useForm();
   async function handelSubmit(e) {
     let obj = {
       currentPassword: e.current_Password,
       newPassword: e.new_Password,
     };
-    await userService.updatePassword(obj, user?._id);
+    try {
+      await userService.updatePassword(obj, user?._id);
+      Toast({
+        type: 'success',
+        message: 'Password Updated Successfully!',
+      });
+      onLogout();
+    } catch (error) {
+      Toast({
+        type: 'error',
+        message: error.message,
+      });
+    }
   }
   return (
     <StyledEditForm form={form} onSubmit={handelSubmit}>
@@ -30,14 +45,16 @@ const ChangePassword = () => {
         rounded
         placeholder="Enter Current Password"
         rules={[
-          { required: true },
           {
-            pattern: /^.{0,40}$/,
-            message: "Maximum Character Length is 256",
+            required: true,
+            message: 'Password is required',
           },
-        ]}
-      >
-        <Field />
+          {
+            pattern: /^.{8,64}$/,
+            message: 'Please enter a valid password',
+          },
+        ]}>
+        <Field maxLength={64} />
       </Form.Item>
       <div className="combine-fields">
         <Form.Item
@@ -48,14 +65,16 @@ const ChangePassword = () => {
           rounded
           placeholder="Enter New Password"
           rules={[
-            { required: true },
             {
-              pattern: /^.{0,40}$/,
-              message: "Maximum Character Length is 256",
+              required: true,
+              message: 'Password is required',
             },
-          ]}
-        >
-          <Field />
+            {
+              pattern: /^.{8,64}$/,
+              message: 'Password should be between 8 to 64 characters',
+            },
+          ]}>
+          <Field maxLength={64} />
         </Form.Item>
         <Form.Item
           type="password"
@@ -67,14 +86,13 @@ const ChangePassword = () => {
           rules={[
             {
               required: true,
+              message: 'Password is required',
             },
             {
-              transform: (value) =>
-                value !== form.getFieldValue("new_Password"),
-              message: "The two passwords that you entered do not match!",
+              transform: value => value !== form.getFieldValue('new_Password'),
+              message: 'The two passwords that you entered do not match!',
             },
-          ]}
-        >
+          ]}>
           <Field />
         </Form.Item>
       </div>

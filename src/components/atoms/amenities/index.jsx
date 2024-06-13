@@ -5,8 +5,10 @@ import Image from 'next/image';
 import MessageIcon from '../../../_assets/chat-icon.svg';
 import CenterModal from '../Modal/CenterModal';
 import Chat from '../Chat';
+import Skeletonn from '../skeleton/Skeletonn';
+import { NoRecord } from '../categories/categories.style';
 
-const index = ({ data }) => {
+const Amenities = ({ data, loading }) => {
   const [chatModal, setChatModal] = useState(false);
   return (
     <>
@@ -19,14 +21,24 @@ const index = ({ data }) => {
             <span>Amenities</span>
           </div>
           <div className="amenities">
-            {data?.amenities?.map((data, index) => (
-              <div className="amenity" key={index}>
-                <span>
-                  <IoIosCheckmarkCircle className="icon" />
-                  {data}
-                </span>
-              </div>
-            ))}
+            {loading ? (
+              Array.from({ length: 5 }).map((_, ind) => (
+                <div className="amenity" key={ind}>
+                  <Skeletonn height="20" radius="12px" width="70" resp />
+                </div>
+              ))
+            ) : data?.amenities?.length ? (
+              data?.amenities?.map((data, index) => (
+                <div className="amenity" key={index}>
+                  <span>
+                    <IoIosCheckmarkCircle className="icon" />
+                    {data}
+                  </span>
+                </div>
+              ))
+            ) : (
+              <NoRecord>No records found</NoRecord>
+            )}
           </div>
         </AmentitiesWrapper>
         <div
@@ -47,4 +59,4 @@ const index = ({ data }) => {
   );
 };
 
-export default index;
+export default Amenities;

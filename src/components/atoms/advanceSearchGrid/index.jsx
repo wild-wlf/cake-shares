@@ -17,12 +17,11 @@ const AdvanceSearchGrid = ({data}) => {
           <div className="card-div">
             <div className="card">
               <div className="image-div">
-                <Image src={data.media[0]} alt="card-image" width={180} height={180}/>
+                <figure>
+                  <Image src={data.media[0]} alt="card-image" width={180} height={180} />
+                </figure>
                 <div className="tagWrapper">
                   <div className="tag">{data?.investmentType?.name}</div>
-                  <div className="icon-div">
-                    <Image src={Heart} alt="Heart" className="heart" />
-                  </div>
                 </div>
               </div>
               <div className="decription">
@@ -32,11 +31,7 @@ const AdvanceSearchGrid = ({data}) => {
                 </div>
                 <div className="progress">
                   <ProgressBar
-                     completed={
-                data?.currentBackers === 0
-                  ? 0
-                  : (data?.currentBackers / data?.maximumBackers) * 100
-              }
+                    completed={data?.currentBackers === 0 ? 0 : (data?.currentBackers / data?.maximumBackers) * 100}
                     bgColor="#408F8C"
                     height="5px"
                     borderRadius="60px"
@@ -48,19 +43,18 @@ const AdvanceSearchGrid = ({data}) => {
             </div>
             <div className="desc-div">
               <h3>{data?.productName}</h3>
-              <span>{data?.address}</span>
-              <br />
+              <span className="address">{data?.address}</span>
               <span>
-                <span className="deadline">Deadline:</span> ({formatDateWithSuffix(data?.deadline)} / { daysLeft(data?.deadline)} Left ) 
+                <span className="deadline">Deadline: </span> ({formatDateWithSuffix(data?.deadline)} /{' '}
+                {daysLeft(data?.deadline)} Left)
               </span>
-              <br />
               <span>KYC (Level {data?.kycLevel})</span>
             </div>
           </div>
           <div className="values-div">
             <div>
               <span>Investment type</span>
-              <h3>{data?.investmentType?.name }</h3>
+              <h3>{data?.investmentType?.name}</h3>
             </div>
             <div>
               <span>Return (%)</span>
@@ -80,12 +74,12 @@ const AdvanceSearchGrid = ({data}) => {
             </div>
           </div>
           <div className="btnWrapper">
-            <Button rounded sm btntype="primary" className="button">
+            <Button rounded sm btntype="primary" className="button" width="100%">
               <RiFilePaperFill />
               Initiate Investment
             </Button>
             <Link href={`/products/${data._id}`}>
-              <Button rounded sm btntype="white-blue" className="button">
+              <Button rounded sm btntype="white-blue" className="button viewDetail" width="100%">
                 <RiFilePaperFill />
                 View Details
               </Button>

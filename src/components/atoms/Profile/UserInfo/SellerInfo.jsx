@@ -39,9 +39,8 @@ const SellerInfo = ({ userInfo }) => {
               height={170}
             />
           </ProfileWrapper>
-
           <div className="textWrapper">
-            <strong className="name">{userInfo?.fullName ? userInfo?.fullName : userInfo?.username}</strong>
+            <strong className="name">{userInfo?.fullName || userInfo?.username}</strong>
             <div className="discreption">
               <span className="active">CakeShare {userInfo?.sellerType} Seller</span>
               {userInfo?.created_at && (

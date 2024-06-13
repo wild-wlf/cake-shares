@@ -11,7 +11,7 @@ import KycLevel from '../KYC/KycLevel';
 import { KycContext } from '@/components/Context/KycContext';
 import { UserContext } from '@/components/Context/UserContext';
 import userService from '@/services/userService';
-import { convertToFormData } from '@/helpers/common';
+import { checkAge, convertToFormData } from '@/helpers/common';
 import Toast from '@/components/molecules/Toast';
 const CompleteRegistrationModal = ({ handleRegistration }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
@@ -50,6 +50,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
   }, []);
 
   const handleSubmit = async e => {
+    // console.log(e);
     let obj = {
       profilePicture: image,
       type: buyerRegistrationData.type,
@@ -130,8 +131,17 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                     message: 'Please enter username',
                   },
                   {
-                    pattern: /^(?!.*\s)[a-zA-Z0-9_-]{5,20}$/,
-                    message: 'Maximum Character Length is 256',
+                    pattern: /^.{5,20}$/,
+                    message: 'Minimum character length is 5',
+                  },
+                  {
+                    pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,
+                    message:
+                      'Please enter a valid username (no spaces, letters, numbers, underscores, and hyphens only)',
+                  },
+                  {
+                    pattern: /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9_-]+$/,
+                    message: 'Username must be a combination of characters and digits',
                   },
                 ]}>
                 <Field maxLength={20} />
@@ -151,8 +161,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                     message: 'Please enter email address',
                   },
                   {
-                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-                    message: 'Maximum Character Length is 256',
+                    email: true,
                   },
                 ]}>
                 <Field maxLength={40} />
@@ -179,6 +188,10 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                   {
                     required: true,
                     message: 'Please enter Date Of Birth',
+                  },
+                  {
+                    transform: value => checkAge(value) === false,
+                    message: 'Age must be 18',
                   },
                 ]}>
                 <Field />
@@ -264,7 +277,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                   },
                   {
                     pattern: /^[a-zA-Z0-9_-]{8,40}$/,
-                    message: 'User ID must be between 8 and 256 characters long',
+                    message: 'User ID must be between 8 and 40 characters long',
                   },
                 ]}>
                 <Field maxLength={40} />
@@ -272,26 +285,6 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
             </div>
           </div>
         </div>
-        {/* <div className="kyc-info">
-          <h5>KYC Info:</h5>
-
-          <div>
-            <div className="kyc-div">
-              <div>
-                <span>My KYC Level</span>
-                <span>{kycLevel - 1}</span>
-              </div>
-
-              <div className="kyc-wrap">
-                <KycLevel level={kycLevel} />
-
-                <span className="upgrade-kyc" onClick={checkKycLevel}>
-                  Upgrade KYC
-                </span>
-              </div>
-            </div>
-          </div>
-        </div> */}
 
         <div className="inheritance-info">
           <h5>Inheritance Info:</h5>
@@ -370,16 +363,12 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                     message: 'Please enter email address',
                   },
                   {
-                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-                    message: 'Maximum Character Length is 256',
+                    email: true,
                   },
                 ]}>
                 <Field maxLength={40} />
               </Form.Item>
             </div>
-            {/* <div className="addmore">
-              <span>+Add more</span>
-            </div> */}
           </div>
         </div>
 

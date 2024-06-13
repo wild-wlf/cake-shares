@@ -52,6 +52,7 @@ export const ProductDetailWrapper = styled.div`
     width: 100%;
     max-width: 660px;
     height: 364px;
+    flex: 2;
     img {
       width: 100%;
       height: 100%;
@@ -60,12 +61,13 @@ export const ProductDetailWrapper = styled.div`
   }
   .product2 {
     display: flex;
+    flex: 1;
     gap: 20px;
     width: 100%;
     height: 360px;
 
     img {
-      width: 50%;
+      width: 100%;
       height: 100%;
       object-fit: cover;
     }
@@ -86,6 +88,7 @@ export const ProductDetailWrapper = styled.div`
     }
 
     .content-holder {
+      width: 100%;
       font-size: 16px;
       line-height: 20px;
       @media (min-width: 992px) {
@@ -158,13 +161,14 @@ export const ProductDetailWrapper = styled.div`
     .product2 {
       width: 100%;
       height: 185px;
+      overflow: hidden;
     }
     .product2 {
       gap: 12px;
     }
   }
   @media only screen and (max-width: 576px) {
-    padding: 00px 0px;
+    padding: 0px 0px;
     .headings {
       font-size: 10px;
     }
