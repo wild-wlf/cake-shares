@@ -9,10 +9,8 @@ import { AuthContext } from '@/components/Context/authContext';
 import profileplaceHolder from '../../../../_assets/profileplaceHolder.jpg';
 import MediaSlide from './MediaSlide';
 import { TbExternalLink } from 'react-icons/tb';
-import CenterModal from '../../Modal/CenterModal';
-import ChatMembers from '../ChatMembers';
+
 const ChatMedia = ({ userInfo, type }) => {
-  console.log(type);
   const { user } = useContextHook(AuthContext, v => ({
     user: v.user,
   }));

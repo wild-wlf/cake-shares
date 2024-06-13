@@ -9,7 +9,7 @@ const ChatHeader = ({ userInfo }) => {
       <Image src={userInfo?.profilPicture ? userInfo?.profilPicture : Pic} alt="profilePic" width={40} height={40} />
       <div>
         <h6>{userInfo?.fullName}</h6>
-        <span>You & {userInfo?.fullName}</span>
+        <span>You & {userInfo?.fullName ? userInfo?.fullName : userInfo?.username}</span>
       </div>
     </ChatHeaderWrapper>
   );

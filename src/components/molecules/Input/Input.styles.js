@@ -1,30 +1,28 @@
-import styled, { css } from "styled-components";
-import FakeInput from "../FakeInput";
+import styled, { css } from 'styled-components';
+import FakeInput from '../FakeInput';
 
 export const styles = css`
-  border: 1px solid
-    ${({ $invalid }) => ($invalid ? "var(--danger)" : "var(--light)")};
+  border: 1px solid ${({ $invalid }) => ($invalid ? 'var(--danger)' : 'var(--light)')};
   background: var(--white);
   outline: none;
-  height: ${({ sm }) => (sm ? "45px" : "45px")};
-  padding: ${({ sm }) =>
-    sm ? "0.3125rem .9375rem" : "var(--form-element-padding-lg)"};
+  height: ${({ sm }) => (sm ? '30px' : '45px')};
+  padding: ${({ sm }) => (sm ? '0.3125rem .9375rem' : 'var(--form-element-padding-lg)')};
   width: 100%;
   transition: border var(--animation-speed) ease-in-out;
   color: var(--secondary-text-color);
   font: var(--base-font-sans-serif);
   font-size: var(--font-size-sm);
   font-weight: 400;
-  border-radius: ${({ $straight }) => ($straight ? "6px" : "60px")};
-  padding-left: ${({ $prefix }) => $prefix && "2.5rem"};
+  border-radius: ${({ $straight }) => ($straight ? '6px' : '60px')};
+  padding-left: ${({ $prefix }) => $prefix && '2.5rem'};
   padding-right: ${({ $suffix, $button }) => {
-    if ($suffix) return "2.5rem";
-    if ($button) return "3.6rem";
-    return "";
+    if ($suffix) return '2.5rem';
+    if ($button) return '3.6rem';
+    return '';
   }};
 
   ${({ type }) =>
-    type === "search" &&
+    type === 'search' &&
     css`
       transition: all var(--animation-speed) ease-in-out;
 
@@ -78,8 +76,7 @@ export const styles = css`
     `}
 
   /* &:focus {
-    border-color: ${({ $invalid }) =>
-    !$invalid && `${darken(0.1, cssVar("--primary"))}`};
+    border-color: ${({ $invalid }) => !$invalid && `${darken(0.1, cssVar('--primary'))}`};
   } */
 
   ::-webkit-input-placeholder {
@@ -103,11 +100,11 @@ export const styles = css`
     opacity: 0.6;
   }
 
-  &[type="radio"] {
+  &[type='radio'] {
     + ${FakeInput} {
       border-radius: 100%;
       &:before {
-        content: "";
+        content: '';
         background: var(--white);
         border-radius: 100%;
         width: 10px;
@@ -129,7 +126,7 @@ export const styles = css`
     }
   }
 
-  &[type="checkbox"] {
+  &[type='checkbox'] {
     + ${FakeInput} {
       .icon-check {
         color: var(--white);
@@ -138,8 +135,8 @@ export const styles = css`
     }
   }
 
-  &[type="checkbox"],
-  &[type="radio"] {
+  &[type='checkbox'],
+  &[type='radio'] {
     display: none;
     &:checked {
       + ${FakeInput} {
