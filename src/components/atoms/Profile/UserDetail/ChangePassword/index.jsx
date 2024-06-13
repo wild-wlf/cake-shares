@@ -45,13 +45,16 @@ const ChangePassword = () => {
         rounded
         placeholder="Enter Current Password"
         rules={[
-          { required: true },
           {
-            pattern: /^.{0,40}$/,
-            message: 'Maximum Character Length is 256',
+            required: true,
+            message: 'Password is required',
+          },
+          {
+            pattern: /^.{8,64}$/,
+            message: 'Please enter a valid password',
           },
         ]}>
-        <Field />
+        <Field maxLength={64} />
       </Form.Item>
       <div className="combine-fields">
         <Form.Item
@@ -62,13 +65,16 @@ const ChangePassword = () => {
           rounded
           placeholder="Enter New Password"
           rules={[
-            { required: true },
             {
-              pattern: /^.{0,40}$/,
-              message: 'Maximum Character Length is 256',
+              required: true,
+              message: 'Password is required',
+            },
+            {
+              pattern: /^.{8,64}$/,
+              message: 'Password should be between 8 to 64 characters',
             },
           ]}>
-          <Field />
+          <Field maxLength={64} />
         </Form.Item>
         <Form.Item
           type="password"
@@ -80,6 +86,7 @@ const ChangePassword = () => {
           rules={[
             {
               required: true,
+              message: 'Password is required',
             },
             {
               transform: value => value !== form.getFieldValue('new_Password'),

@@ -44,6 +44,7 @@ const CreatePasswordModal = ({ createPasswordModal, handleCompleteRegistration, 
             rules={[
               {
                 required: true,
+                message: 'Password is required',
               },
               {
                 pattern: /^(?=.*[!@#$%^&*])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
@@ -63,13 +64,14 @@ const CreatePasswordModal = ({ createPasswordModal, handleCompleteRegistration, 
             rules={[
               {
                 required: true,
+                message: 'Password is required',
               },
               {
                 transform: value => value !== form.getFieldValue('new_password'),
                 message: 'The two passwords that you entered do not match!',
               },
             ]}>
-            <Field />
+            <Field maxLength={64} />
           </Form.Item>
         </div>
         <div className="btnWrapper">

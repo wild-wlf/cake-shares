@@ -81,10 +81,11 @@ const EditBank = ({ bankInfo, onClose }) => {
           rules={[
             {
               required: true,
+              message: 'Please enter Bank Name',
             },
             {
-              pattern: /^.{0,50}$/,
-              message: 'Maximum Character Length is 256',
+              pattern: /^.{8,50}$/,
+              message: 'Please enter a valid Bank Name',
             },
           ]}>
           <Field maxLength={50} />
@@ -141,7 +142,7 @@ const EditBank = ({ bankInfo, onClose }) => {
             },
             {
               pattern: /^[a-zA-Z0-9_-]{8,40}$/,
-              message: 'User ID must be between 8 and 256 characters long',
+              message: 'User ID must be between 8 and 40 characters long',
             },
           ]}>
           <Field maxLength={40} />

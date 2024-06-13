@@ -1,21 +1,16 @@
-import React, { useContext } from "react";
-import { Wrapper } from "./buyerloginSignupModal.style";
-import Field from "../Field";
-import Form, { useForm } from "@/components/molecules/Form";
-import Button from "../Button";
-import { FcGoogle } from "react-icons/fc";
-import Facebook from "../../../_assets/facebook.svg";
-import Image from "next/image";
-import Select from "../Select";
-import { useRouter } from "next/router";
-import { UserContext } from "@/components/Context/UserContext";
+import React, { useContext } from 'react';
+import { Wrapper } from './buyerloginSignupModal.style';
+import Field from '../Field';
+import Form, { useForm } from '@/components/molecules/Form';
+import Button from '../Button';
+import { FcGoogle } from 'react-icons/fc';
+import Facebook from '../../../_assets/facebook.svg';
+import Image from 'next/image';
+import Select from '../Select';
+import { useRouter } from 'next/router';
+import { UserContext } from '@/components/Context/UserContext';
 
-const BuyerLoginSignupModal = ({
-  handleBuyerModal,
-  handleLoginModal,
-  handleSellerLoginModal,
-  type,
-}) => {
+const BuyerLoginSignupModal = ({ handleBuyerModal, handleLoginModal, handleSellerLoginModal, type }) => {
   const [form] = useForm();
   const router = useRouter();
   function handleSubmit(e) {
@@ -28,8 +23,8 @@ const BuyerLoginSignupModal = ({
       password: e.password?.trim(),
     };
 
-    if (type === "Login As Buyer") {
-      handleLoginModal({ ...loginObj, type: "Buyer" });
+    if (type === 'Login As Buyer') {
+      handleLoginModal({ ...loginObj, type: 'Buyer' });
     } else {
       // buyer Registration
       handleBuyerModal(registerObj);
@@ -53,9 +48,7 @@ const BuyerLoginSignupModal = ({
   return (
     <Wrapper>
       <div>
-        <span className="description">
-          Please provide the details to proceed.
-        </span>
+        <span className="description">Please provide the details to proceed.</span>
       </div>
       <Form form={form} onSubmit={handleSubmit}>
         <div className="input-div">
@@ -69,17 +62,24 @@ const BuyerLoginSignupModal = ({
             rules={[
               {
                 required: true,
-                message: "Please enter username",
+                message: 'Please enter username',
               },
               {
-                pattern: /^(?!.*\s)[a-zA-Z0-9_-]{5,20}$/,
-                message: "Maximum Character Length is 256",
+                pattern: /^.{5,20}$/,
+                message: 'Minimum character length is 5',
               },
-            ]}
-          >
+              {
+                pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,
+                message: 'Please enter a valid username (no spaces, letters, numbers, underscores, and hyphens only)',
+              },
+              {
+                pattern: /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9_-]+$/,
+                message: 'Username must be a combination of characters and digits',
+              },
+            ]}>
             <Field maxLength={20} />
           </Form.Item>
-          {type === "Login As Buyer" ? (
+          {type === 'Login As Buyer' ? (
             <Form.Item
               type="password"
               label="Password"
@@ -91,9 +91,12 @@ const BuyerLoginSignupModal = ({
                 {
                   required: true,
                 },
-              ]}
-            >
-              <Field />
+                {
+                  pattern: /^.{8,64}$/,
+                  message: 'Password should be between 8 to 64 characters',
+                },
+              ]}>
+              <Field maxLength={64} />
             </Form.Item>
           ) : (
             <Form.Item
@@ -106,14 +109,12 @@ const BuyerLoginSignupModal = ({
               rules={[
                 {
                   required: true,
-                  message: "Please enter email address",
+                  message: 'Please enter email address',
                 },
                 {
-                  pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-                  message: "Maximum Character Length is 256",
+                  email: true,
                 },
-              ]}
-            >
+              ]}>
               <Field maxLength={40} />
             </Form.Item>
           )}
@@ -156,8 +157,7 @@ const BuyerLoginSignupModal = ({
             // }
             // htmlType={type === "Login As Seller" ? "submit" : "button"}
             // loader={true}
-            htmlType={"submit"}
-          >
+            htmlType={'submit'}>
             Continue
           </Button>
         </div>
