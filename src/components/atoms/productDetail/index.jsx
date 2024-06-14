@@ -176,7 +176,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
           <div className="product1">
             {loading ? (
               <Skeletonn height="360" radius="30px" width="100" />
-            ) : data?.media[0].split('').slice(-3).join('') === 'mp4' ? (
+            ) : data?.media[0]?.split('')?.slice(-3)?.join('') === 'mp4' ? (
               data?.media[0] && (
                 <div className="videoWrapp">
                   <ModalContainer
