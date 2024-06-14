@@ -7,9 +7,12 @@ import { useForm } from '@/components/molecules/Form';
 import userService from '@/services/userService';
 import { AuthContext } from '@/components/Context/authContext';
 import { useContextHook } from 'use-context-hook';
+import { countries } from '@/components/Constant';
 import Toast from '@/components/molecules/Toast';
+import Select from '@/components/atoms/Select';
 
 const EditInheritance = ({ selectedItem, userData, onClose }) => {
+  const [arr, setArr] = useState(countries);
   const { setPermission } = useContextHook(AuthContext, v => ({
     setPermission: v.setPermission,
   }));
@@ -22,7 +25,7 @@ const EditInheritance = ({ selectedItem, userData, onClose }) => {
         userId: userData?._id,
         name: e?.name,
         passportNumber: e?.passportNumber,
-        country: e?.country,
+        country: e?.country?.value,
         email: e?.inheritanceEmail?.trim(),
       },
     };
@@ -46,10 +49,12 @@ const EditInheritance = ({ selectedItem, userData, onClose }) => {
     }
   }
   useEffect(() => {
+    const country = countries.find(ele => ele.value === selectedItem?.country);
     form.setFieldsValue({
-      name: selectedItem.name,
+      name: selectedItem?.name,
       passportNumber: selectedItem?.passportNumber,
-      country: selectedItem.country,
+      country: country || { value: '', label: '' },
+      inheritanceEmail: selectedItem?.email,
     });
   }, []);
   return (
@@ -97,16 +102,13 @@ const EditInheritance = ({ selectedItem, userData, onClose }) => {
             name="country"
             sm
             rounded
-            placeholder="United States"
+            options={arr}
             rules={[
-              { required: true },
-
               {
-                pattern: /^.{0,40}$/,
-                message: 'Maximum Character Length is 256',
+                required: true,
               },
             ]}>
-            <Field />
+            <Select />
           </Form.Item>
           <Form.Item
             type="email"
