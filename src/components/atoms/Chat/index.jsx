@@ -17,6 +17,7 @@ const Chat = ({ userInfo, type }) => {
     fetch: v.fetch,
   }));
   const chatBoxRef = useRef(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
   const { messages_loading, messages_data } = notificationService.GetAllConversationMessages(
     {
@@ -57,10 +58,21 @@ const Chat = ({ userInfo, type }) => {
     };
   }, [user, userInfo]);
 
+  useEffect(() => {
+    window.addEventListener('online_users', event => {
+      setOnlineUsers(event.detail);
+    });
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('online_users', () => {});
+    };
+  }, []);
+
   return (
     <ChatWrapper>
       <div className="chatWrapper">
-        <ChatHeader userInfo={userInfo} />
+        <ChatHeader userInfo={userInfo} onlineUsers={onlineUsers} />
         <ChatBody ref={chatBoxRef}>
           {messages_loading
             ? 'Loading...'
@@ -79,7 +91,7 @@ const Chat = ({ userInfo, type }) => {
         </ChatBody>
         <ChatFooter userInfo={userInfo} />
       </div>
-      <ChatMedia userInfo={userInfo} type={type} />
+      <ChatMedia userInfo={userInfo} type={type} onlineUsers={onlineUsers} />
       <div className="hamburger" onClick={() => document.body.classList.toggle('chat-sidebar-active')}>
         <RiMenu3Fill size={30} />
       </div>

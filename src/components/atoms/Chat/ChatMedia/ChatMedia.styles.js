@@ -74,7 +74,33 @@ export const StyledChatMedia = styled.div`
         background: #313131;
         display: flex;
         align-items: flex-start;
-        overflow: hidden;
+        position: relative;
+
+        img {
+          border-radius: 50%;
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 3px;
+          right: 2px;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+        }
+
+        &.online {
+          &::after {
+            background: var(--green);
+          }
+        }
+
+        &.offline {
+          &::after {
+            background: var(--dark);
+          }
+        }
       }
       .userName {
         display: block;

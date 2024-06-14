@@ -9,17 +9,19 @@ import { AuthContext } from '@/components/Context/authContext';
 import profileplaceHolder from '../../../../_assets/profileplaceHolder.jpg';
 import MediaSlide from './MediaSlide';
 import { TbExternalLink } from 'react-icons/tb';
+import CenterModal from '@/components/molecules/Modal/CenterModal';
+import ChatMembers from '../ChatMembers';
 
-const ChatMedia = ({ userInfo, type }) => {
+const ChatMedia = ({ userInfo, type, onlineUsers }) => {
   const { user } = useContextHook(AuthContext, v => ({
     user: v.user,
   }));
   const [chatMembers, setChatMembers] = useState(false);
   return (
     <>
-      {/* <CenterModal open={chatMembers} setOpen={setChatMembers} title="All Chat Members" width="450">
-          <ChatMembers />
-        </CenterModal> */}
+      <CenterModal open={chatMembers} setOpen={setChatMembers} title="All Chat Members" width="450">
+        <ChatMembers />
+      </CenterModal>
       <StyledChatMedia>
         <div className="fakeBefore">
           <Image src={chatIconMedia} alt="chatIconMedia" />
@@ -27,7 +29,7 @@ const ChatMedia = ({ userInfo, type }) => {
         <strong className="title">{type === 'Community' ? 'Chat Members' : 'Private Chat'}</strong>
         <div className="chat-between">
           <div className="col">
-            <div className="image-warp">
+            <div className={`image-warp ${onlineUsers?.find(_ => _?.id === userInfo?._id) ? 'online' : 'offline'}`}>
               <Image
                 src={userInfo?.profilePicture ? userInfo?.profilePicture : profileplaceHolder}
                 alt="profilePicture"
@@ -35,7 +37,7 @@ const ChatMedia = ({ userInfo, type }) => {
                 height={80}
               />
             </div>
-            <label className="userName">{userInfo?.fullName}</label>
+            <label className="userName">{userInfo?.fullName || userInfo?.username}</label>
             <span>{userInfo?.sellerType} Seller</span>
           </div>
           {type === 'Community' ? (
@@ -67,7 +69,7 @@ const ChatMedia = ({ userInfo, type }) => {
                   height={80}
                 />
               </div>
-              <label className="userName">{user?.fullName}</label>
+              <label className="userName">{user?.fullName || user?.username}</label>
               <span>Me</span>
             </div>
           )}
