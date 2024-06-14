@@ -74,8 +74,6 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
       },
     };
 
-    // console.log(obj);
-
     const formData = convertToFormData(obj);
 
     try {

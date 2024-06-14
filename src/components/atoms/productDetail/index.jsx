@@ -20,6 +20,9 @@ import HandleLoginModal from '@/components/molecules/HandleLoginModal';
 import UpgradeKycLevelModal from '@/components/molecules/upgradeKycLevelModal';
 import InfoIcon from '../../../_assets/info-icon.svg';
 import Skeletonn from '../skeleton/Skeletonn';
+import { FaPlay } from 'react-icons/fa';
+import { IoPlay } from 'react-icons/io5';
+import ModalContainer from '../ModalContainer';
 
 const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
   const { isLoggedIn, user } = useContextHook(AuthContext, v => ({
@@ -168,13 +171,49 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
             </div>
           </div>
         </div>
-
+        {/* productData?.product.media[0].split('').slice(-3).join('') */}
         <div className="imagewrapper">
           <div className="product1">
             {loading ? (
               <Skeletonn height="360" radius="30px" width="100" />
+            ) : data?.media[0].split('').slice(-3).join('') === 'mp4' ? (
+              data?.media[0] && (
+                <div className="videoWrapp">
+                  <ModalContainer
+                    lg
+                    width={668}
+                    title="Product Video"
+                    btnComponent={({ onClick }) => (
+                      <div className="palyIcon" onClick={onClick}>
+                        <IoPlay />
+                      </div>
+                    )}
+                    content={({ onClose }) => (
+                      <div className="modalVideo">
+                        <video
+                          className="videoTag"
+                          src={data?.media[0]}
+                          width={500}
+                          height={360}
+                          autoPlay={true}
+                          controls={true}
+                          type="video/mp4"></video>
+                      </div>
+                    )}
+                  />
+
+                  <video
+                    className="videoTag"
+                    src={data?.media[0]}
+                    width={660}
+                    height={360}
+                    type="video/mp4"
+                    autoplay="false"
+                    controls={false}></video>
+                </div>
+              )
             ) : (
-              data?.media[0] && <Image src={data?.media[0]} alt="Product-Image" width={660} height={360} />
+              data?.media[0] && <Image src={data?.media[0]} alt="Product-Image" />
             )}
           </div>
           <div className="product2">
@@ -192,7 +231,6 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
             )}
           </div>
         </div>
-
         <div className="investwrapper">
           <div className="content-holder">
             <strong>Why Invest in this?</strong>
