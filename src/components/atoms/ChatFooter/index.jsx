@@ -11,7 +11,7 @@ import Button from '../Button';
 import Field from '../Field';
 import { AuthContext } from '@/components/Context/authContext';
 import { useContextHook } from 'use-context-hook';
-import { sendDirectMessage } from 'helpers/socketConnection/socketConnection';
+import { sendDirectMessage } from '@/helpers/socketConnection/socketConnection';
 
 const ChatFooter = ({ userInfo }) => {
   const [form] = useForm();
