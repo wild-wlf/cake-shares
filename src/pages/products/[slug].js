@@ -32,7 +32,7 @@ const ProductDetails = ({ userData }) => {
   useEffect(() => {
     handleProductDetail(userData);
   }, [userData]);
-
+console.log(productData?.product.media[0].split('').slice(-3).join(''));
   return (
     <>
       <Head>
