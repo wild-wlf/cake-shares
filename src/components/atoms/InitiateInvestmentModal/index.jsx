@@ -21,7 +21,6 @@ const InitiateInvestmentModal = ({
     user: v.user,
     setPermission: v.setPermission,
   }));
-  console.log(user);
   const [isLoading, setIsLoading] = useState(false);
   const [shareAmount, setShareAmount] = useState(0);
   const [form] = useForm();

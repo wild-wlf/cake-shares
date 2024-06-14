@@ -5,7 +5,6 @@ import Card from '../card';
 import arrowRight from '../../../_assets/arrow.png';
 import Property from '../../../_assets/property.png';
 import Link from 'next/link';
-import Loader from '../Loader';
 import Skeletonn from '../skeleton/Skeletonn';
 
 const Categories = ({ title, data, loading }) => {

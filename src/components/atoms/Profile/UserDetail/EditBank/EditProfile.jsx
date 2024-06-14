@@ -23,6 +23,10 @@ const EditProfile = ({ personalInfo, onClose }) => {
   const [arr, setArr] = useState(countries);
   const [loading, setLoading] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
+  const [dob, setDob] = useState(
+    `${personalInfo?.dob.slice(6, 10)}-${personalInfo?.dob.slice(3, 5)}-${personalInfo?.dob.slice(0, 2)}`,
+  );
+  console.log(dob);
   const [form] = useForm();
   const { setPermission } = useContextHook(AuthContext, v => ({
     setPermission: v.setPermission,
@@ -105,13 +109,13 @@ const EditProfile = ({ personalInfo, onClose }) => {
             rounded
             placeholder="Alex Mertiz"
             rules={[
-              { required: true },
+              { required: true, message: 'Please enter Full Name' },
               {
-                pattern: /^.{0,40}$/,
-                message: 'Maximum Character Length is 256',
+                pattern: /^.{3,40}$/,
+                message: 'Please enter a valid full name',
               },
             ]}>
-            <Field />
+            <Field maxLength={40} />
           </Form.Item>
           <Form.Item
             type="text"
@@ -121,13 +125,24 @@ const EditProfile = ({ personalInfo, onClose }) => {
             rounded
             placeholder="alex123"
             rules={[
-              { required: true },
               {
-                pattern: /^.{0,40}$/,
-                message: 'Maximum Character Length is 256',
+                required: true,
+                message: 'Please enter username',
+              },
+              {
+                pattern: /^.{5,20}$/,
+                message: 'Minimum character length is 5',
+              },
+              {
+                pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,
+                message: 'Please enter a valid username (no spaces, letters, numbers, underscores, and hyphens only)',
+              },
+              {
+                pattern: /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9_-]+$/,
+                message: 'Username must be a combination of characters and digits',
               },
             ]}>
-            <Field />
+            <Field maxLength={20} />
           </Form.Item>
           <Form.Item
             type="text"
@@ -163,7 +178,13 @@ const EditProfile = ({ personalInfo, onClose }) => {
             name="dob"
             sm
             rounded
-            placeholder="03/05/2001"
+            value={dob}
+            onChange={e => {
+              setDob(e.target.value);
+              form.setFieldsValue({
+                dob: e.target.value,
+              });
+            }}
             rules={[
               { required: true, message: 'Birthdate is required' },
 

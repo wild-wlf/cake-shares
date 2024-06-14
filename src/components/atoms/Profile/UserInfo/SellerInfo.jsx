@@ -10,13 +10,23 @@ import profile from '../../../../_assets/profileplaceHolder.jpg';
 import { formatDateWithSuffix } from '@/helpers/common';
 import CenterModal from '../../Modal/CenterModal';
 import Chat from '../../Chat';
+import { AuthContext } from '@/components/Context/authContext';
+import { useContextHook } from 'use-context-hook';
 
 const SellerInfo = ({ userInfo }) => {
-
   const [chat, setChat] = useState(false);
+  const { isLoggedIn } = useContextHook(AuthContext, v => ({
+    isLoggedIn: v.isLoggedIn,
+  }));
+
   return (
     <>
-      <CenterModal zIndex={9999} open={chat} setOpen={setChat} width="1339" title="Logan's Chat">
+      <CenterModal
+        zIndex={9999}
+        open={chat}
+        setOpen={setChat}
+        width="1339"
+        title={`${userInfo?.fullName ? userInfo?.fullName : userInfo?.username}'s Chat`}>
         <Chat userInfo={userInfo} />
       </CenterModal>
       <StyledUserInfo>
@@ -57,6 +67,7 @@ const SellerInfo = ({ userInfo }) => {
           </div>
         </div>
         <Button
+          disabled={!isLoggedIn}
           type="primary"
           md
           rounded
@@ -64,7 +75,7 @@ const SellerInfo = ({ userInfo }) => {
           onClick={() => {
             setChat(true);
           }}>
-          <span className="username">Chat with {userInfo?.fullName ? userInfo?.fullName : 'Seller'}</span>
+          <span className="username">Chat with {userInfo?.fullName ? userInfo?.fullName : userInfo?.username}</span>
           <Image src={chatIcon} alt="chatIcon" />
         </Button>
       </StyledUserInfo>
