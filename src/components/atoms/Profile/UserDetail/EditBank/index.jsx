@@ -7,7 +7,7 @@ import Form from '@/components/molecules/Form/Form';
 import userService from '@/services/userService';
 import Toast from '@/components/molecules/Toast';
 import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 
 const EditBank = ({ bankInfo, onClose }) => {
   const { setPermission, user } = useContextHook(AuthContext, v => ({

@@ -15,7 +15,7 @@ export const setCookie = (name, value, days, domain) => {
     expires = `; expires=${date.toUTCString()}`;
   }
   const domainString = domain ? `; domain=${domain}` : '';
-  console.log(domainString);
+
   document.cookie = `${name}=${value || ''}${expires}; path=/${domainString}`;
 
   return true;
@@ -625,7 +625,7 @@ export const daysLeft = dateObj => {
   const daysLeft = differenceInCalendarDays(date, new Date());
 
   return daysLeft < 10 ? `0${daysLeft} days` : `${daysLeft.toString()} days`;
-  // console.log(formatDistanceToNow(date));
+
   // return formatDistanceToNow(date, {addSuffix: false});
 };
 

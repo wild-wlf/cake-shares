@@ -10,7 +10,7 @@ import UserDetail from './UserDetail';
 import UserImage from '../../../_assets/userProfile.png';
 import bgImage from '../../../_assets/banerImage.jpg';
 import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import productService from '@/services/productService';
 
 const Profile = () => {

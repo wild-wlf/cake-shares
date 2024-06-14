@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { getCookie } from '@/helpers/common';
 import { useContextHook } from 'use-context-hook';
-import { connectionWithSocketServer, socketServer } from '../../helpers/socketConnection/socketConnection';
+import { connectionWithSocketServer, socketServer } from '../helpers/socketConnection/socketConnection';
 import { AuthContext } from './authContext';
 
 const context = {

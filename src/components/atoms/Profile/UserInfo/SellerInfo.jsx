@@ -10,7 +10,7 @@ import profile from '../../../../_assets/profileplaceHolder.jpg';
 import { formatDateWithSuffix } from '@/helpers/common';
 import CenterModal from '../../Modal/CenterModal';
 import Chat from '../../Chat';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
 
 const SellerInfo = ({ userInfo }) => {

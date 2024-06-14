@@ -9,7 +9,7 @@ import { Sort } from "../advanceSearch/advanceSearch.style";
 import Field from "../Field";
 import { BsFillGridFill } from "react-icons/bs";
 import { SearchHeaderWrapper } from "./searchHeader.style";
-import { SearchContext } from "@/components/Context/SearchContext";
+import { SearchContext } from "@/context/SearchContext";
 
 const SearchHeader = ({ handleViewController, listview }) => {
   const router = useRouter();

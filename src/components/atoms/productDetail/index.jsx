@@ -4,9 +4,6 @@ import Button from '../Button';
 import { IoIosArrowBack } from 'react-icons/io';
 import { RiFilePaperFill } from 'react-icons/ri';
 import Image from 'next/image';
-import property from '../../../_assets/property.png';
-import property2 from '../../../_assets/property2.png';
-import property3 from '../../../_assets/property3.png';
 import CenterModal from '../Modal/CenterModal';
 import ConfirmIcon from '../../../_assets/confirmIcon.svg';
 import { useRouter } from 'next/router';
@@ -15,12 +12,11 @@ import InvestmentSuccesModal from '../InvestmentSuccesModal';
 import ProductDescription from '../productDescription';
 import { daysLeft, formatDateWithSuffix } from '@/helpers/common';
 import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import HandleLoginModal from '@/components/molecules/HandleLoginModal';
 import UpgradeKycLevelModal from '@/components/molecules/upgradeKycLevelModal';
 import InfoIcon from '../../../_assets/info-icon.svg';
 import Skeletonn from '../skeleton/Skeletonn';
-import { FaPlay } from 'react-icons/fa';
 import { IoPlay } from 'react-icons/io5';
 import ModalContainer from '../ModalContainer';
 
@@ -208,7 +204,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
                     width={660}
                     height={360}
                     type="video/mp4"
-                    autoplay="false"
+                    autoPlay="false"
                     controls={false}></video>
                 </div>
               )

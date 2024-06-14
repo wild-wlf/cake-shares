@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from "react";
-// import { AuthContext } from "context/authContext";
 import { ContentHolder, Head, StyledModal } from "./Modal.styles";
 import close from "../../../_assets/close.svg";
 import Image from "next/image";

@@ -5,7 +5,7 @@ import { StyledEditForm } from './EditForm.styles';
 import Form from '@/components/molecules/Form/Form';
 import { useForm } from '@/components/molecules/Form';
 import userService from '@/services/userService';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
 import { countries } from '@/components/Constant';
 import Toast from '@/components/molecules/Toast';

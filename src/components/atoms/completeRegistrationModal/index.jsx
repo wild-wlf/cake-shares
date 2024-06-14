@@ -8,8 +8,8 @@ import Image from 'next/image';
 import { countries } from '@/components/Constant';
 import UploadImg from '@/components/molecules/UploadImg';
 import KycLevel from '../KYC/KycLevel';
-import { KycContext } from '@/components/Context/KycContext';
-import { UserContext } from '@/components/Context/UserContext';
+import { KycContext } from '@/context/KycContext';
+import { UserContext } from '@/context/UserContext';
 import userService from '@/services/userService';
 import { checkAge, convertToFormData } from '@/helpers/common';
 import Toast from '@/components/molecules/Toast';
@@ -50,7 +50,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
   }, []);
 
   const handleSubmit = async e => {
-    // console.log(e);
+
     let obj = {
       profilePicture: image,
       type: buyerRegistrationData.type,

@@ -9,7 +9,7 @@ import GalleryIcon from '../../../_assets/gallery-icon.svg';
 import Form, { useForm } from '@/components/molecules/Form';
 import Button from '../Button';
 import Field from '../Field';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
 import { sendDirectMessage } from '@/helpers/socketConnection/socketConnection';
 

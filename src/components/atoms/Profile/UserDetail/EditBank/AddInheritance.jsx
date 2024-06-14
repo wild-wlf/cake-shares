@@ -1,24 +1,18 @@
 import Button from '@/components/atoms/Button';
 import Field from '@/components/atoms/Field';
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { StyledEditForm } from './EditForm.styles';
 import Form from '@/components/molecules/Form/Form';
 import { useForm } from '@/components/molecules/Form';
 import { countries } from '@/components/Constant';
-import Image from 'next/image';
 import Select from '@/components/atoms/Select';
-import ModalContainer from '@/components/atoms/ModalContainer';
-import { MdModeEdit } from 'react-icons/md';
-import Password from '../../../../../_assets/changePassword.svg';
-import ChangePassword from '../ChangePassword';
-import CenterModal from '@/components/atoms/Modal/CenterModal';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
 import userService from '@/services/userService';
 import Toast from '@/components/molecules/Toast';
+
 const AddInheritance = ({ onClose }) => {
   const [arr, setArr] = useState(countries);
-  const [changePassword, setChangePassword] = useState(false);
   const [form] = useForm();
   const { user, setPermission } = useContextHook(AuthContext, v => ({
     user: v.user,

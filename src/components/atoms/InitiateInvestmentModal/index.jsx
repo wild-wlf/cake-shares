@@ -4,7 +4,7 @@ import Form, { useForm } from '@/components/molecules/Form';
 import Button from '../Button';
 import { InvestmentModalWrapper } from './InitiateInvestmentModal.style';
 import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import { formatNumber } from '@/helpers/common';
 import walletService from '@/services/walletService';
 import Toast from '@/components/molecules/Toast';

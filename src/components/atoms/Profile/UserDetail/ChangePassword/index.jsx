@@ -6,7 +6,7 @@ import Field from '@/components/atoms/Field';
 import Button from '@/components/atoms/Button';
 import userService from '@/services/userService';
 import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import Toast from '@/components/molecules/Toast';
 
 const ChangePassword = () => {
@@ -14,7 +14,7 @@ const ChangePassword = () => {
     user: v.user,
     onLogout: v.onLogout,
   }));
-  console.log(user);
+
   const [form] = useForm();
   async function handelSubmit(e) {
     let obj = {

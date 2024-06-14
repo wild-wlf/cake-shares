@@ -4,7 +4,7 @@ import SearchFilterFields from '../components/atoms/searchFilters';
 import SearchSlider from '../components/atoms/searchSlider';
 import AdvanceSearchGrid from '@/components/atoms/advanceSearchGrid';
 import productService from '@/services/productService';
-import { SearchContext } from '@/components/Context/SearchContext';
+import { SearchContext } from '@/context/SearchContext';
 
 const AdvanceSearch = () => {
   const [listview, setListView] = useState(true);
@@ -25,7 +25,6 @@ const AdvanceSearch = () => {
         setData(res?.items);
         setLoading(false);
       } catch (err) {
-        console.log(err);
         setLoading(false);
       }
     }

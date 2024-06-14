@@ -1,6 +1,5 @@
-import { getCookie } from '@/helpers/common';
 import categoryService from '@/services/categoryService';
-import { useState, createContext, useEffect, useMemo } from 'react';
+import { useState, createContext,  useMemo } from 'react';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from './authContext';
 
