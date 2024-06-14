@@ -47,7 +47,7 @@ const CreatePasswordModal = ({ createPasswordModal, handleCompleteRegistration, 
                 message: 'Password is required',
               },
               {
-                pattern: /^(?=.*[!@#$%^&*])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
+                pattern: /^(?=.*[!@#$%^&*+()_\-=<>?])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
                 message:
                   'Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.',
               },

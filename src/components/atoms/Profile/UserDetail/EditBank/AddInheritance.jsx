@@ -32,7 +32,7 @@ const AddInheritance = ({ onClose }) => {
         userId: user?._id,
         name: e?.name?.trim(),
         passportNumber: e?.passportNumber?.trim(),
-        country: e?.country?.trim(),
+        country: e?.country?.value,
         email: e?.inheritanceEmail?.trim(),
       },
     };
@@ -103,16 +103,12 @@ const AddInheritance = ({ onClose }) => {
             name="country"
             sm
             rounded
-            placeholder="United States"
             rules={[
-              { required: true },
-
               {
-                pattern: /^.{3,40}$/,
-                message: 'Please enter a valid country',
+                required: true,
               },
             ]}>
-            <Field maxLength={40} />
+            <Select options={arr} />
           </Form.Item>
           <Form.Item
             type="email"
