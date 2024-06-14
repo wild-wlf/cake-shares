@@ -84,11 +84,11 @@ const EditBank = ({ bankInfo, onClose }) => {
               message: 'Please enter Bank Name',
             },
             {
-              pattern: /^.{8,50}$/,
+              pattern: /^.{3,30}$/,
               message: 'Please enter a valid Bank Name',
             },
           ]}>
-          <Field maxLength={50} />
+          <Field maxLength={30} />
         </Form.Item>
         <Form.Item
           type="text"

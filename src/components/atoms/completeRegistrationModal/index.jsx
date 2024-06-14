@@ -69,7 +69,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
       inheritanceInfo: {
         name: e.person_name?.trim(),
         passportNumber: e.passport_number?.trim(),
-        country: e.country?.trim(),
+        country: e.country.value,
         email: e.inheritanceEmail?.trim(),
       },
     };
@@ -217,11 +217,11 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                     message: 'Please enter Bank Name',
                   },
                   {
-                    pattern: /^.{8,50}$/,
+                    pattern: /^.{3,30}$/,
                     message: 'Please enter a valid Bank Name',
                   },
                 ]}>
-                <Field maxLength={50} />
+                <Field maxLength={30} />
               </Form.Item>
               <Form.Item
                 type="text"
@@ -337,18 +337,12 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 name="country"
                 sm
                 rounded
-                placeholder="United States"
                 rules={[
                   {
                     required: true,
-                    message: 'Please enter Country',
-                  },
-                  {
-                    pattern: /^.{0,40}$/,
-                    message: 'Please enter a valid country',
                   },
                 ]}>
-                <Field maxLength={40} />
+                <Select options={arr} />
               </Form.Item>
               <Form.Item
                 type="text"
