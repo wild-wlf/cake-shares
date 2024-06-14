@@ -10,11 +10,39 @@ export const ChatHeaderWrapper = styled.header`
   position: absolute;
   top: 0;
   width: 100%;
-  img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
+
+  .image-wrapper {
+    position: relative;
+
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50px;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 3px;
+      right: -3px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    &.online {
+      &::after {
+        background: var(--green);
+      }
+    }
+
+    &.offline {
+      &::after {
+        background: var(--dark);
+      }
+    }
   }
+
   h6 {
     font-size: 20px;
     font-weight: 400;

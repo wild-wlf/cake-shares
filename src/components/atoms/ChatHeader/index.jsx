@@ -1,15 +1,22 @@
 import Image from 'next/image';
 import React from 'react';
 import { ChatHeaderWrapper } from './ChatHeader.style';
-import Pic from '../../../_assets/seller-img.png';
+import profileplaceHolder from '../../../_assets/profileplaceHolder.jpg';
 
-const ChatHeader = ({ userInfo }) => {
+const ChatHeader = ({ userInfo, onlineUsers }) => {
   return (
     <ChatHeaderWrapper>
-      <Image src={userInfo?.profilPicture ? userInfo?.profilPicture : Pic} alt="profilePic" width={40} height={40} />
+      <div className={`image-wrapper ${onlineUsers?.find(_ => _?.id === userInfo?._id) ? 'online' : 'offline'}`}>
+        <Image
+          src={userInfo?.profilPicture ? userInfo?.profilPicture : profileplaceHolder}
+          alt="profilePic"
+          width={40}
+          height={40}
+        />
+      </div>
       <div>
-        <h6>{userInfo?.fullName}</h6>
-        <span>You & {userInfo?.fullName}</span>
+        <h6>{userInfo?.fullName || userInfo?.username}</h6>
+        <span>You & {userInfo?.fullName || userInfo?.username}</span>
       </div>
     </ChatHeaderWrapper>
   );

@@ -29,7 +29,4 @@ export const ChatBody = styled.div`
   height: 680px;
   overflow: auto;
   padding-right: 8px;
-  .messages-holder {
-    margin-bottom: 20px;
-  }
 `;

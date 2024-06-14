@@ -1,11 +1,8 @@
-import React, { createContext, useEffect, useState } from "react";
-import { getCookie } from "@/helpers/common";
-import { useContextHook } from "use-context-hook";
-import {
-  connectionWithSocketServer,
-  socketServer,
-} from "../../helpers/socketConnection/socketConnection";
-import { AuthContext } from "./authContext";
+import React, { createContext, useEffect, useState } from 'react';
+import { getCookie } from '@/helpers/common';
+import { useContextHook } from 'use-context-hook';
+import { connectionWithSocketServer, socketServer } from '../../helpers/socketConnection/socketConnection';
+import { AuthContext } from './authContext';
 
 const context = {
   socket: null,
@@ -19,6 +16,7 @@ export function SocketContextProvider(props) {
     setSocketData: v.setSocketData,
   }));
   const access_token = getCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE);
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
   const handleUserUpdate = data => {
     setSocketData(data);
@@ -37,5 +35,9 @@ export function SocketContextProvider(props) {
     };
   }, [access_token, isLoggedIn]);
 
-  return <SocketContext.Provider value={{ socket: socketServer() }}>{props.children}</SocketContext.Provider>;
+  return (
+    <SocketContext.Provider value={{ socket: socketServer(), setOnlineUsers, onlineUsers }}>
+      {props.children}
+    </SocketContext.Provider>
+  );
 }

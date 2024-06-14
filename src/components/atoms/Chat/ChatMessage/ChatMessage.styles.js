@@ -19,13 +19,13 @@ export const StyledChatMessage = styled.div`
     font-size: 14px;
     line-height: 18px;
     font-weight: 300;
-    margin-bottom: 8px;
+    margin-bottom: 40px;
 
     ${({ $type }) =>
       $type === 'send'
         ? css`
             border-radius: 10px 10px 10px 0;
-            background: var(--gray-3);
+            background-color: rgba(78, 97, 153, 0.1);
             color: var(--base-text-color);
           `
         : css`
@@ -40,7 +40,7 @@ export const StyledChatMessage = styled.div`
     align-items: center;
     gap: 5px;
     position: absolute;
-    bottom: -16px;
+    bottom: 15px;
     font-size: 12px;
     line-height: 16px;
 
