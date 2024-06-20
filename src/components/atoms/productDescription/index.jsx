@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ProductDescriptionWrapper } from './productDescription.style';
-import Profilepic from '../../../_assets/userProfile.png';
 import Image from 'next/image';
 import { TbExternalLink } from 'react-icons/tb';
 import { PiChatTeardropTextFill } from 'react-icons/pi';
@@ -10,8 +9,9 @@ import Chat from '../Chat';
 
 const ProductDescription = ({ data, SellerData }) => {
   const router = useRouter();
-
   const [chat, setChat] = useState(false);
+
+  console.log({ SellerData });
   return (
     <>
       <CenterModal zIndex={9999} open={chat} setOpen={setChat} width="1339" title="Logan's Chat">

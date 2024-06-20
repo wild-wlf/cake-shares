@@ -1,13 +1,16 @@
-import styled from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const LoaderWrap = styled.div`
-  position: fixed;
-  inset: 0;
-  backdrop-filter: blur(3px);
+  width: 100%;
+  min-height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  ${({ $noHeight }) =>
+    $noHeight &&
+    css`
+      min-height: max-content;
+    `}
 `;
 
 export const LoaderStyled = styled.div`
@@ -22,7 +25,7 @@ export const LoaderStyled = styled.div`
   position: relative;
 
   &::after {
-    content: "";
+    content: '';
     box-sizing: border-box;
     position: absolute;
     left: 0;
