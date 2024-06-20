@@ -5,7 +5,7 @@ import ProfilePic from '../../../../_assets/seller-img.png';
 import Image from 'next/image';
 import Attachments from '../../Attachments';
 import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import profileplaceHolder from '../../../../_assets/profileplaceHolder.jpg';
 import MediaSlide from './MediaSlide';
 import { TbExternalLink } from 'react-icons/tb';

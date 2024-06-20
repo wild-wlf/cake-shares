@@ -1,22 +1,18 @@
 import React, { useEffect } from 'react';
-import UserInfo from '@/components/atoms/Profile/UserInfo';
 import Button from '@/components/atoms/Button';
 import { IoIosArrowBack } from 'react-icons/io';
 import { useRouter } from 'next/router';
 import { StyledProfile } from '../../components/atoms/Profile/Profile.styles';
-import sellerImage from '../../_assets/seller-img.png';
-import sellerHeroImage from '../../_assets/seller-hero-bg.png';
 import SellerPersonalInfo from '@/components/atoms/SellerPersonalInfo';
 import Categories from '@/components/atoms/categories';
 import SellerProfileBanner from '@/components/atoms/Profile/ProfileBanner/sellerProfileBanner';
 import userService from '@/services/userService';
 import { useState } from 'react';
 import SellerInfo from '@/components/atoms/Profile/UserInfo/SellerInfo';
-import Loader from '@/components/atoms/Loader';
 import Toast from '@/components/molecules/Toast';
 
 const SellerProfile = ({ userProfileData }) => {
-  console.log(userProfileData);
+
   const router = useRouter();
   const [userProfile, setUserProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -72,7 +68,7 @@ export default SellerProfile;
 
 export async function getServerSideProps({ params }) {
   const slug = params?.slug;
-  console.log(params?.slug);
+
   return {
     props: {
       userProfileData: slug,

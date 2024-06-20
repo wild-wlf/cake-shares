@@ -6,7 +6,7 @@ import ChatFooter from '../ChatFooter';
 import ChatMessage from './ChatMessage';
 import ChatMedia from './ChatMedia';
 import { RiMenu3Fill } from 'react-icons/ri';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
 import { updateDirectChatHistoryIfActive } from '@/helpers/socketConnection/chatHandlers';
 import notificationService from '@/services/notificationservice';

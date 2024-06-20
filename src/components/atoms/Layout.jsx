@@ -4,7 +4,7 @@ import { Wrapper } from "@/styles/helpers.styles";
 import CenterModal from "./Modal/CenterModal";
 import VerficationModal from "./VerficationModal";
 import { useContextHook } from "use-context-hook";
-import { AuthContext } from "../Context/authContext";
+import { AuthContext } from "@/context/authContext";
 
 function isEmptyObject(obj) {
   return Object.keys(obj).length === 0 && obj.constructor === Object;

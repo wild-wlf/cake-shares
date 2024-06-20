@@ -32,7 +32,6 @@ const ProductDetails = ({ userData }) => {
   useEffect(() => {
     handleProductDetail(userData);
   }, [userData]);
-
   return (
     <>
       <Head>
@@ -58,7 +57,7 @@ export default ProductDetails;
 
 export async function getServerSideProps({ params }) {
   const slug = params?.slug;
-  console.log(params?.slug);
+
   return {
     props: {
       userData: slug,

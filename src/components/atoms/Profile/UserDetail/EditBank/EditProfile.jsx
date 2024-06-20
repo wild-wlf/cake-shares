@@ -15,7 +15,7 @@ import CenterModal from '@/components/atoms/Modal/CenterModal';
 import userService from '@/services/userService';
 import Toast from '@/components/molecules/Toast';
 import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import { convertDateToISO } from '@/helpers/common';
 import { checkAge, convertToFormData } from '@/helpers/common';
 
@@ -26,7 +26,7 @@ const EditProfile = ({ personalInfo, onClose }) => {
   const [dob, setDob] = useState(
     `${personalInfo?.dob.slice(6, 10)}-${personalInfo?.dob.slice(3, 5)}-${personalInfo?.dob.slice(0, 2)}`,
   );
-  console.log(dob);
+
   const [form] = useForm();
   const { setPermission } = useContextHook(AuthContext, v => ({
     setPermission: v.setPermission,
@@ -62,7 +62,7 @@ const EditProfile = ({ personalInfo, onClose }) => {
       dob: personalInfo?.dob,
       country: country || { value: '', label: '' },
     });
-    console.log('dob', personalInfo?.dob);
+    
   }, []);
   async function handelSubmit(e) {
     setLoading(true);
@@ -85,7 +85,7 @@ const EditProfile = ({ personalInfo, onClose }) => {
         message: 'Profile updated successfully',
       });
     } catch (error) {
-      console.log(error);
+   
       Toast({
         type: 'error',
         message: error.message,

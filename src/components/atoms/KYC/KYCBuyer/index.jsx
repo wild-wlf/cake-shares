@@ -5,7 +5,7 @@ import Field from '../../Field';
 import Form, { useForm } from '@/components/molecules/Form';
 import kycService from '@/services/kycService';
 import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import Toast from '@/components/molecules/Toast';
 
 const KycBuyerLevelOne = ({ setOpen, setKycLevel }) => {

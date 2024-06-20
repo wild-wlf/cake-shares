@@ -58,6 +58,38 @@ export const ProductDetailWrapper = styled.div`
       height: 100%;
       object-fit: cover;
     }
+    .videoTag {
+      overflow: hidden;
+      border-radius: 30px;
+      width: 100%;
+    }
+    .modalVideo {
+      .videoTag {
+        border-radius: 0;
+      }
+    }
+    .videoWrapp {
+      position: relative;
+      .palyIcon {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        width: 80px;
+        height: 80px;
+        background: #fff;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 50px;
+        line-height: 1;
+        cursor: pointer;
+        z-index: 2;
+      }
+    }
   }
   .product2 {
     display: flex;

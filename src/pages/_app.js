@@ -6,16 +6,16 @@ import styled, { createGlobalStyle } from 'styled-components';
 import Variables from '../styles/variables.css';
 import { HelperClasses, Styling } from '../styles/GlobalStyles.styles';
 import { Wrapper } from '@/styles/helpers.styles';
-import { KycContextProvider } from '@/components/Context/KycContext';
+import { KycContextProvider } from '@/context/KycContext';
 import TopBar from '../common/TopBar';
-import { UserContextProvider } from '@/components/Context/UserContext';
+import { UserContextProvider } from '@/context/UserContext';
 import { ToastContainer } from 'react-toastify';
-import { AuthContextProvider } from '@/components/Context/authContext';
+import { AuthContextProvider } from '@/context/authContext';
 import Layout from '@/components/atoms/Layout';
-import { SocketContextProvider } from '@/components/Context/socketContext';
+import { SocketContextProvider } from '@/context/socketContext';
 import { useRouter } from 'next/router';
 import Loader from '@/components/atoms/Loader';
-import { SearchContextProvider } from '@/components/Context/SearchContext';
+import { SearchContextProvider } from '@/context/SearchContext';
 
 export const StyledToastContainer = styled(ToastContainer)`
   z-index: 99999;
