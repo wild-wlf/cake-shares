@@ -3,7 +3,7 @@ import { VerficationModalWrapper } from "./VerficationModal.style";
 import Image from "next/image";
 import VerificationIcon from "../../../_assets/verification.svg";
 import Button from "../Button";
-import { AuthContext } from "@/components/Context/authContext";
+import { AuthContext } from "@/context/authContext";
 import { useContextHook } from "use-context-hook";
 import arrowImg from "../../../_assets/half-white-arrow.svg";
 

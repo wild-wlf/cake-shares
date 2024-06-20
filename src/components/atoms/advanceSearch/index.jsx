@@ -9,11 +9,11 @@ import { FaMinus } from 'react-icons/fa';
 import Form, { useForm } from '@/components/molecules/Form';
 import Select from '../Select';
 import { countries } from '@/components/Constant';
-import { SearchContext } from '@/components/Context/SearchContext';
+import { SearchContext } from '@/context/SearchContext';
 import { useRouter } from 'next/router';
 import productService from '@/services/productService';
 import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import categoryService from '@/services/categoryService';
 
 const AdvanceSearch = () => {

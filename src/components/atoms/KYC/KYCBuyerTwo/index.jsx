@@ -8,7 +8,7 @@ import Select from '../../Select';
 import Field from '../../Field';
 import kycService from '@/services/kycService';
 import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import Toast from '@/components/molecules/Toast';
 
 const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
@@ -22,7 +22,7 @@ const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
   const [step, setStep] = useState(1);
 
   const onSubmit = async data => {
-    console.log(state);
+
     if (step === 1) {
       setStep(2);
       return;

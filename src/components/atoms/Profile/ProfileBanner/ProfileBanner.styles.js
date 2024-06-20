@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import bgImage from "../../../../_assets/banerImage.jpg";
-import { useContextHook } from "use-context-hook";
-import { AuthContext } from "@/components/Context/authContext";
+
 
 export const StyledProfileBanner = styled.div`
   position: relative;

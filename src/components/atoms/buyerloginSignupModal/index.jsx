@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Wrapper } from './buyerloginSignupModal.style';
 import Field from '../Field';
 import Form, { useForm } from '@/components/molecules/Form';
@@ -6,9 +6,8 @@ import Button from '../Button';
 import { FcGoogle } from 'react-icons/fc';
 import Facebook from '../../../_assets/facebook.svg';
 import Image from 'next/image';
-import Select from '../Select';
 import { useRouter } from 'next/router';
-import { UserContext } from '@/components/Context/UserContext';
+
 
 const BuyerLoginSignupModal = ({ handleBuyerModal, handleLoginModal, handleSellerLoginModal, type }) => {
   const [form] = useForm();

@@ -8,7 +8,6 @@ import Facebook from '../../../_assets/facebook.svg';
 import Image from 'next/image';
 import Select from '../Select';
 import { useRouter } from 'next/router';
-import { UserContext } from '@/components/Context/UserContext';
 
 const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleSellerRegisterModal, type }) => {
   const [form] = useForm();

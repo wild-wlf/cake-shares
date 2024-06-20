@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { HandleKycModalWrapper } from './HandleLoginModal.styles';
 import Button from '@/components/atoms/Button';
-import { KycContext } from '@/components/Context/KycContext';
+import { KycContext } from '@/context/KycContext';
 import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import Toast from '../Toast';
 
 const UpgradeKycLevelModal = ({ reqKycLevel, setOpen }) => {

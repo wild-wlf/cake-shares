@@ -4,7 +4,7 @@ import editIcon from '../../../../_assets/editIcon.svg';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import userService from '@/services/userService';
 import { convertToFormData } from '@/helpers/common';
 import Toast from '@/components/molecules/Toast';

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import InfoIcon from '../../../_assets/info-icon.svg';
 import Button from '@/components/atoms/Button';
 import close from '../../../_assets/close.svg';
-import { UserContext } from '@/components/Context/UserContext';
+import { UserContext } from '@/context/UserContext';
 
 const HandleLoginModal = ({ setOpen, text }) => {
   const { setLoginModal } = useContext(UserContext);

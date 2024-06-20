@@ -12,6 +12,7 @@ const ProductDescription = ({ data, SellerData }) => {
   const router = useRouter();
 
   const [chat, setChat] = useState(false);
+
   return (
     <>
       <CenterModal zIndex={9999} open={chat} setOpen={setChat} width="1339" title="Logan's Chat">
@@ -35,7 +36,7 @@ const ProductDescription = ({ data, SellerData }) => {
         </div>
         <div className="seller">
           <div className="profilepic">
-            <Image src={SellerData?.profilePicture} alt="profilepic" width={90} height={90} />
+            <Image src={SellerData?.profilePicture || Profilepic} alt="profilepic" width={90} height={90} />
           </div>
           <div className="profiledesc">
             <strong className="user-name">{SellerData?.fullName}</strong>

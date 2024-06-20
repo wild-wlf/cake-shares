@@ -9,7 +9,7 @@ import profilePlaceHolder from '../../../_assets/profileplaceHolder.jpg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import CenterModal from '../../atoms/Modal/CenterModal';
 import PrivacyPolicy from '@/components/atoms/PrivacyPolicyModal/PrivacyPolicy';
 import TermsConditions from '@/components/atoms/TermsConditions/TermsConditions';

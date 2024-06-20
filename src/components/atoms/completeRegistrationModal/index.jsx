@@ -8,8 +8,8 @@ import Image from 'next/image';
 import { countries } from '@/components/Constant';
 import UploadImg from '@/components/molecules/UploadImg';
 import KycLevel from '../KYC/KycLevel';
-import { KycContext } from '@/components/Context/KycContext';
-import { UserContext } from '@/components/Context/UserContext';
+import { KycContext } from '@/context/KycContext';
+import { UserContext } from '@/context/UserContext';
 import userService from '@/services/userService';
 import { checkAge, convertToFormData } from '@/helpers/common';
 import Toast from '@/components/molecules/Toast';
@@ -50,7 +50,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
   }, []);
 
   const handleSubmit = async e => {
-    // console.log(e);
+
     let obj = {
       profilePicture: image,
       type: buyerRegistrationData.type,
@@ -69,7 +69,7 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
       inheritanceInfo: {
         name: e.person_name?.trim(),
         passportNumber: e.passport_number?.trim(),
-        country: e.country?.trim(),
+        country: e.country.value,
         email: e.inheritanceEmail?.trim(),
       },
     };
@@ -217,11 +217,11 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                     message: 'Please enter Bank Name',
                   },
                   {
-                    pattern: /^.{8,50}$/,
+                    pattern: /^.{3,30}$/,
                     message: 'Please enter a valid Bank Name',
                   },
                 ]}>
-                <Field maxLength={50} />
+                <Field maxLength={30} />
               </Form.Item>
               <Form.Item
                 type="text"
@@ -337,18 +337,12 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
                 name="country"
                 sm
                 rounded
-                placeholder="United States"
                 rules={[
                   {
                     required: true,
-                    message: 'Please enter Country',
-                  },
-                  {
-                    pattern: /^.{0,40}$/,
-                    message: 'Please enter a valid country',
                   },
                 ]}>
-                <Field maxLength={40} />
+                <Select options={arr} />
               </Form.Item>
               <Form.Item
                 type="text"

@@ -9,7 +9,7 @@ import Field from '../../Field';
 import WebCam from '../../WebCam';
 import kycService from '@/services/kycService';
 import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
+import { AuthContext } from '@/context/authContext';
 import Toast from '@/components/molecules/Toast';
 import { bas64toFile } from '@/helpers/common';
 

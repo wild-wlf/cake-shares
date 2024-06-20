@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect,  useState } from 'react';
 import { SearchFiltersWrapper } from './searchFilters.style';
 import Field from '../Field';
 import Button from '../Button';
@@ -6,10 +6,8 @@ import { FaMinus } from 'react-icons/fa6';
 import Form, { useForm } from '@/components/molecules/Form';
 import Select from '../Select';
 import { countries } from '@/components/Constant';
-import { SearchContext } from '@/components/Context/SearchContext';
-import { useContextHook } from 'use-context-hook';
-import { AuthContext } from '@/components/Context/authContext';
-import categoryService from '@/services/categoryService';
+import { SearchContext } from '@/context/SearchContext';
+
 
 const SearchFilters = () => {
   const kycLevel = [
