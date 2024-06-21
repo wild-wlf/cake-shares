@@ -209,7 +209,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
                 </div>
               )
             ) : (
-              data?.media[0] && <Image src={data?.media[0]} alt="Product-Image" />
+              data?.media[0] && <Image src={data?.media[0]} alt="Product-Image" width={365} height={360} />
             )}
           </div>
           <div className="product2">
