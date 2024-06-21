@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledPollDetailsModal = styled.div`
+  padding-top: 20px;
+  color: var(--dark);
   span {
     display: block;
   }

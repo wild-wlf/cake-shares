@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledPollDetailsModal } from './PollDetailsModal.styles';
 import { HiMiniStar } from 'react-icons/hi2';
-import userImg from '../../../../../public/assets/user-img.png';
+import userImg from '../../../../_assets/userProfile.png';
 import Image from 'next/image';
 
 const PollDetailsModal = () => {

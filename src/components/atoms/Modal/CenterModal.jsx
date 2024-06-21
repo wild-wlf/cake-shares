@@ -1,7 +1,7 @@
-import React, { useEffect, useContext } from "react";
-import { ContentHolder, Head, StyledModal } from "./Modal.styles";
-import close from "../../../_assets/close.svg";
-import Image from "next/image";
+import React, { useEffect, useContext } from 'react';
+import { ContentHolder, Head, StyledModal } from './Modal.styles';
+import close from '../../../_assets/close.svg';
+import Image from 'next/image';
 
 const CenterModal = ({
   children,
@@ -21,11 +21,11 @@ const CenterModal = ({
   // const { clearFormData } = useContext(AuthContext);
   useEffect(() => {
     const disableScroll = () => {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     };
 
     const enableScroll = () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     };
 
     if (open) {
@@ -55,14 +55,13 @@ const CenterModal = ({
         $zIndex={zIndex}
         open={open}
         onClick={handleClose}
-        onKeyDown={(e) => {
+        onKeyDown={e => {
           if (iscloseAble) {
-            if (e.key === "Escape") {
+            if (e.key === 'Escape') {
               handleClose();
             }
           }
-        }}
-      >
+        }}>
         <ContentHolder
           bg={bg}
           padding={padding}
@@ -72,18 +71,12 @@ const CenterModal = ({
           desktopTop={desktopTop}
           role="dialog"
           aria-modal="true"
-          onClick={(e) => e.stopPropagation()}
-          tabIndex={-1}
-        >
+          onClick={e => e.stopPropagation()}
+          tabIndex={-1}>
           <Head>
-            <strong>{title}</strong>
+            <strong className="title">{title}</strong>
             {iscloseAble && (
-              <button
-                type="button"
-                className="closer"
-                onClick={handleClose}
-                tabIndex={0}
-              >
+              <button type="button" className="closer" onClick={handleClose} tabIndex={0}>
                 <Image src={close} alt="Close-Modal" />
               </button>
             )}

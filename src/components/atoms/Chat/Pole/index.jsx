@@ -6,6 +6,8 @@ import { format } from 'date-fns';
 import Image from 'next/image';
 import CheckBox from '../../CheckBox';
 import PoleProgress from './PoleProgress';
+import PollDetailsModal from '../PollDetailsModal';
+import ModalContainer from '../../ModalContainer';
 
 const Pole = ({ type, time }) => {
   const pollOptions = ['I want to buy 10 Shares', 'I want to buy 20 Shares', 'I want to buy 30 Shares'];
@@ -50,7 +52,12 @@ const Pole = ({ type, time }) => {
           <div className="icon">{isMessageRead ? <LiaCheckDoubleSolid size={16} /> : <LiaCheckSolid size={16} />}</div>
         </div>
       )}
-      <button>View Votes</button>
+      <ModalContainer
+        width={600}
+        title="Create Poll"
+        btnComponent={({ onClick }) => <button onClick={onClick}>View Votes</button>}
+        content={({ onClose }) => <PollDetailsModal />}
+      />
     </StyledPole>
   );
 };

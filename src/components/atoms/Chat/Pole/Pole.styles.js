@@ -66,7 +66,6 @@ export const StyledPole = styled.div`
   }
   button {
     width: 100%;
-    margin: 0 auto;
     text-align: center;
     padding-top: 14px;
     ${({ $type }) =>
