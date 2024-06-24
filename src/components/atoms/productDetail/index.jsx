@@ -138,7 +138,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
                   </>
                 )}
               </span>
-              <span>KYC ({data?.kycLevel})</span>
+              <span>KYC (Level {data?.kycLevel})</span>
             </div>
           </div>
 
@@ -209,7 +209,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
                 </div>
               )
             ) : (
-              data?.media[0] && <Image src={data?.media[0]} alt="Product-Image" />
+              data?.media[0] && <Image src={data?.media[0]} width={365} height={360} alt="Product-Image" />
             )}
           </div>
           <div className="product2">
