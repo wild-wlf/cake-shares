@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Closer = styled.div``;
 
@@ -8,22 +8,25 @@ export const StyledModal = styled.div`
   background: rgba(50, 59, 75, 0.1);
   backdrop-filter: blur(4px);
   padding: 20px;
-  visibility: ${({ open }) => (open ? "visible" : "hidden")};
-  opacity: ${({ open }) => (open ? "1" : "0")};
+  visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
+  opacity: ${({ open }) => (open ? '1' : '0')};
   transition: 0.3s all ease-in-out;
   overflow-x: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: ${({ $zIndex }) => ($zIndex ? $zIndex : "99")};
+  z-index: ${({ $zIndex }) => ($zIndex ? $zIndex : '99')};
+  .title {
+    color: var(--dark);
+  }
 `;
 
 export const ContentHolder = styled.div`
-  max-width: ${({ width }) => (width ? `${width}px` : "100%")};
-  width: ${({ width }) => (width ? "100%" : "")};
-  padding: ${({ padding }) => padding ?? ""}; // must prop
-  background: ${({ bg }) => bg ?? ""}; // must props
-  border-radius: ${({ radius }) => radius ?? "30px"};
+  max-width: ${({ width }) => (width ? `${width}px` : '100%')};
+  width: ${({ width }) => (width ? '100%' : '')};
+  padding: ${({ padding }) => padding ?? ''}; // must prop
+  background: ${({ bg }) => bg ?? ''}; // must props
+  border-radius: ${({ radius }) => radius ?? '30px'};
   animation: myAnim 0.3s ease;
   background: var(--white);
   max-height: 100%;

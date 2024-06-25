@@ -9,6 +9,7 @@ import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
 import { updateDirectChatHistoryIfActive } from '@/helpers/socketConnection/chatHandlers';
 import notificationService from '@/services/notificationservice';
+import Pole from './Pole';
 
 const Chat = ({ userInfo, type }) => {
   const [chatMessages, setChatMessages] = useState([]);
@@ -88,6 +89,7 @@ const Chat = ({ userInfo, type }) => {
                   // showImage={index === chatMessages.length - 1}
                 />
               ))}
+          <Pole type="send" time={Date.now()} />
         </ChatBody>
         <ChatFooter userInfo={userInfo} />
       </div>

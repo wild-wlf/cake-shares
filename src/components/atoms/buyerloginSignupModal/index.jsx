@@ -54,7 +54,6 @@ const BuyerLoginSignupModal = ({ handleBuyerModal, handleLoginModal, handleSelle
             type="text"
             label="Username"
             name="username"
-            sm
             rounded
             placeholder="alex123"
             rules={[
@@ -82,7 +81,6 @@ const BuyerLoginSignupModal = ({ handleBuyerModal, handleLoginModal, handleSelle
               type="password"
               label="Password"
               name="password"
-              sm
               rounded
               placeholder="***********"
               rules={[
@@ -98,7 +96,6 @@ const BuyerLoginSignupModal = ({ handleBuyerModal, handleLoginModal, handleSelle
               type="text"
               label="Email Address"
               name="email"
-              sm
               rounded
               placeholder="alex123@gmail.com"
               rules={[
