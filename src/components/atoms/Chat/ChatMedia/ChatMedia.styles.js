@@ -75,6 +75,7 @@ export const StyledChatMedia = styled.div`
         display: flex;
         align-items: flex-start;
         position: relative;
+        overflow: hidden;
 
         img {
           border-radius: 50%;

@@ -12,6 +12,7 @@ import { updateDirectChatHistoryIfActive } from '@/helpers/socketConnection/chat
 import notificationService from '@/services/notificationservice';
 import Loader from '../Loader';
 import { LoaderStyled } from '../Loader/Loader.styles';
+import Pole from './Pole';
 
 const Chat = ({ userInfo, type }) => {
   const [chatMessages, setChatMessages] = useState([]);
@@ -125,6 +126,7 @@ const Chat = ({ userInfo, type }) => {
               />
             ))
           )}
+          <Pole type="send" time={Date.now()} />
         </ChatBody>
         <ChatFooter userInfo={userInfo} type={type} />
       </div>

@@ -12,6 +12,8 @@ import Field from '../Field';
 import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
 import { sendDirectMessage, sendComMsg } from '@/helpers/socketConnection/socketConnection';
+import CreatePollModal from '../Chat/CreatePollModal';
+import ModalContainer from '../ModalContainer';
 
 const ChatFooter = ({ userInfo, type, productName, productId }) => {
   const [form] = useForm();
@@ -57,7 +59,14 @@ const ChatFooter = ({ userInfo, type, productName, productId }) => {
             </Form.Item>
           </div>
           <div className="icons-div">
-            <Image src={PollIcon} alt="PollIcon" width={14} height={14} />
+            <ModalContainer
+              width={600}
+              title="Create Poll"
+              btnComponent={({ onClick }) => (
+                <Image src={PollIcon} alt="PollIcon" width={14} height={14} onClick={onClick} />
+              )}
+              content={({ onClose }) => <CreatePollModal onClose={onClose} />}
+            />
             <Image src={LinkIcon} alt="LinkIcon" width={14} height={14} />
             <Image src={GalleryIcon} alt="GalleryIcon" width={14} height={14} />
           </div>
