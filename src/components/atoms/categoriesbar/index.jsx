@@ -48,7 +48,7 @@ const CategoriesBar = ({ categories, loading, setSearchQuery }) => {
 
   return (
     <>
-      <CenterModal open={modal} setOpen={setModal} title={'Advance Search'} width="670">
+      <CenterModal open={modal} setOpen={setModal} title={'Advanced Search'} width="670">
         <AdvanceSearch />
       </CenterModal>
       <CategoriesBarWrapper>

@@ -5,6 +5,7 @@ import SearchSlider from '../components/atoms/searchSlider';
 import AdvanceSearchGrid from '@/components/atoms/advanceSearchGrid';
 import productService from '@/services/productService';
 import { SearchContext } from '@/context/SearchContext';
+import { NoRecord } from '@/components/atoms/categories/categories.style';
 
 const AdvanceSearch = () => {
   const [listview, setListView] = useState(true);
@@ -37,9 +38,15 @@ const AdvanceSearch = () => {
       <SearchFilterFields />
       {listview ? (
         <>
-          <SearchSlider data={data} loading={loading} />
-          <SearchSlider data={data} loading={loading} />
-          <SearchSlider data={data} loading={loading} />
+          {data && data?.length > 0 ? (
+            <>
+              <SearchSlider data={data} loading={loading} />
+              <SearchSlider data={data} loading={loading} />
+              <SearchSlider data={data} loading={loading} />
+            </>
+          ) : (
+            <NoRecord>No Records Found</NoRecord>
+          )}
         </>
       ) : (
         <AdvanceSearchGrid data={data} loading={loading} />

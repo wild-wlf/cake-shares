@@ -31,13 +31,19 @@ const AdvanceSearch = () => {
   );
 
   const categoriesOptions = useMemo(() => {
-    return categories_data?.items
-      ?.filter(item => item?.status !== 'Inactive')
-      ?.map(ele => ({
+    const options = [
+      {
+        label: 'All',
+        value: '',
+      },
+      ...(categories_data?.items?.map(ele => ({
         value: ele?._id,
         label: ele?.name,
-      }));
+      })) || []),
+    ];
+    return options;
   }, [categories_data?.items]);
+
   const [selected, setSelected] = useState({
     investment: 'Select Type',
     country: 'Select Country',
