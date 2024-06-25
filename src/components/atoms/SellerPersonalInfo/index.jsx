@@ -54,7 +54,7 @@ const SellerPersonalInfo = ({ userInfo }) => {
         </div>
       </div>
       <div className="section">
-        <span className="heading">Finential Information:</span>
+        <span className="heading">Financial Information:</span>
         <div className="col-holder">
           {finentialInfoData?.map((item, index) => (
             <div className="col " key={index}>

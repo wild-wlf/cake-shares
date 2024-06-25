@@ -12,7 +12,6 @@ import SellerInfo from '@/components/atoms/Profile/UserInfo/SellerInfo';
 import Toast from '@/components/molecules/Toast';
 
 const SellerProfile = ({ userProfileData }) => {
-
   const router = useRouter();
   const [userProfile, setUserProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +50,7 @@ const SellerProfile = ({ userProfileData }) => {
           Go Back
         </Button>
         <SellerProfileBanner title="Real Estate Broker Things mate!" image={userProfile?.bannerImage} />
-        <SellerInfo userInfo={userProfile?.user} />
+        <SellerInfo userInfo={userProfile?.user} userCategories={userProfile?.userCategories} />
         <SellerPersonalInfo userInfo={userProfile?.user} />
         <Categories title="Seller’s Other Products" data={userProfile?.otherProducts} loading={isLoading} />
         <Categories

@@ -8,7 +8,6 @@ import Facebook from '../../../_assets/facebook.svg';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-
 const BuyerLoginSignupModal = ({ handleBuyerModal, handleLoginModal, handleSellerLoginModal, type }) => {
   const [form] = useForm();
   const router = useRouter();
@@ -89,10 +88,7 @@ const BuyerLoginSignupModal = ({ handleBuyerModal, handleLoginModal, handleSelle
               rules={[
                 {
                   required: true,
-                },
-                {
-                  pattern: /^.{8,64}$/,
-                  message: 'Password should be between 8 to 64 characters',
+                  message: 'Password is required',
                 },
               ]}>
               <Field maxLength={64} />

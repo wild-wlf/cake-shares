@@ -33,15 +33,32 @@ const ProductDescription = ({ data, SellerData }) => {
           <div className="amountdiv">
             <div>
               <span>Min Investment (USD)</span>
-              <strong className="amount">$ {data?.minimumInvestment?.toLocaleString('en-US')}</strong>
+              <strong className="amount">
+                $
+                {data?.minimumInvestment?.toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </strong>
             </div>
             <div>
               <span>Asset Value (USD)</span>
-              <strong className="amount">$ {data?.assetValue?.toLocaleString('en-US')}</strong>
+              <strong className="amount">
+                $
+                {data?.assetValue?.toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </strong>
             </div>
           </div>
           <div className="total">
-            Total Value Raised (USD) <span> $ {data?.valueRaised || '0.00'}</span>
+            Total Value Raised (USD){' '}
+            <span>
+              $
+              {data?.valueRaised?.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) ||
+                '0.00'}
+            </span>
           </div>
         </div>
         <div className="seller">

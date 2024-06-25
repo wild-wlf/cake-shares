@@ -32,6 +32,7 @@ export const AuthContextProvider = props => {
   const privatePages = ['/profile'];
 
   const onLogout = async () => {
+    if (!isLoggedIn) return;
     try {
       clearCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE);
       clearCookie('is_email_verified');
