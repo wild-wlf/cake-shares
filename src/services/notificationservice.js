@@ -64,6 +64,32 @@ const notificationService = {
     };
   },
 
+  GetAllCommunityConversationMessages(searchQuery, fetch) {
+    const [messages, setMessages] = useState({
+      messages: [],
+      totalItems: 0,
+    });
+    const { cancellablePromise } = useCancellablePromise();
+    const [notificationStatus, setNotificationStatus] = useState(STATUS.LOADING);
+    useEffect(() => {
+      setNotificationStatus(STATUS.LOADING);
+      cancellablePromise(this.getAllCommunityConversationMessages(searchQuery))
+        .then(res => {
+          setMessages({
+            messages: res.items,
+            totalItems: res.totalItems,
+          });
+          setNotificationStatus(STATUS.SUCCESS);
+        })
+        .catch(() => setNotificationStatus(STATUS.ERROR));
+    }, [searchQuery?.page, searchQuery?.itemsPerPage, searchQuery?.channelName, fetch]);
+    return {
+      messages_loading: notificationStatus === STATUS.LOADING,
+      messages_error: notificationStatus === STATUS.ERROR,
+      messages_data: messages,
+    };
+  },
+
   async getAllNotifications({ page = 1, itemsPerPage = 10 }) {
     let res = await Fetch.get(`${this._url}/notification?page=${page}&itemsPerPage=${itemsPerPage}`);
     if (res.status >= 200 && res.status < 300) {
@@ -77,6 +103,18 @@ const notificationService = {
   async getAllConversationMessages({ page = 1, itemsPerPage = 10, author = '', receiver = '', conversationId = '' }) {
     let res = await Fetch.get(
       `${this._url}/get-conversation-messages?page=${page}&itemsPerPage=${itemsPerPage}&author=${author}&receiver=${receiver}&conversationId=${conversationId}`,
+    );
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return res;
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? 'Something Went Wrong');
+  },
+
+  async getAllCommunityConversationMessages({ page = 1, itemsPerPage = 10, channelName = '' }) {
+    let res = await Fetch.get(
+      `${this._url}/get-com-conversation-messages?page=${page}&itemsPerPage=${itemsPerPage}&channelName=${channelName}`,
     );
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();

@@ -4,16 +4,23 @@ import { IoIosCheckmarkCircle } from 'react-icons/io';
 import Image from 'next/image';
 import MessageIcon from '../../../_assets/chat-icon.svg';
 import CenterModal from '../Modal/CenterModal';
-import Chat from '../Chat';
+import CommunityChat from '../Chat/CommunityChat';
 import Skeletonn from '../skeleton/Skeletonn';
 import { NoRecord } from '../categories/categories.style';
+import { AuthContext } from '@/context/authContext';
+import { useContextHook } from 'use-context-hook';
+import Toast from '@/components/molecules/Toast';
 
 const Amenities = ({ data, loading }) => {
   const [chatModal, setChatModal] = useState(false);
+  const { isLoggedIn } = useContextHook(AuthContext, v => ({
+    isLoggedIn: v.isLoggedIn,
+  }));
+
   return (
     <>
       <CenterModal open={chatModal} setOpen={setChatModal} title="Community Chat" width="1339">
-        <Chat type="Community" />
+        <CommunityChat type="community" userInfo={data?.userId} productName={data?.productName} productId={data?._id} />
       </CenterModal>
       <ContainerWrapper>
         <AmentitiesWrapper>
@@ -44,7 +51,11 @@ const Amenities = ({ data, loading }) => {
         <div
           className="chatWrapper"
           onClick={() => {
-            setChatModal(true);
+            if (isLoggedIn) {
+              setChatModal(true);
+            } else {
+              Toast({ type: 'error', message: 'Kindly Login To Continue' });
+            }
           }}>
           <div>
             <Image src={MessageIcon} alt="chatIcon" width={19.26} height={19.26} />

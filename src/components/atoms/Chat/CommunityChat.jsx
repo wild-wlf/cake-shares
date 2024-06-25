@@ -8,30 +8,32 @@ import ChatMedia from './ChatMedia';
 import { RiMenu3Fill } from 'react-icons/ri';
 import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
-import { updateDirectChatHistoryIfActive } from '@/helpers/socketConnection/chatHandlers';
-import notificationService from '@/services/notificationservice';
 import Loader from '../Loader';
 import { LoaderStyled } from '../Loader/Loader.styles';
+import { updateChatIfActive } from '@/helpers/socketConnection/comMsgHandlers';
+import notificationService from '@/services/notificationservice';
+import { removeSpaces } from '@/helpers/common';
 
-const Chat = ({ userInfo, type }) => {
+const CommunityChat = ({ userInfo, type, productName, productId }) => {
   const [chatMessages, setChatMessages] = useState([]);
   const { user, fetch } = useContextHook(AuthContext, v => ({
     user: v.user,
     fetch: v.fetch,
   }));
-  const chatBoxRef = useRef(null);
-  const [onlineUsers, setOnlineUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState({
     page: 1,
     itemsPerPage: 10,
-    author: user?._id,
-    receiver: userInfo?._id,
-    conversationId: '',
+    channelName: `com_${removeSpaces(productName)}_${productId}`,
   });
+  const chatBoxRef = useRef(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const [chatLoading, setChatLoading] = useState(true);
   const [moreMsgLoading, setMoreMsgLoading] = useState(false);
 
-  const { messages_loading, messages_data } = notificationService.GetAllConversationMessages(searchQuery, fetch);
+  const { messages_loading, messages_data } = notificationService.GetAllCommunityConversationMessages(
+    searchQuery,
+    fetch,
+  );
 
   useEffect(() => {
     if (messages_data?.messages?.length > 0) {
@@ -57,16 +59,21 @@ const Chat = ({ userInfo, type }) => {
   }, []);
 
   useEffect(() => {
-    window.addEventListener('direct_chat_history', event => {
-      updateDirectChatHistoryIfActive({ ...event.detail, user, userInfo, setChatMessages });
+    window.addEventListener('com_message_history', event => {
+      updateChatIfActive({
+        ...event.detail,
+        user,
+        setChatMessages,
+        channelName: `com_${removeSpaces(productName)}_${productId}`,
+      });
       handleScrollToBottom();
     });
 
     // Clean up the event listener on component unmount
     return () => {
-      window.removeEventListener('direct_chat_history', () => {});
+      window.removeEventListener('com_message_history', () => {});
     };
-  }, [user, userInfo]);
+  }, []);
 
   useEffect(() => {
     window.addEventListener('online_users', event => {
@@ -89,7 +96,7 @@ const Chat = ({ userInfo, type }) => {
   return (
     <ChatWrapper>
       <div className="chatWrapper">
-        <ChatHeader userInfo={userInfo} onlineUsers={onlineUsers} type={type} />
+        <ChatHeader userInfo={userInfo} onlineUsers={onlineUsers} type={type} productName={productName} />
         <ChatBody ref={chatBoxRef} onScroll={onScrolledToTop}>
           {moreMsgLoading && (
             <div
@@ -119,14 +126,16 @@ const Chat = ({ userInfo, type }) => {
                 type={item?.author?._id === user?._id ? 'seen' : 'send'}
                 message={item.content}
                 time={item?.created_at}
-                readBy={item?.readBy?.includes(userInfo?._id)}
+                showImage={item?.author?.profilePicture}
+                readBy={item?.readBy?.length >= item?.receivers?.length}
                 messageId={item?._id}
-                receiverId={userInfo?._id}
+                receivers={item?.receivers}
+                group
               />
             ))
           )}
         </ChatBody>
-        <ChatFooter userInfo={userInfo} type={type} />
+        <ChatFooter userInfo={userInfo} type={type} productName={productName} productId={productId} />
       </div>
       <ChatMedia userInfo={userInfo} type={type} onlineUsers={onlineUsers} />
       <div className="hamburger" onClick={() => document.body.classList.toggle('chat-sidebar-active')}>
@@ -136,4 +145,4 @@ const Chat = ({ userInfo, type }) => {
   );
 };
 
-export default Chat;
+export default CommunityChat;

@@ -635,7 +635,6 @@ export const bas64toFile = async (dataUrl, fileName) => {
   return new File([blob], fileName, { type: 'image/jpg' });
 };
 
-
 export const checkAge = birthdate => {
   let birthDate = new Date(birthdate);
   if (isNaN(birthDate)) {
@@ -660,3 +659,6 @@ export const checkAge = birthdate => {
   }
 };
 
+export const removeSpaces = (str = '') => {
+  return str.replace(/ /g, '');
+};

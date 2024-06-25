@@ -67,7 +67,7 @@ export const StyledChatMessage = styled.div`
     border-radius: 50%;
     overflow: hidden;
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
     left: 0;
     display: ${({ $type }) => ($type === 'send' ? 'block' : 'none')};
 

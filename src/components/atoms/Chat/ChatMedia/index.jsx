@@ -26,7 +26,7 @@ const ChatMedia = ({ userInfo, type, onlineUsers }) => {
         <div className="fakeBefore">
           <Image src={chatIconMedia} alt="chatIconMedia" />
         </div>
-        <strong className="title">{type === 'Community' ? 'Chat Members' : 'Private Chat'}</strong>
+        <strong className="title">{type === 'community' ? 'Chat Members' : 'Private Chat'}</strong>
         <div className="chat-between">
           <div className="col">
             <div className={`image-warp ${onlineUsers?.find(_ => _?.id === userInfo?._id) ? 'online' : 'offline'}`}>
@@ -40,7 +40,7 @@ const ChatMedia = ({ userInfo, type, onlineUsers }) => {
             <label className="userName">{userInfo?.fullName || userInfo?.username}</label>
             <span>{userInfo?.sellerType} Seller</span>
           </div>
-          {type === 'Community' ? (
+          {type === 'community' && (
             <div className="community-col">
               <div className="images-wrapper">
                 <Image src={ProfilePic} alt="profilePic" width={45} height={45} />
@@ -59,7 +59,8 @@ const ChatMedia = ({ userInfo, type, onlineUsers }) => {
                 View All <TbExternalLink fontSize={18} />
               </span>
             </div>
-          ) : (
+          )}
+          {type === 'private' && (
             <div className="col">
               <div className="image-warp">
                 <Image

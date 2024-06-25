@@ -27,7 +27,7 @@ const SellerInfo = ({ userInfo }) => {
         setOpen={setChat}
         width="1339"
         title={`${userInfo?.fullName ? userInfo?.fullName : userInfo?.username}'s Chat`}>
-        <Chat userInfo={userInfo} />
+        <Chat userInfo={userInfo} type="private" />
       </CenterModal>
       <StyledUserInfo>
         <div className="userInfo">

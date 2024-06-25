@@ -6,15 +6,27 @@ import { PiChatTeardropTextFill } from 'react-icons/pi';
 import { useRouter } from 'next/router';
 import CenterModal from '../Modal/CenterModal';
 import Chat from '../Chat';
+import Profilepic from '@/_assets/profileplaceHolder.jpg';
+import { AuthContext } from '@/context/authContext';
+import { useContextHook } from 'use-context-hook';
+import Toast from '@/components/molecules/Toast';
 
 const ProductDescription = ({ data, SellerData }) => {
   const router = useRouter();
   const [chat, setChat] = useState(false);
+  const { isLoggedIn } = useContextHook(AuthContext, v => ({
+    isLoggedIn: v.isLoggedIn,
+  }));
 
   return (
     <>
-      <CenterModal zIndex={9999} open={chat} setOpen={setChat} width="1339" title="Logan's Chat">
-        <Chat userInfo={SellerData} />
+      <CenterModal
+        zIndex={9999}
+        open={chat}
+        setOpen={setChat}
+        width="1339"
+        title={`${SellerData?.fullName || SellerData?.username}'s Chat`}>
+        <Chat userInfo={SellerData} type="private" />
       </CenterModal>
       <ProductDescriptionWrapper>
         <div className="investment">
@@ -43,7 +55,15 @@ const ProductDescription = ({ data, SellerData }) => {
               <div className="viewprofile" onClick={() => router.push(`/seller/${SellerData?._id}`)}>
                 <span>View Profile</span> <TbExternalLink className="icon" />
               </div>
-              <div className="message" onClick={() => setChat(true)}>
+              <div
+                className="message"
+                onClick={() => {
+                  if (isLoggedIn) {
+                    setChat(true);
+                  } else {
+                    Toast({ type: 'error', message: 'Kindly Login To Continue' });
+                  }
+                }}>
                 <span>Message Seller</span>
                 <PiChatTeardropTextFill className="icon" />
               </div>

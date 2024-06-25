@@ -5,14 +5,18 @@ import { LiaCheckDoubleSolid, LiaCheckSolid } from 'react-icons/lia';
 import Image from 'next/image';
 import { format } from 'date-fns';
 
-const ChatMessage = ({ showImage, message, time, type, readBy, messageId, receiverId }) => {
+const ChatMessage = ({ showImage, message, time, type, readBy, messageId, receiverId, receivers, group = false }) => {
   const [isMessageRead, setIsMessageRead] = useState(readBy);
 
   useEffect(() => {
     window.addEventListener('seen_message_response', event => {
       const currentMessage = event.detail;
 
-      if (messageId === currentMessage?._id && currentMessage?.readBy?.includes(receiverId)) {
+      if (messageId === currentMessage?._id && currentMessage?.readBy?.includes(receiverId) && !group) {
+        setIsMessageRead(true);
+      }
+
+      if (messageId === currentMessage?._id && currentMessage?.readBy?.length >= receivers?.length && group) {
         setIsMessageRead(true);
       }
     });
@@ -25,9 +29,9 @@ const ChatMessage = ({ showImage, message, time, type, readBy, messageId, receiv
 
   return (
     <StyledChatMessage $type={type}>
-      {showImage && (
+      {type === 'send' && group && (
         <div className="img-holder">
-          <Image src={Pic} alt="user-pic" />
+          <Image src={showImage || Pic} alt="user-pic" />
         </div>
       )}
       <div className="message-holder">

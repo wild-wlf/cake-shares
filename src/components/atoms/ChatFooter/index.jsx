@@ -11,20 +11,32 @@ import Button from '../Button';
 import Field from '../Field';
 import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
-import { sendDirectMessage } from '@/helpers/socketConnection/socketConnection';
+import { sendDirectMessage, sendComMsg } from '@/helpers/socketConnection/socketConnection';
 
-const ChatFooter = ({ userInfo }) => {
+const ChatFooter = ({ userInfo, type, productName, productId }) => {
   const [form] = useForm();
   const { user } = useContextHook(AuthContext, v => ({
     user: v.user,
   }));
 
   const handleSubmit = ({ message }) => {
-    sendDirectMessage({
-      author: user?._id,
-      receiver: userInfo?._id,
-      content: message,
-    });
+    if (type === 'private') {
+      sendDirectMessage({
+        author: user?._id,
+        receiver: userInfo?._id,
+        content: message,
+      });
+    }
+
+    if (type === 'community') {
+      sendComMsg({
+        author: user?._id,
+        content: message,
+        productName,
+        productId,
+        productOwnerId: userInfo?._id,
+      });
+    }
     form.setFieldsValue({ message: '' });
     form.setFieldsError({ message: { message: '' } });
   };

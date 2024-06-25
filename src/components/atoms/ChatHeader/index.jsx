@@ -3,8 +3,10 @@ import React from 'react';
 import { ChatHeaderWrapper } from './ChatHeader.style';
 import profileplaceHolder from '../../../_assets/profileplaceHolder.jpg';
 
-const ChatHeader = ({ userInfo, onlineUsers }) => {
-  return (
+const ChatHeader = ({ userInfo, onlineUsers, type, productName }) => {
+  return type === 'community' ? (
+    <ChatHeaderWrapper>{productName}</ChatHeaderWrapper>
+  ) : (
     <ChatHeaderWrapper>
       <div className={`image-wrapper ${onlineUsers?.find(_ => _?.id === userInfo?._id) ? 'online' : 'offline'}`}>
         <Image

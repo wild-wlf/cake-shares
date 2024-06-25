@@ -1,16 +1,13 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const LoaderWrap = styled.div`
-  width: 100%;
-  min-height: 200px;
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   justify-content: center;
-  ${({ $noHeight }) =>
-    $noHeight &&
-    css`
-      min-height: max-content;
-    `}
+  z-index: 9999;
 `;
 
 export const LoaderStyled = styled.div`
