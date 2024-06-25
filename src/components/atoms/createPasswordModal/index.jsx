@@ -3,9 +3,16 @@ import { Wrapper } from './createPasswordModal.style';
 import Field from '../Field';
 import Form, { useForm } from '@/components/molecules/Form';
 import Button from '../Button';
-import Link from 'next/link';
+import { IoIosArrowRoundBack } from 'react-icons/io';
 import UploadImg from '@/components/molecules/UploadImg';
-const CreatePasswordModal = ({ createPasswordModal, handleCompleteRegistration, handleSellerPasswordModal, type }) => {
+const CreatePasswordModal = ({
+  createPasswordModal,
+  handleCompleteRegistration,
+  handleSellerPasswordModal,
+  type,
+  setBuyerModal,
+  setPasswordModal,
+}) => {
   const [submitForm, setsubmitForm] = useState('');
   const [profilePicture, setProfilePicture] = useState('');
   const [form] = useForm();
@@ -24,6 +31,15 @@ const CreatePasswordModal = ({ createPasswordModal, handleCompleteRegistration, 
   };
   return (
     <Wrapper>
+      <div className="back-icon">
+        <IoIosArrowRoundBack
+          onClick={() => {
+            setBuyerModal(true);
+            setPasswordModal(false);
+          }}
+          size={45}
+        />
+      </div>
       <span className="description">Add a profile picture and create a password to secure your account.</span>
       <Form form={form} onSubmit={handleSubmit}>
         {type === 'Register As Seller' ? (
@@ -36,7 +52,7 @@ const CreatePasswordModal = ({ createPasswordModal, handleCompleteRegistration, 
         <div className="input-div">
           <Form.Item
             type="password"
-            label="New Password"
+            label="Password"
             name="new_password"
             sm
             rounded
@@ -46,11 +62,7 @@ const CreatePasswordModal = ({ createPasswordModal, handleCompleteRegistration, 
                 required: true,
                 message: 'Password is required',
               },
-              {
-                pattern: /^(?=.*[!@#$%^&*+()_\-=<>?])(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
-                message:
-                  'Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.',
-              },
+              { password: true },
             ]}>
             <Field />
           </Form.Item>
