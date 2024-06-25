@@ -12,8 +12,9 @@ import CenterModal from '../../Modal/CenterModal';
 import Chat from '../../Chat';
 import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
+import { NoRecord } from '../../categories/categories.style';
 
-const SellerInfo = ({ userInfo }) => {
+const SellerInfo = ({ userInfo, userCategories }) => {
   const [chat, setChat] = useState(false);
   const { isLoggedIn } = useContextHook(AuthContext, v => ({
     isLoggedIn: v.isLoggedIn,
@@ -51,18 +52,16 @@ const SellerInfo = ({ userInfo }) => {
           <div className="textWrapper addbefore">
             <span className="categoriesText">Seller’s Product Top Categories:</span>
             <ul className="categoriesWrapper">
-              <li className="categoriesList">
-                <Image src={popular} alt="popular" />
-                Popular
-              </li>
-              <li className="categoriesList">
-                <Image src={PropertyIcon} alt="PropertyIcon" />
-                Properties
-              </li>
-              <li className="categoriesList">
-                <Image src={VentureIcon} alt="VentureIcon" />
-                Ventures
-              </li>
+              {userCategories && userCategories?.length > 0 ? (
+                userCategories?.map(ele => (
+                  <li key={ele?.name} className="categoriesList">
+                    <Image src={ele?.icon || popular} alt="popular" />
+                    {ele?.name}
+                  </li>
+                ))
+              ) : (
+                <NoRecord>No Category Found.</NoRecord>
+              )}
             </ul>
           </div>
         </div>

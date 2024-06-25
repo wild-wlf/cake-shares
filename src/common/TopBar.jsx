@@ -252,6 +252,8 @@ const TopBar = () => {
           type={'Register as Buyer'}
           createPasswordModal={createPasswordModal}
           handleCompleteRegistration={handleCompleteRegistration}
+          setBuyerModal={setBuyerModal}
+          setPasswordModal={setPasswordModal}
         />
       </CenterModal>
 

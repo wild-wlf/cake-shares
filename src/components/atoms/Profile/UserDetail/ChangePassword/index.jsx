@@ -49,10 +49,6 @@ const ChangePassword = () => {
             required: true,
             message: 'Password is required',
           },
-          {
-            pattern: /^.{8,64}$/,
-            message: 'Please enter a valid password',
-          },
         ]}>
         <Field maxLength={64} />
       </Form.Item>
@@ -69,12 +65,9 @@ const ChangePassword = () => {
               required: true,
               message: 'Password is required',
             },
-            {
-              pattern: /^.{8,64}$/,
-              message: 'Password should be between 8 to 64 characters',
-            },
+            { password: true },
           ]}>
-          <Field maxLength={64} />
+          <Field />
         </Form.Item>
         <Form.Item
           type="password"
