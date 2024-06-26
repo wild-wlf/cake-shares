@@ -6,27 +6,49 @@ import { IoAdd } from 'react-icons/io5';
 import { TiDelete } from 'react-icons/ti';
 import Field from '../../Field';
 import Switch from '@/components/molecules/Switch';
+import { sendComMsg } from '@/helpers/socketConnection/socketConnection';
+import Toast from '@/components/molecules/Toast';
 
-const CreatePollModal = () => {
+const CreatePollModal = ({ userInfo, productName, productId, user, onClose }) => {
   const [form] = useForm();
-  const [addOption, setAddOption] = useState(['']);
-  const [question, setQuestion] = useState('');
-  const [allowMultiple, setAllowMultiple] = useState(false);
+  const [addOption, setAddOption] = useState(['', '']);
   const handleAddOption = () => {
-    setAddOption([...addOption, ' ']);
+    setAddOption(_ => [..._, ' ']);
   };
+
   const removeOption = index => setAddOption(prev => prev.filter((_, i) => i !== index));
+
+  const handleSubmit = values => {
+    const payload = values;
+    const pool = {
+      question: payload?.question,
+      allow_multiple: payload?.allow_multiple,
+    };
+
+    delete payload.question;
+    delete payload.allow_multiple;
+
+    pool.options = Object.values(payload).map(_ => ({ option: _ }));
+
+    sendComMsg({
+      author: user?._id,
+      productName,
+      productId,
+      productOwnerId: userInfo?._id,
+      pool,
+    });
+    onClose();
+  };
+
   return (
     <StyledCreatePollModal>
-      <Form form={form}>
+      <Form form={form} onSubmit={handleSubmit}>
         <Form.Item
           type="text"
           label="Question"
           name="question"
-          value={question}
           rounded
           placeholder="Ask Question"
-          onChange={e => setQuestion(e.target.value)}
           rules={[
             {
               required: true,
@@ -50,9 +72,18 @@ const CreatePollModal = () => {
                 name={`options${index}`}
                 value={option}
                 rounded
-                placeholder="+Add"
+                placeholder="Enter Option"
                 suffix={<TiDelete color="red" size={20} />}
-                onClickSuffix={() => removeOption(index)}
+                onClickSuffix={() => {
+                  if (addOption.length > 1) {
+                    removeOption(index);
+                  } else {
+                    Toast({
+                      type: 'error',
+                      message: 'Pool Cannot Have One Option',
+                    });
+                  }
+                }}
                 onChange={e => {
                   form.setFieldsValue({
                     [`options${index}`]: e.target.value,
@@ -74,13 +105,9 @@ const CreatePollModal = () => {
             ))}
         </div>
         <div className="switch">
-          <Switch
-            label="Allow Multiple Answers"
-            value={allowMultiple}
-            onChange={({ target: { value } }) => {
-              setAllowMultiple(value);
-            }}
-          />
+          <Form.Item type="radio" label="Allow Multiple" name="allow_multiple" rounded>
+            <Switch />
+          </Form.Item>
         </div>
         <Button rounded md type="primary" width="170" htmlType="submit">
           Create Poll

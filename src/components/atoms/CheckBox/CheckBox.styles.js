@@ -49,8 +49,8 @@ export const StyledCheckBox = styled.div`
       }
 
       input[type='checkbox']:checked {
-        background-color: var(--primary-500);
-        border: 2px solid var(--primary-500);
+        background-color: var(--green);
+        border: 2px solid var(--green);
         opacity: 1;
       }
       input[type='checkbox']:before {
@@ -71,54 +71,9 @@ export const StyledCheckBox = styled.div`
       }
     `}
   ${({ $type }) =>
-    $type === 'circle' &&
+    $type === 'radio' &&
     css`
-      input[type='checkbox'] {
-        position: relative;
-        border: 2px solid #afb7c6;
-        border-radius: 2px;
-        background: none;
-        cursor: pointer;
-        line-height: 0;
-        margin: 0 0.6em 0 0;
-        outline: 0;
-        vertical-align: text-top;
-        height: 14px;
-        width: 14px;
-        border-radius: 50%;
-        -webkit-appearance: none;
-      }
-
-      input[type='checkbox']:hover {
-        opacity: 1;
-      }
-
-      input[type='checkbox']:checked {
-        background-color: var(--primary-500);
-        border: 2px solid var(--primary-500);
-        opacity: 1;
-      }
-      input[type='checkbox']:before {
-        content: '';
-        position: absolute;
-        right: 58%;
-        top: 50%;
-        width: 4px;
-        height: 9px;
-        border: solid #fff;
-        border-width: 0;
-        margin: -1px -1px 0 -1px;
-        transform: rotate(45deg) translate(-50%, -50%);
-        z-index: 2;
-      }
-      input[type='checkbox']:checked:before {
-        border-width: 0 1px 1px 0;
-      }
-    `}
-  ${({ $type }) =>
-    $type === 'rounded' &&
-    css`
-      input[type='checkbox'] {
+      input[type='radio'] {
         position: relative;
         border: 2px solid #fff;
         border-radius: 2px;
@@ -134,7 +89,7 @@ export const StyledCheckBox = styled.div`
         -webkit-appearance: none;
 
         ${({ $color }) =>
-          $color === 'send'
+          $color === 'seen'
             ? css`
                 border: 2px solid #fff;
               `
@@ -143,14 +98,14 @@ export const StyledCheckBox = styled.div`
               `}
       }
 
-      input[type='checkbox']:hover {
+      input[type='radio']:hover {
         opacity: 1;
       }
 
-      input[type='checkbox']:checked {
+      input[type='radio']:checked {
         opacity: 1;
         ${({ $color }) =>
-          $color === 'send'
+          $color === 'seen'
             ? css`
                 border: 2px solid #fff;
               `
@@ -158,7 +113,7 @@ export const StyledCheckBox = styled.div`
                 border: 2px solid var(--base-text-color);
               `}
       }
-      input[type='checkbox']:checked:before {
+      input[type='radio']:checked:before {
         content: '';
         position: absolute;
         top: 50%;
@@ -169,7 +124,7 @@ export const StyledCheckBox = styled.div`
         transform: translate(-50%, -50%);
         z-index: 2;
         ${({ $color }) =>
-          $color === 'send'
+          $color === 'seen'
             ? css`
                 border: 2px solid #fff;
               `

@@ -13,6 +13,7 @@ import { LoaderStyled } from '../Loader/Loader.styles';
 import { updateChatIfActive } from '@/helpers/socketConnection/comMsgHandlers';
 import notificationService from '@/services/notificationservice';
 import { removeSpaces } from '@/helpers/common';
+import Pole from './Pole';
 
 const CommunityChat = ({ userInfo, type, productName, productId }) => {
   const [chatMessages, setChatMessages] = useState([]);
@@ -120,19 +121,34 @@ const CommunityChat = ({ userInfo, type, productName, productId }) => {
               <Loader />
             </div>
           ) : (
-            chatMessages?.map((item, index) => (
-              <ChatMessage
-                key={index}
-                type={item?.author?._id === user?._id ? 'seen' : 'send'}
-                message={item.content}
-                time={item?.created_at}
-                showImage={item?.author?.profilePicture}
-                readBy={item?.readBy?.length >= item?.receivers?.length}
-                messageId={item?._id}
-                receivers={item?.receivers}
-                group
-              />
-            ))
+            chatMessages?.map((item, index) =>
+              item?.isPool ? (
+                <Pole
+                  type={item?.author?._id === user?._id ? 'seen' : 'send'}
+                  time={item?.created_at}
+                  key={index}
+                  question={item?.pool?.question}
+                  options={item?.pool?.options}
+                  allow_multiple={item?.pool?.allow_multiple}
+                  receivers={item?.receivers}
+                  showImage={item?.author?.profilePicture}
+                  readBy={item?.readBy?.length >= item?.receivers?.length}
+                  messageId={item?._id}
+                />
+              ) : (
+                <ChatMessage
+                  key={index}
+                  type={item?.author?._id === user?._id ? 'seen' : 'send'}
+                  message={item.content}
+                  time={item?.created_at}
+                  showImage={item?.author?.profilePicture}
+                  readBy={item?.readBy?.length >= item?.receivers?.length}
+                  messageId={item?._id}
+                  receivers={item?.receivers}
+                  group
+                />
+              ),
+            )
           )}
         </ChatBody>
         <ChatFooter userInfo={userInfo} type={type} productName={productName} productId={productId} />
