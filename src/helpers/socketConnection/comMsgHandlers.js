@@ -1,7 +1,7 @@
 import { setComSeenMsg } from './socketConnection';
 
 export const updateChatIfActive = data => {
-  const { participants, message, conversationId, user, setChatMessages, channelName } = data;
+  const { participants, message, conversationId, user, setChatMessages } = data;
 
   const loggedInUser = user;
   const usersInConversation = [...participants, loggedInUser._id];
@@ -14,7 +14,6 @@ export const updateChatIfActive = data => {
       conversationId,
       loggedInUser,
       setChatMessages,
-      channelName,
     });
   } else {
     console.error('error is in updateDirectChatHistoryIfActive');
@@ -28,7 +27,6 @@ const updateChatHistoryIfSameConversationActive = ({
   conversationId,
   loggedInUser,
   setChatMessages,
-  channelName,
 }) => {
   if (!Array.isArray(participants) || !Array.isArray(usersInConversation)) {
     console.error('Participants or Users in Conversation is not an array');
@@ -42,7 +40,6 @@ const updateChatHistoryIfSameConversationActive = ({
       conversationId,
       user: loggedInUser?._id,
       messageId: message?._id,
-      channelName,
     });
   }
 

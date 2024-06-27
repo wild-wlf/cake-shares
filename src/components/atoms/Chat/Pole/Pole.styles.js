@@ -68,7 +68,7 @@ export const StyledPole = styled.div`
         ? css`
             right: 13px;
             .icon {
-              /* display: none; */
+              display: none;
             }
           `
         : css`

@@ -30,6 +30,7 @@ const CommunityChat = ({ userInfo, type, productName, productId }) => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [chatLoading, setChatLoading] = useState(true);
   const [moreMsgLoading, setMoreMsgLoading] = useState(false);
+  const [channelReceivers, setChannelReceivers] = useState([]);
 
   const { messages_loading, messages_data } = notificationService.GetAllCommunityConversationMessages(
     searchQuery,
@@ -39,6 +40,8 @@ const CommunityChat = ({ userInfo, type, productName, productId }) => {
   useEffect(() => {
     if (messages_data?.messages?.length > 0) {
       setChatMessages(prev => [...messages_data?.messages, ...prev]);
+      const lastMessage = messages_data?.messages[messages_data?.messages?.length - 1];
+      setChannelReceivers([lastMessage, { ...lastMessage?.author }]);
       setMoreMsgLoading(false);
     }
   }, [messages_data]);
@@ -65,7 +68,6 @@ const CommunityChat = ({ userInfo, type, productName, productId }) => {
         ...event.detail,
         user,
         setChatMessages,
-        channelName: `com_${removeSpaces(productName)}_${productId}`,
       });
       handleScrollToBottom();
     });
@@ -153,7 +155,7 @@ const CommunityChat = ({ userInfo, type, productName, productId }) => {
         </ChatBody>
         <ChatFooter userInfo={userInfo} type={type} productName={productName} productId={productId} />
       </div>
-      <ChatMedia userInfo={userInfo} type={type} onlineUsers={onlineUsers} />
+      <ChatMedia userInfo={userInfo} type={type} onlineUsers={onlineUsers} channelReceivers={channelReceivers} />
       <div className="hamburger" onClick={() => document.body.classList.toggle('chat-sidebar-active')}>
         <RiMenu3Fill size={30} />
       </div>

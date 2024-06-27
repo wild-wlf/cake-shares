@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { StyledChatMedia } from './ChatMedia.styles';
 import chatIconMedia from '../../../../_assets/chatIconMedia.svg';
-import ProfilePic from '../../../../_assets/seller-img.png';
 import Image from 'next/image';
 import Attachments from '../../Attachments';
 import { useContextHook } from 'use-context-hook';
@@ -12,15 +11,28 @@ import { TbExternalLink } from 'react-icons/tb';
 import CenterModal from '@/components/molecules/Modal/CenterModal';
 import ChatMembers from '../ChatMembers';
 
-const ChatMedia = ({ userInfo, type, onlineUsers }) => {
+const ChatMedia = ({ userInfo, type, onlineUsers, channelReceivers }) => {
   const { user } = useContextHook(AuthContext, v => ({
     user: v.user,
   }));
   const [chatMembers, setChatMembers] = useState(false);
+
+  const getThreeParticipants = () => {
+    const receivers = channelReceivers?.filter(_ => _?._id === userInfo?._id);
+    if (receivers?.length > 3) {
+      receivers?.splice(0, 3);
+    }
+    return receivers;
+  };
+
   return (
     <>
       <CenterModal open={chatMembers} setOpen={setChatMembers} title="All Chat Members" width="450">
-        <ChatMembers />
+        <ChatMembers
+          channelReceivers={channelReceivers?.filter(_ => _?._id === userInfo?._id)}
+          user={user}
+          onlineUsers={onlineUsers}
+        />
       </CenterModal>
       <StyledChatMedia>
         <div className="fakeBefore">
@@ -40,26 +52,34 @@ const ChatMedia = ({ userInfo, type, onlineUsers }) => {
             <label className="userName">{userInfo?.fullName || userInfo?.username}</label>
             <span>{userInfo?.sellerType} Seller</span>
           </div>
+
           {type === 'community' && (
             <div className="community-col">
               <div className="images-wrapper">
-                <Image src={ProfilePic} alt="profilePic" width={45} height={45} />
-                <Image src={ProfilePic} alt="profilePic" width={45} height={45} />
-                <Image src={ProfilePic} alt="profilePic" width={45} height={45} />
+                {getThreeParticipants()?.map((item, index) => {
+                  return (
+                    <Image
+                      src={item?.profilePicture || profileplaceHolder}
+                      alt="profilePic"
+                      width={45}
+                      height={45}
+                      key={index}
+                    />
+                  );
+                })}
               </div>
-              <div className="images-wrapper">
-                <Image src={ProfilePic} alt="profilePic" width={45} height={45} />
-                <Image src={ProfilePic} alt="profilePic" width={45} height={45} />
-                <Image src={ProfilePic} alt="profilePic" width={45} height={45} />
-              </div>
-              <span
-                onClick={() => {
-                  setChatMembers(true);
-                }}>
-                View All <TbExternalLink fontSize={18} />
-              </span>
+
+              {channelReceivers?.filter(_ => _?._id === userInfo?._id) > 3 && (
+                <span
+                  onClick={() => {
+                    setChatMembers(true);
+                  }}>
+                  View All <TbExternalLink fontSize={18} />
+                </span>
+              )}
             </div>
           )}
+
           {type === 'private' && (
             <div className="col">
               <div className="image-warp">
