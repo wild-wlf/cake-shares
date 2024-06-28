@@ -78,6 +78,7 @@ const CategoriesBar = ({ categories, loading, setSearchQuery }) => {
                           category: item?.value,
                         }));
                       }}>
+                      <Image src={item.icon} alt='icons' width={16} height={16}/>
                       {item.label}
                     </Button>
                   </div>
