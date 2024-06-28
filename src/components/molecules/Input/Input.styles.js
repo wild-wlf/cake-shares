@@ -5,7 +5,7 @@ export const styles = css`
   border: 1px solid ${({ $invalid }) => ($invalid ? 'var(--danger)' : 'var(--light)')};
   background: var(--white);
   outline: none;
-  height: ${({ sm }) => (sm ? '30px' : '45px')};
+  height: ${({ sm }) => (sm ? '45px' : '45px')};
   padding: ${({ sm }) => (sm ? '0.3125rem .9375rem' : 'var(--form-element-padding-lg)')};
   width: 100%;
   transition: border var(--animation-speed) ease-in-out;

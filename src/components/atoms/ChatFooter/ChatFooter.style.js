@@ -32,6 +32,7 @@ export const ChatFooterWrapper = styled.footer`
         max-width: 800px;
         width: 100%;
         margin-top: -10px;
+        height: 30px;
       }
     }
     .icons-div {
