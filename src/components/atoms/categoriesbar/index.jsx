@@ -25,7 +25,7 @@ const CategoriesBar = ({ categories, loading, setSearchQuery }) => {
     arrows: false,
     infinite: false,
     speed: 500,
-    autoplay: false,
+    autoplay: true,
     slidesToShow: 1,
     // slidesToScroll: 1,
     variableWidth: true,
@@ -41,6 +41,7 @@ const CategoriesBar = ({ categories, loading, setSearchQuery }) => {
       ...categories.map(ele => ({
         label: ele?.name,
         value: ele?._id,
+        icon: ele?.icon,
       })),
     ],
     [categories],
@@ -78,7 +79,7 @@ const CategoriesBar = ({ categories, loading, setSearchQuery }) => {
                           category: item?.value,
                         }));
                       }}>
-                      <Image src={item.icon} alt='icons' width={16} height={16}/>
+                     {item.label !=='All' && <Image src={item.icon} alt='icons' width={36} height={36}/>}
                       {item.label}
                     </Button>
                   </div>
