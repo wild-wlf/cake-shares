@@ -2,19 +2,10 @@ import React, { useState, useMemo } from 'react';
 import { CategoriesBarWrapper } from './categoriesbar.style';
 import Button from '@/components/atoms/Button';
 import Slider from 'react-slick';
-import all from '../../../_assets/all.svg';
 import Image from 'next/image';
-import { FaFire } from 'react-icons/fa';
-import { FaHouseChimney } from 'react-icons/fa6';
-import { TbBuildingFactory } from 'react-icons/tb';
-import { PiStorefrontFill } from 'react-icons/pi';
-import { FaCarAlt } from 'react-icons/fa';
-import { HiHeart } from 'react-icons/hi2';
-import { AiFillDollarCircle } from 'react-icons/ai';
 import { CiSearch } from 'react-icons/ci';
 import CenterModal from '../Modal/CenterModal';
 import AdvanceSearch from '../advanceSearch';
-import { BiSolidCategory } from 'react-icons/bi';
 import Skeletonn from '../skeleton/Skeletonn';
 
 const CategoriesBar = ({ categories, loading, setSearchQuery }) => {
