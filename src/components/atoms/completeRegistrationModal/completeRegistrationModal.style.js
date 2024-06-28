@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   padding: 26px 0px 0px 0px;
@@ -81,5 +81,8 @@ export const Wrapper = styled.div`
     .kyc-div {
       width: 100%;
     }
+  }
+  .back-icon {
+    cursor: pointer;
   }
 `;

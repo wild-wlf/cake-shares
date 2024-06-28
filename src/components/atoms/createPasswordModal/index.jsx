@@ -12,6 +12,7 @@ const CreatePasswordModal = ({
   type,
   setBuyerModal,
   setPasswordModal,
+  loader,
 }) => {
   const [submitForm, setsubmitForm] = useState('');
   const [profilePicture, setProfilePicture] = useState('');
@@ -94,6 +95,7 @@ const CreatePasswordModal = ({
               btntype="primary"
               width="170"
               htmlType="submit"
+              loader={loader}
               className="button"
               onClick={() => setsubmitForm('finish')}>
               Finish!

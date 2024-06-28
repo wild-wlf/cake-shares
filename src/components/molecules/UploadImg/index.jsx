@@ -1,16 +1,11 @@
-import Image from "next/image";
-import React, { useState } from "react";
-import { StyledUploadImage } from "./UploadImg.style";
-import Camera from "../../../_assets/camera.svg";
-import ProfilePic from "../../../_assets/avatar-icon.svg";
+import Image from 'next/image';
+import React, { useState } from 'react';
+import { StyledUploadImage } from './UploadImg.style';
+import Camera from '../../../_assets/camera.svg';
+import ProfilePic from '../../../_assets/avatar-icon.svg';
 
-const UploadImg = ({
-  id = "upload",
-  fileSize = 2,
-  accept = ".png , .jpg",
-  ...props
-}) => {
-  const [uploaded, setUploaded] = useState("");
+const UploadImg = ({ id = 'upload', fileSize = 2, accept = '.png , .jpg , .jpeg', ...props }) => {
+  const [uploaded, setUploaded] = useState('');
 
   function handelChange(e) {
     const file = e.target.files[0];
@@ -21,7 +16,7 @@ const UploadImg = ({
         props.onChange(e.target.files[0]);
         // onChange(e.target.files[0]);
       } else {
-        alert("file size exceeded");
+        alert('file size exceeded');
       }
     }
   }
@@ -33,23 +28,16 @@ const UploadImg = ({
             <Image className="icon-img" src={ProfilePic} alt="icon" />
           </span>
         )}
-        {uploaded && typeof uploaded === "string" ? (
+        {uploaded && typeof uploaded === 'string' ? (
           <Image src={uploaded} alt="img" width={250} height={300} />
         ) : (
-          uploaded && (
-            <Image
-              src={URL.createObjectURL(uploaded)}
-              alt="img"
-              width={250}
-              height={300}
-            />
-          )
+          uploaded && <Image src={URL.createObjectURL(uploaded)} alt="img" width={250} height={300} />
         )}
         <input
           type="file"
           id={id}
           accept={accept}
-          onChange={(e) => {
+          onChange={e => {
             handelChange(e);
           }}
         />

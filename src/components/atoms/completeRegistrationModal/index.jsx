@@ -13,7 +13,8 @@ import { UserContext } from '@/context/UserContext';
 import userService from '@/services/userService';
 import { checkAge, convertToFormData } from '@/helpers/common';
 import Toast from '@/components/molecules/Toast';
-const CompleteRegistrationModal = ({ handleRegistration }) => {
+import { IoIosArrowRoundBack } from 'react-icons/io';
+const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistrationModal, setPasswordModal }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
   const { buyerRegistrationData } = useContext(UserContext);
   // const { message } = userService.createUser();
@@ -50,7 +51,6 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
   }, []);
 
   const handleSubmit = async e => {
-
     let obj = {
       profilePicture: image,
       type: buyerRegistrationData.type,
@@ -92,6 +92,15 @@ const CompleteRegistrationModal = ({ handleRegistration }) => {
   };
   return (
     <Wrapper>
+      <div className="back-icon">
+        <IoIosArrowRoundBack
+          onClick={() => {
+            setPasswordModal(true);
+            setCompleteRegistrationModal(false);
+          }}
+          size={45}
+        />
+      </div>
       <Form form={form} onSubmit={handleSubmit}>
         <div className="personal-info">
           <h5>Personal Info:</h5>
