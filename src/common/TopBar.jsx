@@ -369,18 +369,20 @@ const TopBar = () => {
               </div>
             </>
           )}
-          <div
-            className="notification"
-            onClick={() => {
-              setNotifications(!notifications);
-            }}
-            ref={NotificationRef}>
-            <Image src={bell} alt="bell" className="bell" />
-            <Image src={bellWhite} alt="bell" className="bell-white" />
-            <div className={notifications ? 'notificationWrapper-visible' : 'notificationWrapper'}>
-              <Notifications fetchNotifications={fetchNotifications} />
+          {isLoggedIn && (
+            <div
+              className="notification"
+              onClick={() => {
+                setNotifications(!notifications);
+              }}
+              ref={NotificationRef}>
+              <Image src={bell} alt="bell" className="bell" />
+              <Image src={bellWhite} alt="bell" className="bell-white" />
+              <div className={notifications ? 'notificationWrapper-visible' : 'notificationWrapper'}>
+                <Notifications fetchNotifications={fetchNotifications} />
+              </div>
             </div>
-          </div>
+          )}
 
           {isLoggedIn ? (
             <>

@@ -11,32 +11,7 @@ import { CategoriesWrapper, NoRecord } from '../categories/categories.style';
 import Skeletonn from '../skeleton/Skeletonn';
 
 const index = ({ data, loading }) => {
-  const images = [
-    {
-      image: Property,
-      id: '1',
-    },
-    {
-      id: '2',
-      image: Property2,
-    },
-    {
-      image: Property3,
-      id: '3',
-    },
-    {
-      image: Property,
-      id: '4',
-    },
-    {
-      image: Property2,
-      id: '5',
-    },
-    {
-      image: Property3,
-      id: '6',
-    },
-  ];
+  
   var settings = {
     dots: false,
     arrows: false,

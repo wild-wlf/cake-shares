@@ -4,6 +4,7 @@ import Categories from '../components/atoms/categories';
 import CategoriesBar from '../components/atoms/categoriesbar';
 import productService from '@/services/productService';
 import Head from 'next/head';
+import categoryService from '@/services/categoryService';
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState({
@@ -20,7 +21,7 @@ const Home = () => {
     async function getCategories() {
       setCategoriesBarLoading(true);
       try {
-        const res = await productService.getAllCategories();
+        const res = await categoryService.getAllCategories();
         setCategoriesBar(res?.items);
       } catch (error) {
         console.log(error);
