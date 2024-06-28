@@ -10,6 +10,8 @@ export const StyledModal = styled.div`
   padding: 20px;
   visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
   opacity: ${({ open }) => (open ? '1' : '0')};
+  visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
+  opacity: ${({ open }) => (open ? '1' : '0')};
   transition: 0.3s all ease-in-out;
   overflow-x: hidden;
   display: flex;
@@ -27,11 +29,17 @@ export const ContentHolder = styled.div`
   padding: ${({ padding }) => padding ?? ''}; // must prop
   background: ${({ bg }) => bg ?? ''}; // must props
   border-radius: ${({ radius }) => radius ?? '30px'};
+  max-width: ${({ width }) => (width ? `${width}px` : '100%')};
+  width: ${({ width }) => (width ? '100%' : '')};
+  padding: ${({ padding }) => padding ?? ''}; // must prop
+  background: ${({ bg }) => bg ?? ''}; // must props
+  border-radius: ${({ radius }) => radius ?? '30px'};
   animation: myAnim 0.3s ease;
   background: var(--white);
   max-height: 100%;
   padding: 30px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
+  overflow-y: ${({ overflow }) => (overflow ? '' : 'auto')};
 
   @keyframes myAnim {
     0% {
