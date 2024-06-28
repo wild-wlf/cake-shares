@@ -10,6 +10,7 @@ const CenterModal = ({
   bg,
   padding,
   width,
+  overflow,
   radius,
   desktopRight,
   desktopTop,
@@ -66,6 +67,7 @@ const CenterModal = ({
           bg={bg}
           padding={padding}
           width={width}
+          overflow={overflow}
           radius={radius}
           desktopRight={desktopRight}
           desktopTop={desktopTop}

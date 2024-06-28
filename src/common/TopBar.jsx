@@ -68,6 +68,7 @@ const TopBar = () => {
   const [fetchNotifications, setfetchNotifications] = useState(false);
   const ProfileRef = useRef(null);
   const NotificationRef = useRef(null);
+  const [loader, setLoader] = useState(false);
 
   const router = usePathname();
   const navigate = useRouter();
@@ -117,14 +118,21 @@ const TopBar = () => {
     };
     const formData = convertToFormData(obj);
     try {
-      await userService.createUser(formData);
-      Toast({
-        type: 'success',
-        message: 'User Registered Successfully!',
-      });
-      setSellerPasswordModal(false);
-      setBuyerRegistrationData({});
+      setLoader(true);
+      let response = await userService.createUser(formData);
+      if (response.success) {
+        setLoader(false);
+        Toast({
+          type: 'success',
+          message: 'User Registered Successfully!',
+        });
+        setSellerPasswordModal(false);
+        setBuyerRegistrationData({});
+      } else {
+        setLoader(flase);
+      }
     } catch (error) {
+      setLoader(false);
       Toast({
         type: 'error',
         message: error.message,
@@ -262,7 +270,11 @@ const TopBar = () => {
         setOpen={setCompleteRegistrationModal}
         title="Complete Registration"
         width="804">
-        <CompleteRegistrationModal handleRegistration={handleRegistration} />
+        <CompleteRegistrationModal
+          handleRegistration={handleRegistration}
+          setCompleteRegistrationModal={setCompleteRegistrationModal}
+          setPasswordModal={setPasswordModal}
+        />
       </CenterModal>
 
       <CenterModal open={sellerregistermodal} setOpen={setSellerRegisterModal} title="Register as a Seller" width="666">
@@ -270,7 +282,11 @@ const TopBar = () => {
       </CenterModal>
 
       <CenterModal open={sellerpasswordModal} setOpen={setSellerPasswordModal} title="Register as a Seller" width="666">
-        <CreatePasswordModal type="Register As Seller" handleSellerPasswordModal={handleSellerPasswordModal} />
+        <CreatePasswordModal
+          type="Register As Seller"
+          handleSellerPasswordModal={handleSellerPasswordModal}
+          loader={loader}
+        />
       </CenterModal>
 
       {/******************************** Registration Modals ******************************************/}
