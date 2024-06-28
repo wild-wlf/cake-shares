@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "env-cmd -e development next dev -p 3000",
     "build": "env-cmd -e production next build",
-    "start": "env-cmd -e production next start -p 3001",
+    "start": "env-cmd -e production next start -p 3000",
+    "start:staging": "env-cmd -e staging next start -p 3000",
+    "build:staging": "env-cmd -e staging next build",
     "lint": "next lint"
   },
   "dependencies": {
