@@ -70,7 +70,8 @@ const CategoriesBar = ({ categories, loading, setSearchQuery }) => {
                           category: item?.value,
                         }));
                       }}>
-                     {item.label !=='All' && <Image src={item.icon} alt='icons' width={36} height={36}/>}
+                     
+                     {item.label !=='All' && <div className='sliderCatImage'> <Image src={item.icon} alt='icons' width={36} height={36}/></div>}
                       {item.label}
                     </Button>
                   </div>

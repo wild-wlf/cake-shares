@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CategoriesBarWrapper = styled.div`
   padding: 40px 0;
@@ -58,7 +58,13 @@ export const CategoriesBarWrapper = styled.div`
       color: rgba(64, 143, 140, 1);
     }
   }
-
+  .sliderCatImage {
+    max-width: 20px;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
   @media only screen and (max-width: 768px) {
     padding: 30px 0;
 
