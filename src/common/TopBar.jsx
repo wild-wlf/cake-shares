@@ -69,6 +69,7 @@ const TopBar = () => {
   const ProfileRef = useRef(null);
   const NotificationRef = useRef(null);
   const [loader, setLoader] = useState(false);
+  const notificationsRef = useRef(null);
 
   const router = usePathname();
   const navigate = useRouter();
@@ -224,6 +225,30 @@ const TopBar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleSellerNotification = () => {
+      setfetchNotifications(_ => !_);
+    };
+
+    window.addEventListener('seller_notification', handleSellerNotification);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('seller_notification', handleSellerNotification);
+    };
+  }, []);
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (notificationsRef.current && !notificationsRef.current.contains(event.target)) {
+        setNotifications(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [notificationsRef]);
   const { kycLevel, setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } = useContext(KycContext);
   return (
     <>
@@ -371,11 +396,11 @@ const TopBar = () => {
           )}
           {isLoggedIn && (
             <div
+              ref={(notificationsRef, NotificationRef)}
               className="notification"
               onClick={() => {
                 setNotifications(!notifications);
-              }}
-              ref={NotificationRef}>
+              }}>
               <Image src={bell} alt="bell" className="bell" />
               <Image src={bellWhite} alt="bell" className="bell-white" />
               <div className={notifications ? 'notificationWrapper-visible' : 'notificationWrapper'}>
@@ -386,11 +411,11 @@ const TopBar = () => {
 
           {isLoggedIn ? (
             <>
-            <Link href="/wallet">
-              <div className="wallet">
-                <FaWallet />
-                <span>My Wallet</span>
-              </div>
+              <Link href="/wallet">
+                <div className="wallet">
+                  <FaWallet />
+                  <span>My Wallet</span>
+                </div>
               </Link>
               <div className="buttonWrapper" ref={ProfileRef}>
                 <Button
