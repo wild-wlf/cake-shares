@@ -386,10 +386,12 @@ const TopBar = () => {
 
           {isLoggedIn ? (
             <>
-              <div className="wallet" onClick={() => {}}>
+            <Link href="/wallet">
+              <div className="wallet">
                 <FaWallet />
                 <span>My Wallet</span>
               </div>
+              </Link>
               <div className="buttonWrapper" ref={ProfileRef}>
                 <Button
                   rounded
