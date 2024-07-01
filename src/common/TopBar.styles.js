@@ -131,7 +131,7 @@ export const StyledTopBar = styled.header`
     right: 0px;
     transform: translateY(50px);
     transition: 0.4s;
-    max-width: 400px;
+    max-height: 400px;
     overflow-y: auto;
   }
   .notificationWrapper {
