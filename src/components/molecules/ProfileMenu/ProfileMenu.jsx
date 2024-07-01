@@ -68,7 +68,7 @@ const ProfileMenu = ({ openProfile }) => {
           <div
             className="DarkTheme"
             onClick={() => {
-              setPrivacyPolicy(true);
+              setPrivacyPolicy(!privacyPolicy);
             }}>
             <Image src={privacyPolicyIcon} alt="Privacy Policies" width={17} height={17} />
             <h5>Privacy Policy</h5>
@@ -81,7 +81,7 @@ const ProfileMenu = ({ openProfile }) => {
             className="DarkTheme"
             style={{ paddingBottom: '14px' }}
             onClick={() => {
-              setTermsCondition(true);
+              setTermsCondition(!termsCondition);
             }}>
             <Image src={termsIcon} alt="Terms & Conditions" width={17} height={17} />
             <h5>Terms & Conditions</h5>

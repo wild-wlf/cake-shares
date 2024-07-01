@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 // import Filters from "common/filters";
-import TableHeader from "../TableHeader";
-import { StyledTableLayout } from "./TableLayout.styles";
-import Pagination from "../Pagination";
+import TableHeader from '../TableHeader';
+import { StyledTableLayout } from './TableLayout.styles';
+import Pagination from '../Pagination';
 
 function TableLayout({
   children,
@@ -10,7 +10,7 @@ function TableLayout({
   pageSize = 10,
   totalCount = 0,
   onChangeFilters,
-  customFilterKey = "",
+  customFilterKey = '',
   exportBtn,
   createBtn,
   extraFilters,
@@ -22,7 +22,7 @@ function TableLayout({
   noPagination,
   setResetFilter = () => {},
 }) {
-  const [filterState, setFilterState] = useState("");
+  const [filterState, setFilterState] = useState('');
   return (
     <>
       {/* {filters && (
@@ -38,33 +38,30 @@ function TableLayout({
           onOptionClick={onOptionClick}
         />
       )} */}
-      <StyledTableLayout
-        noNegativeMargin={noNegativeMargin}
-        noPagination={noPagination}
-      >
-        {tableHeading && (
-          <strong className="table-heading">{tableHeading}</strong>
-        )}
+      <StyledTableLayout noNegativeMargin={noNegativeMargin} noPagination={noPagination}>
+        {tableHeading && <strong className="table-heading">{tableHeading}</strong>}
         <div className="inner-wrap">
           <TableHeader
             total={totalCount}
             page={currentPage}
             resultPerPage={pageSize}
-            setPageSize={(_) => onChangeFilters({ pageSize: _, page: 1 })}
+            setPageSize={_ => onChangeFilters({ pageSize: _, page: 1 })}
             exportBtn={exportBtn}
             createBtn={createBtn}
           />
           {children}
           <div className="pagination">
-            <Pagination
-              currentPage={currentPage}
-              totalCount={totalCount}
-              pageSize={pageSize}
-              // onPageChange={_ => onChangeFilters({ page: _ })}
-              onPageChange={(_) =>
-                onChangeFilters({ filter: filterState.filter, page: _ })
-              }
-            />
+            {totalCount > 1 ? (
+              <Pagination
+                currentPage={currentPage}
+                totalCount={totalCount}
+                pageSize={pageSize}
+                // onPageChange={_ => onChangeFilters({ page: _ })}
+                onPageChange={_ => onChangeFilters({ filter: filterState.filter, page: _ })}
+              />
+            ) : (
+              ''
+            )}
           </div>
         </div>
       </StyledTableLayout>
