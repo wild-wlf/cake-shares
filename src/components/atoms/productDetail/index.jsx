@@ -124,7 +124,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
           </Button>
         </div>
         <div className="titlewrapper">
-          <div>
+          <div className='titleHolder'>
             <div className="title">
               <span>{data?.productName}</span>
             </div>
@@ -138,11 +138,11 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
                   </>
                 )}
               </span>
-              <span>KYC (Level {data?.kycLevel})</span>
+              <span className='kycText'>KYC (Level {data?.kycLevel})</span>
             </div>
           </div>
 
-          <div>
+          <div className='headingHolder'>
             <div className="headings">
               <div>
                 <span>Investment type</span>

@@ -7,8 +7,9 @@ import { CiSearch } from 'react-icons/ci';
 import CenterModal from '../Modal/CenterModal';
 import AdvanceSearch from '../advanceSearch';
 import Skeletonn from '../skeleton/Skeletonn';
+import categoryService from '@/services/categoryService';
 
-const CategoriesBar = ({ categories, loading, setSearchQuery }) => {
+const CategoriesBar = ({ setSearchQuery }) => {
   const [modal, setModal] = useState(false);
   const [Tab, setTab] = useState(0);
   var settings = {
@@ -23,19 +24,21 @@ const CategoriesBar = ({ categories, loading, setSearchQuery }) => {
     swipeToSlide: true,
   };
 
+  const { categories_data, categories_loading } = categoryService.GetAllCategories({ getAll: true });
+
   const categoriesOptions = useMemo(
     () => [
       {
         label: 'All',
         value: '',
       },
-      ...categories.map(ele => ({
+      ...categories_data.categories.map(ele => ({
         label: ele?.name,
         value: ele?._id,
         icon: ele?.icon,
       })),
     ],
-    [categories],
+    [categories_data],
   );
 
   return (
@@ -46,7 +49,7 @@ const CategoriesBar = ({ categories, loading, setSearchQuery }) => {
       <CategoriesBarWrapper>
         <div className="maindiv">
           <div className="slider">
-            {loading ? (
+            {categories_loading ? (
               <Slider {...settings}>
                 {Array.from({ length: 10 }).map((_, ind) => (
                   <Button rounded sm btntype={'white'} key={ind}>
@@ -70,8 +73,11 @@ const CategoriesBar = ({ categories, loading, setSearchQuery }) => {
                           category: item?.value,
                         }));
                       }}>
-                     
-                     {item.label !=='All' && <div className='sliderCatImage'> <Image src={item.icon} alt='icons' width={36} height={36}/></div>}
+                      {item.label !== 'All' && (
+                        <div className="sliderCatImage">
+                          <Image src={item.icon} alt="icons" width={36} height={36} />
+                        </div>
+                      )}
                       {item.label}
                     </Button>
                   </div>

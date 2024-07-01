@@ -23,7 +23,7 @@ const categoryService = {
       setCategoryStatus(STATUS.LOADING);
       cancellablePromise(this.getAllCategories(searchQuery))
         .then(res => {
-          setCategories(() => res);
+          setCategories(() => ({ categories: res.items, totalItems: res.totalItems }));
           setCategoryStatus(STATUS.SUCCESS);
         })
         .catch(() => setCategoryStatus(STATUS.ERROR));

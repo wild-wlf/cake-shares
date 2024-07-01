@@ -38,9 +38,11 @@ export const CardWrapper = styled.div`
     background-color: rgba(255, 255, 255, 1);
     color: rgba(78, 97, 153, 1);
     border-radius: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding:5px 8px;
   }
   .decription {
     border-radius: 0px 0px 20px 20px;

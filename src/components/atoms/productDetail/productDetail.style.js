@@ -13,6 +13,13 @@ export const ProductDetailWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    gap: 26px;
+    .titleHolder {
+      max-width: 50%;
+    }
+    .headingHolder {
+      max-width: 50%;
+    }
   }
   .title {
     font-size: 40px;
@@ -21,8 +28,13 @@ export const ProductDetailWrapper = styled.div`
   }
   .titledesc {
     display: flex;
-    gap: 16px;
+    gap: 26px;
     font-size: var(--h5-font-size);
+
+    .kycText{
+      display: block;
+      flex-shrink: 0;
+    }
   }
   .deadline {
     color: rgba(215, 65, 32, 1);
@@ -158,6 +170,13 @@ export const ProductDetailWrapper = styled.div`
       flex-direction: column;
       gap: 26px;
       align-items: normal;
+
+      .titleHolder {
+      max-width: 100%;
+    }
+    .headingHolder {
+      max-width: 100%;
+    }
     }
     .headings {
       display: flex;

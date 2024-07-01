@@ -12,7 +12,7 @@ const Card = ({ Cardimage, c_data }) => {
         <div className="image-div">
           <Image src={Cardimage} alt="card-image" width={300} height={300} />
           <div className="tagWrapper">
-            <div className="tag">{c_data?.investmentType?.name}</div>
+            <div className="tag">{c_data?.investmentType?.name}sdfsdgdfgdfg</div>
           </div>
         </div>
         <div className="decription">
