@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ProfileSec = styled.div`
   width: 230px;
@@ -9,9 +9,9 @@ export const ProfileSec = styled.div`
   transition: 0.4s;
   background-color: #fff;
   position: absolute;
-  visibility: ${({ $show }) => ($show ? "visible" : "hidden")};
-  opacity: ${({ $show }) => ($show ? "1" : "0")};
-  transform: ${({ $show }) => ($show ? "translateY(5px)" : "translateY(-5px)")};
+  visibility: ${({ $show }) => ($show ? 'visible' : 'hidden')};
+  opacity: ${({ $show }) => ($show ? '1' : '0')};
+  transform: ${({ $show }) => ($show ? 'translateY(5px)' : 'translateY(-5px)')};
   top: 70px;
   right: 0;
   z-index: 999;
@@ -68,6 +68,7 @@ export const ProfileSec = styled.div`
 
     .DarkTheme {
       padding-top: 14px;
+
       display: flex;
       align-items: center;
       justify-content: flex-start;

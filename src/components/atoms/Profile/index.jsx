@@ -20,7 +20,7 @@ const Profile = () => {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState({
     page: 1,
-    itemsPerPage: 4,
+    pageSize: 4,
   });
   const { user } = useContextHook(AuthContext, v => ({
     user: v.user,
@@ -45,7 +45,13 @@ const Profile = () => {
       </div>
       <ProfileBanner image={user.bannerImage || bgImage} />
       <UserInfo userImage={user?.profilePicture} userData={user} categoriesData={assets_data?.myCategories} />
-      <UserDetail userData={user} assetsData={assets_data} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <UserDetail
+        userData={user}
+        assetsData={assets_data}
+        assets_loading={assets_loading}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
     </StyledProfile>
   );
 };
