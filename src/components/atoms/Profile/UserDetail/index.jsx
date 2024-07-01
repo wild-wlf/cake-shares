@@ -25,7 +25,7 @@ import EditBank from './EditBank';
 import EditProfile from './EditBank/EditProfile';
 import { countries } from '@/components/Constant';
 
-const UserDetail = ({ userData, assetsData, searchQuery, setSearchQuery }) => {
+const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSearchQuery }) => {
   const fromatDate = value => {
     const date = new Date(value);
     const day = String(date.getDate()).padStart(2, '0');
@@ -58,7 +58,7 @@ const UserDetail = ({ userData, assetsData, searchQuery, setSearchQuery }) => {
   );
   const { report_rows, totalItems } = useMemo(
     () => ({
-      report_rows: assetsData?.items?.map(report => [
+      report_rows: assetsData?.assets?.map(report => [
         report?.productName,
         report?.category?.name,
         report?.totalShares ?? 0,
@@ -133,7 +133,7 @@ const UserDetail = ({ userData, assetsData, searchQuery, setSearchQuery }) => {
       <Inheritance userData={userData} />
       <div className="colWrapper">
         <div className="colHeader">
-          <strong className="colTitle">Personal Information:</strong>
+          <strong className="colTitle">Edit Profile:</strong>
           <ModalContainer
             lg
             width={673}
@@ -239,7 +239,7 @@ const UserDetail = ({ userData, assetsData, searchQuery, setSearchQuery }) => {
               ...filters,
             }));
           }}>
-          <Table rowsData={report_rows} columnNames={columnNames} noPadding />
+          <Table rowsData={report_rows} loading={assets_loading} columnNames={columnNames} noPadding />
         </TableLayout>
       </div>
     </StyledUserDetail>

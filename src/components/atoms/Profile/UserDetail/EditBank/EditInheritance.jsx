@@ -114,6 +114,7 @@ const EditInheritance = ({ selectedItem, userData, onClose }) => {
             type="email"
             label="Email Address"
             name="inheritanceEmail"
+            disabled={selectedItem?.email}
             sm
             rounded
             placeholder="alex123@gmail.com"

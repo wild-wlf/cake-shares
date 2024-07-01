@@ -46,7 +46,7 @@ const productService = {
     const [status, setStatus] = useState(STATUS.LOADING);
     useEffect(() => {
       setStatus(STATUS.LOADING);
-      cancellablePromise(this.getUserAssets(searchQuery))
+      cancellablePromise(this.getAssets(searchQuery))
         .then(res => {
           setAssets(() => res);
           setStatus(STATUS.SUCCESS);
@@ -93,8 +93,8 @@ const productService = {
     throw new Error(message ?? 'Something went wrong');
   },
 
-  async getAssets() {
-    let res = await Fetch.get(`${this._url}/get-all-assets`);
+  async getAssets({ page, pageSize, getAll }) {
+    let res = await Fetch.get(`${this._url}/get-all-assets?itemsPerPage=${pageSize}&page=${page}&getAll=${getAll}`);
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
       return {

@@ -225,9 +225,13 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                     required: true,
                     message: 'Please enter Bank Name',
                   },
+                  // {
+                  //   pattern: /^.{3,30}$/,
+                  //   message: 'Please enter a valid Bank Name',
+                  // },
                   {
                     pattern: /^.{3,30}$/,
-                    message: 'Please enter a valid Bank Name',
+                    message: 'Please enter a valid Bank Name 3 to 30 characters long',
                   },
                 ]}>
                 <Field maxLength={30} />
@@ -246,7 +250,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                   },
                   {
                     pattern: /^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/,
-                    message: 'Please enter a valid IBAN number',
+                    message: 'Enter a valid IBAN 2 letters, 2 digits, 11-30 alphanumeric characters',
                   },
                 ]}>
                 <Field maxLength={30} />
@@ -351,7 +355,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                     required: true,
                   },
                 ]}>
-                <Select options={arr} />
+                <Select options={arr} menuPlacement="top" />
               </Form.Item>
               <Form.Item
                 type="text"
