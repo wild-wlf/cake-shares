@@ -18,6 +18,7 @@ import { AuthContext } from '@/context/authContext';
 import Toast from '@/components/molecules/Toast';
 import { format, parseISO } from 'date-fns';
 import SmLoader from '../../Loader/SmLoader';
+import { NoRecord } from '../../categories/categories.style';
 const UserInfo = ({
   userImage,
   type = {
@@ -77,7 +78,7 @@ const UserInfo = ({
               </>
             ) : (
               <>
-                <Image src={profile} alt="userImage" />
+                <Image src={profile} alt="userImage" width={170} height={250} />
                 {loading && <SmLoader />}
               </>
             )}
@@ -85,7 +86,7 @@ const UserInfo = ({
         )}
         {type.userType === 'Seller' && (
           <ProfileWrapper>
-            <Image src={profile} alt="userImage" />
+            <Image src={profile} alt="userImage" width={170} height={250} />
           </ProfileWrapper>
         )}
         <div className="textWrapper">
@@ -98,14 +99,18 @@ const UserInfo = ({
         <div className="textWrapper addbefore">
           <span className="categoriesText">{type?.categories}</span>
           <ul className="categoriesWrapper">
-            {categoriesData &&
-              categoriesData.length > 0 &&
-              categoriesData.map((ele, index) => (
+            {categoriesData && categoriesData?.length > 0 ? (
+              categoriesData?.map((ele, index) => (
                 <li key={index} className="categoriesList">
-                  <Image src={ele?.icon || popular} alt="popular" />
-                  {ele?.name}
+                  <figure className="img-holder">
+                    <Image src={ele?.icon || popular} alt="popular" width={20} height={20} />
+                  </figure>
+                  <span>{ele?.name}</span>
                 </li>
-              ))}
+              ))
+            ) : (
+              <span>No Category Found.</span>
+            )}
           </ul>
         </div>
       </div>
@@ -131,7 +136,7 @@ const UserInfo = ({
       ) : (
         <Button type="primary" md rounded width="200">
           Chat with Lagan
-          <Image src={chatIcon} alt="chatIcon" />
+          <Image src={chatIcon} alt="chatIcon" width={20} height={20} />
         </Button>
       )}
     </StyledUserInfo>

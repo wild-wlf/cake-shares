@@ -17,6 +17,8 @@
     "@ramonak/react-progress-bar": "^5.2.0",
     "babel-plugin-styled-components": "^2.1.4",
     "date-fns": "^3.6.0",
+    "highcharts": "^11.4.3",
+    "highcharts-react-official": "^3.2.1",
     "next": "14.1.4",
     "rc-slider": "^9.7.5",
     "rc-util": "^5.16.1",

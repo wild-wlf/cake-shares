@@ -34,7 +34,9 @@ export const StyledUserInfo = styled.div`
     }
 
     .textWrapper {
+      width: 100%;
       margin-bottom: 20px;
+
       @media screen and (min-width: 1024px) {
         padding: 0 20px;
         margin-bottom: 0px;
@@ -59,12 +61,12 @@ export const StyledUserInfo = styled.div`
   .addbefore {
     position: relative;
     padding-left: 0;
+
     @media screen and (min-width: 1024px) {
       padding-left: 15px !important;
     }
     &:before {
       display: none;
-
       position: absolute;
       content: '';
       width: 2px;
@@ -84,15 +86,56 @@ export const StyledUserInfo = styled.div`
     color: var(--secondary-50);
     display: flex;
     align-items: flex-end;
-    justify-content: space-evenly;
-    max-width: 220px;
     width: 100%;
+    max-width: 420px;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      height: 4px !important;
+    }
+
     .categoriesList {
       text-align: center;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      gap: 8px;
+      padding: 0 15px;
+      position: relative;
+
+      .img-holder {
+        width: 20px;
+        height: 20px;
+        margin-bottom: 8px;
+
+        img {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+        }
+      }
+
+      span {
+        display: block;
+      }
+
+      &:first-child {
+        padding-left: 0;
+        &::before {
+          display: none;
+        }
+      }
+
+      &:before {
+        content: '';
+        display: none;
+        position: absolute;
+        width: 2px;
+        height: 40px;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.1);
+
+        @media screen and (min-width: 1024px) {
+          display: block;
+        }
+      }
     }
   }
   .categoriesText {

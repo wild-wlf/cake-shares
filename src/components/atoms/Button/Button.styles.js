@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const StyledButton = styled.button`
   position: relative;
@@ -12,16 +12,16 @@ export const StyledButton = styled.button`
   font-size: 22px;
   line-height: 26px;
   cursor: pointer;
-  font-weight: ${({ weight }) => weight || "600"};
-  width: ${({ width }) => width && "100%"};
+  font-weight: ${({ weight }) => weight || '600'};
+  width: ${({ width }) => width && '100%'};
   max-width: ${({ width }) => width && `${width}px`};
   transition: filter 0.3s linear, box-shadow 0.3s linear;
 
   border-radius: ${({ rounded }) => {
     if (rounded) {
-      return "100px";
+      return '100px';
     }
-    return "10px";
+    return '10px';
   }};
   ${({ disabled }) =>
     disabled &&
@@ -30,68 +30,77 @@ export const StyledButton = styled.button`
       opacity: 0.6;
     `}
   color: ${({ btntype }) => {
-    if (btntype === "primary") {
-      return "var(--white)";
+    if (btntype === 'primary') {
+      return 'var(--white)';
     }
-    if (btntype === "light-green") {
-      return "rgba(64,143,140,1)";
+    if (btntype === 'light-green') {
+      return 'rgba(64,143,140,1)';
     }
-    if (btntype === "blue") {
-      return "rgba(78, 97, 153, 1)";
+    if (btntype === 'blue') {
+      return 'rgba(78, 97, 153, 1)';
     }
-    if (btntype === "white-blue") {
-      return "#4E6199";
+    if (btntype === 'white-blue') {
+      return '#4E6199';
     }
 
-    if (btntype === "white") {
-      return "#313131";
+    if (btntype === 'white') {
+      return '#313131';
     }
-    if (btntype === "dropdown") {
-      return "#313131";
+    if (btntype === 'dropdown') {
+      return '#313131';
     }
-    if (btntype === "danger") {
-      return "var(--danger)";
+    if (btntype === 'danger') {
+      return 'var(--danger)';
     }
-    return "rgba(49, 49, 49, 1)";
+    if (btntype === 'download') {
+      return '#4E6199';
+    }
+    return 'rgba(49, 49, 49, 1)';
   }};
 
   background: ${({ btntype }) => {
-    if (btntype === "dropdown") {
-      return "var(--white)";
+    if (btntype === 'dropdown') {
+      return 'var(--white)';
     }
-    if (btntype === "primary") {
-      return "rgba(64, 143, 140, 1)";
+    if (btntype === 'primary') {
+      return 'rgba(64, 143, 140, 1)';
     }
-    if (btntype === "light-green") {
-      return "rgba(64,143,140,0.1)";
+    if (btntype === 'light-green') {
+      return 'rgba(64,143,140,0.1)';
     }
-    if (btntype === "blue") {
-      return "rgba(78, 97, 153, 0.1)";
+    if (btntype === 'blue') {
+      return 'rgba(78, 97, 153, 0.1)';
     }
-    if (btntype === "white-blue") {
-      return "#FEFEFE";
+    if (btntype === 'white-blue') {
+      return '#FEFEFE';
     }
 
-    if (btntype === "white") {
-      return "var(--white)";
+    if (btntype === 'white') {
+      return 'var(--white)';
     }
-    if (btntype === "danger") {
-      return "rgba(215, 65, 32, 0.1)";
+    if (btntype === 'danger') {
+      return 'rgba(215, 65, 32, 0.1)';
+    }
+    if (btntype === 'download') {
+      return '#fff';
     }
     // if (btntype === "danger") {
     //   return "var(--danger-dark)";
     // }
-    return "var(--white)";
+    return 'var(--white)';
   }};
   border: ${({ btntype }) => {
-    if (btntype === "white") {
-      return "1px solid #cdcdcd";
+    if (btntype === 'white') {
+      return '1px solid #cdcdcd';
     }
-    if (btntype === "dropdown") {
-      return "1px solid rgba(241, 241, 241, 1)";
+    if (btntype === 'dropdown') {
+      return '1px solid rgba(241, 241, 241, 1)';
     }
-    if (btntype === "white-blue") {
-      return "1px solid #4E6199";
+    if (btntype === 'white-blue') {
+      return '1px solid #4E6199';
+    }
+    if (btntype === 'download') {
+      return '1.5px solid #4E6199';
     }
   }};
 
@@ -117,16 +126,16 @@ export const StyledButton = styled.button`
 
   &:hover {
     /* background: ${({ btntype }) => {
-      if (btntype === "white") {
-        return "var(--white)";
+      if (btntype === 'white') {
+        return 'var(--white)';
       }
-      return "var(--primary)";
+      return 'var(--primary)';
     }};
     color: ${({ btntype }) => {
-      if (btntype === "outline") {
-        return "var(--primary)";
+      if (btntype === 'outline') {
+        return 'var(--primary)';
       }
-      return "var(--white)";
+      return 'var(--white)';
     }}; */
 
     opacity: 0.75;
@@ -137,8 +146,7 @@ export const StyledButton = styled.button`
     border-radius: 50%;
     display: inline-block;
     border-top: 3px solid var(--white);
-    border-top: ${({ color }) =>
-      color ? `3px solid ${color}` : `3px solid var(--white)`};
+    border-top: ${({ color }) => (color ? `3px solid ${color}` : `3px solid var(--white)`)};
     /* border-top: 3px solid var(--primary); */
     border-right: 3px solid transparent;
     box-sizing: border-box;
