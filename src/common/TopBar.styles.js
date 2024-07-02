@@ -132,6 +132,7 @@ export const StyledTopBar = styled.header`
     transform: translateY(50px);
     transition: 0.4s;
     max-height: 400px;
+    z-index: 1;
     overflow-y: auto;
   }
   .notificationWrapper {
@@ -145,6 +146,9 @@ export const StyledTopBar = styled.header`
     transform: translateY(50px);
     opacity: 0;
     transition: 0.4s;
+    max-height: 400px;
+    z-index: 1;
+    overflow-y: auto;
   }
   .wallet {
     display: flex;
