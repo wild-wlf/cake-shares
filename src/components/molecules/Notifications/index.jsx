@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { ImageHolder, NotificationsHolder } from "./Notifications.styles";
-import Investment from "../../../_assets/investment-icon.svg";
-import Property from "../../../_assets/property-icon.svg";
-import Message from "../../../_assets/message-icon.svg";
-import Image from "next/image";
-import notificationService from "@/services/notificationservice";
-import { format } from "date-fns";
+import React, { useState } from 'react';
+import { ImageHolder, NotificationsHolder } from './Notifications.styles';
+import Investment from '../../../_assets/investment-icon.svg';
+import Property from '../../../_assets/property-icon.svg';
+import Message from '../../../_assets/message-icon.svg';
+import Image from 'next/image';
+import notificationService from '@/services/notificationservice';
+import { format } from 'date-fns';
 
-const Notifications = ({fetchNotifications}) => {
-const [searchQuery, setSearchQuery] = useState({
+const Notifications = ({ fetchNotifications }) => {
+  const [searchQuery, setSearchQuery] = useState({
     page: 1,
     pageSize: 3,
   });

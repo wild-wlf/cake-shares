@@ -13,13 +13,23 @@ import Chat from '../../Chat';
 import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
 import { NoRecord } from '../../categories/categories.style';
+import Slider from 'react-slick';
 
 const SellerInfo = ({ userInfo, userCategories }) => {
   const [chat, setChat] = useState(false);
   const { isLoggedIn } = useContextHook(AuthContext, v => ({
     isLoggedIn: v.isLoggedIn,
   }));
-
+  var settings = {
+    dots: true,
+    arrows: false,
+    infinite: true,
+    autoplay: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+  };
   return (
     <>
       <CenterModal
@@ -54,10 +64,14 @@ const SellerInfo = ({ userInfo, userCategories }) => {
             <ul className="categoriesWrapper">
               {userCategories && userCategories?.length > 0 ? (
                 userCategories?.map(ele => (
-                  <li key={ele?.name} className="categoriesList">
-                    <Image src={ele?.icon || popular} alt="popular" />
-                    {ele?.name}
-                  </li>
+                  <>
+                    <li key={ele?.name} className="categoriesList">
+                      <figure className="img-holder">
+                        <Image src={ele?.icon || popular} alt="popular" width={20} height={20} />
+                      </figure>
+                      <span>{ele?.name}</span>
+                    </li>
+                  </>
                 ))
               ) : (
                 <NoRecord>No Category Found.</NoRecord>
