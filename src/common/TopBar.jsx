@@ -9,7 +9,7 @@ import profilePlaceHolder from '../_assets/profileplaceHolder.jpg';
 
 import Button from '@/components/atoms/Button';
 import register from '../_assets/register.svg';
-import { HiMenuAlt1, HiOutlineMenuAlt1 } from 'react-icons/hi';
+import { HiOutlineMenuAlt1 } from 'react-icons/hi';
 import RegisterModal from '../components/atoms/registerModal';
 import CenterModal from '@/components/atoms/Modal/CenterModal';
 import CreatePasswordModal from '@/components/atoms/createPasswordModal';
@@ -28,7 +28,7 @@ import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { UserContext } from '@/context/UserContext';
 import userService from '@/services/userService';
-import { convertToFormData, setCookie } from '@/helpers/common';
+import { convertToFormData } from '@/helpers/common';
 import BuyerLoginSignupModal from '@/components/atoms/buyerloginSignupModal';
 import LoginAsSellerModal from '@/components/atoms/LoginAsSellerModal';
 import Toast from '@/components/molecules/Toast';
@@ -51,7 +51,8 @@ const TopBar = () => {
     loginmodal,
     setLoginModal,
   } = useContext(UserContext);
-  const { onLogin, loading, isLoggedIn, user } = useContextHook(AuthContext, v => ({
+
+  const { onLogin, isLoggedIn, user } = useContextHook(AuthContext, v => ({
     onLogin: v.onLogin,
     loading: v.loading,
     isLoggedIn: v.isLoggedIn,
@@ -386,11 +387,11 @@ const TopBar = () => {
 
           {isLoggedIn ? (
             <>
-            <Link href="/wallet">
-              <div className="wallet">
-                <FaWallet />
-                <span>My Wallet</span>
-              </div>
+              <Link href="/wallet">
+                <div className="wallet">
+                  <FaWallet />
+                  <span>My Wallet</span>
+                </div>
               </Link>
               <div className="buttonWrapper" ref={ProfileRef}>
                 <Button
@@ -426,11 +427,6 @@ const TopBar = () => {
                 btntype="white-blue"
                 onClick={() => {
                   setLoginModal(true);
-                  // setIsLoggedIn(true);
-                  // navigate.push({
-                  //   pathname: "http://localhost:3000/",
-                  //   query: { type: "seller" },
-                  // });
                 }}>
                 Login
               </Button>

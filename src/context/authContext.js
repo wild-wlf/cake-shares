@@ -86,7 +86,7 @@ export const AuthContextProvider = props => {
     }
   }, [socketData]);
 
-  const onLogin = async ({ username, password, type, sellerType }) => {
+  const onLogin = async ({ username, password, type }) => {
     setLoadingUser(true);
     setLoading(true);
     try {
@@ -94,22 +94,19 @@ export const AuthContextProvider = props => {
         username,
         password,
         type,
-        sellerType,
       });
 
       if (!res?.token) {
         throw new Error(res?.message);
       }
       if (res?.type !== 'Buyer') {
-        // Construct the URL with token query parameter
         const url = `${process.env.NEXT_PUBLIC_URL}?token=${res?.token}`;
 
-        // Open the URL in a new tab
         window.open(url, '_blank');
       }
       if (res.type === 'Buyer') {
         setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
-        // router.push("/");
+
         setIsLoggedIn(true);
         Toast({ type: 'success', message: 'Logged In Successfully!' });
         setLoadingUser(false);

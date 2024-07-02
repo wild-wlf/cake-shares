@@ -16,12 +16,10 @@ const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleS
     const obj = {
       username: e.username?.trim(),
       email: e.email?.trim(),
-      sellerType: e.sellerType?.value,
     };
     const loginObj = {
       username: e.username?.trim(),
       password: e.password?.trim(),
-      sellerType: e.sellerType.value,
     };
 
     if (type === 'Login As Seller') {
