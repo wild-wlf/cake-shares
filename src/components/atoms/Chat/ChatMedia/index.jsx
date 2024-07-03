@@ -38,7 +38,7 @@ const ChatMedia = ({ userInfo, type, onlineUsers, channelReceivers }) => {
         <div className="fakeBefore">
           <Image src={chatIconMedia} alt="chatIconMedia" />
         </div>
-        <strong className="title">{type === 'community' ? 'Chat Members' : 'Private Chat'}</strong>
+        <strong className="title">{type === 'community' || type === 'stake' ? 'Chat Members' : 'Private Chat'}</strong>
         <div className="chat-between">
           <div className="col">
             <div className={`image-warp ${onlineUsers?.find(_ => _?.id === userInfo?._id) ? 'online' : 'offline'}`}>
@@ -53,7 +53,7 @@ const ChatMedia = ({ userInfo, type, onlineUsers, channelReceivers }) => {
             <span>{userInfo?.sellerType} Seller</span>
           </div>
 
-          {type === 'community' && (
+          {(type === 'community' || type === 'stake') && (
             <div className="community-col">
               <div className="images-wrapper">
                 {getThreeParticipants()?.map((item, index) => {

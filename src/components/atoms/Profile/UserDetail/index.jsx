@@ -11,19 +11,17 @@ import userName from '../../../../_assets/userName.svg';
 import emailAddress from '../../../../_assets/emailAddress.svg';
 import password from '../../../../_assets/password.svg';
 import flagIcon from '../../../../_assets/flagIcon.svg';
-import countryflgIcon from '../../../../_assets/countryflgIcon.svg';
 import dltIcon from '../../../../_assets/dltIcon.svg';
 import accDelete from '../../../../_assets/accDelete.svg';
 import Image from 'next/image';
 import Inheritance from './Inheritance';
 import TableLayout from '../../TableLayout';
 import Table from '@/components/molecules/Table';
-import { IoIosArrowBack } from 'react-icons/io';
-import Field from '../../Field';
 import ModalContainer from '../../ModalContainer';
 import EditBank from './EditBank';
 import EditProfile from './EditBank/EditProfile';
 import { countries } from '@/components/Constant';
+import CommunityChat from '@/components/atoms/Chat/CommunityChat';
 
 const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSearchQuery }) => {
   const fromatDate = value => {
@@ -50,21 +48,37 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
     dob: fromatDate(userData?.dob),
   };
 
-  const actionBtns = () => (
-    // eslint-disable-next-line react/jsx-filename-extension
-    <button type="button" className="chatButton">
-      Chat
-    </button>
+  const actionBtns = asset => (
+    <ModalContainer
+      lg
+      width={1339}
+      title="Stakeholder Chat"
+      btnComponent={({ onClick }) => (
+        <Button type="primary" rounded sm onClick={onClick}>
+          Chat
+        </Button>
+      )}
+      content={({ onClose }) => (
+        <CommunityChat
+          onClose={onClose}
+          type="stake"
+          userInfo={asset?.user}
+          productName={asset?.product?.productName}
+          productId={asset?.product?._id}
+        />
+      )}
+    />
   );
+
   const { report_rows, totalItems } = useMemo(
     () => ({
       report_rows: assetsData?.assets?.map(report => [
-        report?.productName,
+        report?.product?.productName,
         report?.category?.name,
         report?.totalShares ?? 0,
         report?.totalAmount ?? 0,
 
-        actionBtns(),
+        actionBtns(report),
       ]),
       totalItems: assetsData?.totalItems,
     }),

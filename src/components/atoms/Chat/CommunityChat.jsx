@@ -24,7 +24,8 @@ const CommunityChat = ({ userInfo, type, productName, productId }) => {
   const [searchQuery, setSearchQuery] = useState({
     page: 1,
     itemsPerPage: 10,
-    channelName: `com_${removeSpaces(productName)}_${productId}`,
+    channelName: `${type === 'community' ? 'com' : 'stake'}_${removeSpaces(productName)}_${productId}`,
+    type,
   });
   const chatBoxRef = useRef(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
