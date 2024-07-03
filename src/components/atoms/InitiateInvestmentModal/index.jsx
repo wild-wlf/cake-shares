@@ -11,6 +11,7 @@ import Toast from '@/components/molecules/Toast';
 
 const InitiateInvestmentModal = ({
   productId,
+  sellerId,
   assetValue,
   minInvestValue,
   setOwnershipPercentage,
@@ -32,6 +33,7 @@ const InitiateInvestmentModal = ({
       setIsLoading(true);
       const payload = {
         userId: user?._id,
+        sellerId: sellerId?._id,
         productId,
         boughtAmount,
       };

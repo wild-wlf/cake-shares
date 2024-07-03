@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 // import Filters from "common/filters";
 import TableHeader from '../TableHeader';
 import { StyledTableLayout } from './TableLayout.styles';
@@ -7,6 +7,8 @@ import Field from '../Field';
 import { CiSearch } from 'react-icons/ci';
 import Button from '../Button';
 import Image from 'next/image';
+import Select from '../../atoms/Select';
+import { debounce } from '../../../helpers/common';
 
 function TableLayout({
   children,
@@ -23,6 +25,7 @@ function TableLayout({
   onOptionClick,
   resetFilter = false,
   tableHeading,
+  transationFilter,
   noPagination,
   placeholder,
   btnWidth,
@@ -31,6 +34,8 @@ function TableLayout({
   btnImg,
   openModal,
   iconImg,
+  setSearchQuery,
+  lastPage,
   setResetFilter = () => {},
 }) {
   const [filterState, setFilterState] = useState('');
@@ -38,6 +43,26 @@ function TableLayout({
   function fetchResults(e) {
     onChangeFilters(e);
   }
+  const debouncedFetchResults = useCallback(debounce(fetchResults, 300), []);
+
+  const filterData = [
+    {
+      value: 'all',
+      label: 'All',
+    },
+    {
+      value: 'earn',
+      label: 'Earn',
+    },
+    {
+      value: 'top_up',
+      label: 'Top Up',
+    },
+    {
+      value: 'spend',
+      label: 'filter by products',
+    },
+  ];
   return (
     <>
       {/* {filters && (
@@ -55,7 +80,23 @@ function TableLayout({
       )} */}
       <StyledTableLayout noNegativeMargin={noNegativeMargin} noPagination={noPagination}>
         <div className="head">
-          {tableHeading && <strong className="table-heading">{tableHeading}</strong>}
+          <div className="heading-holder">
+            {tableHeading && <strong className="table-heading">{tableHeading}</strong>}
+            {transationFilter && (
+              <div className="select-holder">
+                <Select
+                  noMargin
+                  placeholder="Transaction type"
+                  onChange={({ target: { value } }) => {
+                    // onChangeFilters({ type: value?.value });
+                    setSearchQuery(prev => ({ ...prev, type: value?.value }));
+                  }}
+                  options={filterData}
+                  labelReverse
+                />
+              </div>
+            )}
+          </div>
           <div className="actions">
             {placeholder && (
               <div className="item">
@@ -100,7 +141,7 @@ function TableLayout({
           />
           {children}
           <div className="pagination">
-            {totalCount > 1 ? (
+            {lastPage > 1 ? (
               <Pagination
                 currentPage={currentPage}
                 totalCount={totalCount}
