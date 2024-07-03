@@ -15,6 +15,7 @@ const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleS
     const obj = {
       username: e.username?.trim(),
       email: e.email?.trim(),
+      sellerType: e.sellerType?.value,
     };
     const loginObj = {
       username: e.username?.trim(),
@@ -34,28 +35,30 @@ const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleS
         <span className="description">Please provide the details to proceed.</span>
       </div>
       <Form form={form} onSubmit={handleSubmit}>
-        {/* <div>
-          <Form.Item
-            type="text"
-            label="Seller Type"
-            name="sellerType"
-            sm
-            rounded
-            placeholder="Select Type"
-            rules={[
-              {
-                required: true,
-                message: 'Please enter a valid Seller Type',
-              },
-            ]}>
-            <Select
-              options={[
-                { label: 'Individual Seller', value: 'Individual' },
-                { label: 'Company Seller', value: 'Company' },
-              ]}
-            />
-          </Form.Item>
-        </div> */}
+        {type === 'Register As Seller' && (
+          <div>
+            <Form.Item
+              type="text"
+              label="Seller Type"
+              name="sellerType"
+              sm
+              rounded
+              placeholder="Select Type"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter a valid Seller Type',
+                },
+              ]}>
+              <Select
+                options={[
+                  { label: 'Individual Seller', value: 'Individual' },
+                  { label: 'Company Seller', value: 'Company' },
+                ]}
+              />
+            </Form.Item>
+          </div>
+        )}
         <div className="input-div">
           <Form.Item
             type="text"

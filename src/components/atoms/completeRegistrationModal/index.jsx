@@ -7,17 +7,17 @@ import Select from '../Select';
 import Image from 'next/image';
 import { countries } from '@/components/Constant';
 import UploadImg from '@/components/molecules/UploadImg';
-import KycLevel from '../KYC/KycLevel';
 import { KycContext } from '@/context/KycContext';
 import { UserContext } from '@/context/UserContext';
 import userService from '@/services/userService';
 import { checkAge, convertToFormData } from '@/helpers/common';
 import Toast from '@/components/molecules/Toast';
 import { IoIosArrowRoundBack } from 'react-icons/io';
+
 const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistrationModal, setPasswordModal }) => {
   const { kycLevel, setKycLevel, checkKycLevel } = useContext(KycContext);
   const { buyerRegistrationData } = useContext(UserContext);
-  // const { message } = userService.createUser();
+
   const [arr, setArr] = useState(countries);
   const [image, setImage] = useState('');
   const [form] = useForm();
@@ -30,7 +30,6 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
           <figure>
             <Image
               src={`https://countryflagsapi.netlify.app/flag/${elem.value}.svg`}
-              // src={`https://flagsapi.com/${elem.value}/shiny/48.png`}
               width={48}
               height={48}
               alt={`Flag of ${elem.value}`}
