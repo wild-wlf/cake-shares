@@ -18,7 +18,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { useRouter } from 'next/router';
 import CenterModal from '../Modal/CenterModal';
 
-const MyWallet = () => {
+const MyWallet = ({ wallet }) => {
   const ary3 = [0, 200, 10, 1000, 5000, 200, 8000, 10, 500];
   const ary2 = [0, 200, 300, 6000, 500, 1000, 500, 5000, 1000, 8000, 200, 5000, 5200, 5500, 5700, 5720, 5880];
   const pieData = [
@@ -267,7 +267,12 @@ const MyWallet = () => {
 
         <ChartWrapper>
           <div className="ChartContainer">
-            <PieChart graphData={pieData} title="Total Investments" amount="$0" timeFrame="year" />
+            <PieChart
+              graphData={pieData}
+              title="Total Investments"
+              amount={`$${wallet?.investmentAount || 0}`}
+              timeFrame="year"
+            />
           </div>
 
           <div className="ChartContainer">

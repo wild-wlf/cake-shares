@@ -193,6 +193,18 @@ export const getVisitNo = visit => {
   }
 };
 
+export const debounce = (func, delay) => {
+  let timeoutId;
+  return (...args) => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      func(...args);
+    }, delay);
+  };
+};
+
 export const getOfferDetails = ({
   offer_type,
   // eslint-disable-next-line no-unused-vars
@@ -661,4 +673,13 @@ export const checkAge = birthdate => {
 
 export const removeSpaces = (str = '') => {
   return str.replace(/ /g, '');
+};
+
+export const getDateTime = createdAt => {
+  const date = new Date(createdAt);
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  return `${String(date.getDate()).padStart(2, '0')} ${monthNames[date.getMonth()]} ${date.getFullYear()} (${String(
+    date.getHours(),
+  ).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')})`;
 };
