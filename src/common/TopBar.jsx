@@ -144,6 +144,7 @@ const TopBar = () => {
     });
   };
   const handleLoginSellerModal = e => {
+    onLogin(e);
     setSellerLoginModal(false);
   };
 
@@ -175,7 +176,7 @@ const TopBar = () => {
   };
 
   const handleBuyerLogin = async e => {
-    const login = onLogin(e);
+    onLogin(e);
     setBuyerLoginModal(false);
   };
 
@@ -198,6 +199,7 @@ const TopBar = () => {
     setRegisterModal(false);
     setSellerRegisterModal(true);
   };
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutsideProfile);
     document.addEventListener('mousedown', handleClickOutsideNotification);
@@ -206,6 +208,7 @@ const TopBar = () => {
       document.removeEventListener('mousedown', handleClickOutsideNotification);
     };
   }, []);
+
   useEffect(() => {
     if (sideNav) {
       document.body.classList.add('active-nav');

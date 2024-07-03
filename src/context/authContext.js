@@ -100,7 +100,7 @@ export const AuthContextProvider = props => {
         throw new Error(res?.message);
       }
       if (res?.type !== 'Buyer') {
-        const url = `${process.env.NEXT_PUBLIC_URL}?token=${res?.token}`;
+        const url = `${process.env.NEXT_PUBLIC_ADMIN_DOMAIN}?token=${res?.token}`;
 
         window.open(url, '_blank');
       }
