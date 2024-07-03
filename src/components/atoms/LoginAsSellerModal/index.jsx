@@ -1,5 +1,5 @@
-import React from "react";
-import LoginSignupModal from "../loginSignupModal";
+import React from 'react';
+import LoginSignupModal from '../loginSignupModal';
 
 const LoginAsSellerModal = ({
   handleRegisterModal,

@@ -73,7 +73,6 @@ const TopBar = () => {
   const notificationsRef = useRef(null);
 
   const router = usePathname();
-  const navigate = useRouter();
   const handleClickOutsideProfile = event => {
     if (ProfileRef.current && !ProfileRef.current.contains(event.target)) {
       setOpenProfile(false);
@@ -145,9 +144,9 @@ const TopBar = () => {
     });
   };
   const handleLoginSellerModal = e => {
-    const Login = onLogin(e);
     setSellerLoginModal(false);
   };
+
   const createPasswordModal = async e => {
     let obj = {
       type: buyerRegistrationData.type,
@@ -155,13 +154,16 @@ const TopBar = () => {
       email: buyerRegistrationData.email,
       username: buyerRegistrationData.username,
     };
+
     const formData = convertToFormData(obj);
+
     try {
       await userService.createUser(formData);
       Toast({
         type: 'success',
         message: 'User Registered Successfully!',
       });
+
       setPasswordModal(false);
       setBuyerRegistrationData({});
     } catch (error) {
@@ -205,7 +207,6 @@ const TopBar = () => {
     };
   }, []);
   useEffect(() => {
-    //  navigator.vibrate(20000);
     if (sideNav) {
       document.body.classList.add('active-nav');
     } else {
@@ -238,6 +239,7 @@ const TopBar = () => {
       window.removeEventListener('seller_notification', handleSellerNotification);
     };
   }, []);
+
   useEffect(() => {
     const handleClickOutside = event => {
       if (notificationsRef.current && !notificationsRef.current.contains(event.target)) {
@@ -250,7 +252,8 @@ const TopBar = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [notificationsRef]);
-  const { kycLevel, setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } = useContext(KycContext);
+
+  const { setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } = useContext(KycContext);
   return (
     <>
       {/******************************** KYC MODAL ******************************************/}
@@ -312,6 +315,8 @@ const TopBar = () => {
           type="Register As Seller"
           handleSellerPasswordModal={handleSellerPasswordModal}
           loader={loader}
+          setBuyerModal={setSellerRegisterModal}
+          setPasswordModal={setSellerPasswordModal}
         />
       </CenterModal>
 
