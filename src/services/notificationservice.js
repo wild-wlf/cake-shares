@@ -82,7 +82,7 @@ const notificationService = {
           setNotificationStatus(STATUS.SUCCESS);
         })
         .catch(() => setNotificationStatus(STATUS.ERROR));
-    }, [searchQuery?.page, searchQuery?.itemsPerPage, searchQuery?.channelName, fetch]);
+    }, [searchQuery?.page, searchQuery?.itemsPerPage, searchQuery?.channelName, searchQuery?.type, fetch]);
     return {
       messages_loading: notificationStatus === STATUS.LOADING,
       messages_error: notificationStatus === STATUS.ERROR,
@@ -112,9 +112,9 @@ const notificationService = {
     throw new Error(message ?? 'Something Went Wrong');
   },
 
-  async getAllCommunityConversationMessages({ page = 1, itemsPerPage = 10, channelName = '' }) {
+  async getAllCommunityConversationMessages({ page = 1, itemsPerPage = 10, channelName = '', type = '' }) {
     let res = await Fetch.get(
-      `${this._url}/get-com-conversation-messages?page=${page}&itemsPerPage=${itemsPerPage}&channelName=${channelName}`,
+      `${this._url}/get-com-conversation-messages?page=${page}&itemsPerPage=${itemsPerPage}&channelName=${channelName}&type=${type}`,
     );
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
