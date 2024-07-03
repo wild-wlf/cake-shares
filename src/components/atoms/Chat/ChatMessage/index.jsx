@@ -4,6 +4,7 @@ import Pic from '../../../../_assets/seller-img.png';
 import { LiaCheckDoubleSolid, LiaCheckSolid } from 'react-icons/lia';
 import Image from 'next/image';
 import { format } from 'date-fns';
+import RenderTextMessage from './renderTextMessage';
 
 const ChatMessage = ({ showImage, message, time, type, readBy, messageId, receiverId, receivers, group = false }) => {
   const [isMessageRead, setIsMessageRead] = useState(readBy);
@@ -36,7 +37,9 @@ const ChatMessage = ({ showImage, message, time, type, readBy, messageId, receiv
       )}
       <div className="message-holder">
         <div className="message">
-          <p>{message}</p>
+          <p>
+            <RenderTextMessage text={message} />
+          </p>
         </div>
         {time && (
           <div className="time-holder">
