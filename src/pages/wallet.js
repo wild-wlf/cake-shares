@@ -8,10 +8,10 @@ import { AuthContext } from '@/context/authContext';
 
 const Wallet = () => {
   const { wallet_Details } = userService.GetWalletDetails();
-  console.log({ wallet_Details });
+  // console.log({ wallet_Details });
 
   let filterData = wallet_Details?.wallet?.data.reduce((acc, record) => {
-    let existingRecord = acc.find(r => r._id === record._id);
+    let existingRecord = acc.find(r => r.investmentTypeName === record.investmentTypeName);
     if (existingRecord) {
       existingRecord.percentage += record.percentage;
       existingRecord.investmentAmount += record.investmentAmount;
@@ -23,7 +23,7 @@ const Wallet = () => {
   }, []);
 
   const pieData = filterData?.map((item, index) => ({
-    name: item.productName,
+    name: item.investmentTypeName,
     y: item.percentage,
     color: index <= 5 ? getRandomColor(index) : getRandomColor(),
   }));

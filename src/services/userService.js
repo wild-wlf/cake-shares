@@ -228,7 +228,6 @@ const userService = {
     throw new Error(message ?? 'Something Went Wrong');
   },
 
-  ///need to update it
   GetWalletDetails() {
     const [wallet, setWallet] = useState();
     const { cancellablePromise } = useCancellablePromise();

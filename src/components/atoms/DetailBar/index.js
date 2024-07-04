@@ -10,7 +10,7 @@ const DetailBar = ({ topData, amount, totalInvestmentCount }) => {
     <Container>
       {topInvestments?.map(item => (
         <Data key={item}>
-          <span className="f-span">{item.productName}</span>
+          <span className="f-span">{item.investmentTypeName}</span>
           <h1>{`$${item.investmentAmount}`}</h1>
           <span className="l-span">{`${item.totalInvestment} Investments`}</span>
         </Data>
