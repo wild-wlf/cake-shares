@@ -9,7 +9,7 @@ import profilePlaceHolder from '../_assets/profileplaceHolder.jpg';
 
 import Button from '@/components/atoms/Button';
 import register from '../_assets/register.svg';
-import { HiMenuAlt1, HiOutlineMenuAlt1 } from 'react-icons/hi';
+import { HiOutlineMenuAlt1 } from 'react-icons/hi';
 import RegisterModal from '../components/atoms/registerModal';
 import CenterModal from '@/components/atoms/Modal/CenterModal';
 import CreatePasswordModal from '@/components/atoms/createPasswordModal';
@@ -28,7 +28,7 @@ import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { UserContext } from '@/context/UserContext';
 import userService from '@/services/userService';
-import { convertToFormData, setCookie } from '@/helpers/common';
+import { convertToFormData } from '@/helpers/common';
 import BuyerLoginSignupModal from '@/components/atoms/buyerloginSignupModal';
 import LoginAsSellerModal from '@/components/atoms/LoginAsSellerModal';
 import Toast from '@/components/molecules/Toast';
@@ -51,7 +51,8 @@ const TopBar = () => {
     loginmodal,
     setLoginModal,
   } = useContext(UserContext);
-  const { onLogin, loading, isLoggedIn, user } = useContextHook(AuthContext, v => ({
+
+  const { onLogin, isLoggedIn, user } = useContextHook(AuthContext, v => ({
     onLogin: v.onLogin,
     loading: v.loading,
     isLoggedIn: v.isLoggedIn,
@@ -72,7 +73,6 @@ const TopBar = () => {
   const notificationsRef = useRef(null);
 
   const router = usePathname();
-  const navigate = useRouter();
   const handleClickOutsideProfile = event => {
     if (ProfileRef.current && !ProfileRef.current.contains(event.target)) {
       setOpenProfile(false);
@@ -144,9 +144,10 @@ const TopBar = () => {
     });
   };
   const handleLoginSellerModal = e => {
-    const Login = onLogin(e);
+    onLogin(e);
     setSellerLoginModal(false);
   };
+
   const createPasswordModal = async e => {
     let obj = {
       type: buyerRegistrationData.type,
@@ -154,13 +155,16 @@ const TopBar = () => {
       email: buyerRegistrationData.email,
       username: buyerRegistrationData.username,
     };
+
     const formData = convertToFormData(obj);
+
     try {
       await userService.createUser(formData);
       Toast({
         type: 'success',
         message: 'User Registered Successfully!',
       });
+
       setPasswordModal(false);
       setBuyerRegistrationData({});
     } catch (error) {
@@ -172,7 +176,7 @@ const TopBar = () => {
   };
 
   const handleBuyerLogin = async e => {
-    const login = onLogin(e);
+    onLogin(e);
     setBuyerLoginModal(false);
   };
 
@@ -195,6 +199,7 @@ const TopBar = () => {
     setRegisterModal(false);
     setSellerRegisterModal(true);
   };
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutsideProfile);
     document.addEventListener('mousedown', handleClickOutsideNotification);
@@ -203,8 +208,8 @@ const TopBar = () => {
       document.removeEventListener('mousedown', handleClickOutsideNotification);
     };
   }, []);
+
   useEffect(() => {
-    //  navigator.vibrate(20000);
     if (sideNav) {
       document.body.classList.add('active-nav');
     } else {
@@ -237,6 +242,7 @@ const TopBar = () => {
       window.removeEventListener('seller_notification', handleSellerNotification);
     };
   }, []);
+
   useEffect(() => {
     const handleClickOutside = event => {
       if (notificationsRef.current && !notificationsRef.current.contains(event.target)) {
@@ -249,7 +255,8 @@ const TopBar = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [notificationsRef]);
-  const { kycLevel, setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } = useContext(KycContext);
+
+  const { setKycLevel, kyc1, setKyc1, kyc2, setKyc2, kyc3, setKyc3 } = useContext(KycContext);
   return (
     <>
       {/******************************** KYC MODAL ******************************************/}
@@ -311,6 +318,8 @@ const TopBar = () => {
           type="Register As Seller"
           handleSellerPasswordModal={handleSellerPasswordModal}
           loader={loader}
+          setBuyerModal={setSellerRegisterModal}
+          setPasswordModal={setSellerPasswordModal}
         />
       </CenterModal>
 
@@ -451,11 +460,6 @@ const TopBar = () => {
                 btntype="white-blue"
                 onClick={() => {
                   setLoginModal(true);
-                  // setIsLoggedIn(true);
-                  // navigate.push({
-                  //   pathname: "http://localhost:3000/",
-                  //   query: { type: "seller" },
-                  // });
                 }}>
                 Login
               </Button>

@@ -4,7 +4,7 @@ import { ChatHeaderWrapper } from './ChatHeader.style';
 import profileplaceHolder from '../../../_assets/profileplaceHolder.jpg';
 
 const ChatHeader = ({ userInfo, onlineUsers, type, productName }) => {
-  return type === 'community' ? (
+  return type === 'community' || type === 'stake' ? (
     <ChatHeaderWrapper>{productName}</ChatHeaderWrapper>
   ) : (
     <ChatHeaderWrapper>

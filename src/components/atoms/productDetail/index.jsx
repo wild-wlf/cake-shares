@@ -87,6 +87,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
       <CenterModal open={modal} setOpen={setModal} title="Initiate Investment" width="543">
         <InitiateInvestmentModal
           productId={data?._id}
+          sellerId={data?.userId}
           assetValue={data?.assetValue}
           minInvestValue={data?.minimumInvestment}
           setOwnershipPercentage={setOwnershipPercentage}

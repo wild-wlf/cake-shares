@@ -7,11 +7,10 @@ import { FcGoogle } from 'react-icons/fc';
 import Facebook from '../../../_assets/facebook.svg';
 import Image from 'next/image';
 import Select from '../Select';
-import { useRouter } from 'next/router';
 
 const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleSellerRegisterModal, type }) => {
   const [form] = useForm();
-  const router = useRouter();
+
   function handleSubmit(e) {
     const obj = {
       username: e.username?.trim(),
@@ -21,7 +20,6 @@ const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleS
     const loginObj = {
       username: e.username?.trim(),
       password: e.password?.trim(),
-      sellerType: e.sellerType.value,
     };
 
     if (type === 'Login As Seller') {
@@ -29,20 +27,6 @@ const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleS
     } else if (type === 'Register As Seller') {
       handleSellerRegisterModal(obj);
     }
-
-    // if (e?.select_type.value === "company_seller") {
-    //   router.push({
-    //     pathname: "https://cake-admin.webevis.com/",
-    //     query: { type: "company" },
-    //   });
-    // } else {
-    //   router.push({
-    //     pathname: "https://cake-admin.webevis.com/",
-    //     query: { type: "seller" },
-    //   });
-    // }
-    // handleSellerLoginModal();
-    // setBuyerDetails((prev) => ({ ...prev, ...e }));
   }
 
   return (
@@ -51,28 +35,30 @@ const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleS
         <span className="description">Please provide the details to proceed.</span>
       </div>
       <Form form={form} onSubmit={handleSubmit}>
-        <div>
-          <Form.Item
-            type="text"
-            label="Seller Type"
-            name="sellerType"
-            sm
-            rounded
-            placeholder="Select Type"
-            rules={[
-              {
-                required: true,
-                message: 'Please enter a valid Seller Type',
-              },
-            ]}>
-            <Select
-              options={[
-                { label: 'Individual Seller', value: 'Individual' },
-                { label: 'Company Seller', value: 'Company' },
-              ]}
-            />
-          </Form.Item>
-        </div>
+        {type === 'Register As Seller' && (
+          <div>
+            <Form.Item
+              type="text"
+              label="Seller Type"
+              name="sellerType"
+              sm
+              rounded
+              placeholder="Select Type"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter a valid Seller Type',
+                },
+              ]}>
+              <Select
+                options={[
+                  { label: 'Individual Seller', value: 'Individual' },
+                  { label: 'Company Seller', value: 'Company' },
+                ]}
+              />
+            </Form.Item>
+          </div>
+        )}
         <div className="input-div">
           <Form.Item
             type="text"

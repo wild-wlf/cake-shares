@@ -18,6 +18,10 @@ export const StyledTableLayout = styled.div`
         display: none;
       }
     `}
+  .select-holder {
+    width: 100%;
+    max-width: 150x;
+  }
   .head {
     width: 100%;
     display: flex;
@@ -52,6 +56,12 @@ export const StyledTableLayout = styled.div`
           }
         }
       `}
+
+    .heading-holder {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
   }
   .table-heading {
     display: block;
@@ -59,7 +69,6 @@ export const StyledTableLayout = styled.div`
     line-height: 25px;
     font-weight: 500;
     text-transform: capitalize;
-    margin: 0 0 15px;
   }
 
   .inner-wrap {
