@@ -1,36 +1,27 @@
-import React from "react";
-import {Container, Data} from "./BarStyles";
+import React from 'react';
+import { Container, Data } from './BarStyles';
 
-const DetailBar = () => {
-    return (
-        <Container>
-            <Data>
-                <span className="f-span">Banking Product</span>
-                <h1>$0</h1>
-                <span className="l-span">0 Investments</span>
-            </Data>
-            <Data>
-                <span className="f-span">Properties</span>
-                <h1>$0</h1>
-                <span className="l-span">0 Investments</span>
-            </Data>
-            <Data>
-                <span className="f-span">Ventures</span>
-                <h1>$0</h1>
-                <span className="l-span">0 Investments</span>
-            </Data>
-            <Data>
-                <span className="f-span">Bazar</span>
-                <h1>$0</h1>
-                <span className="l-span">0 Investments</span>
-            </Data>
-            <Data>
-                <span className="f-span">Total Investment</span>
-                <h1>$0</h1>
-                <span className="l-span">0 Investments</span>
-            </Data>
-        </Container>
-    );
+const DetailBar = ({ topData, amount, totalInvestmentCount }) => {
+  topData?.sort((a, b) => b.investmentAmount - a.investmentAmount);
+
+  let topInvestments = topData?.filter((item, index) => index < 4);
+
+  return (
+    <Container>
+      {topInvestments?.map(item => (
+        <Data key={item}>
+          <span className="f-span">{item.investmentTypeName}</span>
+          <h1>{`$${item.investmentAmount}`}</h1>
+          <span className="l-span">{`${item.totalInvestment} Investments`}</span>
+        </Data>
+      ))}
+      <Data>
+        <span className="f-span">Total Investment</span>
+        <h1>{`$${amount}`}</h1>
+        <span className="l-span">{`$${totalInvestmentCount} Investments`} </span>
+      </Data>
+    </Container>
+  );
 };
 
 export default DetailBar;

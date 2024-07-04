@@ -80,7 +80,7 @@ const TransactionTable = ({ transactions }) => {
   //   },
   // ];
 
-  const { totalCount, lastPage, transaction_rows } = useMemo(
+  const { totalCount, transaction_rows } = useMemo(
     () => ({
       transaction_rows: transactions_data?.transactions?.map(_ => [
         // format(new Date(_.created_at), 'yyyy-MM-dd'),
@@ -91,7 +91,6 @@ const TransactionTable = ({ transactions }) => {
         `$${_.assetValue}` ?? '------------',
       ]),
       totalCount: transactions_data.totalItems,
-      lastPage: transactions_data.lastPage,
     }),
     [transactions_data],
   );
@@ -132,7 +131,6 @@ const TransactionTable = ({ transactions }) => {
           setSearchQuery={setSearchQuery}
           currentPage={searchQuery.page}
           totalCount={totalCount}
-          lastPage={lastPage}
           pageSize={searchQuery.itemsPerPage}>
           <Table
             width={1024}

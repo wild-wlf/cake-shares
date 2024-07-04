@@ -35,7 +35,6 @@ function TableLayout({
   openModal,
   iconImg,
   setSearchQuery,
-  lastPage,
   setResetFilter = () => {},
 }) {
   const [filterState, setFilterState] = useState('');
@@ -141,7 +140,7 @@ function TableLayout({
           />
           {children}
           <div className="pagination">
-            {lastPage > 1 ? (
+            {totalCount > 1 ? (
               <Pagination
                 currentPage={currentPage}
                 totalCount={totalCount}
