@@ -186,7 +186,6 @@ const userService = {
     const [transactions, setTransactions] = useState({
       transactions: [],
       totalItems: 0,
-      lastPage: 0,
     });
     const { cancellablePromise } = useCancellablePromise();
     const [transactionStatus, setTransactionStatus] = useState(STATUS.LOADING);
@@ -223,7 +222,6 @@ const userService = {
       return {
         transactions: res.items,
         totalItems: res.totalItems,
-        lastPage: res.lastPage,
       };
     }
     const { message } = await res.json();

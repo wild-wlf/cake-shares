@@ -18,16 +18,17 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { useRouter } from 'next/router';
 import CenterModal from '../Modal/CenterModal';
 
-const MyWallet = ({ wallet }) => {
+const MyWallet = ({ pieData, amount }) => {
   const ary3 = [0, 200, 10, 1000, 5000, 200, 8000, 10, 500];
   const ary2 = [0, 200, 300, 6000, 500, 1000, 500, 5000, 1000, 8000, 200, 5000, 5200, 5500, 5700, 5720, 5880];
-  const pieData = [
+  const dummyPieData = [
     { name: 'Banking product', y: 30, color: '#408F8C' },
     { name: 'Properties', y: 25, color: '#00AFD6' },
     { name: 'Ventures', y: 20, color: '#0A1149' },
     { name: 'Bazar', y: 15, color: '#419400' },
     { name: 'Cars', y: 10, color: '#4E6199' },
   ];
+
   const [open, setOpen] = useState(false);
   const [openLast, setOpenLast] = useState(false);
   const [openBank, setOpenBank] = useState(false);
@@ -268,9 +269,9 @@ const MyWallet = ({ wallet }) => {
         <ChartWrapper>
           <div className="ChartContainer">
             <PieChart
-              graphData={pieData}
+              graphData={pieData || dummyPieData}
               title="Total Investments"
-              amount={`$${wallet?.investmentAount || 0}`}
+              amount={`$${amount || 0}`}
               timeFrame="year"
             />
           </div>
