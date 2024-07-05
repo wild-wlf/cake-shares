@@ -102,7 +102,7 @@ export const StyledUserInfo = styled.div`
       .img-holder {
         width: 20px;
         height: 20px;
-        margin-bottom: 8px;
+        margin: 0 auto 8px;
 
         img {
           width: 100%;
@@ -113,6 +113,10 @@ export const StyledUserInfo = styled.div`
 
       span {
         display: block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 50px;
       }
 
       &:first-child {
@@ -130,7 +134,7 @@ export const StyledUserInfo = styled.div`
         height: 40px;
         top: 0;
         left: 0;
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(0, 0, 0, 0.2);
 
         @media screen and (min-width: 1024px) {
           display: block;

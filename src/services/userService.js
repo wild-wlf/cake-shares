@@ -181,5 +181,83 @@ const userService = {
     const { message } = await res.json();
     throw new Error(message ?? 'Something went wrong');
   },
+
+  GetAllTransactions(searchQuery, fetch) {
+    const [transactions, setTransactions] = useState({
+      transactions: [],
+      totalItems: 0,
+    });
+    const { cancellablePromise } = useCancellablePromise();
+    const [transactionStatus, setTransactionStatus] = useState(STATUS.LOADING);
+    useEffect(() => {
+      setTransactionStatus(STATUS.LOADING);
+      cancellablePromise(this.getAllTransactions(searchQuery))
+        .then(res => {
+          setTransactions(() => res);
+          setTransactionStatus(STATUS.SUCCESS);
+        })
+        .catch(() => setTransactionStatus(STATUS.ERROR));
+    }, [searchQuery, fetch]);
+    return {
+      transactions_loading: transactionStatus === STATUS.LOADING,
+      transactions_error: transactionStatus === STATUS.ERROR,
+      transactions_data: transactions,
+    };
+  },
+
+  async getAllTransactions({
+    page = 1,
+    itemsPerPage = 10,
+    status = '',
+    searchText = '',
+    type = '',
+    startDate = '',
+    endDate = '',
+  }) {
+    let res = await Fetch.get(
+      `${this._url}/get-all-transactions?page=${page}&itemsPerPage=${itemsPerPage}&searchText=${searchText}&type=${type}&startDate=${startDate}&endDate=${endDate}`,
+    );
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return {
+        transactions: res.items,
+        totalItems: res.totalItems,
+      };
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? 'Something Went Wrong');
+  },
+
+  GetWalletDetails() {
+    const [wallet, setWallet] = useState();
+    const { cancellablePromise } = useCancellablePromise();
+    const [status, setStatus] = useState(STATUS.LOADING);
+    useEffect(() => {
+      setStatus(STATUS.LOADING);
+      cancellablePromise(this.getWalletDetails())
+        .then(res => {
+          setWallet(() => res);
+          setStatus(STATUS.SUCCESS);
+        })
+        .catch(() => setStatus(STATUS.ERROR));
+    }, []);
+    return {
+      wallet_loading: status === STATUS.LOADING,
+      wallet_error: status === STATUS.ERROR ? status : '',
+      wallet_Details: wallet,
+    };
+  },
+
+  async getWalletDetails() {
+    let res = await Fetch.get(`${this._url}/get-wallet-details`);
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return {
+        wallet: res,
+      };
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? 'Something went wrong');
+  },
 };
 export default userService;
