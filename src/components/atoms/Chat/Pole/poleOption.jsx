@@ -8,7 +8,7 @@ const PoleOption = ({ type, name, users, user, option_id, messageId, receivers, 
 
   const handleVote = e => {
     setChecked(e.isChecked);
-    castPoolVote({ option_id, msg_id: messageId, user_id: user?._id, checked: e.isChecked });
+    castPoolVote({ option_id, msg_id: messageId, user_id: user?._id, checked: e.isChecked, type: 'user' });
   };
 
   useEffect(() => {

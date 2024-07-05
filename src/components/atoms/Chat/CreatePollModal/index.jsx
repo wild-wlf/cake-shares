@@ -37,6 +37,7 @@ const CreatePollModal = ({ userInfo, productName, productId, user, onClose, type
       productOwnerId: userInfo?._id,
       pool,
       type,
+      user_type: 'user',
     });
     onClose();
   };

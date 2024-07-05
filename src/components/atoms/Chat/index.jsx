@@ -119,7 +119,7 @@ const Chat = ({ userInfo, type }) => {
                 type={item?.author?._id === user?._id ? 'seen' : 'send'}
                 message={item.content}
                 time={item?.created_at}
-                readBy={item?.readBy?.includes(userInfo?._id)}
+                readBy={item?.readBy?.find(_ => _?._id === userInfo?._id)}
                 messageId={item?._id}
                 receiverId={userInfo?._id}
               />

@@ -41,6 +41,7 @@ const updateDirectChatHistoryIfSameConversationActive = ({
       conversationId,
       user: loggedInUser?._id,
       message,
+      type: 'user',
     });
   }
 

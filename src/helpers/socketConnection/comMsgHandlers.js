@@ -40,6 +40,7 @@ const updateChatHistoryIfSameConversationActive = ({
       conversationId,
       user: loggedInUser?._id,
       messageId: message?._id,
+      type: 'user',
     });
   }
 

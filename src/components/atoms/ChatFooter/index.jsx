@@ -39,6 +39,7 @@ const ChatFooter = ({ userInfo, type, productName, productId }) => {
         productId,
         productOwnerId: userInfo?._id,
         type,
+        user_type: 'user',
       });
     }
     form.setFieldsValue({ message: '' });
