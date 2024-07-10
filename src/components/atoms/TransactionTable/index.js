@@ -11,7 +11,7 @@ import { format } from 'date-fns';
 import userService from '@/services/userService';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
-import { formatNumber, getDateTime } from '@/helpers/common';
+import { convertToCurrencyFormat, getDateTime } from '@/helpers/common';
 
 const TransactionTable = ({ transactions }) => {
   const { user, fetch } = useContextHook(AuthContext, v => ({
@@ -90,7 +90,7 @@ const TransactionTable = ({ transactions }) => {
           transaction.assetValue
             ? `$${((transaction.investmentAmount / transaction.assetValue) * 100).toFixed(2)}`
             : '------------',
-          transaction.assetValue ? `$${formatNumber(transaction.assetValue)}` : '$0.00',
+          transaction.assetValue ? `${convertToCurrencyFormat(transaction.assetValue)}` : '$0.00',
         ]) ?? [],
       totalCount: transactions_data?.totalItems ?? 0,
     }),

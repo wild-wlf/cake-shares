@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Data } from './BarStyles';
+import { convertToCurrencyFormat } from '@/helpers/common';
 
 const DetailBar = ({ topData, amount, totalInvestmentCount }) => {
   topData?.sort((a, b) => b.investmentAmount - a.investmentAmount);
@@ -30,7 +31,8 @@ const DetailBar = ({ topData, amount, totalInvestmentCount }) => {
 
       <Data>
         <span className="f-span">Total Investment</span>
-        <h1>{`$${amount || 0}`}</h1>
+        {/* <h1>{`$${amount || 0}`}</h1> */}
+        <h1>{convertToCurrencyFormat(amount)}</h1>
         <span className="l-span">{`${totalInvestmentCount || 0}  Investments`} </span>
       </Data>
     </Container>
