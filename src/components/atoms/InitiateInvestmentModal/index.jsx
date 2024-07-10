@@ -60,7 +60,10 @@ const InitiateInvestmentModal = ({
     }
   };
 
-  const remainingInvestAmount = parseFloat(assetValue) - parseFloat(valueRaised);
+  let remainingInvestAmount;
+  if (valueRaised > 0) {
+    remainingInvestAmount = parseFloat(assetValue) - parseFloat(valueRaised);
+  }
 
   return (
     <InvestmentModalWrapper>
@@ -90,23 +93,36 @@ const InitiateInvestmentModal = ({
                 required: true,
                 message: 'Please enter Amount!  ',
               },
-
-              {
-                transform: value => parseFloat(value) > parseFloat(user?.wallet),
-                message: 'You cannot exceed your Wallet Amount!.',
-              },
               {
                 transform: value => parseFloat(value) > parseFloat(assetValue) - parseFloat(valueRaised),
-                message: 'You cannot exceed Investment Amount!.',
+                message: 'You cannot exceed Investment Amount.',
+              },
+              {
+                transform: value => parseFloat(value) > parseFloat(user?.wallet),
+                message: 'You cannot exceed your Wallet Amount.',
               },
 
               {
-                min: minInvestValue,
-                message: `Minimum Investment Amount is $${formatNumber(minInvestValue)}`,
+                transform: value =>
+                  remainingInvestAmount
+                    ? parseFloat(remainingInvestAmount) > parseFloat(minInvestValue)
+                      ? parseFloat(minInvestValue)
+                      : ''
+                    : parseFloat(value) < parseFloat(minInvestValue)
+                    ? minInvestValue
+                    : '',
+                message: `Minimum Investment Amount is $${
+                  remainingInvestAmount ? formatNumber(remainingInvestAmount) : minInvestValue
+                }`,
               },
               {
-                max: assetValue,
+                transform: value =>
+                  parseFloat(remainingInvestAmount) > parseFloat(assetValue) ? parseFloat(assetValue) : '',
                 message: `Maximum Investment Amount is $${formatNumber(assetValue)}`,
+              },
+              {
+                pattern: /^(?!0+(\.0+)?$)(0|[1-9]\d{0,6})(\.\d{1,2})?$/,
+                message: 'Please enter a valid limit between 0.01 and 9999999, with up to 2 decimal places',
               },
             ]}>
             <Field />
