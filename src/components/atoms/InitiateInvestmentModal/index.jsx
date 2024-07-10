@@ -17,6 +17,7 @@ const InitiateInvestmentModal = ({
   setOwnershipPercentage,
   handleCloseModal,
   setProductData,
+  valueRaised,
 }) => {
   const { user, setPermission } = useContextHook(AuthContext, v => ({
     user: v.user,
@@ -59,6 +60,8 @@ const InitiateInvestmentModal = ({
     }
   };
 
+  const remainingInvestAmount = parseFloat(assetValue) - parseFloat(valueRaised);
+
   return (
     <InvestmentModalWrapper>
       <div>
@@ -87,10 +90,16 @@ const InitiateInvestmentModal = ({
                 required: true,
                 message: 'Please enter Amount!  ',
               },
+
               {
                 transform: value => parseFloat(value) > parseFloat(user?.wallet),
                 message: 'You cannot exceed your Wallet Amount!.',
               },
+              {
+                transform: value => parseFloat(value) > parseFloat(assetValue) - parseFloat(valueRaised),
+                message: 'You cannot exceed Investment Amount!.',
+              },
+
               {
                 min: minInvestValue,
                 message: `Minimum Investment Amount is $${formatNumber(minInvestValue)}`,
@@ -103,6 +112,12 @@ const InitiateInvestmentModal = ({
             <Field />
           </Form.Item>
         </div>
+        {valueRaised > 0 && (
+          <>
+            <span className="text-wrapper">Remaining Investment Amount ${remainingInvestAmount}</span>
+          </>
+        )}
+
         <div className="text-wrapper">
           You will own <span>{ownershipPercentage}%</span> of the asset, valued at a total of $
           {formatNumber(assetValue)}.

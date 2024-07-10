@@ -40,7 +40,8 @@ function TableLayout({
   const [filterState, setFilterState] = useState('');
   const [searchText, setSearchText] = useState('');
   function fetchResults(e) {
-    onChangeFilters(e);
+    // onChangeFilters(e);
+    onChangeFilters({ searchText: e });
   }
   const debouncedFetchResults = useCallback(debounce(fetchResults, 300), []);
 

@@ -1,6 +1,6 @@
 import Button from '@/components/atoms/Button';
 import Field from '@/components/atoms/Field';
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { StyledEditForm } from './EditForm.styles';
 import Form from '@/components/molecules/Form/Form';
 import { useForm } from '@/components/molecules/Form';
@@ -63,14 +63,18 @@ const AddInheritance = ({ onClose }) => {
             rules={[
               {
                 required: true,
-                message: 'Person name is required',
+                message: 'Please enter Name of Person',
               },
               {
-                pattern: /^.{3,40}$/,
-                message: 'Please enter a valid name',
+                pattern: /^[a-zA-Z\s]*$/,
+                message: 'Only alphabets are allowed',
+              },
+              {
+                pattern: /^.{2,30}$/,
+                message: 'Name should be between 2 and 30 characters.',
               },
             ]}>
-            <Field maxLength={40} />
+            <Field maxLength={30} />
           </Form.Item>
           <Form.Item
             type="number"

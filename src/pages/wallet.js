@@ -8,7 +8,6 @@ import { AuthContext } from '@/context/authContext';
 
 const Wallet = () => {
   const { wallet_Details } = userService.GetWalletDetails();
-  // console.log({ wallet_Details });
 
   let filterData = wallet_Details?.wallet?.data.reduce((acc, record) => {
     let existingRecord = acc.find(r => r.investmentTypeName === record.investmentTypeName);

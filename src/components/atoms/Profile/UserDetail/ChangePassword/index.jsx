@@ -67,7 +67,7 @@ const ChangePassword = () => {
             },
             { password: true },
           ]}>
-          <Field />
+          <Field maxLength={64} />
         </Form.Item>
         <Form.Item
           type="password"
@@ -86,7 +86,7 @@ const ChangePassword = () => {
               message: 'The two passwords that you entered do not match!',
             },
           ]}>
-          <Field />
+          <Field maxLength={64} />
         </Form.Item>
       </div>
       <Button rounded md btntype="primary" width="170" htmlType="submit">

@@ -71,6 +71,7 @@ const TopBar = () => {
   const NotificationRef = useRef(null);
   const [loader, setLoader] = useState(false);
   const notificationsRef = useRef(null);
+  const [registrationData, setRegistrationData] = useState();
 
   const router = usePathname();
   const handleClickOutsideProfile = event => {
@@ -283,11 +284,28 @@ const TopBar = () => {
         />
       </CenterModal>
 
-      <CenterModal open={buyermodal} setOpen={setBuyerModal} title="Register as a Buyer" width="666">
-        <BuyerLoginSignupModal handleBuyerModal={handleBuyerModal} type={'Register As Buyer'} />
+      <CenterModal
+        open={buyermodal}
+        setOpen={setBuyerModal}
+        title="Register as a Buyer"
+        width="666"
+        setRegistrationData={setRegistrationData}
+        registrationData={registrationData}>
+        <BuyerLoginSignupModal
+          handleBuyerModal={handleBuyerModal}
+          type={'Register As Buyer'}
+          registrationData={registrationData}
+          setRegistrationData={setRegistrationData}
+        />
       </CenterModal>
 
-      <CenterModal open={passwordModal} setOpen={setPasswordModal} title="Register as a Buyer" width="666">
+      <CenterModal
+        open={passwordModal}
+        setOpen={setPasswordModal}
+        title="Register as a Buyer"
+        width="666"
+        setRegistrationData={setRegistrationData}
+        registrationData={registrationData}>
         <CreatePasswordModal
           type={'Register as Buyer'}
           createPasswordModal={createPasswordModal}
@@ -309,11 +327,28 @@ const TopBar = () => {
         />
       </CenterModal>
 
-      <CenterModal open={sellerregistermodal} setOpen={setSellerRegisterModal} title="Register as a Seller" width="666">
-        <LoginAsSellerModal handleSellerRegisterModal={handleSellerRegisterModal} type="Register As Seller" />
+      <CenterModal
+        open={sellerregistermodal}
+        setOpen={setSellerRegisterModal}
+        title="Register as a Seller"
+        width="666"
+        setRegistrationData={setRegistrationData}
+        registrationData={registrationData}>
+        <LoginAsSellerModal
+          handleSellerRegisterModal={handleSellerRegisterModal}
+          type="Register As Seller"
+          registrationData={registrationData}
+          setRegistrationData={setRegistrationData}
+        />
       </CenterModal>
 
-      <CenterModal open={sellerpasswordModal} setOpen={setSellerPasswordModal} title="Register as a Seller" width="666">
+      <CenterModal
+        open={sellerpasswordModal}
+        setOpen={setSellerPasswordModal}
+        title="Register as a Seller"
+        width="666"
+        setRegistrationData={setRegistrationData}
+        registrationData={registrationData}>
         <CreatePasswordModal
           type="Register As Seller"
           handleSellerPasswordModal={handleSellerPasswordModal}
