@@ -146,21 +146,33 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
 
           <div className="headingHolder">
             <div className="headings">
-              <div>
-                <span>Investment type</span>
-                <h3>{data?.investmentType?.name}</h3>
+              <div className="textCon">
+                <div>
+                  <span>Investment type</span>
+                  <h3>{data?.investmentType?.name}</h3>
+                </div>
+                <div className="line"></div>
               </div>
-              <div>
-                <span>Return (%)</span>
-                <h3>0%</h3>
+              <div className="textCon">
+                <div>
+                  <span>Return (%)</span>
+                  <h3>0%</h3>
+                </div>
+                <div className="line"></div>
               </div>
-              <div>
-                <span>Funding Ratio</span>
-                <h3>0%</h3>
+              <div className="textCon">
+                <div>
+                  <span>Funding Ratio</span>
+                  <h3>0%</h3>
+                </div>
+                <div className="line"></div>
               </div>
-              <div>
-                <span>Backers Limit</span>
-                <h3>{data?.maximumBackers}</h3>
+              <div className="textCon">
+                <div>
+                  <span>Backers Limit</span>
+                  <h3>{data?.maximumBackers}</h3>
+                </div>
+                <div className="line"></div>
               </div>
               <div>
                 <span>Annual Cost (est.)</span>
