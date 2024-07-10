@@ -120,10 +120,12 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
             <IoIosArrowBack />
             Go Back
           </Button>
-          <Button rounded sm btntype="primary" className="button" onClick={handleInitiateInvestment}>
-            Initiate Investment
-            <RiFilePaperFill />
-          </Button>
+          {data?.assetValue !== data?.valueRaised && (
+            <Button rounded sm btntype="primary" className="button" onClick={handleInitiateInvestment}>
+              Initiate Investment
+              <RiFilePaperFill />
+            </Button>
+          )}
         </div>
         <div className="titlewrapper">
           <div className="titleHolder">

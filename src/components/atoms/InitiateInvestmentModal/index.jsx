@@ -94,32 +94,41 @@ const InitiateInvestmentModal = ({
                 message: 'Please enter Amount!  ',
               },
               {
-                transform: value => parseFloat(value) > parseFloat(assetValue) - parseFloat(valueRaised),
+                transform: value =>
+                  Number(value).toFixed(2) > Number(assetValue).toFixed(2) - Number(valueRaised).toFixed(2),
                 message: 'You cannot exceed Investment Amount.',
               },
               {
-                transform: value => parseFloat(value) > parseFloat(user?.wallet),
+                transform: value => Number(value) > (user?.wallet ?? 0),
                 message: 'You cannot exceed your Wallet Amount.',
               },
-
               {
-                transform: value =>
-                  remainingInvestAmount
-                    ? parseFloat(remainingInvestAmount) > parseFloat(minInvestValue)
-                      ? parseFloat(minInvestValue)
-                      : ''
-                    : parseFloat(value) < parseFloat(minInvestValue)
-                    ? minInvestValue
-                    : '',
+                transform: value => {
+                  if (remainingInvestAmount) {
+                    if (remainingInvestAmount < minInvestValue) {
+                      if (value >= remainingInvestAmount) return;
+                      return remainingInvestAmount.toFixed(2);
+                    } else {
+                      if (value >= minInvestValue) return;
+                      return minInvestValue;
+                    }
+                  } else {
+                    if (value < minInvestValue) {
+                      return minInvestValue;
+                    }
+                  }
+                },
                 message: `Minimum Investment Amount is $${
-                  remainingInvestAmount ? formatNumber(remainingInvestAmount) : minInvestValue
+                  remainingInvestAmount < minInvestValue
+                    ? formatNumber(remainingInvestAmount.toFixed(2))
+                    : minInvestValue
                 }`,
               },
               {
-                transform: value =>
-                  parseFloat(remainingInvestAmount) > parseFloat(assetValue) ? parseFloat(assetValue) : '',
+                transform: value => (remainingInvestAmount > assetValue ? assetValue : ''),
                 message: `Maximum Investment Amount is $${formatNumber(assetValue)}`,
               },
+
               {
                 pattern: /^(?!0+(\.0+)?$)(0|[1-9]\d{0,6})(\.\d{1,2})?$/,
                 message: 'Please enter a valid limit between 0.01 and 9999999, with up to 2 decimal places',
@@ -130,7 +139,7 @@ const InitiateInvestmentModal = ({
         </div>
         {valueRaised > 0 && (
           <>
-            <span className="text-wrapper">Remaining Investment Amount ${remainingInvestAmount}</span>
+            <span className="text-wrapper">Remaining Investment Amount ${remainingInvestAmount.toFixed(2)}</span>
           </>
         )}
 
