@@ -74,11 +74,15 @@ const EditInheritance = ({ selectedItem, userData, onClose }) => {
                 message: 'Person name is required',
               },
               {
-                pattern: /^.{0,40}$/,
-                message: 'Maximum Character Length is 256',
+                pattern: /^[a-zA-Z\s]*$/,
+                message: 'Only alphabets are allowed',
+              },
+              {
+                pattern: /^.{2,30}$/,
+                message: ' Name should be between 2 and 30 characters.',
               },
             ]}>
-            <Field />
+            <Field maxLength={30} />
           </Form.Item>
           <Form.Item
             type="text"

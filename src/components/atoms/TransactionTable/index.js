@@ -20,7 +20,7 @@ const TransactionTable = ({ transactions }) => {
   }));
   const [searchQuery, setSearchQuery] = useState({
     page: 1,
-    pageSize: 10,
+    itemsPerPage: 10,
     searchText: '',
     startDate: '',
     endDate: '',
@@ -124,7 +124,6 @@ const TransactionTable = ({ transactions }) => {
           onChangeFilters={filters => {
             setSearchQuery(_ => ({
               ..._,
-              searchText: filters,
               ...filters,
             }));
           }}

@@ -50,7 +50,11 @@ const KycBuyerLevelOne = ({ setOpen, setKycLevel }) => {
   return (
     <StyledKycBuyer>
       <Form form={form} onSubmit={onSubmit}>
-        <span className="kycdiscreption">Upgrade to KYC Level 1</span>
+        <span className="kycdiscreption">{`Let's get you verified! Snap a photo of your passport.`}</span>
+
+        <label htmlFor="" className="fakelabel">
+          ID Proof
+        </label>
         <div className="combineField">
           <Form.Item
             rounded

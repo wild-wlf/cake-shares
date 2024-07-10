@@ -44,10 +44,10 @@ const Profile = () => {
         </Button>
       </div>
       <ProfileBanner image={user.bannerImage || bgImage} />
-      <UserInfo userImage={user?.profilePicture} userData={user} categoriesData={assets_data?.myCategories} />
+      <UserInfo userImage={user?.profilePicture} userData={user} categoriesData={assets_data?.assets?.myCategories} />
       <UserDetail
         userData={user}
-        assetsData={assets_data}
+        assetsData={assets_data?.assets}
         assets_loading={assets_loading}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}

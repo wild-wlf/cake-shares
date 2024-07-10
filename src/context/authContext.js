@@ -34,6 +34,7 @@ export const AuthContextProvider = props => {
   const onLogout = async () => {
     if (!isLoggedIn) return;
     try {
+      await userService.logout();
       clearCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE);
       clearCookie('is_email_verified');
       clearCookie('email');
@@ -42,8 +43,10 @@ export const AuthContextProvider = props => {
       setLoadingUser(false);
       setIsLoggedIn(false);
       setUser({});
-      await userService.logout();
     } catch (error) {
+      clearCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE);
+      clearCookie('is_email_verified');
+      clearCookie('email');
       console.error('Error during logout:', error);
     }
   };
@@ -73,7 +76,7 @@ export const AuthContextProvider = props => {
       setPermission(false);
     } else if (!isLoggedIn) {
       if (privatePages.includes(router.pathname)) {
-        router.push('/sign-in');
+        router.push('/');
       }
     }
   }, [isLoggedIn, permission]);

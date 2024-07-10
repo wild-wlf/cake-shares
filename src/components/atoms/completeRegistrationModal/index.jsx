@@ -139,8 +139,8 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                     message: 'Please enter username',
                   },
                   {
-                    pattern: /^.{5,20}$/,
-                    message: 'Minimum character length is 5',
+                    pattern: /^.{3,20}$/,
+                    message: 'Minimum character length is 3',
                   },
                   {
                     pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,
@@ -316,11 +316,15 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                     message: 'Please enter Name of Person',
                   },
                   {
-                    pattern: /^.{2,40}$/,
-                    message: 'Please enter a valid name',
+                    pattern: /^[a-zA-Z\s]*$/,
+                    message: 'Only alphabets are allowed',
+                  },
+                  {
+                    pattern: /^.{2,30}$/,
+                    message: ' Name should be between 2 and 30 characters.',
                   },
                 ]}>
-                <Field maxLength={40} />
+                <Field maxLength={30} />
               </Form.Item>
               <Form.Item
                 type="number"

@@ -72,7 +72,7 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
 
   const { report_rows, totalItems } = useMemo(
     () => ({
-      report_rows: assetsData?.assets?.map(report => [
+      report_rows: assetsData?.items?.map(report => [
         report?.product?.productName,
         report?.category?.name,
         report?.totalShares ?? 0,
