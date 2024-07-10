@@ -19,6 +19,7 @@ import { useRouter } from 'next/router';
 import CenterModal from '../Modal/CenterModal';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
+import { convertToCurrencyFormat } from '@/helpers/common';
 
 const MyWallet = ({ pieData, amount }) => {
   const { user } = useContextHook(AuthContext, v => ({
@@ -262,13 +263,18 @@ const MyWallet = ({ pieData, amount }) => {
           <div className="credit">
             <span>Total Credit:</span> <br />
             {/* <h1>$35,265.00</h1> */}
-            <h1>{+user?.wallet != null && user?.wallet != undefined ? `$${user?.wallet}` : '$0'}</h1>
+            <h1>{convertToCurrencyFormat(user?.wallet)}</h1>
           </div>
         </div>
 
         <ChartWrapper>
           <div className="ChartContainer">
-            <PieChart graphData={pieData} title="Total Investments" amount={`$${amount || 0}`} timeFrame="year" />
+            <PieChart
+              graphData={pieData}
+              title="Total Investments"
+              amount={convertToCurrencyFormat(amount)}
+              timeFrame="year"
+            />
           </div>
 
           <div className="ChartContainer">
@@ -279,7 +285,7 @@ const MyWallet = ({ pieData, amount }) => {
               tooltipBg=""
               title="Potential Return P.A"
               // amount={dashboard_data?.totalTransactionAmount}
-              amount="$0"
+              amount={convertToCurrencyFormat(null)}
               timeFrame="steps"
             />
           </div>
@@ -292,7 +298,7 @@ const MyWallet = ({ pieData, amount }) => {
               tooltipImg=""
               title="Portfolio Costs"
               // amount={dashboard_data?.totalTransactionAmount}
-              amount="$0"
+              amount={convertToCurrencyFormat(null)}
               timeFrame="steps"
             />
           </div>
