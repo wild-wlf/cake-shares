@@ -66,6 +66,11 @@ const ChangePassword = () => {
               message: 'Password is required',
             },
             { password: true },
+            {
+              pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?`~\-]).{8,}$/,
+              message:
+                'Password must be 8 char long with 1 special character 1 number and 1 capital and small alphabet',
+            },
           ]}>
           <Field maxLength={64} />
         </Form.Item>

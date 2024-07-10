@@ -45,7 +45,7 @@ const AdvanceSearch = () => {
               <SearchSlider data={data} loading={loading} />
             </>
           ) : (
-            <NoRecord>No Records Found</NoRecord>
+            <NoRecord>No Record Found</NoRecord>
           )}
         </>
       ) : (

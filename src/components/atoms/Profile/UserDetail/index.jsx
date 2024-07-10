@@ -147,7 +147,7 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
       <Inheritance userData={userData} />
       <div className="colWrapper">
         <div className="colHeader">
-          <strong className="colTitle">Edit Profile:</strong>
+          <strong className="colTitle">Personal info:</strong>
           <ModalContainer
             lg
             width={673}
@@ -155,7 +155,7 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
             btnComponent={({ onClick }) => (
               <Button type="primary" rounded sm onClick={onClick}>
                 <MdModeEdit />
-                Edit Info
+                Edit Profile
               </Button>
             )}
             content={({ onClose }) => <EditProfile onClose={onClose} personalInfo={personalInfo} />}

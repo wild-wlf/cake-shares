@@ -11,7 +11,7 @@ import { format } from 'date-fns';
 import userService from '@/services/userService';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
-import { getDateTime } from '@/helpers/common';
+import { formatNumber, getDateTime } from '@/helpers/common';
 
 const TransactionTable = ({ transactions }) => {
   const { user, fetch } = useContextHook(AuthContext, v => ({
@@ -82,18 +82,21 @@ const TransactionTable = ({ transactions }) => {
 
   const { totalCount, transaction_rows } = useMemo(
     () => ({
-      transaction_rows: transactions_data?.transactions?.map(_ => [
-        // format(new Date(_.created_at), 'yyyy-MM-dd'),
-        _.productName ?? '------------',
-        getDateTime(_?.created_at),
-        _.investmentTypeName ?? '------------',
-        _.assetValue ? ((_.investmentAmount / _.assetValue) * 100).toFixed(2) : '------------',
-        `$${_.assetValue}` ?? '------------',
-      ]),
-      totalCount: transactions_data.totalItems,
+      transaction_rows:
+        transactions_data?.transactions?.map(transaction => [
+          transaction.productName ?? '------------',
+          getDateTime(transaction.created_at),
+          transaction.investmentTypeName ?? '------------',
+          transaction.assetValue
+            ? `$${((transaction.investmentAmount / transaction.assetValue) * 100).toFixed(2)}`
+            : '------------',
+          transaction.assetValue ? `$${formatNumber(transaction.assetValue)}` : '$0.00',
+        ]) ?? [],
+      totalCount: transactions_data?.totalItems ?? 0,
     }),
     [transactions_data],
   );
+
   const columnNames = [`Product`, `Date & Time`, 'Category', 'Total Shares', 'Amount'];
 
   return (

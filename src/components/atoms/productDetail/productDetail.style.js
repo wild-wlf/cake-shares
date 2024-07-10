@@ -31,7 +31,7 @@ export const ProductDetailWrapper = styled.div`
     gap: 26px;
     font-size: var(--h5-font-size);
 
-    .kycText{
+    .kycText {
       display: block;
       flex-shrink: 0;
     }
@@ -44,6 +44,15 @@ export const ProductDetailWrapper = styled.div`
     gap: 20px;
     justify-content: space-between;
     font-size: var(--h3-font-size);
+    .textCon {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      .line {
+        height: 100%;
+        border-right: 2px solid #dadada;
+      }
+    }
   }
   h3 {
     font-size: var(--font-size-xxl);
@@ -154,6 +163,7 @@ export const ProductDetailWrapper = styled.div`
         padding-bottom: 10px;
       }
       p {
+        word-break: break-all;
         margin-bottom: 20px;
         @media (min-width: 768px) {
           margin-bottom: 30px;
@@ -172,11 +182,11 @@ export const ProductDetailWrapper = styled.div`
       align-items: normal;
 
       .titleHolder {
-      max-width: 100%;
-    }
-    .headingHolder {
-      max-width: 100%;
-    }
+        max-width: 100%;
+      }
+      .headingHolder {
+        max-width: 100%;
+      }
     }
     .headings {
       display: flex;
