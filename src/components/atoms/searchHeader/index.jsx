@@ -1,15 +1,16 @@
-import React, { useContext, useState } from "react";
-import { IoIosArrowBack } from "react-icons/io";
-import Button from "../Button";
-import { useRouter } from "next/router";
-import { RiExpandUpDownFill } from "react-icons/ri";
-import { IoIosRemoveCircle } from "react-icons/io";
-import { IoIosListBox } from "react-icons/io";
-import { Sort } from "../advanceSearch/advanceSearch.style";
-import Field from "../Field";
-import { BsFillGridFill } from "react-icons/bs";
-import { SearchHeaderWrapper } from "./searchHeader.style";
-import { SearchContext } from "@/context/SearchContext";
+import React, { useContext, useState } from 'react';
+import { IoIosArrowBack } from 'react-icons/io';
+import Button from '../Button';
+import { useRouter } from 'next/router';
+import { RiExpandUpDownFill } from 'react-icons/ri';
+import { IoIosRemoveCircle } from 'react-icons/io';
+import { IoIosListBox } from 'react-icons/io';
+import { Sort } from '../advanceSearch/advanceSearch.style';
+import Field from '../Field';
+import { BsFillGridFill } from 'react-icons/bs';
+import { SearchHeaderWrapper } from './searchHeader.style';
+import { SearchContext } from '@/context/SearchContext';
+import { useContextHook } from 'use-context-hook';
 
 const SearchHeader = ({ handleViewController, listview }) => {
   const router = useRouter();
@@ -19,22 +20,27 @@ const SearchHeader = ({ handleViewController, listview }) => {
   //   searchText: "",
   //   sort: "",
   // });
-  const { handleClearQuery } = useContext(SearchContext);
+  const { setSearchResults, handleClearQuery } = useContextHook(SearchContext, v => ({
+    setSearchResults: v.setSearchResults,
+    handleClearQuery: v.handleClearQuery,
+  }));
 
+  const handleSortChecked = e => {
+    const { name } = e.target;
+    if (name === 'Popularity') {
+      setSearchResults(prev => {
+        const sortedResults = [...prev].sort((a, b) => b.popularityPercent - a.popularityPercent);
+        return sortedResults;
+      });
+    }
 
-  // const handleSortChecked = (e) => {
-  //   const { name } = e.target;
-
-  //   setSelected(name);
-  //   setSearchQuery((prev) => ({
-  //     ...prev,
-  //     sort: name,
-  //   }));
-  //   setSortBox(false);
-  // };
-  function handelClearSearch() {
-  handleClearQuery()
-  }
+    setSelected(name);
+    // setSearchQuery((prev) => ({
+    //   ...prev,
+    //   sort: name,
+    // }));
+    // setSortBox(false);
+  };
   return (
     <SearchHeaderWrapper>
       <div>
@@ -44,8 +50,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
           btntype="blue"
           onClick={() => {
             router.back();
-          }}
-        >
+          }}>
           <IoIosArrowBack />
           Go Back
         </Button>
@@ -55,35 +60,20 @@ const SearchHeader = ({ handleViewController, listview }) => {
           <span className="heading">Search Results</span>
         </div>
         <div className="sorting">
-          {" "}
+          {' '}
           {listview ? (
-            <Button
-              rounded
-              sm
-              className="button"
-              onClick={handleViewController}
-            >
+            <Button rounded sm className="button" onClick={handleViewController}>
               List View
               <IoIosListBox size={18} />
             </Button>
           ) : (
-            <Button
-              rounded
-              sm
-              className="button"
-              onClick={handleViewController}
-            >
+            <Button rounded sm className="button" onClick={handleViewController}>
               Grid View
               <BsFillGridFill size={18} />
             </Button>
           )}
-          <Sort className={sortBox && "active"}>
-            <Button
-              rounded
-              sm
-              className="button"
-              onClick={() => setSortBox(!sortBox)}
-            >
+          <Sort className={sortBox && 'active'}>
+            <Button rounded sm className="button" onClick={() => setSortBox(!sortBox)}>
               Sort By
               <RiExpandUpDownFill size={18} />
             </Button>
@@ -96,8 +86,8 @@ const SearchHeader = ({ handleViewController, listview }) => {
                     name="Popularity"
                     radioBorder="var(--gray-2)"
                     labelReverse
-                    // onChange={handleSortChecked}
-                    value={selected === "Popularity"}
+                    onChange={handleSortChecked}
+                    value={selected === 'Popularity'}
                   />
                   <Field
                     type="checkbox"
@@ -105,8 +95,8 @@ const SearchHeader = ({ handleViewController, listview }) => {
                     name="Funding Ratio"
                     radioBorder="var(--gray-2)"
                     labelReverse
-                    // onChange={handleSortChecked}
-                    value={selected === "Funding Ratio"}
+                    onChange={handleSortChecked}
+                    value={selected === 'Funding Ratio'}
                   />
                   <Field
                     type="checkbox"
@@ -114,14 +104,14 @@ const SearchHeader = ({ handleViewController, listview }) => {
                     name="Return"
                     radioBorder="var(--gray-2)"
                     labelReverse
-                    // onChange={handleSortChecked}
-                    value={selected === "Return"}
+                    onChange={handleSortChecked}
+                    value={selected === 'Return'}
                   />
                 </div>
               )}
             </div>
           </Sort>
-          <Button rounded sm className="button" onClick={handelClearSearch}>
+          <Button rounded sm className="button" onClick={handleClearQuery}>
             Close All
             <IoIosRemoveCircle size={18} />
           </Button>

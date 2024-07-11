@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CardWrapper = styled.div`
   max-width: 400px;
@@ -33,16 +33,14 @@ export const CardWrapper = styled.div`
   }
   .tag {
     font-size: 11px;
-    width: 75px;
-    height: 25px;
     background-color: rgba(255, 255, 255, 1);
     color: rgba(78, 97, 153, 1);
     border-radius: 60px;
-    display: block;
+    display: inline-block;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    padding:5px 8px;
+    padding: 5px 8px;
   }
   .decription {
     border-radius: 0px 0px 20px 20px;
