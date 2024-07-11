@@ -22,7 +22,6 @@ const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
   const [step, setStep] = useState(1);
 
   const onSubmit = async data => {
-
     if (step === 1) {
       setStep(2);
       return;
@@ -83,11 +82,11 @@ const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
               rules={[
                 { required: true },
                 {
-                  pattern: /^.{0,256}$/,
-                  message: 'Maximum Character Length is 256',
+                  pattern: /^.{3,30}$/,
+                  message: 'Please enter a valid bank name',
                 },
               ]}>
-              <Field />
+              <Field maxLength={30} />
               {/* <Select options={optionData} /> */}
             </Form.Item>
             <div className="combineFields">
@@ -97,13 +96,20 @@ const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
                 name="accountHolder"
                 placeholder="Alex Mertiz"
                 rules={[
-                  { required: true },
                   {
-                    pattern: /^.{0,256}$/,
-                    message: 'Maximum Character Length is 256',
+                    required: true,
+                    message: 'Account Holder Name is Required',
+                  },
+                  {
+                    pattern: /^[a-zA-Z\s]*$/,
+                    message: 'Only alphabets are allowed',
+                  },
+                  {
+                    pattern: /^.{2,30}$/,
+                    message: 'Account Holder Name should be between 2 and 30 characters.',
                   },
                 ]}>
-                <Field />
+                <Field maxLength={30} />
               </Form.Item>
               <Form.Item
                 type="num"
@@ -111,10 +117,10 @@ const KycBuyerLevelTwo = ({ setOpen, setKycLevel }) => {
                 name="accountNumber"
                 placeholder="35402755003895"
                 rules={[
-                  { required: true },
+                  { required: true, message: 'Please enter account number' },
                   {
-                    pattern: /^.{0,256}$/,
-                    message: 'Maximum Character Length is 256',
+                    pattern: /^[0-9]{8,34}$/,
+                    message: 'Please enter a valid account number',
                   },
                 ]}>
                 <Field />

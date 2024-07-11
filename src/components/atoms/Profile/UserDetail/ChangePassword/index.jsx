@@ -66,8 +66,13 @@ const ChangePassword = () => {
               message: 'Password is required',
             },
             { password: true },
+            {
+              pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?`~\-]).{8,}$/,
+              message:
+                'Password must be 8 char long with 1 special character 1 number and 1 capital and small alphabet',
+            },
           ]}>
-          <Field />
+          <Field maxLength={64} />
         </Form.Item>
         <Form.Item
           type="password"
@@ -86,7 +91,7 @@ const ChangePassword = () => {
               message: 'The two passwords that you entered do not match!',
             },
           ]}>
-          <Field />
+          <Field maxLength={64} />
         </Form.Item>
       </div>
       <Button rounded md btntype="primary" width="170" htmlType="submit">

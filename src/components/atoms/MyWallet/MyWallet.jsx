@@ -19,6 +19,7 @@ import { useRouter } from 'next/router';
 import CenterModal from '../Modal/CenterModal';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
+import { convertToCurrencyFormat } from '@/helpers/common';
 
 const MyWallet = ({ pieData, amount }) => {
   const { user } = useContextHook(AuthContext, v => ({
@@ -27,13 +28,6 @@ const MyWallet = ({ pieData, amount }) => {
 
   const ary3 = [0, 200, 10, 1000, 5000, 200, 8000, 10, 500];
   const ary2 = [0, 200, 300, 6000, 500, 1000, 500, 5000, 1000, 8000, 200, 5000, 5200, 5500, 5700, 5720, 5880];
-  const dummyPieData = [
-    { name: 'Banking product', y: 30, color: '#408F8C' },
-    { name: 'Properties', y: 25, color: '#00AFD6' },
-    { name: 'Ventures', y: 20, color: '#0A1149' },
-    { name: 'Bazar', y: 15, color: '#419400' },
-    { name: 'Cars', y: 10, color: '#4E6199' },
-  ];
 
   const [open, setOpen] = useState(false);
   const [openLast, setOpenLast] = useState(false);
@@ -269,16 +263,16 @@ const MyWallet = ({ pieData, amount }) => {
           <div className="credit">
             <span>Total Credit:</span> <br />
             {/* <h1>$35,265.00</h1> */}
-            <h1>{+user?.wallet != null && user?.wallet != undefined ? `$${user?.wallet}` : '$0'}</h1>
+            <h1>{convertToCurrencyFormat(user?.wallet)}</h1>
           </div>
         </div>
 
         <ChartWrapper>
           <div className="ChartContainer">
             <PieChart
-              graphData={pieData || dummyPieData}
+              graphData={pieData}
               title="Total Investments"
-              amount={`$${amount || 0}`}
+              amount={convertToCurrencyFormat(amount)}
               timeFrame="year"
             />
           </div>
@@ -291,7 +285,7 @@ const MyWallet = ({ pieData, amount }) => {
               tooltipBg=""
               title="Potential Return P.A"
               // amount={dashboard_data?.totalTransactionAmount}
-              amount="$0"
+              amount={convertToCurrencyFormat(null)}
               timeFrame="steps"
             />
           </div>
@@ -304,7 +298,7 @@ const MyWallet = ({ pieData, amount }) => {
               tooltipImg=""
               title="Portfolio Costs"
               // amount={dashboard_data?.totalTransactionAmount}
-              amount="$0"
+              amount={convertToCurrencyFormat(null)}
               timeFrame="steps"
             />
           </div>

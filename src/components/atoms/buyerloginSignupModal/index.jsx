@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Wrapper } from './buyerloginSignupModal.style';
 import Field from '../Field';
 import Form, { useForm } from '@/components/molecules/Form';
@@ -8,9 +8,26 @@ import Facebook from '../../../_assets/facebook.svg';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-const BuyerLoginSignupModal = ({ handleBuyerModal, handleLoginModal, handleSellerLoginModal, type }) => {
+const BuyerLoginSignupModal = ({
+  handleBuyerModal,
+  handleLoginModal,
+  handleSellerLoginModal,
+  type,
+  registrationData,
+  setRegistrationData,
+}) => {
   const [form] = useForm();
   const router = useRouter();
+
+  useEffect(() => {
+    if (registrationData?.username) {
+      form.setFieldsValue({
+        username: registrationData?.username,
+        email: registrationData?.email,
+      });
+    }
+  }, [registrationData, form]);
+
   function handleSubmit(e) {
     let registerObj = {
       username: e.username?.trim(),
@@ -26,6 +43,11 @@ const BuyerLoginSignupModal = ({ handleBuyerModal, handleLoginModal, handleSelle
     } else {
       // buyer Registration
       handleBuyerModal(registerObj);
+      setRegistrationData(prev => ({
+        ...prev,
+        username: e.username?.trim(),
+        email: e.email?.trim(),
+      }));
     }
 
     // if (e?.select_type.value === "company_seller") {
@@ -62,8 +84,8 @@ const BuyerLoginSignupModal = ({ handleBuyerModal, handleLoginModal, handleSelle
                 message: 'Please enter username',
               },
               {
-                pattern: /^.{5,20}$/,
-                message: 'Minimum character length is 5',
+                pattern: /^.{3,20}$/,
+                message: 'Minimum character length is 3',
               },
               {
                 pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,

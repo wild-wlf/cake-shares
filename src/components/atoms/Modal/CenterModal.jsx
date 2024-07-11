@@ -18,6 +18,8 @@ const CenterModal = ({
   setIsEditing,
   zIndex,
   iscloseAble = true,
+  setRegistrationData,
+  registrationData,
 }) => {
   // const { clearFormData } = useContext(AuthContext);
   useEffect(() => {
@@ -47,6 +49,14 @@ const CenterModal = ({
     // });
     if (iscloseAble) {
       setOpen(false);
+    }
+    if (registrationData) {
+      setRegistrationData(prev => ({
+        ...prev,
+        username: '',
+        email: '',
+        sellerType: '',
+      }));
     }
   };
 

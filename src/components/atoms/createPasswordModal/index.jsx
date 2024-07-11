@@ -63,9 +63,14 @@ const CreatePasswordModal = ({
                 required: true,
                 message: 'Password is required',
               },
+              {
+                pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?`~\-]).{8,}$/,
+                message:
+                  'Password must be 8 char long with 1 special character 1 number and 1 capital and small alphabet',
+              },
               { password: true },
             ]}>
-            <Field />
+            <Field maxLength={64} />
           </Form.Item>
           <Form.Item
             type="password"

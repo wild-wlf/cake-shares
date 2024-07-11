@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Wrapper } from './loginSignupModal.style';
 import Field from '../Field';
 import Form, { useForm } from '@/components/molecules/Form';
@@ -8,8 +8,31 @@ import Facebook from '../../../_assets/facebook.svg';
 import Image from 'next/image';
 import Select from '../Select';
 
-const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleSellerRegisterModal, type }) => {
+let data = [
+  { label: 'Individual Seller', value: 'Individual' },
+  { label: 'Company Seller', value: 'Company' },
+];
+
+const LoginSignupModal = ({
+  handleRegisterModal,
+  handleSellerLoginModal,
+  handleSellerRegisterModal,
+  registrationData,
+  setRegistrationData,
+  type,
+}) => {
   const [form] = useForm();
+
+  useEffect(() => {
+    if (registrationData?.username) {
+      const sellertype = data?.find(ele => ele.value === registrationData?.sellerType);
+      form.setFieldsValue({
+        username: registrationData?.username,
+        email: registrationData?.email,
+        sellerType: sellertype || { value: '', label: '' },
+      });
+    }
+  }, [registrationData, form]);
 
   function handleSubmit(e) {
     const obj = {
@@ -17,6 +40,7 @@ const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleS
       email: e.email?.trim(),
       sellerType: e.sellerType?.value,
     };
+
     const loginObj = {
       username: e.username?.trim(),
       password: e.password?.trim(),
@@ -26,6 +50,12 @@ const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleS
       handleSellerLoginModal({ ...loginObj, type: 'Seller' });
     } else if (type === 'Register As Seller') {
       handleSellerRegisterModal(obj);
+      setRegistrationData(prev => ({
+        ...prev,
+        username: e.username?.trim(),
+        email: e.email?.trim(),
+        sellerType: e.sellerType?.value,
+      }));
     }
   }
 
@@ -43,19 +73,14 @@ const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleS
               name="sellerType"
               sm
               rounded
-              placeholder="Select Type"
+              options={data}
               rules={[
                 {
                   required: true,
                   message: 'Please enter a valid Seller Type',
                 },
               ]}>
-              <Select
-                options={[
-                  { label: 'Individual Seller', value: 'Individual' },
-                  { label: 'Company Seller', value: 'Company' },
-                ]}
-              />
+              <Select />
             </Form.Item>
           </div>
         )}
@@ -73,8 +98,8 @@ const LoginSignupModal = ({ handleRegisterModal, handleSellerLoginModal, handleS
                 message: 'Please enter username',
               },
               {
-                pattern: /^.{5,20}$/,
-                message: 'Minimum character length is 5',
+                pattern: /^.{3,20}$/,
+                message: 'Minimum character length is 3',
               },
               {
                 pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,

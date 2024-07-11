@@ -39,7 +39,7 @@ const productService = {
 
   GetMyAssets(searchQuery, refetch) {
     const [assets, setAssets] = useState({
-      users: [],
+      assets: [],
       totalItems: 0,
     });
     const { cancellablePromise } = useCancellablePromise();
@@ -98,7 +98,7 @@ const productService = {
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
       return {
-        assets: res.items,
+        assets: res,
         totalItems: res.totalItems,
       };
     }

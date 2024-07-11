@@ -5,7 +5,7 @@ import Button from '../Button';
 import { InvestmentModalWrapper } from './InitiateInvestmentModal.style';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
-import { formatNumber } from '@/helpers/common';
+import { convertToCurrencyFormat } from '@/helpers/common';
 import walletService from '@/services/walletService';
 import Toast from '@/components/molecules/Toast';
 
@@ -17,6 +17,7 @@ const InitiateInvestmentModal = ({
   setOwnershipPercentage,
   handleCloseModal,
   setProductData,
+  valueRaised,
 }) => {
   const { user, setPermission } = useContextHook(AuthContext, v => ({
     user: v.user,
@@ -59,6 +60,11 @@ const InitiateInvestmentModal = ({
     }
   };
 
+  let remainingInvestAmount;
+  if (valueRaised > 0) {
+    remainingInvestAmount = parseFloat(assetValue) - parseFloat(valueRaised);
+  }
+
   return (
     <InvestmentModalWrapper>
       <div>
@@ -66,7 +72,7 @@ const InitiateInvestmentModal = ({
       </div>
       <Form form={form} onSubmit={onSubmit}>
         <div className="current-wallet">
-          Current Wallet Balance: <span>${formatNumber(user?.wallet) || 0}</span>
+          Current Wallet Balance: <span>${convertToCurrencyFormat(user?.wallet) || 0}</span>
         </div>
         <div className="input-div">
           <Form.Item
@@ -88,24 +94,59 @@ const InitiateInvestmentModal = ({
                 message: 'Please enter Amount!  ',
               },
               {
-                transform: value => parseFloat(value) > parseFloat(user?.wallet),
-                message: 'You cannot exceed your Wallet Amount!.',
+                transform: value =>
+                  convertToCurrencyFormat(value) >
+                  convertToCurrencyFormat(assetValue) - convertToCurrencyFormat(valueRaised),
+                message: 'You cannot exceed Investment Amount.',
               },
               {
-                min: minInvestValue,
-                message: `Minimum Investment Amount is $${formatNumber(minInvestValue)}`,
+                transform: value => convertToCurrencyFormat(value) > (user?.wallet ?? 0),
+                message: 'You cannot exceed your Wallet Amount.',
               },
               {
-                max: assetValue,
-                message: `Maximum Investment Amount is $${formatNumber(assetValue)}`,
+                transform: value => {
+                  if (remainingInvestAmount) {
+                    if (remainingInvestAmount < minInvestValue) {
+                      if (value >= remainingInvestAmount) return;
+                      return convertToCurrencyFormat(remainingInvestAmount);
+                    } else {
+                      if (value >= minInvestValue) return;
+                      return minInvestValue;
+                    }
+                  } else {
+                    if (value < minInvestValue) {
+                      return minInvestValue;
+                    }
+                  }
+                },
+                message: `Minimum Investment Amount is $${
+                  remainingInvestAmount < minInvestValue
+                    ? convertToCurrencyFormat(remainingInvestAmount)
+                    : minInvestValue
+                }`,
+              },
+              {
+                transform: value => (remainingInvestAmount > assetValue ? assetValue : ''),
+                message: `Maximum Investment Amount is ${convertToCurrencyFormat(assetValue)}`,
+              },
+
+              {
+                pattern: /^(?!0+(\.0+)?$)(0|[1-9]\d{0,6})(\.\d{1,2})?$/,
+                message: 'Please enter a valid limit between 0.01 and 9999999, with up to 2 decimal places',
               },
             ]}>
             <Field />
           </Form.Item>
         </div>
+        {valueRaised > 0 && (
+          <>
+            <span className="text-wrapper">Remaining Investment Amount ${remainingInvestAmount.toFixed(2)}</span>
+          </>
+        )}
+
         <div className="text-wrapper">
           You will own <span>{ownershipPercentage}%</span> of the asset, valued at a total of $
-          {formatNumber(assetValue)}.
+          {convertToCurrencyFormat(assetValue)}.
         </div>
         <div>
           <Button rounded md btntype="primary" loader={isLoading} width="170" htmlType="submit">

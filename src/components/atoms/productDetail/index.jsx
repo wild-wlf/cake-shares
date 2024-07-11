@@ -90,6 +90,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
           sellerId={data?.userId}
           assetValue={data?.assetValue}
           minInvestValue={data?.minimumInvestment}
+          valueRaised={data?.valueRaised}
           setOwnershipPercentage={setOwnershipPercentage}
           handleCloseModal={() => {
             setModal(false);
@@ -119,13 +120,15 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
             <IoIosArrowBack />
             Go Back
           </Button>
-          <Button rounded sm btntype="primary" className="button" onClick={handleInitiateInvestment}>
-            Initiate Investment
-            <RiFilePaperFill />
-          </Button>
+          {data?.assetValue !== data?.valueRaised && (
+            <Button rounded sm btntype="primary" className="button" onClick={handleInitiateInvestment}>
+              Initiate Investment
+              <RiFilePaperFill />
+            </Button>
+          )}
         </div>
         <div className="titlewrapper">
-          <div className='titleHolder'>
+          <div className="titleHolder">
             <div className="title">
               <span>{data?.productName}</span>
             </div>
@@ -139,27 +142,39 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
                   </>
                 )}
               </span>
-              <span className='kycText'>KYC (Level {data?.kycLevel})</span>
+              <span className="kycText">KYC (Level {data?.kycLevel})</span>
             </div>
           </div>
 
-          <div className='headingHolder'>
+          <div className="headingHolder">
             <div className="headings">
-              <div>
-                <span>Investment type</span>
-                <h3>{data?.investmentType?.name}</h3>
+              <div className="textCon">
+                <div>
+                  <span>Investment type</span>
+                  <h3>{data?.investmentType?.name}</h3>
+                </div>
+                <div className="line"></div>
               </div>
-              <div>
-                <span>Return (%)</span>
-                <h3>0%</h3>
+              <div className="textCon">
+                <div>
+                  <span>Return (%)</span>
+                  <h3>0%</h3>
+                </div>
+                <div className="line"></div>
               </div>
-              <div>
-                <span>Funding Ratio</span>
-                <h3>0%</h3>
+              <div className="textCon">
+                <div>
+                  <span>Funding Ratio</span>
+                  <h3>0%</h3>
+                </div>
+                <div className="line"></div>
               </div>
-              <div>
-                <span>Backers Limit</span>
-                <h3>{data?.maximumBackers}</h3>
+              <div className="textCon">
+                <div>
+                  <span>Backers Limit</span>
+                  <h3>{data?.maximumBackers}</h3>
+                </div>
+                <div className="line"></div>
               </div>
               <div>
                 <span>Annual Cost (est.)</span>

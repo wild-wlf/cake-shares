@@ -67,7 +67,7 @@ const UserInfo = ({
       <div className="userInfo">
         {type.userType === 'Buyer' && (
           <ProfileWrapper showEffect={type.userType}>
-            <input type="file" id="bannerImg" accept=".png , .jpg" onChange={handelProfileImage} />
+            <input type="file" id="bannerImg" accept=".png , .jpg, .jpeg" onChange={handelProfileImage} />
             <span className="rounded-icon">
               <MdEdit color="var(--white)" size={26} />
             </span>
