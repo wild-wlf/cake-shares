@@ -1,15 +1,16 @@
-import React, { useContext, useState } from "react";
-import { IoIosArrowBack } from "react-icons/io";
-import Button from "../Button";
-import { useRouter } from "next/router";
-import { RiExpandUpDownFill } from "react-icons/ri";
-import { IoIosRemoveCircle } from "react-icons/io";
-import { IoIosListBox } from "react-icons/io";
-import { Sort } from "../advanceSearch/advanceSearch.style";
-import Field from "../Field";
-import { BsFillGridFill } from "react-icons/bs";
-import { SearchHeaderWrapper } from "./searchHeader.style";
-import { SearchContext } from "@/context/SearchContext";
+import React, { useContext, useState } from 'react';
+import { IoIosArrowBack } from 'react-icons/io';
+import Button from '../Button';
+import { useRouter } from 'next/router';
+import { RiExpandUpDownFill } from 'react-icons/ri';
+import { IoIosRemoveCircle } from 'react-icons/io';
+import { IoIosListBox } from 'react-icons/io';
+import { Sort } from '../advanceSearch/advanceSearch.style';
+import Field from '../Field';
+import { BsFillGridFill } from 'react-icons/bs';
+import { SearchHeaderWrapper } from './searchHeader.style';
+import { SearchContext } from '@/context/SearchContext';
+import { useContextHook } from 'use-context-hook';
 
 const SearchHeader = ({ handleViewController, listview }) => {
   const router = useRouter();
@@ -19,8 +20,9 @@ const SearchHeader = ({ handleViewController, listview }) => {
   //   searchText: "",
   //   sort: "",
   // });
-  const { handleClearQuery } = useContext(SearchContext);
-
+  const { handleClearQuery } = useContextHook(SearchContext, v => ({
+    handleClearQuery: v.handleClearQuery,
+  }));
 
   // const handleSortChecked = (e) => {
   //   const { name } = e.target;
@@ -33,7 +35,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
   //   setSortBox(false);
   // };
   function handelClearSearch() {
-  handleClearQuery()
+    handleClearQuery();
   }
   return (
     <SearchHeaderWrapper>
@@ -44,8 +46,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
           btntype="blue"
           onClick={() => {
             router.back();
-          }}
-        >
+          }}>
           <IoIosArrowBack />
           Go Back
         </Button>
@@ -55,35 +56,20 @@ const SearchHeader = ({ handleViewController, listview }) => {
           <span className="heading">Search Results</span>
         </div>
         <div className="sorting">
-          {" "}
+          {' '}
           {listview ? (
-            <Button
-              rounded
-              sm
-              className="button"
-              onClick={handleViewController}
-            >
+            <Button rounded sm className="button" onClick={handleViewController}>
               List View
               <IoIosListBox size={18} />
             </Button>
           ) : (
-            <Button
-              rounded
-              sm
-              className="button"
-              onClick={handleViewController}
-            >
+            <Button rounded sm className="button" onClick={handleViewController}>
               Grid View
               <BsFillGridFill size={18} />
             </Button>
           )}
-          <Sort className={sortBox && "active"}>
-            <Button
-              rounded
-              sm
-              className="button"
-              onClick={() => setSortBox(!sortBox)}
-            >
+          <Sort className={sortBox && 'active'}>
+            <Button rounded sm className="button" onClick={() => setSortBox(!sortBox)}>
               Sort By
               <RiExpandUpDownFill size={18} />
             </Button>
@@ -97,7 +83,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
                     radioBorder="var(--gray-2)"
                     labelReverse
                     // onChange={handleSortChecked}
-                    value={selected === "Popularity"}
+                    value={selected === 'Popularity'}
                   />
                   <Field
                     type="checkbox"
@@ -106,7 +92,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
                     radioBorder="var(--gray-2)"
                     labelReverse
                     // onChange={handleSortChecked}
-                    value={selected === "Funding Ratio"}
+                    value={selected === 'Funding Ratio'}
                   />
                   <Field
                     type="checkbox"
@@ -115,7 +101,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
                     radioBorder="var(--gray-2)"
                     labelReverse
                     // onChange={handleSortChecked}
-                    value={selected === "Return"}
+                    value={selected === 'Return'}
                   />
                 </div>
               )}

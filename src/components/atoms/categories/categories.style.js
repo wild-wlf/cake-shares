@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const NoRecord = styled.div`
   min-height: 100px;
@@ -15,6 +15,28 @@ export const CategoriesWrapper = styled.div`
     font-size: var(--font-size-xl);
     font-weight: 500;
   }
+  ${({ $slide }) =>
+    $slide &&
+    css`
+      .slider {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 20px;
+        width: 100%;
+        @media screen and (max-width: 1600px) {
+          grid-template-columns: repeat(5, 1fr);
+        }
+        @media screen and (max-width: 1200px) {
+          grid-template-columns: repeat(4, 1fr);
+        }
+        @media screen and (max-width: 992px) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        @media screen and (max-width: 768px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    `}
 
   .slick-track {
     display: flex;
@@ -56,15 +78,15 @@ export const CategoriesWrapper = styled.div`
       }
     }
     .slick-arrow.slick-next {
-      background-image: url(${(props) => props.image.src});
+      background-image: url(${props => props.image.src});
       right: 0;
     }
     .slick-arrow.slick-next {
-      background-image: url(${(props) => props.image.src});
+      background-image: url(${props => props.image.src});
       right: 0;
     }
     .slick-arrow.slick-prev {
-      background-image: url(${(props) => props.image.src});
+      background-image: url(${props => props.image.src});
       left: auto;
       transform: rotate(180deg);
       top: -20px;

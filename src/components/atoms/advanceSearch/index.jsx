@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useState, useEffect, useContext, useMemo } from 'react';
 import { Sort, Wrapper } from './advanceSearch.style';
 import Button from '../Button';
 import { IoMdArrowDropdown } from 'react-icons/io';
@@ -22,6 +22,11 @@ const AdvanceSearch = () => {
   const { fetch } = useContextHook(AuthContext, v => ({
     fetch: v.fetch,
   }));
+  const { handleSearchQuery, handleClearQuery } = useContextHook(SearchContext, v => ({
+    handleSearchQuery: v.handleSearchQuery,
+    handleClearQuery: v.handleClearQuery,
+  }));
+
   const { categories_data } = categoryService.GetAllCategories(
     {
       getAll: true,
@@ -35,13 +40,13 @@ const AdvanceSearch = () => {
         label: 'All',
         value: '',
       },
-      ...(categories_data?.items?.map(ele => ({
+      ...(categories_data?.categories?.map(ele => ({
         value: ele?._id,
         label: ele?.name,
       })) || []),
     ];
     return options;
-  }, [categories_data?.items]);
+  }, [categories_data?.categories]);
 
   const [selected, setSelected] = useState({
     investment: 'Select Type',
@@ -55,22 +60,12 @@ const AdvanceSearch = () => {
     minInvestment: '',
     maxInvestment: '',
   });
-  const handlePopularChecked = () => {
-    setSearchQuery(prev => ({
-      ...prev,
-      popular: !prev.popular,
-    }));
-  };
-  const handlePrivateChecked = () => {
-    setSearchQuery(prev => ({
-      ...prev,
-      private: !prev.private,
-    }));
-  };
-  const { handleSearchQuery } = useContext(SearchContext);
 
   const handleSubmit = e => {
     let obj = {
+      searchText: e?.searchText,
+      popular: e?.popular,
+      type: e?.type,
       investmentType: e?.investment_type?.value,
       country: e?.country?.value,
       kycLevel: e?.kyc_level?.value,
@@ -85,12 +80,30 @@ const AdvanceSearch = () => {
     handleSearchQuery(obj);
     router.push('/advanceSearch');
   };
+
+  useEffect(() => {
+    handleClearQuery();
+  }, []);
+
   return (
     <Form form={form} onSubmit={handleSubmit}>
       <Wrapper>
         <div className="searchby">
-          <span>Search by</span>
-          <input type="text" placeholder="Search any keyword" />
+          <Form.Item
+            type="text"
+            label="Search By"
+            name="searchText"
+            sm
+            rounded
+            placeholder="Search by any Keyword"
+            rules={[
+              {
+                pattern: /^.{0,40}$/,
+                message: 'Maximum Character Length is 256',
+              },
+            ]}>
+            <Field />
+          </Form.Item>
         </div>
 
         <div className="investmenttype">
@@ -171,6 +184,10 @@ const AdvanceSearch = () => {
                   pattern: /^.{0,10}$/,
                   message: 'Maximum Character Length is 10',
                 },
+                {
+                  pattern: /^(?!-)(?:0|(?:[1-9]\d*)(?:\.\d{1,2})?)$/,
+                  message: 'Please Enter a Valid Positive Number.',
+                },
               ]}>
               <Field maxLength={10} />
             </Form.Item>
@@ -187,6 +204,10 @@ const AdvanceSearch = () => {
                 {
                   pattern: /^.{0,10}$/,
                   message: 'Maximum Character Length is 10',
+                },
+                {
+                  pattern: /^(?!-)(?:0|(?:[1-9]\d*)(?:\.\d{1,2})?)$/,
+                  message: 'Please Enter a Valid Positive Number.',
                 },
               ]}>
               <Field maxLength={10} />
@@ -205,6 +226,10 @@ const AdvanceSearch = () => {
                   pattern: /^.{0,3}$/,
                   message: 'Maximum Character Length is 3',
                 },
+                {
+                  pattern: /^(?!-)(?:0|(?:[1-9]\d*)(?:\.\d{1,2})?)$/,
+                  message: 'Please Enter a Valid Positive Number.',
+                },
               ]}>
               <Field maxLength={3} />
             </Form.Item>
@@ -222,6 +247,10 @@ const AdvanceSearch = () => {
                   pattern: /^.{0,3}$/,
                   message: 'Maximum Character Length is 3',
                 },
+                {
+                  pattern: /^(?!-)(?:0|(?:[1-9]\d*)(?:\.\d{1,2})?)$/,
+                  message: 'Please Enter a Valid Positive Number.',
+                },
               ]}>
               <Field maxLength={3} />
             </Form.Item>
@@ -229,20 +258,22 @@ const AdvanceSearch = () => {
         </div>
 
         <div className="checkbox">
-          <Field
+          <Form.Item
             type="checkbox"
             label="Popular (likes)"
+            name="popular"
             labelColor="rgba(49, 49, 49, 1)"
-            radioBorder="var(--gray-2)"
-            onChange={handlePopularChecked}
-          />
-          <Field
+            radioBorder="var(--gray-2)">
+            <Field />
+          </Form.Item>
+          <Form.Item
             type="checkbox"
             label="Corporate or Private"
+            name="type"
             labelColor="rgba(49, 49, 49, 1)"
-            radioBorder="var(--gray-2)"
-            onChange={handlePrivateChecked}
-          />
+            radioBorder="var(--gray-2)">
+            <Field />
+          </Form.Item>
         </div>
 
         <div className="btnwrapper">

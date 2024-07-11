@@ -1,4 +1,4 @@
-import React, { useContext, useEffect,  useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { SearchFiltersWrapper } from './searchFilters.style';
 import Field from '../Field';
 import Button from '../Button';
@@ -7,27 +7,52 @@ import Form, { useForm } from '@/components/molecules/Form';
 import Select from '../Select';
 import { countries } from '@/components/Constant';
 import { SearchContext } from '@/context/SearchContext';
+import categoryService from '@/services/categoryService';
+import { useContextHook } from 'use-context-hook';
+import { AuthContext } from '@/context/authContext';
 
+const SearchFilters = ({ fetchProducts }) => {
+  const { fetch } = useContextHook(AuthContext, v => ({
+    fetch: v.fetch,
+  }));
 
-const SearchFilters = () => {
   const kycLevel = [
     { label: 'Level 0', value: 0 },
     { label: 'Level 1', value: 1 },
     { label: 'Level 2', value: 2 },
   ];
   const [arr, setArr] = useState(countries);
+  const [isLoading, setIsLoading] = useState(false);
   const [form] = useForm();
-  const { handleSearchQuery, searchQuery, categoriesOptions } = useContext(SearchContext);
+  const { handleSearchQuery, searchQuery } = useContextHook(SearchContext, v => ({
+    handleSearchQuery: v.handleSearchQuery,
+    searchQuery: v.searchQuery,
+  }));
+
+  const { categories_data } = categoryService.GetAllCategories(
+    {
+      getAll: true,
+    },
+    fetch,
+  );
+
+  const categoriesOptions = useMemo(() => {
+    return categories_data?.categories?.map(ele => ({
+      value: ele?._id,
+      label: ele?.name,
+    }));
+  }, [categories_data?.categories]);
 
   const [investmentVolume, setInvestmentVolume] = useState({
     min: searchQuery?.minInvestment || '',
     max: searchQuery?.maxInvestment || '',
   });
+
   useEffect(() => {
     async function setFilters(params) {
       const country = countries.find(ele => ele.value === searchQuery?.country);
       const kyc = kycLevel.find(ele => ele.value === searchQuery?.kycLevel);
-      const investmentType = await categoriesOptions?.find(ele => ele.value === searchQuery?.investmentType);
+      const investmentType = categoriesOptions?.find(ele => ele.value === searchQuery?.investmentType);
       form.setFieldsValue({
         investment_type: investmentType,
         kyc_level: kyc,
@@ -41,10 +66,16 @@ const SearchFilters = () => {
       });
     }
     setFilters();
-  }, [searchQuery]);
+  }, [searchQuery, categories_data?.categories]);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
+    setIsLoading(true);
     let obj = {
+      page: 1,
+      itemsPerPage: 12,
+      searchText: '',
+      popular: '',
+      type: '',
       investmentType: e?.investment_type?.value,
       country: e?.country?.value,
       kycLevel: e?.kyc_level?.value,
@@ -56,6 +87,8 @@ const SearchFilters = () => {
       maxInvestment: investmentVolume?.max,
     };
     handleSearchQuery(obj);
+    fetchProducts(obj);
+    setIsLoading(false);
   };
   return (
     <Form form={form} onSubmit={handleSubmit}>
@@ -210,7 +243,7 @@ const SearchFilters = () => {
           </Form.Item>
         </div>
         <div className="btn-wrapper">
-          <Button rounded md btntype="primary" width="200px" htmlType="submit">
+          <Button rounded md loader={isLoading} btntype="primary" width="200px" htmlType="submit">
             Search
           </Button>
         </div>
