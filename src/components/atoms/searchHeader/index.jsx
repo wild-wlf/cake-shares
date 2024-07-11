@@ -20,23 +20,27 @@ const SearchHeader = ({ handleViewController, listview }) => {
   //   searchText: "",
   //   sort: "",
   // });
-  const { handleClearQuery } = useContextHook(SearchContext, v => ({
+  const { setSearchResults, handleClearQuery } = useContextHook(SearchContext, v => ({
+    setSearchResults: v.setSearchResults,
     handleClearQuery: v.handleClearQuery,
   }));
 
-  // const handleSortChecked = (e) => {
-  //   const { name } = e.target;
+  const handleSortChecked = e => {
+    const { name } = e.target;
+    if (name === 'Popularity') {
+      setSearchResults(prev => {
+        const sortedResults = [...prev].sort((a, b) => b.popularityPercent - a.popularityPercent);
+        return sortedResults;
+      });
+    }
 
-  //   setSelected(name);
-  //   setSearchQuery((prev) => ({
-  //     ...prev,
-  //     sort: name,
-  //   }));
-  //   setSortBox(false);
-  // };
-  function handelClearSearch() {
-    handleClearQuery();
-  }
+    setSelected(name);
+    // setSearchQuery((prev) => ({
+    //   ...prev,
+    //   sort: name,
+    // }));
+    // setSortBox(false);
+  };
   return (
     <SearchHeaderWrapper>
       <div>
@@ -82,7 +86,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
                     name="Popularity"
                     radioBorder="var(--gray-2)"
                     labelReverse
-                    // onChange={handleSortChecked}
+                    onChange={handleSortChecked}
                     value={selected === 'Popularity'}
                   />
                   <Field
@@ -91,7 +95,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
                     name="Funding Ratio"
                     radioBorder="var(--gray-2)"
                     labelReverse
-                    // onChange={handleSortChecked}
+                    onChange={handleSortChecked}
                     value={selected === 'Funding Ratio'}
                   />
                   <Field
@@ -100,14 +104,14 @@ const SearchHeader = ({ handleViewController, listview }) => {
                     name="Return"
                     radioBorder="var(--gray-2)"
                     labelReverse
-                    // onChange={handleSortChecked}
+                    onChange={handleSortChecked}
                     value={selected === 'Return'}
                   />
                 </div>
               )}
             </div>
           </Sort>
-          <Button rounded sm className="button" onClick={handelClearSearch}>
+          <Button rounded sm className="button" onClick={handleClearQuery}>
             Close All
             <IoIosRemoveCircle size={18} />
           </Button>

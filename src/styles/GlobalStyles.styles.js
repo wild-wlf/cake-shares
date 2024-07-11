@@ -162,7 +162,7 @@ export const Styling = css`
     }
   }
   .rc-slide-customization {
-    margin: 20px 10px 30px 10px;
+    margin: 20px 0px 30px 0px;
     .rc-slider-rail {
       height: 10px;
     }
@@ -547,4 +547,3 @@ export const HelperClasses = css`
     }
   }
 `;
-

@@ -90,6 +90,21 @@ const SearchFilters = ({ fetchProducts }) => {
     fetchProducts(obj);
     setIsLoading(false);
   };
+
+  const loadInvestmentTypeOptions = async searchText => {
+    try {
+      let options = [];
+      const response = await categoryService.getAllCategories({
+        getAll: true,
+        searchText,
+      });
+      options = response?.items?.map(_ => ({ value: _?._id, label: _?.name }));
+      return options;
+    } catch (error) {
+      return [];
+    }
+  };
+
   return (
     <Form form={form} onSubmit={handleSubmit}>
       <SearchFiltersWrapper>
@@ -101,14 +116,14 @@ const SearchFilters = ({ fetchProducts }) => {
             sm
             rounded
             placeholder="Select Type"
-            options={categoriesOptions}
+            defaultOptions={categoriesOptions}
             rules={[
               {
                 pattern: /^.{0,40}$/,
                 message: 'Maximum Character Length is 256',
               },
             ]}>
-            <Select />
+            <Select async loadOptions={loadInvestmentTypeOptions} />
           </Form.Item>
         </div>
         <div className="dropdown-div">
