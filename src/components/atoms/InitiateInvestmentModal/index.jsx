@@ -72,7 +72,7 @@ const InitiateInvestmentModal = ({
       </div>
       <Form form={form} onSubmit={onSubmit}>
         <div className="current-wallet">
-          Current Wallet Balance: <span>${convertToCurrencyFormat(user?.wallet) || 0}</span>
+          Current Wallet Balance: <span>{convertToCurrencyFormat(user?.wallet) || 0}</span>
         </div>
         <div className="input-div">
           <Form.Item
@@ -94,13 +94,11 @@ const InitiateInvestmentModal = ({
                 message: 'Please enter Amount!  ',
               },
               {
-                transform: value =>
-                  convertToCurrencyFormat(value) >
-                  convertToCurrencyFormat(assetValue) - convertToCurrencyFormat(valueRaised),
+                transform: value => Number(value) > Number(assetValue) - Number(valueRaised),
                 message: 'You cannot exceed Investment Amount.',
               },
               {
-                transform: value => convertToCurrencyFormat(value) > (user?.wallet ?? 0),
+                transform: value => Number(value) > (user?.wallet ?? 0),
                 message: 'You cannot exceed your Wallet Amount.',
               },
               {
@@ -108,7 +106,7 @@ const InitiateInvestmentModal = ({
                   if (remainingInvestAmount) {
                     if (remainingInvestAmount < minInvestValue) {
                       if (value >= remainingInvestAmount) return;
-                      return convertToCurrencyFormat(remainingInvestAmount);
+                      return Number(remainingInvestAmount);
                     } else {
                       if (value >= minInvestValue) return;
                       return minInvestValue;
@@ -120,9 +118,7 @@ const InitiateInvestmentModal = ({
                   }
                 },
                 message: `Minimum Investment Amount is $${
-                  remainingInvestAmount < minInvestValue
-                    ? convertToCurrencyFormat(remainingInvestAmount)
-                    : minInvestValue
+                  remainingInvestAmount < minInvestValue ? Number(remainingInvestAmount) : minInvestValue
                 }`,
               },
               {
@@ -145,7 +141,8 @@ const InitiateInvestmentModal = ({
         )}
 
         <div className="text-wrapper">
-          You will own <span>{ownershipPercentage}%</span> of the asset, valued at a total of $
+          You will own <span>{ownershipPercentage}%</span>
+          {`of the asset, valued at a total of `}
           {convertToCurrencyFormat(assetValue)}.
         </div>
         <div>

@@ -10,6 +10,7 @@ import Profilepic from '@/_assets/profileplaceHolder.jpg';
 import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
 import Toast from '@/components/molecules/Toast';
+import { convertToCurrencyFormat } from '@/helpers/common';
 
 const ProductDescription = ({ data, SellerData }) => {
   const router = useRouter();
@@ -33,23 +34,11 @@ const ProductDescription = ({ data, SellerData }) => {
           <div className="amountdiv">
             <div>
               <span>Min Investment (USD)</span>
-              <strong className="amount">
-                $
-                {data?.minimumInvestment?.toLocaleString('en-US', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
-              </strong>
+              <strong className="amount">{convertToCurrencyFormat(data?.minimumInvestment)}</strong>
             </div>
             <div>
               <span>Asset Value (USD)</span>
-              <strong className="amount">
-                $
-                {data?.assetValue?.toLocaleString('en-US', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
-              </strong>
+              <strong className="amount">{convertToCurrencyFormat(data?.assetValue)}</strong>
             </div>
           </div>
           <div className="total">
