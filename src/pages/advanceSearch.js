@@ -68,7 +68,7 @@ const AdvanceSearch = () => {
           searchResults.length > 0 ? (
             <SearchSlider data={searchResults} loading={loading} />
           ) : (
-            <NoRecord>No Records Found</NoRecord>
+            <NoRecord>No Record Found</NoRecord>
           )
         ) : (
           <AdvanceSearchGrid data={searchResults} loading={loading} />
