@@ -93,7 +93,7 @@ const productService = {
     throw new Error(message ?? 'Something went wrong');
   },
 
-  async getAssets({ page, pageSize, getAll = '' }) {
+  async getAssets({ page, pageSize, getAll }) {
     let res = await Fetch.get(`${this._url}/get-all-assets?itemsPerPage=${pageSize}&page=${page}&getAll=${getAll}`);
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
