@@ -58,7 +58,7 @@ const Chat = ({ userInfo, type }) => {
 
   useEffect(() => {
     window.addEventListener('direct_chat_history', event => {
-      updateDirectChatHistoryIfActive({ ...event.detail, user, userInfo, setChatMessages });
+      updateDirectChatHistoryIfActive({ ...event.detail, user, userInfo, onlineUsers, setChatMessages });
       handleScrollToBottom();
     });
 
@@ -126,7 +126,7 @@ const Chat = ({ userInfo, type }) => {
             ))
           )}
         </ChatBody>
-        <ChatFooter userInfo={userInfo} type={type} />
+        <ChatFooter userInfo={userInfo} type={type} lastMessage={chatMessages.slice(-5)} />
       </div>
       <ChatMedia userInfo={userInfo} type={type} onlineUsers={onlineUsers} />
       <div className="hamburger" onClick={() => document.body.classList.toggle('chat-sidebar-active')}>

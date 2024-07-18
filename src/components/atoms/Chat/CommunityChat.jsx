@@ -32,6 +32,7 @@ const CommunityChat = ({ userInfo, type, productName, productId }) => {
   const [chatLoading, setChatLoading] = useState(true);
   const [moreMsgLoading, setMoreMsgLoading] = useState(false);
   const [channelReceivers, setChannelReceivers] = useState([]);
+  const [receivers, setreceivers] = useState([]);
 
   const { messages_loading, messages_data } = notificationService.GetAllCommunityConversationMessages(
     searchQuery,
@@ -42,6 +43,7 @@ const CommunityChat = ({ userInfo, type, productName, productId }) => {
     if (messages_data?.messages?.length > 0) {
       setChatMessages(prev => [...messages_data?.messages, ...prev]);
       const lastMessage = messages_data?.messages[messages_data?.messages?.length - 1];
+      setreceivers(messages_data?.messages[messages_data?.messages.length - 1]?.receivers);
       setChannelReceivers([lastMessage, { ...lastMessage?.author }]);
       setMoreMsgLoading(false);
     }
@@ -70,6 +72,7 @@ const CommunityChat = ({ userInfo, type, productName, productId }) => {
         user,
         setChatMessages,
       });
+      setreceivers(event?.detail?.participants);
       handleScrollToBottom();
     });
 
@@ -154,7 +157,13 @@ const CommunityChat = ({ userInfo, type, productName, productId }) => {
             )
           )}
         </ChatBody>
-        <ChatFooter userInfo={userInfo} type={type} productName={productName} productId={productId} />
+        <ChatFooter
+          userInfo={userInfo}
+          type={type}
+          productName={productName}
+          productId={productId}
+          receivers={receivers?.map(receiver => receiver?._id?.toString()) || receivers}
+        />
       </div>
       <ChatMedia userInfo={userInfo} type={type} onlineUsers={onlineUsers} channelReceivers={channelReceivers} />
       <div className="hamburger" onClick={() => document.body.classList.toggle('chat-sidebar-active')}>

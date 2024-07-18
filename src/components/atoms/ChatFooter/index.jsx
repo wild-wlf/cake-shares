@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { ChatFooterWrapper } from './ChatFooter.style';
 import Image from 'next/image';
 import SendIcon from '../../../_assets/send-icon.svg';
@@ -11,11 +11,19 @@ import Button from '../Button';
 import Field from '../Field';
 import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
-import { sendDirectMessage, sendComMsg } from '@/helpers/socketConnection/socketConnection';
+import {
+  sendDirectMessage,
+  sendComMsg,
+  startChat,
+  endChat,
+  joinGroupChat,
+  leaveGroupChat,
+} from '@/helpers/socketConnection/socketConnection';
 import CreatePollModal from '../Chat/CreatePollModal';
 import CenterModal from '../Modal/CenterModal';
+import { removeSpaces } from '@/helpers/common';
 
-const ChatFooter = ({ userInfo, type, productName, productId }) => {
+const ChatFooter = ({ userInfo, type, productName, productId, receivers }) => {
   const [form] = useForm();
   const { user } = useContextHook(AuthContext, v => ({
     user: v.user,
@@ -32,6 +40,7 @@ const ChatFooter = ({ userInfo, type, productName, productId }) => {
     }
 
     if (type === 'community' || type === 'stake') {
+      const channelName = `${type === 'community' ? 'com' : 'stake'}_${removeSpaces(productName)}_${productId}`;
       sendComMsg({
         author: user?._id,
         content: message,
@@ -40,11 +49,49 @@ const ChatFooter = ({ userInfo, type, productName, productId }) => {
         productOwnerId: userInfo?._id,
         type,
         user_type: 'user',
+        channelName,
+        receivers,
       });
     }
     form.setFieldsValue({ message: '' });
     form.setFieldsError({ message: { message: '' } });
   };
+
+  useEffect(() => {
+    const handleStartChat = () => {
+      if (user?._id && userInfo?._id) {
+        startChat({ author: user._id, receiver: userInfo._id });
+      }
+    };
+
+    const handleEndChat = () => {
+      if (user?._id && userInfo?._id) {
+        endChat({ author: user._id, receiver: userInfo._id });
+      }
+      if (type === 'community' || type === 'stake') {
+        const channelName = `${type === 'community' ? 'com' : 'stake'}_${removeSpaces(productName)}_${productId}`;
+        leaveGroupChat({ userId: user._id, groupId: channelName });
+      }
+    };
+
+    window.addEventListener('beforeunload', handleEndChat);
+    window.addEventListener('unload', handleEndChat);
+
+    // handleStartChat();
+    // Check type and initiate startChat for specific types
+    if (type === 'community' || type === 'stake') {
+      const channelName = `${type === 'community' ? 'com' : 'stake'}_${removeSpaces(productName)}_${productId}`;
+      joinGroupChat({ userId: user._id, groupId: channelName });
+    } else {
+      handleStartChat();
+    }
+
+    return () => {
+      handleEndChat();
+      window.removeEventListener('beforeunload', handleEndChat);
+      window.removeEventListener('unload', handleEndChat);
+    };
+  }, []);
 
   return (
     <>
