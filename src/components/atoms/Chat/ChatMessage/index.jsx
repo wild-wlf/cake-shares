@@ -32,7 +32,7 @@ const ChatMessage = ({ showImage, message, time, type, readBy, messageId, receiv
     <StyledChatMessage $type={type}>
       {type === 'send' && group && (
         <div className="img-holder">
-          <Image src={showImage || Pic} alt="user-pic" />
+          <Image src={showImage || Pic} alt="user-pic" width={25} height={25} />
         </div>
       )}
       <div className="message-holder">

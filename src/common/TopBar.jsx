@@ -34,6 +34,7 @@ import LoginAsSellerModal from '@/components/atoms/LoginAsSellerModal';
 import Toast from '@/components/molecules/Toast';
 import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
+import notificationService from '@/services/notificationservice';
 
 const TopBar = () => {
   const {
@@ -72,7 +73,7 @@ const TopBar = () => {
   const [loader, setLoader] = useState(false);
   const notificationsRef = useRef(null);
   const [registrationData, setRegistrationData] = useState();
-
+  const [isBadge, setIsBadge] = useState(false);
   const router = usePathname();
   const handleClickOutsideProfile = event => {
     if (ProfileRef.current && !ProfileRef.current.contains(event.target)) {
@@ -201,6 +202,33 @@ const TopBar = () => {
     setSellerRegisterModal(true);
   };
 
+  const handleReadAllNotification = async () => {
+    try {
+      const response = await notificationService.readAllNotifications();
+
+      if (response.success) {
+        setfetchNotifications(_ => !_);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const handleBuyerNotification = () => {
+      setfetchNotifications(_ => {
+        //  console.log({ _ });
+      });
+    };
+
+    window.addEventListener('buyer_notification', handleBuyerNotification);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('buyer_notification', handleBuyerNotification);
+    };
+  }, []);
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutsideProfile);
     document.addEventListener('mousedown', handleClickOutsideNotification);
@@ -217,32 +245,6 @@ const TopBar = () => {
       document.body.classList.remove('active-nav');
     }
   }, [sideNav]);
-
-  useEffect(() => {
-    const handleBuyerNotification = () => {
-      setfetchNotifications(_ => !_);
-    };
-
-    window.addEventListener('buyer_notification', handleBuyerNotification);
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener('buyer_notification', handleBuyerNotification);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleSellerNotification = () => {
-      setfetchNotifications(_ => !_);
-    };
-
-    window.addEventListener('seller_notification', handleSellerNotification);
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener('seller_notification', handleSellerNotification);
-    };
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = event => {
@@ -439,18 +441,21 @@ const TopBar = () => {
             </>
           )}
           {isLoggedIn && (
-            <div
-              ref={(notificationsRef, NotificationRef)}
-              className="notification"
-              onClick={() => {
-                setNotifications(!notifications);
-              }}>
-              <Image src={bell} alt="bell" className="bell" />
-              <Image src={bellWhite} alt="bell" className="bell-white" />
-              <div className={notifications ? 'notificationWrapper-visible' : 'notificationWrapper'}>
-                <Notifications fetchNotifications={fetchNotifications} />
+            <>
+              <div
+                ref={(notificationsRef, NotificationRef)}
+                className={`notification ${isBadge && 'message'}`}
+                onClick={() => {
+                  setNotifications(!notifications);
+                  handleReadAllNotification();
+                }}>
+                <Image src={bell} alt="bell" />
+                {/* <Image src={bellWhite} alt="bell" className="bell-white" /> */}
               </div>
-            </div>
+              <div className={notifications ? 'notificationWrapper-visible' : 'notificationWrapper'}>
+                <Notifications fetchNotifications={fetchNotifications} setIsBadge={setIsBadge} />
+              </div>
+            </>
           )}
 
           {isLoggedIn ? (

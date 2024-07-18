@@ -41,6 +41,37 @@ export const StyledTopBar = styled.header`
       height: 30px;
     }
   }
+  .message {
+    position: relative;
+    &::before {
+      position: absolute;
+      content: '';
+      top: -2px;
+      width: 10px;
+      height: 10px;
+      background: red;
+      border-radius: 10px;
+      right: 0;
+    }
+  }
+  .notification {
+    display: flex;
+    padding: 8px 10px;
+    align-items: center;
+    gap: 4px;
+    border-radius: 50px;
+    border: 1px solid #cdcdcd;
+    color: var(--dark);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 17px;
+    cursor: pointer;
+
+    z-index: 1;
+    .bell-white {
+      display: none;
+    }
+  }
 
   .logo {
     width: 100%;
