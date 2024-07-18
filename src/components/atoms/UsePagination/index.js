@@ -41,18 +41,18 @@ const UsePagination = ({ totalCount, pageSize, siblingCount = 1, currentPage }) 
       const leftItemCount = 3 + 2 * siblingCount;
       const leftRange = range(1, leftItemCount);
 
-      return [...leftRange, DOTS, totalPageCount];
+      return [...leftRange, totalPageCount];
     }
 
     if (shouldShowLeftDots && !shouldShowRightDots) {
       const rightItemCount = 3 + 2 * siblingCount;
       const rightRange = range(totalPageCount - rightItemCount + 1, totalPageCount);
-      return [firstPageIndex, DOTS, ...rightRange];
+      return [firstPageIndex, ...rightRange];
     }
 
     if (shouldShowLeftDots && shouldShowRightDots) {
       const middleRange = range(leftSiblingIndex, rightSiblingIndex);
-      return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
+      return [firstPageIndex, ...middleRange, lastPageIndex];
     }
   }, [totalCount, pageSize, siblingCount, currentPage]);
 
