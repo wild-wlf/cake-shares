@@ -105,7 +105,7 @@ const InitiateInvestmentModal = ({
                 transform: value => {
                   if (remainingInvestAmount) {
                     if (remainingInvestAmount < minInvestValue) {
-                      if (value >= remainingInvestAmount) return;
+                      if (value <= remainingInvestAmount) return;
                       return Number(remainingInvestAmount);
                     } else {
                       if (value >= minInvestValue) return;
@@ -113,7 +113,7 @@ const InitiateInvestmentModal = ({
                     }
                   } else {
                     if (value < minInvestValue) {
-                      return minInvestValue;
+                      return value;
                     }
                   }
                 },

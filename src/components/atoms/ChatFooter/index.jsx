@@ -23,7 +23,7 @@ import CreatePollModal from '../Chat/CreatePollModal';
 import CenterModal from '../Modal/CenterModal';
 import { removeSpaces } from '@/helpers/common';
 
-const ChatFooter = ({ userInfo, type, productName, productId, receivers }) => {
+const ChatFooter = ({ userInfo, type, productName, productId }) => {
   const [form] = useForm();
   const { user } = useContextHook(AuthContext, v => ({
     user: v.user,
@@ -50,7 +50,6 @@ const ChatFooter = ({ userInfo, type, productName, productId, receivers }) => {
         type,
         user_type: 'user',
         channelName,
-        receivers,
       });
     }
     form.setFieldsValue({ message: '' });

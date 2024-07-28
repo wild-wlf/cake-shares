@@ -126,7 +126,7 @@ const Chat = ({ userInfo, type }) => {
             ))
           )}
         </ChatBody>
-        <ChatFooter userInfo={userInfo} type={type} lastMessage={chatMessages.slice(-5)} />
+        <ChatFooter userInfo={userInfo} type={type} />
       </div>
       <ChatMedia userInfo={userInfo} type={type} onlineUsers={onlineUsers} />
       <div className="hamburger" onClick={() => document.body.classList.toggle('chat-sidebar-active')}>
