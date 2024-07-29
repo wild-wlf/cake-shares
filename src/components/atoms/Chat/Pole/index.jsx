@@ -59,7 +59,7 @@ const Pole = ({ type, time, question, options, allow_multiple, receivers, readBy
     <StyledPole $type={type}>
       {type === 'send' && (
         <figure className="img-holder">
-          <Image src={showImage || Pic} alt="user-pic" />
+          <Image src={showImage || Pic} width="17" height="17" alt="user-pic" />
         </figure>
       )}
       <div className="head">
