@@ -84,7 +84,7 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
     }),
     [assetsData],
   );
-  const columnNames = [`Product`, `Category`, `Total Shares`, `Amount`, `Chat (Stakeholders)`];
+  const columnNames = [`Product`, `Category`, `Total Shares`, `Amount`, `Chat (Shareholders)`];
   return (
     <StyledUserDetail>
       <div className="colWrapper">
