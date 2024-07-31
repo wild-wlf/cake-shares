@@ -1,5 +1,4 @@
-import styled from "styled-components";
-
+import styled from 'styled-components';
 
 export const StyledProfileBanner = styled.div`
   position: relative;
@@ -9,6 +8,7 @@ export const StyledProfileBanner = styled.div`
     ${({ $image }) => $image && `url(${$image})`} lightgray 50%;
 
   background-size: 130% 100%;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   background-color: var(--dark);
@@ -18,7 +18,7 @@ export const StyledProfileBanner = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  font-family: "Oleo Script";
+  font-family: 'Oleo Script';
   color: var(--white);
   border-bottom-left-radius: 560px 250px;
   border-bottom-right-radius: 560px 250px;

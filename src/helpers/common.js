@@ -635,7 +635,13 @@ export const formatDateWithSuffix = dateObj => {
 export const daysLeft = dateObj => {
   const date = new Date(dateObj);
   const daysLeft = differenceInCalendarDays(date, new Date());
-
+  console.log(daysLeft, 'Last date');
+  if (daysLeft < 0) {
+    return `0 days`;
+  }
+  if (daysLeft === 0) {
+    return `Last date`;
+  }
   return daysLeft < 10 ? `0${daysLeft} days` : `${daysLeft.toString()} days`;
 
   // return formatDistanceToNow(date, {addSuffix: false});

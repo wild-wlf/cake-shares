@@ -13,9 +13,12 @@ import { AuthContext } from '@/context/authContext';
 import CenterModal from '../../atoms/Modal/CenterModal';
 import PrivacyPolicy from '@/components/atoms/PrivacyPolicyModal/PrivacyPolicy';
 import TermsConditions from '@/components/atoms/TermsConditions/TermsConditions';
+import PrivacySetting from '@/components/atoms/PrivacySettingModal/PrivacySetting';
 
 const ProfileMenu = ({ openProfile }) => {
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
+  const [privacySetting, setPrivacySetting] = useState(false);
+
   const [termsCondition, setTermsCondition] = useState(false);
   const { onLogout, user } = useContextHook(AuthContext, v => ({
     onLogout: v.onLogout,
@@ -23,6 +26,9 @@ const ProfileMenu = ({ openProfile }) => {
   }));
   return (
     <>
+      <CenterModal open={privacySetting} setOpen={setPrivacySetting} title="Privacy Setting" width="996">
+        <PrivacySetting />
+      </CenterModal>
       <CenterModal open={privacyPolicy} setOpen={setPrivacyPolicy} title="Privacy Policy" width="996">
         <PrivacyPolicy />
       </CenterModal>
@@ -73,18 +79,22 @@ const ProfileMenu = ({ openProfile }) => {
             <Image src={privacyPolicyIcon} alt="Privacy Policies" width={17} height={17} />
             <h5>Privacy Policy</h5>
           </div>
-          <div className="DarkTheme">
+          <div
+            className="DarkTheme"
+            onClick={() => {
+              setPrivacySetting(true);
+            }}>
             <Image src={privacySettingIcon} alt="Privacy Settings" width={17} height={17} />
             <h5>Privacy Settings</h5>
           </div>
           <div
-            className="DarkTheme"
-            style={{ paddingBottom: '14px' }}
             onClick={() => {
               setTermsCondition(!termsCondition);
             }}>
-            <Image src={termsIcon} alt="Terms & Conditions" width={17} height={17} />
-            <h5>Terms & Conditions</h5>
+            <div className="DarkTheme" style={{ paddingBottom: '14px' }}>
+              <Image src={termsIcon} alt="Terms & Conditions" width={17} height={17} />
+              <h5>Terms & Conditions</h5>
+            </div>
           </div>
           <hr />
           <div
