@@ -137,6 +137,7 @@ const CommunityChat = ({ userInfo, type, productName, productId }) => {
                   showImage={item?.author?.profilePicture}
                   readBy={item?.readBy?.length >= item?.receivers?.length}
                   messageId={item?._id}
+                  author={item?.author}
                 />
               ) : (
                 <ChatMessage

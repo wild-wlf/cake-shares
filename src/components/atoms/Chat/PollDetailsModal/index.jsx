@@ -3,10 +3,11 @@ import { StyledPollDetailsModal } from './PollDetailsModal.styles';
 import { HiMiniStar } from 'react-icons/hi2';
 import Pic from '../../../../_assets/seller-img.png';
 import Image from 'next/image';
+import userAvatar from '../../../../_assets/user_avatar.png';
 
-const PollDetailsModal = ({ poolOptions, question, user, receivers }) => {
+const PollDetailsModal = ({ poolOptions, question, user, receivers, author }) => {
   const getReceiverInfo = user_id => {
-    return receivers?.find(_ => _?._id === user_id);
+    return receivers?.find(_ => _?._id === user_id?._id);
   };
 
   return (
@@ -30,17 +31,29 @@ const PollDetailsModal = ({ poolOptions, question, user, receivers }) => {
 
               <div className="user-holder">
                 {item?.users?.map((_, __) => {
-                  const isCurrentUser = _ === user?._id;
-                  const receiverInfo = isCurrentUser ? user : getReceiverInfo(_);
-                  const fullName = receiverInfo?.fullName || receiverInfo?.username;
-                  const profilePicture = receiverInfo?.profilePicture || Pic;
+                  const receiverInfo = getReceiverInfo(_);
+                  let fullName, profilePicture;
+                  if (!receiverInfo) {
+                    fullName = author?.fullName;
+                    profilePicture = author?.profilePicture || Pic;
+                  } else {
+                    fullName = receiverInfo?.fullName || receiverInfo?.username;
+                    profilePicture = receiverInfo?.profilePicture || Pic;
+                  }
 
                   return (
                     <div key={__}>
                       <div className="img-holders">
-                        <Image src={profilePicture} alt="userImg" width={50} height={50} />
+                        <Image
+                          src={_?.isAnonymous && _?._id !== user?._id ? userAvatar : profilePicture}
+                          alt="userImg"
+                          width={50}
+                          height={50}
+                        />
                       </div>
-                      <span className="user-name">{fullName}</span>
+                      <span className="user-name">
+                        {_?.isAnonymous && _?._id !== user?._id ? 'Anonymous' : fullName}
+                      </span>
                     </div>
                   );
                 })}

@@ -75,6 +75,26 @@ export const StyledPole = styled.div`
             right: 0;
           `}
   }
+  .anonymous-polling {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 5px;
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 14px;
+    ${({ $type }) =>
+      $type === 'send'
+        ? css`
+            right: 13px;
+            .icon {
+              display: none;
+            }
+          `
+        : css`
+            right: 0;
+          `}
+  }
   .view-votes {
     width: 100%;
     text-align: center;

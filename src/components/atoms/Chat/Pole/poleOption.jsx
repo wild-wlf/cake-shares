@@ -3,16 +3,24 @@ import CheckBox from '../../CheckBox';
 import { castPoolVote } from '@/helpers/socketConnection/socketConnection';
 import PoleProgress from './PoleProgress';
 
-const PoleOption = ({ type, name, users, user, option_id, messageId, receivers, allow_multiple }) => {
+const PoleOption = ({ type, name, users, user, option_id, messageId, receivers, allow_multiple, isAnonymous }) => {
   const [checked, setChecked] = useState(false);
 
   const handleVote = e => {
     setChecked(e.isChecked);
-    castPoolVote({ option_id, msg_id: messageId, user_id: user?._id, checked: e.isChecked, type: 'user' });
+    castPoolVote({
+      option_id,
+      msg_id: messageId,
+      user_id: user?._id,
+      checked: e.isChecked,
+      type: 'user',
+      allow_multiple,
+      isAnonymous,
+    });
   };
 
   useEffect(() => {
-    setChecked(users?.includes(user?._id));
+    setChecked(users?.some(u => u._id === user?._id));
   }, [users]);
 
   const calculateProgressValues = totalVotes => {
