@@ -117,11 +117,14 @@ const Chat = ({ userInfo, type }) => {
               <ChatMessage
                 key={index}
                 type={item?.author?._id === user?._id ? 'seen' : 'send'}
+                chatType={type}
                 message={item.content}
                 time={item?.created_at}
                 readBy={item?.readBy?.find(_ => _?._id === userInfo?._id)}
                 messageId={item?._id}
                 receiverId={userInfo?._id}
+                defaultReaction={item?.reaction}
+                showReaction={item?.author?._id !== user?._id ? true : false}
               />
             ))
           )}
