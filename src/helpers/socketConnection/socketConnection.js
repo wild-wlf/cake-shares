@@ -27,6 +27,12 @@ export const connectionWithSocketServer = token => {
     }
   });
 
+  socket.on('reaction-added', async data => {
+    if (socket && data) {
+      window.dispatchEvent(new CustomEvent('reaction-added', { detail: { ...data } }));
+    }
+  });
+
   socket.on('seen-message-response', data => {
     window.dispatchEvent(new CustomEvent('seen_message_response', { detail: { ...data } }));
   });
@@ -57,6 +63,12 @@ export const socketServer = () => socket;
 export const sendDirectMessage = data => {
   if (socket && data) {
     socket.emit('direct-message', data);
+  }
+};
+
+export const sendPrivateReaction = data => {
+  if (socket && data) {
+    socket.emit('private-reaction', data);
   }
 };
 
