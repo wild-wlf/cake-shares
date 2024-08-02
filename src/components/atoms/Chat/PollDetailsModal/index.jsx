@@ -24,8 +24,8 @@ const PollDetailsModal = ({ poolOptions, question, user, receivers, author }) =>
               <div className="total-votes">
                 <span className="heading vote-option">{item?.option}</span>
                 <div className="votes-holder">
-                  <span className="heading">{item?.users?.length}</span>
-                  {item?.users?.includes(user?._id) && <HiMiniStar color="#FFB800" size={20} />}
+                  {item?.users?.length} {item?.users?.length > 1 ? 'Votes' : 'Vote'}
+                  {item?.users?.some(u => u?._id === user?._id) && <HiMiniStar color="#FFB800" size={20} />}
                 </div>
               </div>
 

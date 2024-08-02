@@ -65,6 +65,10 @@ const CommunityChat = ({ userInfo, type, productName, productId }) => {
 
   useEffect(() => {
     window.addEventListener('com_message_history', event => {
+      const { message } = event.detail;
+      if (message?.receivers?.length > channelReceivers?.receivers?.length) {
+        setChannelReceivers([message, { ...message?.author }]);
+      }
       updateChatIfActive({
         ...event.detail,
         user,
