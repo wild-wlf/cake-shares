@@ -1,16 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { StyledChatMessage } from './ChatMessage.styles';
+import { StyledChatMessage, MessageContainer, ReactionContainer, AddedReaction } from './ChatMessage.styles';
 import Pic from '../../../../_assets/seller-img.png';
 import { LiaCheckDoubleSolid, LiaCheckSolid } from 'react-icons/lia';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import RenderTextMessage from './renderTextMessage';
+import ReactionTooltip from '../../ReactionTooltip';
+import MessageReaction from '../../../atoms/MessageReactions/index';
+import reactionIcon from '../../../../_assets/reaction.png';
+import { sendPrivateReaction } from '@/helpers/socketConnection/socketConnection';
 
-const ChatMessage = ({ showImage, message, time, type, readBy, messageId, receiverId, receivers, group = false }) => {
+const ChatMessage = ({
+  showImage,
+  message,
+  time,
+  type,
+  readBy,
+  messageId,
+  receiverId,
+  receivers,
+  showReaction,
+  group = false,
+  chatType,
+
+  defaultReaction,
+}) => {
   const [isMessageRead, setIsMessageRead] = useState(readBy);
+  const [active, setActive] = useState(false);
+  const [reaction, setReactions] = useState('');
+  const [receivedReaction, setReceivedReaction] = useState('');
 
   useEffect(() => {
-    window.addEventListener('seen_message_response', event => {
+    const handleSeenMessageResponse = event => {
       const currentMessage = event.detail;
 
       if (messageId === currentMessage?._id && currentMessage?.readBy?.includes(receiverId) && !group) {
@@ -20,13 +41,42 @@ const ChatMessage = ({ showImage, message, time, type, readBy, messageId, receiv
       if (messageId === currentMessage?._id && currentMessage?.readBy?.length >= receivers?.length && group) {
         setIsMessageRead(true);
       }
-    });
+    };
+
+    window.addEventListener('seen_message_response', handleSeenMessageResponse);
 
     // Clean up the event listener on component unmount
     return () => {
-      window.removeEventListener('seen_message_response', () => {});
+      window.removeEventListener('seen_message_response', handleSeenMessageResponse);
     };
-  }, [messageId, receiverId]);
+  }, [messageId, receiverId, group, receivers]);
+
+  useEffect(() => {
+    const handleReaction = event => {
+      const currentMessage = event.detail;
+
+      if (messageId === currentMessage?.messageId && currentMessage?.reaction) {
+        setReceivedReaction(currentMessage?.reaction);
+      }
+    };
+
+    window.addEventListener('reaction-added', handleReaction);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('reaction-added', handleReaction);
+    };
+  }, [messageId, receiverId, receivers]);
+
+  useEffect(() => {
+    if (chatType === 'private' && reaction) {
+      sendPrivateReaction({
+        reaction,
+        messageId,
+        receiverId,
+      });
+    }
+  }, [reaction, chatType, messageId, receiverId]);
 
   return (
     <StyledChatMessage $type={type}>
@@ -36,14 +86,43 @@ const ChatMessage = ({ showImage, message, time, type, readBy, messageId, receiv
         </div>
       )}
       <div className="message-holder">
-        <div className="message">
-          <p>
-            <RenderTextMessage text={message} />
-          </p>
-        </div>
+        <MessageContainer>
+          {showReaction && (
+            <ReactionContainer>
+              <ReactionTooltip
+                data={<MessageReaction setActive={setActive} setReaction={setReactions} />}
+                type="primary"
+                width={230}
+                active={active}
+                setActive={setActive}
+                alignRight={true}>
+                <Image src={reactionIcon} alt="add reaction" height={22} width={22} />
+              </ReactionTooltip>
+            </ReactionContainer>
+          )}
+          <div className="message">
+            <p>
+              <RenderTextMessage text={message} />
+            </p>
+          </div>
+          {(chatType === 'private' && defaultReaction) || receivedReaction ? (
+            <AddedReaction>
+              <span>{receivedReaction || defaultReaction}</span>
+            </AddedReaction>
+          ) : (
+            ''
+          )}
+          {(chatType === 'private' && defaultReaction) || reaction ? (
+            <AddedReaction>
+              <span>{reaction || defaultReaction}</span>
+            </AddedReaction>
+          ) : (
+            ''
+          )}
+        </MessageContainer>
         {time && (
           <div className="time-holder">
-            <span>{format(time, 'yyyy-MM-dd, hh:mma')}</span>
+            <span>{format(new Date(time), 'yyyy-MM-dd, hh:mma')}</span>
             <div className="icon">
               {isMessageRead ? <LiaCheckDoubleSolid size={18} /> : <LiaCheckSolid size={18} />}
             </div>

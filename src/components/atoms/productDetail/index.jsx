@@ -137,7 +137,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
               <span>
                 {data?.deadline && (
                   <>
-                    <span className="deadline">Deadline:</span> ({formatDateWithSuffix(data?.deadline)} /{' '}
+                    <span className="deadline">Deadline:</span> ({formatDateWithSuffix(data?.deadline)} /
                     {daysLeft(data?.deadline)} left)
                   </>
                 )}
