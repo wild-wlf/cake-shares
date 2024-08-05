@@ -52,7 +52,7 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
     <ModalContainer
       lg
       width={1339}
-      title="Stakeholder Chat"
+      title="Shareholder Chat"
       btnComponent={({ onClick }) => (
         <Button type="primary" rounded sm onClick={onClick}>
           Chat

@@ -8,7 +8,7 @@ import { AuthContext } from '@/context/authContext';
 import profileplaceHolder from '../../../../_assets/profileplaceHolder.jpg';
 import MediaSlide from './MediaSlide';
 import { TbExternalLink } from 'react-icons/tb';
-import CenterModal from '@/components/molecules/Modal/CenterModal';
+import CenterModal from '@/components/atoms/Modal/CenterModal';
 import ChatMembers from '../ChatMembers';
 
 const ChatMedia = ({ userInfo, type, onlineUsers, channelReceivers }) => {
@@ -18,7 +18,7 @@ const ChatMedia = ({ userInfo, type, onlineUsers, channelReceivers }) => {
   const [chatMembers, setChatMembers] = useState(false);
 
   const getThreeParticipants = () => {
-    const receivers = channelReceivers?.filter(_ => _?._id === userInfo?._id);
+    const receivers = channelReceivers[0]?.receivers?.filter(_ => _?._id !== userInfo?._id);
     if (receivers?.length > 3) {
       receivers?.splice(0, 3);
     }
@@ -29,7 +29,7 @@ const ChatMedia = ({ userInfo, type, onlineUsers, channelReceivers }) => {
     <>
       <CenterModal open={chatMembers} setOpen={setChatMembers} title="All Chat Members" width="450">
         <ChatMembers
-          channelReceivers={channelReceivers?.filter(_ => _?._id === userInfo?._id)}
+          channelReceivers={channelReceivers[0]?.receivers?.filter(_ => _?._id !== userInfo?._id)}
           user={user}
           onlineUsers={onlineUsers}
         />
@@ -69,7 +69,7 @@ const ChatMedia = ({ userInfo, type, onlineUsers, channelReceivers }) => {
                 })}
               </div>
 
-              {channelReceivers?.filter(_ => _?._id === userInfo?._id) > 3 && (
+              {channelReceivers[0]?.receivers?.filter(receiver => receiver._id !== userInfo?._id).length > 3 && (
                 <span
                   onClick={() => {
                     setChatMembers(true);

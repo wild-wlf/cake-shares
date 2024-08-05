@@ -11,12 +11,16 @@ import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
 import PoleOption from './poleOption';
 import { clearPoolVotes } from '@/helpers/socketConnection/socketConnection';
+import Switch from '@/components/molecules/Switch';
 
-const Pole = ({ type, time, question, options, allow_multiple, receivers, readBy, messageId, showImage }) => {
+const Pole = ({ type, time, question, options, allow_multiple, receivers, readBy, messageId, showImage, author }) => {
   const [isMessageRead, setIsMessageRead] = useState(readBy);
   const { user } = useContextHook(AuthContext, v => ({
     user: v.user,
   }));
+  const [isAnonymous, setIsAnonymous] = useState(
+    options?.some(ele => ele?.users?.some(users => users?.isAnonymous && users?._id === user?._id)),
+  );
   const [poolOptions, setPoolOptions] = useState(options);
 
   useEffect(() => {
@@ -90,9 +94,18 @@ const Pole = ({ type, time, question, options, allow_multiple, receivers, readBy
             messageId={messageId}
             receivers={receivers}
             allow_multiple={allow_multiple}
+            isAnonymous={isAnonymous}
           />
         </div>
       ))}
+      <div className="anonymous-polling">
+        <Switch
+          label="Stay Anonymous while Polling?"
+          name={`toogleSwitch${messageId}`}
+          value={isAnonymous}
+          onChange={e => setIsAnonymous(e.target.value)}
+        />
+      </div>
       {time && (
         <div className="time-holder">
           <span>{format(time, 'yyyy-MM-dd, hh:mma')}</span>
@@ -101,7 +114,7 @@ const Pole = ({ type, time, question, options, allow_multiple, receivers, readBy
       )}
       <ModalContainer
         width={600}
-        title="Create Poll"
+        title="Poll Details"
         btnComponent={({ onClick }) => (
           <button className="view-votes" onClick={onClick}>
             View Votes
@@ -114,6 +127,7 @@ const Pole = ({ type, time, question, options, allow_multiple, receivers, readBy
             question={question}
             user={user}
             receivers={receivers}
+            author={author}
           />
         )}
       />
