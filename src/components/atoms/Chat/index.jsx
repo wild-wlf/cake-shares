@@ -121,6 +121,7 @@ const Chat = ({ userInfo, type }) => {
                 message={item.content}
                 time={item?.created_at}
                 readBy={item?.readBy?.find(_ => _?._id === userInfo?._id)}
+                senderId={user?._id}
                 messageId={item?._id}
                 receiverId={userInfo?._id}
                 defaultReaction={item?.reaction}
