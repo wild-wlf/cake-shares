@@ -107,7 +107,7 @@ export const ReactionContainer = styled.div`
 
 export const AddedReaction = styled.div`
   position: absolute;
-  left: -8%;
+  left: -10%;
   height: 25px;
   width: 25px;
   border-radius: 50%;
@@ -118,5 +118,22 @@ export const AddedReaction = styled.div`
   background-color: rgba(64, 143, 140, 0.5);
   span {
     font-size: 13px;
+  }
+`;
+
+export const GroupReaction = styled.div`
+  position: absolute;
+  left: -10px;
+  padding: 1px 3px;
+  border-radius: 29%;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(64, 143, 140, 0.5);
+  span {
+    font-size: 12px;
+    white-space: nowrap;
+    color: #fff;
   }
 `;
