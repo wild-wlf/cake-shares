@@ -1,6 +1,6 @@
-/ eslint-disable no-unused-vars /;
-import { useEffect, useState } from "react";
-import Modal from "components/molecules/Modal";
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from 'react';
+import Modal from '../Modal/CenterModal';
 
 function ModalContainer({
   btnComponent,
@@ -40,16 +40,15 @@ function ModalContainer({
       {btnComponent && btnComponent({ onClick: showModal })}
       <Modal
         title={title}
-        isOpen={isVisible}
-        setIsOpen={setIsVisible}
+        open={isVisible}
+        setOpen={setIsVisible}
         xl={xl}
         lg={lg}
         sm={sm}
         width={width}
         isClosable={isClosable}
         helpModal={helpModal}
-        imgPreview={imgPreview}
-      >
+        imgPreview={imgPreview}>
         {content({ onClose: handleCancel })}
       </Modal>
     </>

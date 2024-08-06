@@ -15,6 +15,12 @@ import ReactionTooltip from '../../ReactionTooltip';
 import MessageReaction from '../../../atoms/MessageReactions/index';
 import reactionIcon from '../../../../_assets/reaction.png';
 import { sendGroupReaction, sendPrivateReaction } from '@/helpers/socketConnection/socketConnection';
+import MenuButton, { MenuItem } from '../../../molecules/Menu/index';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import { MdOutlineReport } from 'react-icons/md';
+import ReportModal from '@/components/molecules/ReportModal';
+import ModalContainer from '@/components/molecules/ModalContainer';
+import declineIcon from '../../../../_assets/decline-icon.svg';
 
 const ChatMessage = ({
   showImage,
@@ -32,6 +38,7 @@ const ChatMessage = ({
   defaultGroupReactions,
   defaultReaction,
   channelName,
+  item,
 }) => {
   const [isMessageRead, setIsMessageRead] = useState(readBy);
   const [active, setActive] = useState(false);
@@ -126,8 +133,30 @@ const ChatMessage = ({
                 alignRight={true}>
                 <Image src={reactionIcon} alt="add reaction" height={22} width={22} />
               </ReactionTooltip>
+              <ModalContainer
+                md
+                width={700}
+                title={<Image src={declineIcon} alt="declineIcon" />}
+                btnComponent={({ onClick }) => (
+                  <MenuButton
+                    icon={
+                      <span>
+                        <BsThreeDotsVertical />
+                      </span>
+                    }>
+                    <MenuItem onClick={onClick} icon={<MdOutlineReport size={20} />}>
+                      {' '}
+                      Report
+                    </MenuItem>
+                  </MenuButton>
+                )}
+                content={({ onClose }) => (
+                  <ReportModal onClose={onClose} item={item} title="Report this Message!" btnText="Report" />
+                )}
+              />
             </ReactionContainer>
           )}
+
           <div className="message">
             <p>
               <RenderTextMessage text={message} />

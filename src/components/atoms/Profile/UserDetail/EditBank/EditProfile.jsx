@@ -62,7 +62,6 @@ const EditProfile = ({ personalInfo, onClose }) => {
       dob: personalInfo?.dob,
       country: country || { value: '', label: '' },
     });
-    
   }, []);
   async function handelSubmit(e) {
     setLoading(true);
@@ -85,7 +84,6 @@ const EditProfile = ({ personalInfo, onClose }) => {
         message: 'Profile updated successfully',
       });
     } catch (error) {
-   
       Toast({
         type: 'error',
         message: error.message,

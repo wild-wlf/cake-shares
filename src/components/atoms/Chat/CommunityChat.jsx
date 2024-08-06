@@ -158,6 +158,7 @@ const CommunityChat = ({ userInfo, type, productName, productId }) => {
                   defaultGroupReactions={item.reactions}
                   channelName={messages_data?.messages[0]?.conversationId?.channelName}
                   showReaction={item?.author?._id !== user?._id ? true : false}
+                  item={item}
                   group
                 />
               ),

@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
-import { IoIosClose } from "react-icons/io";
-import { ContentHolder, Head, StyledModal } from "./Modal.styles";
+import React, { useEffect } from 'react';
+import { MdOutlineClose } from 'react-icons/md';
+import { ContentHolder, Head, StyledModal } from './Modal.styles';
+import Image from 'next/image';
+import { RxCross2 } from 'react-icons/rx';
 
 const CenterModal = ({
   children,
@@ -13,14 +15,18 @@ const CenterModal = ({
   desktopRight,
   desktopTop,
   setIsEditing,
+  title,
+  headImage,
+  iscloseAble = true,
 }) => {
+  // console.log(open);
   useEffect(() => {
     const disableScroll = () => {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     };
 
     const enableScroll = () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     };
 
     if (open) {
@@ -35,22 +41,22 @@ const CenterModal = ({
   }, [open]);
 
   const handleClose = () => {
-    setIsEditing?.({
-      status: false,
-    });
-    setOpen(false);
+    if (iscloseAble) {
+      setOpen(false);
+    }
   };
   return (
     open && (
       <StyledModal
         open={open}
         onClick={handleClose}
-        onKeyDown={(e) => {
-          if (e.key === "Escape") {
-            handleClose();
+        onKeyDown={e => {
+          if (iscloseAble) {
+            if (e.key === 'Escape') {
+              handleClose();
+            }
           }
-        }}
-      >
+        }}>
         <ContentHolder
           bg={bg}
           padding={padding}
@@ -60,18 +66,16 @@ const CenterModal = ({
           desktopTop={desktopTop}
           role="dialog"
           aria-modal="true"
-          onClick={(e) => e.stopPropagation()}
-          tabIndex={-1}
-        >
+          onClick={e => e.stopPropagation()}
+          tabIndex={-1}>
           <Head>
-            <button
-              type="button"
-              className="closer"
-              onClick={handleClose}
-              tabIndex={0}
-            >
-              <IoIosClose size={25} color="var(--white)" />
-            </button>
+            {title && <strong className="title">{title}</strong>}
+            {headImage && <Image src={headImage} alt="Icon" />}
+            {iscloseAble && (
+              <button type="button" className="closer" onClick={handleClose} tabIndex={0}>
+                <RxCross2 className="Icon" />
+              </button>
+            )}
           </Head>
           {children}
         </ContentHolder>
