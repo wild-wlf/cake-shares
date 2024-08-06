@@ -20,6 +20,7 @@ import CenterModal from '../Modal/CenterModal';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
 import { convertToCurrencyFormat } from '@/helpers/common';
+import PayoutModal from '../PayoutModal/PayoutModal';
 
 const MyWallet = ({ pieData, amount }) => {
   const { user, setPermission, refetch } = useContextHook(AuthContext, v => ({
@@ -32,6 +33,7 @@ const MyWallet = ({ pieData, amount }) => {
   const ary2 = [0, 200, 300, 6000, 500, 1000, 500, 5000, 1000, 8000, 200, 5000, 5200, 5500, 5700, 5720, 5880];
 
   const [open, setOpen] = useState(false);
+  const [payoutModal, setPayoutModal] = useState(false);
   const [openLast, setOpenLast] = useState(false);
   const [openBank, setOpenBank] = useState(false);
   const [openCard, setOpenCard] = useState(false);
@@ -224,6 +226,11 @@ const MyWallet = ({ pieData, amount }) => {
         <TopUpModal openNext={openNext} handleOptionSelect={handleOptionSelect} selectedOption={selectedOption} />
       </CenterModal>
 
+      {/* modal for payout */}
+      <CenterModal open={payoutModal} setOpen={setPayoutModal} width="623" title="Payout">
+        <PayoutModal currentAmount={user?.wallet} openNext={openNext} handleOptionSelect={handleOptionSelect} />
+      </CenterModal>
+
       <StyledContainer>
         <div className="previousButton back-button">
           <Button
@@ -237,10 +244,16 @@ const MyWallet = ({ pieData, amount }) => {
             <IoIosArrowBack />
             Go Back
           </Button>
-          <Button width={'142'} rounded sm btntype="primary" onClick={() => openModal()}>
-            Top Up Wallet
-            <Image src={walletWhite} alt="walletWhite" />
-          </Button>
+          <div style={{ display: 'flex', gap: '10px', flexShrink: 0 }}>
+            <Button rounded sm btntype="primary" onClick={() => setPayoutModal(true)} disabled={user?.wallet < 50}>
+              Payout
+              <Image src={walletWhite} alt="walletWhite" />
+            </Button>
+            <Button rounded sm btntype="primary" onClick={() => openModal()}>
+              Top Up Wallet
+              <Image src={walletWhite} alt="walletWhite" />
+            </Button>
+          </div>
         </div>
         <div className="btnDiv">
           <h1>My Wallet</h1>

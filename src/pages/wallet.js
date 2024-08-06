@@ -38,7 +38,7 @@ const Wallet = () => {
 
   return (
     <div>
-      <MyWallet pieData={pieData} amount={wallet_Details?.wallet?.totalInvestmentAmount} />
+      <MyWallet pieData={pieData} amount={wallet_Details?.wallet?.totalInvestmentAmount} wallet={wallet_Details} />
       <DetailBar
         topData={filterData}
         amount={wallet_Details?.wallet?.totalInvestmentAmount}

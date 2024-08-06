@@ -188,7 +188,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
           <div className="product1">
             {loading ? (
               <Skeletonn height="360" radius="30px" width="100" />
-            ) : data?.media[0]?.split('')?.slice(-3)?.join('') === 'mp4' ? (
+            ) : data?.media && data?.media[0]?.split('')?.slice(-3)?.join('') === 'mp4' ? (
               data?.media[0] && (
                 <div className="videoWrapp">
                   <ModalContainer
@@ -225,6 +225,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
                 </div>
               )
             ) : (
+              data?.media &&
               data?.media[0] && <Image src={data?.media[0]} width={365} height={360} alt="Product-Image" />
             )}
           </div>
@@ -232,6 +233,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
             {loading ? (
               <Skeletonn height="360" radius="30px" width="100" />
             ) : (
+              data?.media &&
               data?.media[1] && <Image src={data?.media[1]} alt="Product-Image" width={365} height={360} />
             )}
           </div>
@@ -239,6 +241,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
             {loading ? (
               <Skeletonn height="360" radius="30px" width="100" />
             ) : (
+              data?.media &&
               data?.media[2] && <Image src={data?.media[2]} alt="Product-Image" width={365} height={360} />
             )}
           </div>

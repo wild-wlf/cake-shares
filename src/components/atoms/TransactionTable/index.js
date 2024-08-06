@@ -11,9 +11,9 @@ import { format } from 'date-fns';
 import userService from '@/services/userService';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
-import { convertToCurrencyFormat, getDateTime } from '@/helpers/common';
+import { convertToCurrencyFormat } from '@/helpers/common';
 
-const TransactionTable = ({ transactions }) => {
+const TransactionTable = () => {
   const { user, fetch } = useContextHook(AuthContext, v => ({
     user: v.user,
     fetch: v.fetch,
@@ -41,7 +41,6 @@ const TransactionTable = ({ transactions }) => {
   };
 
   const { transactions_data, transactions_loading } = userService.GetAllTransactions(searchQuery, fetch);
-
   const { totalCount, transaction_rows } = useMemo(() => {
     const mappedTransactions = transactions_data?.transactions?.map(transaction => {
       return [
