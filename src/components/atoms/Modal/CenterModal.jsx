@@ -20,6 +20,7 @@ const CenterModal = ({
   iscloseAble = true,
   setRegistrationData,
   registrationData,
+  headImage,
 }) => {
   // const { clearFormData } = useContext(AuthContext);
   useEffect(() => {
@@ -87,6 +88,7 @@ const CenterModal = ({
           tabIndex={-1}>
           <Head>
             <strong className="title">{title}</strong>
+            {headImage && <Image src={headImage} alt="Icon" />}
             {iscloseAble && (
               <button type="button" className="closer" onClick={handleClose} tabIndex={0}>
                 <Image src={close} alt="Close-Modal" />

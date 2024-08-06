@@ -22,8 +22,10 @@ import { AuthContext } from '@/context/authContext';
 import { convertToCurrencyFormat } from '@/helpers/common';
 
 const MyWallet = ({ pieData, amount }) => {
-  const { user } = useContextHook(AuthContext, v => ({
+  const { user, setPermission, refetch } = useContextHook(AuthContext, v => ({
     user: v.user,
+    setPermission: v.setPermission,
+    refetch: v.refetch,
   }));
 
   const ary3 = [0, 200, 10, 1000, 5000, 200, 8000, 10, 500];
@@ -82,6 +84,8 @@ const MyWallet = ({ pieData, amount }) => {
   const openCardNext = () => {
     setOpenCard(false);
     setOpenCardSuccess(true);
+    refetch();
+    setPermission(true);
   };
   const walletLinkModal = () => {
     setOpenCrypto(false);
@@ -171,27 +175,7 @@ const MyWallet = ({ pieData, amount }) => {
       </CenterModal>
 
       <CenterModal open={openCardSuccess} setOpen={setOpenCardSuccess} width="543" headImage={SuccessIcon}>
-        <SuccessModal
-          heading="Wallet Top up Successful!"
-          paragraph="Great news! Your wallet top-up using your credit card was successful. Funds should be available within 3 business days."
-        />
-        <ButtonContainer>
-          <Button rounded width={'170px'} height={'40px'} sm btntype="cancel" onClick={() => setOpenCardSuccess(false)}>
-            Cancel
-          </Button>
-          <Button
-            rounded
-            width={'170px'}
-            height={'40px'}
-            sm
-            btntype="green"
-            onClick={() => {
-              setOpenCardSuccess(false);
-              setOpenCardLast(true);
-            }}>
-            Save Card Details
-          </Button>
-        </ButtonContainer>
+        <SuccessModal heading="Wallet Top up Successful!" />
       </CenterModal>
 
       <CenterModal open={openCard} setOpen={setOpenCard} width="666" title={'Top up via Credit Card'}>
