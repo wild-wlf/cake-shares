@@ -17,6 +17,7 @@
     "@ramonak/react-progress-bar": "^5.2.0",
     "@stripe/react-stripe-js": "^2.7.3",
     "@stripe/stripe-js": "^4.1.0",
+    "@szhsin/react-menu": "github:szhsin/react-menu",
     "babel-plugin-styled-components": "^2.1.4",
     "date-fns": "^3.6.0",
     "highcharts": "^11.4.3",

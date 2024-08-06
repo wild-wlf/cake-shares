@@ -101,8 +101,11 @@ export const MessageContainer = styled.div`
 export const ReactionContainer = styled.div`
   position: absolute;
   top: 0px;
-  right: -30px;
+  right: -50px;
   cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 `;
 
 export const AddedReaction = styled.div`

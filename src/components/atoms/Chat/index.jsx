@@ -129,6 +129,7 @@ const Chat = ({ userInfo, type }) => {
                 receiverId={userInfo?._id}
                 defaultReaction={item?.reaction}
                 showReaction={item?.author?._id !== user?._id ? true : false}
+                item={item}
               />
             ))
           )}
