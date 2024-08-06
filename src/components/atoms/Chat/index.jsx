@@ -30,11 +30,14 @@ const Chat = ({ userInfo, type }) => {
   });
   const [chatLoading, setChatLoading] = useState(true);
   const [moreMsgLoading, setMoreMsgLoading] = useState(false);
+  const [channelReceivers, setChannelReceivers] = useState([]);
 
   const { messages_loading, messages_data } = notificationService.GetAllConversationMessages(searchQuery, fetch);
 
   useEffect(() => {
     if (messages_data?.messages?.length > 0) {
+      const lastMessage = messages_data?.messages[messages_data?.messages?.length - 1];
+      setChannelReceivers([lastMessage, { ...lastMessage?.author }]);
       setChatMessages(prev => [...messages_data?.messages, ...prev]);
       setMoreMsgLoading(false);
     }
@@ -132,7 +135,7 @@ const Chat = ({ userInfo, type }) => {
         </ChatBody>
         <ChatFooter userInfo={userInfo} type={type} />
       </div>
-      <ChatMedia userInfo={userInfo} type={type} onlineUsers={onlineUsers} />
+      <ChatMedia userInfo={userInfo} type={type} onlineUsers={onlineUsers} channelReceivers={channelReceivers} />
       <div className="hamburger" onClick={() => document.body.classList.toggle('chat-sidebar-active')}>
         <RiMenu3Fill size={30} />
       </div>

@@ -24,9 +24,10 @@ const TransactionTable = ({ transactions }) => {
     searchText: '',
     startDate: '',
     endDate: '',
-    type: 'spend',
+    type: 'all',
     filterRoles: '',
   });
+
   const [open, setOpen] = useState(false);
   const [statementModal, setStatementModal] = useState(false);
   const modalParagraph =
@@ -41,63 +42,21 @@ const TransactionTable = ({ transactions }) => {
 
   const { transactions_data, transactions_loading } = userService.GetAllTransactions(searchQuery, fetch);
 
-  // const transactions = [
-  //   {
-  //     name: "name",
-  //     phone: "2301652065",
-  //     email: "shjdgf@.com",
-  //     date: "24-May-2024",
-  //   },
-  //   {
-  //     name: "name",
-  //     phone: "2301652065",
-  //     email: "shjdgf@.com",
-  //     date: "24-May-2024",
-  //   },
-  //   {
-  //     name: "name",
-  //     phone: "2301652065",
-  //     email: "shjdgf@.com",
-  //     date: "24-May-2024",
-  //   },
-  //   {
-  //     name: "name",
-  //     phone: "2301652065",
-  //     email: "shjdgf@.com",
-  //     date: "",
-  //   },
-  //   {
-  //     name: "name",
-  //     phone: "2301652065",
-  //     email: "shjdgf@.com",
-  //     date: "24-May-2024",
-  //   },
-  //   {
-  //     name: "name",
-  //     phone: "2301652065",
-  //     email: "shjdgf@.com",
-  //     date: "24-May-2024",
-  //   },
-  // ];
+  const { totalCount, transaction_rows } = useMemo(() => {
+    const mappedTransactions = transactions_data?.transactions?.map(transaction => {
+      return [
+        format(new Date(transaction.created_at), 'yyyy-MM-dd'),
+        transaction.transactionType ?? '------------',
+        convertToCurrencyFormat(transaction.amount?.$numberDecimal) ?? '------------',
+      ];
+    });
+    return {
+      transaction_rows: mappedTransactions,
+      totalCount: transactions_data?.totalItems,
+    };
+  }, [transactions_data?.totalItems, transactions_data?.transactions]);
 
-  const { totalCount, transaction_rows } = useMemo(
-    () => ({
-      transaction_rows:
-        transactions_data?.transactions?.map(transaction => [
-          transaction.productName ?? '------------',
-          getDateTime(transaction.created_at),
-          transaction.investmentTypeName ?? '------------',
-          transaction.assetValue
-            ? `$${((transaction.investmentAmount / transaction.assetValue) * 100).toFixed(2)}`
-            : '------------',
-          transaction.assetValue ? `${convertToCurrencyFormat(transaction.assetValue)}` : '$0.00',
-        ]) ?? [],
-      totalCount: transactions_data?.totalItems ?? 0,
-    }),
-    [transactions_data],
-  );
-
-  const columnNames = [`Product`, `Date & Time`, 'Category', 'Total Shares', 'Amount'];
+  const columnNames = [`Created at`, `Transaction type`, 'Amount'];
 
   return (
     <>
