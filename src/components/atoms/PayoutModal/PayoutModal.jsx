@@ -55,7 +55,7 @@ const PayoutModal = ({ currentAmount }) => {
             </Form.Item>
           </div>
         </div>
-        <span>
+        <span className="payoutNote">
           Make your your Amount will not be greater than you {convertToCurrencyFormat(currentAmount)} current wallet
           amount
         </span>

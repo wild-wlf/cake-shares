@@ -97,7 +97,7 @@ export const SavedCardStyles = styled.div`
     justify-content: space-between;
     gap: 10px;
     width: 195px !important;
-    padding: 13px 25px;
+    padding: 13px 19px;
     border-radius: 100px;
     flex-shrink: 0;
     button {
