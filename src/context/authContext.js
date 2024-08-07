@@ -29,7 +29,7 @@ export const AuthContextProvider = props => {
 
   const publicPages = ['/'];
 
-  const privatePages = ['/profile'];
+  const privatePages = ['/profile', '/wallet'];
 
   const onLogout = async () => {
     if (!isLoggedIn) return;
