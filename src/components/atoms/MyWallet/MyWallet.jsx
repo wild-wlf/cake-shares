@@ -228,7 +228,7 @@ const MyWallet = ({ pieData, amount }) => {
 
       {/* modal for payout */}
       <CenterModal open={payoutModal} setOpen={setPayoutModal} width="623" title="Payout">
-        <PayoutModal currentAmount={user?.wallet} openNext={openNext} handleOptionSelect={handleOptionSelect} />
+        <PayoutModal currentAmount={user?.wallet} setPayoutModal={setPayoutModal} />
       </CenterModal>
 
       <StyledContainer>

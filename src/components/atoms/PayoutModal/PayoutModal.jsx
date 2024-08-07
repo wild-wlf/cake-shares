@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Form, { useForm } from '@/components/molecules/Form';
 import Button from '@/components/atoms/Button';
@@ -8,20 +8,24 @@ import { convertToCurrencyFormat } from '@/helpers/common';
 import Toast from '@/components/molecules/Toast';
 import paymentService from '@/services/paymentService';
 
-const PayoutModal = ({ currentAmount }) => {
+const PayoutModal = ({ currentAmount, setPayoutModal }) => {
   const [form] = useForm();
+  const [isLoading, setIsLoading] = useState(false);
 
   const submitHandler = async value => {
     try {
+      setIsLoading(true);
       const response = await paymentService.requestPayout({ amount: value.amount });
-      console.log(response);
       if (response.success) {
         Toast({ type: 'success', message: response.message });
+        setPayoutModal(false);
       } else {
         Toast({ type: 'error', message: response.message });
       }
     } catch (error) {
       Toast({ type: 'error', message: error.message });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -55,13 +59,16 @@ const PayoutModal = ({ currentAmount }) => {
             </Form.Item>
           </div>
         </div>
-        <span className="payoutNote">
-          Make your your Amount will not be greater than you {convertToCurrencyFormat(currentAmount)} current wallet
-          amount
-        </span>
-        <Button width={'170'} height={'40px'} rounded sm btntype="primary" htmlType={'submit'}>
-          Confirm
-        </Button>
+        <div className="infoText">
+          Please ensure that the amount does not exceed your current wallet balance of{' '}
+          {convertToCurrencyFormat(currentAmount)}.
+        </div>
+
+        <div className="btnWrapper">
+          <Button width={'170'} height={'40px'} loader={isLoading} rounded sm btntype="primary" htmlType={'submit'}>
+            Confirm
+          </Button>
+        </div>
       </Form>
     </Container>
   );

@@ -12,9 +12,14 @@ export const Container = styled.div`
       font-size: 16px;
     }
   }
-  .payoutNote {
-    display: block;
-    margin-bottom: 10px;
+  .infoText {
+    padding-top: 16px;
+  }
+
+  .btnWrapper {
+    display: flex;
+    gap: 6px;
+    margin-top: 13px;
   }
 `;
 
