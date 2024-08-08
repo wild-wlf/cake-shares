@@ -9,7 +9,7 @@ import Toast from '@/components/molecules/Toast';
 import paymentService from '@/services/paymentService';
 
 const PayoutModal = ({ currentAmount, setPayoutModal }) => {
-  const comission = 0.4;
+  const comission = 0;
   const [form] = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState();
@@ -34,7 +34,7 @@ const PayoutModal = ({ currentAmount, setPayoutModal }) => {
     }
   };
 
-  const calculateComission = (value, percent = 0.2) => {
+  const calculateComission = (value, percent = 0.4) => {
     const amount = (percent / 100) * value;
 
     return amount.toFixed(2);
@@ -46,7 +46,7 @@ const PayoutModal = ({ currentAmount, setPayoutModal }) => {
         <div className="feildContainer">
           <div className="wrapper">
             <Form.Item
-              label="Amount (Cakeshares will deduct 0.4% comission on this)"
+              label={`Amount (Cakeshares will deduct ${comission}% comission on this)`}
               type="input"
               rounded
               sm

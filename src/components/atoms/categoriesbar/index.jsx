@@ -9,7 +9,7 @@ import AdvanceSearch from '../advanceSearch';
 import Skeletonn from '../skeleton/Skeletonn';
 import categoryService from '@/services/categoryService';
 
-const CategoriesBar = ({ setSearchQuery }) => {
+const CategoriesBar = ({ setSearchQuery, priceRange }) => {
   const [modal, setModal] = useState(false);
   const [Tab, setTab] = useState(0);
   var settings = {
@@ -44,7 +44,7 @@ const CategoriesBar = ({ setSearchQuery }) => {
   return (
     <>
       <CenterModal open={modal} setOpen={setModal} title={'Advanced Search'} width="670">
-        <AdvanceSearch />
+        <AdvanceSearch priceRange={priceRange} />
       </CenterModal>
       <CategoriesBarWrapper>
         <div className="maindiv">
