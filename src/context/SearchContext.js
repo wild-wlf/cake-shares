@@ -8,7 +8,6 @@ export const SearchContextProvider = ({ children }) => {
     page: 1,
     itemsPerPage: 12,
     searchText: '',
-    popular: '',
     type: '',
     investmentType: '',
     country: '',

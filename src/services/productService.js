@@ -76,7 +76,9 @@ const productService = {
       res = await res.json();
       return {
         popularProducts: res.popularProducts.items,
+        popularProductsHasNextPage: res.popularProducts.hasNextPage,
         advertisedProducts: res.advertisedProducts.items,
+        advertisedProductsHasNextPage: res.advertisedProducts.hasNextPage,
         priceRange: res.priceRange,
       };
     }
@@ -122,7 +124,6 @@ const productService = {
     itemsPerPage = 12,
     searchText = '',
     type,
-    popular = false,
     investmentType = '',
     kycLevel = '',
     minInvestment = '',
@@ -134,7 +135,7 @@ const productService = {
     country = '',
   }) {
     let res = await Fetch.get(
-      `${this._url}/search-products?page=${page}&itemsPerPage=${itemsPerPage}&searchText=${searchText}&type=${type}&popular=${popular}&investmentType=${investmentType}&kycLevel=${kycLevel}&minInvestmentVolume=${minInvestment}&maxInvestmentVolume=${maxInvestment}&valueRaised=${minFundsRaised}&minimumBackers=${minBackers}&country=${country}&daysLeft=${maxDaysLeft}`,
+      `${this._url}/search-products?page=${page}&itemsPerPage=${itemsPerPage}&searchText=${searchText}&type=${type}&investmentType=${investmentType}&kycLevel=${kycLevel}&minInvestmentVolume=${minInvestment}&maxInvestmentVolume=${maxInvestment}&valueRaised=${minFundsRaised}&minimumBackers=${minBackers}&country=${country}&daysLeft=${maxDaysLeft}`,
     );
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
