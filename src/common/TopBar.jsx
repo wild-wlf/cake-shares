@@ -132,7 +132,7 @@ const TopBar = () => {
         setSellerPasswordModal(false);
         setBuyerRegistrationData({});
       } else {
-        setLoader(flase);
+        setLoader(false);
       }
     } catch (error) {
       setLoader(false);

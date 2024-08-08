@@ -1,10 +1,16 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const InvestmentModalWrapper = styled.div`
   padding: 26px 0px 0px 0px;
   display: flex;
   flex-direction: column;
   gap: 26px;
+
+  .minInvest {
+    font-size: 12px;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
   .description {
     font-size: var(--font-size-xl);
     font-weight: 300;

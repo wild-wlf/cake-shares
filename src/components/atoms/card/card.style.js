@@ -71,6 +71,15 @@ export const CardWrapper = styled.div`
         font-weight: 500;
       }
     }
+    .details {
+      display: flex;
+
+      .currentBackers {
+        color: var(--primary);
+        font-weight: 500;
+        margin-right: 10px;
+      }
+    }
   }
 
   @media only screen and (max-width: 768px) {

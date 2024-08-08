@@ -46,7 +46,7 @@ const MyWallet = ({ pieData, amount }) => {
   const [openCardSuccess, setOpenCardSuccess] = useState(false);
   const [openCardLast, setOpenCardLast] = useState(false);
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('bank');
+  const [selectedOption, setSelectedOption] = useState('card');
   const router = useRouter();
 
   const handleOptionSelect = option => {

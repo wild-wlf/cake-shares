@@ -172,12 +172,28 @@ const AdvanceSearch = () => {
           <div className="volume-div">
             <span className="heading">Investment Volume</span>
             <div className="inputWrapper">
-              <input type="text" placeholder="$0" readOnly value={`$${searchQuery.minInvestment}`} />
+              <input
+                type="text"
+                placeholder="$0"
+                value={`${searchQuery.minInvestment}`}
+                onChange={_ => {
+                  setSearchQuery(prev => ({ ...prev, minInvestment: _.target.value }));
+                }}
+              />
               <FaMinus size={30} />
-              <input type="text" placeholder="$0" readOnly value={`$${searchQuery.maxInvestment}`} />
+              <input
+                type="text"
+                placeholder="$0"
+                value={`${searchQuery.maxInvestment}`}
+                onChange={_ => {
+                  setSearchQuery(prev => ({ ...prev, maxInvestment: _.target.value }));
+                }}
+              />
             </div>
           </div>
           <RangeSlider
+            min={0}
+            max={999999}
             onChange={_ => {
               setSearchQuery(prev => ({ ...prev, minInvestment: _[0], maxInvestment: _[1] }));
             }}

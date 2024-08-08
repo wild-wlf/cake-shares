@@ -19,6 +19,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
   const { buyerRegistrationData } = useContext(UserContext);
 
   const [arr, setArr] = useState(countries);
+  const [loading, setLoading] = useState(false);
   const [image, setImage] = useState('');
   const [form] = useForm();
 
@@ -50,6 +51,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
   }, []);
 
   const handleSubmit = async e => {
+    setLoading(true);
     let obj = {
       profilePicture: image,
       type: buyerRegistrationData.type,
@@ -81,8 +83,10 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
         type: 'success',
         message: 'User Registered Successfully!',
       });
+      setLoading(false);
       handleRegistration();
     } catch (error) {
+      setLoading(false);
       Toast({
         type: 'error',
         message: error.message,
@@ -382,7 +386,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
           </div>
         </div>
 
-        <Button rounded md btntype="primary" width="170" htmlType="submit">
+        <Button rounded md btntype="primary" width="170" htmlType="submit" loader={loading}>
           Go To Home
         </Button>
       </Form>

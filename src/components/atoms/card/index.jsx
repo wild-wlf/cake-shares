@@ -18,13 +18,13 @@ const Card = ({ Cardimage, c_data }) => {
           <div className="title-div">
             <div className="productNameWrapper">
               <span className="producName">{c_data?.productName}</span>
-              <Image src={people} alt="people" />
-              <span className="producName currentBackers">{c_data?.currentBackers}</span>
             </div>
-            <span>
+            <div className="details">
+              <Image src={people} alt="people" />
+              <span className="currentBackers">{c_data?.currentBackers}</span>
               {c_data?.currentBackers == 0 ? '0' : Math.ceil((c_data?.valueRaised / c_data?.assetValue) * 100)}% -{' '}
               {c_data?.assetValue}
-            </span>
+            </div>
           </div>
 
           <div className="progress">
