@@ -81,7 +81,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
               {sortBox && (
                 <div className="list">
                   <Field
-                    type="checkbox"
+                    type="radio"
                     label="Popularity"
                     name="Popularity"
                     radioBorder="var(--gray-2)"
@@ -90,7 +90,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
                     value={selected === 'Popularity'}
                   />
                   <Field
-                    type="checkbox"
+                    type="radio"
                     label="Funding Ratio"
                     name="Funding Ratio"
                     radioBorder="var(--gray-2)"
@@ -99,7 +99,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
                     value={selected === 'Funding Ratio'}
                   />
                   <Field
-                    type="checkbox"
+                    type="radio"
                     label="Return"
                     name="Return"
                     radioBorder="var(--gray-2)"
