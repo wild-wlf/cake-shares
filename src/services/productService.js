@@ -17,6 +17,7 @@ const productService = {
     const [products, setProducts] = useState({
       recommendedProducts: [],
       popularProducts: [],
+      priceRange: null,
     });
     const { cancellablePromise } = useCancellablePromise();
     const [status, setStatus] = useState(STATUS.LOADING);
@@ -76,7 +77,7 @@ const productService = {
       return {
         popularProducts: res.popularProducts.items,
         advertisedProducts: res.advertisedProducts.items,
-        // recommendedProducts: res.recommendedProducts.items,
+        priceRange: res.priceRange,
       };
     }
     const { message } = await res.json();

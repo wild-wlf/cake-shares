@@ -21,7 +21,7 @@ const Home = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Banner />
-      <CategoriesBar setSearchQuery={setSearchQuery} />
+      <CategoriesBar setSearchQuery={setSearchQuery} priceRange={products_data.priceRange} />
       <Categories title="Popular Investments" data={products_data?.popularProducts} loading={products_loading} />
       {/* <Categories title="Recommended Investments" data={products_data?.recommendedProducts} loading={products_loading} /> */}
       <Categories title="Advertised Investments" data={products_data?.advertisedProducts} loading={products_loading} />

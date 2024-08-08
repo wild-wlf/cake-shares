@@ -6,8 +6,14 @@ export const InvestmentModalWrapper = styled.div`
   flex-direction: column;
   gap: 26px;
 
+  .input-div {
+    > div {
+      margin-bottom: 10px;
+    }
+  }
+
   .minInvest {
-    font-size: 12px;
+    font-size: 14px;
     font-style: italic;
     margin-bottom: 10px;
   }
