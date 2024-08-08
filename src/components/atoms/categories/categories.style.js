@@ -24,6 +24,7 @@ export const CategoriesWrapper = styled.div`
         grid-template-columns: repeat(6, 1fr);
         gap: 20px;
         width: 100%;
+        margin-bottom: 70px;
         @media screen and (max-width: 1600px) {
           grid-template-columns: repeat(5, 1fr);
         }
