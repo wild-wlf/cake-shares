@@ -22,9 +22,20 @@ const Home = () => {
       </Head>
       <Banner />
       <CategoriesBar setSearchQuery={setSearchQuery} priceRange={products_data.priceRange} />
-      <Categories title="Popular Investments" data={products_data?.popularProducts} loading={products_loading} />
-      {/* <Categories title="Recommended Investments" data={products_data?.recommendedProducts} loading={products_loading} /> */}
-      <Categories title="Advertised Investments" data={products_data?.advertisedProducts} loading={products_loading} />
+      <Categories
+        title="Popular Investments"
+        data={products_data?.popularProducts}
+        hasNextPage={products_data.popularProductshasNextPage}
+        loading={products_loading}
+        priceRange={products_data?.priceRange}
+      />
+      <Categories
+        title="Advertised Investments"
+        data={products_data?.advertisedProducts}
+        hasNextPage={products_data.advertisedProductshasNextPage}
+        loading={products_loading}
+        priceRange={products_data?.priceRange}
+      />
     </>
   );
 };

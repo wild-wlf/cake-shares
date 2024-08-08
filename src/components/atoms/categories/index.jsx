@@ -6,8 +6,16 @@ import arrowRight from '../../../_assets/arrow.png';
 import Property from '../../../_assets/property.png';
 import Link from 'next/link';
 import Skeletonn from '../skeleton/Skeletonn';
+import Button from '../Button';
+import { useRouter } from 'next/router';
+import { useContextHook } from 'use-context-hook';
+import { SearchContext } from '@/context/SearchContext';
 
-const Categories = ({ title, data, loading }) => {
+const Categories = ({ title, data, hasNextPage, loading, priceRange }) => {
+  const { setSearchQuery } = useContextHook(SearchContext, v => ({
+    setSearchQuery: v.setSearchQuery,
+  }));
+  const router = useRouter();
   const settings = {
     dots: false,
     infinite: false,
@@ -57,6 +65,23 @@ const Categories = ({ title, data, loading }) => {
     <CategoriesWrapper image={arrowRight} $slide>
       <div className="title">
         <span>{title}</span>
+        {hasNextPage && (
+          <Button
+            onClick={() => {
+              setSearchQuery(prev => ({
+                ...prev,
+                minInvestment: priceRange.minPrice,
+                maxInvestment: priceRange.maxPrice,
+              }));
+              router.push('/advanceSearch');
+            }}
+            rounded
+            sm
+            btntype="primary"
+            className="button">
+            View All
+          </Button>
+        )}
       </div>
       {loading ? (
         <Slider {...settings}>

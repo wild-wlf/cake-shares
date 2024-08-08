@@ -52,7 +52,7 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
     <ModalContainer
       lg
       width={1339}
-      title="Shareholder Chat"
+      title="Investor Chat"
       btnComponent={({ onClick }) => (
         <Button type="primary" rounded sm onClick={onClick}>
           Chat
@@ -84,7 +84,7 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
     }),
     [assetsData],
   );
-  const columnNames = [`Product`, `Category`, `Total Shares`, `Amount`, `Chat (Shareholders)`];
+  const columnNames = [`Product`, `Category`, `Total Shares`, `Amount`, `Chat (Investors)`];
   return (
     <StyledUserDetail>
       <div className="colWrapper">

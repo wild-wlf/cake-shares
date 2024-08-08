@@ -46,24 +46,19 @@ const AdvanceSearch = ({ priceRange }) => {
     return options;
   }, [categories_data?.categories]);
 
-  const [selected, setSelected] = useState({
-    investment: 'Select Type',
-    country: 'Select Country',
-    kyc: 'Select Level',
-  });
   const [searchQuery, setSearchQuery] = useState({
     searchText: '',
-    // popular: false,
     private: false,
     minInvestment: priceRange.minPrice,
     maxInvestment: priceRange.maxPrice,
   });
 
   const handleSubmit = e => {
+    const type = e?.corporate && e?.private ? 'both' : e?.corporate ? 'corporate' : e?.private ? 'private' : '';
+
     let obj = {
       searchText: e?.searchText,
-      // popular: e?.popular,
-      type: e?.type,
+      type,
       investmentType: e?.investment_type?.value,
       country: e?.country?.value,
       kycLevel: e?.kyc_level?.value,
@@ -286,18 +281,18 @@ const AdvanceSearch = ({ priceRange }) => {
         </div>
 
         <div className="checkbox">
-          {/* <Form.Item
+          <Form.Item
             type="checkbox"
-            label="Popular (likes)"
-            name="popular"
+            label="Corporate"
+            name="corporate"
             labelColor="rgba(49, 49, 49, 1)"
             radioBorder="var(--gray-2)">
             <Field />
-          </Form.Item> */}
+          </Form.Item>
           <Form.Item
             type="checkbox"
-            label="Corporate or Private"
-            name="type"
+            label="Private"
+            name="private"
             labelColor="rgba(49, 49, 49, 1)"
             radioBorder="var(--gray-2)">
             <Field />
