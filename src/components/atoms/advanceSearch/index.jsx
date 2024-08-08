@@ -269,7 +269,7 @@ const AdvanceSearch = ({ priceRange }) => {
               name="max_days_left"
               sm
               rounded
-              placeholder="0%"
+              placeholder="0"
               rules={[
                 {
                   pattern: /^.{0,3}$/,
