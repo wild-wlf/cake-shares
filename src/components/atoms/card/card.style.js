@@ -59,12 +59,21 @@ export const CardWrapper = styled.div`
       display: flex;
       align-items: center;
       gap: 2px;
+
       .producName {
-        max-width: 60px;
         width: 100%;
+        max-width: 40px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+
+        @media (min-width: 1400px) {
+          max-width: 120px;
+        }
+
+        @media (min-width: 768px) {
+          max-width: 90px;
+        }
       }
       .currentBackers {
         color: var(--primary);

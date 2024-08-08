@@ -14,6 +14,7 @@ export const CategoriesWrapper = styled.div`
     justify-content: space-between;
     font-size: var(--font-size-xl);
     font-weight: 500;
+    margin-top: 15px;
   }
   ${({ $slide }) =>
     $slide &&
@@ -23,6 +24,7 @@ export const CategoriesWrapper = styled.div`
         grid-template-columns: repeat(6, 1fr);
         gap: 20px;
         width: 100%;
+        margin-bottom: 70px;
         @media screen and (max-width: 1600px) {
           grid-template-columns: repeat(5, 1fr);
         }

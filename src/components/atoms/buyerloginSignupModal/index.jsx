@@ -83,18 +83,27 @@ const BuyerLoginSignupModal = ({
                 required: true,
                 message: 'Please enter username',
               },
-              {
-                pattern: /^.{3,20}$/,
-                message: 'Minimum character length is 3',
-              },
-              {
-                pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,
-                message: 'Please enter a valid username (no spaces, letters, numbers, underscores, and hyphens only)',
-              },
-              {
-                pattern: /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9_-]+$/,
-                message: 'Username must be a combination of characters and digits',
-              },
+              ...(type === 'Register As Buyer'
+                ? [
+                    {
+                      pattern: /^.{3,20}$/,
+                      message: 'Minimum character length is 3',
+                    },
+                    {
+                      pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,
+                      message:
+                        'Please enter a valid username (no spaces, letters, numbers, underscores, and hyphens only)',
+                    },
+                    {
+                      pattern: /^(?!\d+$).*$/,
+                      message: 'Username cannot be only numbers',
+                    },
+                    {
+                      pattern: /^(?![!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$).*$/,
+                      message: 'Username cannot consist only of special characters',
+                    },
+                  ]
+                : []),
             ]}>
             <Field maxLength={20} />
           </Form.Item>
