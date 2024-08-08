@@ -175,7 +175,6 @@ const AdvanceSearch = () => {
               <input
                 type="text"
                 placeholder="$0"
-                readOnly
                 value={searchQuery.minInvestment ? `$${searchQuery.minInvestment}` : '$0'}
                 onChange={_ => {
                   setSearchQuery(prev => ({ ...prev, minInvestment: _.target.value }));
@@ -185,7 +184,6 @@ const AdvanceSearch = () => {
               <input
                 type="text"
                 placeholder="$0"
-                readOnly
                 value={searchQuery.maxInvestment ? `$${searchQuery.maxInvestment}` : '$0'}
                 onChange={_ => {
                   setSearchQuery(prev => ({ ...prev, maxInvestment: _.target.value }));
