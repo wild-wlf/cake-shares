@@ -7,7 +7,7 @@ import close from '../../../_assets/close.svg';
 import { UserContext } from '@/context/UserContext';
 
 const HandleLoginModal = ({ setOpen, text }) => {
-  const { setLoginModal } = useContext(UserContext);
+  const { setLoginModal, setRegisterModal } = useContext(UserContext);
   return (
     <HandleLoginModalWrapper>
       <Image src={InfoIcon} alt="Info Icon" className="InfoIcon" />
@@ -16,21 +16,33 @@ const HandleLoginModal = ({ setOpen, text }) => {
         <Button btntype="light-green" color="success" rounded md width="200" onClick={() => setOpen(false)}>
           Close
         </Button>
-        {text === 'You are not currently logged in. Please log in to proceed with this action.' ? (
-          <Button
-            btntype="primary"
-            color="success"
-            rounded
-            md
-            width="200"
-            onClick={() => {
-              setLoginModal(true);
-              setOpen(false);
-            }}>
-            Login
-          </Button>
-        ) : (
-          <></>
+        {text === 'You are not currently logged in. Please log in to proceed with this action.' && (
+          <>
+            <Button
+              btntype="primary"
+              color="success"
+              rounded
+              md
+              width="200"
+              onClick={() => {
+                setLoginModal(true);
+                setOpen(false);
+              }}>
+              Login
+            </Button>
+            <Button
+              btntype="primary"
+              color="success"
+              rounded
+              md
+              width="200"
+              onClick={() => {
+                setRegisterModal(true);
+                setOpen(false);
+              }}>
+              Register
+            </Button>
+          </>
         )}
       </div>
     </HandleLoginModalWrapper>

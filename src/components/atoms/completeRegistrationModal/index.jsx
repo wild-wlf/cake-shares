@@ -152,8 +152,12 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                       'Please enter a valid username (no spaces, letters, numbers, underscores, and hyphens only)',
                   },
                   {
-                    pattern: /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9_-]+$/,
-                    message: 'Username must be a combination of characters and digits',
+                    pattern: /^(?!\d+$).*$/,
+                    message: 'Username cannot be only numbers',
+                  },
+                  {
+                    pattern: /^(?![!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$).*$/,
+                    message: 'Username cannot consist only of special characters',
                   },
                 ]}>
                 <Field maxLength={20} />

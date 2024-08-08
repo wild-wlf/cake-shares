@@ -8,7 +8,7 @@ import Head from 'next/head';
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState({
     page: 1,
-    pageSize: 30,
+    pageSize: 12,
     category: '',
   });
 

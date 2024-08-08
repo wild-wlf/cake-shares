@@ -84,7 +84,7 @@ const Field = forwardRef(
               onChange={({ target: { name, checked } }) => inputProps?.onChange?.({ target: { name, value: checked } })}
             />
             <FakeInput $radioBorder={radioBorder} $labelReverse={labelReverse}>
-              {type === 'checkbox' && <TbCheck color="var(--white)" />}
+              {type === 'checkbox' && <TbCheck color="var(--white)" size={20} />}
             </FakeInput>
             <FakeLabel $labelColor={labelColor} required={rules?.filter(({ required }) => required).length}>
               {label}
