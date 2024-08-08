@@ -31,6 +31,8 @@ export const HandleLoginModalWrapper = styled.div`
   }
   .btn-holder {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 16px;
     button {
       width: 250px;

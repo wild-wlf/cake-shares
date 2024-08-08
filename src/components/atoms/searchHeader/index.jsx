@@ -112,7 +112,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
             </div>
           </Sort>
           <Button rounded sm className="button" onClick={handleClearQuery}>
-            Close All
+            Clear All
             <IoIosRemoveCircle size={18} />
           </Button>
         </div>

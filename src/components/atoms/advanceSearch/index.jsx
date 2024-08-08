@@ -175,7 +175,8 @@ const AdvanceSearch = () => {
               <input
                 type="text"
                 placeholder="$0"
-                value={`${searchQuery.minInvestment}`}
+                readOnly
+                value={searchQuery.minInvestment ? `$${searchQuery.minInvestment}` : '$0'}
                 onChange={_ => {
                   setSearchQuery(prev => ({ ...prev, minInvestment: _.target.value }));
                 }}
@@ -184,7 +185,8 @@ const AdvanceSearch = () => {
               <input
                 type="text"
                 placeholder="$0"
-                value={`${searchQuery.maxInvestment}`}
+                readOnly
+                value={searchQuery.maxInvestment ? `$${searchQuery.maxInvestment}` : '$0'}
                 onChange={_ => {
                   setSearchQuery(prev => ({ ...prev, maxInvestment: _.target.value }));
                 }}
@@ -271,7 +273,7 @@ const AdvanceSearch = () => {
               name="max_days_left"
               sm
               rounded
-              placeholder="0%"
+              placeholder="0"
               rules={[
                 {
                   pattern: /^.{0,3}$/,
