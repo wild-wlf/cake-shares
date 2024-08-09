@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const VerficationModalWrapper = styled.div`
   display: flex;
@@ -16,6 +16,15 @@ export const VerficationModalWrapper = styled.div`
     font-size: 22px;
     font-weight: 300;
     text-align: center;
+  }
+  .btn-holder {
+    display: flex;
+
+    gap: 10px; /* Adjust the gap size as needed */
+  }
+
+  .contact-btn {
+    text-wrap: nowrap;
   }
   @media only screen and (max-width: 576px) {
     gap: 20px;
