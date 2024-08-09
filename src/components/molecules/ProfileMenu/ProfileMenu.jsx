@@ -73,7 +73,7 @@ const ProfileMenu = ({ openProfile }) => {
           </div>
           {/* </Link> */}
 
-          {/* <div
+          <div
             className="DarkTheme"
             onClick={() => {
               setPrivacyPolicy(!privacyPolicy);
@@ -81,7 +81,7 @@ const ProfileMenu = ({ openProfile }) => {
             <Image src={privacyPolicyIcon} alt="Privacy Policies" width={17} height={17} />
             <h5>Privacy Policy</h5>
           </div>
-          <div
+          {/* <div
             className="DarkTheme"
             onClick={() => {
               setPrivacySetting(true);
@@ -89,6 +89,7 @@ const ProfileMenu = ({ openProfile }) => {
             <Image src={privacySettingIcon} alt="Privacy Settings" width={17} height={17} />
             <h5>Privacy Settings</h5>
           </div>
+           */}
           <div
             onClick={() => {
               setTermsCondition(!termsCondition);
@@ -97,7 +98,7 @@ const ProfileMenu = ({ openProfile }) => {
               <Image src={termsIcon} alt="Terms & Conditions" width={17} height={17} />
               <h5>Terms & Conditions</h5>
             </div>
-          </div> */}
+          </div>
           {/* <hr /> */}
           <div
             className="LogOut"
