@@ -42,7 +42,8 @@ const HandleLoginModal = ({ setOpen, text }) => {
               Register
             </Button>
           </>
-        ) : (
+        ) : text ===
+          'Your KYC request is currently under review and has not yet been approved. We appreciate your patience and will notify you as soon as the process is complete. Thank you for your understanding.' ? null : (
           <Button btntype="light-green" color="success" rounded md width="200" onClick={() => router.push('/wallet')}>
             Topup
           </Button>
