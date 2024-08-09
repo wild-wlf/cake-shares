@@ -98,7 +98,7 @@ const ProfileMenu = ({ openProfile }) => {
               <h5>Terms & Conditions</h5>
             </div>
           </div> */}
-          <hr />
+          {/* <hr /> */}
           <div
             className="LogOut"
             onClick={() => {
