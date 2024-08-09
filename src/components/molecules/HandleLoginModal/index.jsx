@@ -15,13 +15,7 @@ const HandleLoginModal = ({ setOpen, text }) => {
       <Image src={InfoIcon} alt="Info Icon" className="InfoIcon" />
       <span>{text}</span>
       <div className="btn-holder">
-        <Button btntype="light-green" color="success" rounded md width="200" onClick={() => router.push('/wallet')}>
-          Topup
-        </Button>
-        <Button btntype="light-green" color="success" rounded md width="200" onClick={() => setOpen(false)}>
-          Close
-        </Button>
-        {text === 'You are not currently logged in. Please log in to proceed with this action.' && (
+        {text === 'You are not currently logged in. Please log in to proceed with this action.' ? (
           <>
             <Button
               btntype="primary"
@@ -48,6 +42,10 @@ const HandleLoginModal = ({ setOpen, text }) => {
               Register
             </Button>
           </>
+        ) : (
+          <Button btntype="light-green" color="success" rounded md width="200" onClick={() => router.push('/wallet')}>
+            Topup
+          </Button>
         )}
       </div>
     </HandleLoginModalWrapper>
