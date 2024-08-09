@@ -196,7 +196,7 @@ const SearchFilters = ({ fetchProducts }) => {
             name="min_annual_cost"
             sm
             rounded
-            placeholder="0%"
+            placeholder="0"
             rules={[
               {
                 pattern: /^.{0,40}$/,
@@ -247,7 +247,7 @@ const SearchFilters = ({ fetchProducts }) => {
             name="max_days_left"
             sm
             rounded
-            placeholder="0%"
+            placeholder="0"
             rules={[
               {
                 pattern: /^.{0,40}$/,

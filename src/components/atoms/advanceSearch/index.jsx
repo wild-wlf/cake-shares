@@ -201,7 +201,7 @@ const AdvanceSearch = ({ priceRange }) => {
               name="min_annual_cost"
               sm
               rounded
-              placeholder="0%"
+              placeholder="0"
               rules={[
                 {
                   pattern: /^.{0,10}$/,

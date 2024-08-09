@@ -64,7 +64,7 @@ const ProfileMenu = ({ openProfile }) => {
 
         <hr />
         <div className="Dets">
-          <Link href="/profile">
+          <Link href="/profile" passHref>
             <div className="DarkTheme">
               <Image src={myProfileIcon} alt="My profile" width={17} height={17} />
               <h5>My Profile</h5>

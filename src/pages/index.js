@@ -25,14 +25,14 @@ const Home = () => {
       <Categories
         title="Popular Investments"
         data={products_data?.popularProducts}
-        hasNextPage={products_data.popularProductshasNextPage}
+        hasNextPage={products_data.popularProductsHasNextPage}
         loading={products_loading}
         priceRange={products_data?.priceRange}
       />
       <Categories
         title="Advertised Investments"
         data={products_data?.advertisedProducts}
-        hasNextPage={products_data.advertisedProductshasNextPage}
+        hasNextPage={products_data.advertisedProductsHasNextPage}
         loading={products_loading}
         priceRange={products_data?.priceRange}
       />
