@@ -37,7 +37,9 @@ const CardForm = ({ openCardNext }) => {
     if (!stripe || !elements) {
       return;
     }
-
+    if (!amount) {
+      Toast({ type: 'warning', message: 'Please fill all fields' });
+    }
     setLoading(true);
 
     try {
@@ -270,7 +272,7 @@ const CardForm = ({ openCardNext }) => {
           width={'170px'}
           height={'40px'}
           sm
-          disabled={ready}
+          disabled={ready || !amount}
           loader={loading}
           btntype="primary"
           onClick={formSubmitHandler}>
