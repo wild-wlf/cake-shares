@@ -100,7 +100,8 @@ export const MessageContainer = styled.div`
 
   .message-content {
     display: flex;
-    gap: px;
+    align-items: flex-start;
+    gap: 5px;
   }
 `;
 
