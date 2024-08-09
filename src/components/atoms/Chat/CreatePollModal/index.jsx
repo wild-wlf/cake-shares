@@ -70,7 +70,7 @@ const CreatePollModal = ({ userInfo, productName, productId, user, onClose, type
               <Form.Item
                 key={index}
                 type="text"
-                label={`Options ${index + 1}`}
+                label={`Option ${index + 1}`}
                 name={`options${index}`}
                 value={option}
                 rounded

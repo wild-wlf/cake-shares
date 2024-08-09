@@ -79,7 +79,6 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
       <CenterModal
         open={handleLoginModal}
         setOpen={setHandleLoginModal}
-        iscloseAble={false}
         title={infoModalHeadingText}
         width="689">
         <HandleLoginModal setOpen={setHandleLoginModal} text={infoModalText} />

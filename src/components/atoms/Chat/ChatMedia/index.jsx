@@ -58,13 +58,18 @@ const ChatMedia = ({ userInfo, type, onlineUsers, channelReceivers }) => {
               <div className="images-wrapper">
                 {getThreeParticipants()?.map((item, index) => {
                   return (
-                    <Image
-                      src={item?.profilePicture || profileplaceHolder}
-                      alt="profilePic"
-                      width={45}
-                      height={45}
-                      key={index}
-                    />
+                    <div key={index}>
+                      <div className="img-holder">
+                        <Image
+                          src={item?.profilePicture || profileplaceHolder}
+                          alt="profilePic"
+                          width={45}
+                          height={45}
+                        />
+                      </div>
+                      <label className="userName">{item?.fullName || item?.username}</label>
+                      <span>{item?.sellerType} Seller</span>
+                    </div>
                   );
                 })}
               </div>

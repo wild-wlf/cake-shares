@@ -52,7 +52,7 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
     <ModalContainer
       lg
       width={1339}
-      title="Investor Chat"
+      title="Investor's Chat"
       btnComponent={({ onClick }) => (
         <Button type="primary" rounded sm onClick={onClick}>
           Chat
@@ -147,7 +147,7 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
       <Inheritance userData={userData} />
       <div className="colWrapper">
         <div className="colHeader">
-          <strong className="colTitle">Personal info:</strong>
+          <strong className="colTitle">Personal Information:</strong>
           <ModalContainer
             lg
             width={673}
