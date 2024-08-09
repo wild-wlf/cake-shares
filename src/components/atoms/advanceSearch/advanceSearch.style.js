@@ -65,7 +65,7 @@ export const Wrapper = styled.div`
       display: flex;
       align-items: center;
       gap: 10px;
-      max-width: 152px;
+      max-width: 200px;
       input {
         text-align: center;
       }

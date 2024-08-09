@@ -74,10 +74,6 @@ const InitiateInvestmentModal = ({
         <div className="current-wallet">
           Current Wallet Balance: <span>{convertToCurrencyFormat(user?.wallet) || 0}</span>
         </div>
-        <div className="minInvest">
-          Minimum Investment Amount is $
-          {remainingInvestAmount < minInvestValue ? Number(remainingInvestAmount) : minInvestValue}
-        </div>
 
         <div className="input-div">
           <Form.Item
@@ -138,6 +134,10 @@ const InitiateInvestmentModal = ({
             ]}>
             <Field />
           </Form.Item>
+          <div className="minInvest">
+            Minimum Investment Amount is $
+            {remainingInvestAmount < minInvestValue ? Number(remainingInvestAmount) : minInvestValue}
+          </div>
         </div>
 
         {valueRaised > 0 && (
@@ -145,6 +145,7 @@ const InitiateInvestmentModal = ({
             <span className="text-wrapper">Remaining Investment Amount ${remainingInvestAmount.toFixed(2)}</span>
           </>
         )}
+
         <div className="text-wrapper">
           You will own <span>{ownershipPercentage}%</span>
           {`of the asset, valued at a total of `}

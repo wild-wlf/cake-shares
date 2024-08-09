@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react';
-import { Sort, Wrapper } from './advanceSearch.style';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Wrapper } from './advanceSearch.style';
 import Button from '../Button';
-import { IoMdArrowDropdown } from 'react-icons/io';
 import Field from '../Field';
-import Link from 'next/link';
 import RangeSlider from '../rangeSlider';
 import { FaMinus } from 'react-icons/fa';
 import Form, { useForm } from '@/components/molecules/Form';
@@ -15,7 +13,7 @@ import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
 import categoryService from '@/services/categoryService';
 
-const AdvanceSearch = () => {
+const AdvanceSearch = ({ priceRange }) => {
   const [arr, setArr] = useState(countries);
   const [form] = useForm();
   const router = useRouter();
@@ -48,24 +46,19 @@ const AdvanceSearch = () => {
     return options;
   }, [categories_data?.categories]);
 
-  const [selected, setSelected] = useState({
-    investment: 'Select Type',
-    country: 'Select Country',
-    kyc: 'Select Level',
-  });
   const [searchQuery, setSearchQuery] = useState({
     searchText: '',
-    popular: false,
     private: false,
-    minInvestment: '',
-    maxInvestment: '',
+    minInvestment: priceRange.minPrice,
+    maxInvestment: priceRange.maxPrice,
   });
 
   const handleSubmit = e => {
+    const type = e?.corporate && e?.private ? 'both' : e?.corporate ? 'corporate' : e?.private ? 'private' : '';
+
     let obj = {
       searchText: e?.searchText,
-      popular: e?.popular,
-      type: e?.type,
+      type,
       investmentType: e?.investment_type?.value,
       country: e?.country?.value,
       kycLevel: e?.kyc_level?.value,
@@ -192,8 +185,8 @@ const AdvanceSearch = () => {
             </div>
           </div>
           <RangeSlider
-            min={0}
-            max={999999}
+            min={priceRange?.minPrice}
+            max={priceRange?.maxPrice}
             onChange={_ => {
               setSearchQuery(prev => ({ ...prev, minInvestment: _[0], maxInvestment: _[1] }));
             }}
@@ -290,16 +283,16 @@ const AdvanceSearch = () => {
         <div className="checkbox">
           <Form.Item
             type="checkbox"
-            label="Popular (likes)"
-            name="popular"
+            label="Corporate"
+            name="corporate"
             labelColor="rgba(49, 49, 49, 1)"
             radioBorder="var(--gray-2)">
             <Field />
           </Form.Item>
           <Form.Item
             type="checkbox"
-            label="Corporate or Private"
-            name="type"
+            label="Private"
+            name="private"
             labelColor="rgba(49, 49, 49, 1)"
             radioBorder="var(--gray-2)">
             <Field />

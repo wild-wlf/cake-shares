@@ -8,7 +8,7 @@ import Head from 'next/head';
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState({
     page: 1,
-    pageSize: 30,
+    pageSize: 12,
     category: '',
   });
 
@@ -21,10 +21,21 @@ const Home = () => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Banner />
-      <CategoriesBar setSearchQuery={setSearchQuery} />
-      <Categories title="Popular Investments" data={products_data?.popularProducts} loading={products_loading} />
-      {/* <Categories title="Recommended Investments" data={products_data?.recommendedProducts} loading={products_loading} /> */}
-      <Categories title="Advertised Investments" data={products_data?.advertisedProducts} loading={products_loading} />
+      <CategoriesBar setSearchQuery={setSearchQuery} priceRange={products_data.priceRange} />
+      <Categories
+        title="Popular Investments"
+        data={products_data?.popularProducts}
+        hasNextPage={products_data.popularProductshasNextPage}
+        loading={products_loading}
+        priceRange={products_data?.priceRange}
+      />
+      <Categories
+        title="Advertised Investments"
+        data={products_data?.advertisedProducts}
+        hasNextPage={products_data.advertisedProductshasNextPage}
+        loading={products_loading}
+        priceRange={products_data?.priceRange}
+      />
     </>
   );
 };

@@ -6,8 +6,16 @@ import arrowRight from '../../../_assets/arrow.png';
 import Property from '../../../_assets/property.png';
 import Link from 'next/link';
 import Skeletonn from '../skeleton/Skeletonn';
+import Button from '../Button';
+import { useRouter } from 'next/router';
+import { useContextHook } from 'use-context-hook';
+import { SearchContext } from '@/context/SearchContext';
 
-const Categories = ({ title, data, loading }) => {
+const Categories = ({ title, data, hasNextPage, loading, priceRange }) => {
+  const { setSearchQuery } = useContextHook(SearchContext, v => ({
+    setSearchQuery: v.setSearchQuery,
+  }));
+  const router = useRouter();
   const settings = {
     dots: false,
     infinite: false,
@@ -54,9 +62,26 @@ const Categories = ({ title, data, loading }) => {
     ],
   };
   return (
-    <CategoriesWrapper image={arrowRight}>
+    <CategoriesWrapper image={arrowRight} $slide>
       <div className="title">
         <span>{title}</span>
+        {hasNextPage && (
+          <Button
+            onClick={() => {
+              setSearchQuery(prev => ({
+                ...prev,
+                minInvestment: priceRange.minPrice,
+                maxInvestment: priceRange.maxPrice,
+              }));
+              router.push('/advanceSearch');
+            }}
+            rounded
+            sm
+            btntype="primary"
+            className="button">
+            View All
+          </Button>
+        )}
       </div>
       {loading ? (
         <Slider {...settings}>
@@ -66,13 +91,22 @@ const Categories = ({ title, data, loading }) => {
         </Slider>
       ) : data && data?.length > 0 ? (
         <div className="slider">
-          <Slider {...settings}>
+          {data &&
+            data.length > 0 &&
+            data.map((c_data, index) => (
+              <div className="card" key={index}>
+                <Link href={`/products/${c_data?._id}`}>
+                  <Card Cardimage={c_data?.media[0]} c_data={c_data} />
+                </Link>
+              </div>
+            ))}
+          {/* <Slider {...settings}>
             {data?.map((item, index) => (
               <Link href={`/products/${item._id}`} key={index}>
                 <Card c_data={item} Cardimage={item?.media[1] || Property} />
               </Link>
             ))}
-          </Slider>
+          </Slider> */}
         </div>
       ) : (
         <NoRecord>No records found</NoRecord>

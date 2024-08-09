@@ -6,6 +6,8 @@ import { useCancellablePromise } from '@/helpers/promiseHandler';
 import { useRouter } from 'next/router';
 import Toast from '@/components/molecules/Toast';
 import userService from '@/services/userService';
+import VerficationModal from '@/components/atoms/VerficationModal';
+import CenterModal from '@/components/atoms/Modal/CenterModal';
 
 const context = {};
 
@@ -98,6 +100,9 @@ export const AuthContextProvider = props => {
         password,
         type,
       });
+
+      if (res.isBlock) {
+      }
 
       if (!res?.token) {
         throw new Error(res?.message);

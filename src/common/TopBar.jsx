@@ -370,6 +370,8 @@ const TopBar = () => {
           handleSellerModal={handleSellerModal}
           type="Login"
           description="Welcome to cakeshares, please select the account type to proceed."
+          setLoginModal={setLoginModal}
+          setRegisterModal={setRegisterModal}
         />
       </CenterModal>
       <CenterModal open={buyerloginmodal} setOpen={setBuyerLoginModal} title="Login as a Buyer" width="666">
