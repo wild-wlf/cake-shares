@@ -14,8 +14,10 @@ import CenterModal from '../../atoms/Modal/CenterModal';
 import PrivacyPolicy from '@/components/atoms/PrivacyPolicyModal/PrivacyPolicy';
 import TermsConditions from '@/components/atoms/TermsConditions/TermsConditions';
 import PrivacySetting from '@/components/atoms/PrivacySettingModal/PrivacySetting';
+import { useRouter } from 'next/router';
 
 const ProfileMenu = ({ openProfile }) => {
+  const router = useRouter();
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
   const [privacySetting, setPrivacySetting] = useState(false);
 
@@ -64,12 +66,12 @@ const ProfileMenu = ({ openProfile }) => {
 
         <hr />
         <div className="Dets">
-          <Link href="/profile" passHref>
-            <div className="DarkTheme">
-              <Image src={myProfileIcon} alt="My profile" width={17} height={17} />
-              <h5>My Profile</h5>
-            </div>
-          </Link>
+          {/* <Link href="/profile" passHref> */}
+          <div onClick={() => router.push('/profile')} className="DarkTheme">
+            <Image src={myProfileIcon} alt="My profile" width={17} height={17} />
+            <h5>My Profile</h5>
+          </div>
+          {/* </Link> */}
 
           <div
             className="DarkTheme"

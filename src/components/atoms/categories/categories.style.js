@@ -15,6 +15,7 @@ export const CategoriesWrapper = styled.div`
     font-size: var(--font-size-xl);
     font-weight: 500;
     margin-top: 15px;
+    margin-bottom: 17px;
   }
   ${({ $slide }) =>
     $slide &&
