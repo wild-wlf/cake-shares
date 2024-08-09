@@ -56,7 +56,8 @@ export const StyledChatMedia = styled.div`
   .chat-between {
     display: flex;
     align-items: flex-start;
-    justify-content: space-around;
+    justify-content: space-between;
+    gap: 10px;
     padding-bottom: 20px;
     margin-bottom: 20px;
     border-bottom: 1px solid #d4dcdb;
@@ -124,7 +125,7 @@ export const StyledChatMedia = styled.div`
     flex-direction: column;
     gap: 11px;
     .images-wrapper {
-      max-width: 120px;
+      max-width: 160px;
       display: flex;
       flex-flow: wrap;
       gap: 20px;
