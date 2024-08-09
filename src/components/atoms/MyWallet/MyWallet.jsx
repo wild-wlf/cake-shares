@@ -267,7 +267,7 @@ const MyWallet = ({ pieData, amount }) => {
         <ChartWrapper>
           <div className="ChartContainer">
             <PieChart
-              graphData={pieData}
+              graphData={pieData?.length > 0 ? pieData : null}
               title="Total Investments"
               amount={convertToCurrencyFormat(amount)}
               timeFrame="year"
@@ -278,7 +278,7 @@ const MyWallet = ({ pieData, amount }) => {
             <Graph
               graphLineColor="#4E6199"
               // graphData={dashboard_data?.charDataTransaction?.map( => .total)}
-              graphData={ary2}
+              graphData={ary2?.length > 0 ? ary2 : null}
               tooltipBg=""
               title="Potential Return P.A"
               // amount={dashboard_data?.totalTransactionAmount}
@@ -290,7 +290,7 @@ const MyWallet = ({ pieData, amount }) => {
             <Graph
               graphLineColor="#D74120"
               // graphData={dashboard_data?.charDataTransaction?.map( => .total)}
-              graphData={ary3}
+              graphData={ary3?.length > 0 ? ary3 : null}
               tooltipBg=""
               tooltipImg=""
               title="Portfolio Costs"

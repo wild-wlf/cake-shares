@@ -5,7 +5,7 @@ import userNameImage from '../../../_assets/user-name-icon.svg';
 import emailAddressImage from '../../../_assets/email-address-icon.svg';
 import Image from 'next/image';
 
-const SellerPersonalInfo = ({ userInfo }) => {
+const SellerPersonalInfo = ({ userInfo, onGoingProducts }) => {
   const personalInfoData = [
     {
       image: personImage,
@@ -26,7 +26,7 @@ const SellerPersonalInfo = ({ userInfo }) => {
   const finentialInfoData = [
     {
       image: personImage,
-      title: '0',
+      title: onGoingProducts,
       text: 'Ongoing Products   ',
     },
     {
