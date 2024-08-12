@@ -25,6 +25,7 @@ import CenterModal from '../../Modal/CenterModal';
 import { findReactionByUserId } from '@/helpers/common';
 import notificationService from '@/services/notificationservice';
 import ReactionListModal from '../../reactionListModal/ReactionListModal';
+import Toast from '@/components/molecules/Toast';
 
 const ChatMessage = ({
   showImage,
@@ -124,10 +125,17 @@ const ChatMessage = ({
   }, [reaction, chatType, messageId, receiverId]);
 
   const getReactionDetail = async () => {
-    const res = await notificationService.getMessageReactions(messageId);
-    if (res) {
-      setReactionData(res?.reactionData);
-      setSeeReaction(true);
+    try {
+      const res = await notificationService.getMessageReactions(messageId);
+      if (res) {
+        setReactionData(res?.reactionData);
+        setSeeReaction(true);
+      }
+    } catch (error) {
+      Toast({
+        type: 'error',
+        message: error.message,
+      });
     }
   };
 
