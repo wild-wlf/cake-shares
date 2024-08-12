@@ -647,6 +647,16 @@ export const daysLeft = dateObj => {
   // return formatDistanceToNow(date, {addSuffix: false});
 };
 
+// Helper function to find the index of an object by userId
+export const findReactionByUserId = (array, senderId) => {
+  const Index = array.findIndex(obj => obj.senderId?._id === senderId);
+  if (Index >= 0) {
+    return array[Index]?.reaction;
+  } else {
+    return array[0]?.reaction;
+  }
+};
+
 export const bas64toFile = async (dataUrl, fileName) => {
   const res = await fetch(dataUrl);
   const blob = await res.blob();
