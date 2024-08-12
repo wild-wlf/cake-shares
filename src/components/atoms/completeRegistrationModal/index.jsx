@@ -206,6 +206,10 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                     message: 'Please enter Date Of Birth',
                   },
                   {
+                    transform: value => new Date(value) > new Date(),
+                    message: 'DOB cannot be in the future',
+                  },
+                  {
                     transform: value => checkAge(value) === false,
                     message: 'Age must be 18',
                   },

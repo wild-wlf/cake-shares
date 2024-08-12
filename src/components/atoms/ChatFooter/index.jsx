@@ -29,8 +29,10 @@ const ChatFooter = ({ userInfo, type, productName, productId }) => {
     user: v.user,
   }));
   const [openModal, setOpenModal] = useState(false);
+  const [message, setMessage] = useState();
 
-  const handleSubmit = ({ message }) => {
+  const handleSubmit = () => {
+    console.log({ message });
     if (type === 'private') {
       sendDirectMessage({
         author: user?._id,
@@ -52,8 +54,7 @@ const ChatFooter = ({ userInfo, type, productName, productId }) => {
         channelName,
       });
     }
-    form.setFieldsValue({ message: '' });
-    form.setFieldsError({ message: { message: '' } });
+    setMessage('');
   };
 
   useEffect(() => {
@@ -102,8 +103,10 @@ const ChatFooter = ({ userInfo, type, productName, productId }) => {
               <Form.Item
                 type="text"
                 name="message"
+                value={message}
+                onChange={e => setMessage(e.target.value)}
                 sm
-                rules={[{ required: true, message: 'Cannot Send Empty Message' }]}
+                // rules={[{ required: true, message: 'Cannot Send Empty Message' }]}
                 placeholder="Enter Message">
                 <Field maxLength={256} autocomplete="off" />
               </Form.Item>
@@ -116,7 +119,7 @@ const ChatFooter = ({ userInfo, type, productName, productId }) => {
               <Image src={GalleryIcon} alt="GalleryIcon" width={14} height={14} />
             </div>
           </div>
-          <Button htmlType="submit" className="send-icon">
+          <Button disabled={!message} htmlType="submit" className="send-icon">
             <Image src={SendIcon} alt="sendIcon" width={17} height={17} />
           </Button>
         </ChatFooterWrapper>

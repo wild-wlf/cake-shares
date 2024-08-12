@@ -11,6 +11,7 @@ import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
 import Toast from '@/components/molecules/Toast';
 import { convertToCurrencyFormat } from '@/helpers/common';
+import userAvatar from '../../../_assets/profileplaceHolder.jpg';
 
 const ProductDescription = ({ data, SellerData }) => {
   const router = useRouter();
@@ -52,7 +53,7 @@ const ProductDescription = ({ data, SellerData }) => {
         </div>
         <div className="seller">
           <div className="profilepic">
-            <Image src={SellerData?.profilePicture || Profilepic} alt="profilepic" width={90} height={90} />
+            <Image src={SellerData?.profilePicture || userAvatar} alt="User Profile Picture" width={90} height={90} />
           </div>
           <div className="profiledesc">
             <strong className="user-name">{SellerData?.fullName}</strong>

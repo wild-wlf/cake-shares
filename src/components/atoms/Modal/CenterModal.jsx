@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { ContentHolder, Head, StyledModal } from './Modal.styles';
 import close from '../../../_assets/close.svg';
 import Image from 'next/image';
@@ -15,14 +15,10 @@ const CenterModal = ({
   desktopRight,
   desktopTop,
   title,
-  setIsEditing,
   zIndex,
   iscloseAble = true,
-  setRegistrationData,
-  registrationData,
   headImage,
 }) => {
-  // const { clearFormData } = useContext(AuthContext);
   useEffect(() => {
     const disableScroll = () => {
       document.body.style.overflow = 'hidden';
@@ -44,20 +40,8 @@ const CenterModal = ({
   }, [open]);
 
   const handleClose = () => {
-    // clearFormData?.();
-    // setIsEditing?.({
-    //   status: false,
-    // });
     if (iscloseAble) {
       setOpen(false);
-    }
-    if (registrationData) {
-      setRegistrationData(prev => ({
-        ...prev,
-        username: '',
-        email: '',
-        sellerType: '',
-      }));
     }
   };
 
@@ -66,7 +50,6 @@ const CenterModal = ({
       <StyledModal
         $zIndex={zIndex}
         open={open}
-        onClick={handleClose}
         onKeyDown={e => {
           if (iscloseAble) {
             if (e.key === 'Escape') {

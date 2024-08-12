@@ -12,14 +12,8 @@ const RegisterModal = ({
   description,
   setLoginModal,
   setRegisterModal,
+  setRegistrationData,
 }) => {
-  // const [register, setRegister] = useState("register");
-
-  // const handleRadioChecked = (e) => {
-  //   const { name } = e.target;
-
-  //   setRegister(name);
-  // };
   const [selectedOption, setSelectedOption] = useState('bank');
 
   const handleOptionSelect = option => {
@@ -27,6 +21,7 @@ const RegisterModal = ({
   };
 
   const handleModal = () => {
+    setRegistrationData();
     if (selectedOption === 'bank') {
       handleRegisterModal();
     } else {

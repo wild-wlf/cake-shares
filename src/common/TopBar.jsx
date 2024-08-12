@@ -146,11 +146,11 @@ const TopBar = () => {
     });
   };
   const handleLoginSellerModal = e => {
-    onLogin(e);
-    setSellerLoginModal(false);
+    onLogin(e, setSellerLoginModal);
   };
 
   const createPasswordModal = async e => {
+    setLoader(true);
     let obj = {
       type: buyerRegistrationData.type,
       password: e,
@@ -174,12 +174,13 @@ const TopBar = () => {
         type: 'error',
         message: error.message,
       });
+    } finally {
+      setLoader(false);
     }
   };
 
   const handleBuyerLogin = async e => {
-    onLogin(e);
-    setBuyerLoginModal(false);
+    onLogin(e, setBuyerLoginModal);
   };
 
   const handleCompleteRegistration = e => {
@@ -283,16 +284,11 @@ const TopBar = () => {
           handleSellerModal={handleSellerLoginModal}
           type="Register"
           description="Select Account Type"
+          setRegistrationData={setRegistrationData}
         />
       </CenterModal>
 
-      <CenterModal
-        open={buyermodal}
-        setOpen={setBuyerModal}
-        title="Register as a Buyer"
-        width="666"
-        setRegistrationData={setRegistrationData}
-        registrationData={registrationData}>
+      <CenterModal open={buyermodal} setOpen={setBuyerModal} title="Register as a Buyer" width="666">
         <BuyerLoginSignupModal
           handleBuyerModal={handleBuyerModal}
           type={'Register As Buyer'}
@@ -301,19 +297,14 @@ const TopBar = () => {
         />
       </CenterModal>
 
-      <CenterModal
-        open={passwordModal}
-        setOpen={setPasswordModal}
-        title="Register as a Buyer"
-        width="666"
-        setRegistrationData={setRegistrationData}
-        registrationData={registrationData}>
+      <CenterModal open={passwordModal} setOpen={setPasswordModal} title="Register as a Buyer" width="666">
         <CreatePasswordModal
           type={'Register as Buyer'}
           createPasswordModal={createPasswordModal}
           handleCompleteRegistration={handleCompleteRegistration}
           setBuyerModal={setBuyerModal}
           setPasswordModal={setPasswordModal}
+          loader={loader}
         />
       </CenterModal>
 
@@ -329,13 +320,7 @@ const TopBar = () => {
         />
       </CenterModal>
 
-      <CenterModal
-        open={sellerregistermodal}
-        setOpen={setSellerRegisterModal}
-        title="Register as a Seller"
-        width="666"
-        setRegistrationData={setRegistrationData}
-        registrationData={registrationData}>
+      <CenterModal open={sellerregistermodal} setOpen={setSellerRegisterModal} title="Register as a Seller" width="666">
         <LoginAsSellerModal
           handleSellerRegisterModal={handleSellerRegisterModal}
           type="Register As Seller"
@@ -344,13 +329,7 @@ const TopBar = () => {
         />
       </CenterModal>
 
-      <CenterModal
-        open={sellerpasswordModal}
-        setOpen={setSellerPasswordModal}
-        title="Register as a Seller"
-        width="666"
-        setRegistrationData={setRegistrationData}
-        registrationData={registrationData}>
+      <CenterModal open={sellerpasswordModal} setOpen={setSellerPasswordModal} title="Register as a Seller" width="666">
         <CreatePasswordModal
           type="Register As Seller"
           handleSellerPasswordModal={handleSellerPasswordModal}
@@ -372,6 +351,7 @@ const TopBar = () => {
           description="Welcome to cakeshares, please select the account type to proceed."
           setLoginModal={setLoginModal}
           setRegisterModal={setRegisterModal}
+          setRegistrationData={setRegistrationData}
         />
       </CenterModal>
       <CenterModal open={buyerloginmodal} setOpen={setBuyerLoginModal} title="Login as a Buyer" width="666">

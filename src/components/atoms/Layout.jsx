@@ -26,9 +26,9 @@ const Layout = ({ children }) => {
       setModal(false);
     }
 
-    if (user && !isEmptyObject(user) && user.isBlock) {
+    if (user && !isEmptyObject(user) && user.status === 'Suspended') {
       setblockModal(true);
-    } else if (user && !isEmptyObject(user) && !user.isBlock) {
+    } else if (user && !isEmptyObject(user) && !user.status === 'Suspended') {
       setblockModal(false);
     }
   }, [user]);

@@ -238,7 +238,7 @@ const CardForm = ({ openCardNext }) => {
 
         <div className="inputBox">
           <label>
-            <span>*</span>Enter Amount (cakeshares will deduct {comission}% comission on this)
+            <span>*</span>Enter Amount (cakeshares will deduct {comission}% commission on this)
           </label>
 
           <input

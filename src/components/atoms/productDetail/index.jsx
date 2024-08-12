@@ -30,6 +30,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
   const [modal, setModal] = useState(false);
   const [infoModalHeadingText, setInfoModalHeadingText] = useState();
   const [infoModalText, setInfoModalText] = useState();
+  const [modalIntent, setModalIntent] = useState();
   const [handleLoginModal, setHandleLoginModal] = useState(false);
   const [upgradeKycLevel, setUpgradeKycLevel] = useState(false);
   const [successmodal, setSuccessModal] = useState(false);
@@ -40,6 +41,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
       setInfoModalHeadingText('Please Login to Perform this Operation!');
       setInfoModalText('You are not currently logged in. Please log in to proceed with this action.');
       setHandleLoginModal(true);
+      setModalIntent('Login Required!');
     } else if (user?.wallet < data?.minimumInvestment) {
       setInfoModalHeadingText('Insufficient Wallet Balance!');
       setInfoModalText(
@@ -47,13 +49,15 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
           data?.minimumInvestment ?? 0
         }, while your current account balance is $${user?.wallet || 0}. Please top up your account.`,
       );
+      setModalIntent('Insufficient Wallet Balance!');
       setHandleLoginModal(true);
-    } else if (user?.isKycRequested) {
+    } else if (user?.isKycRequested && user?.kycLevel < data?.kycLevel) {
       setInfoModalHeadingText('KYC Requested!');
       setInfoModalText(
         'Your KYC request is currently under review and has not yet been approved. We appreciate your patience and will notify you as soon as the process is complete. Thank you for your understanding.',
       );
       setHandleLoginModal(true);
+      setModalIntent('KYC Under Review!');
     } else if (user.kycLevel >= data.kycLevel) {
       setModal(true);
     } else {
@@ -76,12 +80,8 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
         width="689">
         <UpgradeKycLevelModal reqKycLevel={reqKycLevel} setOpen={setUpgradeKycLevel} />
       </CenterModal>
-      <CenterModal
-        open={handleLoginModal}
-        setOpen={setHandleLoginModal}
-        title={infoModalHeadingText}
-        width="689">
-        <HandleLoginModal setOpen={setHandleLoginModal} text={infoModalText} />
+      <CenterModal open={handleLoginModal} setOpen={setHandleLoginModal} title={infoModalHeadingText} width="689">
+        <HandleLoginModal setOpen={setHandleLoginModal} text={infoModalText} modalIntent={modalIntent} />
       </CenterModal>
       <CenterModal open={modal} setOpen={setModal} title="Initiate Investment" width="543">
         <InitiateInvestmentModal
@@ -171,7 +171,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
               <div className="textCon">
                 <div>
                   <span>Backers Limit</span>
-                  <h3>{data?.maximumBackers}</h3>
+                  <h3>{data?.isInfiniteBackers ? 'Infinite' : data?.maximumBackers}</h3>
                 </div>
                 <div className="line"></div>
               </div>

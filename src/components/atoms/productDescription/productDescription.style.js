@@ -47,7 +47,6 @@ export const ProductDescriptionWrapper = styled.div`
     align-items: flex-start;
     width: 90px;
     height: 90px;
-    background: var(--dark);
     border-radius: 50px;
     overflow: hidden;
     flex-shrink: 0;

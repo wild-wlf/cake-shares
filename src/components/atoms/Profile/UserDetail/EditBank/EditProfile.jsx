@@ -186,10 +186,13 @@ const EditProfile = ({ personalInfo, onClose }) => {
             }}
             rules={[
               { required: true, message: 'Birthdate is required' },
-
+              {
+                transform: value => new Date(value) > new Date(),
+                message: 'DOB cannot be in the future',
+              },
               {
                 transform: value => checkAge(value) === false,
-                message: 'Age must be 18',
+                message: 'You must be at least 18 years old.',
               },
             ]}>
             <Field />

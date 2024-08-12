@@ -41,7 +41,12 @@ const CreatePasswordModal = ({
           size={45}
         />
       </div>
-      <span className="description">Add a profile picture and create a password to secure your account.</span>
+      {/* <span className="description">Add a profile picture and create a password to secure your account.</span> */}
+      <span className="description">
+        {type === 'Register As Seller'
+          ? 'Add a profile picture and create a password to secure your account.'
+          : 'Create a password to secure your account'}
+      </span>
       <Form form={form} onSubmit={handleSubmit}>
         {type === 'Register As Seller' ? (
           <div>
@@ -124,6 +129,7 @@ const CreatePasswordModal = ({
                 width="170"
                 htmlType="submit"
                 className="button"
+                loader={loader}
                 onClick={() => setsubmitForm('later')}>
                 I&apos;ll do later
               </Button>
