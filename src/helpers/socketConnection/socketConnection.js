@@ -1,4 +1,5 @@
 import { io } from 'socket.io-client';
+import { clearCookie } from '../common';
 let socket = null;
 
 export const connectionWithSocketServer = token => {
@@ -30,6 +31,15 @@ export const connectionWithSocketServer = token => {
   socket.on('reaction-added', async data => {
     if (socket && data) {
       window.dispatchEvent(new CustomEvent('reaction-added', { detail: { ...data } }));
+    }
+  });
+
+  socket.on('logout-user', data => {
+    if (socket && data) {
+      clearCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE);
+      clearCookie(process.env.NEXT_PUBLIC_ALLOWED_PAGES_COOKIE);
+      clearCookie(process.env.NEXT_PUBLIC_USER_TYPE_COOKIE);
+      window.location.href = '/';
     }
   });
 

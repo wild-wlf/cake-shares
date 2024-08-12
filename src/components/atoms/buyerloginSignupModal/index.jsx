@@ -7,6 +7,8 @@ import { FcGoogle } from 'react-icons/fc';
 import Facebook from '../../../_assets/facebook.svg';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useContextHook } from 'use-context-hook';
+import { AuthContext } from '@/context/authContext';
 
 const BuyerLoginSignupModal = ({
   handleBuyerModal,
@@ -16,6 +18,9 @@ const BuyerLoginSignupModal = ({
   registrationData,
   setRegistrationData,
 }) => {
+  const { loading_user } = useContextHook(AuthContext, v => ({
+    loading_user: v.loading_user,
+  }));
   const [form] = useForm();
   const router = useRouter();
 
@@ -49,20 +54,6 @@ const BuyerLoginSignupModal = ({
         email: e.email?.trim(),
       }));
     }
-
-    // if (e?.select_type.value === "company_seller") {
-    //   router.push({
-    //     pathname: "https://cake-admin.webevis.com/",
-    //     query: { type: "company" },
-    //   });
-    // } else {
-    //   router.push({
-    //     pathname: "https://cake-admin.webevis.com/",
-    //     query: { type: "seller" },
-    //   });
-    // }
-    // handleSellerLoginModal();
-    // setBuyerDetails((prev) => ({ ...prev, ...e }));
   }
 
   return (
@@ -166,21 +157,7 @@ const BuyerLoginSignupModal = ({
           </div>
         </div>
         <div className="continue-btn">
-          <Button
-            rounded
-            md
-            btntype="primary"
-            width="170"
-            // onClick={
-            //   type === "Login As Seller"
-            //     ? handleSellerLoginModal
-            //     : type === "Register As Seller"
-            //     ? handleSellerRegisterModal
-            //     : handleBuyerModal
-            // }
-            // htmlType={type === "Login As Seller" ? "submit" : "button"}
-            // loader={true}
-            htmlType={'submit'}>
+          <Button rounded md btntype="primary" width="170" loader={loading_user} htmlType={'submit'}>
             Continue
           </Button>
         </div>

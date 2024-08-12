@@ -6,7 +6,7 @@ import Button from '@/components/atoms/Button';
 import { UserContext } from '@/context/UserContext';
 import { useRouter } from 'next/router';
 
-const HandleLoginModal = ({ setOpen, text }) => {
+const HandleLoginModal = ({ setOpen, text, modalIntent }) => {
   const { setLoginModal, setRegisterModal } = useContext(UserContext);
   const router = useRouter();
 
@@ -15,7 +15,7 @@ const HandleLoginModal = ({ setOpen, text }) => {
       <Image src={InfoIcon} alt="Info Icon" className="InfoIcon" />
       <span>{text}</span>
       <div className="btn-holder">
-        {text === 'You are not currently logged in. Please log in to proceed with this action.' ? (
+        {modalIntent === 'Login Required!' ? (
           <>
             <Button
               btntype="primary"
@@ -42,8 +42,7 @@ const HandleLoginModal = ({ setOpen, text }) => {
               Register
             </Button>
           </>
-        ) : text ===
-          'Your KYC request is currently under review and has not yet been approved. We appreciate your patience and will notify you as soon as the process is complete. Thank you for your understanding.' ? null : (
+        ) : modalIntent === 'KYC Under Review!' ? null : (
           <Button btntype="light-green" color="success" rounded md width="200" onClick={() => router.push('/wallet')}>
             Topup
           </Button>

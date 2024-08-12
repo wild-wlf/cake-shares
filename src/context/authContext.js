@@ -91,7 +91,7 @@ export const AuthContextProvider = props => {
     }
   }, [socketData]);
 
-  const onLogin = async ({ username, password, type }) => {
+  const onLogin = async ({ username, password, type }, handleModal) => {
     setLoadingUser(true);
     setLoading(true);
     try {
@@ -100,9 +100,6 @@ export const AuthContextProvider = props => {
         password,
         type,
       });
-
-      if (res.isBlock) {
-      }
 
       if (!res?.token) {
         throw new Error(res?.message);
@@ -117,6 +114,7 @@ export const AuthContextProvider = props => {
 
         setIsLoggedIn(true);
         Toast({ type: 'success', message: 'Logged In Successfully!' });
+        handleModal(false);
         setLoadingUser(false);
         setLoading(false);
       }

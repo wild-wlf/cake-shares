@@ -1,6 +1,7 @@
 import React from 'react';
 
 const RenderTextMessage = ({ text }) => {
+  console.log({ text });
   const urlRegex = /(https?:\/\/[^\s]+)/g;
   const parts = text.split(urlRegex);
 
