@@ -21,6 +21,10 @@ import { MdOutlineReport } from 'react-icons/md';
 import ReportModal from '@/components/molecules/ReportModal';
 import ModalContainer from '@/components/molecules/ModalContainer';
 import declineIcon from '../../../../_assets/decline-icon.svg';
+import CenterModal from '../../Modal/CenterModal';
+import { findReactionByUserId } from '@/helpers/common';
+import notificationService from '@/services/notificationservice';
+import ReactionListModal from '../../reactionListModal/ReactionListModal';
 
 const ChatMessage = ({
   showImage,
@@ -42,9 +46,15 @@ const ChatMessage = ({
 }) => {
   const [isMessageRead, setIsMessageRead] = useState(readBy);
   const [active, setActive] = useState(false);
+  const [seeReaction, setSeeReaction] = useState(false);
+  const [reactionData, setReactionData] = useState([]);
   const [reaction, setReactions] = useState('');
   const [receivedReaction, setReceivedReaction] = useState('');
   const [receivedGroupReaction, setReceivedGroupReaction] = useState([]);
+  const senderData = {
+    _id: senderId,
+    model_type: 'user',
+  };
 
   useEffect(() => {
     const handleSeenMessageResponse = event => {
@@ -99,7 +109,7 @@ const ChatMessage = ({
         reaction,
         messageId,
         receiverId,
-        senderId,
+        senderId: senderData,
       });
     }
 
@@ -113,94 +123,112 @@ const ChatMessage = ({
     }
   }, [reaction, chatType, messageId, receiverId]);
 
+  const getReactionDetail = async () => {
+    const res = await notificationService.getMessageReactions(messageId);
+    if (res) {
+      setReactionData(res?.reactionData);
+      setSeeReaction(true);
+    }
+  };
+
   return (
-    <StyledChatMessage $type={type}>
-      {type === 'send' && group && (
-        <div className="img-holder">
-          <Image src={showImage || Pic} alt="user-pic" width={25} height={25} />
-        </div>
-      )}
-      <div className="message-holder">
-        <MessageContainer>
-          <div className="message-content">
-            <div className="message">
-              <p>
-                <RenderTextMessage text={message} />
-              </p>
+    <>
+      <CenterModal open={seeReaction} setOpen={setSeeReaction} title={'Reactions'} width="500">
+        <ReactionListModal reactionData={reactionData} />
+      </CenterModal>
+
+      <StyledChatMessage $type={type}>
+        {type === 'send' && group && (
+          <div className="img-holder">
+            <Image src={showImage || Pic} alt="user-pic" width={25} height={25} />
+          </div>
+        )}
+        <div className="message-holder">
+          <MessageContainer>
+            <div className="message-content">
+              <div className="message">
+                <p>
+                  <RenderTextMessage text={message} />
+                </p>
+              </div>
+              {showReaction && (
+                <>
+                  <ReactionContainer>
+                    <ReactionTooltip
+                      data={<MessageReaction setActive={setActive} setReaction={setReactions} />}
+                      type="primary"
+                      width={230}
+                      active={active}
+                      setActive={setActive}
+                      alignRight={true}>
+                      <Image src={reactionIcon} alt="add reaction" height={22} width={22} />
+                    </ReactionTooltip>
+                  </ReactionContainer>
+                </>
+              )}
             </div>
             {showReaction && (
               <>
-                <ReactionContainer>
-                  <ReactionTooltip
-                    data={<MessageReaction setActive={setActive} setReaction={setReactions} />}
-                    type="primary"
-                    width={230}
-                    active={active}
-                    setActive={setActive}
-                    alignRight={true}>
-                    <Image src={reactionIcon} alt="add reaction" height={22} width={22} />
-                  </ReactionTooltip>
-                </ReactionContainer>
+                <ModalContainer
+                  md
+                  width={700}
+                  title={<Image src={declineIcon} alt="declineIcon" />}
+                  btnComponent={({ onClick }) => (
+                    <MenuButton
+                      icon={
+                        <span>
+                          <BsThreeDotsVertical />
+                        </span>
+                      }>
+                      <MenuItem onClick={onClick} icon={<MdOutlineReport size={20} />}>
+                        {' '}
+                        Report
+                      </MenuItem>
+                    </MenuButton>
+                  )}
+                  content={({ onClose }) => (
+                    <ReportModal onClose={onClose} item={item} title="Report this Message!" btnText="Report" />
+                  )}
+                />
               </>
             )}
-          </div>
-          {showReaction && (
-            <>
-              <ModalContainer
-                md
-                width={700}
-                title={<Image src={declineIcon} alt="declineIcon" />}
-                btnComponent={({ onClick }) => (
-                  <MenuButton
-                    icon={
-                      <span>
-                        <BsThreeDotsVertical />
-                      </span>
-                    }>
-                    <MenuItem onClick={onClick} icon={<MdOutlineReport size={20} />}>
-                      {' '}
-                      Report
-                    </MenuItem>
-                  </MenuButton>
-                )}
-                content={({ onClose }) => (
-                  <ReportModal onClose={onClose} item={item} title="Report this Message!" btnText="Report" />
-                )}
-              />
-            </>
-          )}
 
-          {(chatType === 'community' || chatType === 'stakeholder') &&
-            (defaultGroupReactions.length > 0 || receivedGroupReaction.length > 0) && (
-              <GroupReaction type={'count'}>
-                <span>
-                  {receivedGroupReaction.length > 0
-                    ? `${receivedGroupReaction[0]?.reaction}${
-                        receivedGroupReaction.length > 1 ? ` +${receivedGroupReaction.length - 1}` : ''
-                      }`
-                    : `${defaultGroupReactions[0]?.reaction}${
-                        defaultGroupReactions.length > 1 ? ` +${defaultGroupReactions.length - 1}` : ''
-                      }`}
-                </span>
-              </GroupReaction>
+            {(chatType === 'community' || chatType === 'stakeholder') &&
+              (defaultGroupReactions.length > 0 || receivedGroupReaction.length > 0) && (
+                <GroupReaction
+                  type={'count'}
+                  onClick={() => {
+                    getReactionDetail();
+                  }}>
+                  <span>
+                    {receivedGroupReaction.length > 0
+                      ? `${findReactionByUserId(receivedGroupReaction, senderId)}${
+                          receivedGroupReaction.length > 1 ? ` +${receivedGroupReaction.length - 1}` : ''
+                        }`
+                      : `${findReactionByUserId(defaultGroupReactions, senderId)}${
+                          defaultGroupReactions.length > 1 ? ` +${defaultGroupReactions.length - 1}` : ''
+                        }`}
+                  </span>
+                </GroupReaction>
+              )}
+
+            {chatType === 'private' && (defaultReaction !== '' || receivedReaction !== '') && (
+              <AddedReaction>
+                <span>{receivedReaction || defaultReaction}</span>
+              </AddedReaction>
             )}
-
-          {chatType === 'private' && (defaultReaction !== '' || receivedReaction !== '') && (
-            <AddedReaction>
-              <span>{receivedReaction || defaultReaction}</span>
-            </AddedReaction>
-          )}
-        </MessageContainer>
-        {time && (
-          <div className="time-holder">
-            <span>{format(new Date(time), 'yyyy-MM-dd, hh:mma')}</span>
-            <div className="icon">
-              {isMessageRead ? <LiaCheckDoubleSolid size={18} /> : <LiaCheckSolid size={18} />}
+          </MessageContainer>
+          {time && (
+            <div className="time-holder">
+              <span>{format(new Date(time), 'yyyy-MM-dd, hh:mma')}</span>
+              <div className="icon">
+                {isMessageRead ? <LiaCheckDoubleSolid size={18} /> : <LiaCheckSolid size={18} />}
+              </div>
             </div>
-          </div>
-        )}
-      </div>
-    </StyledChatMessage>
+          )}
+        </div>
+      </StyledChatMessage>
+    </>
   );
 };
 
