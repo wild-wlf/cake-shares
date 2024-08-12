@@ -90,6 +90,16 @@ const notificationService = {
     };
   },
 
+  async getMessageReactions(messageId) {
+    let res = await Fetch.get(`${this._url}/get-reaction-detail?messageId=${messageId}`);
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return res;
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? 'Something Went Wrong');
+  },
+
   async getAllNotifications({ page = 1, itemsPerPage = 10 }) {
     let res = await Fetch.get(`${this._url}/notification?page=${page}&itemsPerPage=${itemsPerPage}`);
     if (res.status >= 200 && res.status < 300) {
