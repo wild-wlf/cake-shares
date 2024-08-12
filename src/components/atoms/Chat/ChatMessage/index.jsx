@@ -109,7 +109,7 @@ const ChatMessage = ({
         reaction,
         messageId,
         receiverId,
-        senderId: senderData,
+        senderId,
       });
     }
 
@@ -117,7 +117,7 @@ const ChatMessage = ({
       sendGroupReaction({
         reaction,
         messageId,
-        senderId,
+        senderId: senderData,
         channelName,
       });
     }
