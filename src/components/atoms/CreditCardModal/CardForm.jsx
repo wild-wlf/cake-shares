@@ -25,7 +25,6 @@ const CardForm = ({ openCardNext }) => {
   const elements = useElements();
 
   const { cards_data, cards_loading } = paymentService.GetAllCards();
-  console.log('CARDS DATA: ', cards_data);
 
   const calculateComission = (value, percent = 0.2) => {
     const amount = (percent / 100) * value;
