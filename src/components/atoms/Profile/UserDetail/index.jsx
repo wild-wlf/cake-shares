@@ -243,6 +243,7 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
       <div className="colWrapper">
         <TableLayout
           ReportsFilters
+          placeholder="Search in Assets"
           tableHeading="My Assets:"
           currentPage={searchQuery.page}
           pageSize={searchQuery.pageSize}

@@ -96,8 +96,10 @@ const productService = {
     throw new Error(message ?? 'Something went wrong');
   },
 
-  async getAssets({ page, pageSize, getAll }) {
-    let res = await Fetch.get(`${this._url}/get-all-assets?itemsPerPage=${pageSize}&page=${page}&getAll=${getAll}`);
+  async getAssets({ page, pageSize, getAll, searchText }) {
+    let res = await Fetch.get(
+      `${this._url}/get-all-assets?itemsPerPage=${pageSize}&page=${page}&searchText=${searchText}&getAll=${getAll}`,
+    );
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
       return {

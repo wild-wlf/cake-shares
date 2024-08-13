@@ -7,8 +7,13 @@ import Field from '../Field';
 import { convertToCurrencyFormat } from '@/helpers/common';
 import Toast from '@/components/molecules/Toast';
 import paymentService from '@/services/paymentService';
+import { useContextHook } from 'use-context-hook';
+import { AuthContext } from '@/context/authContext';
 
 const PayoutModal = ({ currentAmount, setPayoutModal }) => {
+  const { setPermission } = useContextHook(AuthContext, v => ({
+    setPermission: v.setPermission,
+  }));
   const comission = 0;
   const [form] = useForm();
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +29,7 @@ const PayoutModal = ({ currentAmount, setPayoutModal }) => {
       if (response.success) {
         Toast({ type: 'success', message: response.message });
         setPayoutModal(false);
+        setPermission(true);
       } else {
         Toast({ type: 'error', message: response.message });
       }
