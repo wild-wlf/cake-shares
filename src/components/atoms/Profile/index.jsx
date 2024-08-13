@@ -21,6 +21,7 @@ const Profile = () => {
   const [searchQuery, setSearchQuery] = useState({
     page: 1,
     pageSize: 4,
+    searchText: '',
     getAll: '',
   });
   const { user } = useContextHook(AuthContext, v => ({
