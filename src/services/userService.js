@@ -213,9 +213,10 @@ const userService = {
     type = '',
     startDate = '',
     endDate = '',
+    getAll = false,
   }) {
     let res = await Fetch.get(
-      `${this._url}/get-all-transactions?page=${page}&itemsPerPage=${itemsPerPage}&searchText=${searchText}&type=${type}&startDate=${startDate}&endDate=${endDate}`,
+      `${this._url}/get-all-transactions?page=${page}&itemsPerPage=${itemsPerPage}&searchText=${searchText}&type=${type}&startDate=${startDate}&endDate=${endDate}&getAll=${getAll}`,
     );
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();

@@ -26,6 +26,7 @@ const TransactionTable = () => {
     endDate: '',
     type: 'all',
     filterRoles: '',
+    getAll: false,
   });
 
   const [open, setOpen] = useState(false);
@@ -69,7 +70,11 @@ const TransactionTable = () => {
         width="543"
         padding={'25px'}
         headImage={SuccessIcon}>
-        <SuccessModal heading="Statement Sent Successfully!" paragraph={modalParagraph} />
+        <SuccessModal
+          //  heading="Statement Sent Successfully!"
+          heading="Statement Downloaded Successfully!"
+          // paragraph={modalParagraph}
+        />
       </CenterModal>
 
       <TableContainer>
