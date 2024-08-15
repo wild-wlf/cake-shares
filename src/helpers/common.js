@@ -699,3 +699,30 @@ export const getDateTime = createdAt => {
     date.getHours(),
   ).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')})`;
 };
+
+export const convertArrayOfObjectsToCSV = data => {
+  const headers = ['Date', 'Transaction Type', 'Amount'];
+
+  let csv = `${headers.join(',')}\n`;
+
+  // Iterate over each object in the array
+  data.forEach(obj => {
+    // Extract values for each object
+    const row = [format(new Date(obj.created_at), 'yyyy-MM-dd'), obj.transactionType, obj.amount.$numberDecimal];
+
+    // Join row elements with commas and add to CSV
+    csv += `${row.join(',')}\n`;
+  });
+
+  return csv;
+};
+
+export const downloadStatement = (data, fileName) => {
+  const csvContent = convertArrayOfObjectsToCSV(data);
+  const csvBlob = new Blob([csvContent], { type: 'text/csv' });
+
+  const downloadLink = document.createElement('a');
+  downloadLink.href = URL.createObjectURL(csvBlob);
+  downloadLink.download = `${fileName}.csv`;
+  downloadLink.click();
+};
