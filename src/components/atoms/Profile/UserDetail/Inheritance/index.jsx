@@ -109,7 +109,9 @@ const Inheritance = ({ userData }) => {
                         <MdOutlineDeleteForever />
                       </div>
                     )}
-                    content={({ onClose }) => <DeleteInheritance onClose={onClose} setSuccessModal={setSuccessModal} />}
+                    content={({ onClose }) => (
+                      <DeleteInheritance id={elem?._id} onClose={onClose} setSuccessModal={setSuccessModal} />
+                    )}
                   />
                 </div>
                 <span className="text country">{elem.country}</span>
