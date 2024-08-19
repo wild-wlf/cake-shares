@@ -41,8 +41,14 @@ export default class Field extends Component {
         let newValue;
         if (event instanceof File) {
           newValue = event;
+        } else if (
+          typeof event?.target?.value === 'object' ||
+          Array.isArray(event?.target?.value) ||
+          typeof event?.target?.value === 'boolean'
+        ) {
+          newValue = (event && event.target && event.target.value) ?? '';
         } else {
-          newValue = event.target.value ?? '';
+          newValue = (event && event.target && event.target.value.replace(/\s{2,}/g, ' ')) ?? '';
         }
         setFieldsValue({ [name]: newValue });
       },

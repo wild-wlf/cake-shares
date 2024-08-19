@@ -21,7 +21,19 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
   const [arr, setArr] = useState(countries);
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState('');
+  const [inheritances, setInheritances] = useState([
+    {
+      name: '',
+      email: '',
+      passportNumber: '',
+      country: '',
+    },
+  ]);
   const [form] = useForm();
+
+  const addInheritance = () => setInheritances([...inheritances, '']);
+
+  const removeInheritance = index => setInheritances(prev => prev.filter((_, i) => i !== index));
 
   function handelChange(value = 'PK') {
     const newArr = arr.map((elem, index) => ({
@@ -42,6 +54,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
     }));
     setArr(newArr);
   }
+
   useEffect(() => {
     form.setFieldsValue({
       username: buyerRegistrationData.username,
@@ -67,12 +80,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
         swiftBicNumber: e.bic_number?.trim(),
         userId: e.user_id?.trim(),
       },
-      inheritanceInfo: {
-        name: e.person_name?.trim(),
-        passportNumber: e.passport_number?.trim(),
-        country: e.country.value,
-        email: e.inheritanceEmail?.trim(),
-      },
+      inheritanceInfo: inheritances,
     };
 
     const formData = convertToFormData(obj);
@@ -93,6 +101,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
       });
     }
   };
+
   return (
     <Wrapper>
       <div className="back-icon">
@@ -230,7 +239,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                 name="bank_bank_name"
                 sm
                 rounded
-                placeholder="Bank of Americe"
+                placeholder="Bank of America"
                 rules={[
                   {
                     required: true,
@@ -281,8 +290,8 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                     message: 'Please enter SWIFT / BIC Number',
                   },
                   {
-                    pattern: /^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$/,
-                    message: 'Invalid SWIFT/BIC format',
+                    pattern: /^[A-Z]{6}\d{2}$/,
+                    message: 'Enter a valid SWIFT/BIC Number with exactly 6 letters followed by 2 digits.',
                   },
                 ]}>
                 <Field maxLength={11} />
@@ -314,83 +323,157 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
           <h5>Inheritance Info:</h5>
 
           <div>
-            <div className="input-div">
-              <Form.Item
-                type="text"
-                label="Name of Person"
-                name="person_name"
-                sm
-                rounded
-                placeholder="Logan Paulson"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please enter Name of Person',
-                  },
-                  {
-                    pattern: /^[a-zA-Z\s]*$/,
-                    message: 'Only alphabets are allowed',
-                  },
-                  {
-                    pattern: /^.{2,30}$/,
-                    message: ' Name should be between 2 and 30 characters.',
-                  },
-                ]}>
-                <Field maxLength={30} />
-              </Form.Item>
-              <Form.Item
-                type="number"
-                label="Passport Number"
-                name="passport_number"
-                sm
-                rounded
-                placeholder="123456789"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please enter Passport Number',
-                  },
-                  {
-                    pattern: /^[a-zA-Z0-9]{6,9}$/,
-                    message: 'Passport number must be between 6 and 9 characters long',
-                  },
-                ]}>
-                <Field maxLength={9} />
-              </Form.Item>
-            </div>
-            <div className="input-div">
-              <Form.Item
-                type="text"
-                label="Country of Residence"
-                name="country"
-                sm
-                rounded
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}>
-                <Select options={arr} menuPlacement="top" />
-              </Form.Item>
-              <Form.Item
-                type="text"
-                label="Email Address"
-                name="inheritanceEmail"
-                sm
-                rounded
-                placeholder="alex123@gmail.com"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please enter email address',
-                  },
-                  {
-                    email: true,
-                  },
-                ]}>
-                <Field maxLength={40} />
-              </Form.Item>
-            </div>
+            {inheritances &&
+              inheritances.length > 0 &&
+              inheritances.map((_, index) => (
+                <React.Fragment key={index}>
+                  {inheritances && inheritances?.length > 1 && index !== 0 && (
+                    <div className="deleteExisting">
+                      <span onClick={() => removeInheritance(index)}>-Remove Below Section</span>
+                    </div>
+                  )}
+                  <div className="input-div">
+                    <Form.Item
+                      type="text"
+                      label="Name of Person"
+                      name={`name${index}`}
+                      sm
+                      value={_?.name}
+                      rounded
+                      placeholder="Logan Paulson"
+                      onChange={e => {
+                        console.log('e.target.value: ', e.target.value);
+                        form.setFieldsValue({
+                          [`name${index}`]: e.target.value,
+                        });
+                        setInheritances(prev => {
+                          const updatedInheritances = [...prev];
+                          updatedInheritances[index] = {
+                            ...updatedInheritances[index],
+                            name: e.target?.value,
+                          };
+                          return updatedInheritances;
+                        });
+                      }}
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please enter Name of Person',
+                        },
+                        {
+                          pattern: /^[a-zA-Z\s]*$/,
+                          message: 'Only alphabets are allowed',
+                        },
+                        {
+                          pattern: /^.{2,30}$/,
+                          message: ' Name should be between 2 and 30 characters.',
+                        },
+                      ]}>
+                      <Field maxLength={30} />
+                    </Form.Item>
+                    <Form.Item
+                      type="number"
+                      label="Passport Number"
+                      name={`passportNumber${index}`}
+                      sm
+                      rounded
+                      value={_?.passportNumber}
+                      placeholder="123456789"
+                      onChange={e => {
+                        console.log('e.target.value: ', e.target.value);
+                        form.setFieldsValue({
+                          [`passportNumber${index}`]: e.target.value,
+                        });
+                        setInheritances(prev => {
+                          const updatedInheritances = [...prev];
+                          updatedInheritances[index] = {
+                            ...updatedInheritances[index],
+                            passportNumber: e.target?.value,
+                          };
+                          return updatedInheritances;
+                        });
+                      }}
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please enter Passport Number',
+                        },
+                        {
+                          pattern: /^[a-zA-Z0-9]{6,9}$/,
+                          message: 'Passport number must be between 6 and 9 characters long',
+                        },
+                      ]}>
+                      <Field maxLength={9} />
+                    </Form.Item>
+                  </div>
+                  <div className="input-div">
+                    <Form.Item
+                      type="text"
+                      label="Country of Residence"
+                      name={`country${index}`}
+                      sm
+                      value={_?.country?.label}
+                      rounded
+                      onChange={e => {
+                        form.setFieldsValue({
+                          [`country${index}`]: e.target.value,
+                        });
+                        setInheritances(prev => {
+                          const updatedInheritances = [...prev];
+                          updatedInheritances[index] = {
+                            ...updatedInheritances[index],
+                            country: e.target?.value?.value,
+                          };
+                          return updatedInheritances;
+                        });
+                      }}
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}>
+                      <Select options={arr} menuPlacement="top" />
+                    </Form.Item>
+                    <Form.Item
+                      type="text"
+                      label="Email Address"
+                      name={`email${index}`}
+                      sm
+                      value={_?.email}
+                      rounded
+                      placeholder="alex123@gmail.com"
+                      onChange={e => {
+                        form.setFieldsValue({
+                          [`email${index}`]: e.target.value,
+                        });
+                        setInheritances(prev => {
+                          const updatedInheritances = [...prev];
+                          updatedInheritances[index] = {
+                            ...updatedInheritances[index],
+                            email: e.target?.value,
+                          };
+                          return updatedInheritances;
+                        });
+                      }}
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please enter email address',
+                        },
+                        {
+                          email: true,
+                        },
+                      ]}>
+                      <Field maxLength={40} />
+                    </Form.Item>
+                  </div>
+                </React.Fragment>
+              ))}
+            {inheritances && inheritances?.length < 3 && (
+              <div className="addmore">
+                <span onClick={addInheritance}>+Add more</span>
+              </div>
+            )}
           </div>
         </div>
 

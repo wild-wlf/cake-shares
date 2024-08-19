@@ -190,8 +190,9 @@ export const StyledUserInfo = styled.div`
 `;
 
 export const ProfileWrapper = styled.label`
+  display: block;
   flex-shrink: 0;
-  width: 120px;
+  width: 120px ;
   height: 120px;
   border-radius: 50%;
   overflow: hidden;

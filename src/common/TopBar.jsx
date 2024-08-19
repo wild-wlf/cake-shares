@@ -285,6 +285,8 @@ const TopBar = () => {
           type="Register"
           description="Select Account Type"
           setRegistrationData={setRegistrationData}
+          setRegisterModal={setRegisterModal}
+          setLoginModal={setLoginModal}
         />
       </CenterModal>
 

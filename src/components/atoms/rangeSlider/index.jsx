@@ -9,8 +9,8 @@ const RangeSlider = ({ ...props }) => {
   };
   return (
     <Slider.Range
-      min={0}
-      max={1000}
+      min={props?.min}
+      max={props?.max}
       value={rangeValue}
       onChange={handleRangeChange}
       className="rc-slide-customization"

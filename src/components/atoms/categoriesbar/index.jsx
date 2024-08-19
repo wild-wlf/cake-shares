@@ -12,17 +12,6 @@ import categoryService from '@/services/categoryService';
 const CategoriesBar = ({ setSearchQuery, priceRange }) => {
   const [modal, setModal] = useState(false);
   const [Tab, setTab] = useState(0);
-  var settings = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    speed: 500,
-    autoplay: true,
-    slidesToShow: 1,
-    // slidesToScroll: 1,
-    variableWidth: true,
-    swipeToSlide: true,
-  };
 
   const { categories_data, categories_loading } = categoryService.GetAllCategories({ getAll: true });
 
@@ -40,6 +29,18 @@ const CategoriesBar = ({ setSearchQuery, priceRange }) => {
     ],
     [categories_data],
   );
+
+  var settings = {
+    dots: false,
+    arrows: false,
+    infinite: categoriesOptions && categoriesOptions?.length > 1 && true,
+    speed: 500,
+    autoplay: true,
+    slidesToShow: 1,
+    // slidesToScroll: 1,
+    variableWidth: true,
+    swipeToSlide: true,
+  };
 
   return (
     <>

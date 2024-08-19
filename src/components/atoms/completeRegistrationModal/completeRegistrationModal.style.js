@@ -9,6 +9,16 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    .deleteExisting {
+      color: red;
+      font-weight: 500;
+      font-size: 16px !important;
+      padding-bottom: 20px;
+      margin-top: -6px;
+      cursor: pointer;
+      display: inline-block;
+    }
   }
   .inputWrapper {
     margin-bottom: 0px;
