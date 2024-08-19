@@ -36,7 +36,7 @@ export const Wrapper = styled.div`
       font-size: 12px;
     }
   }
-  .back-icon{
+  .back-icon {
     cursor: pointer;
   }
 `;

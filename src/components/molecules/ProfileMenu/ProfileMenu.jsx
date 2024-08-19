@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { ProfileSec } from './ProfileMenu.Style';
 import LogOut from '../../../_assets/logoutIcon.png';
 import myProfileIcon from '../../../_assets/myProfileIcon.png';
@@ -10,33 +10,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
-import CenterModal from '../../atoms/Modal/CenterModal';
-import PrivacyPolicy from '@/components/atoms/PrivacyPolicyModal/PrivacyPolicy';
-import TermsConditions from '@/components/atoms/TermsConditions/TermsConditions';
-import PrivacySetting from '@/components/atoms/PrivacySettingModal/PrivacySetting';
 import { useRouter } from 'next/router';
+import { UserContext } from '@/context/UserContext';
 
 const ProfileMenu = ({ openProfile }) => {
   const router = useRouter();
-  const [privacyPolicy, setPrivacyPolicy] = useState(false);
-  const [privacySetting, setPrivacySetting] = useState(false);
-
-  const [termsCondition, setTermsCondition] = useState(false);
+  const { privacyPolicy, setPrivacyPolicy, privacySetting, setPrivacySetting, termsCondition, setTermsCondition } =
+    useContext(UserContext);
   const { onLogout, user } = useContextHook(AuthContext, v => ({
     onLogout: v.onLogout,
     user: v.user,
   }));
   return (
     <>
-      <CenterModal open={privacySetting} setOpen={setPrivacySetting} title="Privacy Setting" width="996">
-        <PrivacySetting />
-      </CenterModal>
-      <CenterModal open={privacyPolicy} setOpen={setPrivacyPolicy} title="Privacy Policy" width="996">
-        <PrivacyPolicy />
-      </CenterModal>
-      <CenterModal open={termsCondition} setOpen={setTermsCondition} title="Terms & Conditions" width="996">
-        <TermsConditions />
-      </CenterModal>
       <ProfileSec $show={openProfile}>
         <div className="top">
           <div className="Dp">

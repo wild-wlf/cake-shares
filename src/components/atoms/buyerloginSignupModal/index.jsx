@@ -82,8 +82,7 @@ const BuyerLoginSignupModal = ({
                     },
                     {
                       pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,
-                      message:
-                        'Please enter a valid username (no spaces, letters, numbers, underscores, and hyphens only)',
+                      message: 'No Special Characters and spaces are allowed, only hyphens and underscore are allowed.',
                     },
                     {
                       pattern: /^(?!\d+$).*$/,
@@ -91,7 +90,7 @@ const BuyerLoginSignupModal = ({
                     },
                     {
                       pattern: /^(?![!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$).*$/,
-                      message: 'Username cannot consist only of special characters',
+                      message: 'Only special characters are not allowed',
                     },
                   ]
                 : []),

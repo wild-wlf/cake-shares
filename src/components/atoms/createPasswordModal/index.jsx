@@ -33,13 +33,18 @@ const CreatePasswordModal = ({
   return (
     <Wrapper>
       <div className="back-icon">
-        <IoIosArrowRoundBack
+        <Button
+          rounded
+          sm
+          btntype="blue"
+          className="button"
           onClick={() => {
             setBuyerModal(true);
             setPasswordModal(false);
-          }}
-          size={45}
-        />
+          }}>
+          <IoIosArrowRoundBack size={20} />
+          Go Back
+        </Button>
       </div>
       {/* <span className="description">Add a profile picture and create a password to secure your account.</span> */}
       <span className="description">
