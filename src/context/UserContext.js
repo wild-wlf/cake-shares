@@ -10,6 +10,9 @@ export const UserContextProvider = ({ children }) => {
   const [buyermodal, setBuyerModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
   const [completeRegistrationModal, setCompleteRegistrationModal] = useState(false);
+  const [privacyPolicy, setPrivacyPolicy] = useState(false);
+  const [privacySetting, setPrivacySetting] = useState(false);
+  const [termsCondition, setTermsCondition] = useState(false);
 
   const contextValue = {
     registermodal,
@@ -25,6 +28,12 @@ export const UserContextProvider = ({ children }) => {
     setBuyerRegistrationData,
     loginmodal,
     setLoginModal,
+    privacyPolicy,
+    setPrivacyPolicy,
+    privacySetting,
+    setPrivacySetting,
+    termsCondition,
+    setTermsCondition,
   };
 
   function buyerRegistration(elem) {

@@ -201,7 +201,16 @@ export const StyledTopBar = styled.header`
       color: var(--white);
     }
   }
-
+  .wallet2 {
+    display: none;
+    gap: 8px;
+  }
+  .LogOut {
+    display: none;
+    align-items: flex-end;
+    gap: 8px;
+    color: #d74120;
+  }
   .kycFieldWrapper {
     display: none;
   }
@@ -244,7 +253,18 @@ export const StyledTopBar = styled.header`
       display: block;
       cursor: pointer;
     }
-
+    .wallet {
+      display: none;
+    }
+    .buttonWrapper {
+      display: none;
+    }
+    .wallet2 {
+      display: flex;  
+    }
+    .LogOut {
+      display: flex;
+    }
     .textFieldRight {
       display: none;
     }

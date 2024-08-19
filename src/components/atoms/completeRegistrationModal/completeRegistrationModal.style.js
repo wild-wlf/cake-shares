@@ -10,6 +10,9 @@ export const Wrapper = styled.div`
     flex-direction: column;
     gap: 20px;
   }
+  .back-icon {
+    padding-bottom: 26px;
+  }
   .inputWrapper {
     margin-bottom: 0px;
   }

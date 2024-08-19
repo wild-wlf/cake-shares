@@ -1,13 +1,13 @@
-import React from "react";
-import Image from "next/image";
-import { BannerWrapper, SlideWrapp } from "./banner.style";
-import banner1desk from "../../../_assets/slide1desk.png";
-import banner2desk from "../../../_assets/slide2desk.png";
-import banner3desk from "../../../_assets/slide3desk.png";
-import banner1resp from "../../../_assets/slide1resp.png";
-import banner2resp from "../../../_assets/slide2resp.png";
-import banner3resp from "../../../_assets/slide3resp.png";
-import Slider from "react-slick";
+import React from 'react';
+import Image from 'next/image';
+import { BannerWrapper, SlideWrapp } from './banner.style';
+import banner1desk from '../../../_assets/slide1desk.png';
+import banner2desk from '../../../_assets/slide2desk.png';
+import banner3desk from '../../../_assets/slide3desk.png';
+import banner1resp from '../../../_assets/slide1resp.png';
+import banner2resp from '../../../_assets/slide2resp.png';
+import banner3resp from '../../../_assets/slide3resp.png';
+import Slider from 'react-slick';
 
 const Banner = () => {
   var settings = {

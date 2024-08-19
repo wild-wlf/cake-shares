@@ -6,7 +6,6 @@ import Image from 'next/image';
 import bell from '../_assets/bell.svg';
 import bellWhite from '../_assets/bell-white.svg';
 import profilePlaceHolder from '../_assets/profileplaceHolder.jpg';
-
 import Button from '@/components/atoms/Button';
 import register from '../_assets/register.svg';
 import { HiOutlineMenuAlt1 } from 'react-icons/hi';
@@ -19,7 +18,7 @@ import { KycContext } from '@/context/KycContext';
 import KycBuyerLevelTwo from '@/components/atoms/KYC/KYCBuyerTwo';
 import KYCBuyerThree from '@/components/atoms/KYC/KYCBuyerThree';
 import ProfileMenu from '@/components/molecules/ProfileMenu/ProfileMenu';
-import { MdArrowDropDown, MdStorefront } from 'react-icons/md';
+import { MdArrowDropDown } from 'react-icons/md';
 import KycLevel from '@/components/atoms/KYC/KycLevel';
 import line from '../_assets/sidenav-line.svg';
 import { FaWallet } from 'react-icons/fa';
@@ -35,6 +34,10 @@ import Toast from '@/components/molecules/Toast';
 import { AuthContext } from '@/context/authContext';
 import { useContextHook } from 'use-context-hook';
 import notificationService from '@/services/notificationservice';
+import SideNavItems from '@/components/atoms/sideNavItems';
+import PrivacySetting from '@/components/atoms/PrivacySettingModal/PrivacySetting';
+import PrivacyPolicy from '@/components/atoms/PrivacyPolicyModal/PrivacyPolicy';
+import TermsConditions from '@/components/atoms/TermsConditions/TermsConditions';
 
 const TopBar = () => {
   const {
@@ -51,6 +54,12 @@ const TopBar = () => {
     buyerRegistrationData,
     loginmodal,
     setLoginModal,
+    privacyPolicy,
+    setPrivacyPolicy,
+    privacySetting,
+    setPrivacySetting,
+    termsCondition,
+    setTermsCondition,
   } = useContext(UserContext);
 
   const { onLogin, isLoggedIn, user } = useContextHook(AuthContext, v => ({
@@ -75,6 +84,8 @@ const TopBar = () => {
   const [registrationData, setRegistrationData] = useState();
   const [isBadge, setIsBadge] = useState(false);
   const router = usePathname();
+  const route = useRouter();
+
   const handleClickOutsideProfile = event => {
     if (ProfileRef.current && !ProfileRef.current.contains(event.target)) {
       setOpenProfile(false);
@@ -370,6 +381,16 @@ const TopBar = () => {
 
       {/******************************** Login Modals ******************************************/}
 
+      <CenterModal open={privacySetting} setOpen={setPrivacySetting} title="Privacy Setting" width="996">
+        <PrivacySetting />
+      </CenterModal>
+      <CenterModal open={privacyPolicy} setOpen={setPrivacyPolicy} title="Privacy Policy" width="996">
+        <PrivacyPolicy />
+      </CenterModal>
+      <CenterModal open={termsCondition} setOpen={setTermsCondition} title="Terms & Conditions" width="996">
+        <TermsConditions />
+      </CenterModal>
+      {/******************************** Profile Modals ******************************************/}
       <StyledTopBar>
         <div className="logoWrapper">
           <div className="layer" onClick={() => setSideNav(false)} />
@@ -384,6 +405,7 @@ const TopBar = () => {
               <Image src={line} alt="line" />
               <div className="profile-details">
                 <Image
+                  onClick={() => route.push('/profile')}
                   src={user?.profilePicture ? user?.profilePicture : profilePlaceHolder}
                   width={40}
                   height={40}
@@ -396,20 +418,13 @@ const TopBar = () => {
               </div>
               <Image src={line} alt="line" />
             </div>
-            <Link href="/" className={router === '/' ? 'textField textField-home' : 'textField'}>
-              <MdStorefront />
-              <span>Marketplace</span>
-            </Link>
-            <div className="kycFieldWrapper">
-              <div className="kycField">
-                <span className="heading">My Kyc Level</span>
-                <span>{user?.kycLevel}</span>
-              </div>
-              <KycLevel level={user?.kycLevel + 1} bg />
-            </div>
+            {isLoggedIn && (
+              <>
+                <SideNavItems user={user} router={router} />
+              </>
+            )}
           </NavLinks>
         </div>
-
         <div className="actions">
           {isLoggedIn && (
             <>
