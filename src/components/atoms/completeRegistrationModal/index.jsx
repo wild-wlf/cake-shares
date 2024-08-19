@@ -105,13 +105,18 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
   return (
     <Wrapper>
       <div className="back-icon">
-        <IoIosArrowRoundBack
+        <Button
+          rounded
+          sm
+          btntype="blue"
+          className="button"
           onClick={() => {
             setPasswordModal(true);
             setCompleteRegistrationModal(false);
-          }}
-          size={45}
-        />
+          }}>
+          <IoIosArrowRoundBack size={20} />
+          Go Back
+        </Button>
       </div>
       <Form form={form} onSubmit={handleSubmit}>
         <div className="personal-info">
@@ -133,12 +138,26 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                     message: 'Please enter Full Name',
                   },
                   {
-                    pattern: /^.{0,40}$/,
-                    message: 'Maximum Character Length is 256',
+                    pattern: /^.{3,40}$/,
+                    message: 'Full Name must be between 3 and 40 characters',
+                  },
+                  {
+                    pattern: /^(?!\d+$).*$/,
+                    message: 'Full Name cannot be only numbers',
+                  },
+                  {
+                    pattern: /^(?![!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$).*$/,
+                    message: 'Full Name cannot consist only of special characters',
+                  },
+                  {
+                    pattern:
+                      /^(?!.*[0-9][!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?!.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?][0-9]).*$/,
+                    message: 'Combinations of digits and special characters are not allowed',
                   },
                 ]}>
                 <Field maxLength={40} />
               </Form.Item>
+
               <Form.Item
                 type="text"
                 label="Username"

@@ -20,6 +20,9 @@ export const Wrapper = styled.div`
       display: inline-block;
     }
   }
+  .back-icon {
+    padding-bottom: 26px;
+  }
   .inputWrapper {
     margin-bottom: 0px;
   }
