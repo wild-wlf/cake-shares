@@ -54,29 +54,6 @@ const userService = {
     throw new Error(message ?? 'Something went wrong');
   },
 
-  // async getUsers({
-  //   page = 1,
-  //   pageSize = 10,
-  //   searchText,
-  //   filterRoles = "",
-  //   startDate,
-  //   endDate,
-  //   getAll = false,
-  // }) {
-  //   let res = await Fetch.get(
-  //     `${this._url}/get-all-admins?itemsPerPage=${pageSize}&page=${page}&searchText=${searchText}&filterRoles=${filterRoles}&startDate=${startDate}&endDate=${endDate}&getAll=${getAll}`
-  //   );
-  //   if (res.status >= 200 && res.status < 300) {
-  //     res = await res.json();
-  //     return {
-  //       admins: res.items,
-  //       totalItems: res.totalItems,
-  //     };
-  //   }
-  //   const { message } = await res.json();
-  //   throw new Error(message ?? "Something went wrong");
-  // },
-
   async login(payload) {
     let res = await Fetch.post(`${this._url}/login`, payload);
     if (res.status >= 200 && res.status < 300) {
@@ -123,7 +100,7 @@ const userService = {
     throw new Error(message ?? 'Something went wrong');
   },
   async deleteInheritance(id) {
-    let res = await Fetch.delete(`${this._url}/delete-inhertance/${id}`);
+    let res = await Fetch.delete(`${this._url}/delete-inheritance/${id}`);
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();
       return res;
