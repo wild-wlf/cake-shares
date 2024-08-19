@@ -98,6 +98,21 @@ const RegisterModal = ({
               Register
             </Button>
           )}
+
+          {type === 'Register' && (
+            <Button
+              rounded
+              s
+              md
+              btntype="primary"
+              width="170"
+              onClick={() => {
+                setLoginModal(true);
+                setRegisterModal(false);
+              }}>
+              Login
+            </Button>
+          )}
         </div>
       </Container>
     </>

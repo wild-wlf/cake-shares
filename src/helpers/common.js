@@ -596,14 +596,19 @@ export const convertToFormData = obj => {
   const formData = new FormData();
 
   Object.keys(obj).forEach(key => {
-    if (key === 'bankInfo' || (key === 'inheritanceInfo' && typeof obj[key] === 'object')) {
+    if (
+      key === 'bankInfo' ||
+      (key === 'inheritanceInfo' && (typeof obj[key] === 'object' || Array.isArray(obj[key])))
+    ) {
       formData.append(key, JSON.stringify(obj[key]));
     } else {
       formData.append(key, obj[key]);
     }
   });
+
   return formData;
 };
+
 export const convertDateToISO = dateStr => {
   const [day, month, year] = dateStr.split('/');
   return `${year}-${month}-${day}`;
