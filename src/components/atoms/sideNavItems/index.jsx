@@ -6,6 +6,7 @@ import { MdStorefront } from 'react-icons/md';
 import LogOut from '../../../_assets/logoutIcon.png';
 import Image from 'next/image';
 import privacyPolicyIcon from '../../../_assets/privacyPolicyIcon.png';
+import myProfileIcon from '../../../_assets/myProfileIcon.png';
 import privacySettingIcon from '../../../_assets/privacySettingIcon.png';
 import termsIcon from '../../../_assets/termsIcon.png';
 import { useContextHook } from 'use-context-hook';
@@ -31,6 +32,12 @@ const SideNavItems = ({ user, router }) => {
         <MdStorefront />
         <span>Marketplace</span>
       </Link>
+
+      <div onClick={() => router.push('/profile')} className="wallet2">
+        <Image src={myProfileIcon} alt="My profile" width={17} height={17} />
+        <span>My Profile</span>
+      </div>
+
       <Link href="/wallet">
         <div className="wallet2">
           <FaWallet />
@@ -44,7 +51,7 @@ const SideNavItems = ({ user, router }) => {
           setPrivacyPolicy(!privacyPolicy);
         }}>
         <Image src={privacyPolicyIcon} alt="Privacy Policies" width={17} height={17} />
-        <h5>Privacy Policy</h5>
+        <span>Privacy Policy</span>
       </div>
       {/* <div
         className="wallet2"
@@ -52,7 +59,7 @@ const SideNavItems = ({ user, router }) => {
           setPrivacySetting(true);
         }}>
         <Image src={privacySettingIcon} alt="Privacy Settings" width={17} height={17} />
-        <h5>Privacy Settings</h5>
+        <span>Privacy Settings</span>
       </div> */}
       <div
         onClick={() => {
@@ -60,7 +67,7 @@ const SideNavItems = ({ user, router }) => {
         }}>
         <div className="wallet2" style={{ paddingBottom: '14px' }}>
           <Image src={termsIcon} alt="Terms & Conditions" width={17} height={17} />
-          <h5>Terms & Conditions</h5>
+          <span>Terms & Conditions</span>
         </div>
       </div>
 
