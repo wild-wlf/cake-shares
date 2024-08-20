@@ -248,7 +248,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
           </div>
         </div>
         <div className="bank-info">
-          <h5>Bank Info:</h5>
+          <h5>Bank Information:</h5>
 
           <div>
             <div className="input-div">
@@ -339,7 +339,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
         </div>
 
         <div className="inheritance-info">
-          <h5>Inheritance Info:</h5>
+          <h5>Inheritance Information:</h5>
 
           <div>
             {inheritances &&

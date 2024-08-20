@@ -12,12 +12,41 @@ import userService from '@/services/userService';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
 import { convertToCurrencyFormat } from '@/helpers/common';
+import ButtonsGroup from '../ButtonsGroup';
 
 const TransactionTable = () => {
   const { user, fetch } = useContextHook(AuthContext, v => ({
     user: v.user,
     fetch: v.fetch,
   }));
+
+  const filterData = [
+    {
+      value: 'all',
+      label: 'All',
+    },
+    {
+      value: 'spend',
+      label: 'Spend',
+    },
+    {
+      value: 'earn',
+      label: 'Earn',
+    },
+    {
+      value: 'top_up',
+      label: 'Top up',
+    },
+    {
+      value: 'payout',
+      label: 'Payout',
+    },
+    // {
+    //   value: 'product',
+    //   label: 'Filter by products',
+    // },
+  ];
+
   const [searchQuery, setSearchQuery] = useState({
     page: 1,
     itemsPerPage: 10,
@@ -79,7 +108,15 @@ const TransactionTable = () => {
 
       <TableContainer>
         <TableLayout
-          tableHeading="Transaction History"
+          tableHeading={
+            <ButtonsGroup
+              title={'Transaction History'}
+              buttons={false}
+              dropdown={true}
+              setSearchQuery={setSearchQuery}
+              data={filterData}
+            />
+          }
           // transationFilter={true}
           placeholder="Search history"
           btnText="Download Statement"

@@ -245,7 +245,15 @@ const CardForm = ({ openCardNext }) => {
             className="customInput"
             placeholder="$2,000,00"
             value={amount}
-            onChange={e => setAmount(e.target.value)}
+            onChange={e => {
+              const inputValue = e.target.value;
+              const numericValue = inputValue.replace(/[^0-9.]/g, '');
+              if (numericValue > 0) {
+                setAmount(numericValue);
+              } else {
+                setAmount('');
+              }
+            }}
           />
         </div>
         <div className="inputBox checkbox">
