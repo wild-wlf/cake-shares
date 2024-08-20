@@ -18,7 +18,7 @@ import { KycContext } from '@/context/KycContext';
 import KycBuyerLevelTwo from '@/components/atoms/KYC/KYCBuyerTwo';
 import KYCBuyerThree from '@/components/atoms/KYC/KYCBuyerThree';
 import ProfileMenu from '@/components/molecules/ProfileMenu/ProfileMenu';
-import { MdArrowDropDown } from 'react-icons/md';
+import { MdArrowDropDown, MdStorefront } from 'react-icons/md';
 import KycLevel from '@/components/atoms/KYC/KycLevel';
 import line from '../_assets/sidenav-line.svg';
 import { FaWallet } from 'react-icons/fa';
@@ -420,10 +420,15 @@ const TopBar = () => {
               </div>
               <Image src={line} alt="line" />
             </div>
-            {isLoggedIn && (
+            {isLoggedIn ? (
               <>
                 <SideNavItems user={user} router={router} />
               </>
+            ) : (
+              <Link href="/" className={router === '/' ? 'textField textField-home' : 'textField'}>
+                <MdStorefront />
+                <span>Marketplace</span>
+              </Link>
             )}
           </NavLinks>
         </div>

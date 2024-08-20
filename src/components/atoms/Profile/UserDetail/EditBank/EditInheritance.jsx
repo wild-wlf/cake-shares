@@ -92,10 +92,13 @@ const EditInheritance = ({ selectedItem, userData, onClose }) => {
             rounded
             placeholder="123467894562339"
             rules={[
-              { required: true },
               {
-                pattern: /^.{0,40}$/,
-                message: 'Maximum Character Length is 256',
+                required: true,
+                message: 'Passport number is required',
+              },
+              {
+                pattern: /^[a-zA-Z0-9]{6,9}$/,
+                message: 'Passport number must be between 6 and 9 characters long',
               },
             ]}>
             <Field />
@@ -123,6 +126,7 @@ const EditInheritance = ({ selectedItem, userData, onClose }) => {
             rounded
             placeholder="alex123@gmail.com"
             rules={[
+              { email: true },
               {
                 required: true,
                 message: 'Please enter email address',

@@ -89,7 +89,7 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
     <StyledUserDetail>
       <div className="colWrapper">
         <div className="colHeader">
-          <strong className="colTitle">Bank Info:</strong>
+          <strong className="colTitle">Bank Information:</strong>
           <ModalContainer
             lg
             width={673}
