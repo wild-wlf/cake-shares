@@ -307,6 +307,7 @@ const TopBar = () => {
           type={'Register As Buyer'}
           registrationData={registrationData}
           setRegistrationData={setRegistrationData}
+          setModal={setBuyerModal}
         />
       </CenterModal>
 
@@ -339,6 +340,7 @@ const TopBar = () => {
           type="Register As Seller"
           registrationData={registrationData}
           setRegistrationData={setRegistrationData}
+          setModal={setSellerRegisterModal}
         />
       </CenterModal>
 
@@ -368,7 +370,11 @@ const TopBar = () => {
         />
       </CenterModal>
       <CenterModal open={buyerloginmodal} setOpen={setBuyerLoginModal} title="Login as a Buyer" width="666">
-        <BuyerLoginSignupModal type="Login As Buyer" handleLoginModal={handleBuyerLogin} />
+        <BuyerLoginSignupModal
+          type="Login As Buyer"
+          setModal={setBuyerLoginModal}
+          handleLoginModal={handleBuyerLogin}
+        />
       </CenterModal>
       <CenterModal open={sellerloginmodal} setOpen={setSellerLoginModal} title="Login as a Seller" width="666">
         <LoginAsSellerModal
@@ -378,6 +384,7 @@ const TopBar = () => {
           }}
           handleSellerLoginModal={handleLoginSellerModal}
           type="Login As Seller"
+          setModal={setSellerLoginModal}
         />
       </CenterModal>
 

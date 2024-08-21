@@ -1,18 +1,18 @@
 // eslint-disable-next-line no-unused-vars
-import styled from "styled-components";
-import React from "react";
-import { components } from "react-select";
+import styled from 'styled-components';
+import React from 'react';
+import { components } from 'react-select';
 
-import { debounce } from "lodash";
-import { StyledFormGroup } from "../../../styles/helpers.styles";
-import { Error, InputHolder } from "../../atoms/Field/Field.styles";
-import { StyledSelect, StyledSelectAsync } from "./Select.styles";
-import InputIcon from "../../molecules/InputIcon";
-import Label from "../../molecules/Label";
-import { IoMdArrowDropdown } from "react-icons/io";
-import Image from "next/image";
+import { debounce } from 'lodash';
+import { StyledFormGroup } from '../../../styles/helpers.styles';
+import { Error, InputHolder } from '../../atoms/Field/Field.styles';
+import { StyledSelect, StyledSelectAsync } from './Select.styles';
+import InputIcon from '../../molecules/InputIcon';
+import Label from '../../molecules/Label';
+import { IoMdArrowDropdown } from 'react-icons/io';
+import Image from 'next/image';
 
-const DropdownIndicator = (props) =>
+const DropdownIndicator = props =>
   components.DropdownIndicator && (
     <components.DropdownIndicator {...props}>
       <InputIcon $suffix>
@@ -34,17 +34,18 @@ function Select({
   clear,
   async,
   labelIcon,
+  width,
   ...props
 }) {
   const debouncedRef = React.useRef(0);
-  const loadOptions = async (__) => {
-    const _options = await new Promise((resolve) => {
-      debounce((value) => {
+  const loadOptions = async __ => {
+    const _options = await new Promise(resolve => {
+      debounce(value => {
         debouncedRef.current += 1;
         const LocalRef = debouncedRef.current;
         setTimeout(() => {
           if (LocalRef === debouncedRef.current) {
-            props.loadOptions(value).then((response) => {
+            props.loadOptions(value).then(response => {
               resolve(response);
             });
           }
@@ -62,23 +63,18 @@ function Select({
             props?.onChange?.({
               target: {
                 value: options && options[0],
-                name: props.name ?? "",
+                name: props.name ?? '',
               },
             });
           }}
           required={rules?.filter(({ required }) => required).length}
-          clear={clear}
-        >
+          clear={clear}>
           {label}
         </Label>
       )}
       <InputHolder>
         {prefix && (
-          <InputIcon
-            disabled={disabled}
-            prefix={prefix}
-            invalid={invalid || error}
-          >
+          <InputIcon disabled={disabled} prefix={prefix} invalid={invalid || error}>
             {prefix}
           </InputIcon>
         )}
@@ -93,7 +89,7 @@ function Select({
             loadOptions={loadOptions}
             error={error}
             components={{ DropdownIndicator, IndicatorSeparator: () => null }}
-            onChange={(value) => {
+            onChange={value => {
               props?.onChange?.({
                 target: {
                   value,
@@ -105,13 +101,14 @@ function Select({
         ) : (
           <StyledSelect
             {...props}
+            $width={width}
             $prefix={prefix}
             $suffix={suffix}
             options={options}
             classNamePrefix="react-select"
             error={error}
             components={{ DropdownIndicator, IndicatorSeparator: () => null }}
-            onChange={(value) => {
+            onChange={value => {
               props?.onChange?.({
                 target: {
                   value,

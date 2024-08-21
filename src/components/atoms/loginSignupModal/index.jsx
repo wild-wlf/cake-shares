@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Wrapper } from './loginSignupModal.style';
 import Field from '../Field';
+import { useGoogleLogin } from '@react-oauth/google';
 import Form, { useForm } from '@/components/molecules/Form';
 import Button from '../Button';
 import { FcGoogle } from 'react-icons/fc';
 import Facebook from '../../../_assets/facebook.svg';
 import Image from 'next/image';
 import Select from '../Select';
+import { AuthContext } from '@/context/authContext';
+import { useContextHook } from 'use-context-hook';
 
 let data = [
   { label: 'Individual Seller', value: 'Individual' },
@@ -20,8 +23,14 @@ const LoginSignupModal = ({
   registrationData,
   setRegistrationData,
   type,
+  setModal,
 }) => {
+  const { loading_user, onGoogleLogin } = useContextHook(AuthContext, v => ({
+    loading_user: v.loading_user,
+    onGoogleLogin: v.onGoogleLogin,
+  }));
   const [form] = useForm();
+  const [state, setState] = useState();
 
   useEffect(() => {
     if (registrationData?.username) {
@@ -59,12 +68,28 @@ const LoginSignupModal = ({
     }
   }
 
+  const googleLogin = useGoogleLogin({
+    onSuccess: async tokenResponse => {
+      const { access_token } = tokenResponse;
+      onGoogleLogin(
+        { access_token, type: 'Seller', sellerType: state?.sellerType?.value, action: type.trim().split(' ')[0] },
+        setModal,
+      );
+    },
+  });
+
+  useEffect(() => {
+    if (state?.sellerType) {
+      form.removeFieldError('discount_code');
+    }
+  }, [state?.sellerType]);
+
   return (
     <Wrapper>
       <div>
         <span className="description">Please provide the details to proceed.</span>
       </div>
-      <Form form={form} onSubmit={handleSubmit}>
+      <Form form={form} onSubmit={handleSubmit} onTouched={_ => setState(__ => ({ ...__, ..._ }))}>
         {type === 'Register As Seller' && (
           <div>
             <Form.Item
@@ -173,7 +198,19 @@ const LoginSignupModal = ({
         </div>
         <div className="socialbtns">
           <div>
-            <Button type="dropdown" rounded sm width="500" className="button">
+            <Button
+              onClick={() => {
+                if (!state?.sellerType && type !== 'Login As Seller')
+                  form.setFieldsError({
+                    sellerType: { message: 'Please enter a valid Seller Type!' },
+                  });
+                else googleLogin();
+              }}
+              type="dropdown"
+              rounded
+              sm
+              width="500"
+              className="button">
               <FcGoogle size={20} />
               Continue with Google
             </Button>
@@ -197,7 +234,8 @@ const LoginSignupModal = ({
             //     : handleBuyerModal
             // }
             // htmlType={type === "Login As Seller" ? "submit" : "button"}
-            htmlType={'submit'}>
+            htmlType={'submit'}
+            loader={loading_user}>
             Continue
           </Button>
         </div>

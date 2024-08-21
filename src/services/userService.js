@@ -63,6 +63,15 @@ const userService = {
     const { message } = await res.json();
     throw new Error(message ?? 'Something went wrong');
   },
+  async googleLogin(payload) {
+    let res = await Fetch.post(`${this._url}/google-login`, payload);
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return res;
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? 'Something went wrong');
+  },
   async update(payload, id) {
     let res = await Fetch.put(`${this._url}/update-chunk-info/${id}`, payload);
     if (res.status >= 200 && res.status < 300) {

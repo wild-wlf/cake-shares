@@ -8,6 +8,7 @@ import { HelperClasses, Styling } from '../styles/GlobalStyles.styles';
 import { Wrapper } from '@/styles/helpers.styles';
 import { KycContextProvider } from '@/context/KycContext';
 import TopBar from '../common/TopBar';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { UserContextProvider } from '@/context/UserContext';
 import { ToastContainer } from 'react-toastify';
 import { AuthContextProvider } from '@/context/authContext';
@@ -69,22 +70,24 @@ export default function App({ Component, pageProps }) {
     <>
       {load && (
         <>
-          <AuthContextProvider>
-            <SocketContextProvider>
-              <UserContextProvider>
-                <KycContextProvider>
-                  <SearchContextProvider>
-                    <GlobalStyles />
-                    {loading && <Loader />}
-                    <Layout>
-                      <Component {...pageProps} />
-                    </Layout>
-                  </SearchContextProvider>
-                </KycContextProvider>
-              </UserContextProvider>
-            </SocketContextProvider>
-          </AuthContextProvider>
-          <StyledToastContainer />
+          <GoogleOAuthProvider clientId="579761904467-epdd1g7sv3kl067qgc031n433j91baqv.apps.googleusercontent.com">
+            <AuthContextProvider>
+              <SocketContextProvider>
+                <UserContextProvider>
+                  <KycContextProvider>
+                    <SearchContextProvider>
+                      <GlobalStyles />
+                      {loading && <Loader />}
+                      <Layout>
+                        <Component {...pageProps} />
+                      </Layout>
+                    </SearchContextProvider>
+                  </KycContextProvider>
+                </UserContextProvider>
+              </SocketContextProvider>
+            </AuthContextProvider>
+            <StyledToastContainer />
+          </GoogleOAuthProvider>
         </>
       )}
     </>

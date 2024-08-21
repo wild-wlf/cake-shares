@@ -279,7 +279,7 @@ const CardForm = ({ openCardNext }) => {
           width={'170px'}
           height={'40px'}
           sm
-          disabled={ready || !amount}
+          disabled={ready || !amount || (isCardClicked && !amount)}
           loader={loading}
           btntype="primary"
           onClick={formSubmitHandler}>

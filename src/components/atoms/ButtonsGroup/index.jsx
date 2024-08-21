@@ -35,12 +35,12 @@ const ButtonsGroup = ({ title = '', setSearchQuery, buttons = false, dropdown = 
         <div className="select-holder">
           <Select
             noMargin
-            placeholder="All"
+            placeholder="Select Type"
+            width="200px"
             onChange={({ target: { value } }) => {
               setSearchQuery({ type: value?.value });
             }}
             options={data}
-            labelReverse
           />
         </div>
       )}

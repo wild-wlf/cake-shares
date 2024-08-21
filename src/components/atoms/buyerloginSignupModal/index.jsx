@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Wrapper } from './buyerloginSignupModal.style';
 import Field from '../Field';
+import { useGoogleLogin } from '@react-oauth/google';
 import Form, { useForm } from '@/components/molecules/Form';
 import Button from '../Button';
 import { FcGoogle } from 'react-icons/fc';
@@ -17,9 +18,11 @@ const BuyerLoginSignupModal = ({
   type,
   registrationData,
   setRegistrationData,
+  setModal,
 }) => {
-  const { loading_user } = useContextHook(AuthContext, v => ({
+  const { loading_user, onGoogleLogin } = useContextHook(AuthContext, v => ({
     loading_user: v.loading_user,
+    onGoogleLogin: v.onGoogleLogin,
   }));
   const [form] = useForm();
   const router = useRouter();
@@ -55,6 +58,13 @@ const BuyerLoginSignupModal = ({
       }));
     }
   }
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: async tokenResponse => {
+      const { access_token } = tokenResponse;
+      onGoogleLogin({ access_token, type: 'Buyer', action: type.trim().split(' ')[0] }, setModal);
+    },
+  });
 
   return (
     <Wrapper>
@@ -145,7 +155,7 @@ const BuyerLoginSignupModal = ({
         </div>
         <div className="socialbtns">
           <div>
-            <Button type="dropdown" rounded sm width="500" className="button">
+            <Button onClick={googleLogin} type="dropdown" rounded sm width="500" className="button">
               <FcGoogle size={20} />
               Continue with Google
             </Button>
