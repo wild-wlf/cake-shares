@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import styled from 'styled-components';
 import React from 'react';
 import { components } from 'react-select';
@@ -37,6 +38,7 @@ function Select({
   clear,
   async,
   labelIcon,
+  width,
   ...props
 }) {
   const debouncedRef = React.useRef(0);
@@ -104,16 +106,13 @@ function Select({
         ) : (
           <StyledSelect
             {...props}
+            $width={width}
             $prefix={prefix}
             $suffix={suffix}
             options={options}
             classNamePrefix="react-select"
             error={error}
-            components={{
-              DropdownIndicator,
-              IndicatorSeparator: () => null,
-              Option: options.some(option => option.dataElem) ? CustomOption : undefined,
-            }}
+            components={{ DropdownIndicator, IndicatorSeparator: () => null }}
             onChange={value => {
               props?.onChange?.({
                 target: {

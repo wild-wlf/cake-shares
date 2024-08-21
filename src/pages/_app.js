@@ -8,6 +8,7 @@ import { HelperClasses, Styling } from '../styles/GlobalStyles.styles';
 import { Wrapper } from '@/styles/helpers.styles';
 import { KycContextProvider } from '@/context/KycContext';
 import TopBar from '../common/TopBar';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { UserContextProvider } from '@/context/UserContext';
 import { ToastContainer } from 'react-toastify';
 import { AuthContextProvider } from '@/context/authContext';
@@ -64,27 +65,28 @@ export default function App({ Component, pageProps }) {
       router.events.off('routeChangeComplete', () => setLoading(false));
     };
   }, [router.events]);
-
   return (
     <>
       {load && (
         <>
-          <AuthContextProvider>
-            <SocketContextProvider>
-              <UserContextProvider>
-                <KycContextProvider>
-                  <SearchContextProvider>
-                    <GlobalStyles />
-                    {loading && <Loader />}
-                    <Layout>
-                      <Component {...pageProps} />
-                    </Layout>
-                  </SearchContextProvider>
-                </KycContextProvider>
-              </UserContextProvider>
-            </SocketContextProvider>
-          </AuthContextProvider>
-          <StyledToastContainer />
+          <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
+            <AuthContextProvider>
+              <SocketContextProvider>
+                <UserContextProvider>
+                  <KycContextProvider>
+                    <SearchContextProvider>
+                      <GlobalStyles />
+                      {loading && <Loader />}
+                      <Layout>
+                        <Component {...pageProps} />
+                      </Layout>
+                    </SearchContextProvider>
+                  </KycContextProvider>
+                </UserContextProvider>
+              </SocketContextProvider>
+            </AuthContextProvider>
+            <StyledToastContainer />
+          </GoogleOAuthProvider>
         </>
       )}
     </>

@@ -9,6 +9,7 @@ const Styles = css`
     min-height: inherit;
     padding-top: 0;
     padding-bottom: 0;
+    width: ${({ $width }) => ($width ? $width : '')};
     padding-left: 20px;
     padding-right: 20px;
     border-color: ${({ error }) => error && 'var(--danger) !important'};

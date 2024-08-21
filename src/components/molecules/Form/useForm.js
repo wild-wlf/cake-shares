@@ -230,6 +230,13 @@ class FormStore {
     }
   };
 
+  removeFieldError = fieldName => {
+    if (this.errors[fieldName]) {
+      delete this.errors[fieldName];
+      this.notifyObservers(this.store);
+    }
+  };
+
   setCallbacks = callbacks => {
     this.callbacks = callbacks;
   };
@@ -242,6 +249,8 @@ class FormStore {
     getFieldValue: this.getFieldValue,
     getFieldsValue: this.getFieldsValue,
     setFieldsValue: this.setFieldsValue,
+    removeFieldError: this.removeFieldError,
+    
     registerField: this.registerField,
     submit: this.submit,
     getInternalHooks: () => ({

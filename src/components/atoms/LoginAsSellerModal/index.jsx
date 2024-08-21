@@ -8,7 +8,7 @@ const LoginAsSellerModal = ({
   handleSellerRegisterModal,
   registrationData,
   setRegistrationData,
-
+  setModal,
   type,
 }) => {
   return (
@@ -20,6 +20,7 @@ const LoginAsSellerModal = ({
       type={type}
       registrationData={registrationData}
       setRegistrationData={setRegistrationData}
+      setModal={setModal}
     />
   );
 };

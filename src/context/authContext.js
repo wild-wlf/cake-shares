@@ -111,18 +111,50 @@ export const AuthContextProvider = props => {
       }
       if (res.type === 'Buyer') {
         setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
-
         setIsLoggedIn(true);
-        Toast({ type: 'success', message: 'Logged In Successfully!' });
-        handleModal(false);
-        setLoadingUser(false);
-        setLoading(false);
       }
+      Toast({ type: 'success', message: 'Logged In Successfully!' });
+      handleModal(false);
     } catch ({ message }) {
       setIsLoggedIn(false);
+      Toast({ type: 'error', message });
+    } finally {
       setLoadingUser(false);
       setLoading(false);
+    }
+  };
+
+  const onGoogleLogin = async ({ access_token, type, sellerType, action }, handleModal) => {
+    setLoadingUser(true);
+    setLoading(true);
+    try {
+      const res = await userService.googleLogin({
+        access_token,
+        type,
+        sellerType,
+        action,
+      });
+
+      if (!res?.token) {
+        throw new Error(res?.message);
+      }
+      if (res?.type !== 'Buyer') {
+        const url = `${process.env.NEXT_PUBLIC_ADMIN_DOMAIN}?token=${res?.token}`;
+
+        window.open(url, '_blank');
+      }
+      if (res.type === 'Buyer') {
+        setCookie(process.env.NEXT_PUBLIC_TOKEN_COOKIE, res.token);
+        setIsLoggedIn(true);
+      }
+      Toast({ type: 'success', message: res?.message });
+      handleModal(false);
+    } catch ({ message }) {
+      setIsLoggedIn(false);
       Toast({ type: 'error', message });
+    } finally {
+      setLoadingUser(false);
+      setLoading(false);
     }
   };
 
@@ -178,6 +210,7 @@ export const AuthContextProvider = props => {
         setLoading,
         hasPermission,
         setSocketData,
+        onGoogleLogin,
         socketData,
         allowedPages,
         showTokenModal,
