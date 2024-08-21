@@ -38,7 +38,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
   function handelChange(value = 'PK') {
     const newArr = arr.map((elem, index) => ({
       ...elem,
-      label: (
+      dataElem: (
         <div key={index} className="countrySelect">
           <figure>
             <Image

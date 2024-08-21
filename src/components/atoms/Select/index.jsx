@@ -2,7 +2,6 @@
 import styled from 'styled-components';
 import React from 'react';
 import { components } from 'react-select';
-
 import { debounce } from 'lodash';
 import { StyledFormGroup } from '../../../styles/helpers.styles';
 import { Error, InputHolder } from '../../atoms/Field/Field.styles';
@@ -20,6 +19,11 @@ const DropdownIndicator = props =>
       </InputIcon>
     </components.DropdownIndicator>
   );
+
+const CustomOption = props => {
+  const { data } = props;
+  return <components.Option {...props}>{data.dataElem}</components.Option>;
+};
 
 function Select({
   prefix,
@@ -54,6 +58,7 @@ function Select({
     });
     return _options;
   };
+
   return (
     <StyledFormGroup $invalid={invalid || error} noMargin={noMargin}>
       {label && (
@@ -107,7 +112,11 @@ function Select({
             options={options}
             classNamePrefix="react-select"
             error={error}
-            components={{ DropdownIndicator, IndicatorSeparator: () => null }}
+            components={{
+              DropdownIndicator,
+              IndicatorSeparator: () => null,
+              Option: options.some(option => option.dataElem) ? CustomOption : undefined,
+            }}
             onChange={value => {
               props?.onChange?.({
                 target: {
