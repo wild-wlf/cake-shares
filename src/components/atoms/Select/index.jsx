@@ -112,11 +112,7 @@ function Select({
             options={options}
             classNamePrefix="react-select"
             error={error}
-            components={{
-              DropdownIndicator,
-              IndicatorSeparator: () => null,
-              Option: options.some(option => option.dataElem) ? CustomOption : undefined,
-            }}
+            components={{ DropdownIndicator, IndicatorSeparator: () => null }}
             onChange={value => {
               props?.onChange?.({
                 target: {

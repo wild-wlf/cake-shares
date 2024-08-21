@@ -65,12 +65,11 @@ export default function App({ Component, pageProps }) {
       router.events.off('routeChangeComplete', () => setLoading(false));
     };
   }, [router.events]);
-
   return (
     <>
       {load && (
         <>
-          <GoogleOAuthProvider clientId="579761904467-epdd1g7sv3kl067qgc031n433j91baqv.apps.googleusercontent.com">
+          <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
             <AuthContextProvider>
               <SocketContextProvider>
                 <UserContextProvider>
