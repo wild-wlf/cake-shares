@@ -142,8 +142,9 @@ export const StyledPole = styled.div`
 
     img {
       display: block;
-      width: 100%;
-      height: auto;
+      width: 25px;
+      height: 25px;
+      border-radius: 50px;
       object-fit: cover;
     }
   }

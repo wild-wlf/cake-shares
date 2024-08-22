@@ -40,7 +40,7 @@ export const ToggleSwitchStyle = styled.div`
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28), 0 0 0 20px rgba(128, 128, 128, 0.1);
   }
   input:checked + .switch {
-    background: var(--green);
+    background: #25799d;
   }
   input:checked + .switch::before {
     left: 24px;

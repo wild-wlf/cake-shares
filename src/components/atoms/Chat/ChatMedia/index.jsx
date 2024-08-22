@@ -28,11 +28,7 @@ const ChatMedia = ({ userInfo, type, onlineUsers, channelReceivers }) => {
   return (
     <>
       <CenterModal open={chatMembers} setOpen={setChatMembers} title="All Chat Members" width="450">
-        <ChatMembers
-          channelReceivers={channelReceivers[0]?.receivers?.filter(_ => _?._id !== userInfo?._id)}
-          user={user}
-          onlineUsers={onlineUsers}
-        />
+        <ChatMembers channelReceivers={channelReceivers[0]?.receivers} user={user} onlineUsers={onlineUsers} />
       </CenterModal>
       <StyledChatMedia>
         <div className="fakeBefore">
@@ -52,6 +48,21 @@ const ChatMedia = ({ userInfo, type, onlineUsers, channelReceivers }) => {
             <label className="userName">{userInfo?.fullName || userInfo?.username}</label>
             <span>{userInfo?.sellerType} Seller</span>
           </div>
+
+          {(type === 'community' || type === 'stake') && (
+            <div className="col">
+              <div className="image-warp ">
+                <Image
+                  src={user?.profilePicture ? user?.profilePicture : profileplaceHolder}
+                  alt="profilePicture"
+                  width={80}
+                  height={80}
+                />
+              </div>
+              <label className="userName">{user?.fullName || user?.username}</label>
+              <span>Me</span>
+            </div>
+          )}
 
           {(type === 'community' || type === 'stake') && (
             <div className="community-col">
@@ -74,7 +85,7 @@ const ChatMedia = ({ userInfo, type, onlineUsers, channelReceivers }) => {
                 })}
               </div>
 
-              {channelReceivers[0]?.receivers?.filter(receiver => receiver._id !== userInfo?._id).length > 3 && (
+              {channelReceivers[0]?.receivers?.filter(receiver => receiver._id !== userInfo?._id).length > 1 && (
                 <span
                   onClick={() => {
                     setChatMembers(true);

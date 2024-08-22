@@ -13,7 +13,7 @@ const ChatMembers = ({ channelReceivers, onlineUsers }) => {
             <Image src={data?.profilePicture || ProfilePic} alt="profilePic" height={100} width={100} />
             <div className="info">
               <h6>{data?.fullName || data?.username}</h6>
-              <span>Buyer</span>
+              <span>{data?.type || 'admin'}</span>
             </div>
           </div>
           <span className={data?.online ? 'online' : 'offline'}>

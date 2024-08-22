@@ -4,12 +4,11 @@ import { HiMiniStar } from 'react-icons/hi2';
 import Pic from '../../../../_assets/seller-img.png';
 import Image from 'next/image';
 import userAvatar from '../../../../_assets/user_avatar.png';
+import { TbExternalLink } from 'react-icons/tb';
+import ModalContainer from '../../ModalContainer';
+import PollVotingList from '../../PollVotingList/PollVotingList';
 
-const PollDetailsModal = ({ poolOptions, question, user, receivers, author }) => {
-  const getReceiverInfo = user_id => {
-    return receivers?.find(_ => _?._id === user_id?._id);
-  };
-
+const PollDetailsModal = ({ poolOptions, question, user }) => {
   return (
     <StyledPollDetailsModal>
       <div className="question">
@@ -30,33 +29,80 @@ const PollDetailsModal = ({ poolOptions, question, user, receivers, author }) =>
               </div>
 
               <div className="user-holder">
-                {item?.users?.map((_, __) => {
-                  const receiverInfo = getReceiverInfo(_);
-                  let fullName, profilePicture;
-                  if (!receiverInfo) {
-                    fullName = author?.fullName;
-                    profilePicture = author?.profilePicture || Pic;
-                  } else {
-                    fullName = receiverInfo?.fullName || receiverInfo?.username;
-                    profilePicture = receiverInfo?.profilePicture || Pic;
-                  }
-
-                  return (
-                    <div key={__}>
-                      <div className="img-holders">
-                        <Image
-                          src={_?.isAnonymous && _?._id !== user?._id ? userAvatar : profilePicture}
-                          alt="userImg"
-                          width={50}
-                          height={50}
+                <div className="container">
+                  {item?.users?.length > 4
+                    ? item?.users?.slice(0, 4).map((_, __) => {
+                        return (
+                          <div key={__}>
+                            <div className="img-holders">
+                              <Image
+                                src={
+                                  _?.isAnonymous && _?._id !== user?._id ? userAvatar : _?._id?.profilePicture || Pic
+                                }
+                                alt="userImg"
+                                width={50}
+                                height={50}
+                              />
+                            </div>
+                            <span className="user-name">
+                              {_?.isAnonymous && _?._id !== user?._id
+                                ? 'Anonymous'
+                                : _?._id?.fullName || _?._id?.username}
+                            </span>
+                            <span className="user-name">
+                              {_?.isAnonymous && _?._id !== user?._id ? 'Anonymous' : _?._id?.type || 'admin'}
+                            </span>
+                          </div>
+                        );
+                      })
+                    : item?.users?.map((_, __) => {
+                        return (
+                          <div key={__}>
+                            <div className="img-holders">
+                              <Image
+                                src={
+                                  _?.isAnonymous && _?._id !== user?._id ? userAvatar : _?._id?.profilePicture || Pic
+                                }
+                                alt="userImg"
+                                width={50}
+                                height={50}
+                              />
+                            </div>
+                            <span className="user-name">
+                              {_?.isAnonymous && _?._id !== user?._id
+                                ? 'Anonymous'
+                                : _?._id?.fullName || _?._id?.username}
+                            </span>
+                            <span className="user-name">
+                              {_?.isAnonymous && _?._id !== user?._id ? 'Anonymous' : _?._id?.type || 'admin'}
+                            </span>
+                          </div>
+                        );
+                      })}
+                </div>
+                {item?.users?.length > 4 && (
+                  <div className="container">
+                    <span className="view-all length">+{item?.users?.length - 1}</span>
+                    <ModalContainer
+                      width={400}
+                      title="Voting List"
+                      btnComponent={({ onClick }) => (
+                        <span className="view-all" onClick={onClick}>
+                          View All <TbExternalLink fontSize={18} />
+                        </span>
+                      )}
+                      content={({ onClose }) => (
+                        <PollVotingList
+                          Pic={Pic}
+                          userAvatar={userAvatar}
+                          onClose={onClose}
+                          user={user}
+                          users={item?.users}
                         />
-                      </div>
-                      <span className="user-name">
-                        {_?.isAnonymous && _?._id !== user?._id ? 'Anonymous' : fullName}
-                      </span>
-                    </div>
-                  );
-                })}
+                      )}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           );
