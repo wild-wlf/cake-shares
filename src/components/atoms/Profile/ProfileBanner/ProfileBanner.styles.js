@@ -3,25 +3,27 @@ import styled from 'styled-components';
 export const StyledProfileBanner = styled.div`
   position: relative;
   min-height: 550px;
-
   background: linear-gradient(180deg, #000 38.78%, rgba(0, 0, 0, 0) 78.11%),
     ${({ $image }) => $image && `url(${$image})`} lightgray 50%;
 
-  background-size: 130% 100%;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-color: var(--dark);
+
   margin: -95px -15px 15px -15px;
   padding: 0 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
   font-family: 'Oleo Script';
   color: var(--white);
+
   border-bottom-left-radius: 560px 250px;
   border-bottom-right-radius: 560px 250px;
+
   @media screen and (min-width: 576px) {
     background-image: ${({ $image }) => $image && `url(${$image}) `};
     border-bottom-left-radius: 0;
