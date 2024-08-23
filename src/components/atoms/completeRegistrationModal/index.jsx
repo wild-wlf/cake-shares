@@ -165,6 +165,11 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                 sm
                 rounded
                 placeholder="alex123"
+                onChange={e => {
+                  form.setFieldsValue({
+                    username: e.target.value.replace(/[A-Z]/g, char => char.toLowerCase()),
+                  });
+                }}
                 rules={[
                   {
                     required: true,
