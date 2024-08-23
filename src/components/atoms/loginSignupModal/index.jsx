@@ -116,6 +116,11 @@ const LoginSignupModal = ({
             name="username"
             sm
             rounded
+            onChange={e => {
+              form.setFieldsValue({
+                username: e.target.value.replace(/[A-Z]/g, char => char.toLowerCase()),
+              });
+            }}
             placeholder="alex123"
             rules={[
               {
