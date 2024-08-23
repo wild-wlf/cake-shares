@@ -90,6 +90,7 @@ function Select({
             $suffix={suffix}
             options={options}
             disabled={disabled}
+            menuPosition="fixed"
             classNamePrefix="react-select"
             loadOptions={loadOptions}
             error={error}
@@ -110,6 +111,7 @@ function Select({
             $prefix={prefix}
             $suffix={suffix}
             options={options}
+            menuPosition="fixed"
             classNamePrefix="react-select"
             error={error}
             components={{ DropdownIndicator, IndicatorSeparator: () => null }}

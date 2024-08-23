@@ -713,7 +713,13 @@ export const convertArrayOfObjectsToCSV = data => {
   // Iterate over each object in the array
   data.forEach(obj => {
     // Extract values for each object
-    const row = [format(new Date(obj.created_at), 'yyyy-MM-dd'), obj.transactionType, obj.amount.$numberDecimal];
+    const row = [
+      format(new Date(obj.created_at), 'yyyy-MM-dd'),
+      obj.transactionType === 'spend'
+        ? `${obj.transactionType}${obj.spendType ? `(${obj.spendType})` : ''}`
+        : obj.transactionType || '------------',
+      obj.amount.$numberDecimal,
+    ];
 
     // Join row elements with commas and add to CSV
     csv += `${row.join(',')}\n`;
