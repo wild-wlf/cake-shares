@@ -179,7 +179,7 @@ const ChatMessage = ({
               <>
                 <ModalContainer
                   md
-                  width={700}
+                  width={650}
                   title={<Image src={declineIcon} alt="declineIcon" />}
                   btnComponent={({ onClick }) => (
                     <MenuButton
@@ -189,7 +189,6 @@ const ChatMessage = ({
                         </span>
                       }>
                       <MenuItem onClick={onClick} icon={<MdOutlineReport size={20} />}>
-                        {' '}
                         Report
                       </MenuItem>
                     </MenuButton>
