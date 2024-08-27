@@ -17,6 +17,7 @@ import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
 import { TbCheck } from 'react-icons/tb';
 import UploadFile from '@/components/molecules/UploadFile';
+import { DatePickr } from '../DatePickr';
 const defaultProps = {
   type: 'text',
 };
@@ -158,6 +159,8 @@ const Field = forwardRef(
                 <DatePicker {...inputProps} prefix={prefix} $invalid={invalid || error} />
               ) : type === 'file' ? (
                 <UploadFile {...inputProps} $invalid={invalid || error} />
+              ) : type === 'date' ? (
+                <DatePickr {...inputProps} noMargin={noMargin} $invalid={invalid || error} />
               ) : (
                 <>
                   {/* any other input type */}

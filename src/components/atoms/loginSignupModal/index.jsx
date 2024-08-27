@@ -130,7 +130,7 @@ const LoginSignupModal = ({
               ...(type === 'Register As Seller'
                 ? [
                     {
-                      pattern: /^.{3,20}$/,
+                      pattern: /^.{3,}$/,
                       message: 'Minimum character length is 3',
                     },
                     {
@@ -149,7 +149,7 @@ const LoginSignupModal = ({
                   ]
                 : []),
             ]}>
-            <Field maxLength={20} />
+            <Field />
           </Form.Item>
           {type === 'Login As Seller' ? (
             <Form.Item
