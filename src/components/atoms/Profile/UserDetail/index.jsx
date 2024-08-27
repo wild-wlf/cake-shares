@@ -43,9 +43,9 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
     fullName: userData?.fullName,
     username: userData?.username,
     email: userData?.email,
-    country: userData?.country,
+    country: userData?.country ? userData?.country : '',
     countryLabel: countries.find(elem => elem.value === userData?.country)?.label,
-    dob: fromatDate(userData?.dob),
+    dob: userData?.dob ? fromatDate(userData?.dob) : '',
   };
 
   const actionBtns = asset => (
@@ -205,14 +205,16 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
             <div className="textWrap">
               <strong className="title">Country</strong>
               <div className="discreptionWrap">
-                <figure className="flagicon">
-                  <Image
-                    src={`https://countryflagsapi.netlify.app/flag/${personalInfo?.country}.svg`}
-                    alt="countryflgIcon"
-                    width={18}
-                    height={18}
-                  />
-                </figure>
+                {personalInfo?.country && (
+                  <figure className="flagicon">
+                    <Image
+                      src={`https://countryflagsapi.netlify.app/flag/${personalInfo?.country}.svg`}
+                      alt="countryflgIcon"
+                      width={18}
+                      height={18}
+                    />
+                  </figure>
+                )}
                 <span>{personalInfo.countryLabel}</span>
               </div>
             </div>
@@ -223,7 +225,7 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
             </div>
             <div className="textWrap">
               <strong className="title">Date of Birth</strong>
-              <span>{personalInfo.dob}</span>
+              <span>{personalInfo.dob || ''}</span>
             </div>
           </div>
           <div className="col-content danger">
