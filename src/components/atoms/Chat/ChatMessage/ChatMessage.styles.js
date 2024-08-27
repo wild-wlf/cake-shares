@@ -73,9 +73,6 @@ export const StyledChatMessage = styled.div`
   }
 
   .img-holder {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
     overflow: hidden;
     position: absolute;
     bottom: 40px;
@@ -83,9 +80,10 @@ export const StyledChatMessage = styled.div`
     display: ${({ $type }) => ($type === 'send' ? 'block' : 'none')};
 
     img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
       display: block;
-      width: 100%;
-      height: auto;
       object-fit: cover;
     }
   }

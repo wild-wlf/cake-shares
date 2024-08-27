@@ -100,7 +100,7 @@ const Pole = ({ type, time, question, options, allow_multiple, receivers, readBy
       ))}
       <div className="anonymous-polling">
         <Switch
-          label="Stay Anonymous while Polling?"
+          label="Stay Anonymous while voting?"
           name={`toogleSwitch${messageId}`}
           value={isAnonymous}
           onChange={e => setIsAnonymous(e.target.value)}
