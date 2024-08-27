@@ -176,7 +176,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                     message: 'Please enter username',
                   },
                   {
-                    pattern: /^.{3,20}$/,
+                    pattern: /^.{3,}$/,
                     message: 'Minimum character length is 3',
                   },
                   {
@@ -193,7 +193,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                     message: 'Username cannot consist only of special characters',
                   },
                 ]}>
-                <Field maxLength={20} />
+                <Field />
               </Form.Item>
             </div>
             <div className="input-div">
