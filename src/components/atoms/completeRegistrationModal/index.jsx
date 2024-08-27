@@ -233,6 +233,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                 name="dob"
                 sm
                 rounded
+                onChange={e => form.setFieldsValue({ dob: e[0] })}
                 rules={[
                   {
                     required: true,

@@ -49,6 +49,11 @@ const DownloadModal = ({ openNext }) => {
               noMargin
               sm
               type="date"
+              onChange={e =>
+                form.setFieldsValue({
+                  startDate: e[0],
+                })
+              }
               label="From"
               rules={[
                 {
@@ -73,6 +78,11 @@ const DownloadModal = ({ openNext }) => {
               noMargin
               sm
               type="date"
+              onChange={e =>
+                form.setFieldsValue({
+                  endDate: e[0],
+                })
+              }
               label="To"
               rules={[
                 {
