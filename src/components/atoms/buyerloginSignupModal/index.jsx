@@ -96,16 +96,16 @@ const BuyerLoginSignupModal = ({
                       message: 'Minimum character length is 3',
                     },
                     {
-                      pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,
-                      message: 'No Special Characters and spaces are allowed, only hyphens and underscore are allowed.',
-                    },
-                    {
                       pattern: /^(?!\d+$).*$/,
-                      message: 'Username cannot be only numbers',
+                      message: 'username cannot be only numbers',
                     },
                     {
                       pattern: /^(?![!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$).*$/,
-                      message: 'Only special characters are not allowed',
+                      message: 'username cannot consist only of special characters',
+                    },
+                    {
+                      pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,
+                      message: 'No Special Characters and spaces are allowed, only hyphens and underscore are allowed.',
                     },
                   ]
                 : []),

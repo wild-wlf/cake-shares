@@ -429,7 +429,7 @@ const TopBar = () => {
             </div>
             {isLoggedIn ? (
               <>
-                <SideNavItems user={user} router={router} />
+                <SideNavItems user={user} setSideNav={setSideNav} router={router} />
               </>
             ) : (
               <Link href="/" className={router === '/' ? 'textField textField-home' : 'textField'}>

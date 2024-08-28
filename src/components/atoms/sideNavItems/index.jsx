@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import KycLevel from '../KYC/KycLevel';
 import Link from 'next/link';
 import { FaWallet } from 'react-icons/fa';
@@ -13,7 +13,7 @@ import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
 import { UserContext } from '@/context/UserContext';
 
-const SideNavItems = ({ user, router }) => {
+const SideNavItems = ({ user, router, setSideNav }) => {
   const { onLogout } = useContextHook(AuthContext, v => ({
     onLogout: v.onLogout,
   }));
@@ -29,17 +29,33 @@ const SideNavItems = ({ user, router }) => {
         <KycLevel level={user?.kycLevel + 1} bg />
       </div>
       <Link href="/" className={router === '/' ? 'textField textField-home' : 'textField'}>
-        <MdStorefront />
-        <span>Marketplace</span>
+        <div
+          className="wallet2"
+          onClick={() => {
+            setSideNav(false);
+          }}>
+          <MdStorefront />
+          <span>Marketplace</span>
+        </div>
       </Link>
 
-      <div onClick={() => router.push('/profile')} className="wallet2">
-        <Image src={myProfileIcon} alt="My profile" width={17} height={17} />
-        <span>My Profile</span>
-      </div>
+      <Link href="/profile">
+        <div
+          className="wallet2"
+          onClick={() => {
+            setSideNav(false);
+          }}>
+          <Image src={myProfileIcon} alt="My profile" width={17} height={17} />
+          <span>My Profile</span>
+        </div>
+      </Link>
 
       <Link href="/wallet">
-        <div className="wallet2">
+        <div
+          onClick={() => {
+            setSideNav(false);
+          }}
+          className="wallet2">
           <FaWallet />
           <span>My Wallet</span>
         </div>
