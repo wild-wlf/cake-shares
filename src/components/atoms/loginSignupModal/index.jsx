@@ -219,7 +219,7 @@ const LoginSignupModal = ({
               <FcGoogle size={20} />
               Continue with Google
             </Button>
-            <Button type="dropdown" rounded sm width="500" className="button">
+            <Button disabled type="dropdown" rounded sm width="500" className="button">
               <Image src={Facebook} alt="Facebook" width={20} />
               Continue with Facebook
             </Button>

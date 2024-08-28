@@ -17,6 +17,37 @@ const EditBank = ({ bankInfo, onClose }) => {
 
   const [loading, setloading] = useState(false);
   const [form] = useForm();
+
+  async function handelSubmit(e) {
+    setloading(true);
+
+    let bankPayload = {
+      bankName: e?.bankName?.trim(),
+      iban: e?.iban?.trim(),
+      swiftBicNumber: e?.swiftBicNumber?.trim(),
+      userId: e?.userId?.trim(),
+    };
+
+    try {
+      await userService.updateBankInfo(user?.bank?._id, bankPayload);
+
+      Toast({
+        type: 'success',
+        message: 'Bank Information Updated Successfully!',
+      });
+      setloading(false);
+      setPermission(true);
+      onClose();
+    } catch (error) {
+      Toast({
+        type: 'error',
+        message: error.message,
+      });
+    } finally {
+      setloading(false);
+    }
+  }
+
   useEffect(() => {
     if (bankInfo && Object.keys(bankInfo)?.length > 0) {
       form.setFieldsValue({
@@ -27,46 +58,6 @@ const EditBank = ({ bankInfo, onClose }) => {
       });
     }
   }, []);
-  async function handelSubmit(e) {
-    setloading(true);
-    let obj = {
-      type: 'bank',
-      info: {
-        bankName: e?.bankName?.trim(),
-        iban: e?.iban?.trim(),
-        swiftBicNumber: e?.swiftBicNumber?.trim(),
-        userId: e?.userId?.trim(),
-      },
-    };
-    let objCreate = {
-      bankName: e?.bankName?.trim(),
-      iban: e?.iban?.trim(),
-      swiftBicNumber: e?.swiftBicNumber?.trim(),
-      userId: e?.userId?.trim(),
-    };
-
-    try {
-      if (user?.bank) {
-        await userService.update(obj, user?.bank?._id);
-      } else {
-        await userService.createBank(objCreate, user._id);
-      }
-
-      Toast({
-        type: 'success',
-        message: 'updated successfully',
-      });
-      setloading(false);
-      setPermission(true);
-      onClose();
-    } catch (error) {
-      setloading(false);
-      Toast({
-        type: 'error',
-        message: error.message,
-      });
-    }
-  }
 
   return (
     <StyledEditForm form={form} onSubmit={handelSubmit}>

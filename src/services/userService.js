@@ -246,5 +246,17 @@ const userService = {
     const { message } = await res.json();
     throw new Error(message ?? 'Something went wrong');
   },
+
+  async updateBankInfo(id, payload) {
+    let res = await Fetch.put(`${this._url}/update-bank-info/${id}`, payload);
+    if (res.status >= 200 && res.status < 300) {
+      res = await res.json();
+      return {
+        wallet: res,
+      };
+    }
+    const { message } = await res.json();
+    throw new Error(message ?? 'Something went wrong');
+  },
 };
 export default userService;
