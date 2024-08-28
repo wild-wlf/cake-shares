@@ -202,6 +202,7 @@ export const StyledTopBar = styled.header`
     }
   }
   .wallet2 {
+    cursor: pointer;
     display: none;
     gap: 8px;
   }
@@ -260,9 +261,10 @@ export const StyledTopBar = styled.header`
       display: none;
     }
     .wallet2 {
-      display: flex;  
+      display: flex;
     }
     .LogOut {
+      cursor: pointer;
       display: flex;
     }
     .textFieldRight {

@@ -386,12 +386,13 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                           message: 'Please enter Name of Person',
                         },
                         {
-                          pattern: /^[a-zA-Z\s]*$/,
-                          message: 'Only alphabets are allowed',
+                          pattern: /^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/,
+                          message:
+                            'Only alphabets are allowed, with a single space between words. No leading, trailing, or consecutive spaces.',
                         },
                         {
                           pattern: /^.{2,30}$/,
-                          message: ' Name should be between 2 and 30 characters.',
+                          message: 'Name should be between 2 and 30 characters.',
                         },
                       ]}>
                       <Field maxLength={30} />
