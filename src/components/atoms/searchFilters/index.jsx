@@ -163,7 +163,7 @@ const SearchFilters = ({ fetchProducts }) => {
           </Form.Item>
         </div>
         <div className="volumeWrapper">
-          <span>Investment Volume (in Dollars)</span>
+          <span>Investment Volume($)</span>
           <div className="inputWrapper">
             <input
               type="text"
