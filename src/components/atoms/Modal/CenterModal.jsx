@@ -70,7 +70,7 @@ const CenterModal = ({
           onClick={e => e.stopPropagation()}
           tabIndex={-1}>
           <Head>
-            <strong className="title">{title}</strong>
+            <strong className="modal-title">{title}</strong>
             {headImage && <Image src={headImage} alt="Icon" />}
             {iscloseAble && (
               <button type="button" className="closer" onClick={handleClose} tabIndex={0}>

@@ -325,7 +325,7 @@ const TopBar = () => {
       <CenterModal
         open={completeRegistrationModal}
         setOpen={setCompleteRegistrationModal}
-        title="Complete Registration"
+        title="Complete Details"
         width="804">
         <CompleteRegistrationModal
           handleRegistration={handleRegistration}
@@ -408,7 +408,10 @@ const TopBar = () => {
           </div>
           <NavLinks $active={sideNav}>
             <div className="logo">
-              <Image src={logo} alt="logo" />
+              <Link href="/">
+                <Image src={logo} alt="logo" />
+              </Link>
+
             </div>
             <div className="profile">
               <Image src={line} alt="line" />
