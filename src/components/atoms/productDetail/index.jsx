@@ -156,14 +156,14 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
               <div className="textCon">
                 <div>
                   <span>Return (%)</span>
-                  <h3>0%</h3>
+                  <h3>{data?.returnRatio || 0}%</h3>
                 </div>
                 <div className="line"></div>
               </div>
               <div className="textCon">
                 <div>
                   <span>Funding Ratio</span>
-                  <h3>0%</h3>
+                  <h3>{((data?.valueRaised / data?.assetValue) * 100).toFixed(2) || 0}%</h3>
                 </div>
                 <div className="line"></div>
               </div>
@@ -176,7 +176,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
               </div>
               <div>
                 <span>Annual Cost (est.)</span>
-                <h3>$0.00</h3>
+                <h3>${data?.annualCost || 0}</h3>
               </div>
             </div>
           </div>
