@@ -9,6 +9,7 @@ const RangeSlider = ({ ...props }) => {
   };
   return (
     <Slider.Range
+      style={{ zIndex: 0 }}
       min={props?.min}
       max={props?.max}
       value={rangeValue}

@@ -65,7 +65,7 @@ const AdvanceSearch = ({ priceRange }) => {
       minBackers: e?.min_backers,
       maxDaysLeft: e?.max_days_left,
       minFundsRaised: e?.min_fund_raised,
-      minAnnualCost: e?.min_annual_cost,
+      maxAnnualCost: e?.max_annual_cost,
       minInvestment: searchQuery?.minInvestment,
       maxInvestment: searchQuery?.maxInvestment,
     };
@@ -198,8 +198,8 @@ const AdvanceSearch = ({ priceRange }) => {
           <div className="minvalues">
             <Form.Item
               type="number"
-              label="Min Annual Cost"
-              name="min_annual_cost"
+              label="Max Annual Cost"
+              name="max_annual_cost"
               sm
               rounded
               placeholder="0"

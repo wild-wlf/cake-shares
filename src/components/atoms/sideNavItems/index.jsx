@@ -28,7 +28,7 @@ const SideNavItems = ({ user, router, setSideNav }) => {
         </div>
         <KycLevel level={user?.kycLevel + 1} bg />
       </div>
-      <Link href="/" className={router === '/' ? 'textField textField-home' : 'textField'}>
+      {/* <Link href="/" className={router === '/' ? 'textField textField-home' : 'textField'}>
         <div
           className="wallet2"
           onClick={() => {
@@ -37,7 +37,7 @@ const SideNavItems = ({ user, router, setSideNav }) => {
           <MdStorefront />
           <span>Marketplace</span>
         </div>
-      </Link>
+      </Link> */}
 
       <Link href="/profile">
         <div

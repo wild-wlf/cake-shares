@@ -85,6 +85,7 @@ const TopBar = () => {
   const [isBadge, setIsBadge] = useState(false);
   const router = usePathname();
   const route = useRouter();
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const handleClickOutsideProfile = event => {
     if (ProfileRef.current && !ProfileRef.current.contains(event.target)) {
@@ -247,6 +248,18 @@ const TopBar = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutsideProfile);
       document.removeEventListener('mousedown', handleClickOutsideNotification);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    () => {
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -429,12 +442,31 @@ const TopBar = () => {
             </div>
             {isLoggedIn ? (
               <>
+                <Link href="/" className="textField textField-home">
+                  <div
+                    onClick={() => {
+                      console.log(screenWidth);
+                      if (screenWidth < 760) {
+                        setSideNav(false);
+                      }
+                    }}>
+                    <MdStorefront />
+                    <span>Marketplace</span>
+                  </div>
+                </Link>
                 <SideNavItems user={user} setSideNav={setSideNav} router={router} />
               </>
             ) : (
-              <Link href="/" className={router === '/' ? 'textField textField-home' : 'textField'}>
-                <MdStorefront />
-                <span>Marketplace</span>
+              <Link href="/" className="textField textField-home">
+                <div
+                  onClick={() => {
+                    if (screenWidth < 760) {
+                      setSideNav(false);
+                    }
+                  }}>
+                  <MdStorefront />
+                  <span>Marketplace</span>
+                </div>
               </Link>
             )}
           </NavLinks>
