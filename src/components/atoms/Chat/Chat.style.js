@@ -26,7 +26,7 @@ export const ChatWrapper = styled.div`
 `;
 
 export const ChatBody = styled.div`
-  height: 680px;
+  height: calc(100vh - 310px);
   overflow: auto;
   padding-right: 8px;
 `;

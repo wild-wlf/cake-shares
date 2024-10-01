@@ -84,7 +84,7 @@ const RegisterModal = ({
           <Button rounded s md btntype="primary" width="170" onClick={handleModal}>
             Continue
           </Button>
-          {type === 'Login' && (
+          {/* {type === 'Login' && (
             <Button
               rounded
               s
@@ -97,7 +97,7 @@ const RegisterModal = ({
               }}>
               Register
             </Button>
-          )}
+          )} */}
 
           {type === 'Register' && (
             <Button

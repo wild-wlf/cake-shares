@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import arrowRight from "../../../_assets/banerSlideArrow.png";
+import styled from 'styled-components';
+import arrowRight from '../../../_assets/banerSlideArrow.png';
 
 export const BannerWrapper = styled.div`
   position: relative;
@@ -35,18 +35,19 @@ export const BannerWrapper = styled.div`
       width: 25px;
       height: 25px;
       z-index: 5;
-      top: 215px;
+      bottom: 70px;
       background: red;
       right: 20px;
       background: url(${arrowRight.src});
       background-size: 100% 100%;
       background-repeat: no-repeat;
+      top: auto;
       @media screen and (min-width: 992px) {
         width: 30px;
         height: 30px;
         right: 20px;
         bottom: 25px;
-        top: auto;
+        bottom: 7px;
       }
       &:before {
         display: none;
@@ -56,15 +57,12 @@ export const BannerWrapper = styled.div`
       }
     }
     .slick-prev {
-      left: auto;
       right: 55px;
-      top: 204px;
+      left: auto;
+      bottom: 81px;
       transform: rotate(180deg);
       @media screen and (min-width: 992px) {
-        top: auto;
-        left: auto;
-        right: 55px;
-        bottom: 40px;
+        bottom: 21px;
       }
     }
     .slick-dots {
@@ -104,7 +102,7 @@ export const BannerWrapper = styled.div`
 export const SlideWrapp = styled.div`
   min-height: 600px;
   overflow: hidden;
-  background-image: url(${(props) => props.$resp.src});
+  background-image: url(${props => props.$resp.src});
   background-size: 120% 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -143,7 +141,7 @@ export const SlideWrapp = styled.div`
   }
 
   @media screen and (min-width: 992px) {
-    background-image: url(${(props) => props.$bg.src});
+    background-image: url(${props => props.$bg.src});
     background-size: 100% 100%;
     display: flex !important;
     align-items: flex-end;
