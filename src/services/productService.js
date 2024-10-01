@@ -132,12 +132,12 @@ const productService = {
     maxInvestment = '',
     minBackers = '',
     minFundsRaised = '',
-    minAnnualCost = '',
+    maxAnnualCost = '',
     maxDaysLeft = '',
     country = '',
   }) {
     let res = await Fetch.get(
-      `${this._url}/search-products?page=${page}&itemsPerPage=${itemsPerPage}&searchText=${searchText}&type=${type}&investmentType=${investmentType}&kycLevel=${kycLevel}&minInvestmentVolume=${minInvestment}&maxInvestmentVolume=${maxInvestment}&valueRaised=${minFundsRaised}&minimumBackers=${minBackers}&country=${country}&daysLeft=${maxDaysLeft}`,
+      `${this._url}/search-products?page=${page}&itemsPerPage=${itemsPerPage}&searchText=${searchText}&type=${type}&investmentType=${investmentType}&kycLevel=${kycLevel}&minInvestmentVolume=${minInvestment}&maxInvestmentVolume=${maxInvestment}&valueRaised=${minFundsRaised}&minimumBackers=${minBackers}&country=${country}&daysLeft=${maxDaysLeft}&maxAnnualCost=${maxAnnualCost}`,
     );
     if (res.status >= 200 && res.status < 300) {
       res = await res.json();

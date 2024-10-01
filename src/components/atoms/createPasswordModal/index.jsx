@@ -125,7 +125,7 @@ const CreatePasswordModal = ({
                 htmlType="submit"
                 onClick={() => setsubmitForm('complete')}
                 className="button">
-                Complete Registration
+                Complete Details
               </Button>
               <Button
                 rounded
@@ -136,7 +136,7 @@ const CreatePasswordModal = ({
                 className="button"
                 loader={loader}
                 onClick={() => setsubmitForm('later')}>
-                I&apos;ll do later
+                Go to Profile
               </Button>
             </>
           )}

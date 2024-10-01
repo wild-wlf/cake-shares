@@ -43,6 +43,7 @@ function Graph({ graphData, tooltipBg, title, amount, graphLineColor, sm, timeFr
 
   return (
     <StyledGraph sm={sm}>
+      <div className="blur">No Data</div>
       <GraphHeader bg={tooltipBg} sm={sm}>
         <div className="Head">
           <strong>{title}</strong>

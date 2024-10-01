@@ -737,3 +737,21 @@ export const downloadStatement = (data, fileName) => {
   downloadLink.download = `${fileName}.csv`;
   downloadLink.click();
 };
+
+export const downloadImage = async url => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Network response was not ok');
+
+    const blob = await response.blob();
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.setAttribute('download', 'image.jpg');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(link.href);
+  } catch (error) {
+    console.error('Error downloading the image:', error);
+  }
+};

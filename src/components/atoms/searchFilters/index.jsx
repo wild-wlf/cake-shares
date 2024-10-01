@@ -61,7 +61,7 @@ const SearchFilters = ({ fetchProducts }) => {
         min_backers: searchQuery?.minBackers,
         max_days_left: searchQuery?.maxDaysLeft,
         min_fund_raised: searchQuery?.minFundsRaised,
-        min_annual_cost: searchQuery?.minAnnualCost,
+        max_annual_cost: searchQuery?.maxAnnualCost,
         minInvestment: searchQuery?.minInvestment,
         maxInvestment: searchQuery?.maxInvestment,
       });
@@ -83,7 +83,7 @@ const SearchFilters = ({ fetchProducts }) => {
       minBackers: e?.min_backers,
       maxDaysLeft: e?.max_days_left,
       minFundsRaised: e?.min_fund_raised,
-      minAnnualCost: e?.min_annual_cost,
+      maxAnnualCost: e?.max_annual_cost,
       minInvestment: investmentVolume?.min,
       maxInvestment: investmentVolume?.max,
     };
@@ -192,9 +192,9 @@ const SearchFilters = ({ fetchProducts }) => {
         </div>
         <div className="dropdown-div">
           <Form.Item
-            type="text"
-            label="Min Annual Cost"
-            name="min_annual_cost"
+            type="number"
+            label="Max Annual Cost"
+            name="max_annual_cost"
             sm
             rounded
             placeholder="0"
@@ -209,7 +209,7 @@ const SearchFilters = ({ fetchProducts }) => {
         </div>
         <div className="dropdown-div">
           <Form.Item
-            type="text"
+            type="number"
             label="Min Fund Raised"
             name="min_fund_raised"
             sm

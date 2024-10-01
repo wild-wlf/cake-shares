@@ -3,6 +3,11 @@ import styled from 'styled-components';
 export const ProductDetailWrapper = styled.div`
   padding: 30px 0px;
 
+  .download-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
   .btnwrapper {
     width: 100%;
     display: flex;
@@ -111,6 +116,25 @@ export const ProductDetailWrapper = styled.div`
         z-index: 2;
       }
     }
+    .btnWrapper {
+      padding: 0px 26px 0px 21px;
+      .button {
+        flex-shrink: 0;
+        margin: 0 10px;
+        margin-bottom: 16px;
+      }
+      .viewDetail {
+        margin-bottom: 10px;
+      }
+    }
+  }
+  .product3 {
+    cursor: pointer;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
   .product2 {
     display: flex;
@@ -118,6 +142,7 @@ export const ProductDetailWrapper = styled.div`
     gap: 20px;
     width: 100%;
     height: 360px;
+    cursor: pointer;
 
     img {
       width: 100%;

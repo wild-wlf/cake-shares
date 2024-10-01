@@ -23,83 +23,83 @@ const MediaSlide = () => {
       },
     ],
   };
-    const media = [
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-      {
-        img: property,
-        video: true,
-      },
-    ];
-    const chunkArray = (array, size) => {
-      const result = [];
-      for (let i = 0; i < array.length; i += size) {
-        result.push(array.slice(i, i + size));
-      }
-      return result;
-    };
-    const mediaChunks = chunkArray(media, 6);
-    return (
-      <StyledMediaSlide>
-        <label className="slideTitle">Photos & Multimedia</label>
+  const media = [
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+    {
+      img: property,
+      video: true,
+    },
+  ];
+  const chunkArray = (array, size) => {
+    const result = [];
+    for (let i = 0; i < array.length; i += size) {
+      result.push(array.slice(i, i + size));
+    }
+    return result;
+  };
+  const mediaChunks = chunkArray(media, 6);
+  return (
+    <StyledMediaSlide>
+      {/* <label className="slideTitle">Photos & Multimedia</label>
         <Slider {...settings}>
           {mediaChunks.map((chunk, index) => (
             <div className="col-wrapper" key={index}>
@@ -110,9 +110,9 @@ const MediaSlide = () => {
               ))}
             </div>
           ))}
-        </Slider>
-      </StyledMediaSlide>
-    );
+        </Slider> */}
+    </StyledMediaSlide>
+  );
 };
 
 export default MediaSlide;

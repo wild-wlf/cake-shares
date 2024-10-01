@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Sidenav = styled.div`
   position: absolute;
-  left: ${({ open }) => (open ? "0" : "-200%")};
+  left: ${({ open }) => (open ? '0' : '-200%')};
   top: 0;
   background-color: white;
   width: 260px;
@@ -15,7 +15,7 @@ export const Sidenav = styled.div`
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 
   .backdrop {
-    display: ${({ open }) => (open ? "block" : "none")};
+    display: ${({ open }) => (open ? 'block' : 'none')};
     transition: display 0.3s ease-in-out;
     position: fixed;
     top: 0;
@@ -76,7 +76,7 @@ export const Sidenav = styled.div`
     color: var(--green);
   }
   .textField::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;

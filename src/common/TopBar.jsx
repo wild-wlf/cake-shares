@@ -85,6 +85,7 @@ const TopBar = () => {
   const [isBadge, setIsBadge] = useState(false);
   const router = usePathname();
   const route = useRouter();
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const handleClickOutsideProfile = event => {
     if (ProfileRef.current && !ProfileRef.current.contains(event.target)) {
@@ -251,6 +252,18 @@ const TopBar = () => {
   }, []);
 
   useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
     if (sideNav) {
       document.body.classList.add('active-nav');
     } else {
@@ -325,7 +338,7 @@ const TopBar = () => {
       <CenterModal
         open={completeRegistrationModal}
         setOpen={setCompleteRegistrationModal}
-        title="Complete Registration"
+        title="Complete Details"
         width="804">
         <CompleteRegistrationModal
           handleRegistration={handleRegistration}
@@ -408,7 +421,10 @@ const TopBar = () => {
           </div>
           <NavLinks $active={sideNav}>
             <div className="logo">
-              <Image src={logo} alt="logo" />
+              <Link href="/">
+                <Image src={logo} alt="logo" />
+              </Link>
+
             </div>
             <div className="profile">
               <Image src={line} alt="line" />
@@ -429,12 +445,31 @@ const TopBar = () => {
             </div>
             {isLoggedIn ? (
               <>
+                <Link href="/" className="textField textField-home">
+                  <div
+                    onClick={() => {
+                      console.log(screenWidth);
+                      if (screenWidth < 760) {
+                        setSideNav(false);
+                      }
+                    }}>
+                    <MdStorefront />
+                    <span>Marketplace</span>
+                  </div>
+                </Link>
                 <SideNavItems user={user} setSideNav={setSideNav} router={router} />
               </>
             ) : (
-              <Link href="/" className={router === '/' ? 'textField textField-home' : 'textField'}>
-                <MdStorefront />
-                <span>Marketplace</span>
+              <Link href="/" className="textField textField-home">
+                <div
+                  onClick={() => {
+                    if (screenWidth < 760) {
+                      setSideNav(false);
+                    }
+                  }}>
+                  <MdStorefront />
+                  <span>Marketplace</span>
+                </div>
               </Link>
             )}
           </NavLinks>

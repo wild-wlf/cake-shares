@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import InitiateInvestmentModal from '../InitiateInvestmentModal';
 import InvestmentSuccesModal from '../InvestmentSuccesModal';
 import ProductDescription from '../productDescription';
-import { daysLeft, formatDateWithSuffix } from '@/helpers/common';
+import { daysLeft, downloadImage, formatDateWithSuffix } from '@/helpers/common';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
 import HandleLoginModal from '@/components/molecules/HandleLoginModal';
@@ -45,8 +45,7 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
     } else if (user?.wallet < data?.minimumInvestment) {
       setInfoModalHeadingText('Insufficient Wallet Balance!');
       setInfoModalText(
-        `You currently do not have sufficient wallet balance to perform this action. The minimum amount required to invest in this product is $${
-          data?.minimumInvestment ?? 0
+        `You currently do not have sufficient wallet balance to perform this action. The minimum amount required to invest in this product is $${data?.minimumInvestment ?? 0
         }, while your current account balance is $${user?.wallet || 0}. Please top up your account.`,
       );
       setModalIntent('Insufficient Wallet Balance!');
@@ -208,7 +207,8 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
                           height={360}
                           autoPlay={true}
                           controls={true}
-                          type="video/mp4"></video>
+                          type="video/mp4"
+                        ></video>
                       </div>
                     )}
                   />
@@ -220,12 +220,48 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
                     height={360}
                     type="video/mp4"
                     autoPlay="false"
-                    controls={false}></video>
+                    controls={false}
+                  ></video>
                 </div>
               )
             ) : (
               data?.media &&
-              data?.media[0] && <Image src={data?.media[0]} width={365} height={360} alt="Product-Image" />
+              data?.media[0] && (
+                <ModalContainer
+                  lg
+                  width={668}
+                  title="Product Image"
+                  btnComponent={({ onClick }) => (
+                    <Image
+                      src={data?.media[0]}
+                      width={365}
+                      height={360}
+                      alt="Product-Image"
+                      onClick={onClick}
+                    />
+                  )}
+                  content={({ onClose }) => (
+                    <div className="modalImage">
+                      <Image
+                        src={data?.media[0]}
+                        width={500}
+                        height={360}
+                        alt="Product-Image"
+                        onClick={onClose}
+                      />
+                      <div className="download-button ">
+                        <Button rounded sm btntype="primary" className="button" onClick={() => {
+                          downloadImage(data?.media[0]);
+                          onClose();
+                        }}>
+
+                          Download Image
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                />
+              )
             )}
           </div>
           <div className="product2">
@@ -233,15 +269,85 @@ const ProductDetail = ({ data, SellerData, setProductData, loading }) => {
               <Skeletonn height="360" radius="30px" width="100" />
             ) : (
               data?.media &&
-              data?.media[1] && <Image src={data?.media[1]} alt="Product-Image" width={365} height={360} />
+              data?.media[1] && (
+                <ModalContainer
+                  lg
+                  width={668}
+                  title="Product Image"
+                  btnComponent={({ onClick }) => (
+                    <Image
+                      src={data?.media[1]}
+                      width={365}
+                      height={360}
+                      alt="Product-Image"
+                      onClick={onClick}
+                    />
+                  )}
+                  content={({ onClose }) => (
+                    <div className="modalImage">
+                      <Image
+                        src={data?.media[1]}
+                        width={500}
+                        height={360}
+                        alt="Product-Image"
+                        onClick={onClose}
+                      />
+                      <div className="download-button">
+                        <Button rounded sm btntype="primary" className="button" onClick={() => {
+                          downloadImage(data?.media[1]);
+                          onClose();
+                        }}>
+
+                          Download Image
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                />
+              )
             )}
           </div>
-          <div className="product2">
+          <div className="product3">
             {loading ? (
               <Skeletonn height="360" radius="30px" width="100" />
             ) : (
               data?.media &&
-              data?.media[2] && <Image src={data?.media[2]} alt="Product-Image" width={365} height={360} />
+              data?.media[2] && (
+                <ModalContainer
+                  lg
+                  width={668}
+                  title="Product Image"
+                  btnComponent={({ onClick }) => (
+                    <Image
+                      src={data?.media[2]}
+                      width={365}
+                      height={360}
+                      alt="Product-Image"
+                      onClick={onClick}
+                    />
+                  )}
+                  content={({ onClose }) => (
+                    <div className="modalImage">
+                      <Image
+                        src={data?.media[2]}
+                        width={500}
+                        height={360}
+                        alt="Product-Image"
+                        onClick={onClose}
+                      />
+                      <div className="download-button">
+                        <Button rounded sm btntype="primary" className="button" onClick={() => {
+                          downloadImage(data?.media[2]);
+                          onClose();
+                        }}>
+
+                          Download Image
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                />
+              )
             )}
           </div>
         </div>

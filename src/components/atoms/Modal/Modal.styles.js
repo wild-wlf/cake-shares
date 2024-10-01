@@ -18,9 +18,6 @@ export const StyledModal = styled.div`
   align-items: center;
   justify-content: center;
   z-index: ${({ $zIndex }) => ($zIndex ? $zIndex : '99')};
-  .title {
-    color: var(--dark);
-  }
 `;
 
 export const ContentHolder = styled.div`
@@ -64,9 +61,10 @@ export const Head = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
-  strong {
+  .modal-title {
     font-size: 32px;
     font-weight: 400;
+    color: var(--dark);
   }
 
   .closer {

@@ -28,18 +28,13 @@ const SearchHeader = ({ handleViewController, listview }) => {
   const handleSortChecked = e => {
     const { name } = e.target;
     if (name === 'Popularity') {
-      setSearchResults(prev => {
-        const sortedResults = [...prev].sort((a, b) => b.popularityPercent - a.popularityPercent);
-        return sortedResults;
-      });
+      setSearchResults(prev => [...prev].sort((a, b) => b.popularityPercent - a.popularityPercent));
+    } else if (name === 'Funding Ratio') {
+      setSearchResults(prev => [...prev].sort((a, b) => b.fundingRatio - a.fundingRatio));
+    } else if (name === 'Return') {
+      setSearchResults(prev => [...prev].sort((a, b) => b.returnRatio - a.returnRatio));
     }
-
     setSelected(name);
-    // setSearchQuery((prev) => ({
-    //   ...prev,
-    //   sort: name,
-    // }));
-    // setSortBox(false);
   };
   return (
     <SearchHeaderWrapper>
@@ -50,6 +45,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
           btntype="blue"
           onClick={() => {
             router.back();
+            handleClearQuery();
           }}>
           <IoIosArrowBack />
           Go Back
@@ -117,7 +113,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
             className="button"
             onClick={() => {
               handleClearQuery();
-              router.back();
+              // router.back();
             }}>
             Clear All
             <IoIosRemoveCircle size={18} />

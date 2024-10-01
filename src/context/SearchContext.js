@@ -15,7 +15,7 @@ export const SearchContextProvider = ({ children }) => {
     minBackers: '',
     maxDaysLeft: '',
     minFundsRaised: '',
-    minAnnualCost: '',
+    maxAnnualCost: '',
     minInvestment: '',
     maxInvestment: '',
   });
@@ -41,7 +41,7 @@ export const SearchContextProvider = ({ children }) => {
       minBackers: '',
       maxDaysLeft: '',
       minFundsRaised: '',
-      minAnnualCost: '',
+      maxAnnualCost: '',
       minInvestment: '',
       maxInvestment: '',
     });
