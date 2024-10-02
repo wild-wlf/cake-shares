@@ -78,7 +78,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
         bankName: e.bank_bank_name?.trim(),
         iban: e.bank_iban_number?.trim(),
         swiftBicNumber: e.bic_number?.trim(),
-        userId: e.user_id?.trim(),
+        // userId: e.user_id?.trim(),
       },
       inheritanceInfo: inheritances,
     };

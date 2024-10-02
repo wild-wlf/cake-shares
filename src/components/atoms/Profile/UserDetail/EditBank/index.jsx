@@ -25,7 +25,7 @@ const EditBank = ({ bankInfo, onClose }) => {
       bankName: e?.bankName?.trim(),
       iban: e?.iban?.trim(),
       swiftBicNumber: e?.swiftBicNumber?.trim(),
-      userId: e?.userId?.trim(),
+      // userId: e?.userId?.trim(),
     };
 
     try {
@@ -54,7 +54,7 @@ const EditBank = ({ bankInfo, onClose }) => {
         bankName: bankInfo.bankName,
         iban: bankInfo.iban,
         swiftBicNumber: bankInfo.swiftBicNumber,
-        userId: bankInfo.userId,
+        // userId: bankInfo.userId,
       });
     }
   }, []);
