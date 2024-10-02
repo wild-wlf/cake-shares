@@ -192,7 +192,7 @@ export const StyledUserInfo = styled.div`
 export const ProfileWrapper = styled.label`
   display: block;
   flex-shrink: 0;
-  width: 120px ;
+  width: 120px;
   height: 120px;
   border-radius: 50%;
   overflow: hidden;
@@ -218,7 +218,7 @@ export const ProfileWrapper = styled.label`
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
   &::before {
     position: absolute;

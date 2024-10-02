@@ -20,6 +20,8 @@ export const SearchContextProvider = ({ children }) => {
     maxInvestment: '',
   });
 
+  const [countries, setCountries] = useState([]);
+
   const [searchResults, setSearchResults] = useState([]);
 
   function handleSearchQuery(elem) {
@@ -50,11 +52,13 @@ export const SearchContextProvider = ({ children }) => {
   const contextValue = {
     searchResults,
     searchQuery,
+    countries,
     setSearchQuery,
     handleSearchQuery,
     handleClearQuery,
     setSearchQuery,
     setSearchResults,
+    setCountries,
   };
   return <SearchContext.Provider value={contextValue}>{children}</SearchContext.Provider>;
 };

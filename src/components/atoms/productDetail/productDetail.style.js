@@ -83,6 +83,7 @@ export const ProductDetailWrapper = styled.div`
       width: 100%;
       height: 100%;
       object-fit: cover;
+      cursor: pointer;
     }
     .videoTag {
       overflow: hidden;
@@ -128,15 +129,22 @@ export const ProductDetailWrapper = styled.div`
       }
     }
   }
-  .product3 {
+
+  .product2 {
+    display: flex;
+    flex: 1;
+    gap: 20px;
+    width: 100%;
+    height: 360px;
     cursor: pointer;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
-  .product2 {
+  .product3 {
     display: flex;
     flex: 1;
     gap: 20px;
