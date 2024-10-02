@@ -30,7 +30,7 @@ export const SearchContextProvider = ({ children }) => {
   }
 
   function handleClearQuery() {
-    setSearchResults([]);
+    // setSearchResults([]);
     setSearchQuery({
       page: 1,
       itemsPerPage: 12,
