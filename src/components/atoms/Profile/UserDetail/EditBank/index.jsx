@@ -119,7 +119,7 @@ const EditBank = ({ bankInfo, onClose }) => {
           ]}>
           <Field maxLength={11} />
         </Form.Item>
-        <Form.Item
+        {/* <Form.Item
           type="text"
           label="User ID"
           name="userId"
@@ -137,7 +137,7 @@ const EditBank = ({ bankInfo, onClose }) => {
             },
           ]}>
           <Field maxLength={40} />
-        </Form.Item>
+        </Form.Item> */}
       </div>
 
       <Button rounded md btntype="primary" width="170" htmlType="submit" disabled={loading} loader={loading}>

@@ -321,7 +321,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                 ]}>
                 <Field maxLength={11} />
               </Form.Item>
-              <Form.Item
+              {/* <Form.Item
                 type="text"
                 label="User ID"
                 name="user_id"
@@ -339,7 +339,7 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                   },
                 ]}>
                 <Field maxLength={40} />
-              </Form.Item>
+              </Form.Item> */}
             </div>
           </div>
         </div>
