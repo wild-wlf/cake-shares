@@ -83,6 +83,7 @@ export const ProductDetailWrapper = styled.div`
       width: 100%;
       height: 100%;
       object-fit: cover;
+      cursor: pointer;
     }
     .videoTag {
       overflow: hidden;
