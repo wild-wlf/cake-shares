@@ -83,6 +83,7 @@ const AdvanceSearch = () => {
         listview={listview}
         selected={sortFilter}
         setSelected={setSortFilter}
+        fetchProducts={fetchProducts}
       />
 
       <SearchFilterFields
