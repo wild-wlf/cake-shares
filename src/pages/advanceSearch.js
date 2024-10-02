@@ -17,6 +17,8 @@ const AdvanceSearch = () => {
     fetch: v.fetch,
   }));
 
+  const [sortFilter, setSortFilter] = useState(null);
+
   const handleViewController = () => {
     setListView(!listview);
   };
@@ -61,8 +63,13 @@ const AdvanceSearch = () => {
 
   return (
     <>
-      <SearchHeader handleViewController={handleViewController} listview={listview} />
-      <SearchFilterFields fetchProducts={fetchProducts} />
+      <SearchHeader
+        handleViewController={handleViewController}
+        listview={listview}
+        selected={sortFilter}
+        setSelected={setSortFilter}
+      />
+      <SearchFilterFields fetchProducts={fetchProducts} setSortFilter={setSortFilter} />
       <InfiniteScroll dataLength={searchResults?.length} fetchMore={fetchProducts} hasMore={hasNextPage}>
         {listview ? (
           searchResults.length > 0 ? (

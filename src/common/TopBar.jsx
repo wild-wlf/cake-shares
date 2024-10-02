@@ -38,6 +38,7 @@ import SideNavItems from '@/components/atoms/sideNavItems';
 import PrivacySetting from '@/components/atoms/PrivacySettingModal/PrivacySetting';
 import PrivacyPolicy from '@/components/atoms/PrivacyPolicyModal/PrivacyPolicy';
 import TermsConditions from '@/components/atoms/TermsConditions/TermsConditions';
+import { SearchContext } from '@/context/SearchContext';
 
 const TopBar = () => {
   const {
@@ -67,6 +68,10 @@ const TopBar = () => {
     loading: v.loading,
     isLoggedIn: v.isLoggedIn,
     user: v.user,
+  }));
+
+  const { handleClearQuery } = useContextHook(SearchContext, v => ({
+    handleClearQuery: v.handleClearQuery,
   }));
 
   const [sideNav, setSideNav] = useState(false);
@@ -420,7 +425,11 @@ const TopBar = () => {
             <HiOutlineMenuAlt1 />
           </div>
           <NavLinks $active={sideNav}>
-            <div className="logo">
+            <div className="logo" onClick={() => {
+              if (router === '/advanceSearch')
+                handleClearQuery();
+
+            }}>
               <Link href="/">
                 <Image src={logo} alt="logo" />
               </Link>

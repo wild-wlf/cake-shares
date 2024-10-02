@@ -12,7 +12,7 @@ import categoryService from '@/services/categoryService';
 const predefinedOrder = [
   'All',
   'Properties',
-  'Classic cars',
+  'Classic Cars',
   'Watches',
   'Luxury items',
   'New Ventures',
@@ -26,11 +26,11 @@ const predefinedOrder = [
 // Category colors mapping
 const categoryColors = {
   'Properties': 'green',
-  'Classic cars': 'green',
+  'Classic Cars': 'green',
   'Watches': 'green',
   'Luxury items': 'red',
-  'New Ventures': 'yellow',
-  'Corporate Investments': 'yellow',
+  'New Ventures': 'rgb(163 163 8)',
+  'Corporate Investments': 'rgb(163 163 8)',
   'Trade Hub': 'red',
   'Asset Backed Lending': 'green',
   'Banking Products': 'green',

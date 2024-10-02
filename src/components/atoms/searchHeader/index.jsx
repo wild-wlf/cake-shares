@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import Button from '../Button';
 import { useRouter } from 'next/router';
@@ -12,14 +12,11 @@ import { SearchHeaderWrapper } from './searchHeader.style';
 import { SearchContext } from '@/context/SearchContext';
 import { useContextHook } from 'use-context-hook';
 
-const SearchHeader = ({ handleViewController, listview }) => {
+const SearchHeader = ({ handleViewController, listview, selected, setSelected }) => {
+  const closeRef = useRef();
   const router = useRouter();
   const [sortBox, setSortBox] = useState(false);
-  const [selected, setSelected] = useState(null);
-  // const [searchQuery, setSearchQuery] = useState({
-  //   searchText: "",
-  //   sort: "",
-  // });
+  // const [selected, setSelected] = useState(null);
   const { setSearchResults, handleClearQuery } = useContextHook(SearchContext, v => ({
     setSearchResults: v.setSearchResults,
     handleClearQuery: v.handleClearQuery,
@@ -28,7 +25,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
   const handleSortChecked = e => {
     const { name } = e.target;
     if (name === 'Popularity') {
-      setSearchResults(prev => [...prev].sort((a, b) => b.popularityPercent - a.popularityPercent));
+      setSearchResults(prev => [...prev].sort((a, b) => b.fundingRatio - a.fundingRatio));
     } else if (name === 'Funding Ratio') {
       setSearchResults(prev => [...prev].sort((a, b) => b.fundingRatio - a.fundingRatio));
     } else if (name === 'Return') {
@@ -36,6 +33,20 @@ const SearchHeader = ({ handleViewController, listview }) => {
     }
     setSelected(name);
   };
+
+  const handleClickOutside = event => {
+    if (closeRef.current && !closeRef.current.contains(event.target)) {
+      setSortBox(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <SearchHeaderWrapper>
       <div>
@@ -73,7 +84,7 @@ const SearchHeader = ({ handleViewController, listview }) => {
               Sort By
               <RiExpandUpDownFill size={18} />
             </Button>
-            <div className="sort-list">
+            <div className="sort-list" ref={closeRef}>
               {sortBox && (
                 <div className="list">
                   <Field

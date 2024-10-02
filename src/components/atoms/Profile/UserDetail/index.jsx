@@ -133,13 +133,13 @@ const UserDetail = ({ userData, assetsData, assets_loading, searchQuery, setSear
               </div>
             </div>
             <div className="col-content">
-              <div className="iconWrap">
+              {/* <div className="iconWrap">
                 <Image src={userId} alt="bankIcon" />
               </div>
               <div className="textWrap">
                 <strong className="title">User ID</strong>
                 <span>{bankInfo?.userId}</span>
-              </div>
+              </div> */}
             </div>
           </>
         </div>

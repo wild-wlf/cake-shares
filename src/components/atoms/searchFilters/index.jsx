@@ -11,7 +11,7 @@ import categoryService from '@/services/categoryService';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
 
-const SearchFilters = ({ fetchProducts }) => {
+const SearchFilters = ({ fetchProducts, setSortFilter }) => {
   const { fetch } = useContextHook(AuthContext, v => ({
     fetch: v.fetch,
   }));
@@ -37,12 +37,16 @@ const SearchFilters = ({ fetchProducts }) => {
     fetch,
   );
 
-  const categoriesOptions = useMemo(() => {
-    return categories_data?.categories?.map(ele => ({
-      value: ele?._id,
-      label: ele?.name,
-    }));
-  }, [categories_data?.categories]);
+  const categoriesOptions = useMemo(() =>
+    [
+      { value: '', label: 'All' },
+      ...(categories_data?.categories?.map(ele => ({
+        value: ele?._id,
+        label: ele?.name,
+      })) || []),
+    ]
+    , [categories_data?.categories]);
+
 
   const [investmentVolume, setInvestmentVolume] = useState({
     min: searchQuery?.minInvestment || '',
@@ -90,6 +94,7 @@ const SearchFilters = ({ fetchProducts }) => {
     handleSearchQuery(obj);
     fetchProducts(obj);
     setIsLoading(false);
+    setSortFilter(null);
   };
 
   const loadInvestmentTypeOptions = async searchText => {
