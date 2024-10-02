@@ -109,7 +109,7 @@ const CategoriesBar = ({ setSearchQuery, priceRange }) => {
 
                       style={{
                         color: Tab === index ? categoryColors[item?.label] : 'black',
-                        backgroundColor: 'rgba(64, 143, 140, 0.1)'
+                        backgroundColor: Tab === index ? 'rgba(64, 143, 140, 0.1)' : ''
                         //  color: Tab === index ? 'white' : 'black',
                       }}
                       className={Tab === index ? 'button active' : 'button'}
