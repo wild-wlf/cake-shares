@@ -80,6 +80,7 @@ const productService = {
         advertisedProducts: res.advertisedProducts.items,
         advertisedProductsHasNextPage: res.advertisedProducts.hasNextPage,
         priceRange: res.priceRange,
+        countries: res?.countries,
       };
     }
     const { message } = await res.json();

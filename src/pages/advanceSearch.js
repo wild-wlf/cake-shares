@@ -10,12 +10,14 @@ import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
 import InfiniteScroll from '@/components/molecules/InfiniteScroll';
 import Toast from '@/components/molecules/Toast';
+import { byIso } from 'country-code-lookup';
 
 const AdvanceSearch = () => {
   const [listview, setListView] = useState(true);
   const { fetch } = useContextHook(AuthContext, v => ({
     fetch: v.fetch,
   }));
+  const [dynamicVar, setDynamicVar] = useState({});
 
   const [sortFilter, setSortFilter] = useState(null);
 
@@ -45,9 +47,22 @@ const AdvanceSearch = () => {
           return payload ? newItems : [...prev, ...newItems];
         });
 
+        if (searchQuery?.page === 1) {
+          setDynamicVar({
+            priceRange: res?.priceStats,
+            countries: [
+              { label: 'All', value: '' },
+              ...(res?.uniqueCountries?.map(ele => ({ label: byIso(ele)?.country, value: ele })) || []),
+            ],
+          });
+        }
+
         setHasNextPage(res?.hasNextPage);
         setSearchQuery(prev => ({
           ...prev,
+          ...(prev.page === 1
+            ? { minInvestment: res?.priceStats?.minPrice, maxInvestment: res?.priceStats?.maxPrice }
+            : {}),
           page: res?.nextPage,
         }));
       } catch ({ message }) {
@@ -69,7 +84,13 @@ const AdvanceSearch = () => {
         selected={sortFilter}
         setSelected={setSortFilter}
       />
-      <SearchFilterFields fetchProducts={fetchProducts} setSortFilter={setSortFilter} />
+
+      <SearchFilterFields
+        fetchProducts={fetchProducts}
+        setSortFilter={setSortFilter}
+        dynamicVar={dynamicVar}
+        setDynamicVar={setDynamicVar}
+      />
       <InfiniteScroll dataLength={searchResults?.length} fetchMore={fetchProducts} hasMore={hasNextPage}>
         {listview ? (
           searchResults.length > 0 ? (

@@ -14,15 +14,17 @@ import { AuthContext } from '@/context/authContext';
 import categoryService from '@/services/categoryService';
 
 const AdvanceSearch = ({ priceRange }) => {
-  const [arr, setArr] = useState(countries);
+  // const [arr, setArr] = useState(countries);
+
   const [form] = useForm();
   const router = useRouter();
   const { fetch } = useContextHook(AuthContext, v => ({
     fetch: v.fetch,
   }));
-  const { handleSearchQuery, handleClearQuery } = useContextHook(SearchContext, v => ({
+  const { handleSearchQuery, handleClearQuery, countries } = useContextHook(SearchContext, v => ({
     handleSearchQuery: v.handleSearchQuery,
     handleClearQuery: v.handleClearQuery,
+    countries: v.countries,
   }));
 
   const { categories_data } = categoryService.GetAllCategories(
@@ -134,7 +136,7 @@ const AdvanceSearch = ({ priceRange }) => {
           </div>
           <div className="dropdown-div">
             <Form.Item type="text" label="Country" name="country" sm rounded placeholder="Select Country">
-              <Select options={arr} />
+              <Select options={countries} />
             </Form.Item>
           </div>
           <div className="dropdown-div">
@@ -167,7 +169,7 @@ const AdvanceSearch = ({ priceRange }) => {
             <span className="heading">Investment Volume (in Dollars)</span>
             <div className="inputWrapper">
               <input
-                type="text"
+                type="number"
                 placeholder="$0"
                 value={searchQuery.minInvestment ? `${searchQuery.minInvestment}` : '0'}
                 onChange={_ => {
@@ -176,7 +178,7 @@ const AdvanceSearch = ({ priceRange }) => {
               />
               <FaMinus size={30} />
               <input
-                type="text"
+                type="number"
                 placeholder="$0"
                 value={searchQuery.maxInvestment ? `${searchQuery.maxInvestment}` : '0'}
                 onChange={_ => {

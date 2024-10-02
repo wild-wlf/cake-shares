@@ -11,7 +11,7 @@ import categoryService from '@/services/categoryService';
 import { useContextHook } from 'use-context-hook';
 import { AuthContext } from '@/context/authContext';
 
-const SearchFilters = ({ fetchProducts, setSortFilter }) => {
+const SearchFilters = ({ fetchProducts, setSortFilter, dynamicVar, setDynamicVar }) => {
   const { fetch } = useContextHook(AuthContext, v => ({
     fetch: v.fetch,
   }));
@@ -22,12 +22,15 @@ const SearchFilters = ({ fetchProducts, setSortFilter }) => {
     { label: 'Level 2', value: 2 },
     { label: 'Level 3', value: 3 },
   ];
-  const [arr, setArr] = useState(countries);
+  // const [arr, setArr] = useState(countries);
   const [isLoading, setIsLoading] = useState(false);
   const [form] = useForm();
-  const { handleSearchQuery, searchQuery } = useContextHook(SearchContext, v => ({
+  const { handleSearchQuery, searchQuery,
+    //  countries 
+  } = useContextHook(SearchContext, v => ({
     handleSearchQuery: v.handleSearchQuery,
     searchQuery: v.searchQuery,
+    // countries: v.countries,
   }));
 
   const { categories_data } = categoryService.GetAllCategories(
@@ -49,13 +52,13 @@ const SearchFilters = ({ fetchProducts, setSortFilter }) => {
 
 
   const [investmentVolume, setInvestmentVolume] = useState({
-    min: searchQuery?.minInvestment || '',
-    max: searchQuery?.maxInvestment || '',
+    min: dynamicVar?.priceRange?.minPrice || '',
+    max: dynamicVar?.priceRange?.maxPrice || '',
   });
 
   useEffect(() => {
     async function setFilters(params) {
-      const country = countries.find(ele => ele.value === searchQuery?.country);
+      const country = dynamicVar?.countries?.find(ele => ele.value === searchQuery?.country);
       const kyc = kycLevel.find(ele => ele.value === searchQuery?.kycLevel);
       const investmentType = categoriesOptions?.find(ele => ele.value === searchQuery?.investmentType);
       form.setFieldsValue({
@@ -146,7 +149,7 @@ const SearchFilters = ({ fetchProducts, setSortFilter }) => {
                 message: 'Maximum Character Length is 256',
               },
             ]}>
-            <Select options={arr} />
+            <Select options={dynamicVar?.countries} />
           </Form.Item>
         </div>
         <div className="dropdown-div">
@@ -171,26 +174,40 @@ const SearchFilters = ({ fetchProducts, setSortFilter }) => {
           <span>Investment Volume($)</span>
           <div className="inputWrapper">
             <input
-              type="text"
+              type="number"
               placeholder="$0"
-              value={investmentVolume?.min}
+              value={dynamicVar?.priceRange?.minPrice}
               onChange={e => {
                 setInvestmentVolume(prev => ({
                   ...prev,
                   min: e.target.value,
                 }));
+                setDynamicVar(prev => ({
+                  ...prev,
+                  priceRange: {
+                    ...prev.priceRange,
+                    minPrice: e.target.value
+                  }
+                }))
               }}
             />
             <FaMinus size={30} />
             <input
-              type="text"
+              type="number"
               placeholder="$0"
-              value={investmentVolume?.max}
+              value={dynamicVar?.priceRange?.maxPrice}
               onChange={e => {
                 setInvestmentVolume(prev => ({
                   ...prev,
                   max: e.target.value,
                 }));
+                setDynamicVar(prev => ({
+                  ...prev,
+                  priceRange: {
+                    ...prev.priceRange,
+                    maxPrice: e.target.value
+                  }
+                }))
               }}
             />
           </div>
