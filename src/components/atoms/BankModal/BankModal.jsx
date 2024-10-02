@@ -68,7 +68,7 @@ const BankModal = ({ openAccountModal }) => {
             </Form.Item>
           </div>
           <div className="wrapper">
-            <Form.Item
+            {/* <Form.Item
               label="User ID"
               type="input"
               rounded
@@ -82,7 +82,7 @@ const BankModal = ({ openAccountModal }) => {
                 },
               ]}>
               <Field />
-            </Form.Item>
+            </Form.Item> */}
           </div>
         </div>
 

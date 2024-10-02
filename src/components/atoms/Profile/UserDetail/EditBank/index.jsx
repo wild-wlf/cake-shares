@@ -25,7 +25,7 @@ const EditBank = ({ bankInfo, onClose }) => {
       bankName: e?.bankName?.trim(),
       iban: e?.iban?.trim(),
       swiftBicNumber: e?.swiftBicNumber?.trim(),
-      userId: e?.userId?.trim(),
+      // userId: e?.userId?.trim(),
     };
 
     try {
@@ -54,7 +54,7 @@ const EditBank = ({ bankInfo, onClose }) => {
         bankName: bankInfo.bankName,
         iban: bankInfo.iban,
         swiftBicNumber: bankInfo.swiftBicNumber,
-        userId: bankInfo.userId,
+        // userId: bankInfo.userId,
       });
     }
   }, []);
@@ -119,7 +119,7 @@ const EditBank = ({ bankInfo, onClose }) => {
           ]}>
           <Field maxLength={11} />
         </Form.Item>
-        <Form.Item
+        {/* <Form.Item
           type="text"
           label="User ID"
           name="userId"
@@ -137,7 +137,7 @@ const EditBank = ({ bankInfo, onClose }) => {
             },
           ]}>
           <Field maxLength={40} />
-        </Form.Item>
+        </Form.Item> */}
       </div>
 
       <Button rounded md btntype="primary" width="170" htmlType="submit" disabled={loading} loader={loading}>
