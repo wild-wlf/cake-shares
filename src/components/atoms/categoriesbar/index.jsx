@@ -14,7 +14,7 @@ const predefinedOrder = [
   'Properties',
   'Classic Cars',
   'Watches',
-  'Luxury items',
+  'Luxury Items',
   'New Ventures',
   'Corporate Investments',
   'Trade Hub',
@@ -28,9 +28,9 @@ const categoryColors = {
   'Properties': 'green',
   'Classic Cars': 'green',
   'Watches': 'green',
-  'Luxury items': 'red',
-  'New Ventures': 'rgb(163 163 8)',
-  'Corporate Investments': 'rgb(163 163 8)',
+  'Luxury Items': 'red',
+  'New Ventures': 'rgb(163, 163, 8)',
+  'Corporate Investments': 'rgb(163, 163, 8)',
   'Trade Hub': 'red',
   'Asset Backed Lending': 'green',
   'Banking Products': 'green',
@@ -109,6 +109,7 @@ const CategoriesBar = ({ setSearchQuery, priceRange }) => {
 
                       style={{
                         color: Tab === index ? categoryColors[item?.label] : 'black',
+                        backgroundColor: 'rgba(64, 143, 140, 0.1)'
                         //  color: Tab === index ? 'white' : 'black',
                       }}
                       className={Tab === index ? 'button active' : 'button'}
