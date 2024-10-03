@@ -7,73 +7,23 @@ import { CiSearch } from 'react-icons/ci';
 import CenterModal from '../Modal/CenterModal';
 import AdvanceSearch from '../advanceSearch';
 import Skeletonn from '../skeleton/Skeletonn';
-import categoryService from '@/services/categoryService';
 
-const predefinedOrder = [
-  'All',
-  'Properties',
-  'Classic Cars',
-  'Watches',
-  'Luxury Items',
-  'New Ventures',
-  'Corporate Investments',
-  'Trade Hub',
-  'Asset Backed Lending',
-  'Banking Products',
-  'Bazaar',
-];
-
-// Category colors mapping
-const categoryColors = {
-  'Properties': 'green',
-  'Classic Cars': 'green',
-  'Watches': 'green',
-  'Luxury Items': 'red',
-  'New Ventures': 'rgb(163, 163, 8)',
-  'Corporate Investments': 'rgb(163, 163, 8)',
-  'Trade Hub': 'red',
-  'Asset Backed Lending': 'green',
-  'Banking Products': 'green',
-  'Bazaar': 'red',
-};
-
-const CategoriesBar = ({ setSearchQuery, priceRange }) => {
+const CategoriesBar = ({ setSearchQuery, priceRange, categories_data, categories_loading, Tab, setTab }) => {
   const [modal, setModal] = useState(false);
-  const [Tab, setTab] = useState(0);
 
-  const { categories_data, categories_loading } = categoryService.GetAllCategories({ getAll: true });
-
-  const categoriesOptions = useMemo(() => {
-    // Create an object to map category names to their order index
-    const orderMapping = predefinedOrder.reduce((acc, category, index) => {
-      acc[category] = index;
-      return acc;
-    }, {});
-
-    // Map and sort categories based on the predefined order
-    const sortedCategories = categories_data.categories
-      .map((ele) => ({
-        label: ele?.name,
+  const categoriesOptions = useMemo(() =>
+    [
+      { value: '', label: 'All' },
+      ...(categories_data?.categories?.map(ele => ({
         value: ele?._id,
+        label: ele?.name,
         icon: ele?.icon,
         bgColor: ele?.bgColor,
-        textColor: ele?.textColor,
-      }))
-      .sort((a, b) => {
-        const orderA = orderMapping[a.label] ?? Infinity;
-        const orderB = orderMapping[b.label] ?? Infinity;
-        return orderA - orderB;
-      });
+        textColor: ele?.textColor
+      })) || []),
+    ]
+    , [categories_data]);
 
-    const allCategory = {
-      label: 'All',
-      value: '',
-      bgColor: 'rgba(64, 143, 140, 0.1)',
-      textColor: 'var(--green)'
-    };
-
-    return [allCategory, ...sortedCategories];
-  }, [categories_data]);
 
   const settings = {
     dots: false,
