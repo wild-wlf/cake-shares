@@ -91,23 +91,27 @@ const BuyerLoginSignupModal = ({
               },
               ...(type === 'Register As Buyer'
                 ? [
-                    {
-                      pattern: /^.{3,}$/,
-                      message: 'Minimum character length is 3',
-                    },
-                    {
-                      pattern: /^(?!\d+$).*$/,
-                      message: 'username cannot be only numbers',
-                    },
-                    {
-                      pattern: /^(?![!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$).*$/,
-                      message: 'username cannot consist only of special characters',
-                    },
-                    {
-                      pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,
-                      message: 'No Special Characters and spaces are allowed, only hyphens and underscore are allowed.',
-                    },
-                  ]
+                  {
+                    pattern: /^.{3,}$/,
+                    message: 'Minimum character length is 3',
+                  },
+                  {
+                    pattern: /^(?!\d+$).*$/,
+                    message: 'username cannot be only numbers',
+                  },
+                  {
+                    pattern: /^(?![!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$).*$/,
+                    message: 'username cannot consist only of special characters',
+                  },
+                  {
+                    pattern: /^(?!.*\s)[a-zA-Z0-9_-]+$/,
+                    message: 'No Special Characters and spaces are allowed, only hyphens and underscore are allowed.',
+                  },
+                  {
+                    pattern: /^.{0,25}$/,
+                    message: 'Maximum character length is 25',
+                  },
+                ]
                 : []),
             ]}>
             <Field />

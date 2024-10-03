@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { CategoriesBarWrapper } from './categoriesbar.style';
+import { CategoriesBarWrapper, StyledCategories } from './categoriesbar.style';
 import Button from '@/components/atoms/Button';
 import Slider from 'react-slick';
 import Image from 'next/image';
@@ -56,6 +56,8 @@ const CategoriesBar = ({ setSearchQuery, priceRange }) => {
         label: ele?.name,
         value: ele?._id,
         icon: ele?.icon,
+        bgColor: ele?.bgColor,
+        textColor: ele?.textColor,
       }))
       .sort((a, b) => {
         const orderA = orderMapping[a.label] ?? Infinity;
@@ -63,10 +65,11 @@ const CategoriesBar = ({ setSearchQuery, priceRange }) => {
         return orderA - orderB;
       });
 
-    // Include 'All' category at the top if it's not already included in sorted categories
     const allCategory = {
       label: 'All',
       value: '',
+      bgColor: 'rgba(64, 143, 140, 0.1)',
+      textColor: 'var(--green)'
     };
 
     return [allCategory, ...sortedCategories];
@@ -88,7 +91,7 @@ const CategoriesBar = ({ setSearchQuery, priceRange }) => {
       <CenterModal open={modal} setOpen={setModal} title="Advanced Search" width="670">
         <AdvanceSearch priceRange={priceRange} />
       </CenterModal>
-      <CategoriesBarWrapper>
+      <CategoriesBarWrapper >
         <div className="maindiv">
           <div className="slider">
             {categories_loading ? (
@@ -102,16 +105,10 @@ const CategoriesBar = ({ setSearchQuery, priceRange }) => {
             ) : (
               <Slider {...settings}>
                 {categoriesOptions?.map((item, index) => (
-                  <div key={index}>
+                  <StyledCategories key={index} $bgColor={item?.bgColor} $textColor={item?.textColor}>
                     <Button
                       rounded
                       sm
-
-                      style={{
-                        color: Tab === index ? categoryColors[item?.label] : 'black',
-                        backgroundColor: Tab === index ? 'rgba(64, 143, 140, 0.1)' : ''
-                        //  color: Tab === index ? 'white' : 'black',
-                      }}
                       className={Tab === index ? 'button active' : 'button'}
                       onClick={() => {
                         setTab(index);
@@ -128,7 +125,7 @@ const CategoriesBar = ({ setSearchQuery, priceRange }) => {
                       )}
                       {item.label}
                     </Button>
-                  </div>
+                  </StyledCategories>
                 ))}
               </Slider>
             )}
@@ -138,7 +135,7 @@ const CategoriesBar = ({ setSearchQuery, priceRange }) => {
             <CiSearch className="searchicon" />
           </div>
         </div>
-      </CategoriesBarWrapper>
+      </CategoriesBarWrapper >
     </>
   );
 };

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SearchGridWrapper = styled.div`
   .CardWrapper {
@@ -63,9 +63,11 @@ export const SearchGridWrapper = styled.div`
     gap: 70px;
   }
   .tag {
+    border: 1px solid black;
     font-size: 11px;
     width: 75px;
-    height: 25px;
+    height: 37px;
+    text-align: center;
     background-color: rgba(255, 255, 255, 1);
     color: rgba(78, 97, 153, 1);
     border-radius: 60px;
