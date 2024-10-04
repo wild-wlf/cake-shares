@@ -7,8 +7,19 @@ import { RiFilePaperFill } from "react-icons/ri";
 import Button from "../Button";
 import Link from "next/link";
 import { daysLeft, formatDateWithSuffix } from "@/helpers/common";
+import people from '../../../_assets/people.png';
+
+const calculatePercentage = (valueRaised, assetValue) => {
+  if (assetValue === 0 || !valueRaised) return '0.00';
+  return ((valueRaised / assetValue) * 100).toFixed(2);
+};
 
 const AdvanceSearchGrid = ({ data }) => {
+  console.log(data)
+
+
+  const percentage = calculatePercentage(data?.valueRaised, data?.assetValue);
+
 
   return (
     <SearchGridWrapper>
@@ -21,17 +32,23 @@ const AdvanceSearchGrid = ({ data }) => {
                   <Image src={data.media[0]} alt="card-image" width={180} height={180} />
                 </figure>
                 <div className="tagWrapper">
-                  <div className="tag">{data?.investmentType?.name}</div>
+                  <div className="tag">{data?.investmentType?.name || data?.investmentType}</div>
                 </div>
               </div>
               <div className="decription">
                 <div className="title-div">
-                  <span>{data?.productName}</span>
-                  <span>{data && ((data?.valueRaised / data?.assetValue) * 100).toFixed(2)}%</span>
+                  <div className="productNameWrapper">
+                    <span className="producName">{data?.productName}</span>
+                  </div>
+                  <div className="details">
+                    <Image src={people} alt="people" />
+                    <span className="currentBackers">{data?.currentBackers}</span>
+                    {data?.currentBackers === 0 ? '0%' : `${((data?.valueRaised / data?.assetValue) * 100).toFixed(2)}%`} - {data?.assetValue}
+                  </div>
                 </div>
                 <div className="progress">
                   <ProgressBar
-                    completed={data && ((data?.valueRaised / data?.assetValue) * 100).toFixed(2)}
+                    completed={data?.currentBackers === 0 ? 0 : ((data?.valueRaised / data?.assetValue) * 100).toFixed(2)}
                     bgColor="#408F8C"
                     height="5px"
                     borderRadius="60px"
@@ -54,11 +71,11 @@ const AdvanceSearchGrid = ({ data }) => {
           <div className="values-div">
             <div>
               <span>Investment type</span>
-              <h3>{data?.investmentType?.name}</h3>
+              <h3>{data?.investmentType?.name || data?.investmentType}</h3>
             </div>
             <div>
               <span>Return (%)</span>
-              <h3>{data?.returnRatio}%</h3>
+              <h3>{data?.returnRatio || 0}%</h3>
             </div>
             <div>
               <span>Funding Ratio</span>
@@ -70,7 +87,7 @@ const AdvanceSearchGrid = ({ data }) => {
             </div>
             <div>
               <span>Annual Cost (est.)</span>
-              <h3>$0</h3>
+              <h3>${data?.annualCost || 0}</h3>
             </div>
           </div>
           <div className="btnWrapper">
