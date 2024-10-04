@@ -4,7 +4,14 @@ import Image from 'next/image';
 import people from '../../../_assets/people.png';
 import ProgressBar from '@ramonak/react-progress-bar';
 
+const calculatePercentage = (valueRaised, assetValue) => {
+  if (assetValue === 0 || !valueRaised) return '0.00';
+  return ((valueRaised / assetValue) * 100).toFixed(2);
+};
+
 const Card = ({ Cardimage, c_data }) => {
+  const percentage = calculatePercentage(c_data?.valueRaised, c_data?.assetValue);
+
   return (
     <CardWrapper>
       <div className="card">
@@ -22,14 +29,13 @@ const Card = ({ Cardimage, c_data }) => {
             <div className="details">
               <Image src={people} alt="people" />
               <span className="currentBackers">{c_data?.currentBackers}</span>
-              {c_data?.currentBackers == 0 ? '0' : Math.ceil((c_data?.valueRaised / c_data?.assetValue) * 100)}% -{' '}
-              {c_data?.assetValue}
+              {c_data?.currentBackers === 0 ? '0%' : `${percentage}%`} - {c_data?.assetValue}
             </div>
           </div>
 
           <div className="progress">
             <ProgressBar
-              completed={c_data?.currentBackers === 0 ? 0 : Math.ceil((c_data?.valueRaised / c_data?.assetValue) * 100)}
+              completed={c_data?.currentBackers === 0 ? 0 : Math.ceil(percentage)}
               bgColor="#408F8C"
               height="5px"
               borderRadius="60px"
