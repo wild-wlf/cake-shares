@@ -16,17 +16,7 @@ export const CategoriesBarWrapper = styled.div`
   .slider {
     max-width: 80%;
   }
-  .button {
-    width: 100%;
-    @media (max-width: 768px) {
-      padding: 7px 5px;
-      gap: 5px;
-    }
-    &.active {
-      color: var(--green);
-      border: 1px solid rgba(64, 143, 140, 0.1);
-    }
-  }
+
   .lg {
     width: 140px;
   }
@@ -87,6 +77,25 @@ export const CategoriesBarWrapper = styled.div`
 
     .search {
       max-width: 100%;
+    }
+  }
+`;
+export const StyledCategories = styled.div`
+  .button {
+    width: 100%;
+    transition: 0.3s;
+    @media (max-width: 768px) {
+      padding: 7px 5px;
+      gap: 5px;
+    }
+    &:hover {
+      background-color: ${({ $bgColor }) => $bgColor && $bgColor};
+      color: ${({ $textColor }) => $textColor && $textColor};
+    }
+    &.active {
+      background-color: ${({ $bgColor }) => $bgColor && $bgColor};
+      color: ${({ $textColor }) => $textColor && $textColor};
+      border: 1px solid ${({ $textColor }) => $textColor && $textColor};
     }
   }
 `;

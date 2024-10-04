@@ -10,6 +10,9 @@ export const StyledGraph = styled.div`
   padding: ${({ sm }) => (sm ? '20px 40px 0 0' : '40px 30px 0 0')};
   flex-grow: 1;
   position: relative;
+
+  background-color: green;
+
   overflow: hidden;
   @media (min-width: 1235px) {
     height: 100%;

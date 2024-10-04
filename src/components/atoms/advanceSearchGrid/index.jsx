@@ -8,8 +8,8 @@ import Button from "../Button";
 import Link from "next/link";
 import { daysLeft, formatDateWithSuffix } from "@/helpers/common";
 
-const AdvanceSearchGrid = ({data}) => {
-  
+const AdvanceSearchGrid = ({ data }) => {
+
   return (
     <SearchGridWrapper>
       {data.map((data, index) => (
@@ -27,11 +27,11 @@ const AdvanceSearchGrid = ({data}) => {
               <div className="decription">
                 <div className="title-div">
                   <span>{data?.productName}</span>
-                  <span>30%</span>
+                  <span>{data && ((data?.valueRaised / data?.assetValue) * 100).toFixed(2)}%</span>
                 </div>
                 <div className="progress">
                   <ProgressBar
-                    completed={data?.currentBackers === 0 ? 0 : (data?.currentBackers / data?.maximumBackers) * 100}
+                    completed={data && ((data?.valueRaised / data?.assetValue) * 100).toFixed(2)}
                     bgColor="#408F8C"
                     height="5px"
                     borderRadius="60px"
@@ -58,15 +58,15 @@ const AdvanceSearchGrid = ({data}) => {
             </div>
             <div>
               <span>Return (%)</span>
-              <h3>0%</h3>
+              <h3>{data?.returnRatio}%</h3>
             </div>
             <div>
               <span>Funding Ratio</span>
-              <h3>0%</h3>
+              <h3>{data && ((data?.valueRaised / data?.assetValue) * 100).toFixed(2)}%</h3>
             </div>
             <div>
               <span>Backers Limit</span>
-              <h3>{data?.maximumBackers}</h3>
+              <h3>{data?.maximumBackers || 'Infinite'}</h3>
             </div>
             <div>
               <span>Annual Cost (est.)</span>

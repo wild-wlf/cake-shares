@@ -2,7 +2,7 @@ import React from "react";
 import { StyledProfileBanner } from "./ProfileBannerSeller.styles";
 
 const SellerProfileBanner = ({
-  title = "Master the World of NFT’s!",
+  title = "Cakeshares",
   image,
 }) => {
   return (

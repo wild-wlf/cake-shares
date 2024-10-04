@@ -192,6 +192,10 @@ const CompleteRegistrationModal = ({ handleRegistration, setCompleteRegistration
                     pattern: /^(?![!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$).*$/,
                     message: 'Username cannot consist only of special characters',
                   },
+                  {
+                    pattern: /^.{0,25}$/,
+                    message: 'Maximum character length is 25',
+                  },
                 ]}>
                 <Field />
               </Form.Item>
