@@ -51,9 +51,9 @@ const Banner = ({ setTab, categories_data, setSearchQuery }) => {
           <div className="textWrapp">
             <strong className='heading'>Turkish Government, House Bonds!</strong>
             <div className='text'>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s.</p>
+              <p>Invest in secure lending backed by property. The lender provides assets worth at least double the loan amount, offering lower risk and steady returns for cautious investors.</p>
             </div>
-            <button onClick={() => handleCategoryClick('Properties')} className="btn">Browse Category</button>
+            <button onClick={() => handleCategoryClick('Asset Backed Lending')} className="btn">Browse Category</button>
           </div>
 
           <figure className="img-holder">
@@ -62,11 +62,14 @@ const Banner = ({ setTab, categories_data, setSearchQuery }) => {
         </SlideWrapp>
         <SlideWrapp $bg={banner2desk} $resp={banner2resp}>
           <div className="textWrapp">
-            <strong className='heading'>Find Best Watches to make an Investment!</strong>
+            <strong className='heading'>Choose Your Rolex Daytona Investment!</strong>
             <div className='text'>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s.</p>
+              <p>
+                The watch market is booming! Investing in the right luxury watch can yield returns of over 10% per year. Don&apos;t miss out on this exciting opportunity!
+              </p>
+
             </div>
-            <button onClick={() => handleCategoryClick('Watches')} className="btn">Browse Category</button>
+            <button onClick={() => handleCategoryClick('Rolex Daytona')} className="btn">Browse Category</button>
           </div>
           <figure className="img-holder">
             <Image src={bannerImg2} alt="bannerImg1" />
@@ -76,12 +79,25 @@ const Banner = ({ setTab, categories_data, setSearchQuery }) => {
           <div className="textWrapp">
             <strong className='heading'>Ferrari Car Shares Investment Scheme!</strong>
             <div className='text'>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s.</p>
+              <p>Looking for a long-term investment? Buy shares in classic cars! While there are annual costs, earnings can reach up to 100% over the next 5 years.</p>
             </div>
             <button onClick={() => handleCategoryClick('Classic Cars')} className="btn">Browse Category</button>
           </div>
           <figure className="img-holder">
             <Image src={bannerImg3} alt="bannerImg1" />
+          </figure>
+        </SlideWrapp>
+        <SlideWrapp $bg={banner1desk} $resp={banner1resp}>
+          <div className="textWrapp">
+            <strong className='heading'>Turkish Government, House Bonds!</strong>
+            <div className='text'>
+              <p>Investing in properties is a smart move! Enjoy stable returns and the potential for growth. Build your wealth with fractional ownership today!</p>
+            </div>
+            <button onClick={() => handleCategoryClick('Properties')} className="btn">Browse Category</button>
+          </div>
+
+          <figure className="img-holder">
+            <Image src={bannerImg1} alt="bannerImg1" />
           </figure>
         </SlideWrapp>
       </Slider>
