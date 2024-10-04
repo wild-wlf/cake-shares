@@ -51,7 +51,7 @@ const Banner = ({ setTab, categories_data, setSearchQuery }) => {
           <div className="textWrapp">
             <strong className='heading'>Turkish Government, House Bonds!</strong>
             <div className='text'>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s.</p>
             </div>
             <button onClick={() => handleCategoryClick('Properties')} className="btn">Browse Category</button>
           </div>
@@ -64,7 +64,7 @@ const Banner = ({ setTab, categories_data, setSearchQuery }) => {
           <div className="textWrapp">
             <strong className='heading'>Find Best Apartments to make an Investment!</strong>
             <div className='text'>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s.</p>
             </div>
             <button onClick={() => handleCategoryClick('Watches')} className="btn">Browse Category</button>
           </div>
@@ -76,7 +76,7 @@ const Banner = ({ setTab, categories_data, setSearchQuery }) => {
           <div className="textWrapp">
             <strong className='heading'>Ferrari Car Shares Investment Scheme!</strong>
             <div className='text'>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s.</p>
             </div>
             <button onClick={() => handleCategoryClick('Classic Cars')} className="btn">Browse Category</button>
           </div>
