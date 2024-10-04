@@ -62,7 +62,7 @@ const Banner = ({ setTab, categories_data, setSearchQuery }) => {
         </SlideWrapp>
         <SlideWrapp $bg={banner2desk} $resp={banner2resp}>
           <div className="textWrapp">
-            <strong className='heading'>Find Best Apartments to make an Investment!</strong>
+            <strong className='heading'>Find Best Watches to make an Investment!</strong>
             <div className='text'>
               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s.</p>
             </div>
