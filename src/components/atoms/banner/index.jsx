@@ -49,7 +49,7 @@ const Banner = ({ setTab, categories_data, setSearchQuery }) => {
       <Slider {...settings}>
         <SlideWrapp $bg={banner1desk} $resp={banner1resp}>
           <div className="textWrapp">
-            <strong className='heading'>Turkish Government, House Bonds!</strong>
+            <strong className='heading'>Invest Smart: Asset Backed Lending</strong>
             <div className='text'>
               <p>Invest in secure lending backed by property. The lender provides assets worth at least double the loan amount, offering lower risk and steady returns for cautious investors.</p>
             </div>
