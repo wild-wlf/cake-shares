@@ -86,10 +86,25 @@ export const SearchGridWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 11px;
+    .productNameWrapper {
+      width: 65px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
   }
   .title-div {
     display: flex;
     justify-content: space-between;
+  }
+  .details {
+    display: flex;
+
+    .currentBackers {
+      color: var(--primary);
+      font-weight: 500;
+      margin-right: 10px;
+    }
   }
   .desc-div {
     margin-right: 20px;

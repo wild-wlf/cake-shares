@@ -49,7 +49,7 @@ const SellerProfile = ({ userProfileData }) => {
           <IoIosArrowBack />
           Go Back
         </Button>
-        <SellerProfileBanner title="Real Estate Broker Things mate!" image={userProfile?.bannerImage} />
+        <SellerProfileBanner title="Cakeshares" image={userProfile?.bannerImage} />
         <SellerInfo userInfo={userProfile?.user} userCategories={userProfile?.userCategories} />
         <SellerPersonalInfo userInfo={userProfile?.user} onGoingProducts={userProfile?.otherProducts?.length} />
         <Categories title="Seller’s Other Products" data={userProfile?.otherProducts} loading={isLoading} />

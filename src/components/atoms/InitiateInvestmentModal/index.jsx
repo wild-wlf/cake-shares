@@ -18,6 +18,8 @@ const InitiateInvestmentModal = ({
   handleCloseModal,
   setProductData,
   valueRaised,
+  origin = 'productPage',
+  setCompleteData
 }) => {
   const { user, setPermission } = useContextHook(AuthContext, v => ({
     user: v.user,
@@ -39,13 +41,17 @@ const InitiateInvestmentModal = ({
         boughtAmount,
       };
       const { raisedValue } = await walletService.initiateInvestment(payload);
-      setProductData(prev => ({
-        ...prev,
-        product: {
-          ...prev.product,
-          valueRaised: raisedValue,
-        },
-      }));
+      if (origin === 'productPage') {
+        setProductData?.(prev => ({
+          ...prev,
+          product: {
+            ...prev.product,
+            valueRaised: raisedValue,
+          },
+        }));
+      } else {
+        setCompleteData(raisedValue)
+      }
 
       setOwnershipPercentage(ownershipPercentage);
       handleCloseModal();
@@ -118,9 +124,8 @@ const InitiateInvestmentModal = ({
                     }
                   }
                 },
-                message: `Minimum Investment Amount is $${
-                  remainingInvestAmount < minInvestValue ? Number(remainingInvestAmount) : minInvestValue
-                }`,
+                message: `Minimum Investment Amount is $${remainingInvestAmount < minInvestValue ? Number(remainingInvestAmount) : minInvestValue
+                  }`,
               },
               {
                 transform: value => (remainingInvestAmount > assetValue ? assetValue : ''),

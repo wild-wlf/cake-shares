@@ -33,6 +33,7 @@ const SearchHeader = ({ handleViewController, listview, selected, setSelected, f
       setSearchResults(prev => [...prev].sort((a, b) => b.returnRatio - a.returnRatio));
     }
     setSelected(name);
+    setSortBox(false);
   };
 
   const handleClickOutside = event => {
