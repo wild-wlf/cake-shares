@@ -13,7 +13,7 @@ const CategoriesBar = ({ setSearchQuery, priceRange, categories_data, categories
 
   const categoriesOptions = useMemo(() =>
     [
-      { value: '', label: 'All' },
+      { value: '', label: 'All', bgColor: "rgba(64, 143, 140, 0.2)", textColor: "#408f8c" },
       ...(categories_data?.categories?.map(ele => ({
         value: ele?._id,
         label: ele?.name,
