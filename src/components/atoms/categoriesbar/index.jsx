@@ -30,7 +30,7 @@ const CategoriesBar = ({ setSearchQuery, priceRange, categories_data, categories
     arrows: false,
     infinite: categoriesOptions && categoriesOptions?.length > 1 && true,
     speed: 500,
-    autoplay: true,
+    autoplay: false,
     slidesToShow: 1,
     variableWidth: true,
     swipeToSlide: true,

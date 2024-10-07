@@ -46,7 +46,11 @@ const Home = () => {
         setTab={setTab}
       />
       <Categories
-        title="Popular Investments"
+        title={`Popular Investments ${
+          searchQuery?.category
+            ? `(${categories_data?.categories?.find(ele => ele?._id === searchQuery?.category)?.name})`
+            : ''
+        }`}
         data={products_data?.popularProducts}
         hasNextPage={products_data.popularProductsHasNextPage}
         loading={products_loading}
@@ -54,7 +58,11 @@ const Home = () => {
         countries={products_data?.countries}
       />
       <Categories
-        title="Advertised Investments"
+        title={`Advertised Investments ${
+          searchQuery?.category
+            ? `(${categories_data?.categories?.find(ele => ele?._id === searchQuery?.category)?.name})`
+            : ''
+        }`}
         data={products_data?.advertisedProducts}
         hasNextPage={products_data.advertisedProductsHasNextPage}
         loading={products_loading}
