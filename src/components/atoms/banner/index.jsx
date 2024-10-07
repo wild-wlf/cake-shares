@@ -3,11 +3,14 @@ import Image from 'next/image';
 import { BannerWrapper, SlideWrapp } from './banner.style';
 import banner1desk from '../../../_assets/slide1desk.png';
 import bannerImg1 from '../../../_assets/banner-img-1.png';
+import banner1resp from '../../../_assets/slide1resp.png';
+import banner4desk from '../../../_assets/slide4desk.png';
+import bannerImg4 from '../../../_assets/banner-img-4.png';
 import banner2desk from '../../../_assets/slide2desk.png';
 import bannerImg2 from '../../../_assets/banner-img-2.png';
 import banner3desk from '../../../_assets/slide3desk.png';
 import bannerImg3 from '../../../_assets/banner-img-3.png';
-import banner1resp from '../../../_assets/slide1resp.png';
+import banner4resp from '../../../_assets/slide4resp.png';
 import banner2resp from '../../../_assets/mobile-img.png';
 import banner3resp from '../../../_assets/slide3resp.png';
 import Slider from 'react-slick';
@@ -72,7 +75,7 @@ const Banner = ({ setTab, categories_data, setSearchQuery }) => {
             <button onClick={() => handleCategoryClick('Watches')} className="btn">Browse Category</button>
           </div>
           <figure className="img-holder">
-            <Image src={bannerImg2} alt="bannerImg1" />
+            <Image src={bannerImg2} alt="bannerImg2" />
           </figure>
         </SlideWrapp>
         <SlideWrapp $bg={banner3desk} $resp={banner3resp}>
@@ -84,10 +87,10 @@ const Banner = ({ setTab, categories_data, setSearchQuery }) => {
             <button onClick={() => handleCategoryClick('Classic Cars')} className="btn">Browse Category</button>
           </div>
           <figure className="img-holder">
-            <Image src={bannerImg3} alt="bannerImg1" />
+            <Image src={bannerImg3} alt="bannerImg3" />
           </figure>
         </SlideWrapp>
-        <SlideWrapp $bg={banner1desk} $resp={banner1resp}>
+        <SlideWrapp $bg={banner4desk} $resp={banner4resp}>
           <div className="textWrapp">
             <strong className='heading'>Turkish Government, House Bonds!</strong>
             <div className='text'>
@@ -97,7 +100,7 @@ const Banner = ({ setTab, categories_data, setSearchQuery }) => {
           </div>
 
           <figure className="img-holder">
-            <Image src={bannerImg1} alt="bannerImg1" />
+            <Image src={bannerImg4} alt="bannerImg4" />
           </figure>
         </SlideWrapp>
       </Slider>
