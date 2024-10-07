@@ -62,14 +62,14 @@ const Banner = ({ setTab, categories_data, setSearchQuery }) => {
         </SlideWrapp>
         <SlideWrapp $bg={banner2desk} $resp={banner2resp}>
           <div className="textWrapp">
-            <strong className='heading'>Choose Your Rolex Daytona Investment!</strong>
+            <strong className='heading'>Choose a Luxury Watch as Your Investment!</strong>
             <div className='text'>
               <p>
                 The watch market is booming! Investing in the right luxury watch can yield returns of over 10% per year. Don&apos;t miss out on this exciting opportunity!
               </p>
 
             </div>
-            <button onClick={() => handleCategoryClick('Rolex Daytona')} className="btn">Browse Category</button>
+            <button onClick={() => handleCategoryClick('Watches')} className="btn">Browse Category</button>
           </div>
           <figure className="img-holder">
             <Image src={bannerImg2} alt="bannerImg1" />
