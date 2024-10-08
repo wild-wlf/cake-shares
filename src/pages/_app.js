@@ -50,6 +50,7 @@ export default function App({ Component, pageProps }) {
   ${Styling}
   ${HelperClasses}
 `;
+
   useEffect(() => {
     setLoad(true);
   }, []);
