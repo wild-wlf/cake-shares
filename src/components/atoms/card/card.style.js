@@ -32,6 +32,7 @@ export const CardWrapper = styled.div`
     gap: 95px;
   }
   .tag {
+    border: 1px solid black;
     font-size: 11px;
     background-color: rgba(255, 255, 255, 1);
     color: rgba(78, 97, 153, 1);

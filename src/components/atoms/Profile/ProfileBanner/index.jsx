@@ -9,7 +9,7 @@ import userService from '@/services/userService';
 import { convertToFormData } from '@/helpers/common';
 import Toast from '@/components/molecules/Toast';
 
-const ProfileBanner = ({ title = 'Master the World of NFT’s!', type = 'Buyer' }) => {
+const ProfileBanner = ({ title = 'Cakeshares', type = 'Buyer' }) => {
   const { user, setPermission } = useContextHook(AuthContext, v => ({
     user: v.user,
     setPermission: v.setPermission,
@@ -18,9 +18,32 @@ const ProfileBanner = ({ title = 'Master the World of NFT’s!', type = 'Buyer' 
   const [loading, setloading] = useState(false);
 
   const router = usePathname();
-  async function handleBannerImg(e) {
+  async function handleBannerImg(e, accept) {
     setloading(true);
     const file = e.target.files[0];
+
+    const acceptableExtensions = accept.split(',').map(ext => ext.trim());
+    if (!acceptableExtensions?.includes(file?.type)) {
+      const extensions = acceptableExtensions
+        .map(ext => ext.split('/')[1].toUpperCase())
+        .join(', ')
+        .replace(/,(?=[^,]*$)/, ' and');
+
+      Toast({
+        type: 'error',
+        message: `Image Must be in ${extensions} format!`,
+      });
+      return;
+    }
+
+    const fileLength = file.size / (1024 * 1024);
+    if (fileLength > 1) {
+      Toast({
+        type: 'error', message: "File size exceeded! Please upload a file having size upto 1MB."
+      })
+      return;
+    }
+
     if (file) {
       const reader = new FileReader();
       reader.onload = event => {
@@ -55,7 +78,7 @@ const ProfileBanner = ({ title = 'Master the World of NFT’s!', type = 'Buyer' 
         <strong className="title">{title}</strong>
         {router === '/profile' && (
           <button type="button">
-            <input type="file" id="bannerImg" accept="image/*" onChange={handleBannerImg} />
+            <input type="file" id="bannerImg" accept="image/jpeg, image/jpg, image/png" onChange={e => handleBannerImg(e, 'image/jpeg, image/jpg, image/png')} />
             <label htmlFor="bannerImg">
               <span className="rounded-icon">
                 <Image src={editIcon} alt="editIcon" />

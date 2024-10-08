@@ -12,14 +12,15 @@ import { SearchHeaderWrapper } from './searchHeader.style';
 import { SearchContext } from '@/context/SearchContext';
 import { useContextHook } from 'use-context-hook';
 
-const SearchHeader = ({ handleViewController, listview, selected, setSelected }) => {
+const SearchHeader = ({ handleViewController, listview, selected, setSelected, fetchProducts }) => {
   const closeRef = useRef();
   const router = useRouter();
   const [sortBox, setSortBox] = useState(false);
   // const [selected, setSelected] = useState(null);
-  const { setSearchResults, handleClearQuery } = useContextHook(SearchContext, v => ({
+  const { setSearchResults, handleClearQuery, handleSearchQuery } = useContextHook(SearchContext, v => ({
     setSearchResults: v.setSearchResults,
     handleClearQuery: v.handleClearQuery,
+    handleSearchQuery: v.handleSearchQuery,
   }));
 
   const handleSortChecked = e => {
@@ -32,6 +33,7 @@ const SearchHeader = ({ handleViewController, listview, selected, setSelected })
       setSearchResults(prev => [...prev].sort((a, b) => b.returnRatio - a.returnRatio));
     }
     setSelected(name);
+    setSortBox(false);
   };
 
   const handleClickOutside = event => {
@@ -46,6 +48,27 @@ const SearchHeader = ({ handleViewController, listview, selected, setSelected })
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const handleReset = () => {
+    let obj = {
+      page: 1,
+      itemsPerPage: 12,
+      searchText: '',
+      popular: '',
+      type: '',
+      investmentType: '',
+      country: '',
+      kycLevel: '',
+      minBackers: '',
+      maxDaysLeft: '',
+      minFundsRaised: '',
+      maxAnnualCost: '',
+      minInvestment: '',
+      maxInvestment: '',
+    };
+    handleSearchQuery(obj);
+    fetchProducts(obj);
+  }
 
   return (
     <SearchHeaderWrapper>
@@ -122,10 +145,8 @@ const SearchHeader = ({ handleViewController, listview, selected, setSelected })
             rounded
             sm
             className="button"
-            onClick={() => {
-              handleClearQuery();
-              // router.back();
-            }}>
+            onClick={handleReset}
+          >
             Clear All
             <IoIosRemoveCircle size={18} />
           </Button>

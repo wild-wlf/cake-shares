@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SearchGridWrapper = styled.div`
   .CardWrapper {
@@ -63,9 +63,11 @@ export const SearchGridWrapper = styled.div`
     gap: 70px;
   }
   .tag {
+    border: 1px solid black;
     font-size: 11px;
     width: 75px;
-    height: 25px;
+    height: 37px;
+    text-align: center;
     background-color: rgba(255, 255, 255, 1);
     color: rgba(78, 97, 153, 1);
     border-radius: 60px;
@@ -84,10 +86,25 @@ export const SearchGridWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 11px;
+    .productNameWrapper {
+      width: 65px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
   }
   .title-div {
     display: flex;
     justify-content: space-between;
+  }
+  .details {
+    display: flex;
+
+    .currentBackers {
+      color: var(--primary);
+      font-weight: 500;
+      margin-right: 10px;
+    }
   }
   .desc-div {
     margin-right: 20px;
